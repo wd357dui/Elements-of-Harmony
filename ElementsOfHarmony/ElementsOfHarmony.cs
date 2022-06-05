@@ -147,10 +147,10 @@ namespace ElementsOfHarmony
                                 if (line.Contains("\t"))
                                 {
                                     string[] pair = line.Split(tab, StringSplitOptions.RemoveEmptyEntries);
-                                    string term = pair[0];
-                                    string text = pair[1].Replace("\\n", "\n");
                                     if (pair.Length >= 2)
                                     {
+                                        string term = pair[0];
+                                        string text = pair[1].Replace("\\n", "\n");
                                         Translations.Add(term, text);
                                         LogMessage("Translation added: term=" + term + " value=" + text);
                                     }
@@ -268,6 +268,7 @@ namespace ElementsOfHarmony
         }
 
         #region error handlers, made to record any error that may or may not caused by our mod
+
         public static void LogCallback(string condition, string stackTrace, LogType type)
         {
             switch (type)
@@ -446,12 +447,14 @@ namespace ElementsOfHarmony
                 {
                     // if the language is not originally supported we will follow our override settings
                     OurSelectedLanguageOverride = SelectedLangCode;
+                    LogMessage("language override: " + SelectedLangCode);
                     // and later the game settings itself will fallback to English (en-US)
                 }
                 else
                 {
                     // but if the language is already originally supported then we will just follow the game settings
                     OurSelectedLanguageOverride = "";
+                    LogMessage("language selected: " + SelectedLangCode);
                 }
                 if (wasOverride &&
                     SelectedLangCode == "en-US" &&
