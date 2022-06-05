@@ -40,6 +40,8 @@ namespace ElementsOfHarmony
             get { return OurSelectedLanguageOverride_Internal; }
             set { OurSelectedLanguageOverride_Internal = value; try { WriteOurSettings(); } catch (Exception e) { } }
         }
+        private static string[] SupportedAudioFormats = { ".aiff", ".ogg", ".wav" };
+        private static AudioType[] SupportedAudioTypes = { AudioType.AIFF, AudioType.OGGVORBIS, AudioType.WAV };
 
         [UnityEngine.RuntimeInitializeOnLoadMethod(loadType: UnityEngine.RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         public static void Exist() // this is our "main" function
@@ -93,11 +95,14 @@ namespace ElementsOfHarmony
                     IEnumerable<string> files = Directory.EnumerateFiles(directory);
                     foreach (string f in files)
                     {
-                        if (f.EndsWith(".wav", StringComparison.OrdinalIgnoreCase))
+                        for (int index = 0; index < SupportedAudioFormats.Length; index++)
                         {
-                            UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip("file:///" + f, AudioType.WAV);
-                            req.SendWebRequest().completed += AudioClipLoadComplete;
-                            numAudioClips++;
+                            if (f.EndsWith(SupportedAudioFormats[index], StringComparison.OrdinalIgnoreCase))
+                            {
+                                UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip("file:///" + f, SupportedAudioTypes[index]);
+                                req.SendWebRequest().completed += AudioClipLoadComplete;
+                                numAudioClips++;
+                            }
                         }
                     }
                 }
