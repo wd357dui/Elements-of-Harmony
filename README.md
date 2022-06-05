@@ -24,7 +24,7 @@ and corresponding value `16` into `"types"`
 
 ## Adding our custom translations
 (this section is under construction)
-(if you don't want to wait just look for the comments in `ElementsOfHarmony.cs`)
+(if you don't want to wait just look for the comments in [ElementsOfHarmony.cs](ElementsOfHarmony/ElementsOfHarmony.cs))
 
 ## Disable the block on the Russian language
 1. open `(game folder)\MLP_Data\Managed\Assembly-CSharp.dll` with a binary file editor of your liking (I'm using HxD)
