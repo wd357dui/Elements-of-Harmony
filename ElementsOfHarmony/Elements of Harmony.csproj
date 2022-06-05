@@ -60,32 +60,32 @@
       <HintPath>..\packages\Lib.Harmony.2.2.1\lib\net48\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>D:\Assets\MLP_Data_2022-5-28_work\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="System">
-      <HintPath>D:\Assets\MLP_Data_2022-5-28_work\Managed\System.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\System.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Addressables">
-      <HintPath>D:\Assets\MLP_Data_2022-5-28_work\Managed\Unity.Addressables.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\Unity.Addressables.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>D:\Assets\MLP_Data_2022-5-28_work\Managed\UnityEngine.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Assets\MLP_Data_2022-5-28_work\Managed\UnityEngine.AudioModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Assets\MLP_Data_2022-5-28_work\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Assets\MLP_Data_2022-5-28_work\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestAudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Assets\MLP_Data_2022-5-28_work\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
