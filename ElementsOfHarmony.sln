@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elements of Harmony", "ElementsOfHarmony\Elements of Harmony.csproj", "{91F38739-5BF2-4BD9-95B0-57D5B2809717}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElementsOfHarmony", "ElementsOfHarmony\ElementsOfHarmony.csproj", "{91F38739-5BF2-4BD9-95B0-57D5B2809717}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
