@@ -23,7 +23,8 @@ and corresponding value `16` into `"types"`
 ```
 
 ## Adding our custom translations
-(this section is under construction) (if you don't want to wait just look for the comment in `ElementsOfHarmony.cs`)
+(this section is under construction)
+(if you don't want to wait just look for the comments in `ElementsOfHarmony.cs`)
 
 ## Disable the block on the Russian language
 (this section is under construction)
