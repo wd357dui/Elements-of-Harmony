@@ -147,10 +147,12 @@ namespace ElementsOfHarmony
                                 if (line.Contains("\t"))
                                 {
                                     string[] pair = line.Split(tab, StringSplitOptions.RemoveEmptyEntries);
+                                    string term = pair[0];
+                                    string text = pair[1].Replace("\\n", "\n");
                                     if (pair.Length >= 2)
                                     {
-                                        Translations.Add(pair[0], pair[1]);
-                                        LogMessage("Translation added: term=" + pair[0] + " value=" + pair[1]);
+                                        Translations.Add(term, text);
+                                        LogMessage("Translation added: term=" + term + " value=" + text);
                                     }
                                 }
                             }
