@@ -38,7 +38,7 @@ namespace ElementsOfHarmony
         private static string OurSelectedLanguageOverride
         {
             get { return OurSelectedLanguageOverride_Internal; }
-            set { OurSelectedLanguageOverride_Internal = value; WriteOurSettings(); }
+            set { OurSelectedLanguageOverride_Internal = value; try { WriteOurSettings(); } catch (Exception e) { } }
         }
 
         [UnityEngine.RuntimeInitializeOnLoadMethod(loadType: UnityEngine.RuntimeInitializeLoadType.AfterAssembliesLoaded)]
