@@ -35,10 +35,16 @@ namespace ElementsOfHarmony
         private static string[] OriginalSupportedLanguageList = null;
         private static string[] OurSupportedLanguageList = null;
         private static string OurSelectedLanguageOverride_Internal = "";
+        private static string OurFallbackLanguage_Internal = "en-US";
         private static string OurSelectedLanguageOverride
         {
             get { return OurSelectedLanguageOverride_Internal; }
             set { OurSelectedLanguageOverride_Internal = value; try { WriteOurSettings(); } catch (Exception e) { } }
+        }
+        private static string OurFallbackLanguage
+        {
+            get { return OurFallbackLanguage_Internal; }
+            set { OurFallbackLanguage_Internal = value; try { WriteOurSettings(); } catch (Exception e) { } }
         }
         private static Tuple<string, AudioType>[] OurSupportedAudioFormats = new Tuple<string, AudioType>[]{
             new Tuple<string, AudioType>( ".aiff", AudioType.AIFF ),
@@ -222,7 +228,6 @@ namespace ElementsOfHarmony
 
         public static void ReadOurSettings()
         {
-            // the only setting I have right now is the language override
             // this settings exist because the game can't save a language setting that it doesn't originally support into the game save
             // (so I took the matter into my own hooves)
             // example:
@@ -239,6 +244,11 @@ namespace ElementsOfHarmony
                         OurSelectedLanguageOverride_Internal = line.Substring("OurSelectedLanguageOverride=".Length).Trim();
                         LogMessage("OurSelectedLanguageOverride=" + OurSelectedLanguageOverride_Internal);
                     }
+                    if (line.StartsWith("OurFallbackLanguage="))
+                    {
+                        OurFallbackLanguage_Internal = line.Substring("OurFallbackLanguage=".Length).Trim();
+                        LogMessage("OurFallbackLanguage=" + OurFallbackLanguage_Internal);
+                    }
                 }
             }
             WriteOurSettings();
@@ -248,6 +258,8 @@ namespace ElementsOfHarmony
             using (StreamWriter Settings = new StreamWriter("Elements of Harmony/Settings.txt", false))
             {
                 Settings.WriteLine("OurSelectedLanguageOverride=" + OurSelectedLanguageOverride);
+                Settings.Flush();
+                Settings.WriteLine("OurFallbackLanguage=" + OurFallbackLanguage);
                 Settings.Flush();
             }
         }
@@ -381,7 +393,7 @@ namespace ElementsOfHarmony
                                 // so we add our language to the list and copy paste asset data from English
                                 // language asset data didn't really matter because
                                 // when the game can't find our language in its fixed sized array of languages it will rollback to previous language
-                                // and the language asset data we set here is basically ignored
+                                // so the language asset data we set here is basically ignored
                                 // what matters is the language code we are setting here,
                                 // which will be passed to LanguageSelector class where we have chance to fetch it from
                                 sourceAsset.name = "I2Languages_" + langCode;
@@ -395,19 +407,36 @@ namespace ElementsOfHarmony
         }
 
         [HarmonyPatch(typeof(LanguageSelector))]
+        [HarmonyPatch("OnEnable")]
+        public class OnEnablePatch
+        {
+            public static bool Prefix(LanguageSelector __instance)
+            {
+                List<SupportedLanguageParams> supportedLanguageParams = NonPersistentSingleton<BaseSystem>.Get().i2LManager.supportedLanguages.GetSupportedLanguages();
+                SupportedLanguageParams supportedLanguageParams2 = supportedLanguageParams.Find((SupportedLanguageParams x) => x.code == LocalizationManager.CurrentLanguageCode);
+                string TargetLanguage = string.IsNullOrEmpty(OurSelectedLanguageOverride) ? LocalizationManager.CurrentLanguageCode : OurSelectedLanguageOverride;
+                int index = supportedLanguageParams.FindIndex((SupportedLanguageParams x) => x.code == TargetLanguage);
+                Traverse.Create(__instance).Field("index").SetValue(index);
+                Traverse.Create(__instance).Method("ShowLangname", TargetLanguage).GetValue();
+                // now the menu will show our override language instead of last working language when player opens up language settings
+                return false;
+            }
+        }
+
+        [HarmonyPatch(typeof(LanguageSelector))]
         [HarmonyPatch("GetSupportedLanguageParams")]
         public class GetSupportedLanguageParamsPatch
         {
             public static bool Prefix(ref List<SupportedLanguageParams> __result)
             {
                 __result = NonPersistentSingleton<BaseSystem>.Get().i2LManager.supportedLanguages.GetSupportedLanguages();
-                return false;
+                return false; // bypass the original method which was partially responsible for removing the Russian language
             }
         }
 
         [HarmonyPatch(typeof(LanguageSelector))]
         [HarmonyPatch("ShowLangname")] // the game calls this method to make language names appear/disapper in the menu when player moves the selection
-        public class LoadLanguagePatch
+        public class ShowLangnamePatch
         {
             public static void Prefix(LanguageSelector __instance, string langName)
             {
@@ -471,7 +500,7 @@ namespace ElementsOfHarmony
                     // if the language is not originally supported we will follow our override settings
                     OurSelectedLanguageOverride = SelectedLangCode;
                     LogMessage("language override: " + SelectedLangCode);
-                    // and later the game settings itself will roll back to previous language
+                    LocalizationManager.CurrentLanguageCode = OurFallbackLanguage;
                 }
                 else
                 {
@@ -482,7 +511,7 @@ namespace ElementsOfHarmony
                 if (wasOverride &&
                     SelectedLangCode == LocalizationManager.CurrentLanguageCode)
                 {
-                    // when player is switching back from our "override" language to previous language
+                    // when player is switching back from our "override" language to fallback language
                     // the game won't start changing because the game settings is already that language at this time
                     // (so the game will "believe" that it doesn't need to change)
                     // so in order to fix this we just change the game settings to another language beforehand
@@ -510,9 +539,18 @@ namespace ElementsOfHarmony
                     // save a list of the game's original supported langauges if we haven't already
                     SupportedLanguageParams[] OriginalSupportedLanguageParams = NonPersistentSingleton<BaseSystem>.Get().i2LManager.supportedLanguages.supportedLanguages;
                     OriginalSupportedLanguageList = new string[OriginalSupportedLanguageParams.Length];
+                    bool isValid = false;
                     for (int i = 0; i < OriginalSupportedLanguageParams.Length; i++)
                     {
                         OriginalSupportedLanguageList[i] = OriginalSupportedLanguageParams[i].code;
+                        if (OurFallbackLanguage == OriginalSupportedLanguageParams[i].code)
+                        {
+                            isValid = true;
+                        }
+                    }
+                    if (!isValid)
+                    {
+                        OurFallbackLanguage = "en-US";
                     }
                 }
                 if (!string.IsNullOrEmpty(Term))
