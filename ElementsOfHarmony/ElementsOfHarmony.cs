@@ -86,6 +86,8 @@ namespace ElementsOfHarmony
             catch (Exception e)
             { }
 
+            Traverse.Create<I2LManager>().Field("excludedLanguages").GetValue<string[]>()[0] = "";
+
             try
             {
                 // load our audio clip translations
@@ -384,6 +386,17 @@ namespace ElementsOfHarmony
                         }
                     }
                 }
+            }
+        }
+
+        [HarmonyPatch(typeof(LanguageSelector))]
+        [HarmonyPatch("GetSupportedLanguageParams")]
+        public class GetSupportedLanguageParamsPatch
+        {
+            public static bool Prefix(ref List<SupportedLanguageParams> __result)
+            {
+                __result = NonPersistentSingleton<BaseSystem>.Get().i2LManager.supportedLanguages.GetSupportedLanguages();
+                return false;
             }
         }
 
