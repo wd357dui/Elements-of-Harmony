@@ -40,8 +40,11 @@ namespace ElementsOfHarmony
             get { return OurSelectedLanguageOverride_Internal; }
             set { OurSelectedLanguageOverride_Internal = value; try { WriteOurSettings(); } catch (Exception e) { } }
         }
-        private static string[] SupportedAudioFormats = { ".aiff", ".ogg", ".wav" };
-        private static AudioType[] SupportedAudioTypes = { AudioType.AIFF, AudioType.OGGVORBIS, AudioType.WAV };
+        private static Tuple<string, AudioType>[] OurSupportedAudioFormats = new Tuple<string, AudioType>[]{
+            new Tuple<string, AudioType>( ".aiff", AudioType.AIFF ),
+            new Tuple<string, AudioType>( ".ogg", AudioType.OGGVORBIS ),
+            new Tuple<string, AudioType>( ".wav", AudioType.WAV )
+        };
 
         [UnityEngine.RuntimeInitializeOnLoadMethod(loadType: UnityEngine.RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         public static void Exist() // this is our "main" function
@@ -97,13 +100,14 @@ namespace ElementsOfHarmony
                     IEnumerable<string> files = Directory.EnumerateFiles(directory);
                     foreach (string f in files)
                     {
-                        for (int index = 0; index < SupportedAudioFormats.Length; index++)
+                        foreach (Tuple<string, AudioType> format in OurSupportedAudioFormats)
                         {
-                            if (f.EndsWith(SupportedAudioFormats[index], StringComparison.OrdinalIgnoreCase))
+                            if (f.EndsWith(format.Item1, StringComparison.OrdinalIgnoreCase))
                             {
-                                UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip("file:///" + f, SupportedAudioTypes[index]);
+                                UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip("file:///" + f, format.Item2);
                                 req.SendWebRequest().completed += AudioClipLoadComplete;
                                 numAudioClips++;
+                                break;
                             }
                         }
                     }
@@ -376,7 +380,8 @@ namespace ElementsOfHarmony
                             {
                                 // so we add our language to the list and copy paste asset data from English
                                 // language asset data didn't really matter because
-                                // when the game can't find our language in its fixed sized array of languages it will fallback to English anyway
+                                // when the game can't find our language in its fixed sized array of languages it will rollback to previous language
+                                // and the language asset data we set here is basically ignored
                                 // what matters is the language code we are setting here,
                                 // which will be passed to LanguageSelector class where we have chance to fetch it from
                                 sourceAsset.name = "I2Languages_" + langCode;
@@ -466,7 +471,7 @@ namespace ElementsOfHarmony
                     // if the language is not originally supported we will follow our override settings
                     OurSelectedLanguageOverride = SelectedLangCode;
                     LogMessage("language override: " + SelectedLangCode);
-                    // and later the game settings itself will fallback to English (en-US)
+                    // and later the game settings itself will roll back to previous language
                 }
                 else
                 {
@@ -475,14 +480,20 @@ namespace ElementsOfHarmony
                     LogMessage("language selected: " + SelectedLangCode);
                 }
                 if (wasOverride &&
-                    SelectedLangCode == "en-US" &&
-                    LocalizationManager.CurrentLanguageCode == "en-US")
+                    SelectedLangCode == LocalizationManager.CurrentLanguageCode)
                 {
-                    // when player is switching back from our "override" language to English,
-                    // the game won't start changing because the game settings is already English at this time due to fallback
+                    // when player is switching back from our "override" language to previous language
+                    // the game won't start changing because the game settings is already that language at this time
                     // (so the game will "believe" that it doesn't need to change)
                     // so in order to fix this we just change the game settings to another language beforehand
-                    LocalizationManager.CurrentLanguageCode = "ru";
+                    foreach (string langCode in OriginalSupportedLanguageList)
+                    {
+                        if (langCode != LocalizationManager.CurrentLanguageCode)
+                        {
+                            LocalizationManager.CurrentLanguageCode = langCode;
+                            break;
+                        }
+                    }
                 }
             }
         }
