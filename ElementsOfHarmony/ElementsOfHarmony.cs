@@ -299,7 +299,7 @@ namespace ElementsOfHarmony
             }
             public static void Postfix(Exception __instance)
             {
-                if (!Environment.StackTrace.Contains("ElementsOfHarmony.Send")) // prevent infinite loop
+                if (!Environment.StackTrace.Contains("ElementsOfHarmony.LogMessage")) // prevent infinite loop
                 {
                     LogMessage(Environment.StackTrace + "\n" + __instance.StackTrace + "\n" + __instance.Message + "\n");
                 }
