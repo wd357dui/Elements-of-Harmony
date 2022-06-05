@@ -24,7 +24,7 @@ namespace ElementsOfHarmony
         private static Mutex GlobalMutexB = new Mutex();
         private static Mutex GlobalMutexC = new Mutex();
         private static bool Existed = false;
-        private static StreamWriter Log = new StreamWriter("Elements of Harmony/Elements of Harmony.log", false);
+        private static StreamWriter Log;
         private static TcpClient Client;
         private static NetworkStream Stream;
         private static SortedDictionary<string, AudioClip> OurAudioClips = new SortedDictionary<string, AudioClip>();
@@ -51,6 +51,17 @@ namespace ElementsOfHarmony
                 return;
             }
             else Existed = true;
+
+            try
+            {
+                if (!Directory.Exists("Elements of Harmony"))
+                {
+                    Directory.CreateDirectory("Elements of Harmony");
+                }
+                Log = new StreamWriter("Elements of Harmony/Elements of Harmony.log");
+            }
+            catch (Exception e)
+            { }
 
             try
             {
@@ -180,8 +191,11 @@ namespace ElementsOfHarmony
             // everything we want to log will be written to "Elements of Harmony/Elements of Harmony.log"
             // and to the local server if connected
             GlobalMutexB.WaitOne();
-            Log.WriteLine(message);
-            Log.Flush();
+            if (Log != null)
+            {
+                Log.WriteLine(message);
+                Log.Flush();
+            }
             if (Client != null && Stream != null && Client.Connected && Stream.CanWrite)
             {
                 byte[] buffer = Encoding.UTF8.GetBytes(message);
