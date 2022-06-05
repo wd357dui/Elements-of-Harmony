@@ -127,8 +127,16 @@ namespace ElementsOfHarmony
                     }
                 }
                 // look for all .wav files recursively in the "Elements of Harmony/AudioClip" folder and all its sub folders
-                LoadAudioClipsRecursive("Elements of Harmony/AudioClip");
-                LogMessage(numAudioClips + " audio clips queued for loading");
+                if (Directory.Exists("Elements of Harmony/AudioClip"))
+                {
+                    LoadAudioClipsRecursive("Elements of Harmony/AudioClip");
+                    LogMessage(numAudioClips + " audio clips queued for loading");
+                }
+                else
+                {
+                    AudioClipsLoaded = true;
+                    AudioClipsLoadedEvent.Set();
+                }
             }
             catch (Exception e)
             {
@@ -138,48 +146,55 @@ namespace ElementsOfHarmony
             try
             {
                 // load our text translations in the "Elements of Harmony/Translations" folder
-                IEnumerable<string> files = Directory.EnumerateFiles("Elements of Harmony/Translations");
-                foreach (string f in files)
+                if (Directory.Exists("Elements of Harmony/Translations"))
                 {
-                    if (f.ToLower().EndsWith(".txt"))
+                    IEnumerable<string> files = Directory.EnumerateFiles("Elements of Harmony/Translations");
+                    foreach (string f in files)
                     {
-                        // file name of the txt should be the ISO language code
-                        // the content should be tab-separated values (TSV)
-                        // where first column is the term (is case sensitive)
-                        // and second column is the translated text (other columns will be ignored)
-                        // please also add your language code (as term) and your language name (as translated text)
-                        // so that your language name can show up in the game menu correctly (also case sensitive)
-                        string langCode = f.Remove(f.LastIndexOf("."));
-                        langCode = langCode.Replace("\\", "/");
-                        langCode = langCode.Substring(langCode.LastIndexOf("/") + 1);
-                        SortedDictionary<string, string> Translations = new SortedDictionary<string, string>();
-                        OurTranslations.Add(langCode, Translations);
-                        using (StreamReader reader = new StreamReader(f))
+                        if (f.ToLower().EndsWith(".txt"))
                         {
-                            char[] tab = new char[] { '\t' };
-                            while (!reader.EndOfStream)
+                            // file name of the txt should be the ISO language code
+                            // the content should be tab-separated values (TSV)
+                            // where first column is the term (is case sensitive)
+                            // and second column is the translated text (other columns will be ignored)
+                            // please also add your language code (as term) and your language name (as translated text)
+                            // so that your language name can show up in the game menu correctly (also case sensitive)
+                            string langCode = f.Remove(f.LastIndexOf("."));
+                            langCode = langCode.Replace("\\", "/");
+                            langCode = langCode.Substring(langCode.LastIndexOf("/") + 1);
+                            SortedDictionary<string, string> Translations = new SortedDictionary<string, string>();
+                            OurTranslations.Add(langCode, Translations);
+                            using (StreamReader reader = new StreamReader(f))
                             {
-                                string line = reader.ReadLine();
-                                if (string.IsNullOrEmpty(line)) continue;
-                                if (line.Contains("\t"))
+                                char[] tab = new char[] { '\t' };
+                                while (!reader.EndOfStream)
                                 {
-                                    string[] pair = line.Split(tab, StringSplitOptions.RemoveEmptyEntries);
-                                    if (pair.Length >= 2)
+                                    string line = reader.ReadLine();
+                                    if (string.IsNullOrEmpty(line)) continue;
+                                    if (line.Contains("\t"))
                                     {
-                                        string term = pair[0];
-                                        string text = pair[1].Replace("\\n", "\n");
-                                        Translations.Add(term, text);
-                                        LogMessage("Translation added: term=" + term + " value=" + text);
+                                        string[] pair = line.Split(tab, StringSplitOptions.RemoveEmptyEntries);
+                                        if (pair.Length >= 2)
+                                        {
+                                            string term = pair[0];
+                                            string text = pair[1].Replace("\\n", "\n");
+                                            Translations.Add(term, text);
+                                            LogMessage("Translation added: term=" + term + " value=" + text);
+                                        }
                                     }
                                 }
                             }
+                            LogMessage("language " + langCode + " loaded, " + Translations.Count + " translations");
                         }
-                        LogMessage("language " + langCode + " loaded, " + Translations.Count + " translations");
                     }
+                    List<string> OurLanguageList = new List<string>();
+                    OurLanguageList.AddRange(OurTranslations.Keys);
+                    OurSupportedLanguageList = OurLanguageList.ToArray();
                 }
-                List<string> OurLanguageList = new List<string>();
-                OurLanguageList.AddRange(OurTranslations.Keys);
-                OurSupportedLanguageList = OurLanguageList.ToArray();
+                else
+                {
+                    OurSupportedLanguageList = new string[0];
+                }
             }
             catch (Exception e)
             {
@@ -279,7 +294,7 @@ namespace ElementsOfHarmony
             {
                 term = term.Remove(term.LastIndexOf("."));
             }
-            OurAudioClips.Add(term, clip);
+            OurAudioClips[term] = clip;
             LogMessage("Audio clip loaded: " + term);
             AudioClipLoadingOperations.Remove(req);
             if (AudioClipLoadingOperations.Count == 0)
