@@ -5,7 +5,7 @@ A localization mod for My Little Pony: A Maretime Bay Adventure using Harmony AP
 
 1. build the DLL
 
-2. put `ElementsOfHarmony.dll` and `0Harmony.dll` into `(game folder)\MLP_Data\Managed`
+2. put `ElementsOfHarmony.dll` and `0Harmony.dll` and `0Harmony.xml` into `(game folder)\MLP_Data\Managed`
 
 3. add "ElementsOfHarmony.dll" into `"names"` in `\MLP_Data\ScriptingAssemblies.json`
 and corresponding value `16` into `"types"`
