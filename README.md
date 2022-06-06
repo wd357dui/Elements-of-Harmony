@@ -23,10 +23,16 @@ and corresponding value `16` into `"types"`
 ```
 
 ## Adding our custom translations
-(this section is under construction)
-(if you don't want to wait just look for the comments in [ElementsOfHarmony.cs](ElementsOfHarmony/ElementsOfHarmony.cs))
+*to add a language that the game didn't originally support, follow the following steps*
+1. create a folder named `Elements of Harmony` in the game folder (where MLP.exe is)
+2. to add text translations, in the `Elements of Harmony` folder, create a sub folder named `Translations` and put translation files inside
+3. the translation file name should be `(language ISO code).txt` (case sensitive), its content should be tab-separated values (TSV), where first column is the **term** (case sensitive) and second column is the translated text; other columns will be ignored
+4. please also add your language code (as **term**) and your language name (as translated text) so that your language name can show up in the game menu correctly
+5. to add localized audio files, in the `Elements of Harmony` folder, create a sub folder named `AudioClip` and put the audio files inside (you can create sub folders in `AudioClip` as well, the mod will recursively search for all audio files in all sub folders)
+6. the name of the audio files should match the **terms** (case sensitive); look for the field `OurSupportedAudioFormats` in [ElementsOfHarmony.cs](ElementsOfHarmony/ElementsOfHarmony.cs) for a list of supported audio formats
 
-## Disable the block on the Russian language
+## Disable the block on the Russian language (obsolete)
+*the mod itself is in charge of doing this now, you don't need to change `Assembly-CSharp.dll` anymore, but I'm leaving the content here for archieve purposes*
 1. open `(game folder)\MLP_Data\Managed\Assembly-CSharp.dll` with a binary file editor of your liking (I'm using HxD)
 2. search for one of the following strings in ***UTF-16 Little Endian*** encoding
 `ru` `fr-BE` `fr-CA` `fr-LU` `fr-MC` `fr-CH` `es-AR` `es-BO` `es-ES` `es-CL` `es-CO` `es-CR` `es-DO` `es-EC` `es-SV` `es-GT` `es-HN` `es-US` `es-MX` `es-NI` `es-PA` `es-PY` `es-PE` `es-PR` `es-UY` `es-VE` `es-LA`
