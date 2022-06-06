@@ -34,8 +34,15 @@ namespace ElementsOfHarmony
         private static SortedDictionary<string, SortedDictionary<string, string>> OurTranslations = new SortedDictionary<string, SortedDictionary<string, string>>();
         private static string[] OriginalSupportedLanguageList = null;
         private static string[] OurSupportedLanguageList = null;
+        private static EnvFile Config;
         private static string OurSelectedLanguageOverride_Internal = "";
         private static string OurFallbackLanguage_Internal = "en-US";
+        private static bool Debug_Internal = false;
+        private static bool DebugTCPEnabled_Internal = false;
+        private static string DebugTCPIP_Internal = "127.0.0.1";
+        private static int DebugTCPPort_Internal = 1024;
+        private static bool DebugLog_Internal = false;
+        private static string DebugLogFile_Internal = "Elements of Harmony/Elements of Harmony.log";
         private static string OurSelectedLanguageOverride
         {
             get { return OurSelectedLanguageOverride_Internal; }
@@ -69,24 +76,9 @@ namespace ElementsOfHarmony
                 {
                     Directory.CreateDirectory("Elements of Harmony");
                 }
-                Log = new StreamWriter("Elements of Harmony/Elements of Harmony.log");
             }
             catch (Exception e)
             { }
-
-            try
-            {
-                // connect to local server to support immediate log display
-                // this is optional
-                Client = new TcpClient();
-                Client.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1024));
-                Stream = Client.GetStream();
-                LogMessage("Connection success");
-            }
-            catch (Exception e)
-            {
-                LogMessage(e.StackTrace + "\n" + e.Message);
-            }
 
             try
             {
@@ -94,6 +86,35 @@ namespace ElementsOfHarmony
             }
             catch (Exception e)
             { }
+
+            if (Debug_Internal)
+            {
+                if (DebugLog_Internal)
+                {
+                    try
+                    {
+                        Log = new StreamWriter(DebugLogFile_Internal);
+                    }
+                    catch (Exception e)
+                    { }
+                }
+                if (DebugTCPEnabled_Internal)
+                {
+                    try
+                    {
+                        // connect to local server to support immediate log display
+                        // this is optional
+                        Client = new TcpClient();
+                        Client.Connect(new IPEndPoint(IPAddress.Parse(DebugTCPIP_Internal), DebugTCPPort_Internal));
+                        Stream = Client.GetStream();
+                        LogMessage("Connection success");
+                    }
+                    catch (Exception e)
+                    {
+                        LogMessage(e.StackTrace + "\n" + e.Message);
+                    }
+                }
+            }
 
             Traverse.Create<I2LManager>().Field("excludedLanguages").GetValue<string[]>()[0] = "";
 
@@ -249,34 +270,36 @@ namespace ElementsOfHarmony
             // OurSelectedLanguageOverride=zh-CN
             // (do not add spaces before "=")
             // (the value is the ISO language code, same with your translation file name, case sensitive)
-            using (StreamReader reader = new StreamReader("Elements of Harmony/Settings.txt"))
-            {
-                while (!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine();
-                    if (line.StartsWith("OurSelectedLanguageOverride="))
-                    {
-                        OurSelectedLanguageOverride_Internal = line.Substring("OurSelectedLanguageOverride=".Length).Trim();
-                        LogMessage("OurSelectedLanguageOverride=" + OurSelectedLanguageOverride_Internal);
-                    }
-                    if (line.StartsWith("OurFallbackLanguage="))
-                    {
-                        OurFallbackLanguage_Internal = line.Substring("OurFallbackLanguage=".Length).Trim();
-                        LogMessage("OurFallbackLanguage=" + OurFallbackLanguage_Internal);
-                    }
-                }
-            }
+            Config = new EnvFile("Elements of Harmony/Settings.txt");
+            OurSelectedLanguageOverride_Internal = Config.ReadString("OurSelectedLanguageOverride", OurSelectedLanguageOverride_Internal);
+            OurFallbackLanguage_Internal = Config.ReadString("OurFallbackLanguage", OurFallbackLanguage_Internal);
+
+            Debug_Internal = Config.ReadBoolean("Debug", Debug_Internal);
+
+            DebugTCPEnabled_Internal = Config.ReadBoolean("Debug.TCP.Enabled", DebugTCPEnabled_Internal);
+            DebugTCPIP_Internal = Config.ReadString("Debug.TCP.IP", DebugTCPIP_Internal);
+            DebugTCPPort_Internal = Config.ReadInteger("Debug.TCP.Port", DebugTCPPort_Internal);
+
+            DebugLog_Internal = Config.ReadBoolean("Debug.Log.Enabled", DebugLog_Internal);
+            DebugLogFile_Internal = Config.ReadString("Debug.Log.File", DebugLogFile_Internal);
+
             WriteOurSettings();
         }
         public static void WriteOurSettings()
         {
-            using (StreamWriter Settings = new StreamWriter("Elements of Harmony/Settings.txt", false))
-            {
-                Settings.WriteLine("OurSelectedLanguageOverride=" + OurSelectedLanguageOverride);
-                Settings.Flush();
-                Settings.WriteLine("OurFallbackLanguage=" + OurFallbackLanguage);
-                Settings.Flush();
-            }
+            Config.WriteString("OurSelectedLanguageOverride", OurSelectedLanguageOverride);
+            Config.WriteString("OurFallbackLanguage", OurFallbackLanguage);
+
+            Config.WriteBoolean("Debug", Debug_Internal);
+
+            Config.WriteBoolean("Debug.TCP.Enabled", DebugTCPEnabled_Internal);
+            Config.WriteString("Debug.TCP.IP", DebugTCPIP_Internal);
+            Config.WriteInteger("Debug.TCP.Port", DebugTCPPort_Internal);
+
+            Config.WriteBoolean("Debug.Log.Enabled", DebugLog_Internal);
+            Config.WriteString("Debug.Log.File", DebugLogFile_Internal);
+
+            Config.SaveConfig();
         }
 
         public static void AudioClipLoadComplete(AsyncOperation op)
