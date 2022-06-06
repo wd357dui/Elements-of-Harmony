@@ -562,6 +562,7 @@ namespace ElementsOfHarmony
                         {
                             isValid = true;
                         }
+                        LogMessage("Originally supported language: " + OriginalSupportedLanguageParams[i].code);
                     }
                     if (!isValid)
                     {
@@ -582,12 +583,13 @@ namespace ElementsOfHarmony
                         }
                     }
                 }
-                if (!OriginalSupportedLanguageList.Contains(LocalizationManager.CurrentLanguageCode))
+
+                if (!string.IsNullOrEmpty(OurSelectedLanguageOverride))
                 {
                     // if we are overriding the language but failed to match the specified term in our translation list,
-                    // (or in case of a weird edge case when the game language is set to some one that the game does not support)
-                    // we will let the game fetch its original English text (aka. language fallback)
-                    LocalizationManager.CurrentLanguageCode = "en-US";
+                    // we will let the game fetch translation in fallback language
+                    LocalizationManager.CurrentLanguageCode = OurFallbackLanguage;
+                    LogMessage("Override translation not matched, fallback to " + OurFallbackLanguage + ", term=" + Term);
                 }
                 return true;
             }
