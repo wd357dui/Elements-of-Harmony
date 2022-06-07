@@ -268,7 +268,6 @@ namespace ElementsOfHarmony
             // (so I took the matter into my own hooves)
             // example:
             // OurSelectedLanguageOverride=zh-CN
-            // (do not add spaces before "=")
             // (the value is the ISO language code, same with your translation file name, case sensitive)
             Config = new EnvFile("Elements of Harmony/Settings.txt");
             OurSelectedLanguageOverride_Internal = Config.ReadString("OurSelectedLanguageOverride", OurSelectedLanguageOverride_Internal);
