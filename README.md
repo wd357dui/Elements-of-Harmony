@@ -42,7 +42,7 @@ and corresponding value `16` into `"types"`
 
 The mod attachs/hooks to every kind of error events/exceptions I can think of, `AppDomain.CurrentDomain.UnhandledException` event, `UnityEngine.Debug.LogError` method, `System.Exception` constructor, and so on; and then it logs those errors (stack trace + error message) into `Elements of Harmony/Elements of Harmony.log` if it's enabled in the settings
 
-To enable log setting add line `Debug.Log.Enabled=true` in `Elements of Harmony/Settings.txt`
+To enable log setting add line `Debug=true` and `Debug.Log.Enabled=true` in `Elements of Harmony/Settings.txt`
 
 ***if your game is installed in `C:\Program Files` or `C:\Program Files (x86)` the log probably won't work because writing in those folders requires administrator privileges*** <sub>(so I'd recommend NOT to install your game into those folders...)</sub>
 
