@@ -44,6 +44,6 @@ The mod attachs/hooks to every kind of error events/exceptions I can think of, `
 
 To enable log setting add line `Debug.Log.Enabled=true` in `Elements of Harmony/Settings.txt`
 
-***if your game is installed in `C:\Program Files` or `C:\Program Files (x86)` the log probably won't work because writing in those folders requires administrator privileges***
+***if your game is installed in `C:\Program Files` or `C:\Program Files (x86)` the log probably won't work because writing in those folders requires administrator privileges*** <sub>(so I'd recommend NOT to install your game into those folders...)</sub>
 
 so if you think you've encountered a bug, look into `Elements of Harmony/Elements of Harmony.log`, there is about 70% chance that the clues we needed are recorded in there
