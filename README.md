@@ -3,7 +3,7 @@ A localization mod for My Little Pony: A Maretime Bay Adventure using Harmony AP
 
 ## Applying the mod to the game
 
-1. build the DLL (remember to restore NuGet package first)
+1. build the DLL (remember to restore NuGet package first) (or just download from release tag)
 2. put `ElementsOfHarmony.dll` and `0Harmony.dll` and `0Harmony.xml` into `(game folder)\MLP_Data\Managed`
 3. add `"ElementsOfHarmony.dll"` into `"names"` in `\MLP_Data\ScriptingAssemblies.json`
 and corresponding value `16` into `"types"`
@@ -27,6 +27,8 @@ and corresponding value `16` into `"types"`
 4. please also add your language code as **term** and your language name as translated text so that your language name can show up in the game menu correctly
 5. to add localized audio files, in the `Elements of Harmony` folder, create a sub folder named `AudioClip` and put the audio files inside (you can create sub folders in `AudioClip` as well, the mod will recursively search for all audio files in all sub folders)
 6. the name of the audio files should match the **terms** (case sensitive); look for the field `OurSupportedAudioFormats` in [ElementsOfHarmony.cs](ElementsOfHarmony/ElementsOfHarmony.cs) for a list of supported audio formats
+
+Look here for a list of **[terms](https://docs.google.com/spreadsheets/d/1-Qh_ZdBCHs9MmK423SHe68L2yfnijATV_edYO-vNyek/edit?usp=sharing)**
 
 ## Disable the block on the Russian language (obsolete)
 *the mod itself is in charge of doing this now, you don't need to change `Assembly-CSharp.dll` anymore, but I'm leaving the content here for archieve purposes*
