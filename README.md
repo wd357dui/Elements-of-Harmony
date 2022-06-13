@@ -28,7 +28,7 @@ and corresponding value `16` into `"types"`
 5. to add localized audio files, in the `Elements of Harmony` folder, create a sub folder named `AudioClip` and put the audio files inside (you can create sub folders in `AudioClip` as well, the mod will recursively search for all audio files in all sub folders)
 6. the name of the audio files should match the **translated terms** (case sensitive);
 look for the field `OurSupportedAudioFormats` in [ElementsOfHarmony.cs](ElementsOfHarmony/ElementsOfHarmony.cs) for a list of supported audio formats; 
-    >example for an audio clip:<br>
+    >example for audio clip:<br>
     >term `Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_01_CS_ZP_01`<br>
     >translated (en-US) `BC_INTRO_EV_01_01_CS_ZP_01_en-US`<br>
     >translated (ru) `BC_INTRO_EV_01_01_CS_ZP_01_ru`<br>
