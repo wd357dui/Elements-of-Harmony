@@ -26,9 +26,16 @@ and corresponding value `16` into `"types"`
 3. the translation file name should be `(language ISO code).txt` (case sensitive), its content should be tab-separated values (TSV), where first column is the **term** (case sensitive) and second column is the translated text (use \n for line break during text); other columns will be ignored
 4. please also add your language code as **term** and your language name as translated text so that your language name can show up in the game menu correctly
 5. to add localized audio files, in the `Elements of Harmony` folder, create a sub folder named `AudioClip` and put the audio files inside (you can create sub folders in `AudioClip` as well, the mod will recursively search for all audio files in all sub folders)
-6. the name of the audio files should match the **terms** (case sensitive); look for the field `OurSupportedAudioFormats` in [ElementsOfHarmony.cs](ElementsOfHarmony/ElementsOfHarmony.cs) for a list of supported audio formats
+6. the name of the audio files should match the **translated terms** (case sensitive);
+look for the field `OurSupportedAudioFormats` in [ElementsOfHarmony.cs](ElementsOfHarmony/ElementsOfHarmony.cs) for a list of supported audio formats; 
+    >example for an audio clip:<br>
+    >term `Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_01_CS_ZP_01`<br>
+    >translated (en-US) `BC_INTRO_EV_01_01_CS_ZP_01_en-US`<br>
+    >translated (ru) `BC_INTRO_EV_01_01_CS_ZP_01_ru`<br>
+    >audio file name (en-US) `BC_INTRO_EV_01_01_CS_ZP_01_en-US.ogg`<br>
+    >audio file name (ru) `BC_INTRO_EV_01_01_CS_ZP_01_ru.ogg`<br>
 
-Look here for a list of **[terms](https://docs.google.com/spreadsheets/d/1-Qh_ZdBCHs9MmK423SHe68L2yfnijATV_edYO-vNyek/edit?usp=sharing)**
+    Look here for a list of **[terms](https://docs.google.com/spreadsheets/d/1-Qh_ZdBCHs9MmK423SHe68L2yfnijATV_edYO-vNyek/edit?usp=sharing)**
 
 ## Disable the block on the Russian language (obsolete)
 *the mod itself is in charge of doing this now, you don't need to change `Assembly-CSharp.dll` anymore, but I'm leaving the content here for archieve purposes*
