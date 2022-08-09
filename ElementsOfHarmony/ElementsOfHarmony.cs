@@ -241,7 +241,7 @@ namespace ElementsOfHarmony
             GlobalMutexA.ReleaseMutex();
         }
 
-        private static void LogMessage(string message)
+        public static void LogMessage(string message)
         {
             // everything we want to log will be written to "Elements of Harmony/Elements of Harmony.log"
             // and to the local server if connected
