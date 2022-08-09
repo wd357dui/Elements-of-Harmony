@@ -106,7 +106,7 @@ namespace ElementsOfHarmony
                 {
                     return Int32.Parse(keyValuePair.Value);
                 }
-                catch (Exception e) { }
+                catch (Exception) { }
             }
             return defaultValue;
         }
@@ -138,7 +138,7 @@ namespace ElementsOfHarmony
             {
                 File.WriteAllText(Path, output);
             }
-            catch (Exception e) { }
+            catch (Exception) { }
         }
     }
 }

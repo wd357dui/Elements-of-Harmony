@@ -46,12 +46,12 @@ namespace ElementsOfHarmony
         private static string OurSelectedLanguageOverride
         {
             get { return OurSelectedLanguageOverride_Internal; }
-            set { OurSelectedLanguageOverride_Internal = value; try { WriteOurSettings(); } catch (Exception e) { } }
+            set { OurSelectedLanguageOverride_Internal = value; try { WriteOurSettings(); } catch (Exception) { } }
         }
         private static string OurFallbackLanguage
         {
             get { return OurFallbackLanguage_Internal; }
-            set { OurFallbackLanguage_Internal = value; try { WriteOurSettings(); } catch (Exception e) { } }
+            set { OurFallbackLanguage_Internal = value; try { WriteOurSettings(); } catch (Exception) { } }
         }
         private static Tuple<string, AudioType>[] OurSupportedAudioFormats = new Tuple<string, AudioType>[]{
             new Tuple<string, AudioType>( ".aiff", AudioType.AIFF ),
@@ -77,14 +77,14 @@ namespace ElementsOfHarmony
                     Directory.CreateDirectory("Elements of Harmony");
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             { }
 
             try
             {
                 ReadOurSettings();
             }
-            catch (Exception e)
+            catch (Exception)
             { }
 
             if (Debug_Internal)
@@ -95,7 +95,7 @@ namespace ElementsOfHarmony
                     {
                         Log = new StreamWriter(DebugLogFile_Internal);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     { }
                 }
                 if (DebugTCPEnabled_Internal)
