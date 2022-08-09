@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="ElementsOfHarmony.cs" />
     <Compile Include="EnvFile.cs" />
+    <Compile Include="Loyalty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
