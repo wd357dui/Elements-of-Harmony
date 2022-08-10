@@ -1,20 +1,19 @@
-﻿// dllmain.cpp : 定义 DLL 应用程序的入口点。
-#include "pch.h"
+﻿#include "pch.h"
 
-BOOL APIENTRY DllMain( HMODULE hModule,
-                       DWORD  ul_reason_for_call,
-                       LPVOID lpReserved
-                     )
+BOOL APIENTRY DllMain(HMODULE hModule,
+	DWORD  ul_reason_for_call,
+	LPVOID lpReserved
+)
 {
-    switch (ul_reason_for_call)
-    {
-    case DLL_PROCESS_ATTACH:
-    case DLL_THREAD_ATTACH:
-    case DLL_THREAD_DETACH:
-    case DLL_PROCESS_DETACH:
-        break;
-    }
-    return TRUE;
+	switch (ul_reason_for_call)
+	{
+	case DLL_PROCESS_ATTACH:
+	case DLL_THREAD_ATTACH:
+	case DLL_THREAD_DETACH:
+	case DLL_PROCESS_DETACH:
+		break;
+	}
+	return TRUE;
 }
 
 ComPtr<IKinectSensor> Sensor;
@@ -22,6 +21,7 @@ ComPtr<IBodyFrameSource> Source;
 ComPtr<IBodyFrameReader> Reader;
 ComPtr<IBodyFrame> Frame;
 TIMESPAN FrameTime = 0;
+Vector4 Floor;
 array<IBody*, BODY_COUNT> Bodies;
 array<BOOLEAN, BODY_COUNT> BodyTracked;
 array<HandState, BODY_COUNT> BodyLeftHandState;
@@ -41,6 +41,10 @@ extern "C" __declspec(dllexport) int GetHandStateLeft(int body);
 extern "C" __declspec(dllexport) int GetHandStateRight(int body);
 extern "C" __declspec(dllexport) int GetHandConfidenceLeft(int body);
 extern "C" __declspec(dllexport) int GetHandConfidenceRight(int body);
+extern "C" __declspec(dllexport) float GetLeftFootOnTheGround(int body, float floorElevation);
+extern "C" __declspec(dllexport) float GetRightFootOnTheGround(int body, float floorElevation);
+extern "C" __declspec(dllexport) float GetLeftAnkleOnTheGround(int body, float floorElevation);
+extern "C" __declspec(dllexport) float GetRightAnkleOnTheGround(int body, float floorElevation);
 extern "C" __declspec(dllexport) int GetJointState(int body, int joint);
 
 void ReleaseLastFrame();
@@ -71,6 +75,8 @@ int AcquireLatestFrame()
 	result = Frame->GetAndRefreshBodyData(BODY_COUNT, Bodies.data());
 	if (FAILED(result)) return result;
 	result = Frame->get_RelativeTime(&FrameTime);
+	if (FAILED(result)) return result;
+	result = Frame->get_FloorClipPlane(&Floor);
 	if (FAILED(result)) return result;
 
 	LARGE_INTEGER Large{};
@@ -139,6 +145,46 @@ int GetHandConfidenceLeft(int body)
 int GetHandConfidenceRight(int body)
 {
 	return BodyRightHandConfidence[body];
+}
+
+float GetLeftFootOnTheGround(int body, float floorElevation)
+{
+	XMVECTOR FloorPlane = XMPlaneNormalize(XMLoadFloat4(reinterpret_cast<XMFLOAT4*>(&Floor)));
+	FloorPlane = XMPlaneTransform(FloorPlane, XMMatrixTranslation(0.0f, floorElevation, 0.0f));
+	XMVECTOR Head = XMLoadFloat3(reinterpret_cast<XMFLOAT3*>(&Joints[body][JointType_Head].Position));
+	XMVECTOR LeftFoot = XMLoadFloat3(reinterpret_cast<XMFLOAT3*>(&Joints[body][JointType_FootLeft].Position));
+	XMVECTOR Intersect = XMPlaneIntersectLine(FloorPlane, Head, LeftFoot);
+	return XMVectorGetX(XMVector3Length(Head - LeftFoot)) - XMVectorGetX(XMVector3Length(Head - Intersect));
+}
+
+float GetRightFootOnTheGround(int body, float floorElevation)
+{
+	XMVECTOR FloorPlane = XMPlaneNormalize(XMLoadFloat4(reinterpret_cast<XMFLOAT4*>(&Floor)));
+	FloorPlane = XMPlaneTransform(FloorPlane, XMMatrixTranslation(0.0f, floorElevation, 0.0f));
+	XMVECTOR Head = XMLoadFloat3(reinterpret_cast<XMFLOAT3*>(&Joints[body][JointType_Head].Position));
+	XMVECTOR RightFoot = XMLoadFloat3(reinterpret_cast<XMFLOAT3*>(&Joints[body][JointType_FootRight].Position));
+	XMVECTOR Intersect = XMPlaneIntersectLine(FloorPlane, Head, RightFoot);
+	return XMVectorGetX(XMVector3Length(Head - RightFoot)) - XMVectorGetX(XMVector3Length(Head - Intersect));
+}
+
+float GetLeftAnkleOnTheGround(int body, float floorElevation)
+{
+	XMVECTOR FloorPlane = XMPlaneNormalize(XMLoadFloat4(reinterpret_cast<XMFLOAT4*>(&Floor)));
+	FloorPlane = XMPlaneTransform(FloorPlane, XMMatrixTranslation(0.0f, floorElevation, 0.0f));
+	XMVECTOR Head = XMLoadFloat3(reinterpret_cast<XMFLOAT3*>(&Joints[body][JointType_Head].Position));
+	XMVECTOR LeftFoot = XMLoadFloat3(reinterpret_cast<XMFLOAT3*>(&Joints[body][JointType_AnkleLeft].Position));
+	XMVECTOR Intersect = XMPlaneIntersectLine(FloorPlane, Head, LeftFoot);
+	return XMVectorGetX(XMVector3Length(Head - LeftFoot)) - XMVectorGetX(XMVector3Length(Head - Intersect));
+}
+
+float GetRightAnkleOnTheGround(int body, float floorElevation)
+{
+	XMVECTOR FloorPlane = XMPlaneNormalize(XMLoadFloat4(reinterpret_cast<XMFLOAT4*>(&Floor)));
+	FloorPlane = XMPlaneTransform(FloorPlane, XMMatrixTranslation(0.0f, floorElevation, 0.0f));
+	XMVECTOR Head = XMLoadFloat3(reinterpret_cast<XMFLOAT3*>(&Joints[body][JointType_Head].Position));
+	XMVECTOR RightFoot = XMLoadFloat3(reinterpret_cast<XMFLOAT3*>(&Joints[body][JointType_AnkleRight].Position));
+	XMVECTOR Intersect = XMPlaneIntersectLine(FloorPlane, Head, RightFoot);
+	return XMVectorGetX(XMVector3Length(Head - RightFoot)) - XMVectorGetX(XMVector3Length(Head - Intersect));
 }
 
 int GetJointState(int body, int joint)

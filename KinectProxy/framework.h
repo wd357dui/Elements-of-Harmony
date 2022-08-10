@@ -9,5 +9,8 @@
 #include <wrl.h>
 using namespace Microsoft::WRL;
 
+#include <DirectXMath.h>
+using namespace DirectX;
+
 #include <array>
 using namespace std;
