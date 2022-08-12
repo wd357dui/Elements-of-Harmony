@@ -621,6 +621,10 @@ namespace ElementsOfHarmony
                     RightFootOnTheGround[index] = KinectUpdate.GetRightFootOnTheGround(body, 0.3f) > 0.0f;
                     LeftAnkleOnTheGround[index] = KinectUpdate.GetLeftAnkleOnTheGround(body, 0.3f) > 0.0f;
                     RightAnkleOnTheGround[index] = KinectUpdate.GetRightAnkleOnTheGround(body, 0.3f) > 0.0f;
+                    SpineBase[index] = new Vector3(
+                        KinectUpdate.GetJointPosX(body, (int)KinectUpdate.JointType.SpineBase),
+                        KinectUpdate.GetJointPosY(body, (int)KinectUpdate.JointType.SpineBase),
+                        KinectUpdate.GetJointPosZ(body, (int)KinectUpdate.JointType.SpineBase));
                     LeftHip[index] = new Vector3(
                         KinectUpdate.GetJointPosX(body, (int)KinectUpdate.JointType.HipLeft),
                         KinectUpdate.GetJointPosY(body, (int)KinectUpdate.JointType.HipLeft),
@@ -658,6 +662,7 @@ namespace ElementsOfHarmony
             public static bool[] PlayerTracked = new bool[2];
             public static bool[] LeftFootOnTheGround = new bool[2], RightFootOnTheGround = new bool[2];
             public static bool[] LeftAnkleOnTheGround = new bool[2], RightAnkleOnTheGround = new bool[2];
+            public static Vector3[] SpineBase = new Vector3[2];
             public static Vector3[] LeftHip = new Vector3[2], RightHip = new Vector3[2];
             public static Vector3[] LeftKnee = new Vector3[2], RightKnee = new Vector3[2];
             public static Vector3[] LeftAnkle = new Vector3[2], RightAnkle = new Vector3[2];
@@ -675,98 +680,91 @@ namespace ElementsOfHarmony
                             RightFootOnTheGround_[player] = RightFootOnTheGround[player];
                             LeftAnkleOnTheGround_[player] = LeftAnkleOnTheGround[player];
                             RightAnkleOnTheGround_[player] = RightAnkleOnTheGround[player];
-                            LeftHip[player] = LeftHip_[player];
-                            RightHip[player] = RightHip_[player];
-                            LeftKnee[player] = LeftKnee_[player];
-                            RightKnee[player] = RightKnee_[player];
-                            LeftAnkle[player] = LeftAnkle_[player];
-                            RightAnkle[player] = RightAnkle_[player];
-                            LeftFootPos[player] = LeftFootPos_[player];
-                            RightFootPos[player] = RightFootPos_[player];
+                            SpineBase_[player] = SpineBase[player];
+                            LeftHip_[player] = LeftHip[player];
+                            RightHip_[player] = RightHip[player];
+                            LeftKnee_[player] = LeftKnee[player];
+                            RightKnee_[player] = RightKnee[player];
+                            LeftAnkle_[player] = LeftAnkle[player];
+                            RightAnkle_[player] = RightAnkle[player];
+                            LeftFootPos_[player] = LeftFootPos[player];
+                            RightFootPos_[player] = RightFootPos[player];
                         }
                         PlayerTracked_[player] = PlayerTracked[player];
 
-                        MLPAction LeftFootAction;
-                        MLPAction RightFootAction;
                         Action<FashionShowCombo> LeftFootCallback = null;
                         Action<FashionShowCombo> RightFootCallback = null;
 
-                        if (!LeftFootAction_[player].HasValue)
+                        MLPAction LeftFootAction = TestArea(LeftHip[player], SpineBase[player], LeftAnkle[player]);
+                        MLPAction RightFootAction = TestArea(RightHip[player], SpineBase[player], RightAnkle[player]);
+                        switch (LeftFootAction)
                         {
-                            TestEnterArea(LeftHip[player], LeftFootPos[player], LeftAnkleOnTheGround[player], LeftFootAction_[player].GetValueOrDefault(MLPAction.INTERACT), out LeftFootAction);
-                            LeftFootAction_[player] = LeftFootAction;
-                        }
-                        if (LeftFootIdle[player])
-                        {
-                            if (TestEnterArea(LeftHip[player], LeftFootPos[player], LeftAnkleOnTheGround[player], LeftFootAction_[player].Value, out LeftFootAction))
-                            {
-                                LogMessage("Left Foot enter area " + LeftFootAction);
-                                LeftFootIdle[player] = false;
-                                LeftFootCallback = (FashionShowCombo __instance) =>
+                            case MLPAction.RIGHT:
+                            case MLPAction.LEFT:
+                            case MLPAction.UP:
+                            case MLPAction.DOWN:
+                                if (!LeftAnkleOnTheGround_[player] && LeftAnkleOnTheGround[player])
                                 {
-                                    FashionShowComboCheckActionOverride.Forgiving(__instance, LeftFootAction);
-                                };
-                            }
-                        }
-                        else if (TestSwitchArea(LeftHip[player], LeftFootPos[player], LeftAnkleOnTheGround[player], LeftFootAction_[player].Value, out LeftFootAction))
-                        {
-                            LogMessage("Left Foot switch area " + LeftFootAction);
-                            LeftFootIdle[player] = false;
-                            LeftFootCallback = (FashionShowCombo __instance) =>
-                            {
-                                FashionShowComboCheckActionOverride.Forgiving(__instance, LeftFootAction);
-                            };
-                        }
-                        else if (TestLeftArea(LeftHip[player], LeftFootPos[player], LeftAnkleOnTheGround[player], LeftFootAction_[player].Value))
-                        {
-                            LogMessage("Left Foot left area " + LeftFootAction_[player].Value);
-                            LeftFootIdle[player] = true;
-                        }
-
-                        if (!RightFootAction_[player].HasValue)
-                        {
-                            TestEnterArea(RightHip[player], RightFootPos[player], RightAnkleOnTheGround[player], RightFootAction_[player].GetValueOrDefault(MLPAction.INTERACT), out RightFootAction);
-                            RightFootAction_[player] = RightFootAction;
-                        }
-                        if (RightFootIdle[player])
-                        {
-                            if (TestEnterArea(RightHip[player], RightFootPos[player], RightAnkleOnTheGround[player], RightFootAction_[player].Value, out RightFootAction))
-                            {
-                                LogMessage("Right Foot enter area " + RightFootAction);
-                                RightFootIdle[player] = false;
-                                RightFootCallback = (FashionShowCombo __instance) =>
+                                    LogMessage("Left Foot " + LeftFootAction);
+                                    FashionShowComboUpdateOverride.OnPlayerFootDown[player] += (FashionShowCombo __instance) =>
+                                    {
+                                        FashionShowComboCheckActionOverride.Forgiving(__instance, LeftFootAction);
+                                    };
+                                }
+                                break;
+                            case MLPAction.INTERACT:
+                                if (!LeftAnkleOnTheGround_[player] && LeftAnkleOnTheGround[player])
                                 {
-                                    FashionShowComboCheckActionOverride.Forgiving(__instance, RightFootAction);
-                                };
-                            }
+                                    LogMessage("Left Foot " + LeftFootAction);
+                                    FashionShowComboUpdateOverride.OnPlayerFootDown[player] += (FashionShowCombo __instance) =>
+                                    {
+                                        FashionShowComboCheckActionOverride.Forgiving(__instance, LeftFootAction);
+                                    };
+                                }
+                                break;
                         }
-                        else if (TestSwitchArea(RightHip[player], RightFootPos[player], RightAnkleOnTheGround[player], RightFootAction_[player].Value, out RightFootAction))
+                        switch (RightFootAction)
                         {
-                            LogMessage("Left Foot switch area " + LeftFootAction);
-                            LeftFootIdle[player] = false;
-                            LeftFootCallback = (FashionShowCombo __instance) =>
-                            {
-                                FashionShowComboCheckActionOverride.Forgiving(__instance, LeftFootAction);
-                            };
-                        }
-                        else if (TestLeftArea(RightHip[player], RightFootPos[player], RightAnkleOnTheGround[player], RightFootAction_[player].Value))
-                        {
-                            LogMessage("Right Foot left area " + LeftFootAction_[player].Value);
-                            RightFootIdle[player] = true;
+                            case MLPAction.RIGHT:
+                            case MLPAction.LEFT:
+                            case MLPAction.UP:
+                            case MLPAction.DOWN:
+                                if (!RightAnkleOnTheGround_[player] && RightAnkleOnTheGround[player])
+                                {
+                                    LogMessage("Right Foot " + RightFootAction);
+                                    FashionShowComboUpdateOverride.OnPlayerFootDown[player] += (FashionShowCombo __instance) =>
+                                    {
+                                        FashionShowComboCheckActionOverride.Forgiving(__instance, RightFootAction);
+                                    };
+                                }
+                                break;
+                            case MLPAction.INTERACT:
+                                if (!RightAnkleOnTheGround_[player] && RightAnkleOnTheGround[player])
+                                {
+                                    LogMessage("Right Foot " + RightFootAction);
+                                    FashionShowComboUpdateOverride.OnPlayerFootDown[player] += (FashionShowCombo __instance) =>
+                                    {
+                                        FashionShowComboCheckActionOverride.Forgiving(__instance, RightFootAction);
+                                    };
+                                }
+                                break;
                         }
 
                         LeftFootOnTheGround_[player] = LeftFootOnTheGround[player];
                         RightFootOnTheGround_[player] = RightFootOnTheGround[player];
                         LeftAnkleOnTheGround_[player] = LeftAnkleOnTheGround[player];
                         RightAnkleOnTheGround_[player] = RightAnkleOnTheGround[player];
-                        LeftHip[player] = LeftHip_[player];
-                        RightHip[player] = RightHip_[player];
-                        LeftKnee[player] = LeftKnee_[player];
-                        RightKnee[player] = RightKnee_[player];
-                        LeftAnkle[player] = LeftAnkle_[player];
-                        RightAnkle[player] = RightAnkle_[player];
-                        LeftFootPos[player] = LeftFootPos_[player];
-                        RightFootPos[player] = RightFootPos_[player];
+                        SpineBase_[player] = SpineBase[player];
+                        LeftHip_[player] = LeftHip[player];
+                        RightHip_[player] = RightHip[player];
+                        LeftKnee_[player] = LeftKnee[player];
+                        RightKnee_[player] = RightKnee[player];
+                        LeftAnkle_[player] = LeftAnkle[player];
+                        RightAnkle_[player] = RightAnkle[player];
+                        LeftFootPos_[player] = LeftFootPos[player];
+                        RightFootPos_[player] = RightFootPos[player];
+                        LeftFootAction_[player] = LeftFootAction;
+                        RightFootAction_[player] = RightFootAction;
 
                         FashionShowComboUpdateOverride.DanceMutex.WaitOne();
                         FashionShowComboUpdateOverride.OnPlayerFootDown[player] += LeftFootCallback;
@@ -776,20 +774,31 @@ namespace ElementsOfHarmony
                     else
                     {
                         LeftFootAction_[player] = RightFootAction_[player] = null;
-                        LeftFootIdle[player] = RightFootIdle[player] = false;
                     }
                 }
             }
             public static bool[] PlayerTracked_ = new bool[2];
             public static bool[] LeftFootOnTheGround_ = new bool[2], RightFootOnTheGround_ = new bool[2];
             public static bool[] LeftAnkleOnTheGround_ = new bool[2], RightAnkleOnTheGround_ = new bool[2];
+            public static Vector3[] SpineBase_ = new Vector3[2];
             public static Vector3[] LeftHip_ = new Vector3[2], RightHip_ = new Vector3[2];
             public static Vector3[] LeftKnee_ = new Vector3[2], RightKnee_ = new Vector3[2];
             public static Vector3[] LeftAnkle_ = new Vector3[2], RightAnkle_ = new Vector3[2];
             public static Vector3[] LeftFootPos_ = new Vector3[2], RightFootPos_ = new Vector3[2];
             public static MLPAction?[] LeftFootAction_ = new MLPAction?[2], RightFootAction_ = new MLPAction?[2];
-            public static bool[] LeftFootIdle = new bool[2], RightFootIdle = new bool[2];
 
+            public static MLPAction TestArea(Vector3 Hip, Vector3 SpineBase, Vector3 Ankle)
+            {
+                float DeviationForwardBackward = Ankle.z - Hip.z;
+                float DeviationLeftRight = Ankle.x - SpineBase.x;
+                if (DeviationForwardBackward > 0.3f) return MLPAction.DOWN;
+                else if (DeviationForwardBackward < 0.0f) return MLPAction.UP;
+                else if (DeviationLeftRight > 0.2f) return MLPAction.RIGHT;
+                else if (DeviationLeftRight < -0.2f) return MLPAction.LEFT;
+                else return MLPAction.INTERACT;
+            }
+
+            /*
             public static bool TestLeftArea(Vector3 Hip, Vector3 Foot, bool AnkleOnTheGround, MLPAction PreviousAction)
             {
                 switch (PreviousAction)
@@ -856,6 +865,7 @@ namespace ElementsOfHarmony
                     }
                 }
             }
+            */
         }
 
         [HarmonyPatch(typeof(FashionShowCombo))]
@@ -1151,6 +1161,52 @@ namespace ElementsOfHarmony
                     character.bodyController.characterModel.animator.SetTrigger("FlyingChangeLane");
                     //audioSource.PlayOneShot(changeLaneClip);
                 }
+            }
+        }
+
+        #endregion
+
+        #region Sprout's Roller-Blading Chase
+
+        [HarmonyPatch(typeof(Runner1MiniGame))]
+        [HarmonyPatch("StartGame")]
+        class RunnerStartGameHook
+        {
+            public static RunnerStates[] Runners;
+            public static void Postfix(Runner1MiniGame __instance)
+            {
+                Runners = new RunnerStates[2] {
+                    (RunnerStates)__instance.Characters[0].bodyController.states,
+                    __instance.Characters.Count > 1 ? (RunnerStates)__instance.Characters[1].bodyController.states : null
+                };
+                KinectUpdate.OnProcessPlayer += KinectUpdate_OnProcessPlayer;
+            }
+
+            public static void KinectUpdate_OnProcessPlayer(int player)
+            {
+                if (KinectUpdate.Players[player] != null)
+                {
+                    if (KinectUpdate.GetLeftAnkleOnTheGround(KinectUpdate.Players[player].Value, 0.4f) > 0.0f &&
+                        KinectUpdate.GetRightAnkleOnTheGround(KinectUpdate.Players[player].Value, 0.4f) > 0.0f)
+                    {
+                        LogMessage("Not Jumping player " + player);
+                    }
+                    else
+                    {
+                        LogMessage("Jumping player " + player);
+                        Runners[player]?.SetCurrrent(Runners[player].jumping);
+                    }
+                }
+            }
+        }
+        
+        [HarmonyPatch(typeof(Runner1MiniGame))]
+        [HarmonyPatch("FinishGame")]
+        class RunnerFinishGameHook
+        {
+            public static void Postfix()
+            {
+                KinectUpdate.OnProcessPlayer -= RunnerStartGameHook.KinectUpdate_OnProcessPlayer;
             }
         }
 
