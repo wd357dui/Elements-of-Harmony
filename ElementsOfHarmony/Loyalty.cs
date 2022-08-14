@@ -1,6 +1,7 @@
 ﻿using Character;
 using HarmonyLib;
 using Melbot;
+using Mono.Cecil;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -797,75 +798,6 @@ namespace ElementsOfHarmony
                 else if (DeviationLeftRight < -0.2f) return MLPAction.LEFT;
                 else return MLPAction.INTERACT;
             }
-
-            /*
-            public static bool TestLeftArea(Vector3 Hip, Vector3 Foot, bool AnkleOnTheGround, MLPAction PreviousAction)
-            {
-                switch (PreviousAction)
-                {
-                    case MLPAction.RIGHT:
-                    case MLPAction.LEFT:
-                    case MLPAction.UP:
-                    case MLPAction.DOWN:
-                        return (Hip.XZ() - Foot.XZ()).magnitude < 0.2f && !AnkleOnTheGround;
-                    case MLPAction.INTERACT:
-                    default:
-                        return !AnkleOnTheGround;
-                }
-            }
-            public static bool TestSwitchArea(Vector3 Hip, Vector3 Foot, bool AnkleOnTheGround, MLPAction PreviousAction, out MLPAction Action)
-            {
-                Action = TestArea(Hip, Foot);
-                return Action != MLPAction.INTERACT && PreviousAction != MLPAction.INTERACT && Action != PreviousAction;
-            }
-            public static bool TestEnterArea(Vector3 Hip, Vector3 Foot, bool AnkleOnTheGround, MLPAction PreviousAction, out MLPAction Action)
-            {
-                if (AnkleOnTheGround)
-                {
-                    Action = TestArea(Hip, Foot);
-                    return true;
-                }
-                else
-                {
-                    Action = PreviousAction;
-                    return false;
-                }
-            }
-            public static MLPAction TestArea(Vector3 Hip, Vector3 Foot)
-            {
-                Vector2 Deviation = Foot.XZ() - Hip.XZ();
-                Deviation.y *= 2.0f;
-                if (Deviation.magnitude < 0.3f)
-                {
-                    return MLPAction.INTERACT;
-                }
-                else
-                {
-                    if (Math.Abs(Deviation.x) > Math.Abs(Deviation.y))
-                    {
-                        if (Deviation.x > 0.0f)
-                        {
-                            return MLPAction.RIGHT;
-                        }
-                        else
-                        {
-                            return MLPAction.LEFT;
-                        }
-                    }
-                    else
-                    {
-                        if (Deviation.y > 0.0f)
-                        {
-                            return MLPAction.DOWN;
-                        }
-                        else
-                        {
-                            return MLPAction.UP;
-                        }
-                    }
-                }
-            }
-            */
         }
 
         [HarmonyPatch(typeof(FashionShowCombo))]
@@ -1015,6 +947,69 @@ namespace ElementsOfHarmony
             }
             public static Mutex DanceMutex = new Mutex();
             public static Action<FashionShowCombo>[] OnPlayerFootDown = new Action<FashionShowCombo>[2];
+        }
+
+        [HarmonyPatch(typeof(SignalCombo))]
+        [HarmonyPatch("Update")]
+        class SignalComboUpdateOverride
+        {
+            public static bool Prefix(SignalCombo __instance)
+            {
+                Traverse<int> nextPunch = Traverse.Create(__instance).Field<int>("nextPunch");
+                Traverse<int> total = Traverse.Create(__instance).Field<int>("total");
+                int player = 0;
+                if (__instance.fashionShowCombo.playerCombo.fashionShowMinigame.playerCombo_1 == __instance.fashionShowCombo.playerCombo)
+                {
+                    player = 1;
+                }
+
+                if (!Traverse.Create(__instance.fashionShowCombo.playerCombo.fashionShowMinigame).Field<bool>("playing").Value || 0 >= __instance.puncher.punches.Count)
+                {
+                    return false;
+                }
+
+                float time = __instance.source.time;
+                if (nextPunch.Value >= __instance.puncher.punches.Count)
+                {
+                    return false;
+                }
+
+                BeatType beatType = __instance.puncher.punches[nextPunch.Value];
+                float num = Vector3.Distance(__instance.signalLauncher.hit.position, __instance.signalLauncher.start.position) / __instance.configuration.speeds[__instance.signalLauncher.lifetimeIndex];
+                if (beatType.time <= time + num)
+                {
+                    total.Value++;
+                    PackData data = __instance.comboPack.GetData(total.Value);
+                    if (beatType.large)
+                    {
+                        data.action = MLPAction.ANY;
+                    }
+                    else data.action = Adjust(data.action, player); // replacement code
+
+                    nextPunch.Value++;
+                    Signal signal = __instance.signalLauncher.Launch(data);
+                    if ((bool)signal)
+                    {
+                        signal.traveling.startTime = __instance.source.time;
+                        signal.traveling.hitTime = beatType.time - 0.16f;
+                    }
+                }
+                return false;
+            }
+            public static MLPAction Adjust(MLPAction Previous, int player)
+            {
+                if (player == 0 && Previous == MLPAction.RIGHT)
+                {
+                    LogMessage("right change to left");
+                    return MLPAction.LEFT;
+                }
+                else if (player == 1 && Previous == MLPAction.LEFT)
+                {
+                    LogMessage("left change to right");
+                    return MLPAction.RIGHT;
+                }
+                else return Previous;
+            }
         }
 
         #endregion
