@@ -1,7 +1,6 @@
 ﻿using Character;
 using HarmonyLib;
 using Melbot;
-using Mono.Cecil;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -16,6 +15,9 @@ namespace ElementsOfHarmony
     // I'm a little unwilling to create new DLLs (because that would require extra work to setup the mod) (but this is prbably what I'm going to end up with in the end)
     // I don't want to create new github repos either, I want to keep sub-mods as branches if possible
     // also I'm still struggling to understand github branches & stuff
+
+    // also I've been aiming for "rush for progress" when coding, so that there will probably be lots of messy/less efficient code
+
     public class Loyalty
     {
         public static void LogMessage(string Message)
@@ -23,7 +25,7 @@ namespace ElementsOfHarmony
             ElementsOfHarmony.LogMessage(Message);
         }
 
-        // I didn't have the time to add comments right now
+        // I didn't have the time to add comments at the moment
         public class KinectUpdate
         {
             public const int BodyCount = 6;
@@ -268,6 +270,14 @@ namespace ElementsOfHarmony
 
                 if (Players[index].HasValue)
                 {
+                    LeftShoulder[index].x = GetJointPosX(Players[index].Value, (int)JointType.ShoulderLeft);
+                    LeftShoulder[index].y = GetJointPosY(Players[index].Value, (int)JointType.ShoulderLeft);
+                    RightShoulder[index].x = GetJointPosX(Players[index].Value, (int)JointType.ShoulderRight);
+                    RightShoulder[index].y = GetJointPosY(Players[index].Value, (int)JointType.ShoulderRight);
+                    LeftAxisPos[index].x = GetJointPosX(Players[index].Value, (int)JointType.HandLeft);
+                    LeftAxisPos[index].y = GetJointPosY(Players[index].Value, (int)JointType.HandLeft);
+                    RightAxisPos[index].x = GetJointPosX(Players[index].Value, (int)JointType.HandRight);
+                    RightAxisPos[index].y = GetJointPosY(Players[index].Value, (int)JointType.HandRight);
                     if (IsLeftHandHolding(index))
                     {
                         if (!PlayerLeftHandHolding[index])
@@ -318,16 +328,31 @@ namespace ElementsOfHarmony
                         }
                         PlayerRightHandHolding[index] = false;
                     }
+                    if (index == 1) Overlay.SetPlayer2(true, PlayerLeftHandHolding[index], PlayerRightHandHolding[index],
+                        !IsLeftHandCloserToUpperBody(Players[index].Value), !IsRightHandCloserToUpperBody(Players[index].Value),
+                        A[index], B[index], Y[index], Start[index],
+                        LeftShoulder[index].x, LeftShoulder[index].y, RightShoulder[index].x, RightShoulder[index].y,
+                        LeftAxisStartPos[index].x, LeftAxisStartPos[index].y, RightAxisStartPos[index].x, RightAxisStartPos[index].y,
+                        LeftAxisPos[index].x, LeftAxisPos[index].y, RightAxisPos[index].x, RightAxisPos[index].y);
+                    else Overlay.SetPlayer1(true, PlayerLeftHandHolding[index], PlayerRightHandHolding[index],
+                        !IsLeftHandCloserToUpperBody(Players[index].Value), !IsRightHandCloserToUpperBody(Players[index].Value),
+                        A[index], B[index], Y[index], Start[index],
+                        LeftShoulder[index].x, LeftShoulder[index].y, RightShoulder[index].x, RightShoulder[index].y,
+                        LeftAxisStartPos[index].x, LeftAxisStartPos[index].y, RightAxisStartPos[index].x, RightAxisStartPos[index].y,
+                        LeftAxisPos[index].x, LeftAxisPos[index].y, RightAxisPos[index].x, RightAxisPos[index].y);
                 }
                 else
                 {
                     Right[index] = Left[index] = Up[index] = Down[index] = false;
                     A[index] = B[index] = Y[index] = Start[index] = false;
+                    if (index == 1) Overlay.SetPlayer2(false, false, false, false, false, false, false, false, false, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+                    else Overlay.SetPlayer1(false, false, false, false, false, false, false, false, false, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
                 }
                 OnProcessPlayer?.Invoke(index);
             }
             public static event Action<int> OnProcessPlayer;
 
+            public static Vector2[] LeftShoulder = new Vector2[2], RightShoulder = new Vector2[2];
             public static Vector2[] LeftAxisStartPos = new Vector2[2], RightAxisStartPos = new Vector2[2];
             public static Vector2[] LeftAxisPos = new Vector2[2], RightAxisPos = new Vector2[2];
             public static Vector2[] LeftAxisCoord = new Vector2[2], RightAxisCoord = new Vector2[2];
@@ -469,18 +494,57 @@ namespace ElementsOfHarmony
             }
         }
 
+        public class Overlay
+        {
+            [DllImport("DirectXHook.dll")]
+            public extern static int InstallHook();
+            [DllImport("DirectXHook.dll")]
+            public extern static bool CanDraw();
+            [DllImport("DirectXHook.dll")]
+            public extern static void SetPlayer1(bool Tracked,
+                bool LeftHolding, bool RightHolding,
+                bool LeftOutOfBounds, bool RightOutOfBounds,
+                bool A, bool B, bool Y, bool Menu,
+                float ShoulderLeftX, float ShoulderLeftY, float ShoulderRightX, float ShoulderRightY,
+                float OriginLeftX, float OriginLeftY, float OriginRightX, float OriginRightY,
+                float CoordLeftX, float CoordLeftY, float CoordRightX, float CoordRightY);
+            [DllImport("DirectXHook.dll")]
+            public extern static void SetPlayer2(bool Tracked,
+                bool LeftHolding, bool RightHolding,
+                bool LeftOutOfBounds, bool RightOutOfBounds,
+                bool A, bool B, bool Y, bool Menu,
+                float ShoulderLeftX, float ShoulderLeftY, float ShoulderRightX, float ShoulderRightY,
+                float OriginLeftX, float OriginLeftY, float OriginRightX, float OriginRightY,
+                float CoordLeftX, float CoordLeftY, float CoordRightX, float CoordRightY);
+
+            public static Thread action;
+            public static void Begin()
+            {
+                action = new Thread(() =>
+                {
+                    int hresult = InstallHook();
+                    if (hresult != 0) Marshal.GetExceptionForHR(hresult);
+                });
+                action.Start();
+            }
+        }
+
         [HarmonyPatch(typeof(PlayerInput))]
         [HarmonyPatch("Awake")]
         public class PlayerInputAwakeHook
         {
             public static bool HasInit = false;
+            public static Mutex Mutex = new Mutex();
             public static void Postfix()
             {
+                Mutex.WaitOne();
                 if (!HasInit)
                 {
                     KinectUpdate.Begin();
+                    Overlay.Begin();
                     HasInit = true;
                 }
+                Mutex.ReleaseMutex();
             }
         }
 
@@ -1194,7 +1258,7 @@ namespace ElementsOfHarmony
                 }
             }
         }
-        
+
         [HarmonyPatch(typeof(Runner1MiniGame))]
         [HarmonyPatch("FinishGame")]
         class RunnerFinishGameHook

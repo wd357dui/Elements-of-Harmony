@@ -7,20 +7,40 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElementsOfHarmony", "Elemen
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KinectProxy", "KinectProxy\KinectProxy.vcxproj", "{5EED3B55-91F2-45A9-B6A1-1FD32885DED6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXHook", "DirectXHook\DirectXHook.vcxproj", "{973E915A-B6F0-445F-A242-456327C9F132}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Debug|x64.ActiveCfg = Debug|x64
 		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Debug|x64.Build.0 = Debug|x64
+		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Debug|x86.ActiveCfg = Debug|x64
+		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Debug|x86.Build.0 = Debug|x64
 		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Release|x64.ActiveCfg = Release|x64
 		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Release|x64.Build.0 = Release|x64
+		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Release|x86.ActiveCfg = Release|x64
+		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Release|x86.Build.0 = Release|x64
 		{5EED3B55-91F2-45A9-B6A1-1FD32885DED6}.Debug|x64.ActiveCfg = Debug|x64
 		{5EED3B55-91F2-45A9-B6A1-1FD32885DED6}.Debug|x64.Build.0 = Debug|x64
+		{5EED3B55-91F2-45A9-B6A1-1FD32885DED6}.Debug|x86.ActiveCfg = Debug|x64
+		{5EED3B55-91F2-45A9-B6A1-1FD32885DED6}.Debug|x86.Build.0 = Debug|x64
 		{5EED3B55-91F2-45A9-B6A1-1FD32885DED6}.Release|x64.ActiveCfg = Release|x64
 		{5EED3B55-91F2-45A9-B6A1-1FD32885DED6}.Release|x64.Build.0 = Release|x64
+		{5EED3B55-91F2-45A9-B6A1-1FD32885DED6}.Release|x86.ActiveCfg = Release|x64
+		{5EED3B55-91F2-45A9-B6A1-1FD32885DED6}.Release|x86.Build.0 = Release|x64
+		{973E915A-B6F0-445F-A242-456327C9F132}.Debug|x64.ActiveCfg = Debug|x64
+		{973E915A-B6F0-445F-A242-456327C9F132}.Debug|x64.Build.0 = Debug|x64
+		{973E915A-B6F0-445F-A242-456327C9F132}.Debug|x86.ActiveCfg = Debug|Win32
+		{973E915A-B6F0-445F-A242-456327C9F132}.Debug|x86.Build.0 = Debug|Win32
+		{973E915A-B6F0-445F-A242-456327C9F132}.Release|x64.ActiveCfg = Release|x64
+		{973E915A-B6F0-445F-A242-456327C9F132}.Release|x64.Build.0 = Release|x64
+		{973E915A-B6F0-445F-A242-456327C9F132}.Release|x86.ActiveCfg = Release|Win32
+		{973E915A-B6F0-445F-A242-456327C9F132}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
