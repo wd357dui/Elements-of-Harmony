@@ -2,15 +2,29 @@
 A localization mod for My Little Pony: A Maretime Bay Adventure using Harmony API
 
 # New Goal 2024
-A new MLP game from the same developer (or publisher?) is confirmed called **A Zephyr Heights Mystery**.
-That gives me the drive to begin remastering this mod,
-which counts as training & preparation to mod the new game when it comes out
+A new MLP game from the same developer (or publisher?) is confirmed, it's called **A Zephyr Heights Mystery**.
 
-The goals of this remaster are:
+That gives me the drive to begin to remaster this mod,
+which counts as practice & preparation to mod the new game when it comes out
+
+- **The goals of this remaster**
 
 - [ ] Refactor the codebase to meet my newest standards
 - [ ] Refactor and merge the `Loyalty` branch
 - [ ] Make a patch tool using PowerShell script or something (I just don't want to make a separate program for this)
+
+------
+
+- **Optional goals** (*most of these are stuff I wanted to do at the time, some are just for the meme, and the others are there because I wanted to "unlock the true potential" of this mod, but I didn't, fearing that no one would be interested and I would have just wasted lots of time and effort for nothing...* :cry:)
+
+- [x] Magic - Hook the DirectX API to acquire the game's swap chain, so that we can render our graphics on top of the original game using Direct2D - *already implemented in 2022, will improve in the future*
+- [x] Loyalty - Kinect motion control - *already implemented in 2022, will refactor in the future*
+- [ ] Generosity - Enable the game to load custom models - *didn't figure out how to make Unity load assets at run time yet, maybe it's not possible, at least not legally, I may need to turn the entire Unity engine inside out*
+- [ ] Laughter - Add online multiplayer functionality, you should be able to see other players as any pony they choose, there will be text chat and voice chat, and you should be able to compete with other players in a minigame - *this is the one I'm most interested in, the only dilemma is how to host a game; P2P or dedicated server? Is there any funding for a server?*
+- [ ] Kindness - Dedicated online server program - *maybe this should be a separate GitHub project on its own, and maybe this functionality didn't completely match the title, so maybe in the future I'll reuse this title for something else*
+- [ ] Honesty - Online multiplayer anti-cheat? - *well this one is just for the meme, I didn't come up with anything actually useful that matches the title (I mean who would cheat in this game?)... so maybe in the future I'll reuse this title for something else*
+- [ ] Battle of the Bands - Add the ability to add custom songs to the music minigame - *I think it's possible, and fun (probably)*
+- [ ] Friendship Games - Add new minigames - *might not be possible before I turn the entire unity engine inside out*
 
 > [!NOTE]
 > Everything beyond this line is legacy documentation from 2022
