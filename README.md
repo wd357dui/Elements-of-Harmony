@@ -1,6 +1,22 @@
 # Elements of Harmony
 A localization mod for My Little Pony: A Maretime Bay Adventure using Harmony API
 
+# New Goal 2024
+A new MLP game from the same developer (or publisher?) is confirmed called **A Zephyr Heights Mystery**.
+That gives me the drive to begin remastering this mod,
+which counts as training & preparation to mod the new game when it comes out
+
+The goals of this remaster are:
+
+- [ ] Refactor the codebase to meet my newest standards
+- [ ] Refactor and merge the `Loyalty` branch
+- [ ] Make a patch tool using PowerShell script or something (I just don't want to make a separate program for this)
+
+> [!NOTE]
+> Everything beyond this line is legacy documentation from 2022
+
+------
+
 ## Applying the mod to the game
 
 1. build the DLL (remember to restore NuGet package first) (or just download from [release tag](https://github.com/wd357dui/Elements-of-Harmony/releases))
