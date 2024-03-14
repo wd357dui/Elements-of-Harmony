@@ -7,13 +7,12 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Threading;
 
 namespace ElementsOfHarmony
 {
 	public static class Log
 	{
-		private static Mutex GlobalMutexB = new Mutex();
+		private static readonly object MessageMutex = new object();
 		private static StreamWriter LogFile;
 		private static TcpClient Client;
 		private static NetworkStream Stream;
@@ -68,23 +67,24 @@ namespace ElementsOfHarmony
 
 		public static void Message(string message)
 		{
-			// everything we want to log will be written to "Elements of Harmony/Elements of Harmony.log"
-			// and to the local server if connected
-			GlobalMutexB.WaitOne();
-			if (LogFile != null)
-			{
-				LogFile.WriteLine(message);
-				LogFile.Flush();
-			}
-			if (Client != null && Stream != null && Client.Connected && Stream.CanWrite)
-			{
-				byte[] buffer = Encoding.UTF8.GetBytes(message);
-				Stream.Write(BitConverter.GetBytes(buffer.Length), 0, 4);
-				Stream.Flush();
-				Stream.Write(buffer, 0, buffer.Length);
-				Stream.Flush();
-			}
-			GlobalMutexB.ReleaseMutex();
+            // everything we want to log will be written to "Elements of Harmony/Elements of Harmony.log"
+            // and to the local server if connected
+            lock (MessageMutex)
+            {
+                if (LogFile != null)
+                {
+                    LogFile.WriteLine(message);
+                    LogFile.Flush();
+                }
+                if (Client != null && Stream != null && Client.Connected && Stream.CanWrite)
+                {
+                    byte[] buffer = Encoding.UTF8.GetBytes(message);
+                    Stream.Write(BitConverter.GetBytes(buffer.Length), 0, 4);
+                    Stream.Flush();
+                    Stream.Write(buffer, 0, buffer.Length);
+                    Stream.Flush();
+                }
+            }
 		}
 
 		#region error handlers, made to record any error that may or may not caused by our mod
