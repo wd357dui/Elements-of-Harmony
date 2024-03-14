@@ -39,10 +39,6 @@ namespace ElementsOfHarmony
 				Log.InitDebug();
 
 				Localization.Init();
-
-				// attach our error handlers
-				UnityEngine.Application.logMessageReceived += Log.LogCallback;
-				AppDomain.CurrentDomain.UnhandledException += Log.ExceptionHandler;
 			}
 		}
 
