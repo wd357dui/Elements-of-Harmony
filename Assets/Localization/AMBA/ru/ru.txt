@@ -1,0 +1,1848 @@
+﻿FONTS/DIMBO_REGULAR	Roboto-Black
+FONTS/NOTO_SANS	Roboto-Medium
+FONTS/ROBOTO_MEDIUM	Roboto-Regular
+VanityItems/Body/CategoryName	<size=50>Тело</size>
+VanityItems/Face/CategoryName	<size=50>Лицо</size>
+VanityItems/Head/CategoryName	<size=50>Голова</size>
+VanityItems/Neck/CategoryName	<size=50>Шея</size>
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_01_CS_ZP_01	Добро пожаловать в К.Р.И.Л.О. — самую известную летную школу Игогойского залива.
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_02_CVS_SN_01	Этот пони просто в восторге.
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_03_CVS_ZP_02	Это моя мама придумала.
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_04_CVS_ZP_03	Не ожидай, что я буду от этого счастлива.
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_05_CVS_SN_02	Так вот, оказывается, теперь я кадет.
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_06_CVS_ZP_04	Ага, вижу, ты прошла первые испытания... Ты уже почти готова летать!
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_07_CVS_ZP_05	Поговори с Плюхом и Вжух насчет последних заданий.
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_08_CVS_ZP_06	И потом посмотрим, сможешь ли ты обогнать меня в настоящей гонке...
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_09_CVS_SN_03	Я уже быстро летаю... Назад дороги нет!
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_10_CVS_ZP_07	Это мы еще посмотрим, кадет... Я буду ждать тебя возле взлетной полосы.
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_11_GP_SN_04	Я обязательно заполучу крылья!
+BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_01_CVS_SN_01	А как же!
+BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_02_CVS_ZP_02	Тогда по коням!
+BeachCove/MFL/COMP/BC_MFL_COMP_01_CS_SN_01	Как весело!
+BeachCove/MFL/COMP/BC_MFL_COMP_02_CS_ZP_01	Угу. В смысле, молодец! Ты заслужила эти крыльяю
+BeachCove/MFL/COMP/BC_MFL_COMP_03_CS_ZP_02	Поздравляем от имени Королевской семьи-и-и-и-и!!!
+BeachCove/MFL/COMP/BC_MFL_COMP_04_CS_SN_02	Зипп!!!!
+BeachCove/MFL/COMP/BC_MFL_COMP_05_CS_Brighhouse_01	
+BeachCove/MFL/COMP/BC_MFL_COMP_06_CS_PP_01	О нет!
+BeachCove/MFL/COMP/BC_MFL_COMP_07_CS_IZ_01	О нет!
+BeachCove/MFL/COMP/BC_MFL_COMP_08_CS_HC_01	О нет!
+BeachCove/MFL/COMP/BC_MFL_COMP_09_CS_Sprout_01	О да...
+BeachCove/MFL/COMP/BC_MFL_COMP_10_CS_HC_02	Секундочку. Это кто?
+BeachCove/MFL/COMP/BC_MFL_COMP_11_CS_Paint Shop 3_01	Пони за бортом!
+BeachCove/MFL/COMP/BC_MFL_COMP_12_CS_Sprout_02	Значит, мне пора.
+BeachCove/MFL/COMP/BC_MFL_COMP_13_CS_SN_03	Зипп! Ты в порядке?
+BeachCove/MFL/COMP/BC_MFL_COMP_14_CS_ZP_03	Бывало и лучше.
+BeachCove/MFL/COMP/BC_MFL_COMP_15_CS_SN_04	Магия почему-то не помогла...
+BeachCove/MFL/COMP/BC_MFL_COMP_16_CS_Crowd1_01	Да и откуда в Игогойском заливе пегасы!
+BeachCove/MFL/COMP/BC_MFL_COMP_17_CS_Crowd2_01	Это дело рук единорога! Они опасны!
+BeachCove/MFL/COMP/BC_MFL_COMP_18_CS_Sprout_03	 Хорошо, все идет по плану...
+BeachCove/MFL/COMP/BC_MFL_COMP_19_CS_HC_03	Спраут? Это ты?
+BeachCove/MFL/COMP/BC_MFL_COMP_20_CS_Sprout_04	Нет! Это не я! 
+BeachCove/MFL/COMP/BC_MFL_COMP_21_CS_SN_05	 Я поймаю его!
+BeachCove/MFL/COMP/BC_MFL_COMP_22_CS_Shimmerwing_01	
+BeachCove/MFL/COMP/BC_MFL_COMP_23_GP_SN_06	Он идет к Загривному проспекту!
+BeachCove/MFL/DECLINED/BC_MFL_DECLINED_01_CVS_SN_01	Мне кажется, я еще не готова.
+BeachCove/MFL/DECLINED/BC_MFL_DECLINED_02_CVS_ZP_02	Ага, я тоже.
+BeachCove/MFL/QUESTION/BC_MFL_QUESTION_01_CVS_ZP_01	Готова, Санни?
+BeachCove/MFL/RETACPTD/BC_MFL_RETACPTD_01_CVS_SN_01	Постарайся на этот раз не падать!
+BeachCove/MFL/RETDCLND/BC_MFL_RETDCLND_01_CVS_SN_01	Неа... На высоте страшно.
+BeachCove/MFL/RETRY/BC_MFL_RETRY_01_CVS_ZP_01	Хочешь еще раз взлететь в небо?
+BeachCove/MFL/START/BC_MFL_START_01_CVS_ZP_01	Добро пожаловать на финальную гонку, бла-бла-бла.
+BeachCove/MFL/START/BC_MFL_START_02_CVS_ZP_02	Ты все равно не сможешь меня победить.
+BeachCove/MFL/START/BC_MFL_START_03_CVS_ZP_03	Но если не упадешь в океан — испытание будет считаться пройденным.
+BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_01_CVS_SN_01	Так точно, сэр!
+BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_02_CVS_Zoom_04	Так держать!
+BeachCove/Q13/COMP/BC_Q13_COMP_01_CVS_Zoom_06	Молодец, кадет! Вот твоя награда.
+BeachCove/Q13/DECLINED/BC_Q13_DECLINED_01_CVS_SN_02	Мне нужно подготовиться...
+BeachCove/Q13/DECLINED/BC_Q13_DECLINED_02_CVS_Zoom_05	Не медли!
+BeachCove/Q13/POST_01/BC_Q13_POST_01_01_GP_Zoom_10	Надеюсь, ты летаешь лучше предыдущего... Он все время падал в океан.
+BeachCove/Q13/QUESTION/BC_Q13_QUESTION_01_CVS_Zoom_03	Готова принять участие в этом высокоскоростном испытании?
+BeachCove/Q13/RETACPTD/BC_Q13_RETACPTD_01_CVS_Zoom_08	По коням, детка!
+BeachCove/Q13/RETDCLND/BC_Q13_RETDCLND_01_CVS_Zoom_09	Возвращайся, если захочешь почувствовать, что такое настоящая скорость.
+BeachCove/Q13/RETRY/BC_Q13_RETRY_01_CVS_Zoom_07	Ах, ты вернулась. Хочешь повторить попытку?
+BeachCove/Q13/START/BC_Q13_START_01_CVS_Zoom_01	Смотри-ка, кто пришел! Кадет Старскаут!
+BeachCove/Q13/START/BC_Q13_START_02_CVS_Zoom_02	Это последняя полоса препятствий. Еще на один шаг ближе к новым высотам.
+BeachCove/Q14/COMP/BC_Q14_COMP_01_GP_IZ_01	У тебя начинает неплохо получаться!
+BeachCove/Q14/COMP/BC_Q14_COMP_02_GP_SN_01	Без тебя я бы не справилась, друг!
+BeachCove/Q14/EV_01/BC_Q14_EV_01_01_GP_SN_01	Главный подозреваемый — пегас... У которого отпали крылья!
+BeachCove/Q14/EV_02/BC_Q14_EV_02_01_GP_SN_01	На этот раз, мех розовый.
+BeachCove/Q14/EV_03/BC_Q14_EV_03_01_GP_SN_01	А грива — фиолетовая.
+BeachCove/Q14/EV_04/BC_Q14_EV_04_01_CVS_Sprout_01	Хорошо сработано, сыщик! Знаешь какого-нибудь пони, соответствующего этому описанию?
+BeachCove/Q14/EV_04/BC_Q14_EV_04_02_CVS_SN_01	Возможно... Но один из свидетелей нашел эти парики.
+BeachCove/Q14/EV_04/BC_Q14_EV_04_03_CVS_Sprout_02	О! Как мог я... ПРЕСТУПНИК потерять такое.
+BeachCove/Q14/EV_04/BC_Q14_EV_04_04_CVS_Sprout_03	Как бы то ни было, хорошо сработано, сыщик Санни!
+BeachCove/Q14/EV_04/BC_Q14_EV_04_05_CVS_Sprout_04	Я конфискую эти крылья. В качестве улики.
+BeachCove/Q14/EV_04/BC_Q14_EV_04_06_CVS_SN_02	Думаю, я их оставлю у себя. На всякий случай.
+BeachCove/Q14/EV_04/BC_Q14_EV_04_07_CVS_Sprout_05	Ага, хорошая идея. Хм... Продолжай в том же духе! Мы в опасности!
+BeachCove/Q14/EV_05/BC_Q14_EV_05_01_GP_SN_03	Хм-м-м... Кажется, Спраут что-то скрывает.
+BeachCove/Q14/EV_06/BC_Q14_EV_06_01_CVS_PP_01	Почему все пони сегодня такие раздражительные? Уф...
+BeachCove/Q14/EV_06/BC_Q14_EV_06_02_CVS_SN_01	Спраут «считает», что это ты испортила фреску Зипп.
+BeachCove/Q14/EV_06/BC_Q14_EV_06_03_CVS_PP_02	Что? Это абсурд! Я бы никогда не стала марать свои копытца.
+BeachCove/Q14/EV_06/BC_Q14_EV_06_04_CVS_SN_02	Пожалуй, это крепкое алиби.
+BeachCove/Q14/EV_06/BC_Q14_EV_06_05_CVS_SN_03	Давай постараемся не привлекать внимания, ладно?
+BeachCove/Q14/EV_06/BC_Q14_EV_06_06_CVS_PP_03	Но я люблю это делать больше всего на свете! 
+BeachCove/Q14/EV_06/BC_Q14_EV_06_07_CVS_IZ_01	Здесь такая пляжная погода! Что происходит?
+BeachCove/Q14/EV_06/BC_Q14_EV_06_08_CVS_SN_04	Куча всего! Нужно пони-чинить кучу рекламных щитов!
+BeachCove/Q14/EV_06/BC_Q14_EV_06_09_CS_IZ_02	Отлично! Тогда нам понадобится много краски — придется МНОГО красить!
+BeachCove/Q14/EV_07/BC_Q14_EV_07_01_CVS_PaintShop 3_01	Хочешь краски? Конечно!
+BeachCove/Q14/EV_07/BC_Q14_EV_07_02_CVS_PaintShop 3_02	Принеси мне прикольный надувной матрац, и краска твоя!
+BeachCove/Q14/EV_07/BC_Q14_EV_07_03_CVS_SN_01	Прикольный надувной матрац. Не вопрос!
+BeachCove/Q14/EV_08/BC_Q14_EV_08_01_CVS_RedFloatieGuy_01	Эй, ты не видела моего домашнего краба?
+BeachCove/Q14/EV_08/BC_Q14_EV_08_02_CVS_RedFloatieGuy_02	Ее зовут Бабетта.
+BeachCove/Q14/EV_08/BC_Q14_EV_08_03_CVS_SN_01	Если я ее найду, дашь мне свой надувной матрац?
+BeachCove/Q14/EV_08/BC_Q14_EV_08_04_CVS_RedFloatieGuy_03	Конечно! Я его купил на случай, если придется искать мою милочку в воде!
+BeachCove/Q14/EV_08/BC_Q14_EV_08_05_CVS_SN_02	Не переживай! Я ее найду!
+BeachCove/Q14/EV_09/BC_Q14_EV_09_01_CVS_RedFloatieGuy_01	Бабетта, детка!! Ты вернулась!
+BeachCove/Q14/EV_09/BC_Q14_EV_09_02_CVS_RedFloatieGuy_02	Большое спасибо! Как и обещал, держи.
+BeachCove/Q14/EV_10/BC_Q14_EV_10_01_GP_SN_01	А теперь вернемся к пони, любящему знаки.
+BeachCove/Q14/EV_11/BC_Q14_EV_11_01_GP_PaintShop 3_01	О, какой классный! Вот твоя краска.
+BeachCove/Q14/EV_12/BC_Q14_EV_12_01_GP_SN_01	У нас на руках все подсказки! Вы шутите...
+BeachCove/Q14/EV_13/BC_Q14_EV_13_01_GP_SN_01	Отлично! Вернемся к рекламному щиту.
+BeachCove/Q14/MID_01/BC_Q14_MID_01_01_CVS_Sprout_01	Этого недостаточно. Найди ВСЕХ свидетелей.
+BeachCove/Q14/MID_02/BC_Q14_MID_02_01_CVS_Sprout_01	Это ТОЧНО иностранный заговор.
+BeachCove/Q14/MID_02/BC_Q14_MID_02_02_CVS_Sprout_02	Пегасы и единороги ЯВНО пытаются испортить нам праздник!
+BeachCove/Q14/MID_02/BC_Q14_MID_02_03_CVS_SN_03	Это бессмысленно! Это мои друзья!
+BeachCove/Q14/MID_02/BC_Q14_MID_02_04_CVS_Sprout_04	Может, твои друзья, Санни.
+BeachCove/Q14/MID_02/BC_Q14_MID_02_05_CVS_SN_01	
+BeachCove/Q14/MID_03/BC_Q14_MID_03_01_CVS_PaintShop 3_01	Уверен, что у кого-то из пони должен быть надувной матрац на пляже.
+BeachCove/Q14/MID_04/BC_Q14_MID_04_01_CVS_RedFloatieGuy_01	В последний раз я ее видел у маленькой пещеры в конце пляжа.
+BeachCove/Q14/MID_05/BC_Q14_MID_05_01_GP_IZ_01	Нам нужно много оранжевой краски и куча магии!
+BeachCove/Q14/MID_06/BC_Q14_MID_06_01_GP_PP_01	Пипскики В ВОСТОРГЕ от моих фоток с Дня Игогойского залива!
+BeachCove/Q14/POST_01/BC_Q14_POST_01_01_GP_PaintShop 3_01	Пегасы, уходите прочь... Грубовато, конечно, зато почерк превосходен!
+BeachCove/Q14/POST_02/BC_Q14_POST_02_01_GP_RedFloatieGuy_01	Я больше никогда не отведу глаз от этих милых клешней!
+BeachCove/Q14/POST_03/BC_Q14_POST_03_01_GP_Sprout_01	Рога и перья... Остерегайся их!
+BeachCove/Q14/POST_04/BC_Q14_POST_04_01_GP_PP_01	Пипскики В ВОСТОРГЕ от моих фоток с Дня Игогойского залива!
+BeachCove/Q14/POST_05/BC_Q14_POST_05_01_GP_IZ_01	Спраут обожает День Игогойского залива. Все эти крики в толпе — это так празднично!
+BeachCove/Q14/PRE_01/BC_Q14_PRE_01_01_GP_PaintShop 3_01	Я, конечно, не против никаких пони... Но я обожаю рисовать знаки!
+BeachCove/Q14/PRE_02/BC_Q14_PRE_02_01_GP_RedFloatieGuy_01	Бабетта! Где же ты!
+BeachCove/Q14/PRE_03/BC_Q14_PRE_03_01_GP_PP_01	Санни!! Моим фанатам очень понравился парад, а от тебя у них копыта снесло!
+BeachCove/Q14/START/BC_Q14_START_01_CVS_Thunder_01	Кто бы ни был преступником, мы с них глаз не спустим.
+BeachCove/Q14/START/BC_Q14_START_02_CVS_Sprout_01	Но сами ПРЕСТУПНИКИ — единорог и пегас.
+BeachCove/Q14/START/BC_Q14_START_03_CVS_Sprout_02	Может, ты будешь своих защищать, а?
+BeachCove/Q14/START/BC_Q14_START_04_CVS_Thunder_02	Насколько я знаю, быть пегасом — это еще не преступление.
+BeachCove/Q14/START/BC_Q14_START_05_CVS_Sprout_03	У нас все пегасы и единороги под подозрением, сэр.
+BeachCove/Q14/START/BC_Q14_START_06_CVS_SN_01	В чем дело?
+BeachCove/Q14/START/BC_Q14_START_07_CVS_Sprout_04	Еще один акт вандализма!
+BeachCove/Q14/START/BC_Q14_START_08_CVS_Thunder_03	Фреска в летной академии варварски испорчена.
+BeachCove/Q14/START/BC_Q14_START_09_CVS_SN_02	Понятно...
+BeachCove/Q14/START/BC_Q14_START_10_CVS_Sprout_05	Да! Мы должны...
+BeachCove/Q14/START/BC_Q14_START_11_CVS_SN_03	Найти свидетелей?
+BeachCove/Q14/START/BC_Q14_START_12_CVS_Sprout_06	Именно.
+BeachCove/Q14/START/BC_Q14_START_13_CVS_SN_04	Что ж... хорошо. Я поспрашиваю в округе.
+BeachCove/Q14/TOOFAR/BC_Q14_TOOFAR_01_GP_SN_01	Не могу уйти, не пони-чинив рекламный щит Зипп!
+BeachCove/Q15/COMP/BC_Q15_COMP_01_GP_HC_01	Задание выполнено, кадет! Это в знак благодарности.
+BeachCove/Q15/MID_01/BC_Q15_MID_01_01_CVS_HC_01	Собери кроликов, Санни! Мы не можем ждать целый день!
+BeachCove/Q15/POST_01/BC_Q15_POST_01_01_CVS_HC_01	Будь осторожнее. Ты можешь упасть в океан.
+BeachCove/Q15/START/BC_Q15_START_01_CVS_HC_01	Санни! Та банда кроликов разбежалась по всей бухте.
+BeachCove/Q15/START/BC_Q15_START_02_CVS_HC_02	Они скачут по взлетной полосе.
+BeachCove/Q15/START/BC_Q15_START_03_CVS_HC_03	Сгони их оттуда и приведи их сюда, чтобы мы могли начать гонку.
+BeachCove/Q15/TOOFAR/BC_Q15_TOOFAR_01_GP_HC_01	Санни, этим кроликам нужен пастух, помоги им выбраться оттуда.
+MiniGames/DESCRIPTION_DASH	Летай в небе и повышай навыки
+MiniGames/DESCRIPTION_FASHION_SHOW	Покажи как ты можешь танцевать!
+MiniGames/DESCRIPTION_HERDING_BUNNIES	Помоги Хитчу с кроликами
+MiniGames/DESCRIPTION_HERDING_CRABS	Помоги Хитчу с крабами и кроликами
+MiniGames/DESCRIPTION_RUNNER	Догони Спраута с помощью друзей
+MiniGames/MULTIPLAYER_CONTROLS	В режиме многопользовательской игры понадобится 2 контроллера Joy-Con™ для Nintendo Switch™
+MiniGames/MULTIPLAYER_CONTROLS_INDICATION	Чтобы продолжить, нажмите на кнопку «Принять»
+MiniGames/NEXT_ROUND	СЛЕДУЮЩИЙ РАУНД
+MiniGames/PROGRESSION_EVALUATION_0	ХОРОШО
+MiniGames/PROGRESSION_EVALUATION_1	КЛАСС
+MiniGames/PROGRESSION_EVALUATION_2	ИДЕАЛЬНО
+MiniGames/PROGRESSION_EVALUATION_EXTRA	БОНУС
+MiniGames/PROGRESSION_EVALUATION_FAIL	ОЙ
+MiniGames/PROGRESSION_EVALUATION_GO	ВПЕРЕД!
+MiniGames/PROGRESSION_EVALUATION_GREAT	ОТЛИЧНО
+MiniGames/TIMES_UP	ВРЕМЯ ВЫШЛО!
+MiniGames/TITLE_DASH	Летная академия Зипп
+MiniGames/TITLE_FASHION_SHOW	Танцевальный Пипп-пипп-парад!
+MiniGames/TITLE_HERDING_BUNNIES	Тренировка Хитча по Пастушьим бегам за кроликами
+MiniGames/TITLE_HERDING_CRABS	Пастушьи бега за кроликами и крабами
+MiniGames/TITLE_RUNNER	Погоня за Спраутом на роликах
+BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01	Хрустальный замок. Великий символ магии и дружбы, царящих в Эквестрии. 
+BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01b	И пока среди единорогов, пегасов и земных пони царит гармония, его свет будет сиять в небе над Игогойским заливом.
+BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_02_CS_BH_01	
+BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_03_CS_Narrator_02	Но одна маленькая пони всегда будет готова всем нам помочь.
+BrighthouseTuto/Q1/COMP/BHT_Q1_COMP_01_CGP_SN_01	Вот так лучше. Наряжена и готова к празднованию!
+BrighthouseTuto/Q1/EV_02/BHT_Q1_EV_02_01_CS_Bunny_01	
+BrighthouseTuto/Q1/EV_03/BHT_Q1_EV_03_02_GP_SN_01	Моя сумка! Ее взял тот кролик!
+BrighthouseTuto/Q1/EV_04/BHT_Q1_EV_04_01_CGP_SN_01	Хитрый какой! Может, я смогу околдовать это растение земной магией...
+BrighthouseTuto/Q1/EV_05/BHT_Q1_EV_05_01_CGP_SN_01	Ага! Только дойти бы туда.
+BrighthouseTuto/Q1/TOOFAR/BHT_Q1_TOOFAR_01_CGP_SN_01	Моя сумка! Не могу уйти без нее... Надо вернуться и найти ее.
+BrighthouseTuto/START/EV_01/BHT_START_EV_01_01_CS_SN_01	Я не сплю! Я не сплю!!
+BrighthouseTuto/START/EV_01/BHT_START_EV_01_02_CS_SN_02	Минуточку... Где же все пони?
+BrighthouseTuto/START/EV_01/BHT_START_EV_01_03_CS_SN_03	А! Сегодня же День Игогойского залива!!! И меня ждет Хитч!
+BrighthouseTuto/START/EV_01/BHT_START_EV_01_04_CS_SN_04	Но что-то не так...
+BrighthouseTuto/START/START/BHT_START_START_08_CS_SN_05	Он нет! Куда я опять дела сумку?
+Brighthouse/BFLY/EV_01/BH_BFLY_EV_01_01_CVS_SN_01	???????????
+Brighthouse/BFLY/EV_01/BH_BFLY_EV_01_02_CVS_SN_02	В чем дело?
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_04_CVS_Shimmerwing_01	
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_05_CVS_SN_04	Сверкающее крыло! Это ты!! Ух ты... Ты хоть и бабочка, но в тебе столько силы!
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_06_CVS_SN_05	Как это ты здесь застряла?
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_07_CVS_Shimmerwing_02	
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_08_CVS_SN_06	Прости! Я не понимаю язык бабочек...
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_09_CVS_Shimmerwing_03	
+Brighthouse/BFLY/EV_03/BH_BFLY_EV_03_10_CGP_SN_07	Кажется, она хочет, чтобы я за ней последовала. Мне пора!
+Brighthouse/INTRO/EV_01/BH_INTRO_EV_01_01_CS_SN_01	Ах, Хрустальный замок! До сих не могу поверить, что мы живем в таком волшебном месте!
+Brighthouse/MH/ACCEPTED/BH_MH_ACCEPTED_01_CGP_HC_01	Отлично! Пришло время для кроликов!
+Brighthouse/MH/COMP/BH_MH_COMP_01_CS_HC_01	Ух ты! Неплохо, Санни, очень даже неплохо!
+Brighthouse/MH/COMP/BH_MH_COMP_02_CS_HC_02	В этом году соревнование наконец будет интересным.
+Brighthouse/MH/COMP/BH_MH_COMP_03_CS_IZ_01	Прекрасно! Вперед, на Загривный проспект!
+Brighthouse/MH/COMP/BH_MH_COMP_04_CS_HC_03	Да! Ну, сейчас я только уберу эти коробки
+Brighthouse/MH/COMP/BH_MH_COMP_05_CS_HC_04	
+Brighthouse/MH/COMP/BH_MH_COMP_06_CS_SN_01	Может, поможем ему?
+Brighthouse/MH/COMP/BH_MH_COMP_07_CS_HC_05	Нет! Я их сюда поставил, я их и уберу... Ой!
+Brighthouse/MH/COMP/BH_MH_COMP_08_CS_IZ_02	Кажется, он в порядке. Он справляется.
+Brighthouse/MH/DECLINED/BH_MH_DECLINED_01_CVS_HC_01	Отказываешься, да? Ну что ж, приходи, когда захочешь попробовать.
+Brighthouse/MH/QUESTION/BH_MH_QUESTION_01_CVS_HC_01	Готова стать пастухом кроликов?
+Brighthouse/MH/REPACPTD/BH_MH_REPACPTD_01_CGP_SN_01	Я за!
+Brighthouse/MH/REPDCLND/BH_MH_REPDCLND_01_CGP_SN_01	Хм, нет, не сейчас. Может, попозже?
+Brighthouse/MH/REPEAT/BH_MH_REPEAT_01_CVS_HC_01	Опять за дело? Хочешь погонять кроликов?
+Brighthouse/MH/START/BH_MH_START_01_CVS_HC_01	Добро пожаловать в официальный лагерь. Здесь мы готовим к Чемпионату по пастушьим навыкам!
+Brighthouse/MH/START/BH_MH_START_02_CVS_HC_02	Цель проста: загони кроликов в ворота.
+Brighthouse/MH/START/BH_MH_START_03_CVS_HC_03	Чем больше кроликов ты загонишь, тем больше очков получишь!
+Brighthouse/MH/START/BH_MH_START_04_CVS_HC_04	Но помни! Ворота не стоят на месте!
+Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_01_CS_SN_01	День Игогойского залива... А вот и мы!
+Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_02_CS_IZ_01	А вот и мы!
+Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_03_CS_HC_01	А вот и мы!
+Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_04_CS_BH_01	
+Brighthouse/Q1/COMP/BH_Q1_COMP_01_CVS_IZ_01	Спасибо, Санни! Благодаря тебе мост спасен!
+Brighthouse/Q1/COMP/BH_Q1_COMP_02_CVS_IZ_02	Теперь ты в любое время можешь пони-чинить вот такие столы.
+Brighthouse/Q1/COMP/BH_Q1_COMP_03_CVS_SN_01	Спасибо тебе! Я еще только учусь управлять магией...
+Brighthouse/Q1/EV_01/BH_Q1_EV_01_01_GP_SN_01	Прекрасно! Осталось еще два!
+Brighthouse/Q1/EV_02/BH_Q1_EV_02_01_GP_SN_01	Идеально! Остался еще один...
+Brighthouse/Q1/EV_03/BH_Q1_EV_03_01_GP_SN_01	Это все! Пора отнести их обратно к Иззи.
+Brighthouse/Q1/MID_01/BH_Q1_MID_01_01_GP_IZ_01	Если под рукой достаточно блесток и попурри, то пони-чинить можно что угодно!
+Brighthouse/Q1/POST_01/BH_Q1_POST_01_01_CVS_IZ_01	Без магии все было гораздо сложнее!
+Brighthouse/Q1/POST_01/BH_Q1_POST_01_02_CVS_IZ_02	А теперь, если под рукой есть немного клея и блесток, все возможно!
+Brighthouse/Q1/POST_01/BH_Q1_POST_01_03_CVS_IZ_03	Можно даже сказать... Едино-можно!
+Brighthouse/Q1/START/BH_Q1_START_01_CVS_IZ_01	Ты еще здесь?! Давай скорее. Нас ждет Игогойский залив!
+Brighthouse/Q1/START/BH_Q1_START_02_CVS_SN_01	Знаю! Нам сюда, да?
+Brighthouse/Q1/START/BH_Q1_START_03_CVS_IZ_02	Именно... Но мост сломан!
+Brighthouse/Q1/START/BH_Q1_START_04_CVS_IZ_03	Мы можем починить его с помощью нашей силы единорогов — пони-чинящей магии!
+Brighthouse/Q1/START/BH_Q1_START_05_CVS_IZ_04	Но я не помню, где мои инструменты...
+Brighthouse/Q1/START/BH_Q1_START_06_CVS_IZ_05	Они наверняка где-то рядом. Поможешь мне найти их?
+Brighthouse/Q1/START/BH_Q1_START_07_CVS_SN_02	Не вопрос!
+Brighthouse/Q1/TOOFAR/BH_Q1_TOOFAR_01_GP_IZ_01	Так хочется на праздник! На День Игогойского залива! Давай закончим поскорее!
+Brighthouse/Q2/COMP/BH_Q2_COMP_01_CGP_HC_01	Мы еще сделаем из тебя пастуха кроликов, верно, ребята?
+Brighthouse/Q2/COMP/BH_Q2_COMP_02_CGP_Bunnies_01	
+Brighthouse/Q2/EV_01/BH_Q2_EV_01_01_GP_SN_01	Мне пора на встречу с Хитчем. Он жутко пунктуальный, а я его заставляю ждать.
+Brighthouse/Q2/EV_02/BH_Q2_EV_02_01_CVS_HC_01	Молодец, Санни. У тебя хорошие пастушьи навыки.
+Brighthouse/Q2/EV_02/BH_Q2_EV_02_02_CVS_HC_02	Но они не будут готовы, пока ты их не покормишь!
+Brighthouse/Q2/EV_02/BH_Q2_EV_02_03_CVS_HC_03	Найди несколько морковок и возвращайся, пока они не начали нервничать.
+Brighthouse/Q2/EV_03/BH_Q2_EV_03_01_GP_SN_01	Прекрасно! Осталось еще две!
+Brighthouse/Q2/EV_04/BH_Q2_EV_04_01_GP_SN_01	Идеально! Осталась еще одна...
+Brighthouse/Q2/EV_05/BH_Q2_EV_05_01_GP_SN_01	И вот у тебя уже три! Пойдем обратно.
+Brighthouse/Q2/MID_01/BH_Q2_MID_01_01_GP_HC_01	Кролики ускачут от тебя. Догони их и приведи ко мне.
+Brighthouse/Q2/MID_02/BH_Q2_MID_02_01_GP_HC_01	Помнишь тот сад на холме? Там наверняка есть морковка.
+Brighthouse/Q2/START/BH_Q2_START_01_CVS_HC_01	А вот и ты! Я тебя уже везде ищу!
+Brighthouse/Q2/START/BH_Q2_START_02_CVS_HC_02	Ты же одна осталась!
+Brighthouse/Q2/START/BH_Q2_START_03_CVS_SN_02	Осталась? В каком смысле?
+Brighthouse/Q2/START/BH_Q2_START_04_CVS_HC_03	Еще не тренировала пастушьи навыки.
+Brighthouse/Q2/START/BH_Q2_START_05_CVS_HC_04	Самая классная новая традиция в честь Дня Игогойского залива:
+Brighthouse/Q2/START/BH_Q2_START_06_CVS_HC_05	Пастушьи бега за кроликами!
+Brighthouse/Q2/START/BH_Q2_START_07_CVS_SN_03	А это... обязательно? Мне жалко кроликов...
+Brighthouse/Q2/START/BH_Q2_START_08_CVS_HC_06	Кролики это обожают! Они сами так говорят!
+Brighthouse/Q2/START/BH_Q2_START_09_CVS_Bunnies_01	
+Brighthouse/Q2/START/BH_Q2_START_10_CVS_HC_07	Видишь?
+Brighthouse/Q2/START/BH_Q2_START_11_CVS_SN_04	Ну ладно. Что нужно делать?
+Brighthouse/Q2/START/BH_Q2_START_12_CVS_HC_08	Ну... Несколько кроликов ускакало на Загривный проспект.
+Brighthouse/Q2/START/BH_Q2_START_14_CVS_HC_10	3 кролика еще не вернулись. Но они наверняка где-то поблизости.
+Brighthouse/Q2/START/BH_Q2_START_15_CVS_HC_11	Их нужно поймать. Поможешь мне?
+Brighthouse/Q2/START/BH_Q2_START_16_CVS_HC_12	Они попытаются ускакать, а ты их гони прямо сюда!
+Brighthouse/Q2/START/BH_Q2_START_17_CVS_SN_05	Будет сделано! Уже бегу!
+Brighthouse/Q2/TOOFAR/BH_Q2_TOOFAR_01_GP_HC_01	Эти кролики сами себя не пригонят, Санни!
+Brighthouse/Q3/START/BH_Q3_START_13_CVS_HC_09	Поэтому я загородил ворота вот этими коробками.
+Mainstreet/End/EV_05/MS_End_EV_05_01_CS_Sprout_01	Ты... Вы...
+Mainstreet/End/EV_05/MS_End_EV_05_02_CS_SN_01	Эй... Не бойся. Мы не причиним тебе вреда.
+Mainstreet/End/EV_05/MS_End_EV_05_03_CS_Sprout_02	Вы... Правда?
+Mainstreet/End/EV_05/MS_End_EV_05_04_CS_SN_02	Да. Мы просто хотим, чтобы все наладилось!
+Mainstreet/End/EV_05/MS_End_EV_05_05_CS_Sprout_03	Но я тоже этого хочу!
+Mainstreet/End/EV_05/MS_End_EV_05_06_CS_Sprout_04	Последние месяцы были невыносимыми... повсюду волшебство и странные пони. Я... Я просто...
+Mainstreet/End/EV_05/MS_End_EV_05_07_CS_HC_01	Спраут... Бывает трудно, когда что-то меняется. Особенно если ты не можешь это контролировать.
+Mainstreet/End/EV_05/MS_End_EV_05_08_CS_ZP_01	Но иногда изменения ведут к лучшему. Они делают нас лучше, если мы принимаем их всем сердцем.
+Mainstreet/End/EV_05/MS_End_EV_05_09_CS_SN_03	Зипп, твои крылья!
+Mainstreet/End/EV_05/MS_End_EV_05_10_CS_IZ_01	О-о-ох! Магия возвращается!
+Mainstreet/End/EV_05/MS_End_EV_05_11_CS_BH_01	
+Mainstreet/End/EV_05/MS_End_EV_05_12_CS_PP_01	Иногда изменения делают все прекраснее, как макияж.
+Mainstreet/End/EV_05/MS_End_EV_05_13_CS_IZ_02	Или блестки!
+Mainstreet/End/EV_05/MS_End_EV_05_14_CS_SN_04	Или новый друг!
+Mainstreet/End/EV_05/MS_End_EV_05_15_CS_Sprout_05	Пожалуй, я слегка перенервничал, а... Так вы на меня не злитесь?
+Mainstreet/End/EV_05/MS_End_EV_05_16_CS_HC_02	Ну... Если в Игогойском заливе снова воцарится мир...
+Mainstreet/End/EV_05/MS_End_EV_05_17_CS_SN_05	Воцарится и дружба
+Mainstreet/End/EV_05/MS_End_EV_05_18_CS_IZ_03	А дружба — это НАСТОЯЩАЯ магия!
+Mainstreet/End/EV_05/MS_End_EV_05_19_CS_PP_02	Эй, Спраут... У меня есть идея, как тебя развеселить!
+Mainstreet/End/EV_05/MS_End_EV_05_20_CS_ZP_02	Нет. Нет, нет, нет!
+Mainstreet/End/EV_05/MS_End_EV_05_21_CS_PP_03	Станцуем!
+Mainstreet/INTRO/EV_01/MS_INTRO_EV_01_01_CS_Narrator_01	
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_01_CS_PP_01	Это Загривный проспект — центр Игогойского залива!
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_02_CS_HC_01	
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_03_CS_PP_02	Ах... Приветствуем, пони! Хотите сказочное зрелище?
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_04_CS_SN_01	Ах... Да?!
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_05_CS_IZ_01	Да, точно!
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_06_CS_PP_03	Тогда смотрите Пипп-пипп-парад!
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_07_CS_Bystanders_01	Пипп-пипп-парад!!
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_08_CS_PP_04	Там будет весь город!
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_09_CS_SN_02	Да! И мы тебя поддержим!
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_10_CS_IZ_02	Я принесу кучу блесток!
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_11_CS_HC_02	А я... Я напишу КЛЕВУЮ песню, припев будет таким...
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_12_CS_PP_05	
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_13_CS_HC_03	Да, я приду. Я фанат!
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_14_CS_PP_06	Здорово! До встречи там, девчонки!
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_15_CS_HC_04	Уф...
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_16_CS_IZ_03	Я подготовлю декорации! До встречи!
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_17_CS_HC_05	А я буду стоять на страже у входа в городской парк.
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_02_CS_ZP_01	Эй, Санни...
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_03_CS_SN_02	Спраут зашел в старый завод «КантерЛогика»! Нужно заставить его выйти оттуда!
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_04_CVS_PP_01	Но все пони города нас сейчас терпеть не могут. Зачем нам это?
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_05_CVS_IZ_01	Это ошибка. Мы все друзья.
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_06_CVS_SN_03	Нам просто нужно поймать Спраута, чтобы он все объяснил всем пони.
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_07_CVS_ZP_02	Но мы не можем летать без магии.
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_08_CVS_PP_02	А раньше здесь было хорошо...
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_09_CVS_PP_03	Нам, наверное, лучше вернуться на Зефирные горы вместе с мамой.
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_10_CVS_ZP_03	Там пони нас не ненавидят.
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_11_CVS_SN_04	Это неправильно. Нам нужно это исправить!
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_12_CVS_HC_01	Нужно что-то делать. Но как же нам обойти эти ворота?
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_13_CVS_SN_05	Я осмотрюсь, может, увижу что-нибудь...
+Mainstreet/M5S/EV_02/MS_M5S_EV_02_01_CVS_IZ_01	Санни... Мне тоже стоит уехать из города? Может, так будет лучше.
+Mainstreet/M5S/EV_02/MS_M5S_EV_02_02_CVS_SN_01	Нет! Должен быть способ обойти эти ворота.
+Mainstreet/M5S/EV_03/MS_M5S_EV_03_01_CVS_ZP_01	Спасибо, что пытаешься, Санни.
+Mainstreet/M5S/EV_03/MS_M5S_EV_03_02_CVS_PP_01	Но уже слишком поздно.
+Mainstreet/M5S/EV_03/MS_M5S_EV_03_03_CVS_SN_01	Помочь другу никогда не поздно.
+Mainstreet/M5S/EV_04/MS_M5S_EV_04_01_GP_SN_01	Если я разбегусь по склону очень быстро...
+Mainstreet/M5S/EV_04/MS_M5S_EV_04_02_GP_SN_02	Ролики!
+Mainstreet/M5S/EV_05/MS_M5S_EV_05_01_GP_SN_01	Ворота не открываются... Должен быть путь внутрь.
+Mainstreet/M5S/EV_06/MS_M5S_EV_06_01_CVS_HC_01	Я не хочу нарушать закон, но если найдешь способ перепрыгнуть через забор...
+Mainstreet/M5S/EV_06/MS_M5S_EV_06_02_CVS_HC_02	Я сделаю вид, что не заметил.
+Mainstreet/M5S/EV_06/MS_M5S_EV_06_03_CVS_SN_01	Перепрыгнуть через забор? Хм-м-м...
+Mainstreet/M5S/TOOFAR/MS_M5S_TOOFAR_01_GP_SN_01	Я не могу уйти, мои друзья рассчитывают на меня...
+Mainstreet/MF/ACCEPTED/MS_MF_ACCEPTED_01_CVS_PP_01	Представление начинается, детка!
+Mainstreet/MF/ACCEPTED/MS_MF_ACCEPTED_02_CVS_PP_02	Одевайся. У нас уже нет времени!
+Mainstreet/MF/COMP/MS_MF_COMP_01_CVS_PP_01	Вот это движения, Санни!
+Mainstreet/MF/COMP/MS_MF_COMP_02_CVS_PP_02	А я и не знала, что ты на такое способна.
+Mainstreet/MF/COMP/MS_MF_COMP_03_CVS_SN_01	Я тоже! Ты прекрасный учитель танцев!
+Mainstreet/MF/COMP/MS_MF_COMP_04_CVS_PP_03	Вот, это тебе, в знак благодарности!
+Mainstreet/MF/COMP/MS_MF_COMP_05_CVS_PP_04	Значок Дня Игогойского залива!
+Mainstreet/MF/COMP/MS_MF_COMP_06_CVS_PP_05	Теперь ты можешь пойти в городской парк гонять кроликов.
+Mainstreet/MF/COMP/MS_MF_COMP_07_CVS_SN_02	День Игогойского залива мне нравится все больше и больше...
+Mainstreet/MF/DECLINED/MS_MF_DECLINED_01_CVS_PP_01	Не медли! Зрители ждут!
+Mainstreet/MF/QUESTION/MS_MF_QUESTION_01_CVS_PP_01	У тебя превосходно получится! Готова танцевать?
+Mainstreet/MF/REPACPTD/MS_MF_REPACPTD_01_CVS_SN_01	Конечно! Почему бы и нет!
+Mainstreet/MF/REPDCLND/MS_MF_REPDCLND_01_CVS_SN_01	Может, попозже.
+Mainstreet/MF/REPEAT/MS_MF_REPEAT_01_CVS_PP_01	Эй, Санни! Хочешь еще потанцевать?
+Mainstreet/MF/START/MS_MF_START_01_CVS_PP_01	Одежду? Но мне нужна танцовщица для шоу!
+Mainstreet/MF/START/MS_MF_START_02_CVS_SN_01	Хочешь, я найду тебе танцовщицу?
+Mainstreet/MF/START/MS_MF_START_03_CVS_PP_02	Нет! Я уже нашла превосходную танцовщицу. Она прямо передо мной.
+Mainstreet/MF/START/MS_MF_START_04_CVS_SN_02	Ну, я...
+Mainstreet/MR/EV_01/MS_MR_EV_01_01_GP_SN_01	Спраут! Не убегай. Мы еще можем все исправить.
+Mainstreet/MR/EV_01/MS_MR_EV_01_02_GP_Sprout_01	Попробуй, исправь это!
+Mainstreet/MR/EV_02/MS_MR_EV_02_01_CS_HC_01	Санни! Кролики помешают ему, но береги себя!
+Mainstreet/MR/EV_02/MS_MR_EV_02_02_GP_SN_01	Я буду осторожна!
+Mainstreet/MR/EV_02/MS_MR_EV_02_03_GP_SN_02	Ой, ну почему?!
+Mainstreet/MR/EV_02/MS_MR_EV_02_04_GP_Sprout_01	Да!
+Mainstreet/MR/EV_02/MS_MR_EV_02_05_GP_Sprout_02	Откуда они взялись?!
+Mainstreet/MR/EV_03/MS_MR_EV_03_01_GP_Sprout_01	Вы меня никогда не поймаете!
+Mainstreet/MR/EV_03/MS_MR_EV_03_02_GP_SN_01	Что происходит?
+Mainstreet/MR/EV_03/MS_MR_EV_03_03_CS_PP_01	Мы отвлечем его, Санни! Лови его!
+Mainstreet/MR/EV_03/MS_MR_EV_03_04_CS_ZP_01	С магией или без, мы не оставим друзей!
+Mainstreet/MR/EV_03/MS_MR_EV_03_05_CS_SN_02	Я вас не подведу!
+Mainstreet/MR/EV_04/MS_MR_EV_04_01_CS_Sprout_01	ОСТАНОВИТЕСЬ уже!
+Mainstreet/MR/EV_04/MS_MR_EV_04_02_CS_IZ_01	Я как раз хотела сказать.
+Mainstreet/MR/EV_07/MS_MR_EV_07_01_GP_SN_01	Я приближаюсь!
+Mainstreet/MR/EV_08/MS_MR_EV_08_01_GP_SN_01	Да!
+Mainstreet/MR/EV_09/MS_MR_EV_09_01_GP_Sprout_01	Нет!
+Mainstreet/MR/EV_10/MS_MR_EV_10_01_GP_Sprout_01	Тебе просто повезло.
+Mainstreet/MR/EV_11/MS_MR_EV_11_01_GP_Sprout_01	Ха-ха!
+Mainstreet/MR/EV_12/MS_MR_EV_12_01_GP_Sprout_01	Получай!
+Mainstreet/MR/EV_13/MS_MR_EV_13_01_GP_Sprout_01	Ой!
+Mainstreet/MR/REPACPTD/MS_MR_REPACPTD_01_CVS_SN_01	Думаешь, будет весело?
+Mainstreet/MR/REPDCLND/MS_MR_REPDCLND_01_CVS_SN_01	Может, в следующий раз.
+Mainstreet/MR/REPEAT/MS_MR_REPEAT_01_CVS_Sprout_01	Эй, Санни, а ты хочешь... Еще раз поучаствовать в гонке?
+Mainstreet/MR/REPEAT/MS_MR_REPEAT_02_CVS_Sprout_02	Я могу «притвориться» и дать тебе снова меня поймать. Я умею притворяться.
+Mainstreet/MR/START/MS_MR_START_01_CS_SN_01	А-а-а-а-а-а-а-а
+Mainstreet/Q11/ACCEPTED/MS_Q11_ACCEPTED_04_CVS_SN_01	Вперед!
+Mainstreet/Q11/BLK/MS_Q11_BLK_01_GP_BigBunny_01	*nobox*
+Mainstreet/Q11/BLK/MS_Q11_BLK_02_GP_Bunnies_01	*nobox*
+Mainstreet/Q11/BLK/MS_Q11_BLK_03_GP_SN_01	Не думаю, что меня пустят туда.
+Mainstreet/Q11/COMP/MS_Q11_COMP_01_CS_HC_01	Вот и все, вымогатель.
+Mainstreet/Q11/COMP/MS_Q11_COMP_02_CS_BigBunny_01	*nobox*
+Mainstreet/Q11/COMP/MS_Q11_COMP_03_CS_Bunnies_01	*nobox*
+Mainstreet/Q11/COMP/MS_Q11_COMP_04_CS_SN_01	Неужели он вот так бросил своих друзей?
+Mainstreet/Q11/COMP/MS_Q11_COMP_05_CS_HC_02	Не думаю, что у него есть настоящие друзья, Санни.
+Mainstreet/Q11/COMP/MS_Q11_COMP_06_CS_Bunnies_02	*nobox*
+Mainstreet/Q11/COMP/MS_Q11_COMP_07_CS_SN_02	Ну, вы всегда можете положиться на нас, ребята!
+Mainstreet/Q11/COMP/MS_Q11_COMP_08_CS_Bunnies_03	*nobox*
+Mainstreet/Q11/DECLINED/MS_Q11_DECLINED_05_CVS_SN_01	Может, попозже...
+Mainstreet/Q11/EV_01/MS_Q11_EV_01_01_CVS_SmoothieShop_01	Исключительно освежающие, да? Точно! Но они требуют особого обращения...
+Mainstreet/Q11/EV_01/MS_Q11_EV_01_02_CVS_SmoothieShop_02	Их нужно доставить супербыстро, иначе они испортятся быстрее, чем ты скажешь «Мои копыта»!
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_01_CVS_BigBunny_01	*nobox*
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_02_CVS_HC_01	Что? Еще одно «условие»?
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_03_CVS_HC_02	Теперь он хочет «крутые солнечные очки»...
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_04_CVS_SN_01	Крутые солнечные очки? Уф... Ладно.
+Mainstreet/Q11/EV_03/MS_Q11_EV_03_01_CVS_FashionPony_01	О, это снова ты. Хочешь солнечные очки, да?
+Mainstreet/Q11/EV_03/MS_Q11_EV_03_02_CVS_FashionPony_02	Это просто. Я умудрилась испортить твой цветок... Можешь его оживить?
+Mainstreet/Q11/EV_03/MS_Q11_EV_03_03_CVS_SN_01	Ох... Конечно!
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_05_CVS_HC_01	Хорошо. Можешь идти.
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_06_CVS_BigBunny_01	*nobox*
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_07_CVS_HC_02	Он говорит, у него осталось ОДНО последнее условие.
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_08_CVS_BigBunny_02	*nobox*
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_09_CVS_HC_03	Три шарика?? Но для чего?
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_10_CVS_BigBunny_03	*nobox*
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_11_CVS_HC_04	Ах, ладно... Три шарика, ага.
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_12_CVS_SN_01	Значит, три шарика. Не вопрос...
+Mainstreet/Q11/EV_05/MS_Q11_EV_05_01_GP_SN_01	Один шарик есть, нужно еще два!
+Mainstreet/Q11/EV_06/MS_Q11_EV_06_01_GP_SN_01	Остался еще один. Где-то я уже видела шарик, но где?
+Mainstreet/Q11/EV_07/MS_Q11_EV_07_01_GP_SN_01	И все три. Отнесу их ему.
+Mainstreet/Q11/EV_08/MS_Q11_EV_08_01_GP_SN_01	Нужно проверить, как дела у Зипп в летной школе в Пляжной бухте.
+Mainstreet/Q11/EV_09/MS_Q11_EV_09_04_GP_FashionPony_01	Спасибо! Вот!
+Mainstreet/Q11/MID_01/MS_Q11_MID_01_01_GP_HC_01	Надо, чтобы смузи были очень освежающие, Санни.
+Mainstreet/Q11/MID_02/MS_Q11_MID_02_01_GP_HC_01	Ты можешь найти крутые солнечные очки в ближайшем магазине.
+Mainstreet/Q11/MID_03/MS_Q11_MID_03_01_GP_HC_01	Я видел шарики на Загривном проспекте. Отправляйся туда, Санни.
+Mainstreet/Q11/POST_01/MS_Q11_POST_01_01_GP_SmoothieShop_01	Смузи! Освежающие и СУПЕРСКИ освежающие! У вас от них замерзнут гривы!
+Mainstreet/Q11/POST_02/MS_Q11_POST_02_01_GP_FashionPony_01	Постараюсь не загубить этот цветок...
+Mainstreet/Q11/PRE_01/MS_Q11_PRE_01_01_GP_SmoothieShop_01	Суперски освежающие смузи! Не дайте им растаять!
+Mainstreet/Q11/PRE_02/MS_Q11_PRE_02_01_GP_FashionPony_01	Стильные очки любого вида и размера! Примерьте их!
+Mainstreet/Q11/PRE_03/MS_Q11_PRE_03_01_GP_ScaredNPC_01	Эти кролики, загородившие проход к Пляжной бухте, явно замышляют что-то плохое.
+Mainstreet/Q11/QUESTION/MS_Q11_QUESTION_03_CVS_SmoothieShop_01	Готова?
+Mainstreet/Q11/RETACPTD/MS_Q11_RETACPTD_08_CVS_SN_01	Вперед!
+Mainstreet/Q11/RETDCLND/MS_Q11_RETDCLND_07_CVS_SN_01	Может, попозже...
+Mainstreet/Q11/RETRY/MS_Q11_RETRY_06_CVS_SmoothieShop_01	Он был недостаточно освежающим. Попробуем еще раз?
+Mainstreet/Q11/START/MS_Q11_START_01_CS_Big Bunny_01	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_02_CS_Bunnies_01	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_03_CS_HC_01	Все пони, успокойтесь! Что происходит?
+Mainstreet/Q11/START/MS_Q11_START_04_CS_Bunnies_02	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_05_CS_SN_01	Что они говорят?
+Mainstreet/Q11/START/MS_Q11_START_06_CS_HC_02	Его зовут Марсель... И он ставит условия.
+Mainstreet/Q11/START/MS_Q11_START_07_CS_HC_03	Он говорит, что они захватили дорогу и не сдвинутся с места, пока не получат то, чего хотят.
+Mainstreet/Q11/START/MS_Q11_START_08_CS_BigBunny_02	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_09_CS_Bunnies_03	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_10_CS_SN_02	И чего они хотят?
+Mainstreet/Q11/START/MS_Q11_START_11_CS_BigBunny_03	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_12_CS_HC_04	Он «требует» исключительно освежающие смузи.
+Mainstreet/Q11/START/MS_Q11_START_13_CS_BigBunny_04	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_14_CS_Bunnies_04	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_15_CS_HC_05	Можешь найти его? А я за ними присмотрю.
+Mainstreet/Q11/START/MS_Q11_START_16_CS_SN_03	Исключительно освежающие смузи! Одну минуту!
+Mainstreet/Q11/TOOFAR/MS_Q11_TOOFAR_01_GP_SN_01	Хитчу нужна моя помощь, чтобы справиться с бандой кроликов.
+Mainstreet/Q16/BLK/MS_Q16_BLK_01_GP_Canterlogic Guard_01	Завод закрыт... Идет ремонт.
+Mainstreet/Q16/COMP/MS_Q16_COMP_01_CVS_Crowd2_02	Пегасы, уходите прочь!
+Mainstreet/Q16/COMP/MS_Q16_COMP_02_CVS_Crowd3_02	Единорогам здесь не место.
+Mainstreet/Q16/COMP/MS_Q16_COMP_03_CVS_SN_01	Все пони, прекратите!
+Mainstreet/Q16/COMP/MS_Q16_COMP_04_CVS_Crowd_01	
+Mainstreet/Q16/COMP/MS_Q16_COMP_05_CVS_SN_02	Неужели не понимаете, что вы делаете?
+Mainstreet/Q16/COMP/MS_Q16_COMP_06_CVS_SN_03	У пегасов и единорогов такие же копыта, сердца и мечты, как и у вас.
+Mainstreet/Q16/COMP/MS_Q16_COMP_07_CVS_SN_04	Они не чужие! Они наши соседи и друзья!
+Mainstreet/Q16/COMP/MS_Q16_COMP_08_CVS_SN_05	Пегасы, единороги и земные пони вместе возродили магию и принесли счастье нам всем!
+Mainstreet/Q16/COMP/MS_Q16_COMP_09_CVS_Crowd2_03	Мне нравится магия.
+Mainstreet/Q16/COMP/MS_Q16_COMP_10_CVS_Crowd1_02	Ага, мне тоже!
+Mainstreet/Q16/COMP/MS_Q16_COMP_11_CVS_SN_06	Какой-то пони угрожает этой магии, и вместе мы сможем его поймать!
+Mainstreet/Q16/COMP/MS_Q16_COMP_12_CVS_Crowd3_03	Пони на высокой платформе говорит правду!
+Mainstreet/Q16/COMP/MS_Q16_COMP_13_CVS_Crowd1_03	Давайте вернем магию!
+Mainstreet/Q16/COMP/MS_Q16_COMP_14_CVS_Crowd1,2,3_01	
+Mainstreet/Q16/COMP/MS_Q16_COMP_15_CVS_Crowd1,2,3_01	Магия! Магия! Магия!
+Mainstreet/Q16/EV_01/MS_Q16_EV_01_01_GP_Crowd1_01	Не могу сейчас говорить!
+Mainstreet/Q16/EV_02/MS_Q16_EV_02_01_GP_Crowd2_01	Неужели не видишь. Я тут протестую, вообще-то!
+Mainstreet/Q16/EV_03/MS_Q16_EV_03_01_GP_Crowd3_01	Я слушаю только пони, говорящих с высоких платформ и тому подобное!
+Mainstreet/Q16/START/MS_Q16_START_01_CGP_SN_01	Он там! Нужно как-нибудь разогнать толпу!
+Mainstreet/Q16/START/MS_Q16_START_02_CGP_SN_02	Если бы только можно было привлечь внимание всех сразу. Нужно найти место повыше.
+Mainstreet/Q16/TOOFAR/MS_Q16_TOOFAR_01_GP_SN_01	Сейчас не время сдаваться! Нужно догнать Спраута.
+Mainstreet/Q4/ACCEPTED/MS_Q4_ACCEPTED_01_CVS_SN_01	Ага! То есть... Так точно!
+Mainstreet/Q4/ACCEPTED/MS_Q4_ACCEPTED_02_CVS_Thunder_02	
+Mainstreet/Q4/COMP/MS_Q4_COMP_01_CVS_Thunder_01	Молодец, кадет Старскаут!
+Mainstreet/Q4/COMP/MS_Q4_COMP_02_CVS_Thunder_02	У тебя неплохо получается. Ты это заслужила.
+Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_01_CVS_SN_01	Не готова...
+Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_02_CVS_Thunder_02	Как скучно! Рано или поздно всем придется это сделать.
+Mainstreet/Q4/POST_01/MS_Q4_POST_01_01_GP_Thunder_01	К.Р.И.Л.О. означает «Крайне расчудесный институт левитационных облетов». Правда же круто?
+Mainstreet/Q4/QUESTION/MS_Q4_QUESTION_01_CVS_Thunder_01	Готова начать тренировку?
+Mainstreet/Q4/RETACPTD/MS_Q4_RETACPTD_01_CVS_SN_01	А как же!
+Mainstreet/Q4/RETDCLND/MS_Q4_RETDCLND_01_CVS_SN_01	Не сейчас...
+Mainstreet/Q4/RETRY/MS_Q4_RETRY_01_CVS_Thunder_01	Хочешь попробовать еще раз, кадет Старскаут?
+Mainstreet/Q4/START/MS_Q4_START_01_CVS_Thunder_01	Ах... Эй! А ты куда?
+Mainstreet/Q4/START/MS_Q4_START_02_CVS_SN_01	На Пипп-пипп-парад... сэр?
+Mainstreet/Q4/START/MS_Q4_START_03_CVS_Thunder_02	Неправильно! Санни Старскаут?
+Mainstreet/Q4/START/MS_Q4_START_04_CVS_Thunder_03	Тебя автоматически записали на учебу в Летную академию К.Р.И.Л.О.
+Mainstreet/Q4/START/MS_Q4_START_05_CVS_Thunder_04	Пока ты на уровне «крылатая пони-новичок», поэтому тебе нужно срочно начать тренироваться.
+Mainstreet/Q4/START/MS_Q4_START_06_CVS_SN_02	Но я же почти не умею летать.
+Mainstreet/Q4/START/MS_Q4_START_07_CVS_Thunder_05	Ну... В этом всё дело, правда?
+Mainstreet/Q4/START/MS_Q4_START_08_CVS_SN_03	Наверное, да...
+Mainstreet/Q4/START/MS_Q4_START_09_CVS_Thunder_06	Сначала проверим, что ты умеешь на земле. На полосе препятствий.
+Mainstreet/Q4/START/MS_Q4_START_10_CVS_Thunder_07	Вовремя хватай кристаллы, если хочешь получить крылья.
+Mainstreet/Q5/COMP/MS_Q5_COMP_01_CS_PP_01	Ох, БОЛЬШОЕ тебе спасибо, Санни!
+Mainstreet/Q5/COMP/MS_Q5_COMP_02_CS_SN_01	Все что угодно для Дня Игогойского залива!
+Mainstreet/Q5/COMP/MS_Q5_COMP_03_CS_PP_02	Я буду ждать тебя у Загривной мелодии! Соберется толпа!
+Mainstreet/Q5/COMP/MS_Q5_COMP_04_CS_PP_03	Все пони придут! Шоу вот-вот начнется!
+Mainstreet/Q5/EV_01/MS_Q5_EV_01_01_GP_SN_01	Главный подозреваемый — единорог... Хм-м.
+Mainstreet/Q5/EV_02/MS_Q5_EV_02_01_GP_SN_01	У того, кто это сделал, мех фиолетового цвета.
+Mainstreet/Q5/EV_03/MS_Q5_EV_03_01_GP_SN_01	У вредителя длинная голубая грива.
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_01_CVS_Sprout_01	Прекрасно сработано, сыщик!
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_02_CVS_Sprout_02	Значит, единорог с фиолетовым мехом и длинной голубой гривой, да?
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_03_CVS_Sprout_03	Мне кажется, ясно, кто это сделал, Санни.
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_04_CVS_SN_01	Нет! Иззи никогда бы такого не сделала.
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_05_CVS_Sprout_04	Мне жаль, но я должен ее арестовать. Я же шериф.
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_06_CVS_SN_02	Нет, подожди! Я поговорю с ней.
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_07_CVS_Sprout_05	Тогда попробуй найти ее раньше, чем я ее найду.
+Mainstreet/Q5/EV_05/MS_Q5_EV_05_01_GP_SN_01	Точно. Мне нужно ее найти.
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_01_CVS_IZ_01	Эй, Санни! Что может быть лучше Дня Игогойского залива?
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_02_CVS_SN_01	Слушай... Кто-то испортил рекламный щит Пиппы...
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_03_CVS_IZ_02	О нет! Это ужасно.
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_04_CVS_IZ_03	У меня есть идея! Можно его пони-починить.
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_05_CVS_SN_02	Да! Им станет ясно, что это не твоих рук дело.
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_06_CVS_IZ_04	Что не моих рук дело?
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_07_CVS_SN_03	Ничего! Что нам для этого нужно?
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_08_CVS_IZ_05	Краска! Розовая краска. И побольше! Принесешь мне?
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_09_CVS_SN_04	Краска, ага. Будет сделано!
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_01_CVS_PaintShop_01	О, привет! Тебе нужна краска?
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_02_CVS_SN_01	Да! Мне нужно много розовой краски.
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_03_CVS_PaintShop_02	Прекрасно! А что у тебя есть для обмена?
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_04_CVS_SN_02	Обмена?
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_05_CVS_PaintShop_03	Сегодня же День Игогойского залива! Деньги запрещены. Можно только обмениваться.
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_06_CVS_PaintShop_04	Для магазина это не очень удобно, зато повышает настроение.
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_07_CVS_SN_03	А что ты хочешь в обмен на краску?
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_08_CVS_PaintShop_05	Ну... В детстве я хотел стать стражником-пегасом.
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_09_CVS_PaintShop_06	Магазин — это, конечно, классно...
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_10_CVS_PaintShop_07	А мне бы хотелось примерить шлемы стражника, они такие классные...
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_11_CVS_PaintShop_08	Может, найдешь мне шлем?
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_12_CVS_SN_04	Понятно. Шлем стражника-пегаса. Я найду его!
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_01_CVS_FashionPony_01	Какой сказочный наряд тебе подобрать?
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_02_CVS_SN_01	Мне нужен шлем стражника.
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_03_CVS_FashionPony_02	Шлем стражника! Прекрасный выбор!
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_04_CVS_FashionPony_03	У меня есть такой шлем, но...
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_05_CVS_SN_02	Но тебе нужно что-то взамен...
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_06_CVS_FashionPony_04	Сегодня же День Игогойского залива!
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_07_CVS_FashionPony_05	Все, что я хочу, — это сказочный красный цветок.
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_08_CVS_SN_03	Сказочный красный цветок? По рукам. Я его найду!
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_01_CVS_FlowerShop_01	Тебе нужен красный цветок?
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_02_CVS_SN_01	Я что угодно отдам в обмен.
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_03_CVS_FlowerShop_02	Ах! Я не против помочь, но у меня уже не осталось красных цветов.
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_04_CVS_FlowerShop_03	Зато у меня еще есть семена красных цветов, посаженные в вот этих горшках.
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_05_CVS_SN_02	Знаешь... Я могу их вырастить с помощью магии... Если ты не против...
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_06_CVS_FlowerShop_04	Совсем не против! Вот, попробуй на этих.
+Mainstreet/Q5/EV_10/MS_Q5_EV_10_01_GP_FlowerShop_01	Магия прекрасна, правда? На здоровье!
+Mainstreet/Q5/EV_11/MS_Q5_EV_11_01_GP_FashionPony_01	Замечательный цветок! Вот, держи. Совершенно новый шлем.
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_01_CVS_PaintShop_01	Посмотри на этот шлем! Дай-ка примерить...
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_02_CVS_SN_01	Классно выглядит!
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_03_CVS_PaintShop_02	Правда? «За Эквестрию!!»
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_04_CVS_SN_02	Ага... «За Эквестрию»...
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_05_CVS_PaintShop_03	Обмен есть обмен! Вот розовая краска.
+Mainstreet/Q5/EV_13/MS_Q5_EV_13_01_GP_SN_03	Прекрасно. Начнем чинить рекламный щит прямо сейчас!
+Mainstreet/Q5/EV_14/MS_Q5_EV_14_01_GP_SN_01	У нас на руках все подсказки. Надо поговорить со Спраутом.
+Mainstreet/Q5/EV_15/MS_Q5_EV_15_01_GP_SN_01	А мне нравится эта серия обменов. Теперь в магазин красок!
+Mainstreet/Q5/MID_01/MS_Q5_MID_01_01_GP_Sprout_01	Нужно больше подсказок. Продолжай опрос.
+Mainstreet/Q5/MID_02/MS_Q5_MID_02_01_CVS_IZ_01	Все пони готовятся ко Дню Игогойского залива. Киоск, который тебе нужен, где-то рядом!
+Mainstreet/Q5/MID_03/MS_Q5_MID_03_01_CVS_Thunder_01	Что? Мой шлем? Да ни за что. Проси кого-нибудь другого.
+Mainstreet/Q5/MID_04/MS_Q5_MID_04_01_CVS_FashionPony_01	У какого-нибудь пони поблизости наверняка есть цветы, детка.
+Mainstreet/Q5/MID_05/MS_Q5_MID_05_01_GP_PaintShop_01	Возвращайся, когда найдешь шлем.
+Mainstreet/Q5/MID_06/MS_Q5_MID_06_01_CVS_PP_01	Пожалуйста, помоги мне очистить мой образ! (В буквальном смысле)
+Mainstreet/Q5/MID_06/MS_Q5_MID_06_02_CVS_PP_02	Никто не придет, если у меня будет ТАКОЕ лицо
+Mainstreet/Q5/MID_06/MS_Q5_MID_06_03_CVS_SN_01	Ничего страшного! Мы всё мигом исправим. Не успеешь сказать «малиновая жвачка».
+Mainstreet/Q5/MID_07/MS_Q5_MID_07_01_CVS_IZ_01	Хорошо! Скорее, к рекламному щиту — пора пони-чинить!
+Mainstreet/Q5/POST_01/MS_Q5_POST_01_01_CVS_IZ_01	Ого-го! Загривный проспект выглядит так изысканно, правда?
+Mainstreet/Q5/POST_02/MS_Q5_POST_02_01_CVS_PaintShop_01	Краска! Лучшие цвета Игогойского залива!
+Mainstreet/Q5/POST_03/MS_Q5_POST_03_01_CVS_FashionPony_01	Наряды для Дня Игогойского залива! Наряжайтесь и сверкайте!
+Mainstreet/Q5/POST_04/MS_Q5_POST_04_01_CVS_FlowerShop_01	Горшки и семена! Растите красивые цветы любого цвета!
+Mainstreet/Q5/POST_05/MS_Q5_POST_05_01_CVS_Sprout_01	Ты нашла Иззи?
+Mainstreet/Q5/POST_05/MS_Q5_POST_05_02_CVS_SN_01	Иззи ничего плохого не сделала!
+Mainstreet/Q5/POST_05/MS_Q5_POST_05_03_CVS_Sprout_02	Это мы еще посмотрим. Что-то здесь не так...
+Mainstreet/Q5/PRE_01/MS_Q5_PRE_01_01_CVS_IZ_01	Ого-го! Загривный проспект выглядит так изысканно, правда?
+Mainstreet/Q5/PRE_02/MS_Q5_PRE_02_01_CVS_PaintShop_01	Краска! Лучшие цвета Игогойского залива!
+Mainstreet/Q5/PRE_03/MS_Q5_PRE_03_01_CVS_FashionPony_01	Наряды для Дня Игогойского залива! Наряжайтесь и сверкайте!
+Mainstreet/Q5/PRE_04/MS_Q5_PRE_04_01_CVS_FlowerShop_01	Горшки и семена! Растите красивые цветы любого цвета!
+Mainstreet/Q5/START/MS_Q5_START_01_CS_PP_01	
+Mainstreet/Q5/START/MS_Q5_START_02_CS_SN_01	Пиппа! Что случилось?
+Mainstreet/Q5/START/MS_Q5_START_03_CS_PP_02	Что случилось? Все плохо!
+Mainstreet/Q5/START/MS_Q5_START_04_CS_PP_03	Мой прекрасный рекламный щит уничтожен!
+Mainstreet/Q5/START/MS_Q5_START_05_CS_PP_04	Теперь на мое шоу не придет ни один пони!
+Mainstreet/Q5/START/MS_Q5_START_06_CS_Sprout_01	Возмутительно! В Игогойском заливе небезопасно!
+Mainstreet/Q5/START/MS_Q5_START_07_CS_PP_05	Кто же мог это сделать?!
+Mainstreet/Q5/START/MS_Q5_START_08_CS_Sprout_02	Какой-то пони пытается испортить нам праздник... Мы должны найти его!
+Mainstreet/Q5/START/MS_Q5_START_09_CS_Sprout_03	Или ее...
+Mainstreet/Q5/START/MS_Q5_START_10_CS_PP_06	Или ее??
+Mainstreet/Q5/START/MS_Q5_START_11_CS_Sprout_04	Под подозрением абсолютно ВСЕ!
+Mainstreet/Q5/START/MS_Q5_START_12_CS_SN_02	
+Mainstreet/Q5/START/MS_Q5_START_13_CS_Sprout_05	Кто-то, наверное, видел, как это произошло!
+Mainstreet/Q5/START/MS_Q5_START_14_CS_Sprout_06	Опроси всех пони в округе.
+Mainstreet/Q5/START/MS_Q5_START_15_CS_SN_03	Так и сделаю!
+Mainstreet/Q5/TOOFAR/MS_Q5_TOOFAR_01_GP_SN_01	Я сейчас не могу, у меня дела!
+Mainstreet/Q6/COMP/MS_Q6_COMP_01_CVS_Primrose_01	Большое спасибо!
+Mainstreet/Q6/COMP/MS_Q6_COMP_02_CVS_SN_01	Это же смузи. Легкотня.
+Mainstreet/Q6/COMP/MS_Q6_COMP_03_CVS_Primrose_02	Нет... Спасибо за то, что вдохновила меня быть самой собой.
+Mainstreet/Q6/COMP/MS_Q6_COMP_04_CVS_SN_02	Лучше этого ничего не может быть.
+Mainstreet/Q6/COMP/MS_Q6_COMP_05_CVS_SN_03	И помни: он ОБОЖАЕТ кроликов.
+Mainstreet/Q6/COMP/MS_Q6_COMP_06_CVS_Primrose_03	Кролики, ага! Может отнести эту одежду Пиппе?
+Mainstreet/Q6/COMP/MS_Q6_COMP_07_CVS_Primrose_04	Она ей больше пригодится, чем мне.
+Mainstreet/Q6/COMP/MS_Q6_COMP_08_CVS_SN_04	Конечно! Она знаток моды.
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_01_CVS_SN_01	Эй! Это ты Примроза?
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_02_CVS_Primrose_01	О... Нет! Примроза... Ушла. Растворилась.
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_03_CVS_SN_02	Это ты! Примроза!
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_04_CVS_Primrose_02	Да! Это я! Но я не могу пойти на шоу!
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_05_CVS_SN_03	Почему? Что-то случилось?
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_06_CVS_Primrose_03	Просто... Мне нечего надеть!
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_07_CVS_SN_04	Всего-то? Я найду тебе что-нибудь красивое.
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_08_CVS_Primrose_04	Правда? Мне нужно три вещи.
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_09_CVS_SN_05	Три? Решено!
+Mainstreet/Q6/EV_02/MS_Q6_EV_02_01_GP_ShopKeeper1_01	Для шоу Пиппы. Это особенный наряд.
+Mainstreet/Q6/EV_03/MS_Q6_EV_03_01_GP_ShopKeeper2_01	Наряд для пони-подиума. Одну секундочку!
+Mainstreet/Q6/EV_04/MS_Q6_EV_04_01_GP_ShopKeeper3_01	Ты получишь море комплиментов.
+Mainstreet/Q6/EV_05/MS_Q6_EV_05_01_GP_SN_01	У меня есть все, что нужно. Пора вернуться к Примрозе.
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_01_CVS_Primrose_01	О... Ты их достала?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_02_CVS_SN_01	Да! Теперь ты можешь выступить на шоу!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_03_CVS_Primrose_02	Но... Я не могу. Нет! Я не могу, не могу!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_04_CVS_SN_02	Что? Но почему же?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_05_CVS_Primrose_03	Потому! А что, если ему они не понравятся?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_06_CVS_SN_03	Ему? Кому это, ему?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_07_CVS_Primrose_04	Хитчу! Кому еще! Он так добр ко всем пони, так участлив, такой... каким только он может быть.
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_08_CVS_SN_04	О... Понятно. Но Хитч ничего не понимает в моде!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_09_CVS_Primrose_05	Разве? Ты... уверена?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_10_CVS_SN_05	Да. Ему больше по душе пасти кроликов и все такое.
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_11_CVS_Primrose_06	А я думала, что наряжусь для на пони-подиума и понравлюсь ему...
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_12_CVS_Primrose_07	Но я стесняюсь.
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_13_CVS_SN_06	Почему? Не стоит!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_14_CVS_SN_07	Ты идеальна! Именно такая, какая ты есть.
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_15_CVS_Primrose_08	Правда?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_16_CVS_SN_08	Да! Просто будь собой.
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_17_CVS_SN_09	Можешь просто подойти к нему и сказать: «Привет»!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_18_CVS_Primrose_09	Ну, не знаю... Я... Было бы проще, будь у меня причина к нему подойти.
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_19_CVS_SN_10	А что, если ты просто предложишь ему поделиться смузи?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_20_CVS_Primrose_10	Ну, наверное, это хорошая причина...
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_21_CVS_SN_11	Он ОБОЖАЕТ смузи из пряной тыквы!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_22_CVS_Primrose_11	Можешь достать мне такой?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_23_CVS_SN_12	Да! Я буду твоим смузи-мейкером!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_24_CVS_SN_13	Но моя тележка со смузи в магазине! Где же я сейчас найду смузи?
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_01_CVS_SN_01	Привет! У меня сломался холодильник для смузи...
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_02_CVS_SN_02	Можешь угостить меня парочкой смузи? Я буду у тебя в долгу!
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_03_CVS_SmoothieShop_01	Конечно, Санни, не вопрос! Что ты хочешь?
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_04_CVS_SN_03	Отлично! Два смузи из пряной тыквы, пожалуйста!
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_05_CVS_SmoothieShop_02	О нет!! Эти я сделать не могу... У меня закончился тыквенный крем!
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_06_CVS_SmoothieShop_03	Если принесешь мне парочку тыкв, то я их тебе сделаю.
+Mainstreet/Q6/EV_08/MS_Q6_EV_08_01_GP_SmoothieShop_01	Смузи из пряной тыквы. Одну секундочку!
+Mainstreet/Q6/EV_09/MS_Q6_EV_09_01_GP_SN_01	Тыквы у меня. Пора обратно в магазин смузи!
+Mainstreet/Q6/EV_10/MS_Q6_EV_10_01_GP_SN_01	Нужно встретиться с Пиппой и рассказать ей последние новости...
+Mainstreet/Q6/MID_01/MS_Q6_MID_01_01_CVS_PP_01	Ты уже нашла Примрозу?
+Mainstreet/Q6/MID_01/MS_Q6_MID_01_02_CVS_PP_02	Ах, Примроза как всегда! Она наверняка где-нибудь прячется.
+Mainstreet/Q6/MID_02/MS_Q6_MID_02_01_GP_Primrose_05	Спроси в магазинах. Я заказала три вещи для шоу.
+Mainstreet/Q6/MID_03/MS_Q6_MID_03_01_GP_Primrose_01	Кажется, рядом есть передвижной киоск со смузи...
+Mainstreet/Q6/MID_04/MS_Q6_MID_04_01_CVS_SmoothieShop_01	Смузи! Вкуснейшие смузи!
+Mainstreet/Q6/POST_01/MS_Q6_POST_01_01_CVS_SmoothieShop_01	Смузи! Вкуснейшие смузи!
+Mainstreet/Q6/POST_02/MS_Q6_POST_02_01_GP_ShopKeeper1_01	Пипп-пипп-парад должен быть потрясающим
+Mainstreet/Q6/POST_03/MS_Q6_POST_03_01_GP_ShopKeeper2_01	Принцесса Пиппа умеет устроить отличное шоу
+Mainstreet/Q6/POST_04/MS_Q6_POST_04_01_GP_ShopKeeper3_01	Сначала мне не нравилось обмениваться, но кажется, я к этом уже привыкаю.
+Mainstreet/Q6/PRE_01/MS_Q6_PRE_01_01_CVS_SmoothieShop_01	Смузи! Вкуснейшие смузи!
+Mainstreet/Q6/PRE_02/MS_Q6_PRE_02_01_GP_ShopKeeper1_01	Самый писк моды Зефирных гор!
+Mainstreet/Q6/PRE_03/MS_Q6_PRE_03_01_GP_ShopKeeper2_01	Единорогам трудно подобрать шляпу — они все протыкают.
+Mainstreet/Q6/PRE_04/MS_Q6_PRE_04_01_GP_ShopKeeper3_01	Шелк и модная одежда из Гривландии!
+Mainstreet/Q6/START/MS_Q6_START_01_CVS_PP_01	Ты узнала, кто испортил мой рекламный щит?
+Mainstreet/Q6/START/MS_Q6_START_02_CVS_SN_01	Вообще-то... нет.
+Mainstreet/Q6/START/MS_Q6_START_03_CVS_PP_02	Ладно. Зато сейчас хорошо выглядит. Это главное.
+Mainstreet/Q6/START/MS_Q6_START_04_CVS_PP_03	Санни! Все уже собрались, но чего-то не хватает...
+Mainstreet/Q6/START/MS_Q6_START_05_CVS_PP_04	Примроза!! Она у меня на подтанцовке!!
+Mainstreet/Q6/START/MS_Q6_START_06_CVS_PP_05	Какое же шоу без танцоров?! Найдешь ее?
+Mainstreet/Q6/START/MS_Q6_START_07_CVS_SN_02	Конечно! Где она может быть?
+Mainstreet/Q6/START/MS_Q6_START_08_CVS_PP_06	Не знаю. Она любит прятаться... И еще любит смузи!
+Mainstreet/Q6/START/MS_Q6_START_09_CVS_SN_03	Я найду ее.
+Mainstreet/Q6/START/MS_Q6_START_10_CVS_PP_07	Шоу должно продолжаться!
+Mainstreet/Q6/TOOFAR/MS_Q6_TOOFAR_01_GP_SN_01	Это еще не все!
+Mainstreet/Q7/COMP/MS_Q7_COMP_01_CVS_HC_01	Ты. Только. Посмотри! Даже значок Дня Игогойского залива есть!
+Mainstreet/Q7/COMP/MS_Q7_COMP_02_CS_HC_01	Ты готова гоняться за кроликами?
+Mainstreet/Q7/COMP/MS_Q7_COMP_03_CS_HC_02	Пойдем в городской парк.
+Mainstreet/Q7/COMP/MS_Q7_COMP_04_CS_BH_01	
+Mainstreet/Q7/EV_01/MS_Q7_EV_01_01_GP_HC_01	Прости, Санни. Но я не могу тебя пустить без значка Дня Игогойского залива!
+Mainstreet/Q7/EV_01/MS_Q7_EV_01_02_GP_HC_02	Чемпионат по пастушьим навыкам — серьезное занятие.
+Mainstreet/Q7/EV_01/MS_Q7_EV_01_03_GP_HC_03	Найти волшебное зеркало и приложи к нему медаль.
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_01_CVS_HC_01	Ага, эти кролики иногда такие смешные вещи говорят!
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_02_CVS_Primrose_01	Расскажи мне о них все, что знаешь, шериф Хитч!
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_03_CVS_HC_02	Ну... Конечно! Зови меня просто Хитчем.
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_04_CVS_Primrose_02	А, ладно... Хитч...
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_05_CVS_SN_01	
+Mainstreet/Q7/START/MS_Q7_START_01_CVS_HC_01	Ты не сможешь попасть в городской парк, пока не получишь медаль Дня Игогойского залива.
+Mainstreet/Q7/START/MS_Q7_START_02_CVS_HC_02	А Пиппе нужна помощь в подготовке ее шоу.
+Mainstreet/SS/EV_01/MS_SS_EV_01_01_CGP_Sprout_01	Граждане Игогойского залива!
+Mainstreet/SS/EV_01/MS_SS_EV_01_02_CGP_Sprout_02	Повода для паники нет!
+Mainstreet/SS/EV_01/MS_SS_EV_01_03_CGP_Sprout_03	Но времена настали по-настоящему страшные.
+Mainstreet/SS/EV_01/MS_SS_EV_01_04_CGP_Sprout_04	В городе у нас появился не один, а целых ДВА преступника!
+Mainstreet/SS/EV_01/MS_SS_EV_01_05_CGP_Sprout_05	Мы расследуем это дело. А пока все, что я могу сказать на данный момент...
+Mainstreet/SS/EV_01/MS_SS_EV_01_06_CGP_Sprout_06	Это то, что эти преступники не из Игогойского залива.
+Mainstreet/SS/EV_01/MS_SS_EV_01_07_CGP_Sprout_07	Ни один из них не является достойным уважения Земным пони.
+Mainstreet/SS/EV_01/MS_SS_EV_01_08_CGP_Sprout_08	Нет повода для паники.
+Mainstreet/SS/EV_01/MS_SS_EV_01_09_CGP_Sprout_09	Но будьте настороже!
+Mainstreet/SS/EV_02/MS_SS_EV_02_10_GP_Crowd1_01	Мне страшно!
+Mainstreet/SS/EV_03/MS_SS_EV_03_11_GP_Crowd2_01	Что же делать?
+Mainstreet/SS/EV_04/MS_SS_EV_04_01_GP_Sprout_01	Мы не можем допустить, чтобы такое случилось еще раз.
+Mainstreet/SS/EV_04/MS_SS_EV_04_02_GP_Sprout_02	Мы привлечем преступников к ответственности.
+TownPark/MC/ACCEPTED/TP_MC_ACCEPTED_01_CVS_HC_01	Отлично! Но тебе еще далеко до моего рекорда.
+TownPark/MC/ACCEPTED/TP_MC_ACCEPTED_02_CVS_SN_01	Посмотрим, дружок.
+TownPark/MC/COMP/TP_MC_COMP_01_CS_HC_01	Ого, Санни, ты... Прекрасно справилась!
+TownPark/MC/COMP/TP_MC_COMP_02_CS_SN_01	Ты удивлен?
+TownPark/MC/COMP/TP_MC_COMP_03_CS_HC_02	Я? Ну...
+TownPark/MC/COMP/TP_MC_COMP_04_CS_SN_02	Ну скажи!
+TownPark/MC/COMP/TP_MC_COMP_05_CS_HC_03	Ну, ладно... Может быть совсем чуть-чуть.
+TownPark/MC/COMP/TP_MC_COMP_06_CS_SN_03	Ха-ха, еще бы!
+TownPark/MC/COMP/TP_MC_COMP_07_CS_Sprout_01	Шериф Хитч.
+TownPark/MC/COMP/TP_MC_COMP_08_CS_Sprout_02	Над городом снова нависла жуткая угроза.
+TownPark/MC/COMP/TP_MC_COMP_09_CS_HC_04	Да, и что за угроза?
+TownPark/MC/COMP/TP_MC_COMP_10_CS_Sprout_03	Разъяренные зайчики столпились на Загривном.
+TownPark/MC/COMP/TP_MC_COMP_11_CS_Sprout_04	Они загородили проход к Пляжной бухте.
+TownPark/MC/COMP/TP_MC_COMP_12_CS_HC_04	Я проверю, но вряд ли так проблемы.
+TownPark/MC/COMP/TP_MC_COMP_13_CS_Sprout_05	О, еще какие проблемы, шериф Хитч.
+TownPark/MC/COMP/TP_MC_COMP_14_CS_HC_05	Можешь проверить, Санни? Я догоню тебя.
+TownPark/MC/COMP/TP_MC_COMP_15_CS_SN_05	Да, шериф Хитч.
+TownPark/MC/COMP/TP_MC_COMP_16_CS_HC_06	Ах!
+TownPark/MC/DECLINED/TP_MC_DECLINED_01_CVS_SN_01	Пока нет. У меня еще есть дела.
+TownPark/MC/DECLINED/TP_MC_DECLINED_02_CVS_HC_01	Возвращайся, когда будешь готова стать пастухом!
+TownPark/MC/EV_01/TP_MC_EV_01_01_GP_SN_01	Нужно вернуться на Загривный проспект и узнать, что не так с этими кроликами.
+TownPark/MC/EV_02/TP_MC_EV_02_01_GP_Sprout_01	Не туда! К Загривному проспекту надо идти в ОБРАТНОМ направлении!
+TownPark/MC/EV_03/TP_MC_EV_03_01_GP_SN_01	Пожалуй, нужно вернуться на Загривный проспект.
+TownPark/MC/POST_01/TP_MC_POST_01_01_GP_IZ_01	Загривный проспект? Пройди мимо рекламного щита и будешь на месте. Не промахнешься!
+TownPark/MC/QUESTION/TP_MC_QUESTION_01_CVS_HC_01	Кто готов стать пастухом?
+TownPark/MC/REPACPTD/TP_MC_REPACPTD_01_CVS_SN_01	Давай погоняем других существ!
+TownPark/MC/REPDCLND/TP_MC_REPDCLND_01_CVS_SN_01	Неа, мне нужно отдохнуть от кроликов...
+TownPark/MC/REPEAT/TP_MC_REPEAT_01_CVS_HC_01	Хочешь снова побыть пастухом?
+TownPark/MC/START/TP_MC_START_01_CVS_HC_01	Наконец настал тот час!
+TownPark/MC/START/TP_MC_START_02_CVS_HC_02	Добро пожаловать на совершенно новые Пастушьи бега за кроликами и крабами!
+TownPark/MC/START/TP_MC_START_03_CVS_HC_03	Чем больше кроликов и крабов ты загонишь в ворота, чем больше очков наберешь.
+TownPark/MC/START/TP_MC_START_04_CVS_HC_04	Только учти, крабы любят прятаться в лужах грязи!
+TownPark/Q10/COMP/TP_Q10_COMP_01_CVS_HC_01	Классно, Санни! У тебя хорошо получается.
+TownPark/Q10/COMP/TP_Q10_COMP_02_CVS_HC_02	Крабы подали мне идею...
+TownPark/Q10/COMP/TP_Q10_COMP_03_CVS_SN_01	Хм-м-м...
+TownPark/Q10/EV_01/TP_Q10_EV_01_01_GP_HC_01	Только обходи лужи грязи — крабы обожают в них прятаться!
+TownPark/Q10/EV_02/TP_Q10_EV_02_01_GP_SN_01	Это было не так уж и плохо, правда, крабик?
+TownPark/Q10/EV_03/TP_Q10_EV_03_01_GP_SN_01	Еще один!
+TownPark/Q10/EV_04/TP_Q10_EV_04_01_GP_SN_01	И вот уже три!
+TownPark/Q10/MID_01/TP_Q10_MID_01_01_GP_HC_01	В отличие от кроликов, которые бегут ОТ тебя, крабы наоборот, следуют за тобой.
+TownPark/Q10/START/TP_Q10_START_01_CVS_HC_01	С животными происходит что-то странное.
+TownPark/Q10/START/TP_Q10_START_02_CVS_HC_02	Три краба выползли с пляжа и добрались аж досюда.
+TownPark/Q10/START/TP_Q10_START_03_CVS_HC_03	Можешь собрать их всех здесь, чтобы я мог за ними присмотреть?
+TownPark/Q10/TOOFAR/TP_Q10_TOOFAR_01_GP_HC_01	Давай, Санни, собери крабов!
+TownPark/Q12/ACCEPTED/TP_Q12_ACCEPTED_01_CVS_SN_01	Почему бы и нет!
+TownPark/Q12/COMP/TP_Q12_COMP_01_CVS_Zoom_01	Неплохо, кадет! Ты уже практически летаешь.
+TownPark/Q12/DECLINED/TP_Q12_DECLINED_01_CVS_SN_01	Может, попозже.
+TownPark/Q12/POST_01/TP_Q12_POST_01_01_CVS_Zoom_01	Ты уже лучше справляешься, кадет!
+TownPark/Q12/QUESTION/TP_Q12_QUESTION_01_CVS_Zoom_01	Хочешь пройти в них полосу препятствий?
+TownPark/Q12/RETACPTD/TP_Q12_RETACPTD_01_CVS_SN_01	Мне нужно тренироваться!
+TownPark/Q12/RETDCLND/TP_Q12_RETDCLND_01_CVS_SN_01	Нет, спасибо. Может, попозже.
+TownPark/Q12/RETRY/TP_Q12_RETRY_01_CVS_Zoom_01	Ну... Попытка не пытка. Хочешь попробовать еще раз?
+TownPark/Q12/START/TP_Q12_START_01_CVS_Zoom_01	Кадет Старскаут! Приветствую тебя снова!
+TownPark/Q12/START/TP_Q12_START_02_CVS_Zoom_02	Вижу, ты используешь высокоскоростное оборудование?
+TownPark/Q12/START/TP_Q12_START_03_CVS_SN_01	А, ты имеешь в виду мои...
+TownPark/Q12/START/TP_Q12_START_04_CVS_Zoom_03	Ролики!
+TownPark/Q8/COMP/TP_Q8_COMP_01_CVS_IZ_01	Огогошечки! Настоящий шедевр пони-починки!
+TownPark/Q8/COMP/TP_Q8_COMP_02_CVS_HC_01	Намного лучше!
+TownPark/Q8/COMP/TP_Q8_COMP_03_CVS_HC_02	Я у тебя такой красивый получился, да?
+TownPark/Q8/COMP/TP_Q8_COMP_04_CVS_SN_01	Это было нелегко...
+TownPark/Q8/COMP/TP_Q8_COMP_05_CVS_HC_03	Эй! Ну... Ладно, спасибо.
+TownPark/Q8/EV_01/TP_Q8_EV_01_01_GP_SN_01	Виновный является пегасом... Странно.
+TownPark/Q8/EV_02/TP_Q8_EV_02_01_GP_SN_01	У главного подозреваемого сверкающий белый мех.
+TownPark/Q8/EV_03/TP_Q8_EV_03_01_GP_SN_01	И короткая грива красно-синего цвета.
+TownPark/Q8/EV_04/TP_Q8_EV_04_01_CVS_ZP_01	У нас на руках все подсказки! Идеально!
+TownPark/Q8/EV_04/TP_Q8_EV_04_02_CVS_ZP_02	Но это описание...
+TownPark/Q8/EV_04/TP_Q8_EV_04_03_CVS_SN_01	Это же ты, Зипп!
+TownPark/Q8/EV_04/TP_Q8_EV_04_04_CVS_ZP_03	Да меня здесь даже не было!
+TownPark/Q8/EV_04/TP_Q8_EV_04_05_CVS_Sprout_01	Ага! Пегас может спокойно улететь с места преступления!
+TownPark/Q8/EV_04/TP_Q8_EV_04_06_CVS_Sprout_02	Боюсь, я должен тебя арестовать.
+TownPark/Q8/EV_04/TP_Q8_EV_04_07_CVS_ZP_04	Нет, ни за что! Прости!
+TownPark/Q8/EV_04/TP_Q8_EV_04_08_CVS_Sprout_03	Ох! Разыскивается преступник!
+TownPark/Q8/EV_04/TP_Q8_EV_04_09_CVS_Sprout_04	Мы должны защитить Игогойский залив от подобных нападений.
+TownPark/Q8/EV_04/TP_Q8_EV_04_10_CVS_Sprout_05	Я предупрежу граждан об угрозе.
+TownPark/Q8/EV_04/TP_Q8_EV_04_11_CVS_SN_02	Что-то здесь не так... Почему мои друзья вдруг на такое решились?
+TownPark/Q8/EV_04/TP_Q8_EV_04_12_CVS_BH_01	
+TownPark/Q8/EV_05/TP_Q8_EV_05_13_GP_SN_03	Пожалуй, мне нужно починить рекламный щит...
+TownPark/Q8/EV_06/TP_Q8_EV_06_01_CVS_IZ_01	А мне нравятся рога Хитча. Это прямо произведение искусства!
+TownPark/Q8/EV_06/TP_Q8_EV_06_02_CVS_SN_01	Ага... Но думаю, надо это пони-чинить.
+TownPark/Q8/EV_06/TP_Q8_EV_06_03_CVS_IZ_02	Правда?
+TownPark/Q8/EV_06/TP_Q8_EV_06_04_CVS_SN_02	Ага... Что нам для этого нужно?
+TownPark/Q8/EV_06/TP_Q8_EV_06_05_CVS_IZ_03	Для начала было бы неплохо достать много желтой краски!
+TownPark/Q8/EV_06/TP_Q8_EV_06_06_CVS_SN_04	Ага! Я ее достану.
+TownPark/Q8/EV_07/TP_Q8_EV_07_01_CVS_PaintGuy2_01	Желтая краска? Я могу тебе немного обменять.
+TownPark/Q8/EV_07/TP_Q8_EV_07_02_CVS_PaintGuy2_02	Я готовлю фруктовый салат, но мне не хватает нескольких ингредиентов
+TownPark/Q8/EV_07/TP_Q8_EV_07_03_CVS_SN_01	Что тебе нужно?
+TownPark/Q8/EV_07/TP_Q8_EV_07_04_CVS_PaintGuy2_03	Можешь достать мне парочку яблок и груш?
+TownPark/Q8/EV_07/TP_Q8_EV_07_05_CVS_SN_02	Ладно, принесу
+TownPark/Q8/EV_08/TP_Q8_EV_08_01_GP_SN_01	Прекрасно! Еще одно
+TownPark/Q8/EV_09/TP_Q8_EV_09_01_GP_SN_01	Отлично. Теперь можно вернуться в магазин красок.
+TownPark/Q8/EV_10/TP_Q8_EV_10_01_CVS_PaintGuy2_01	Замечательные фрукты! А теперь самое главное.
+TownPark/Q8/EV_10/TP_Q8_EV_10_02_CVS_PaintGuy2_02	Нужна большая тыква, в которой все это можно смешать. По-настоящему большая!
+TownPark/Q8/EV_10/TP_Q8_EV_10_03_CVS_SN_01	Клево! Значит, ищем гигантскую тыкву!
+TownPark/Q8/EV_11/TP_Q8_EV_11_01_CVS_PumpkinLady_01	О, Санни. Я готова отдать тебе самую большую тыкву...
+TownPark/Q8/EV_11/TP_Q8_EV_11_02_CVS_PumpkinLady_02	Но она еще растет. Может, использовать магию?
+TownPark/Q8/EV_11/TP_Q8_EV_11_03_CVS_PumpkinLady_03	Вырасти ее, чтобы она стала большой, и забирай!
+TownPark/Q8/EV_12/TP_Q8_EV_12_01_GP_SN_01	Отлично! Еще немного...
+TownPark/Q8/EV_13/TP_Q8_EV_13_01_GP_SN_01	Ой... Она же ГИГАНТСКАЯ! Как же мне ее обратно откатить?
+TownPark/Q8/EV_14/TP_Q8_EV_14_01_GP_SN_01	Это все подсказки, но...
+TownPark/Q8/EV_15/TP_Q8_EV_15_01_CVS_PaintGuy2_01	Силы копытные! Вот это тыква, детка! Вот уж спасибо...
+TownPark/Q8/EV_15/TP_Q8_EV_15_02_CVS_PaintGuy2_02	Держи. Ты ее заслужила... Крась на здоровье!
+TownPark/Q8/EV_16/TP_Q8_EV_16_01_GP_SN_01	Отлично! Вернемся к рекламному щиту.
+TownPark/Q8/MID_01/TP_Q8_MID_01_01_GP_ZP_01	Нужно больше подсказок. Продолжай опрос.
+TownPark/Q8/MID_02/TP_Q8_MID_02_01_GP_PaintGuy2_01	Здесь поблизости растут яблони и груши
+TownPark/Q8/MID_03/TP_Q8_MID_03_01_GP_PaintGuy2_01	Прекрасно, но мне не хватает еще одного фрукта.
+TownPark/Q8/MID_04/TP_Q8_MID_04_01_GP_IZ_01	Может, снова нарисовать черный зуб?
+TownPark/Q8/MID_05/TP_Q8_MID_05_01_GP_HC_01	Пони должны починить рекламный щит! Ради всех кроликов...
+TownPark/Q8/MID_06/TP_Q8_MID_06_01_GP_PaintGuy2_01	Здесь неподалеку есть участок, на котором растут тыквы. Попроси у них самую большую.
+TownPark/Q8/POST_01/TP_Q8_POST_01_01_GP_Sprout_01	Число подозреваемых растет... В Игогойском заливе небезопасно!
+TownPark/Q8/POST_02/TP_Q8_POST_02_01_GP_PaintGuy2_01	Интересно, можно ли из этой тыквы сделать передвижной дом...
+TownPark/Q8/POST_03/TP_Q8_POST_03_01_GP_PumpkinLady_01	Магия земли гораздо сильнее, чем мне казалось...
+TownPark/Q8/POST_04/TP_Q8_POST_04_01_GP_IZ_01	Ну, удачи с пастушьим соревнованием! У тебя все получится.
+TownPark/Q8/PRE_01/TP_Q8_PRE_01_01_GP_PaintGuy2_01	М-м-м. В этом сезоне фрукты такие вкусные.
+TownPark/Q8/PRE_02/TP_Q8_PRE_02_01_GP_PumpkinLady_01	Тыквы! Вкусные и красивые!
+TownPark/Q8/START/TP_Q8_START_01_CS_HC_01	Вот и все, мы готовы к Пастушьим... Что?
+TownPark/Q8/START/TP_Q8_START_02_CS_SN_01	Ах... Ты в порядке?
+TownPark/Q8/START/TP_Q8_START_03_CS_HC_02	Смотри! МОЙ щит!
+TownPark/Q8/START/TP_Q8_START_04_CS_SN_02	Не так все плохо...
+TownPark/Q8/START/TP_Q8_START_05_CS_HC_03	Зубы! Смотри!
+TownPark/Q8/START/TP_Q8_START_06_CS_HC_04	Это вредительство! Проведем сыскную работу! Да?
+TownPark/Q8/START/TP_Q8_START_07_CS_SN_03	Кто пытается испортить День Игогойского залива?
+TownPark/Q8/START/TP_Q8_START_08_CS_ZP_01	Надо что-то расследовать? Я тоже сыщик! У меня даже резюме есть.
+TownPark/Q8/START/TP_Q8_START_09_CS_HC_05	А ты не должна быть в лётном «универe»?
+TownPark/Q8/START/TP_Q8_START_10_CS_ZP_02	Неа. Кажется, всем пони не до тренировок.
+TownPark/Q8/START/TP_Q8_START_11_CS_ZP_03	Нужно найти свидетелей! Это ИНТЕРЕСНЕЕ.
+TownPark/Q8/START/TP_Q8_START_12_CS_ZP_04	Узнай, не видели ли пони что-нибудь.
+TownPark/Q8/START/TP_Q8_START_13_CS_SN_04	Ох, ладно. Я займусь.
+TownPark/Q8/TOOFAR/TP_Q8_TOOFAR_01_GP_SN_01	Нужно помочь Хитчу починить его страшненький рекламный щит...
+TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_01_CVS_SN_01	Пожалуй...
+TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_02_CVS_Zoom_01	Посмотрим, как ты справишься...
+TownPark/Q9/COMP/TP_Q9_COMP_01_CVS_Zoom_01	Ну-ну... Ты произвела на меня впечатление.
+TownPark/Q9/COMP/TP_Q9_COMP_02_CVS_Zoom_02	Мы еще сделаем из тебя летающую звезду.
+TownPark/Q9/COMP/TP_Q9_COMP_03_CVS_Zoom_03	Вот твоя награда.
+TownPark/Q9/COMP/TP_Q9_COMP_04_CVS_SN_01	Эй! Это же мои ролики. Я их везде искала.
+TownPark/Q9/COMP/TP_Q9_COMP_05_CVS_Zoom_04	Можешь не благодарить.
+TownPark/Q9/COMP/TP_Q9_COMP_06_CVS_SN_02	Ну... Спасибо?..
+TownPark/Q9/DECLINED/TP_Q9_DECLINED_01_CVS_SN_01	Ох... Не думаю.
+TownPark/Q9/DECLINED/TP_Q9_DECLINED_02_CVS_Zoom_01	С таким отношением крыльев ты не получишь.
+TownPark/Q9/QUESTION/TP_Q9_QUESTION_01_CVS_Zoom_01	Готова?
+TownPark/Q9/RETACPTD/TP_Q9_RETACPTD_01_CVS_SN_01	Ладно, давай еще раз!
+TownPark/Q9/RETDCLND/TP_Q9_RETDCLND_01_CVS_SN_01	Ах, не думаю.
+TownPark/Q9/RETRY/TP_Q9_RETRY_01_CVS_Zoom_01	Неплохо, пожалуй, но тебе нужно еще поучиться. Хочешь попробовать еще раз?
+TownPark/Q9/START/TP_Q9_START_01_CVS_Zoom_01	Ах! Кадет Старскаут! Я наслышана о тебе
+TownPark/Q9/START/TP_Q9_START_02_CVS_SN_01	Мы же знакомы, я Вжух, помнишь меня?
+TownPark/Q9/START/TP_Q9_START_03_CVS_Zoom_02	Это неважно, кадет.
+TownPark/Q9/START/TP_Q9_START_04_CVS_Zoom_03	Ты здесь для проверки своих моторных навыков.
+TownPark/Q9/START/TP_Q9_START_05_CVS_SN_02	Чего-чего?
+TownPark/Q9/START/TP_Q9_START_06_CVS_Zoom_04	Твоего мастерства на усовершенствованной полосе препятствий.
+VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT1	Для передвижения используй джойстик.
+VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT2	Загони кроликов в ворота, чтобы набрать больше очков.
+VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT1	Для передвижения используй джойстик.
+VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT2	Загони кроликов и крабов в соответствующие ворота, чтобы повысить свой счет.
+VideoTutorials/VIDEOTUTORIAL_HC_SPECIALPTUT1	Это особая пиньята!\nНайди их все, чтобы открыть новых персонажей и сыграть с друзьями.
+VideoTutorials/VIDEOTUTORIAL_IZ_UNICYCLINGTUT1	Нажми эту кнопку, когда найдешь ремесленный стол, чтобы пони-чинить его!
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT1	Девчонки и мальчишки!!
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT10	Используй джойстик или нажми эту кнопку, затем танцуй в такт!
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT11	Чем лучше ты попадаешь в такт, чем лучше твой счет!
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT2	Добро пожаловать на Пипп-пипп-парад! В честь Дня Игогойского залива!
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT3	Для начала нам нужно нарядиться!
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT4	Выбери в меню самый великолепный наряд.
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT5	Нажми эту кнопку, чтобы надеть его.
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT6	Нажми эти кнопки и двигай в сторону, чтобы посмотреть другие аксессуары.
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT7	Нажми эту кнопку, чтобы сверкать на празднике!
+VideoTutorials/VIDEOTUTORIAL_PP_MAGICMTUT1	Ищи волшебные зеркала!\nИспользуй их с помощью этой кнопки, чтобы нарядиться по любому случаю!
+VideoTutorials/VIDEOTUTORIAL_SN_BUTTERTUT1	Следуй за бабочкой, чтобы пройти следующие шаги.
+VideoTutorials/VIDEOTUTORIAL_SN_CLEARGAME	Можешь исследовать Игогойский залив в любое время! Пройди мини-игры еще раз и собери кусочки магии, пропущенные в первый раз!
+VideoTutorials/VIDEOTUTORIAL_SN_JUMPTUT1	Нажми эту кнопку, чтобы прыгать.
+VideoTutorials/VIDEOTUTORIAL_SN_KICKTUT1	Нажми эту кнопку, чтобы потрясти дерево.\nНе забудь подобрать добычу!
+VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT1	Благодаря магии земных пони я могу выращивать растения и цветы. Нажми эту кнопку, чтобы использовать.
+VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT2	Прыгай на них, чтобы дотянуться до высоких мест.
+VideoTutorials/VIDEOTUTORIAL_SN_MOVTUT1	Для передвижения используй джойстик.
+VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT3	Прыгай, нажимая эту кнопку, чтобы избегать ловушек... если можешь!
+VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT2	Надень ролики, нажав эту кнопку.
+VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT3	Если хочешь снизить скорость, сними их, нажав эту кнопку.
+VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT4	Передвигайся в сторону с помощью джойстика, чтобы избегать препятствий.
+VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT5	Лови кольца, чтобы увеличивать скорость.
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_BUTTERTUT	БАБОЧКА-УКАЗАТЕЛЬ
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_CLEARGAME	Игра пройдена!
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_JUMPTUT	ПРЫЖОК
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_KICKTUT	УДАР НОГОЙ
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_MAGICMTUT	ВОЛШЕБНОЕ ЗЕРКАЛО
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_MAGICPTUT	МАГИЯ ЗЕМНОГО ПОНИ
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_MOVTUT	ПЕРЕМЕЩЕНИЕ
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_ROLLERTUT	РОЛИКОВЫЕ КОНЬКИ
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_SPECIALPTUT	СПЕЦИАЛЬНАЯ ПИНЬЯТА
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_UNICYCLINGTUT	МОНОЦИКЛ
+ScoreScreen/SCORE_DRAW	Ничья
+ScoreScreen/SCORE_MAGIC_BITS	Магические монеты
+ScoreScreen/SCORE_PLAYER1_WIN	Игрок 1 победил
+ScoreScreen/SCORE_PLAYER2_WIN	Игрок 2 победил
+ScoreScreen/SCORE_PLAYER_WIN	{[PLAYER_NAME]} победил
+ScoreScreen/SCORE_SCORE	Счет
+ScoreScreen/SCORE_TITLE	Игра завершена!
+ScoreScreen/SCORE_UNLOCK	Мини-игра открыта!
+Characters/BigBunny_Name	Марсель
+Characters/Bunny1_Name	Кролик
+Characters/Bunny2_Name	Кролик
+Characters/CanterlogicGuard_Name	Стражник Кантерлогики
+Characters/Crowd1_Name	Обычный пони
+Characters/Crowd2_Name	Обычный пони
+Characters/Crowd3_Name	Обычный пони
+Characters/Fashion1_Name	Модный пони
+Characters/FlowerShop_Name	Цветочный пони
+Characters/Hitch_Name	Хитч
+Characters/Izzy_Name	Иззи
+Characters/Narrator_Name	Рассказчик
+Characters/PaintShopBeach_Name	Художник
+Characters/PaintShopMane_Name	Живописный пони
+Characters/Pipp_Name	Пипп
+Characters/Primrose_Name	Примроза
+Characters/PumpkinLady_Name	Пони с тыквой
+Characters/RedFloatieGuy_Name	Пони с кругом
+Characters/Shimmerwing_Name	Шиммервинг
+Characters/ShopKeeper1_Name	Лавочник
+Characters/ShopKeeper2_Name	Лавочник
+Characters/ShopKeeper3_Name	Лавочник
+Characters/SmootheShop_Name	Смузи-пони
+Characters/Sprout_Name	Спрайт
+Characters/Sunny_Name	Санни
+Characters/Thunder_Name	Плюх
+Characters/Zipp_Name	Зипп
+Characters/Zoom_Name	Вжух
+Menu/1P	1 игрок
+Menu/2P	2 игрока
+Menu/ACCEPT	Принять
+Menu/ANIMATION	Анимация
+Menu/ART_DIRECTOR_CHARACTER_ARTIST	Арт-директор и художник по персонажам
+Menu/AUDIO	Звук
+Menu/BACK	Назад
+Menu/BEACHCOVE_TITLE	Пляжная бухта
+Menu/BRIGHTHOUSE_TITLE	Кристал Брайтхаус
+Menu/BUSINESS_DEV	Развитие бизнеса
+Menu/CHANGE_SLOT_CONFIRMATION	Уверены, что хотите сменить слот сохранения?
+Menu/CONTINUE	Продолжить
+Menu/CONTROLS	Управление игрой
+Menu/CREATIVE_DIRECTOR	Креативный директор
+Menu/DELETE	Удалить
+Menu/DELETE_CONFIRMATION	Уверены, что хотите удалить?
+Menu/DISMISS	Прекратить
+Menu/ENVIRONMENT_AND_VFX	Художник по окружению и визуальным эффектам
+Menu/ENVIRONMENT_ARTIST_AND_LEVEL	Художник по окружению
+Menu/EXIT	Выход
+Menu/EXIT_CONFIRMATION	Уверены, что хотите выйти?
+Menu/FINANCES	Финансы
+Menu/GAMEPLAY_PROGRAMMER	Геймплей-программист
+Menu/GAME_DESIGNER	Геймдизайнер
+Menu/GO	Поехали
+Menu/INTERACT	Взаимодействовать
+Menu/JUMP	Прыгать
+Menu/LANGUAGE	Язык
+Menu/LEAD_ANIMATOR	Главный аниматор
+Menu/LEAD_PROGRAMMER	Главный программист
+Menu/MAIN_VOLUME	Общая громкость
+Menu/MANESTREET_TITLE	Загривный проспект
+Menu/MENU_VOLUME	Громкость озвучки меню
+Menu/MINIGAMES	Мини-игры
+Menu/MOVEMENT	Движение
+Menu/MUSIC_SFX	Музыка и звуковые эффекты
+Menu/MUSIC_VOLUME	Громкость музыки
+Menu/NEXT	Далее
+Menu/NO	Нет
+Menu/P1	Игрок 1
+Menu/P2	Игрок 2
+Menu/PAUSE	Пауза
+Menu/PAUSE_MENU	Меню паузы
+Menu/PLAY	Игра
+Menu/PLAYER_READY	Готов
+Menu/PRODUCER	Продюсер
+Menu/REPEAT	Еще раз
+Menu/ROLLERBLADES	Роликовые коньки
+Menu/ROTATE	Вращать
+Menu/SAVED_GAMES	Сохраненные игры
+Menu/SAVE_SAFETY_DEFAULT	Не выключайте консоль, когда на экране этот значок.
+Menu/SAVE_SAFETY_SWITCH	Не выключайте консоль, когда на экране этот значок.
+Menu/SELECT	Выбрать
+Menu/SELECT_PLAYERS	Выберите игроков
+Menu/SETTINGS	Настройки
+Menu/SFX_VOLUME	Громкость звуков
+Menu/SLOT1	Сохраненная игра 1
+Menu/SLOT2	Сохраненная игра 2
+Menu/SLOT3	Сохраненная игра 3
+Menu/SLOT4	Сохраненная игра 4
+Menu/SLOT_CURRENT	Текущая
+Menu/SLOT_EMPTY	Пусто
+Menu/STUDIO_DIRECTOR	Директор студии
+Menu/TECHNICAL_DIRECTOR	Технический директор
+Menu/TOTAL_GAME_BITS	Всего за игру
+Menu/TOWNPARK_TITLE	Городской парк
+Menu/TUTORIAL	Обучение
+Menu/TUTORIALS	Обучение
+Menu/TUTORIAL_TITLE	Брайтхаус Хиллс
+Menu/UI_GAMEPLAY_PROGRAMMER	Программист интерфейса и геймплея
+Menu/UNLOCKED	Разблокировано
+Menu/VOICE_VOLUME	Громкость голоса
+Menu/YES	Да
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_01_CS_ZP_01	BC_INTRO_EV_01_01_CS_ZP_01_ru
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_02_CVS_SN_01	BC_INTRO_EV_01_02_CVS_SN_01_ru
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_03_CVS_ZP_02	BC_INTRO_EV_01_03_CVS_ZP_02_ru
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_04_CVS_ZP_03	BC_INTRO_EV_01_04_CVS_ZP_03_ru
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_05_CVS_SN_02	BC_INTRO_EV_01_05_CVS_SN_02_ru
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_06_CVS_ZP_04	BC_INTRO_EV_01_06_CVS_ZP_04_ru
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_07_CVS_ZP_05	BC_INTRO_EV_01_07_CVS_ZP_05_ru
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_08_CVS_ZP_06	BC_INTRO_EV_01_08_CVS_ZP_06_ru
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_09_CVS_SN_03	BC_INTRO_EV_01_09_CVS_SN_03_ru
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_10_CVS_ZP_07	BC_INTRO_EV_01_10_CVS_ZP_07_ru
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_11_GP_SN_04	BC_INTRO_EV_01_11_GP_SN_04_ru
+Audio_BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_01_CVS_SN_01	BC_MFL_ACCEPTED_01_CVS_SN_01_ru
+Audio_BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_02_CVS_ZP_02	BC_MFL_ACCEPTED_02_CVS_ZP_02_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_01_CS_SN_01	BC_MFL_COMP_01_CS_SN_01_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_02_CS_ZP_01	BC_MFL_COMP_02_CS_ZP_01_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_03_CS_ZP_02	BC_MFL_COMP_03_CS_ZP_02_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_04_CS_SN_02	BC_MFL_COMP_04_CS_SN_02_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_06_CS_PP_01	BC_MFL_COMP_06_CS_PP_01_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_07_CS_IZ_01	BC_MFL_COMP_07_CS_IZ_01_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_08_CS_HC_01	BC_MFL_COMP_08_CS_HC_01_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_09_CS_Sprout_01	BC_MFL_COMP_09_CS_Sprout_01_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_10_CS_HC_02	BC_MFL_COMP_10_CS_HC_02_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_11_CS_Paint Shop 3_01	BC_MFL_COMP_11_CS_Paint Shop 3_01_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_12_CS_Sprout_02	BC_MFL_COMP_12_CS_Sprout_02_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_13_CS_SN_03	BC_MFL_COMP_13_CS_SN_03_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_14_CS_ZP_03	BC_MFL_COMP_14_CS_ZP_03_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_15_CS_SN_04	BC_MFL_COMP_15_CS_SN_04_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_16_CS_Crowd1_01	BC_MFL_COMP_16_CS_Crowd1_01_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_17_CS_Crowd2_01	BC_MFL_COMP_17_CS_Crowd2_01_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_18_CS_Sprout_03	BC_MFL_COMP_18_CS_Sprout_03_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_19_CS_HC_03	BC_MFL_COMP_19_CS_HC_03_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_20_CS_Sprout_04	BC_MFL_COMP_20_CS_Sprout_04_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_21_CS_SN_05	BC_MFL_COMP_21_CS_SN_05_ru
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_22_CS_Shimmerwing_01	BC_MFL_COMP_22_CS_Shimmerwing_01_en-US
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_23_GP_SN_06	BC_MFL_COMP_23_GP_SN_06_ru
+Audio_BeachCove/MFL/DECLINED/BC_MFL_DECLINED_01_CVS_SN_01	BC_MFL_DECLINED_01_CVS_SN_01_ru
+Audio_BeachCove/MFL/DECLINED/BC_MFL_DECLINED_02_CVS_ZP_02	BC_MFL_DECLINED_02_CVS_ZP_02_ru
+Audio_BeachCove/MFL/QUESTION/BC_MFL_QUESTION_01_CVS_ZP_01	BC_MFL_QUESTION_01_CVS_ZP_01_ru
+Audio_BeachCove/MFL/RETACPTD/BC_MFL_RETACPTD_01_CVS_SN_01	BC_MFL_RETACPTD_01_CVS_SN_01_ru
+Audio_BeachCove/MFL/RETDCLND/BC_MFL_RETDCLND_01_CVS_SN_01	BC_MFL_RETDCLND_01_CVS_SN_01_ru
+Audio_BeachCove/MFL/RETRY/BC_MFL_RETRY_01_CVS_ZP_01	BC_MFL_RETRY_01_CVS_ZP_01_ru
+Audio_BeachCove/MFL/START/BC_MFL_START_01_CVS_ZP_01	BC_MFL_START_01_CVS_ZP_01_ru
+Audio_BeachCove/MFL/START/BC_MFL_START_02_CVS_ZP_02	BC_MFL_START_02_CVS_ZP_02_ru
+Audio_BeachCove/MFL/START/BC_MFL_START_03_CVS_ZP_03	BC_MFL_START_03_CVS_ZP_03_ru
+Audio_BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_01_CVS_SN_01	BC_Q13_ACCEPTED_01_CVS_SN_01_ru
+Audio_BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_02_CVS_Zoom_04	BC_Q13_ACCEPTED_02_CVS_Zoom_04_ru
+Audio_BeachCove/Q13/COMP/BC_Q13_COMP_01_CVS_Zoom_06	BC_Q13_COMP_01_CVS_Zoom_06_ru
+Audio_BeachCove/Q13/DECLINED/BC_Q13_DECLINED_01_CVS_SN_02	BC_Q13_DECLINED_01_CVS_SN_02_ru
+Audio_BeachCove/Q13/DECLINED/BC_Q13_DECLINED_02_CVS_Zoom_05	BC_Q13_DECLINED_02_CVS_Zoom_05_ru
+Audio_BeachCove/Q13/POST_01/BC_Q13_POST_01_01_GP_Zoom_10	BC_Q13_POST_01_01_GP_Zoom_10_ru
+Audio_BeachCove/Q13/QUESTION/BC_Q13_QUESTION_01_CVS_Zoom_03	BC_Q13_QUESTION_01_CVS_Zoom_03_ru
+Audio_BeachCove/Q13/RETACPTD/BC_Q13_RETACPTD_01_CVS_Zoom_08	BC_Q13_RETACPTD_01_CVS_Zoom_08_ru
+Audio_BeachCove/Q13/RETDCLND/BC_Q13_RETDCLND_01_CVS_Zoom_09	BC_Q13_RETDCLND_01_CVS_Zoom_09_ru
+Audio_BeachCove/Q13/RETRY/BC_Q13_RETRY_01_CVS_Zoom_07	BC_Q13_RETRY_01_CVS_Zoom_07_ru
+Audio_BeachCove/Q13/START/BC_Q13_START_01_CVS_Zoom_01	BC_Q13_START_01_CVS_Zoom_01_ru
+Audio_BeachCove/Q13/START/BC_Q13_START_02_CVS_Zoom_02	BC_Q13_START_02_CVS_Zoom_02_ru
+Audio_BeachCove/Q14/COMP/BC_Q14_COMP_01_GP_IZ_01	BC_Q14_COMP_01_GP_IZ_01_ru
+Audio_BeachCove/Q14/COMP/BC_Q14_COMP_02_GP_SN_01	BC_Q14_COMP_02_GP_SN_01_ru
+Audio_BeachCove/Q14/EV_01/BC_Q14_EV_01_01_GP_SN_01	BC_Q14_EV_01_01_GP_SN_01_ru
+Audio_BeachCove/Q14/EV_02/BC_Q14_EV_02_01_GP_SN_01	BC_Q14_EV_02_01_GP_SN_01_ru
+Audio_BeachCove/Q14/EV_03/BC_Q14_EV_03_01_GP_SN_01	BC_Q14_EV_03_01_GP_SN_01_ru
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_01_CVS_Sprout_01	BC_Q14_EV_04_01_CVS_Sprout_01_ru
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_02_CVS_SN_01	BC_Q14_EV_04_02_CVS_SN_01_ru
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_03_CVS_Sprout_02	BC_Q14_EV_04_03_CVS_Sprout_02_ru
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_04_CVS_Sprout_03	BC_Q14_EV_04_04_CVS_Sprout_03_ru
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_05_CVS_Sprout_04	BC_Q14_EV_04_05_CVS_Sprout_04_ru
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_06_CVS_SN_02	BC_Q14_EV_04_06_CVS_SN_02_ru
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_07_CVS_Sprout_05	BC_Q14_EV_04_07_CVS_Sprout_05_ru
+Audio_BeachCove/Q14/EV_05/BC_Q14_EV_05_01_GP_SN_03	BC_Q14_EV_05_01_GP_SN_03_ru
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_01_CVS_PP_01	BC_Q14_EV_06_01_CVS_PP_01_ru
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_02_CVS_SN_01	BC_Q14_EV_06_02_CVS_SN_01_ru
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_03_CVS_PP_02	BC_Q14_EV_06_03_CVS_PP_02_ru
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_04_CVS_SN_02	BC_Q14_EV_06_04_CVS_SN_02_ru
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_05_CVS_SN_03	BC_Q14_EV_06_05_CVS_SN_03_ru
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_06_CVS_PP_03	BC_Q14_EV_06_06_CVS_PP_03_ru
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_07_CVS_IZ_01	BC_Q14_EV_06_07_CVS_IZ_01_ru
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_08_CVS_SN_04	BC_Q14_EV_06_08_CVS_SN_04_ru
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_09_CS_IZ_02	BC_Q14_EV_06_09_CS_IZ_02_ru
+Audio_BeachCove/Q14/EV_07/BC_Q14_EV_07_01_CVS_PaintShop 3_01	BC_Q14_EV_07_01_CVS_PaintShop 3_01_ru
+Audio_BeachCove/Q14/EV_07/BC_Q14_EV_07_02_CVS_PaintShop 3_02	BC_Q14_EV_07_02_CVS_PaintShop 3_02_ru
+Audio_BeachCove/Q14/EV_07/BC_Q14_EV_07_03_CVS_SN_01	BC_Q14_EV_07_03_CVS_SN_01_ru
+Audio_BeachCove/Q14/EV_08/BC_Q14_EV_08_01_CVS_RedFloatieGuy_01	BC_Q14_EV_08_01_CVS_RedFloatieGuy_01_ru
+Audio_BeachCove/Q14/EV_08/BC_Q14_EV_08_02_CVS_RedFloatieGuy_02	BC_Q14_EV_08_02_CVS_RedFloatieGuy_02_ru
+Audio_BeachCove/Q14/EV_08/BC_Q14_EV_08_03_CVS_SN_01	BC_Q14_EV_08_03_CVS_SN_01_ru
+Audio_BeachCove/Q14/EV_08/BC_Q14_EV_08_04_CVS_RedFloatieGuy_03	BC_Q14_EV_08_04_CVS_RedFloatieGuy_03_ru
+Audio_BeachCove/Q14/EV_08/BC_Q14_EV_08_05_CVS_SN_02	BC_Q14_EV_08_05_CVS_SN_02_ru
+Audio_BeachCove/Q14/EV_09/BC_Q14_EV_09_01_CVS_RedFloatieGuy_01	BC_Q14_EV_09_01_CVS_RedFloatieGuy_01_ru
+Audio_BeachCove/Q14/EV_09/BC_Q14_EV_09_02_CVS_RedFloatieGuy_02	BC_Q14_EV_09_02_CVS_RedFloatieGuy_02_ru
+Audio_BeachCove/Q14/EV_10/BC_Q14_EV_10_01_GP_SN_01	BC_Q14_EV_10_01_GP_SN_01_ru
+Audio_BeachCove/Q14/EV_11/BC_Q14_EV_11_01_GP_PaintShop 3_01	BC_Q14_EV_11_01_GP_PaintShop 3_01_ru
+Audio_BeachCove/Q14/EV_12/BC_Q14_EV_12_01_GP_SN_01	BC_Q14_EV_12_01_GP_SN_01_ru
+Audio_BeachCove/Q14/EV_13/BC_Q14_EV_13_01_GP_SN_01	BC_Q14_EV_13_01_GP_SN_01_ru
+Audio_BeachCove/Q14/MID_01/BC_Q14_MID_01_01_CVS_Sprout_01	BC_Q14_MID_01_01_CVS_Sprout_01_ru
+Audio_BeachCove/Q14/MID_02/BC_Q14_MID_02_01_CVS_Sprout_01	BC_Q14_MID_02_01_CVS_Sprout_01_ru
+Audio_BeachCove/Q14/MID_02/BC_Q14_MID_02_02_CVS_Sprout_02	BC_Q14_MID_02_02_CVS_Sprout_02_ru
+Audio_BeachCove/Q14/MID_02/BC_Q14_MID_02_03_CVS_SN_03	BC_Q14_MID_02_03_CVS_SN_03_ru
+Audio_BeachCove/Q14/MID_02/BC_Q14_MID_02_04_CVS_Sprout_04	BC_Q14_MID_02_04_CVS_Sprout_04_ru
+Audio_BeachCove/Q14/MID_02/BC_Q14_MID_02_05_CVS_SN_01	BC_Q14_MID_02_05_CVS_SN_01_ru
+Audio_BeachCove/Q14/MID_03/BC_Q14_MID_03_01_CVS_PaintShop 3_01	BC_Q14_MID_03_01_CVS_PaintShop 3_01_ru
+Audio_BeachCove/Q14/MID_04/BC_Q14_MID_04_01_CVS_RedFloatieGuy_01	BC_Q14_MID_04_01_CVS_RedFloatieGuy_01_ru
+Audio_BeachCove/Q14/MID_05/BC_Q14_MID_05_01_GP_IZ_01	BC_Q14_MID_05_01_GP_IZ_01_ru
+Audio_BeachCove/Q14/MID_06/BC_Q14_MID_06_01_GP_PP_01	BC_Q14_MID_06_01_GP_PP_01_ru
+Audio_BeachCove/Q14/POST_01/BC_Q14_POST_01_01_GP_PaintShop 3_01	BC_Q14_POST_01_01_GP_PaintShop 3_01_ru
+Audio_BeachCove/Q14/POST_02/BC_Q14_POST_02_01_GP_RedFloatieGuy_01	BC_Q14_POST_02_01_GP_RedFloatieGuy_01_ru
+Audio_BeachCove/Q14/POST_03/BC_Q14_POST_03_01_GP_Sprout_01	BC_Q14_POST_03_01_GP_Sprout_01_ru
+Audio_BeachCove/Q14/POST_04/BC_Q14_POST_04_01_GP_PP_01	BC_Q14_POST_04_01_GP_PP_01_ru
+Audio_BeachCove/Q14/POST_05/BC_Q14_POST_05_01_GP_IZ_01	BC_Q14_POST_05_01_GP_IZ_01_ru
+Audio_BeachCove/Q14/PRE_01/BC_Q14_PRE_01_01_GP_PaintShop 3_01	BC_Q14_PRE_01_01_GP_PaintShop 3_01_ru
+Audio_BeachCove/Q14/PRE_02/BC_Q14_PRE_02_01_GP_RedFloatieGuy_01	BC_Q14_PRE_02_01_GP_RedFloatieGuy_01_ru
+Audio_BeachCove/Q14/PRE_03/BC_Q14_PRE_03_01_GP_PP_01	BC_Q14_PRE_03_01_GP_PP_01_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_01_CVS_Thunder_01	BC_Q14_START_01_CVS_Thunder_01_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_02_CVS_Sprout_01	BC_Q14_START_02_CVS_Sprout_01_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_03_CVS_Sprout_02	BC_Q14_START_03_CVS_Sprout_02_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_04_CVS_Thunder_02	BC_Q14_START_04_CVS_Thunder_02_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_05_CVS_Sprout_03	BC_Q14_START_05_CVS_Sprout_03_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_06_CVS_SN_01	BC_Q14_START_06_CVS_SN_01_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_07_CVS_Sprout_04	BC_Q14_START_07_CVS_Sprout_04_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_08_CVS_Thunder_03	BC_Q14_START_08_CVS_Thunder_03_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_09_CVS_SN_02	BC_Q14_START_09_CVS_SN_02_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_10_CVS_Sprout_05	BC_Q14_START_10_CVS_Sprout_05_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_11_CVS_SN_03	BC_Q14_START_11_CVS_SN_03_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_12_CVS_Sprout_06	BC_Q14_START_12_CVS_Sprout_06_ru
+Audio_BeachCove/Q14/START/BC_Q14_START_13_CVS_SN_04	BC_Q14_START_13_CVS_SN_04_ru
+Audio_BeachCove/Q14/TOOFAR/BC_Q14_TOOFAR_01_GP_SN_01	BC_Q14_TOOFAR_01_GP_SN_01_ru
+Audio_BeachCove/Q15/COMP/BC_Q15_COMP_01_GP_HC_01	BC_Q15_COMP_01_GP_HC_01_ru
+Audio_BeachCove/Q15/MID_01/BC_Q15_MID_01_01_CVS_HC_01	BC_Q15_MID_01_01_CVS_HC_01_ru
+Audio_BeachCove/Q15/POST_01/BC_Q15_POST_01_01_CVS_HC_01	BC_Q15_POST_01_01_CVS_HC_01_ru
+Audio_BeachCove/Q15/START/BC_Q15_START_01_CVS_HC_01	BC_Q15_START_01_CVS_HC_01_ru
+Audio_BeachCove/Q15/START/BC_Q15_START_02_CVS_HC_02	BC_Q15_START_02_CVS_HC_02_ru
+Audio_BeachCove/Q15/START/BC_Q15_START_03_CVS_HC_03	BC_Q15_START_03_CVS_HC_03_ru
+Audio_BeachCove/Q15/TOOFAR/BC_Q15_TOOFAR_01_GP_HC_01	BC_Q15_TOOFAR_01_GP_HC_01_ru
+Audio_Minigames/COUNTDOWN_FASHION	EFO_PP_Minigame_06_ru
+Audio_Minigames/COUNTDOWN_FLYING	EFO_ZP_Minigame_06_ru
+Audio_Minigames/COUNTDOWN_HERDING	EFO_HC_Minigame_06_ru
+Audio_Minigames/COUNTDOWN_HERDINGC	EFO_IZ_Minigame_06_ru
+Audio_Minigames/COUNTDOWN_RUNNER	EFO_Sprout_Minigame_06_ru
+Audio_Minigames/TITLE_DASH	EFO_SN_Game_Menu_4_ru
+Audio_Minigames/TITLE_FASHION_SHOW	EFO_SN_Game_Menu_3_ru
+Audio_Minigames/TITLE_HERDING_BUNNIES	EFO_SN_Game_Menu_1_ru
+Audio_Minigames/TITLE_HERDING_CRABS	EFO_SN_Game_Menu_2_ru
+Audio_Minigames/TITLE_RUNNER	EFO_SN_Game_Menu_5_ru
+Audio_Brighthouse/BFLY/EV_01/BH_BFLY_EV_01_01_CVS_SN_01	BH_BFLY_EV_01_01_CVS_SN_01_ru
+Audio_Brighthouse/BFLY/EV_01/BH_BFLY_EV_01_02_CVS_SN_02	BH_BFLY_EV_01_02_CVS_SN_02_ru
+Audio_Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_04_CVS_Shimmerwing_01	BH_BFLY_EV_02_04_CVS_Shimmerwing_01_en-US
+Audio_Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_05_CVS_SN_04	BH_BFLY_EV_02_05_CVS_SN_04_ru
+Audio_Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_06_CVS_SN_05	BH_BFLY_EV_02_06_CVS_SN_05_ru
+Audio_Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_07_CVS_Shimmerwing_02	BH_BFLY_EV_02_07_CVS_Shimmerwing_02_en-US
+Audio_Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_08_CVS_SN_06	BH_BFLY_EV_02_08_CVS_SN_06_ru
+Audio_Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_09_CVS_Shimmerwing_03	BH_BFLY_EV_02_09_CVS_Shimmerwing_03_en-US
+Audio_Brighthouse/BFLY/EV_03/BH_BFLY_EV_03_10_CGP_SN_07	BH_BFLY_EV_03_10_CGP_SN_07_ru
+Audio_Brighthouse/INTRO/EV_01/BH_INTRO_EV_01_01_CS_SN_01	BH_INTRO_EV_01_01_CS_SN_01_ru
+Audio_Brighthouse/MH/ACCEPTED/BH_MH_ACCEPTED_01_CGP_HC_01	BH_MH_ACCEPTED_01_CGP_HC_01_ru
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_01_CS_HC_01	BH_MH_COMP_01_CS_HC_01_ru
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_02_CS_HC_02	BH_MH_COMP_02_CS_HC_02_ru
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_03_CS_IZ_01	BH_MH_COMP_03_CS_IZ_01_ru
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_04_CS_HC_03	BH_MH_COMP_04_CS_HC_03_ru
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_05_CS_HC_04	BH_MH_COMP_05_CS_HC_04_ru
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_06_CS_SN_01	BH_MH_COMP_06_CS_SN_01_ru
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_07_CS_HC_05	BH_MH_COMP_07_CS_HC_05_ru
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_08_CS_IZ_02	BH_MH_COMP_08_CS_IZ_02_ru
+Audio_Brighthouse/MH/DECLINED/BH_MH_DECLINED_01_CVS_HC_01	BH_MH_DECLINED_01_CVS_HC_01_ru
+Audio_Brighthouse/MH/QUESTION/BH_MH_QUESTION_01_CVS_HC_01	BH_MH_QUESTION_01_CVS_HC_01_ru
+Audio_Brighthouse/MH/REPACPTD/BH_MH_REPACPTD_01_CGP_SN_01	BH_MH_REPACPTD_01_CGP_SN_01_ru
+Audio_Brighthouse/MH/REPDCLND/BH_MH_REPDCLND_01_CGP_SN_01	BH_MH_REPDCLND_01_CGP_SN_01_ru
+Audio_Brighthouse/MH/REPEAT/BH_MH_REPEAT_01_CVS_HC_01	BH_MH_REPEAT_01_CVS_HC_01_ru
+Audio_Brighthouse/MH/START/BH_MH_START_01_CVS_HC_01	BH_MH_START_01_CVS_HC_01_ru
+Audio_Brighthouse/MH/START/BH_MH_START_02_CVS_HC_02	BH_MH_START_02_CVS_HC_02_ru
+Audio_Brighthouse/MH/START/BH_MH_START_03_CVS_HC_03	BH_MH_START_03_CVS_HC_03_ru
+Audio_Brighthouse/MH/START/BH_MH_START_04_CVS_HC_04	BH_MH_START_04_CVS_HC_04_ru
+Audio_Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_01_CS_SN_01	BH_OUTRO_EV_01_01_CS_SN_01_ru
+Audio_Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_02_CS_IZ_01	BH_OUTRO_EV_01_02_CS_IZ_01_ru
+Audio_Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_03_CS_HC_01	BH_OUTRO_EV_01_03_CS_HC_01_ru
+Audio_Brighthouse/Q1/COMP/BH_Q1_COMP_01_CVS_IZ_01	BH_Q1_COMP_01_CVS_IZ_01_ru
+Audio_Brighthouse/Q1/COMP/BH_Q1_COMP_02_CVS_IZ_02	BH_Q1_COMP_02_CVS_IZ_02_ru
+Audio_Brighthouse/Q1/COMP/BH_Q1_COMP_03_CVS_SN_01	BH_Q1_COMP_03_CVS_SN_01_ru
+Audio_Brighthouse/Q1/EV_01/BH_Q1_EV_01_01_GP_SN_01	BH_Q1_EV_01_01_GP_SN_01_ru
+Audio_Brighthouse/Q1/EV_02/BH_Q1_EV_02_01_GP_SN_01	BH_Q1_EV_02_01_GP_SN_01_ru
+Audio_Brighthouse/Q1/EV_03/BH_Q1_EV_03_01_GP_SN_01	BH_Q1_EV_03_01_GP_SN_01_ru
+Audio_Brighthouse/Q1/MID_01/BH_Q1_MID_01_01_GP_IZ_01	BH_Q1_MID_01_01_GP_IZ_01_ru
+Audio_Brighthouse/Q1/POST_01/BH_Q1_POST_01_01_CVS_IZ_01	BH_Q1_POST_01_01_CVS_IZ_01_ru
+Audio_Brighthouse/Q1/POST_01/BH_Q1_POST_01_02_CVS_IZ_02	BH_Q1_POST_01_02_CVS_IZ_02_ru
+Audio_Brighthouse/Q1/POST_01/BH_Q1_POST_01_03_CVS_IZ_03	BH_Q1_POST_01_03_CVS_IZ_03_ru
+Audio_Brighthouse/Q1/START/BH_Q1_START_01_CVS_IZ_01	BH_Q1_START_01_CVS_IZ_01_ru
+Audio_Brighthouse/Q1/START/BH_Q1_START_02_CVS_SN_01	BH_Q1_START_02_CVS_SN_01_ru
+Audio_Brighthouse/Q1/START/BH_Q1_START_03_CVS_IZ_02	BH_Q1_START_03_CVS_IZ_02_ru
+Audio_Brighthouse/Q1/START/BH_Q1_START_04_CVS_IZ_03	BH_Q1_START_04_CVS_IZ_03_ru
+Audio_Brighthouse/Q1/START/BH_Q1_START_05_CVS_IZ_04	BH_Q1_START_05_CVS_IZ_04_ru
+Audio_Brighthouse/Q1/START/BH_Q1_START_06_CVS_IZ_05	BH_Q1_START_06_CVS_IZ_05_ru
+Audio_Brighthouse/Q1/START/BH_Q1_START_07_CVS_SN_02	BH_Q1_START_07_CVS_SN_02_ru
+Audio_Brighthouse/Q1/TOOFAR/BH_Q1_TOOFAR_01_GP_IZ_01	BH_Q1_TOOFAR_01_GP_IZ_01_ru
+Audio_Brighthouse/Q2/COMP/BH_Q2_COMP_01_CGP_HC_01	BH_Q2_COMP_01_CGP_HC_01_ru
+Audio_Brighthouse/Q2/COMP/BH_Q2_COMP_02_CGP_Bunnies_01	BH_Q2_COMP_02_CGP_Bunnies_01_en-US
+Audio_Brighthouse/Q2/EV_01/BH_Q2_EV_01_01_GP_SN_01	BH_Q2_EV_01_01_GP_SN_01_ru
+Audio_Brighthouse/Q2/EV_02/BH_Q2_EV_02_01_CVS_HC_01	BH_Q2_EV_02_01_CVS_HC_01_ru
+Audio_Brighthouse/Q2/EV_02/BH_Q2_EV_02_02_CVS_HC_02	BH_Q2_EV_02_02_CVS_HC_02_ru
+Audio_Brighthouse/Q2/EV_02/BH_Q2_EV_02_03_CVS_HC_03	BH_Q2_EV_02_03_CVS_HC_03_ru
+Audio_Brighthouse/Q2/EV_03/BH_Q2_EV_03_01_GP_SN_01	BH_Q2_EV_03_01_GP_SN_01_ru
+Audio_Brighthouse/Q2/EV_04/BH_Q2_EV_04_01_GP_SN_01	BH_Q2_EV_04_01_GP_SN_01_ru
+Audio_Brighthouse/Q2/EV_05/BH_Q2_EV_05_01_GP_SN_01	BH_Q2_EV_05_01_GP_SN_01_ru
+Audio_Brighthouse/Q2/MID_01/BH_Q2_MID_01_01_GP_HC_01	BH_Q2_MID_01_01_GP_HC_01_ru
+Audio_Brighthouse/Q2/MID_02/BH_Q2_MID_02_01_GP_HC_01	BH_Q2_MID_02_01_GP_HC_01_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_01_CVS_HC_01	BH_Q2_START_01_CVS_HC_01_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_02_CVS_HC_02	BH_Q2_START_02_CVS_HC_02_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_03_CVS_SN_02	BH_Q2_START_03_CVS_SN_02_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_04_CVS_HC_03	BH_Q2_START_04_CVS_HC_03_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_05_CVS_HC_04	BH_Q2_START_05_CVS_HC_04_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_06_CVS_HC_05	BH_Q2_START_06_CVS_HC_05_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_07_CVS_SN_03	BH_Q2_START_07_CVS_SN_03_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_08_CVS_HC_06	BH_Q2_START_08_CVS_HC_06_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_09_CVS_Bunnies_01	BH_Q2_START_09_CVS_Bunnies_01_en-US
+Audio_Brighthouse/Q2/START/BH_Q2_START_10_CVS_HC_07	BH_Q2_START_10_CVS_HC_07_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_11_CVS_SN_04	BH_Q2_START_11_CVS_SN_04_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_12_CVS_HC_08	BH_Q2_START_12_CVS_HC_08_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_14_CVS_HC_10	BH_Q2_START_14_CVS_HC_10_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_15_CVS_HC_11	BH_Q2_START_15_CVS_HC_11_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_16_CVS_HC_12	BH_Q2_START_16_CVS_HC_12_ru
+Audio_Brighthouse/Q2/START/BH_Q2_START_17_CVS_SN_05	BH_Q2_START_17_CVS_SN_05_ru
+Audio_Brighthouse/Q2/TOOFAR/BH_Q2_TOOFAR_01_GP_HC_01	BH_Q2_TOOFAR_01_GP_HC_01_ru
+Audio_Brighthouse/Q3/START/BH_Q3_START_13_CVS_HC_09	BH_Q3_START_13_CVS_HC_09_ru
+Audio_BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01	BHT_INTRO_EV_01_01_CS_Narrator_01_ru
+Audio_BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01b	BHT_INTRO_EV_01_01_CS_Narrator_01b_ru
+Audio_BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_03_CS_Narrator_02	BHT_INTRO_EV_01_03_CS_Narrator_02_ru
+Audio_BrighthouseTuto/Q1/COMP/BHT_Q1_COMP_01_CGP_SN_01	BHT_Q1_COMP_01_CGP_SN_01_ru
+Audio_BrighthouseTuto/Q1/EV_02/BHT_Q1_EV_02_01_CS_Bunny_01	BHT_Q1_EV_02_01_CS_Bunny_01_en-US
+Audio_BrighthouseTuto/Q1/EV_03/BHT_Q1_EV_03_02_GP_SN_01	BHT_Q1_EV_03_02_GP_SN_01_ru
+Audio_BrighthouseTuto/Q1/EV_04/BHT_Q1_EV_04_01_CGP_SN_01	BHT_Q1_EV_04_01_CGP_SN_01_ru
+Audio_BrighthouseTuto/Q1/EV_05/BHT_Q1_EV_05_01_CGP_SN_01	BHT_Q1_EV_05_01_CGP_SN_01_ru
+Audio_BrighthouseTuto/Q1/TOOFAR/BHT_Q1_TOOFAR_01_CGP_SN_01	BHT_Q1_TOOFAR_01_CGP_SN_01_ru
+Audio_BrighthouseTuto/START/EV_01/BHT_START_EV_01_01_CS_SN_01	BHT_START_EV_01_01_CS_SN_01_ru
+Audio_BrighthouseTuto/START/EV_01/BHT_START_EV_01_02_CS_SN_02	BHT_START_EV_01_02_CS_SN_02_ru
+Audio_BrighthouseTuto/START/EV_01/BHT_START_EV_01_03_CS_SN_03	BHT_START_EV_01_03_CS_SN_03_ru
+Audio_BrighthouseTuto/START/EV_01/BHT_START_EV_01_04_CS_SN_04	BHT_START_EV_01_04_CS_SN_04_ru
+Audio_BrighthouseTuto/START/START/BHT_START_START_08_CS_SN_05	BHT_START_START_08_CS_SN_05_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_01_CS_Sprout_01	MS_End_EV_05_01_CS_Sprout_01_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_02_CS_SN_01	MS_End_EV_05_02_CS_SN_01_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_03_CS_Sprout_02	MS_End_EV_05_03_CS_Sprout_02_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_04_CS_SN_02	MS_End_EV_05_04_CS_SN_02_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_05_CS_Sprout_03	MS_End_EV_05_05_CS_Sprout_03_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_06_CS_Sprout_04	MS_End_EV_05_06_CS_Sprout_04_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_07_CS_HC_01	MS_End_EV_05_07_CS_HC_01_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_08_CS_ZP_01	MS_End_EV_05_08_CS_ZP_01_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_09_CS_SN_03	MS_End_EV_05_09_CS_SN_03_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_10_CS_IZ_01	MS_End_EV_05_10_CS_IZ_01_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_12_CS_PP_01	MS_End_EV_05_12_CS_PP_01_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_13_CS_IZ_02	MS_End_EV_05_13_CS_IZ_02_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_14_CS_SN_04	MS_End_EV_05_14_CS_SN_04_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_15_CS_Sprout_05	MS_End_EV_05_15_CS_Sprout_05_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_16_CS_HC_02	MS_End_EV_05_16_CS_HC_02_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_17_CS_SN_05	MS_End_EV_05_17_CS_SN_05_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_18_CS_IZ_03	MS_End_EV_05_18_CS_IZ_03_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_19_CS_PP_02	MS_End_EV_05_19_CS_PP_02_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_20_CS_ZP_02	MS_End_EV_05_20_CS_ZP_02_ru
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_21_CS_PP_03	MS_End_EV_05_21_CS_PP_03_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_01_CS_PP_01	MS_INTRO_EV_02_01_CS_PP_01_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_02_CS_HC_01	MS_INTRO_EV_02_02_CS_HC_01_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_03_CS_PP_02	MS_INTRO_EV_02_03_CS_PP_02_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_04_CS_SN_01	MS_INTRO_EV_02_04_CS_SN_01_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_05_CS_IZ_01	MS_INTRO_EV_02_05_CS_IZ_01_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_06_CS_PP_03	MS_INTRO_EV_02_06_CS_PP_03_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_07_CS_Bystanders_01	MS_INTRO_EV_02_07_CS_Bystanders_01_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_08_CS_PP_04	MS_INTRO_EV_02_08_CS_PP_04_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_09_CS_SN_02	MS_INTRO_EV_02_09_CS_SN_02_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_10_CS_IZ_02	MS_INTRO_EV_02_10_CS_IZ_02_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_11_CS_HC_02	MS_INTRO_EV_02_11_CS_HC_02_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_12_CS_PP_05	MS_INTRO_EV_02_12_CS_PP_05_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_13_CS_HC_03	MS_INTRO_EV_02_13_CS_HC_03_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_14_CS_PP_06	MS_INTRO_EV_02_14_CS_PP_06_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_15_CS_HC_04	MS_INTRO_EV_02_15_CS_HC_04_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_16_CS_IZ_03	MS_INTRO_EV_02_16_CS_IZ_03_ru
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_17_CS_HC_05	MS_INTRO_EV_02_17_CS_HC_05_ru
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_02_CS_ZP_01	MS_M5S_EV_01_02_CS_ZP_01_ru
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_03_CS_SN_02	MS_M5S_EV_01_03_CS_SN_02_ru
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_04_CVS_PP_01	MS_M5S_EV_01_04_CVS_PP_01_ru
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_05_CVS_IZ_01	MS_M5S_EV_01_05_CVS_IZ_01_ru
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_06_CVS_SN_03	MS_M5S_EV_01_06_CVS_SN_03_ru
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_07_CVS_ZP_02	MS_M5S_EV_01_07_CVS_ZP_02_ru
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_08_CVS_PP_02	MS_M5S_EV_01_08_CVS_PP_02_ru
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_09_CVS_PP_03	MS_M5S_EV_01_09_CVS_PP_03_ru
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_10_CVS_ZP_03	MS_M5S_EV_01_10_CVS_ZP_03_ru
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_11_CVS_SN_04	MS_M5S_EV_01_11_CVS_SN_04_ru
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_12_CVS_HC_01	MS_M5S_EV_01_12_CVS_HC_01_ru
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_13_CVS_SN_05	MS_M5S_EV_01_13_CVS_SN_05_ru
+Audio_Mainstreet/M5S/EV_02/MS_M5S_EV_02_01_CVS_IZ_01	MS_M5S_EV_02_01_CVS_IZ_01_ru
+Audio_Mainstreet/M5S/EV_02/MS_M5S_EV_02_02_CVS_SN_01	MS_M5S_EV_02_02_CVS_SN_01_ru
+Audio_Mainstreet/M5S/EV_03/MS_M5S_EV_03_01_CVS_ZP_01	MS_M5S_EV_03_01_CVS_ZP_01_ru
+Audio_Mainstreet/M5S/EV_03/MS_M5S_EV_03_02_CVS_PP_01	MS_M5S_EV_03_02_CVS_PP_01_ru
+Audio_Mainstreet/M5S/EV_03/MS_M5S_EV_03_03_CVS_SN_01	MS_M5S_EV_03_03_CVS_SN_01_ru
+Audio_Mainstreet/M5S/EV_04/MS_M5S_EV_04_01_GP_SN_01	MS_M5S_EV_04_01_GP_SN_01_ru
+Audio_Mainstreet/M5S/EV_04/MS_M5S_EV_04_02_GP_SN_02	MS_M5S_EV_04_02_GP_SN_02_ru
+Audio_Mainstreet/M5S/EV_05/MS_M5S_EV_05_01_GP_SN_01	MS_M5S_EV_05_01_GP_SN_01_ru
+Audio_Mainstreet/M5S/EV_06/MS_M5S_EV_06_01_CVS_HC_01	MS_M5S_EV_06_01_CVS_HC_01_ru
+Audio_Mainstreet/M5S/EV_06/MS_M5S_EV_06_02_CVS_HC_02	MS_M5S_EV_06_02_CVS_HC_02_ru
+Audio_Mainstreet/M5S/EV_06/MS_M5S_EV_06_03_CVS_SN_01	MS_M5S_EV_06_03_CVS_SN_01_ru
+Audio_Mainstreet/M5S/TOOFAR/MS_M5S_TOOFAR_01_GP_SN_01	MS_M5S_TOOFAR_01_GP_SN_01_ru
+Audio_Mainstreet/MF/ACCEPTED/MS_MF_ACCEPTED_01_CVS_PP_01	MS_MF_ACCEPTED_01_CVS_PP_01_ru
+Audio_Mainstreet/MF/ACCEPTED/MS_MF_ACCEPTED_02_CVS_PP_02	MS_MF_ACCEPTED_02_CVS_PP_02_ru
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_01_CVS_PP_01	MS_MF_COMP_01_CVS_PP_01_ru
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_02_CVS_PP_02	MS_MF_COMP_02_CVS_PP_02_ru
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_03_CVS_SN_01	MS_MF_COMP_03_CVS_SN_01_ru
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_04_CVS_PP_03	MS_MF_COMP_04_CVS_PP_03_ru
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_05_CVS_PP_04	MS_MF_COMP_05_CVS_PP_04_ru
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_06_CVS_PP_05	MS_MF_COMP_06_CVS_PP_05_ru
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_07_CVS_SN_02	MS_MF_COMP_07_CVS_SN_02_ru
+Audio_Mainstreet/MF/DECLINED/MS_MF_DECLINED_01_CVS_PP_01	MS_MF_DECLINED_01_CVS_PP_01_ru
+Audio_Mainstreet/MF/QUESTION/MS_MF_QUESTION_01_CVS_PP_01	MS_MF_QUESTION_01_CVS_PP_01_ru
+Audio_Mainstreet/MF/REPACPTD/MS_MF_REPACPTD_01_CVS_SN_01	MS_MF_REPACPTD_01_CVS_SN_01_ru
+Audio_Mainstreet/MF/REPDCLND/MS_MF_REPDCLND_01_CVS_SN_01	MS_MF_REPDCLND_01_CVS_SN_01_ru
+Audio_Mainstreet/MF/REPEAT/MS_MF_REPEAT_01_CVS_PP_01	MS_MF_REPEAT_01_CVS_PP_01_ru
+Audio_Mainstreet/MF/START/MS_MF_START_01_CVS_PP_01	MS_MF_START_01_CVS_PP_01_ru
+Audio_Mainstreet/MF/START/MS_MF_START_02_CVS_SN_01	MS_MF_START_02_CVS_SN_01_ru
+Audio_Mainstreet/MF/START/MS_MF_START_03_CVS_PP_02	MS_MF_START_03_CVS_PP_02_ru
+Audio_Mainstreet/MF/START/MS_MF_START_04_CVS_SN_02	MS_MF_START_04_CVS_SN_02_ru
+Audio_Mainstreet/MR/EV_01/MS_MR_EV_01_01_GP_SN_01	MS_MR_EV_01_01_GP_SN_01_ru
+Audio_Mainstreet/MR/EV_01/MS_MR_EV_01_02_GP_Sprout_01	MS_MR_EV_01_02_GP_Sprout_01_ru
+Audio_Mainstreet/MR/EV_02/MS_MR_EV_02_01_CS_HC_01	MS_MR_EV_02_01_CS_HC_01_ru
+Audio_Mainstreet/MR/EV_02/MS_MR_EV_02_02_GP_SN_01	MS_MR_EV_02_02_GP_SN_01_ru
+Audio_Mainstreet/MR/EV_02/MS_MR_EV_02_03_GP_SN_02	MS_MR_EV_02_03_GP_SN_02_ru
+Audio_Mainstreet/MR/EV_02/MS_MR_EV_02_04_GP_Sprout_01	MS_MR_EV_02_04_GP_Sprout_01_ru
+Audio_Mainstreet/MR/EV_02/MS_MR_EV_02_05_GP_Sprout_02	MS_MR_EV_02_05_GP_Sprout_02_ru
+Audio_Mainstreet/MR/EV_03/MS_MR_EV_03_01_GP_Sprout_01	MS_MR_EV_03_01_GP_Sprout_01_ru
+Audio_Mainstreet/MR/EV_03/MS_MR_EV_03_02_GP_SN_01	MS_MR_EV_03_02_GP_SN_01_ru
+Audio_Mainstreet/MR/EV_03/MS_MR_EV_03_03_CS_PP_01	MS_MR_EV_03_03_CS_PP_01_ru
+Audio_Mainstreet/MR/EV_03/MS_MR_EV_03_04_CS_ZP_01	MS_MR_EV_03_04_CS_ZP_01_ru
+Audio_Mainstreet/MR/EV_03/MS_MR_EV_03_05_CS_SN_02	MS_MR_EV_03_05_CS_SN_02_ru
+Audio_Mainstreet/MR/EV_04/MS_MR_EV_04_01_CS_Sprout_01	MS_MR_EV_04_01_CS_Sprout_01_ru
+Audio_Mainstreet/MR/EV_04/MS_MR_EV_04_02_CS_IZ_01	MS_MR_EV_04_02_CS_IZ_01_ru
+Audio_Mainstreet/MR/EV_07/MS_MR_EV_07_01_GP_SN_01	MS_MR_EV_07_01_GP_SN_01_ru
+Audio_Mainstreet/MR/EV_08/MS_MR_EV_08_01_GP_SN_01	MS_MR_EV_08_01_GP_SN_01_ru
+Audio_Mainstreet/MR/EV_09/MS_MR_EV_09_01_GP_Sprout_01	MS_MR_EV_09_01_GP_Sprout_01_ru
+Audio_Mainstreet/MR/EV_10/MS_MR_EV_10_01_GP_Sprout_01	MS_MR_EV_10_01_GP_Sprout_01_ru
+Audio_Mainstreet/MR/EV_11/MS_MR_EV_11_01_GP_Sprout_01	MS_MR_EV_11_01_GP_Sprout_01_ru
+Audio_Mainstreet/MR/EV_12/MS_MR_EV_12_01_GP_Sprout_01	MS_MR_EV_12_01_GP_Sprout_01_ru
+Audio_Mainstreet/MR/EV_13/MS_MR_EV_13_01_GP_Sprout_01	MS_MR_EV_13_01_GP_Sprout_01_ru
+Audio_Mainstreet/MR/REPACPTD/MS_MR_REPACPTD_01_CVS_SN_01	MS_MR_REPACPTD_01_CVS_SN_01_ru
+Audio_Mainstreet/MR/REPDCLND/MS_MR_REPDCLND_01_CVS_SN_01	MS_MR_REPDCLND_01_CVS_SN_01_ru
+Audio_Mainstreet/MR/REPEAT/MS_MR_REPEAT_01_CVS_Sprout_01	MS_MR_REPEAT_01_CVS_Sprout_01_ru
+Audio_Mainstreet/MR/REPEAT/MS_MR_REPEAT_02_CVS_Sprout_02	MS_MR_REPEAT_02_CVS_Sprout_02_ru
+Audio_Mainstreet/MR/START/MS_MR_START_01_CS_SN_01	MS_MR_START_01_CS_SN_01_ru
+Audio_Mainstreet/Q11/ACCEPTED/MS_Q11_ACCEPTED_04_CVS_SN_01	MS_Q11_ACCEPTED_04_CVS_SN_01_ru
+Audio_Mainstreet/Q11/BLK/MS_Q11_BLK_01_GP_BigBunny_01	MS_Q11_BLK_01_GP_BigBunny_01_en-US
+Audio_Mainstreet/Q11/BLK/MS_Q11_BLK_02_GP_Bunnies_01	MS_Q11_BLK_02_GP_Bunnies_01_en-US
+Audio_Mainstreet/Q11/BLK/MS_Q11_BLK_03_GP_SN_01	MS_Q11_BLK_03_GP_SN_01_ru
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_01_CS_HC_01	MS_Q11_COMP_01_CS_HC_01_ru
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_02_CS_BigBunny_01	MS_Q11_COMP_02_CS_BigBunny_01_en-US
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_03_CS_Bunnies_01	MS_Q11_COMP_03_CS_Bunnies_01_en-US
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_04_CS_SN_01	MS_Q11_COMP_04_CS_SN_01_ru
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_05_CS_HC_02	MS_Q11_COMP_05_CS_HC_02_ru
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_06_CS_Bunnies_02	MS_Q11_COMP_06_CS_Bunnies_02_en-US
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_07_CS_SN_02	MS_Q11_COMP_07_CS_SN_02_ru
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_08_CS_Bunnies_03	MS_Q11_COMP_08_CS_Bunnies_03_en-US
+Audio_Mainstreet/Q11/DECLINED/MS_Q11_DECLINED_05_CVS_SN_01	MS_Q11_DECLINED_05_CVS_SN_01_ru
+Audio_Mainstreet/Q11/EV_01/MS_Q11_EV_01_01_CVS_SmoothieShop_01	MS_Q11_EV_01_01_CVS_SmoothieShop_01_ru
+Audio_Mainstreet/Q11/EV_01/MS_Q11_EV_01_02_CVS_SmoothieShop_02	MS_Q11_EV_01_02_CVS_SmoothieShop_02_ru
+Audio_Mainstreet/Q11/EV_02/MS_Q11_EV_02_01_CVS_BigBunny_01	MS_Q11_EV_02_01_CVS_BigBunny_01_en-US
+Audio_Mainstreet/Q11/EV_02/MS_Q11_EV_02_02_CVS_HC_01	MS_Q11_EV_02_02_CVS_HC_01_ru
+Audio_Mainstreet/Q11/EV_02/MS_Q11_EV_02_03_CVS_HC_02	MS_Q11_EV_02_03_CVS_HC_02_ru
+Audio_Mainstreet/Q11/EV_02/MS_Q11_EV_02_04_CVS_SN_01	MS_Q11_EV_02_04_CVS_SN_01_ru
+Audio_Mainstreet/Q11/EV_03/MS_Q11_EV_03_01_CVS_FashionPony_01	MS_Q11_EV_03_01_CVS_FashionPony_01_ru
+Audio_Mainstreet/Q11/EV_03/MS_Q11_EV_03_02_CVS_FashionPony_02	MS_Q11_EV_03_02_CVS_FashionPony_02_ru
+Audio_Mainstreet/Q11/EV_03/MS_Q11_EV_03_03_CVS_SN_01	MS_Q11_EV_03_03_CVS_SN_01_ru
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_05_CVS_HC_01	MS_Q11_EV_04_05_CVS_HC_01_ru
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_06_CVS_BigBunny_01	MS_Q11_EV_04_06_CVS_BigBunny_01_en-US
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_07_CVS_HC_02	MS_Q11_EV_04_07_CVS_HC_02_ru
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_08_CVS_BigBunny_02	MS_Q11_EV_04_08_CVS_BigBunny_02_en-US
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_09_CVS_HC_03	MS_Q11_EV_04_09_CVS_HC_03_ru
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_10_CVS_BigBunny_03	MS_Q11_EV_04_10_CVS_BigBunny_03_en-US
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_11_CVS_HC_04	MS_Q11_EV_04_11_CVS_HC_04_ru
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_12_CVS_SN_01	MS_Q11_EV_04_12_CVS_SN_01_ru
+Audio_Mainstreet/Q11/EV_05/MS_Q11_EV_05_01_GP_SN_01	MS_Q11_EV_05_01_GP_SN_01_ru
+Audio_Mainstreet/Q11/EV_06/MS_Q11_EV_06_01_GP_SN_01	MS_Q11_EV_06_01_GP_SN_01_ru
+Audio_Mainstreet/Q11/EV_07/MS_Q11_EV_07_01_GP_SN_01	MS_Q11_EV_07_01_GP_SN_01_ru
+Audio_Mainstreet/Q11/EV_08/MS_Q11_EV_08_01_GP_SN_01	MS_Q11_EV_08_01_GP_SN_01_ru
+Audio_Mainstreet/Q11/EV_09/MS_Q11_EV_09_04_GP_FashionPony_01	MS_Q11_EV_09_04_GP_FashionPony_01_ru
+Audio_Mainstreet/Q11/MID_01/MS_Q11_MID_01_01_GP_HC_01	MS_Q11_MID_01_01_GP_HC_01_ru
+Audio_Mainstreet/Q11/MID_02/MS_Q11_MID_02_01_GP_HC_01	MS_Q11_MID_02_01_GP_HC_01_ru
+Audio_Mainstreet/Q11/MID_03/MS_Q11_MID_03_01_GP_HC_01	MS_Q11_MID_03_01_GP_HC_01_ru
+Audio_Mainstreet/Q11/POST_01/MS_Q11_POST_01_01_GP_SmoothieShop_01	MS_Q11_POST_01_01_GP_SmoothieShop_01_ru
+Audio_Mainstreet/Q11/POST_02/MS_Q11_POST_02_01_GP_FashionPony_01	MS_Q11_POST_02_01_GP_FashionPony_01_ru
+Audio_Mainstreet/Q11/PRE_01/MS_Q11_PRE_01_01_GP_SmoothieShop_01	MS_Q11_PRE_01_01_GP_SmoothieShop_01_ru
+Audio_Mainstreet/Q11/PRE_02/MS_Q11_PRE_02_01_GP_FashionPony_01	MS_Q11_PRE_02_01_GP_FashionPony_01_ru
+Audio_Mainstreet/Q11/PRE_03/MS_Q11_PRE_03_01_GP_ScaredNPC_01	MS_Q11_PRE_03_01_GP_ScaredNPC_01_ru
+Audio_Mainstreet/Q11/QUESTION/MS_Q11_QUESTION_03_CVS_SmoothieShop_01	MS_Q11_QUESTION_03_CVS_SmoothieShop_01_ru
+Audio_Mainstreet/Q11/RETACPTD/MS_Q11_RETACPTD_08_CVS_SN_01	MS_Q11_RETACPTD_08_CVS_SN_01_ru
+Audio_Mainstreet/Q11/RETDCLND/MS_Q11_RETDCLND_07_CVS_SN_01	MS_Q11_RETDCLND_07_CVS_SN_01_ru
+Audio_Mainstreet/Q11/RETRY/MS_Q11_RETRY_06_CVS_SmoothieShop_01	MS_Q11_RETRY_06_CVS_SmoothieShop_01_ru
+Audio_Mainstreet/Q11/START/MS_Q11_START_01_CS_Big Bunny_01	MS_Q11_START_01_CS_BigBunny_01_en-US
+Audio_Mainstreet/Q11/START/MS_Q11_START_02_CS_Bunnies_01	MS_Q11_START_02_CS_Bunnies_01_en-US
+Audio_Mainstreet/Q11/START/MS_Q11_START_03_CS_HC_01	MS_Q11_START_03_CS_HC_01_ru
+Audio_Mainstreet/Q11/START/MS_Q11_START_04_CS_Bunnies_02	MS_Q11_START_04_CS_Bunnies_02_en-US
+Audio_Mainstreet/Q11/START/MS_Q11_START_05_CS_SN_01	MS_Q11_START_05_CS_SN_01_ru
+Audio_Mainstreet/Q11/START/MS_Q11_START_06_CS_HC_02	MS_Q11_START_06_CS_HC_02_ru
+Audio_Mainstreet/Q11/START/MS_Q11_START_07_CS_HC_03	MS_Q11_START_07_CS_HC_03_ru
+Audio_Mainstreet/Q11/START/MS_Q11_START_08_CS_BigBunny_02	MS_Q11_START_08_CS_BigBunny_02_en-US
+Audio_Mainstreet/Q11/START/MS_Q11_START_09_CS_Bunnies_03	MS_Q11_START_09_CS_Bunnies_03_en-US
+Audio_Mainstreet/Q11/START/MS_Q11_START_10_CS_SN_02	MS_Q11_START_10_CS_SN_02_ru
+Audio_Mainstreet/Q11/START/MS_Q11_START_11_CS_BigBunny_03	MS_Q11_START_11_CS_BigBunny_03_en-US
+Audio_Mainstreet/Q11/START/MS_Q11_START_12_CS_HC_04	MS_Q11_START_12_CS_HC_04_ru
+Audio_Mainstreet/Q11/START/MS_Q11_START_13_CS_BigBunny_04	MS_Q11_START_13_CS_BigBunny_04_en-US
+Audio_Mainstreet/Q11/START/MS_Q11_START_14_CS_Bunnies_04	MS_Q11_START_14_CS_Bunnies_04_en-US
+Audio_Mainstreet/Q11/START/MS_Q11_START_15_CS_HC_05	MS_Q11_START_15_CS_HC_05_ru
+Audio_Mainstreet/Q11/START/MS_Q11_START_16_CS_SN_03	MS_Q11_START_16_CS_SN_03_ru
+Audio_Mainstreet/Q11/TOOFAR/MS_Q11_TOOFAR_01_GP_SN_01	MS_Q11_TOOFAR_01_GP_SN_01_ru
+Audio_Mainstreet/Q16/BLK/MS_Q16_BLK_01_GP_Canterlogic Guard_01	MS_Q16_BLK_01_GP_Canterlogic Guard_01_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_01_CVS_Crowd2_02	MS_Q16_COMP_01_CVS_Crowd2_02_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_02_CVS_Crowd3_02	MS_Q16_COMP_02_CVS_Crowd3_02_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_03_CVS_SN_01	MS_Q16_COMP_03_CVS_SN_01_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_04_CVS_Crowd_01	MS_Q16_COMP_04_CVS_Crowd_01_en-US
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_05_CVS_SN_02	MS_Q16_COMP_05_CVS_SN_02_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_06_CVS_SN_03	MS_Q16_COMP_06_CVS_SN_03_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_07_CVS_SN_04	MS_Q16_COMP_07_CVS_SN_04_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_08_CVS_SN_05	MS_Q16_COMP_08_CVS_SN_05_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_09_CVS_Crowd2_03	MS_Q16_COMP_09_CVS_Crowd2_03_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_10_CVS_Crowd1_02	MS_Q16_COMP_10_CVS_Crowd1_02_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_11_CVS_SN_06	MS_Q16_COMP_11_CVS_SN_06_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_12_CVS_Crowd3_03	MS_Q16_COMP_12_CVS_Crowd3_03_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_13_CVS_Crowd1_03	MS_Q16_COMP_13_CVS_Crowd1_03_ru
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_14_CVS_Crowd1,2,3_01	MS_Q16_COMP_14_CVS_Crowd 1 ,2, 3_01_en-US
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_15_CVS_Crowd1,2,3_01	MS_Q16_COMP_15_CVS_Crowd 1 ,2, 3_01_ru
+Audio_Mainstreet/Q16/COMP/RandomVariants/MS_Q16_COMP_01_CVS_Crowd2_02_02	MS_Q16_COMP_01_CVS_Crowd 2_02_02_en-US
+Audio_Mainstreet/Q16/COMP/RandomVariants/MS_Q16_COMP_01_CVS_Crowd2_02_03	MS_Q16_COMP_01_CVS_Crowd 2_02_03_en-US
+Audio_Mainstreet/Q16/EV_01/MS_Q16_EV_01_01_GP_Crowd1_01	MS_Q16_EV_01_01_GP_Crowd1_01_ru
+Audio_Mainstreet/Q16/EV_02/MS_Q16_EV_02_01_GP_Crowd2_01	MS_Q16_EV_02_01_GP_Crowd2_01_ru
+Audio_Mainstreet/Q16/EV_03/MS_Q16_EV_03_01_GP_Crowd3_01	MS_Q16_EV_03_01_GP_Crowd3_01_ru
+Audio_Mainstreet/Q16/START/MS_Q16_START_01_CGP_SN_01	MS_Q16_START_01_CGP_SN_01_ru
+Audio_Mainstreet/Q16/START/MS_Q16_START_02_CGP_SN_02	MS_Q16_START_02_CGP_SN_02_ru
+Audio_Mainstreet/Q16/TOOFAR/MS_Q16_TOOFAR_01_GP_SN_01	MS_Q16_TOOFAR_01_GP_SN_01_ru
+Audio_Mainstreet/Q4/ACCEPTED/MS_Q4_ACCEPTED_01_CVS_SN_01	MS_Q4_ACCEPTED_01_CVS_SN_01_ru
+Audio_Mainstreet/Q4/ACCEPTED/MS_Q4_ACCEPTED_02_CVS_Thunder_02	MS_Q4_ACCEPTED_02_CVS_Thunder_02_ru
+Audio_Mainstreet/Q4/COMP/MS_Q4_COMP_01_CVS_Thunder_01	MS_Q4_COMP_01_CVS_Thunder_01_ru
+Audio_Mainstreet/Q4/COMP/MS_Q4_COMP_02_CVS_Thunder_02	MS_Q4_COMP_02_CVS_Thunder_02_ru
+Audio_Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_01_CVS_SN_01	MS_Q4_DECLINED_01_CVS_SN_01_ru
+Audio_Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_02_CVS_Thunder_02	MS_Q4_DECLINED_02_CVS_Thunder_02_ru
+Audio_Mainstreet/Q4/POST_01/MS_Q4_POST_01_01_GP_Thunder_01	MS_Q4_POST_01_01_GP_Thunder_01_ru
+Audio_Mainstreet/Q4/QUESTION/MS_Q4_QUESTION_01_CVS_Thunder_01	MS_Q4_QUESTION_01_CVS_Thunder_01_ru
+Audio_Mainstreet/Q4/RETACPTD/MS_Q4_RETACPTD_01_CVS_SN_01	MS_Q4_RETACPTD_01_CVS_SN_01_ru
+Audio_Mainstreet/Q4/RETDCLND/MS_Q4_RETDCLND_01_CVS_SN_01	MS_Q4_RETDCLND_01_CVS_SN_01_ru
+Audio_Mainstreet/Q4/RETRY/MS_Q4_RETRY_01_CVS_Thunder_01	MS_Q4_RETRY_01_CVS_Thunder_01_ru
+Audio_Mainstreet/Q4/START/MS_Q4_START_01_CVS_Thunder_01	MS_Q4_START_01_CVS_Thunder_01_ru
+Audio_Mainstreet/Q4/START/MS_Q4_START_02_CVS_SN_01	MS_Q4_START_02_CVS_SN_01_ru
+Audio_Mainstreet/Q4/START/MS_Q4_START_03_CVS_Thunder_02	MS_Q4_START_03_CVS_Thunder_02_ru
+Audio_Mainstreet/Q4/START/MS_Q4_START_04_CVS_Thunder_03	MS_Q4_START_04_CVS_Thunder_03_ru
+Audio_Mainstreet/Q4/START/MS_Q4_START_05_CVS_Thunder_04	MS_Q4_START_05_CVS_Thunder_04_ru
+Audio_Mainstreet/Q4/START/MS_Q4_START_06_CVS_SN_02	MS_Q4_START_06_CVS_SN_02_ru
+Audio_Mainstreet/Q4/START/MS_Q4_START_07_CVS_Thunder_05	MS_Q4_START_07_CVS_Thunder_05_ru
+Audio_Mainstreet/Q4/START/MS_Q4_START_08_CVS_SN_03	MS_Q4_START_08_CVS_SN_03_ru
+Audio_Mainstreet/Q4/START/MS_Q4_START_09_CVS_Thunder_06	MS_Q4_START_09_CVS_Thunder_06_ru
+Audio_Mainstreet/Q4/START/MS_Q4_START_10_CVS_Thunder_07	MS_Q4_START_10_CVS_Thunder_07_ru
+Audio_Mainstreet/Q5/COMP/MS_Q5_COMP_01_CS_PP_01	MS_Q5_COMP_01_CS_PP_01_ru
+Audio_Mainstreet/Q5/COMP/MS_Q5_COMP_02_CS_SN_01	MS_Q5_COMP_02_CS_SN_01_ru
+Audio_Mainstreet/Q5/COMP/MS_Q5_COMP_03_CS_PP_02	MS_Q5_COMP_03_CS_PP_02_ru
+Audio_Mainstreet/Q5/COMP/MS_Q5_COMP_04_CS_PP_03	MS_Q5_COMP_04_CS_PP_03_ru
+Audio_Mainstreet/Q5/EV_01/MS_Q5_EV_01_01_GP_SN_01	MS_Q5_EV_01_01_GP_SN_01_ru
+Audio_Mainstreet/Q5/EV_02/MS_Q5_EV_02_01_GP_SN_01	MS_Q5_EV_02_01_GP_SN_01_ru
+Audio_Mainstreet/Q5/EV_03/MS_Q5_EV_03_01_GP_SN_01	MS_Q5_EV_03_01_GP_SN_01_ru
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_01_CVS_Sprout_01	MS_Q5_EV_04_01_CVS_Sprout_01_ru
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_02_CVS_Sprout_02	MS_Q5_EV_04_02_CVS_Sprout_02_ru
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_03_CVS_Sprout_03	MS_Q5_EV_04_03_CVS_Sprout_03_ru
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_04_CVS_SN_01	MS_Q5_EV_04_04_CVS_SN_01_ru
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_05_CVS_Sprout_04	MS_Q5_EV_04_05_CVS_Sprout_04_ru
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_06_CVS_SN_02	MS_Q5_EV_04_06_CVS_SN_02_ru
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_07_CVS_Sprout_05	MS_Q5_EV_04_07_CVS_Sprout_05_ru
+Audio_Mainstreet/Q5/EV_05/MS_Q5_EV_05_01_GP_SN_01	MS_Q5_EV_05_01_GP_SN_01_ru
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_01_CVS_IZ_01	MS_Q5_EV_06_01_CVS_IZ_01_ru
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_02_CVS_SN_01	MS_Q5_EV_06_02_CVS_SN_01_ru
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_03_CVS_IZ_02	MS_Q5_EV_06_03_CVS_IZ_02_ru
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_04_CVS_IZ_03	MS_Q5_EV_06_04_CVS_IZ_03_ru
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_05_CVS_SN_02	MS_Q5_EV_06_05_CVS_SN_02_ru
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_06_CVS_IZ_04	MS_Q5_EV_06_06_CVS_IZ_04_ru
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_07_CVS_SN_03	MS_Q5_EV_06_07_CVS_SN_03_ru
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_08_CVS_IZ_05	MS_Q5_EV_06_08_CVS_IZ_05_ru
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_09_CVS_SN_04	MS_Q5_EV_06_09_CVS_SN_04_ru
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_01_CVS_PaintShop_01	MS_Q5_EV_07_01_CVS_PaintShop_01_ru
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_02_CVS_SN_01	MS_Q5_EV_07_02_CVS_SN_01_ru
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_03_CVS_PaintShop_02	MS_Q5_EV_07_03_CVS_PaintShop_02_ru
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_04_CVS_SN_02	MS_Q5_EV_07_04_CVS_SN_02_ru
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_05_CVS_PaintShop_03	MS_Q5_EV_07_05_CVS_PaintShop_03_ru
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_06_CVS_PaintShop_04	MS_Q5_EV_07_06_CVS_PaintShop_04_ru
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_07_CVS_SN_03	MS_Q5_EV_07_07_CVS_SN_03_ru
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_08_CVS_PaintShop_05	MS_Q5_EV_07_08_CVS_PaintShop_05_ru
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_09_CVS_PaintShop_06	MS_Q5_EV_07_09_CVS_PaintShop_06_ru
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_10_CVS_PaintShop_07	MS_Q5_EV_07_10_CVS_PaintShop_07_ru
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_11_CVS_PaintShop_08	MS_Q5_EV_07_11_CVS_PaintShop_08_ru
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_12_CVS_SN_04	MS_Q5_EV_07_12_CVS_SN_04_ru
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_01_CVS_FashionPony_01	MS_Q5_EV_08_01_CVS_FashionPony_01_ru
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_02_CVS_SN_01	MS_Q5_EV_08_02_CVS_SN_01_ru
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_03_CVS_FashionPony_02	MS_Q5_EV_08_03_CVS_FashionPony_02_ru
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_04_CVS_FashionPony_03	MS_Q5_EV_08_04_CVS_FashionPony_03_ru
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_05_CVS_SN_02	MS_Q5_EV_08_05_CVS_SN_02_ru
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_06_CVS_FashionPony_04	MS_Q5_EV_08_06_CVS_FashionPony_04_ru
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_07_CVS_FashionPony_05	MS_Q5_EV_08_07_CVS_FashionPony_05_ru
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_08_CVS_SN_03	MS_Q5_EV_08_08_CVS_SN_03_ru
+Audio_Mainstreet/Q5/EV_09/MS_Q5_EV_09_01_CVS_FlowerShop_01	MS_Q5_EV_09_01_CVS_FlowerShop_01_ru
+Audio_Mainstreet/Q5/EV_09/MS_Q5_EV_09_02_CVS_SN_01	MS_Q5_EV_09_02_CVS_SN_01_ru
+Audio_Mainstreet/Q5/EV_09/MS_Q5_EV_09_03_CVS_FlowerShop_02	MS_Q5_EV_09_03_CVS_FlowerShop_02_ru
+Audio_Mainstreet/Q5/EV_09/MS_Q5_EV_09_04_CVS_FlowerShop_03	MS_Q5_EV_09_04_CVS_FlowerShop_03_ru
+Audio_Mainstreet/Q5/EV_09/MS_Q5_EV_09_05_CVS_SN_02	MS_Q5_EV_09_05_CVS_SN_02_ru
+Audio_Mainstreet/Q5/EV_09/MS_Q5_EV_09_06_CVS_FlowerShop_04	MS_Q5_EV_09_06_CVS_FlowerShop_04_ru
+Audio_Mainstreet/Q5/EV_10/MS_Q5_EV_10_01_GP_FlowerShop_01	MS_Q5_EV_10_01_GP_FlowerShop_01_ru
+Audio_Mainstreet/Q5/EV_11/MS_Q5_EV_11_01_GP_FashionPony_01	MS_Q5_EV_11_01_GP_FashionPony_01_ru
+Audio_Mainstreet/Q5/EV_12/MS_Q5_EV_12_01_CVS_PaintShop_01	MS_Q5_EV_12_01_CVS_PaintShop_01_ru
+Audio_Mainstreet/Q5/EV_12/MS_Q5_EV_12_02_CVS_SN_01	MS_Q5_EV_12_02_CVS_SN_01_ru
+Audio_Mainstreet/Q5/EV_12/MS_Q5_EV_12_03_CVS_PaintShop_02	MS_Q5_EV_12_03_CVS_PaintShop_02_ru
+Audio_Mainstreet/Q5/EV_12/MS_Q5_EV_12_04_CVS_SN_02	MS_Q5_EV_12_04_CVS_SN_02_ru
+Audio_Mainstreet/Q5/EV_12/MS_Q5_EV_12_05_CVS_PaintShop_03	MS_Q5_EV_12_05_CVS_PaintShop_03_ru
+Audio_Mainstreet/Q5/EV_13/MS_Q5_EV_13_01_GP_SN_03	MS_Q5_EV_13_01_GP_SN_03_ru
+Audio_Mainstreet/Q5/EV_14/MS_Q5_EV_14_01_GP_SN_01	MS_Q5_EV_14_01_GP_SN_01_ru
+Audio_Mainstreet/Q5/EV_15/MS_Q5_EV_15_01_GP_SN_01	MS_Q5_EV_15_01_GP_SN_01_ru
+Audio_Mainstreet/Q5/MID_01/MS_Q5_MID_01_01_GP_Sprout_01	MS_Q5_MID_01_01_GP_Sprout_01_ru
+Audio_Mainstreet/Q5/MID_02/MS_Q5_MID_02_01_CVS_IZ_01	MS_Q5_MID_02_01_CVS_IZ_01_ru
+Audio_Mainstreet/Q5/MID_03/MS_Q5_MID_03_01_CVS_Thunder_01	MS_Q5_MID_03_01_CVS_Thunder_01_ru
+Audio_Mainstreet/Q5/MID_04/MS_Q5_MID_04_01_CVS_FashionPony_01	MS_Q5_MID_04_01_CVS_FashionPony_01_ru
+Audio_Mainstreet/Q5/MID_05/MS_Q5_MID_05_01_GP_PaintShop_01	MS_Q5_MID_05_01_GP_PaintShop_01_ru
+Audio_Mainstreet/Q5/MID_06/MS_Q5_MID_06_01_CVS_PP_01	MS_Q5_MID_06_01_CVS_PP_01_ru
+Audio_Mainstreet/Q5/MID_06/MS_Q5_MID_06_02_CVS_PP_02	MS_Q5_MID_06_02_CVS_PP_02_ru
+Audio_Mainstreet/Q5/MID_06/MS_Q5_MID_06_03_CVS_SN_01	MS_Q5_MID_06_03_CVS_SN_01_ru
+Audio_Mainstreet/Q5/MID_07/MS_Q5_MID_07_01_CVS_IZ_01	MS_Q5_MID_07_01_CVS_IZ_01_ru
+Audio_Mainstreet/Q5/POST_01/MS_Q5_POST_01_01_CVS_IZ_01	MS_Q5_POST_01_01_CVS_IZ_01_ru
+Audio_Mainstreet/Q5/POST_02/MS_Q5_POST_02_01_CVS_PaintShop_01	MS_Q5_POST_02_01_CVS_PaintShop_01_ru
+Audio_Mainstreet/Q5/POST_03/MS_Q5_POST_03_01_CVS_FashionPony_01	MS_Q5_POST_03_01_CVS_FashionPony_01_ru
+Audio_Mainstreet/Q5/POST_04/MS_Q5_POST_04_01_CVS_FlowerShop_01	MS_Q5_POST_04_01_CVS_FlowerShop_01_ru
+Audio_Mainstreet/Q5/POST_05/MS_Q5_POST_05_01_CVS_Sprout_01	MS_Q5_POST_05_01_CVS_Sprout_01_ru
+Audio_Mainstreet/Q5/POST_05/MS_Q5_POST_05_02_CVS_SN_01	MS_Q5_POST_05_02_CVS_SN_01_ru
+Audio_Mainstreet/Q5/POST_05/MS_Q5_POST_05_03_CVS_Sprout_02	MS_Q5_POST_05_03_CVS_Sprout_02_ru
+Audio_Mainstreet/Q5/PRE_01/MS_Q5_PRE_01_01_CVS_IZ_01	MS_Q5_PRE_01_01_CVS_IZ_01_ru
+Audio_Mainstreet/Q5/PRE_02/MS_Q5_PRE_02_01_CVS_PaintShop_01	MS_Q5_PRE_02_01_CVS_PaintShop_01_ru
+Audio_Mainstreet/Q5/PRE_03/MS_Q5_PRE_03_01_CVS_FashionPony_01	MS_Q5_PRE_03_01_CVS_FashionPony_01_ru
+Audio_Mainstreet/Q5/PRE_04/MS_Q5_PRE_04_01_CVS_FlowerShop_01	MS_Q5_PRE_04_01_CVS_FlowerShop_01_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_01_CS_PP_01	MS_Q5_START_01_CS_PP_01_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_02_CS_SN_01	MS_Q5_START_02_CS_SN_01_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_03_CS_PP_02	MS_Q5_START_03_CS_PP_02_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_04_CS_PP_03	MS_Q5_START_04_CS_PP_03_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_05_CS_PP_04	MS_Q5_START_05_CS_PP_04_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_06_CS_Sprout_01	MS_Q5_START_06_CS_Sprout_01_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_07_CS_PP_05	MS_Q5_START_07_CS_PP_05_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_08_CS_Sprout_02	MS_Q5_START_08_CS_Sprout_02_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_09_CS_Sprout_03	MS_Q5_START_09_CS_Sprout_03_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_10_CS_PP_06	MS_Q5_START_10_CS_PP_06_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_11_CS_Sprout_04	MS_Q5_START_11_CS_Sprout_04_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_12_CS_SN_02	MS_Q5_START_12_CS_SN_02_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_13_CS_Sprout_05	MS_Q5_START_13_CS_Sprout_05_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_14_CS_Sprout_06	MS_Q5_START_14_CS_Sprout_06_ru
+Audio_Mainstreet/Q5/START/MS_Q5_START_15_CS_SN_03	MS_Q5_START_15_CS_SN_03_ru
+Audio_Mainstreet/Q5/TOOFAR/MS_Q5_TOOFAR_01_GP_SN_01	MS_Q5_TOOFAR_01_GP_SN_01_ru
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_01_CVS_Primrose_01	MS_Q6_COMP_01_CVS_Primrose_01_ru
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_02_CVS_SN_01	MS_Q6_COMP_02_CVS_SN_01_ru
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_03_CVS_Primrose_02	MS_Q6_COMP_03_CVS_Primrose_02_ru
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_04_CVS_SN_02	MS_Q6_COMP_04_CVS_SN_02_ru
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_05_CVS_SN_03	MS_Q6_COMP_05_CVS_SN_03_ru
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_06_CVS_Primrose_03	MS_Q6_COMP_06_CVS_Primrose_03_ru
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_07_CVS_Primrose_04	MS_Q6_COMP_07_CVS_Primrose_04_ru
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_08_CVS_SN_04	MS_Q6_COMP_08_CVS_SN_04_ru
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_01_CVS_SN_01	MS_Q6_EV_01_01_CVS_SN_01_ru
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_02_CVS_Primrose_01	MS_Q6_EV_01_02_CVS_Primrose_01_ru
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_03_CVS_SN_02	MS_Q6_EV_01_03_CVS_SN_02_ru
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_04_CVS_Primrose_02	MS_Q6_EV_01_04_CVS_Primrose_02_ru
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_05_CVS_SN_03	MS_Q6_EV_01_05_CVS_SN_03_ru
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_06_CVS_Primrose_03	MS_Q6_EV_01_06_CVS_Primrose_03_ru
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_07_CVS_SN_04	MS_Q6_EV_01_07_CVS_SN_04_ru
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_08_CVS_Primrose_04	MS_Q6_EV_01_08_CVS_Primrose_04_ru
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_09_CVS_SN_05	MS_Q6_EV_01_09_CVS_SN_05_ru
+Audio_Mainstreet/Q6/EV_02/MS_Q6_EV_02_01_GP_ShopKeeper1_01	MS_Q6_EV_02_01_GP_ShopKeeper1_01_ru
+Audio_Mainstreet/Q6/EV_03/MS_Q6_EV_03_01_GP_ShopKeeper2_01	MS_Q6_EV_03_01_GP_ShopKeeper2_01_ru
+Audio_Mainstreet/Q6/EV_04/MS_Q6_EV_04_01_GP_ShopKeeper3_01	MS_Q6_EV_04_01_GP_ShopKeeper3_01_ru
+Audio_Mainstreet/Q6/EV_05/MS_Q6_EV_05_01_GP_SN_01	MS_Q6_EV_05_01_GP_SN_01_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_01_CVS_Primrose_01	MS_Q6_EV_06_01_CVS_Primrose_01_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_02_CVS_SN_01	MS_Q6_EV_06_02_CVS_SN_01_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_03_CVS_Primrose_02	MS_Q6_EV_06_03_CVS_Primrose_02_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_04_CVS_SN_02	MS_Q6_EV_06_04_CVS_SN_02_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_05_CVS_Primrose_03	MS_Q6_EV_06_05_CVS_Primrose_03_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_06_CVS_SN_03	MS_Q6_EV_06_06_CVS_SN_03_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_07_CVS_Primrose_04	MS_Q6_EV_06_07_CVS_Primrose_04_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_08_CVS_SN_04	MS_Q6_EV_06_08_CVS_SN_04_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_09_CVS_Primrose_05	MS_Q6_EV_06_09_CVS_Primrose_05_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_10_CVS_SN_05	MS_Q6_EV_06_10_CVS_SN_05_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_11_CVS_Primrose_06	MS_Q6_EV_06_11_CVS_Primrose_06_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_12_CVS_Primrose_07	MS_Q6_EV_06_12_CVS_Primrose_07_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_13_CVS_SN_06	MS_Q6_EV_06_13_CVS_SN_06_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_14_CVS_SN_07	MS_Q6_EV_06_14_CVS_SN_07_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_15_CVS_Primrose_08	MS_Q6_EV_06_15_CVS_Primrose_08_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_16_CVS_SN_08	MS_Q6_EV_06_16_CVS_SN_08_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_17_CVS_SN_09	MS_Q6_EV_06_17_CVS_SN_09_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_18_CVS_Primrose_09	MS_Q6_EV_06_18_CVS_Primrose_09_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_19_CVS_SN_10	MS_Q6_EV_06_19_CVS_SN_10_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_20_CVS_Primrose_10	MS_Q6_EV_06_20_CVS_Primrose_10_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_21_CVS_SN_11	MS_Q6_EV_06_21_CVS_SN_11_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_22_CVS_Primrose_11	MS_Q6_EV_06_22_CVS_Primrose_11_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_23_CVS_SN_12	MS_Q6_EV_06_23_CVS_SN_12_ru
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_24_CVS_SN_13	MS_Q6_EV_06_24_CVS_SN_13_ru
+Audio_Mainstreet/Q6/EV_07/MS_Q6_EV_07_01_CVS_SN_01	MS_Q6_EV_07_01_CVS_SN_01_ru
+Audio_Mainstreet/Q6/EV_07/MS_Q6_EV_07_02_CVS_SN_02	MS_Q6_EV_07_02_CVS_SN_02_ru
+Audio_Mainstreet/Q6/EV_07/MS_Q6_EV_07_03_CVS_SmoothieShop_01	MS_Q6_EV_07_03_CVS_SmoothieShop_01_ru
+Audio_Mainstreet/Q6/EV_07/MS_Q6_EV_07_04_CVS_SN_03	MS_Q6_EV_07_04_CVS_SN_03_ru
+Audio_Mainstreet/Q6/EV_07/MS_Q6_EV_07_05_CVS_SmoothieShop_02	MS_Q6_EV_07_05_CVS_SmoothieShop_02_ru
+Audio_Mainstreet/Q6/EV_07/MS_Q6_EV_07_06_CVS_SmoothieShop_03	MS_Q6_EV_07_06_CVS_SmoothieShop_03_ru
+Audio_Mainstreet/Q6/EV_08/MS_Q6_EV_08_01_GP_SmoothieShop_01	MS_Q6_EV_08_01_GP_SmoothieShop_01_ru
+Audio_Mainstreet/Q6/EV_09/MS_Q6_EV_09_01_GP_SN_01	MS_Q6_EV_09_01_GP_SN_01_ru
+Audio_Mainstreet/Q6/EV_10/MS_Q6_EV_10_01_GP_SN_01	MS_Q6_EV_10_01_GP_SN_01_ru
+Audio_Mainstreet/Q6/MID_01/MS_Q6_MID_01_01_CVS_PP_01	MS_Q6_MID_01_01_CVS_PP_01_ru
+Audio_Mainstreet/Q6/MID_01/MS_Q6_MID_01_02_CVS_PP_02	MS_Q6_MID_01_02_CVS_PP_02_ru
+Audio_Mainstreet/Q6/MID_02/MS_Q6_MID_02_01_GP_Primrose_05	MS_Q6_MID_02_01_GP_Primrose_05_ru
+Audio_Mainstreet/Q6/MID_03/MS_Q6_MID_03_01_GP_Primrose_01	MS_Q6_MID_03_01_GP_Primrose_01_ru
+Audio_Mainstreet/Q6/MID_04/MS_Q6_MID_04_01_CVS_SmoothieShop_01	MS_Q6_MID_04_01_CVS_SmoothieShop_01_ru
+Audio_Mainstreet/Q6/POST_01/MS_Q6_POST_01_01_CVS_SmoothieShop_01	MS_Q6_POST_01_01_CVS_SmoothieShop_01_ru
+Audio_Mainstreet/Q6/POST_02/MS_Q6_POST_02_01_GP_ShopKeeper1_01	MS_Q6_POST_02_01_GP_ShopKeeper1_01_ru
+Audio_Mainstreet/Q6/POST_03/MS_Q6_POST_03_01_GP_ShopKeeper2_01	MS_Q6_POST_03_01_GP_ShopKeeper2_01_ru
+Audio_Mainstreet/Q6/POST_04/MS_Q6_POST_04_01_GP_ShopKeeper3_01	MS_Q6_POST_04_01_GP_ShopKeeper3_01_ru
+Audio_Mainstreet/Q6/PRE_01/MS_Q6_PRE_01_01_CVS_SmoothieShop_01	MS_Q6_PRE_01_01_CVS_SmoothieShop_01_ru
+Audio_Mainstreet/Q6/PRE_02/MS_Q6_PRE_02_01_GP_ShopKeeper1_01	MS_Q6_PRE_02_01_GP_ShopKeeper1_01_ru
+Audio_Mainstreet/Q6/PRE_03/MS_Q6_PRE_03_01_GP_ShopKeeper2_01	MS_Q6_PRE_03_01_GP_ShopKeeper2_01_ru
+Audio_Mainstreet/Q6/PRE_04/MS_Q6_PRE_04_01_GP_ShopKeeper3_01	MS_Q6_PRE_04_01_GP_ShopKeeper3_01_ru
+Audio_Mainstreet/Q6/START/MS_Q6_START_01_CVS_PP_01	MS_Q6_START_01_CVS_PP_01_ru
+Audio_Mainstreet/Q6/START/MS_Q6_START_02_CVS_SN_01	MS_Q6_START_02_CVS_SN_01_ru
+Audio_Mainstreet/Q6/START/MS_Q6_START_03_CVS_PP_02	MS_Q6_START_03_CVS_PP_02_ru
+Audio_Mainstreet/Q6/START/MS_Q6_START_04_CVS_PP_03	MS_Q6_START_04_CVS_PP_03_ru
+Audio_Mainstreet/Q6/START/MS_Q6_START_05_CVS_PP_04	MS_Q6_START_05_CVS_PP_04_ru
+Audio_Mainstreet/Q6/START/MS_Q6_START_06_CVS_PP_05	MS_Q6_START_06_CVS_PP_05_ru
+Audio_Mainstreet/Q6/START/MS_Q6_START_07_CVS_SN_02	MS_Q6_START_07_CVS_SN_02_ru
+Audio_Mainstreet/Q6/START/MS_Q6_START_08_CVS_PP_06	MS_Q6_START_08_CVS_PP_06_ru
+Audio_Mainstreet/Q6/START/MS_Q6_START_09_CVS_SN_03	MS_Q6_START_09_CVS_SN_03_ru
+Audio_Mainstreet/Q6/START/MS_Q6_START_10_CVS_PP_07	MS_Q6_START_10_CVS_PP_07_ru
+Audio_Mainstreet/Q6/TOOFAR/MS_Q6_TOOFAR_01_GP_SN_01	MS_Q6_TOOFAR_01_GP_SN_01_ru
+Audio_Mainstreet/Q7/COMP/MS_Q7_COMP_01_CVS_HC_01	MS_Q7_COMP_01_CVS_HC_01_ru
+Audio_Mainstreet/Q7/COMP/MS_Q7_COMP_02_CS_HC_01	MS_Q7_COMP_02_CS_HC_01_ru
+Audio_Mainstreet/Q7/COMP/MS_Q7_COMP_03_CS_HC_02	MS_Q7_COMP_03_CS_HC_02_ru
+Audio_Mainstreet/Q7/EV_01/MS_Q7_EV_01_01_GP_HC_01	MS_Q7_EV_01_01_GP_HC_01_ru
+Audio_Mainstreet/Q7/EV_01/MS_Q7_EV_01_02_GP_HC_02	MS_Q7_EV_01_02_GP_HC_02_ru
+Audio_Mainstreet/Q7/EV_01/MS_Q7_EV_01_03_GP_HC_03	MS_Q7_EV_01_03_GP_HC_03_ru
+Audio_Mainstreet/Q7/POST_01/MS_Q7_POST_01_01_CVS_HC_01	MS_Q7_POST_01_01_CVS_HC_01_ru
+Audio_Mainstreet/Q7/POST_01/MS_Q7_POST_01_02_CVS_Primrose_01	MS_Q7_POST_01_02_CVS_Primrose_01_ru
+Audio_Mainstreet/Q7/POST_01/MS_Q7_POST_01_03_CVS_HC_02	MS_Q7_POST_01_03_CVS_HC_02_ru
+Audio_Mainstreet/Q7/POST_01/MS_Q7_POST_01_04_CVS_Primrose_02	MS_Q7_POST_01_04_CVS_Primrose_02_ru
+Audio_Mainstreet/Q7/POST_01/MS_Q7_POST_01_05_CVS_SN_01	MS_Q7_POST_01_05_CVS_SN_01_ru
+Audio_Mainstreet/Q7/START/MS_Q7_START_01_CVS_HC_01	MS_Q7_START_01_CVS_HC_01_ru
+Audio_Mainstreet/Q7/START/MS_Q7_START_02_CVS_HC_02	MS_Q7_START_02_CVS_HC_02_ru
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_01_CGP_Sprout_01	MS_SS_EV_01_01_CGP_Sprout_01_ru
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_02_CGP_Sprout_02	MS_SS_EV_01_02_CGP_Sprout_02_ru
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_03_CGP_Sprout_03	MS_SS_EV_01_03_CGP_Sprout_03_ru
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_04_CGP_Sprout_04	MS_SS_EV_01_04_CGP_Sprout_04_ru
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_05_CGP_Sprout_05	MS_SS_EV_01_05_CGP_Sprout_05_ru
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_06_CGP_Sprout_06	MS_SS_EV_01_06_CGP_Sprout_06_ru
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_07_CGP_Sprout_07	MS_SS_EV_01_07_CGP_Sprout_07_ru
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_08_CGP_Sprout_08	MS_SS_EV_01_08_CGP_Sprout_08_ru
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_09_CGP_Sprout_09	MS_SS_EV_01_09_CGP_Sprout_09_ru
+Audio_Mainstreet/SS/EV_02/MS_SS_EV_02_10_GP_Crowd1_01	MS_SS_EV_02_10_GP_Crowd1_01_ru
+Audio_Mainstreet/SS/EV_03/MS_SS_EV_03_11_GP_Crowd2_01	MS_SS_EV_03_11_GP_Crowd2_01_ru
+Audio_Mainstreet/SS/EV_04/MS_SS_EV_04_01_GP_Sprout_01	MS_SS_EV_04_01_GP_Sprout_01_ru
+Audio_Mainstreet/SS/EV_04/MS_SS_EV_04_02_GP_Sprout_02	MS_SS_EV_04_02_GP_Sprout_02_ru
+Audio_TownPark/MC/ACCEPTED/TP_MC_ACCEPTED_01_CVS_HC_01	TP_MC_ACCEPTED_01_CVS_HC_01_ru
+Audio_TownPark/MC/ACCEPTED/TP_MC_ACCEPTED_02_CVS_SN_01	TP_MC_ACCEPTED_02_CVS_SN_01_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_01_CS_HC_01	TP_MC_COMP_01_CS_HC_01_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_02_CS_SN_01	TP_MC_COMP_02_CS_SN_01_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_03_CS_HC_02	TP_MC_COMP_03_CS_HC_02_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_04_CS_SN_02	TP_MC_COMP_04_CS_SN_02_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_05_CS_HC_03	TP_MC_COMP_05_CS_HC_03_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_06_CS_SN_03	TP_MC_COMP_06_CS_SN_03_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_07_CS_Sprout_01	TP_MC_COMP_07_CS_Sprout_01_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_08_CS_Sprout_02	TP_MC_COMP_08_CS_Sprout_02_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_09_CS_HC_04	TP_MC_COMP_09_CS_HC_04_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_10_CS_Sprout_03	TP_MC_COMP_10_CS_Sprout_03_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_11_CS_Sprout_04	TP_MC_COMP_11_CS_Sprout_04_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_12_CS_HC_04	TP_MC_COMP_12_CS_HC_04_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_13_CS_Sprout_05	TP_MC_COMP_13_CS_Sprout_05_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_14_CS_HC_05	TP_MC_COMP_14_CS_HC_05_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_15_CS_SN_05	TP_MC_COMP_15_CS_SN_05_ru
+Audio_TownPark/MC/COMP/TP_MC_COMP_16_CS_HC_06	TP_MC_COMP_16_CS_HC_06_ru
+Audio_TownPark/MC/DECLINED/TP_MC_DECLINED_01_CVS_SN_01	TP_MC_DECLINED_01_CVS_SN_01_ru
+Audio_TownPark/MC/DECLINED/TP_MC_DECLINED_02_CVS_HC_01	TP_MC_DECLINED_02_CVS_HC_01_ru
+Audio_TownPark/MC/EV_01/TP_MC_EV_01_01_GP_SN_01	TP_MC_EV_01_01_GP_SN_01_ru
+Audio_TownPark/MC/EV_02/TP_MC_EV_02_01_GP_Sprout_01	TP_MC_EV_02_01_GP_Sprout_01_ru
+Audio_TownPark/MC/EV_03/TP_MC_EV_03_01_GP_SN_01	TP_MC_EV_03_01_GP_SN_01_ru
+Audio_TownPark/MC/POST_01/TP_MC_POST_01_01_GP_IZ_01	TP_MC_POST_01_01_GP_IZ_01_ru
+Audio_TownPark/MC/QUESTION/TP_MC_QUESTION_01_CVS_HC_01	TP_MC_QUESTION_01_CVS_HC_01_ru
+Audio_TownPark/MC/REPACPTD/TP_MC_REPACPTD_01_CVS_SN_01	TP_MC_REPACPTD_01_CVS_SN_01_ru
+Audio_TownPark/MC/REPDCLND/TP_MC_REPDCLND_01_CVS_SN_01	TP_MC_REPDCLND_01_CVS_SN_01_ru
+Audio_TownPark/MC/REPEAT/TP_MC_REPEAT_01_CVS_HC_01	TP_MC_REPEAT_01_CVS_HC_01_ru
+Audio_TownPark/MC/START/TP_MC_START_01_CVS_HC_01	TP_MC_START_01_CVS_HC_01_ru
+Audio_TownPark/MC/START/TP_MC_START_02_CVS_HC_02	TP_MC_START_02_CVS_HC_02_ru
+Audio_TownPark/MC/START/TP_MC_START_03_CVS_HC_03	TP_MC_START_03_CVS_HC_03_ru
+Audio_TownPark/MC/START/TP_MC_START_04_CVS_HC_04	TP_MC_START_04_CVS_HC_04_ru
+Audio_TownPark/Q10/COMP/TP_Q10_COMP_01_CVS_HC_01	TP_Q10_COMP_01_CVS_HC_01_ru
+Audio_TownPark/Q10/COMP/TP_Q10_COMP_02_CVS_HC_02	TP_Q10_COMP_02_CVS_HC_02_ru
+Audio_TownPark/Q10/COMP/TP_Q10_COMP_03_CVS_SN_01	TP_Q10_COMP_03_CVS_SN_01_ru
+Audio_TownPark/Q10/EV_01/TP_Q10_EV_01_01_GP_HC_01	TP_Q10_EV_01_01_GP_HC_01_ru
+Audio_TownPark/Q10/EV_02/TP_Q10_EV_02_01_GP_SN_01	TP_Q10_EV_02_01_GP_SN_01_ru
+Audio_TownPark/Q10/EV_03/TP_Q10_EV_03_01_GP_SN_01	TP_Q10_EV_03_01_GP_SN_01_ru
+Audio_TownPark/Q10/EV_04/TP_Q10_EV_04_01_GP_SN_01	TP_Q10_EV_04_01_GP_SN_01_ru
+Audio_TownPark/Q10/MID_01/TP_Q10_MID_01_01_GP_HC_01	TP_Q10_MID_01_01_GP_HC_01_ru
+Audio_TownPark/Q10/START/TP_Q10_START_01_CVS_HC_01	TP_Q10_START_01_CVS_HC_01_ru
+Audio_TownPark/Q10/START/TP_Q10_START_02_CVS_HC_02	TP_Q10_START_02_CVS_HC_02_ru
+Audio_TownPark/Q10/START/TP_Q10_START_03_CVS_HC_03	TP_Q10_START_03_CVS_HC_03_ru
+Audio_TownPark/Q10/TOOFAR/TP_Q10_TOOFAR_01_GP_HC_01	TP_Q10_TOOFAR_01_GP_HC_01_ru
+Audio_TownPark/Q12/ACCEPTED/TP_Q12_ACCEPTED_01_CVS_SN_01	TP_Q12_ACCEPTED_01_CVS_SN_01_ru
+Audio_TownPark/Q12/COMP/TP_Q12_COMP_01_CVS_Zoom_01	TP_Q12_COMP_01_CVS_Zoom_01_ru
+Audio_TownPark/Q12/DECLINED/TP_Q12_DECLINED_01_CVS_SN_01	TP_Q12_DECLINED_01_CVS_SN_01_ru
+Audio_TownPark/Q12/POST_01/TP_Q12_POST_01_01_CVS_Zoom_01	TP_Q12_POST_01_01_CVS_Zoom_01_ru
+Audio_TownPark/Q12/QUESTION/TP_Q12_QUESTION_01_CVS_Zoom_01	TP_Q12_QUESTION_01_CVS_Zoom_01_ru
+Audio_TownPark/Q12/RETACPTD/TP_Q12_RETACPTD_01_CVS_SN_01	TP_Q12_RETACPTD_01_CVS_SN_01_ru
+Audio_TownPark/Q12/RETDCLND/TP_Q12_RETDCLND_01_CVS_SN_01	TP_Q12_RETDCLND_01_CVS_SN_01_ru
+Audio_TownPark/Q12/RETRY/TP_Q12_RETRY_01_CVS_Zoom_01	TP_Q12_RETRY_01_CVS_Zoom_01_ru
+Audio_TownPark/Q12/START/TP_Q12_START_01_CVS_Zoom_01	TP_Q12_START_01_CVS_Zoom_01_ru
+Audio_TownPark/Q12/START/TP_Q12_START_02_CVS_Zoom_02	TP_Q12_START_02_CVS_Zoom_02_ru
+Audio_TownPark/Q12/START/TP_Q12_START_03_CVS_SN_01	TP_Q12_START_03_CVS_SN_01_ru
+Audio_TownPark/Q12/START/TP_Q12_START_04_CVS_Zoom_03	TP_Q12_START_04_CVS_Zoom_03_ru
+Audio_TownPark/Q8/COMP/TP_Q8_COMP_01_CVS_IZ_01	TP_Q8_COMP_01_CVS_IZ_01_ru
+Audio_TownPark/Q8/COMP/TP_Q8_COMP_02_CVS_HC_01	TP_Q8_COMP_02_CVS_HC_01_ru
+Audio_TownPark/Q8/COMP/TP_Q8_COMP_03_CVS_HC_02	TP_Q8_COMP_03_CVS_HC_02_ru
+Audio_TownPark/Q8/COMP/TP_Q8_COMP_04_CVS_SN_01	TP_Q8_COMP_04_CVS_SN_01_ru
+Audio_TownPark/Q8/COMP/TP_Q8_COMP_05_CVS_HC_03	TP_Q8_COMP_05_CVS_HC_03_ru
+Audio_TownPark/Q8/EV_01/TP_Q8_EV_01_01_GP_SN_01	TP_Q8_EV_01_01_GP_SN_01_ru
+Audio_TownPark/Q8/EV_02/TP_Q8_EV_02_01_GP_SN_01	TP_Q8_EV_02_01_GP_SN_01_ru
+Audio_TownPark/Q8/EV_03/TP_Q8_EV_03_01_GP_SN_01	TP_Q8_EV_03_01_GP_SN_01_ru
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_01_CVS_ZP_01	TP_Q8_EV_04_01_CVS_ZP_01_ru
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_02_CVS_ZP_02	TP_Q8_EV_04_02_CVS_ZP_02_ru
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_03_CVS_SN_01	TP_Q8_EV_04_03_CVS_SN_01_ru
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_04_CVS_ZP_03	TP_Q8_EV_04_04_CVS_ZP_03_ru
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_05_CVS_Sprout_01	TP_Q8_EV_04_05_CVS_Sprout_01_ru
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_06_CVS_Sprout_02	TP_Q8_EV_04_06_CVS_Sprout_02_ru
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_07_CVS_ZP_04	TP_Q8_EV_04_07_CVS_ZP_04_ru
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_08_CVS_Sprout_03	TP_Q8_EV_04_08_CVS_Sprout_03_ru
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_09_CVS_Sprout_04	TP_Q8_EV_04_09_CVS_Sprout_04_ru
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_10_CVS_Sprout_05	TP_Q8_EV_04_10_CVS_Sprout_05_ru
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_11_CVS_SN_02	TP_Q8_EV_04_11_CVS_SN_02_ru
+Audio_TownPark/Q8/EV_05/TP_Q8_EV_05_13_GP_SN_03	TP_Q8_EV_05_13_GP_SN_03_ru
+Audio_TownPark/Q8/EV_06/TP_Q8_EV_06_01_CVS_IZ_01	TP_Q8_EV_06_01_CVS_IZ_01_ru
+Audio_TownPark/Q8/EV_06/TP_Q8_EV_06_02_CVS_SN_01	TP_Q8_EV_06_02_CVS_SN_01_ru
+Audio_TownPark/Q8/EV_06/TP_Q8_EV_06_03_CVS_IZ_02	TP_Q8_EV_06_03_CVS_IZ_02_ru
+Audio_TownPark/Q8/EV_06/TP_Q8_EV_06_04_CVS_SN_02	TP_Q8_EV_06_04_CVS_SN_02_ru
+Audio_TownPark/Q8/EV_06/TP_Q8_EV_06_05_CVS_IZ_03	TP_Q8_EV_06_05_CVS_IZ_03_ru
+Audio_TownPark/Q8/EV_06/TP_Q8_EV_06_06_CVS_SN_04	TP_Q8_EV_06_06_CVS_SN_04_ru
+Audio_TownPark/Q8/EV_07/TP_Q8_EV_07_01_CVS_PaintGuy2_01	TP_Q8_EV_07_01_CVS_PaintGuy2_01_ru
+Audio_TownPark/Q8/EV_07/TP_Q8_EV_07_02_CVS_PaintGuy2_02	TP_Q8_EV_07_02_CVS_PaintGuy2_02_ru
+Audio_TownPark/Q8/EV_07/TP_Q8_EV_07_03_CVS_SN_01	TP_Q8_EV_07_03_CVS_SN_01_ru
+Audio_TownPark/Q8/EV_07/TP_Q8_EV_07_04_CVS_PaintGuy2_03	TP_Q8_EV_07_04_CVS_PaintGuy2_03_ru
+Audio_TownPark/Q8/EV_07/TP_Q8_EV_07_05_CVS_SN_02	TP_Q8_EV_07_05_CVS_SN_02_ru
+Audio_TownPark/Q8/EV_08/TP_Q8_EV_08_01_GP_SN_01	TP_Q8_EV_08_01_GP_SN_01_ru
+Audio_TownPark/Q8/EV_09/TP_Q8_EV_09_01_GP_SN_01	TP_Q8_EV_09_01_GP_SN_01_ru
+Audio_TownPark/Q8/EV_10/TP_Q8_EV_10_01_CVS_PaintGuy2_01	TP_Q8_EV_10_01_CVS_PaintGuy2_01_ru
+Audio_TownPark/Q8/EV_10/TP_Q8_EV_10_02_CVS_PaintGuy2_02	TP_Q8_EV_10_02_CVS_PaintGuy2_02_ru
+Audio_TownPark/Q8/EV_10/TP_Q8_EV_10_03_CVS_SN_01	TP_Q8_EV_10_03_CVS_SN_01_ru
+Audio_TownPark/Q8/EV_11/TP_Q8_EV_11_01_CVS_PumpkinLady_01	TP_Q8_EV_11_01_CVS_PumpkinLady_01_ru
+Audio_TownPark/Q8/EV_11/TP_Q8_EV_11_02_CVS_PumpkinLady_02	TP_Q8_EV_11_02_CVS_PumpkinLady_02_ru
+Audio_TownPark/Q8/EV_11/TP_Q8_EV_11_03_CVS_PumpkinLady_03	TP_Q8_EV_11_03_CVS_PumpkinLady_03_ru
+Audio_TownPark/Q8/EV_12/TP_Q8_EV_12_01_GP_SN_01	TP_Q8_EV_12_01_GP_SN_01_ru
+Audio_TownPark/Q8/EV_13/TP_Q8_EV_13_01_GP_SN_01	TP_Q8_EV_13_01_GP_SN_01_ru
+Audio_TownPark/Q8/EV_14/TP_Q8_EV_14_01_GP_SN_01	TP_Q8_EV_14_01_GP_SN_01_ru
+Audio_TownPark/Q8/EV_15/TP_Q8_EV_15_01_CVS_PaintGuy2_01	TP_Q8_EV_15_01_CVS_PaintGuy2_01_ru
+Audio_TownPark/Q8/EV_15/TP_Q8_EV_15_02_CVS_PaintGuy2_02	TP_Q8_EV_15_02_CVS_PaintGuy2_02_ru
+Audio_TownPark/Q8/EV_16/TP_Q8_EV_16_01_GP_SN_01	TP_Q8_EV_16_01_GP_SN_01_ru
+Audio_TownPark/Q8/MID_01/TP_Q8_MID_01_01_GP_ZP_01	TP_Q8_MID_01_01_GP_ZP_01_ru
+Audio_TownPark/Q8/MID_02/TP_Q8_MID_02_01_GP_PaintGuy2_01	TP_Q8_MID_02_01_GP_PaintGuy2_01_ru
+Audio_TownPark/Q8/MID_03/TP_Q8_MID_03_01_GP_PaintGuy2_01	TP_Q8_MID_03_01_GP_PaintGuy2_01_ru
+Audio_TownPark/Q8/MID_04/TP_Q8_MID_04_01_GP_IZ_01	TP_Q8_MID_04_01_GP_IZ_01_ru
+Audio_TownPark/Q8/MID_05/TP_Q8_MID_05_01_GP_HC_01	TP_Q8_MID_05_01_GP_HC_01_ru
+Audio_TownPark/Q8/MID_06/TP_Q8_MID_06_01_GP_PaintGuy2_01	TP_Q8_MID_06_01_GP_PaintGuy2_01_ru
+Audio_TownPark/Q8/POST_01/TP_Q8_POST_01_01_GP_Sprout_01	TP_Q8_POST_01_01_GP_Sprout_01_ru
+Audio_TownPark/Q8/POST_02/TP_Q8_POST_02_01_GP_PaintGuy2_01	TP_Q8_POST_02_01_GP_PaintGuy2_01_ru
+Audio_TownPark/Q8/POST_03/TP_Q8_POST_03_01_GP_PumpkinLady_01	TP_Q8_POST_03_01_GP_PumpkinLady_01_ru
+Audio_TownPark/Q8/POST_04/TP_Q8_POST_04_01_GP_IZ_01	TP_Q8_POST_04_01_GP_IZ_01_ru
+Audio_TownPark/Q8/PRE_01/TP_Q8_PRE_01_01_GP_PaintGuy2_01	TP_Q8_PRE_01_01_GP_PaintGuy2_01_ru
+Audio_TownPark/Q8/PRE_02/TP_Q8_PRE_02_01_GP_PumpkinLady_01	TP_Q8_PRE_02_01_GP_PumpkinLady_01_ru
+Audio_TownPark/Q8/START/TP_Q8_START_01_CS_HC_01	TP_Q8_START_01_CS_HC_01_ru
+Audio_TownPark/Q8/START/TP_Q8_START_02_CS_SN_01	TP_Q8_START_02_CS_SN_01_ru
+Audio_TownPark/Q8/START/TP_Q8_START_03_CS_HC_02	TP_Q8_START_03_CS_HC_02_ru
+Audio_TownPark/Q8/START/TP_Q8_START_04_CS_SN_02	TP_Q8_START_04_CS_SN_02_ru
+Audio_TownPark/Q8/START/TP_Q8_START_05_CS_HC_03	TP_Q8_START_05_CS_HC_03_ru
+Audio_TownPark/Q8/START/TP_Q8_START_06_CS_HC_04	TP_Q8_START_06_CS_HC_04_ru
+Audio_TownPark/Q8/START/TP_Q8_START_07_CS_SN_03	TP_Q8_START_07_CS_SN_03_ru
+Audio_TownPark/Q8/START/TP_Q8_START_08_CS_ZP_01	TP_Q8_START_08_CS_ZP_01_ru
+Audio_TownPark/Q8/START/TP_Q8_START_09_CS_HC_05	TP_Q8_START_09_CS_HC_05_ru
+Audio_TownPark/Q8/START/TP_Q8_START_10_CS_ZP_02	TP_Q8_START_10_CS_ZP_02_ru
+Audio_TownPark/Q8/START/TP_Q8_START_11_CS_ZP_03	TP_Q8_START_11_CS_ZP_03_ru
+Audio_TownPark/Q8/START/TP_Q8_START_12_CS_ZP_04	TP_Q8_START_12_CS_ZP_04_ru
+Audio_TownPark/Q8/START/TP_Q8_START_13_CS_SN_04	TP_Q8_START_13_CS_SN_04_ru
+Audio_TownPark/Q8/TOOFAR/TP_Q8_TOOFAR_01_GP_SN_01	TP_Q8_TOOFAR_01_GP_SN_01_ru
+Audio_TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_01_CVS_SN_01	TP_Q9_ACCEPTED_01_CVS_SN_01_ru
+Audio_TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_02_CVS_Zoom_01	TP_Q9_ACCEPTED_02_CVS_Zoom_01_ru
+Audio_TownPark/Q9/COMP/TP_Q9_COMP_01_CVS_Zoom_01	TP_Q9_COMP_01_CVS_Zoom_01_ru
+Audio_TownPark/Q9/COMP/TP_Q9_COMP_02_CVS_Zoom_02	TP_Q9_COMP_02_CVS_Zoom_02_ru
+Audio_TownPark/Q9/COMP/TP_Q9_COMP_03_CVS_Zoom_03	TP_Q9_COMP_03_CVS_Zoom_03_ru
+Audio_TownPark/Q9/COMP/TP_Q9_COMP_04_CVS_SN_01	TP_Q9_COMP_04_CVS_SN_01_ru
+Audio_TownPark/Q9/COMP/TP_Q9_COMP_05_CVS_Zoom_04	TP_Q9_COMP_05_CVS_Zoom_04_ru
+Audio_TownPark/Q9/COMP/TP_Q9_COMP_06_CVS_SN_02	TP_Q9_COMP_06_CVS_SN_02_ru
+Audio_TownPark/Q9/DECLINED/TP_Q9_DECLINED_01_CVS_SN_01	TP_Q9_DECLINED_01_CVS_SN_01_ru
+Audio_TownPark/Q9/DECLINED/TP_Q9_DECLINED_02_CVS_Zoom_01	TP_Q9_DECLINED_02_CVS_Zoom_01_ru
+Audio_TownPark/Q9/QUESTION/TP_Q9_QUESTION_01_CVS_Zoom_01	TP_Q9_QUESTION_01_CVS_Zoom_01_ru
+Audio_TownPark/Q9/RETACPTD/TP_Q9_RETACPTD_01_CVS_SN_01	TP_Q9_RETACPTD_01_CVS_SN_01_ru
+Audio_TownPark/Q9/RETDCLND/TP_Q9_RETDCLND_01_CVS_SN_01	TP_Q9_RETDCLND_01_CVS_SN_01_ru
+Audio_TownPark/Q9/RETRY/TP_Q9_RETRY_01_CVS_Zoom_01	TP_Q9_RETRY_01_CVS_Zoom_01_ru
+Audio_TownPark/Q9/START/TP_Q9_START_01_CVS_Zoom_01	TP_Q9_START_01_CVS_Zoom_01_ru
+Audio_TownPark/Q9/START/TP_Q9_START_02_CVS_SN_01	TP_Q9_START_02_CVS_SN_01_ru
+Audio_TownPark/Q9/START/TP_Q9_START_03_CVS_Zoom_02	TP_Q9_START_03_CVS_Zoom_02_ru
+Audio_TownPark/Q9/START/TP_Q9_START_04_CVS_Zoom_03	TP_Q9_START_04_CVS_Zoom_03_ru
+Audio_TownPark/Q9/START/TP_Q9_START_05_CVS_SN_02	TP_Q9_START_05_CVS_SN_02_ru
+Audio_TownPark/Q9/START/TP_Q9_START_06_CVS_Zoom_04	TP_Q9_START_06_CVS_Zoom_04_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT1	VIDEOTUTORIAL_HC_HERDINGBTUT1_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT2	VIDEOTUTORIAL_HC_HERDINGBTUT2_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT1	VIDEOTUTORIAL_HC_HERDINGCTUT1_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT2	VIDEOTUTORIAL_HC_HERDINGCTUT2_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_HC_SPECIALPTUT1	VIDEOTUTORIAL_HC_SPECIALPTUT1_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_IZ_UNICYCLINGTUT1	VIDEOTUTORIAL_IZ_UNICYCLINGTUT1_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT1	VIDEOTUTORIAL_PP_FASHIONTUT1_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT10	VIDEOTUTORIAL_PP_FASHIONTUT10_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT11	VIDEOTUTORIAL_PP_FASHIONTUT11_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT12	VIDEOTUTORIAL_PP_FASHIONTUT12_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT2	VIDEOTUTORIAL_PP_FASHIONTUT2_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT3	VIDEOTUTORIAL_PP_FASHIONTUT3_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT4	VIDEOTUTORIAL_PP_FASHIONTUT4_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT5	VIDEOTUTORIAL_PP_FASHIONTUT5_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT6	VIDEOTUTORIAL_PP_FASHIONTUT6_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT7	VIDEOTUTORIAL_PP_FASHIONTUT7_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT8	VIDEOTUTORIAL_PP_FASHIONTUT8_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT9	VIDEOTUTORIAL_PP_FASHIONTUT9_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_MAGICMTUT1	VIDEOTUTORIAL_PP_MAGICMTUT1_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_SN_BUTTERTUT1	VIDEOTUTORIAL_SN_BUTTERTUT1_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_SN_CLEARGAME	VIDEOTUTORIAL_SN_CLEARGAME_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_SN_KICKTUT1	VIDEOTUTORIAL_SN_KICKTUT1_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT1	VIDEOTUTORIAL_SN_MAGICPTUT1_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT2	VIDEOTUTORIAL_SN_MAGICPTUT2_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT1	VIDEOTUTORIAL_SP_FASTWINTTUT1_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT2	VIDEOTUTORIAL_SP_FASTWINTTUT2_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT3	VIDEOTUTORIAL_SP_FASTWINTTUT3_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT4	VIDEOTUTORIAL_SP_FASTWINTTUT4_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT1	VIDEOTUTORIAL_ZM_ROLLERTUT1_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT2	VIDEOTUTORIAL_ZM_ROLLERTUT2_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT3	VIDEOTUTORIAL_ZM_ROLLERTUT3_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT4	VIDEOTUTORIAL_ZP_DASHSKYTUT4_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT5	VIDEOTUTORIAL_ZP_DASHSKYTUT5_ru
+Audio_VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT6	VIDEOTUTORIAL_ZP_DASHSKYTUT6_ru
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_01	EFO_SN_Misc_02_05_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_02	EFO_SN_Misc_02_08_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_03	EFO_SN_Misc_02_09_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_04	EFO_SN_Misc_02_10_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_05	EFO_SN_Misc_02_11_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_06	EFO_SN_Misc_02_12_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_07	EFO_SN_Misc_02_13_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_08	EFO_SN_Misc_02_14_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_09	EFO_SN_Misc_02_16_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_10	EFO_SN_Misc_02_17_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_11	EFO_SN_Misc_02_23_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_12	EFO_SN_Misc_02_28_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_13	EFO_SN_Misc_02_29_en-US
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_14	EFO_SN_Misc_02_ru
+Audio_Characters/SUNNY/KICKS/SUNNY_KICK_01	SUNNY_KICK_01_v1_en-US
+Audio_Characters/SUNNY/LANDING/SUNNY_LANDING_04	EFO_SN_Misc_02_10_en-US
+Audio_Characters/SUNNY/LANDING/SUNNY_LANDING_05	EFO_SN_Misc_02_14_en-US
+Audio_Characters/SUNNY/MAGIC/SUNNY_MAGIC_01	EFO_SN_Minigame_01_ru
+Audio_Characters/SUNNY/MAGIC/SUNNY_MAGIC_02	EFO_SN_Minigame_03_ru
+Audio_Characters/SUNNY/MAGIC/SUNNY_MAGIC_03	EFO_SN_Misc_01_ru
+Audio_Characters/SUNNY/MAGIC/SUNNY_MAGIC_04	EFO_SN_Misc_09_02_en-US
+Audio_Characters/SUNNY/MAGIC/SUNNY_MAGIC_05	EFO_SN_Misc_09_04_en-US
+Audio_Characters/SUNNY/MAGIC/SUNNY_MAGIC_06	EFO_SN_Unycicling_02_ru
+Audio/AUDIO	EFO_SN_Menu_05_ru
+Audio/CONTROLS_AUDIO	EFO_SN_Menu_06_ru
+Audio/EXIT	EFO_SN_Menu_04_ru
+Audio/HITCH_GO	efo_hc_minigame_06_go_ru
+Audio/HITCH_ONE	efo_hc_minigame_06_1_ru
+Audio/HITCH_THREE	efo_hc_minigame_06_3_ru
+Audio/HITCH_TWO	efo_hc_minigame_06_2_ru
+Audio/IZZY_GO	efo_iz_minigame_06_go_ru
+Audio/IZZY_ONE	efo_iz_minigame_06_1_ru
+Audio/IZZY_THREE	efo_iz_minigame_06_3_ru
+Audio/IZZY_TWO	efo_iz_minigame_06_2_ru
+Audio/LANGUAGE	EFO_SN_Menu_14_ru
+Audio/MAIN_VOLUME	EFO_SN_Menu_09_ru
+Audio/MENU_VOLUME	EFO_SN_Menu_13_ru
+Audio/MINIGAMES_AUDIO	EFO_SN_Menu_02_ru
+Audio/MUSIC_VOLUME	EFO_SN_Menu_10_ru
+Audio/PIPP_GO	efo_pp_minigame_06_go_ru
+Audio/PIPP_ONE	efo_pp_minigame_06_1_ru
+Audio/PIPP_THREE	efo_pp_minigame_06_3_ru
+Audio/PIPP_TWO	efo_pp_minigame_06_2_ru
+Audio/PLAY	EFO_SN_Menu_01_ru
+Audio/SAVED_GAMES	EFO_SN_Menu_08_ru
+Audio/SETTINGS_AUDIO	EFO_SN_Menu_03_ru
+Audio/SFX_VOLUME	EFO_SN_Menu_12_ru
+Audio/SPROUT_GO	efo_sprout_minigame_06_go_ru
+Audio/SPROUT_ONE	efo_sprout_minigame_06_1_ru
+Audio/SPROUT_THREE	efo_sprout_minigame_06_3_ru
+Audio/SPROUT_TWO	efo_sprout_minigame_06_2_ru
+Audio/VOICE_VOLUME	EFO_SN_Menu_11_ru
+Audio/ZIPP_GO	efo_zp_minigame_06_go_ru
+Audio/ZIPP_ONE	efo_zp_minigame_06_1_ru
+Audio/ZIPP_THREE	efo_zp_minigame_06_3_ru
+Audio/ZIPP_TWO	efo_zp_minigame_06_2_ru
