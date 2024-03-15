@@ -67,24 +67,24 @@ namespace ElementsOfHarmony
 
 		public static void Message(string message)
 		{
-            // everything we want to log will be written to "Elements of Harmony/Elements of Harmony.log"
-            // and to the local server if connected
-            lock (MessageMutex)
-            {
-                if (LogFile != null)
-                {
-                    LogFile.WriteLine(message);
-                    LogFile.Flush();
-                }
-                if (Client != null && Stream != null && Client.Connected && Stream.CanWrite)
-                {
-                    byte[] buffer = Encoding.UTF8.GetBytes(message);
-                    Stream.Write(BitConverter.GetBytes(buffer.Length), 0, 4);
-                    Stream.Flush();
-                    Stream.Write(buffer, 0, buffer.Length);
-                    Stream.Flush();
-                }
-            }
+			// everything we want to log will be written to "Elements of Harmony/Elements of Harmony.log"
+			// and to the local server if connected
+			lock (MessageMutex)
+			{
+				if (LogFile != null)
+				{
+					LogFile.WriteLine(message);
+					LogFile.Flush();
+				}
+				if (Client != null && Stream != null && Client.Connected && Stream.CanWrite)
+				{
+					byte[] buffer = Encoding.UTF8.GetBytes(message);
+					Stream.Write(BitConverter.GetBytes(buffer.Length), 0, 4);
+					Stream.Flush();
+					Stream.Write(buffer, 0, buffer.Length);
+					Stream.Flush();
+				}
+			}
 		}
 
 		#region error handlers, made to record any error that may or may not caused by our mod
@@ -95,26 +95,26 @@ namespace ElementsOfHarmony
 			{
 				case UnityEngine.LogType.Error:
 				case UnityEngine.LogType.Exception:
-                    Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
-                    Message($"condition: {condition}");
-                    Message($"stackTrace:\r\n{stackTrace}");
-                    Message("\r\n");
-                    break;
+					Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
+					Message($"condition: {condition}");
+					Message($"stackTrace:\r\n{stackTrace}");
+					Message("\r\n");
+					break;
 			}
 		}
 		public static void ExceptionHandler(object sender, UnhandledExceptionEventArgs args)
-        {
-            Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
-            Message($"sender.GetType(): {sender.GetType()}");
-            Message($"sender: {sender}");
-            Message($"args: {args}");
-            Message($"args.ExceptionObject.GetType(): {args.ExceptionObject.GetType()}");
-            Message($"args.ExceptionObject: {args.ExceptionObject}");
-            Message("\r\n");
-        }
+		{
+			Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
+			Message($"sender.GetType(): {sender.GetType()}");
+			Message($"sender: {sender}");
+			Message($"args: {args}");
+			Message($"args.ExceptionObject.GetType(): {args.ExceptionObject.GetType()}");
+			Message($"args.ExceptionObject: {args.ExceptionObject}");
+			Message("\r\n");
+		}
 
 		[HarmonyPatch]
-        public static class ExceptionConstructor
+		public static class ExceptionConstructor
 		{
 			public static IEnumerable<MethodBase> TargetMethods()
 			{
@@ -128,13 +128,13 @@ namespace ElementsOfHarmony
 			public static void Postfix(Exception __instance)
 			{
 				if (!Environment.StackTrace.Contains($"{nameof(ElementsOfHarmony)}.{nameof(Log)}.{nameof(Message)}")) // prevent infinite loop
-                {
-                    Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
-                    Message($"Exception.StackTrace:\r\n{__instance.StackTrace}");
-                    Message($"Exception.GetType(): {__instance.GetType()}");
-                    Message($"Exception.Message: {__instance.Message}");
-                    Message("\r\n");
-                }
+				{
+					Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
+					Message($"Exception.StackTrace:\r\n{__instance.StackTrace}");
+					Message($"Exception.GetType(): {__instance.GetType()}");
+					Message($"Exception.Message: {__instance.Message}");
+					Message("\r\n");
+				}
 			}
 		}
 
@@ -143,12 +143,12 @@ namespace ElementsOfHarmony
 		public static class LogError
 		{
 			public static void Postfix(object message)
-            {
-                Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
-                Message($"Message.GetType(): {message.GetType()}");
-                Message($"Message: {message}");
-                Message("\r\n");
-            }
+			{
+				Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
+				Message($"Message.GetType(): {message.GetType()}");
+				Message($"Message: {message}");
+				Message("\r\n");
+			}
 		}
 
 		[HarmonyPatch(typeof(UnityEngine.Debug))]
@@ -156,13 +156,13 @@ namespace ElementsOfHarmony
 		public static class LogException
 		{
 			public static void Postfix(Exception exception)
-            {
-                Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
-                Message($"Exception.StackTrace:\r\n{exception.StackTrace}");
-                Message($"Exception.GetType(): {exception.GetType()}");
-                Message($"Exception.Message: {exception.Message}");
-                Message("\r\n");
-            }
+			{
+				Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
+				Message($"Exception.StackTrace:\r\n{exception.StackTrace}");
+				Message($"Exception.GetType(): {exception.GetType()}");
+				Message($"Exception.Message: {exception.Message}");
+				Message("\r\n");
+			}
 		}
 
 		#endregion
