@@ -40,7 +40,7 @@ namespace ElementsOfHarmony
 
 				Localization.Init();
 
-				if (Settings.DirectXHookEnabled)
+				if (Settings.DirectXHook.Enabled)
 				{
 					DirectXHook.Init();
 				}

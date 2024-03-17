@@ -6,8 +6,6 @@ extern "C" {
 	__declspec(dllexport) DWORD __stdcall InstallHook();
 	__declspec(dllexport) DWORD __stdcall UninstallHook();
 	__declspec(dllexport) DWORD __stdcall SetRunning(bool Running);
-	__declspec(dllexport) void __stdcall SetSwapChainCreationArgsOverride(UINT* Width, UINT* Height, DXGI_RATIONAL* RefreshRate, DXGI_FORMAT* Format, DXGI_SAMPLE_DESC* SampleDesc, UINT* BufferCount);
-	__declspec(dllexport) void __stdcall SetSwapChainPresentArgsOverride(UINT* SyncInterval);
 
 	__declspec(dllexport) int __stdcall BeginProcessCompletionEvent();
 	__declspec(dllexport) DWORD __stdcall EndProcessCompletionEvent();
@@ -61,10 +59,6 @@ IDXGIFactory_CreateSwapChain_Proc IDXGIFactory_CreateSwapChain_Original = nullpt
 IDXGIFactory2_CreateSwapChainForHwnd_Proc IDXGIFactory2_CreateSwapChainForHwnd_Original = nullptr;
 
 atomic<bool> Running = false;
-optional<UINT> Width = nullopt, Height = nullopt, BufferCount = nullopt, SyncInterval = nullopt;
-optional<DXGI_RATIONAL>		RefreshRate = nullopt;
-optional<DXGI_FORMAT>		Format = nullopt;
-optional<DXGI_SAMPLE_DESC>	SampleDesc = nullopt;
 
 HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, UINT SyncInterval, UINT Flags);
 HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* This, UINT SyncInterval, UINT Flags, _In_ const DXGI_PRESENT_PARAMETERS* pPresentParameters);
@@ -140,9 +134,6 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, 
 		IDXGISwapChain_Present_StackCount[This] = 0;
 	}
 	bool StackOverflowFixNeeded = ++IDXGISwapChain_Present_StackCount[This] >= 2;
-	if (Running) {
-		SyncInterval = ::SyncInterval.value_or(SyncInterval);
-	}
 	HRESULT result = 0;
 	if (StackOverflowFixNeeded) {
 		if (Present_HasOriginalFirstFiveBytesOfInstruction) {
@@ -181,9 +172,6 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* Thi
 		IDXGISwapChain1_Present1_StackCount[This] = 0;
 	}
 	bool StackOverflowFixNeeded = ++IDXGISwapChain1_Present1_StackCount[This] >= 2;
-	if (Running) {
-		SyncInterval = ::SyncInterval.value_or(SyncInterval);
-	}
 	HRESULT result = 0;
 	if (StackOverflowFixNeeded) {
 		if (Present1_HasOriginalFirstFiveBytesOfInstruction) {
@@ -221,16 +209,6 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* Th
 	_COM_Outptr_  IDXGISwapChain** ppSwapChain)
 {
 	DXGI_SWAP_CHAIN_DESC Desc{};
-	if (Running) {
-		Desc = *pDesc;
-		pDesc = &Desc;
-		Desc.BufferDesc.Width = ::Width.value_or(Desc.BufferDesc.Width);
-		Desc.BufferDesc.Height = ::Height.value_or(Desc.BufferDesc.Height);
-		Desc.BufferDesc.RefreshRate = ::RefreshRate.value_or(Desc.BufferDesc.RefreshRate);
-		Desc.BufferDesc.Format = ::Format.value_or(Desc.BufferDesc.Format);
-		Desc.SampleDesc = ::SampleDesc.value_or(Desc.SampleDesc);
-		Desc.BufferCount = ::BufferCount.value_or(Desc.BufferCount);
-	}
 	HRESULT result = IDXGIFactory_CreateSwapChain_Original(This, pDevice, pDesc, ppSwapChain);
 	if (Running) {
 		CompletionID = IDXGIFactory_CreateSwapChain_VTableIndex;
@@ -253,20 +231,6 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFac
 {
 	DXGI_SWAP_CHAIN_DESC1 Desc{};
 	DXGI_SWAP_CHAIN_FULLSCREEN_DESC FullscreenDesc{};
-	if (Running) {
-		Desc = *pDesc;
-		pDesc = &Desc;
-		Desc.Width = ::Width.value_or(Desc.Width);
-		Desc.Height = ::Height.value_or(Desc.Height);
-		Desc.Format = ::Format.value_or(Desc.Format);
-		Desc.SampleDesc = ::SampleDesc.value_or(Desc.SampleDesc);
-		Desc.BufferCount = ::BufferCount.value_or(Desc.BufferCount);
-		if (RefreshRate.has_value() && pFullscreenDesc != nullptr) {
-			FullscreenDesc = *pFullscreenDesc;
-			pFullscreenDesc = &FullscreenDesc;
-			FullscreenDesc.RefreshRate = ::RefreshRate.value();
-		}
-	}
 	HRESULT result = IDXGIFactory2_CreateSwapChainForHwnd_Original(This, pDevice, hWnd, pDesc, pFullscreenDesc, pRestrictToOutput, ppSwapChain);
 	if (Running) {
 		CompletionID = IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex;
@@ -685,21 +649,6 @@ DWORD __stdcall SetRunning(bool Running)
 		}
 	}
 	return S_OK;
-}
-
-void __stdcall SetSwapChainCreationArgsOverride(UINT* Width, UINT* Height, DXGI_RATIONAL* RefreshRate, DXGI_FORMAT* Format, DXGI_SAMPLE_DESC* SampleDesc, UINT* BufferCount)
-{
-	if (Width != nullptr) ::Width = *Width; else ::Width = nullopt;
-	if (Height != nullptr) ::Height = *Height; else ::Height = nullopt;
-	if (RefreshRate != nullptr) ::RefreshRate = *RefreshRate; else ::RefreshRate = nullopt;
-	if (Format != nullptr) ::Format = *Format; else ::Format = nullopt;
-	if (SampleDesc != nullptr) ::SampleDesc = *SampleDesc; else ::SampleDesc = nullopt;
-	if (BufferCount != nullptr) ::BufferCount = *BufferCount; else ::BufferCount = nullopt;
-}
-
-void __stdcall SetSwapChainPresentArgsOverride(UINT* SyncInterval)
-{
-	if (SyncInterval != nullptr) ::SyncInterval = *SyncInterval; else ::SyncInterval = nullopt;
 }
 
 int __stdcall BeginProcessCompletionEvent()
