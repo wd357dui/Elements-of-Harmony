@@ -857,7 +857,7 @@ VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_ROLLERTUT	轮滑
 VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_SPECIALPTUT	
 VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_UNICYCLINGTUT	独角回收
 ScoreScreen/SCORE_DRAW	平局
-ScoreScreen/SCORE_MAGIC_BITS	
+ScoreScreen/SCORE_MAGIC_BITS	魔法币
 ScoreScreen/SCORE_PLAYER1_WIN	玩家 1 获胜
 ScoreScreen/SCORE_PLAYER2_WIN	玩家 2 获胜
 ScoreScreen/SCORE_PLAYER_WIN	{[PLAYER_NAME]} 获胜
@@ -918,7 +918,7 @@ Menu/FINANCES	财政
 Menu/GAMEPLAY_PROGRAMMER	游戏性程序员
 Menu/GAME_DESIGNER	游戏设计师
 Menu/GO	开始
-Menu/HASBRO_DISCLAIMER	
+Menu/HASBRO_DISCLAIMER	MLP：小马宝莉（MY LITTLE PONY）和孩之宝（HASBRO）以及所有相关的商标和标识均为孩之宝公司（Hasbro, Inc.）的注册商标。© 2022 Hasbro.
 Menu/INTERACT	互动
 Menu/JUMP	跳
 Menu/LANGUAGE	语言

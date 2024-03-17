@@ -67,22 +67,22 @@ namespace ElementsOfHarmony
 					if (Addr.HasValue && DllAddress != IntPtr.Zero)
 					{
 						int result = JmpEndsUpInRange(Get_IDXGISwapChain_Present_Original(), DllAddress, DllImageSize);
+						Log.Message($"JmpEndsUpInRange(Get_IDXGISwapChain_Present_Original(), DllAddress, DllImageSize) = {result} (1=true,0=false,-1=error)");
 						if (result == 1)
 						{
-							Log.Message($"Present() jmp ends up in GameOverlayRenderer64.dll, which means this is a steam overlay hook");
+							Log.Message($"jmp ends up in GameOverlayRenderer64.dll, which means this is a steam overlay hook");
 						}
 						else if (result == 0)
 						{
-							Log.Message($"Present() jmp did not end up in GameOverlayRenderer64.dll");
-							Log.Message($"last instruction = {JmpEndsUpInRange_LastInstruction():X}");
-							Log.Message($"last address = {JmpEndsUpInRange_LastAddress().ToInt64():X}");
+							Log.Message($"jmp did not end up in GameOverlayRenderer64.dll");
+							Log.Message($"JmpEndsUpInRange_LastInstruction() = {JmpEndsUpInRange_LastInstruction():X}");
+							Log.Message($"JmpEndsUpInRange_LastAddress() = {JmpEndsUpInRange_LastAddress().ToInt64():X}");
 						}
 						else if (result == -1)
 						{
+							Log.Message($"JmpEndsUpInRange_LastError() = {JmpEndsUpInRange_LastError()}");
 							_ = Marshal.GetExceptionForHR((int)JmpEndsUpInRange_LastError());
 						}
-						Log.Message($"result = {result} (1=true,0=false,-1=error)");
-						Log.Message($"last error = {JmpEndsUpInRange_LastError()}");
 					}
 				}
 
@@ -116,22 +116,22 @@ namespace ElementsOfHarmony
 					if (Addr.HasValue && DllAddress != IntPtr.Zero)
 					{
 						int result = JmpEndsUpInRange(Get_IDXGISwapChain1_Present1_Original(), DllAddress, DllImageSize);
+						Log.Message($"JmpEndsUpInRange(Get_IDXGISwapChain1_Present1_Original(), DllAddress, DllImageSize) = {result} (1=true,0=false,-1=error)");
 						if (result == 1)
 						{
-							Log.Message($"Present1() jmp ends up in GameOverlayRenderer64.dll, which means this is a steam overlay hook");
+							Log.Message($"jmp ends up in GameOverlayRenderer64.dll, which means this is a steam overlay hook");
 						}
 						else if (result == 0)
 						{
-							Log.Message($"Present1() jmp did not end up in GameOverlayRenderer64.dll");
-							Log.Message($"last instruction = {JmpEndsUpInRange_LastInstruction():X}");
-							Log.Message($"last address = {JmpEndsUpInRange_LastAddress().ToInt64():X}");
+							Log.Message($"jmp did not end up in GameOverlayRenderer64.dll");
+							Log.Message($"JmpEndsUpInRange_LastInstruction() = {JmpEndsUpInRange_LastInstruction():X}");
+							Log.Message($"JmpEndsUpInRange_LastAddress() = {JmpEndsUpInRange_LastAddress().ToInt64():X}");
 						}
 						else if (result == -1)
 						{
+							Log.Message($"JmpEndsUpInRange_LastError() = {JmpEndsUpInRange_LastError()}");
 							_ = Marshal.GetExceptionForHR((int)JmpEndsUpInRange_LastError());
 						}
-						Log.Message($"result = {result} (1=true,0=false,-1=error)");
-						Log.Message($"last error = {JmpEndsUpInRange_LastError()}");
 					}
 				}
 

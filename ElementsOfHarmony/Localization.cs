@@ -519,6 +519,48 @@ namespace ElementsOfHarmony
 					return false;
 				}
 			}
+
+			[HarmonyPatch(typeof(ControlsMenu))]
+			[HarmonyPatch("SetAsCurrent")] // called when the controls menu settings shows up
+			public static class ControlsMenuTextFix
+			{
+				// aquí me estoy arreglando bugs para Melbot lol
+				public static void Postfix(ControlsMenu __instance)
+				{
+					Text[] ActiveTexts = __instance.GetComponentsInChildren<Text>(false);
+
+					if (ActiveTexts.Find(T => T.name == "Text (TMP)") is Text ShownMovementText &&
+						ActiveTexts.Find(T => T.name == "movement") is Text LocalizedMovementText)
+					{
+						// the text "Movement" on the upper left was not localized, this will fix it
+						ShownMovementText.text = LocalizedMovementText.text;
+					}
+					else
+					{
+						Log.Message($"{typeof(ControlsMenuTextFix).FullName} - \"Text(TMP)\" or \"movement\" not found, this fix may be out of date");
+					}
+
+					if (ActiveTexts.Find(T => T.name == "title2players") is Text Shown2PlayersText)
+					{
+						// the text "2 Players" on the bottom left was not localized, this will fix it
+						Shown2PlayersText.text = LocalizationManager.GetTranslation("Menu/P2");
+					}
+					else
+					{
+						Log.Message($"{typeof(ControlsMenuTextFix).FullName} - \"title2players\" not found, this fix may be out of date");
+					}
+
+					if (ActiveTexts.Find(T => T.name == "Text" && T.text == "Shift") is Text ShiftKeyText)
+					{
+						// the text "Shift" was not entirely shown (the last letter was missing), this will fix it
+						ShiftKeyText.horizontalOverflow = HorizontalWrapMode.Overflow;
+					}
+					else
+					{
+						Log.Message($"{typeof(ControlsMenuTextFix).FullName} - \"Shift\" not found, this fix may be out of date");
+					}
+				}
+			}
 		}
 
 		public static class AZHM

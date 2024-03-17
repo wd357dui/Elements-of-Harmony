@@ -376,13 +376,13 @@ HRESULT DetectPreviousDetourHook()
 			return E_FAIL;
 		}
 		if (RtlCompareMemory(CurrentPresentInstructions + 5, OriginalInstructions + 5, InstructionCompareByteCount - 5) == InstructionCompareByteCount - 5) {
-			Present_PreviousDetourHookDetected = Present_PreviousDetourHookDetected || RtlCompareMemory(CurrentPresentInstructions, OriginalInstructions, 5) == 5;
+			Present_PreviousDetourHookDetected = RtlCompareMemory(CurrentPresentInstructions, OriginalInstructions, 5) != 5;
 			CopyMemory(Present_OriginalFirstFiveBytesOfInstruction, OriginalInstructions, 5);
 			Present_HasOriginalFirstFiveBytesOfInstruction = true;
 			PresentFound = true;
 		}
 		if (RtlCompareMemory(CurrentPresent1Instructions + 5, OriginalInstructions + 5, InstructionCompareByteCount - 5) == InstructionCompareByteCount - 5) {
-			Present1_PreviousDetourHookDetected = Present1_PreviousDetourHookDetected || RtlCompareMemory(CurrentPresent1Instructions, OriginalInstructions, 5) == 5;
+			Present1_PreviousDetourHookDetected = RtlCompareMemory(CurrentPresent1Instructions, OriginalInstructions, 5) != 5;
 			CopyMemory(Present1_OriginalFirstFiveBytesOfInstruction, OriginalInstructions, 5);
 			Present1_HasOriginalFirstFiveBytesOfInstruction = true;
 			Present1Found = true;
