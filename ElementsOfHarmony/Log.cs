@@ -95,7 +95,7 @@ namespace ElementsOfHarmony
 			{
 				case UnityEngine.LogType.Error:
 				case UnityEngine.LogType.Exception:
-					Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
+					Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
 					Message($"condition: {condition}");
 					Message($"stackTrace:\r\n{stackTrace}");
 					Message("\r\n");
@@ -103,8 +103,8 @@ namespace ElementsOfHarmony
 			}
 		}
 		public static void ExceptionHandler(object sender, UnhandledExceptionEventArgs args)
-		{
-			Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
+        {
+            Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
 			Message($"sender.GetType(): {sender.GetType()}");
 			Message($"sender: {sender}");
 			Message($"args: {args}");
@@ -127,9 +127,9 @@ namespace ElementsOfHarmony
 			}
 			public static void Postfix(Exception __instance)
 			{
-				if (!Environment.StackTrace.Contains($"{nameof(ElementsOfHarmony)}.{nameof(Log)}.{nameof(Message)}")) // prevent infinite loop
-				{
-					Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
+				if (!UnityEngine.StackTraceUtility.ExtractStackTrace().Contains($"{nameof(ElementsOfHarmony)}.{nameof(Log)}.{nameof(Message)}")) // prevent infinite loop
+                {
+                    Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
 					Message($"Exception.StackTrace:\r\n{__instance.StackTrace}");
 					Message($"Exception.GetType(): {__instance.GetType()}");
 					Message($"Exception.Message: {__instance.Message}");
@@ -143,8 +143,8 @@ namespace ElementsOfHarmony
 		public static class LogError
 		{
 			public static void Postfix(object message)
-			{
-				Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
+            {
+                Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
 				Message($"Message.GetType(): {message.GetType()}");
 				Message($"Message: {message}");
 				Message("\r\n");
@@ -156,8 +156,8 @@ namespace ElementsOfHarmony
 		public static class LogException
 		{
 			public static void Postfix(Exception exception)
-			{
-				Message($"Environment.StackTrace:\r\n{Environment.StackTrace}");
+            {
+                Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
 				Message($"Exception.StackTrace:\r\n{exception.StackTrace}");
 				Message($"Exception.GetType(): {exception.GetType()}");
 				Message($"Exception.Message: {exception.Message}");
