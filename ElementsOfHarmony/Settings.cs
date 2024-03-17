@@ -71,9 +71,9 @@ namespace ElementsOfHarmony
 				string ClassName = ClassType.Name;
 				Type RootClass = ClassType;
 				while (RootClass.IsNested && RootClass.DeclaringType != typeof(Settings))
-                {
-                    RootClass = RootClass.DeclaringType;
-                    ClassName = $"{RootClass.Name}.{ClassName}";
+				{
+					RootClass = RootClass.DeclaringType;
+					ClassName = $"{RootClass.Name}.{ClassName}";
 				}
 				foreach (var Field in ClassType.GetFields())
 				{
@@ -98,8 +98,8 @@ namespace ElementsOfHarmony
 						Field.SetValue(null, Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null) as string));
 					}
 					else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
-                    {
-                        string[] EnumNames = Enum.GetNames(Field.FieldType);
+					{
+						string[] EnumNames = Enum.GetNames(Field.FieldType);
 						string Read = Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
 						if (Read != null &&
 							EnumNames.FirstOrDefault(N => N.Equals(Read, StringComparison.InvariantCultureIgnoreCase))
@@ -110,9 +110,9 @@ namespace ElementsOfHarmony
 						else
 						{
 							Field.SetValue(null, "");
-                        }
-                    }
-                }
+						}
+					}
+				}
 			}
 			ReadSettingsForClass(typeof(DirectXHook));
 			ReadSettingsForClass(typeof(DirectXHook.URP));
@@ -137,10 +137,10 @@ namespace ElementsOfHarmony
 			{
 				string ClassName = ClassType.Name;
 				Type RootClass = ClassType;
-                while (RootClass.IsNested && RootClass.DeclaringType != typeof(Settings))
-                {
-                    RootClass = RootClass.DeclaringType;
-                    ClassName = $"{RootClass.Name}.{ClassName}";
+				while (RootClass.IsNested && RootClass.DeclaringType != typeof(Settings))
+				{
+					RootClass = RootClass.DeclaringType;
+					ClassName = $"{RootClass.Name}.{ClassName}";
 				}
 				foreach (var Field in ClassType.GetFields())
 				{
@@ -165,10 +165,10 @@ namespace ElementsOfHarmony
 						Config.WriteString($"{ClassName}.{Field.Name}", (string)Field.GetValue(null));
 					}
 					else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
-                    {
-                        Config.WriteString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
-                    }
-                }
+					{
+						Config.WriteString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
+					}
+				}
 			}
 			WriteSettingsForClass(typeof(DirectXHook));
 			WriteSettingsForClass(typeof(DirectXHook.URP));
