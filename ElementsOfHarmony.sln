@@ -866,6 +866,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "zh-CN", "zh-CN", "{EE1E8F6B
 		Assets\Localization\AZHM\zh-CN\zh-CN.txt = Assets\Localization\AZHM\zh-CN\zh-CN.txt
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXHook", "DirectXHook\DirectXHook.vcxproj", "{2394D283-4A25-401E-8B5E-91FE65032317}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -876,6 +878,10 @@ Global
 		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Debug|x64.Build.0 = Debug|x64
 		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Release|x64.ActiveCfg = Release|x64
 		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Release|x64.Build.0 = Release|x64
+		{2394D283-4A25-401E-8B5E-91FE65032317}.Debug|x64.ActiveCfg = Debug|x64
+		{2394D283-4A25-401E-8B5E-91FE65032317}.Debug|x64.Build.0 = Debug|x64
+		{2394D283-4A25-401E-8B5E-91FE65032317}.Release|x64.ActiveCfg = Release|x64
+		{2394D283-4A25-401E-8B5E-91FE65032317}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

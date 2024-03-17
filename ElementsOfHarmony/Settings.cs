@@ -11,13 +11,15 @@ namespace ElementsOfHarmony
 		private static int DebugTCPPort_Internal = 1024;
 		private static bool DebugLog_Internal = false;
 		private static string DebugLogFile_Internal = "Elements of Harmony/Elements of Harmony.log";
-		
+		private static bool DirectXHookEnabled_Internal = true;
+
 		public static bool Debug => Debug_Internal;
 		public static bool DebugTCPEnabled => DebugTCPEnabled_Internal;
 		public static string DebugTCPIP => DebugTCPIP_Internal;
 		public static int DebugTCPPort => DebugTCPPort_Internal;
 		public static bool DebugLog => DebugLog_Internal;
 		public static string DebugLogFile => DebugLogFile_Internal;
+		public static bool DirectXHookEnabled => DirectXHookEnabled_Internal;
 
 		private static string OurSelectedLanguageOverride_Internal = "";
 		private static string OurFallbackLanguage_Internal = "en-US";
@@ -52,6 +54,8 @@ namespace ElementsOfHarmony
 			DebugLog_Internal = Config.ReadBoolean("Debug.Log.Enabled", DebugLog_Internal);
 			DebugLogFile_Internal = Config.ReadString("Debug.Log.File", DebugLogFile_Internal);
 
+			DirectXHookEnabled_Internal = Config.ReadBoolean("DirectXHook.Enabled", DirectXHookEnabled_Internal);
+
 			WriteOurSettings();
 		}
 		public static void WriteOurSettings()
@@ -59,14 +63,16 @@ namespace ElementsOfHarmony
 			Config.WriteString("OurSelectedLanguageOverride", OurSelectedLanguageOverride);
 			Config.WriteString("OurFallbackLanguage", OurFallbackLanguage);
 
-			Config.WriteBoolean("Debug", Debug_Internal);
+			Config.WriteBoolean("Debug", Debug);
 
-			Config.WriteBoolean("Debug.TCP.Enabled", DebugTCPEnabled_Internal);
-			Config.WriteString("Debug.TCP.IP", DebugTCPIP_Internal);
-			Config.WriteInteger("Debug.TCP.Port", DebugTCPPort_Internal);
+			Config.WriteBoolean("Debug.TCP.Enabled", DebugTCPEnabled);
+			Config.WriteString("Debug.TCP.IP", DebugTCPIP);
+			Config.WriteInteger("Debug.TCP.Port", DebugTCPPort);
 
-			Config.WriteBoolean("Debug.Log.Enabled", DebugLog_Internal);
-			Config.WriteString("Debug.Log.File", DebugLogFile_Internal);
+			Config.WriteBoolean("Debug.Log.Enabled", DebugLog);
+			Config.WriteString("Debug.Log.File", DebugLogFile);
+
+			Config.WriteBoolean("DirectXHook.Enabled", DirectXHookEnabled);
 
 			Config.SaveConfig();
 		}

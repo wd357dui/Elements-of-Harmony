@@ -39,6 +39,11 @@ namespace ElementsOfHarmony
 				Log.InitDebug();
 
 				Localization.Init();
+
+				if (Settings.DirectXHookEnabled)
+				{
+					DirectXHook.Init();
+				}
 			}
 		}
 
