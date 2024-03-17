@@ -1,25 +1,21 @@
 ﻿using System;
+using System.CodeDom;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace ElementsOfHarmony
 {
 	public static class Settings
 	{
 		private static EnvFile Config;
-		private static bool Debug_Internal = false;
-		private static bool DebugTCPEnabled_Internal = false;
-		private static string DebugTCPIP_Internal = "localhost";
-		private static int DebugTCPPort_Internal = 1024;
-		private static bool DebugLog_Internal = false;
-		private static string DebugLogFile_Internal = "Elements of Harmony/Elements of Harmony.log";
-		private static bool DirectXHookEnabled_Internal = true;
 
-		public static bool Debug => Debug_Internal;
-		public static bool DebugTCPEnabled => DebugTCPEnabled_Internal;
-		public static string DebugTCPIP => DebugTCPIP_Internal;
-		public static int DebugTCPPort => DebugTCPPort_Internal;
-		public static bool DebugLog => DebugLog_Internal;
-		public static string DebugLogFile => DebugLogFile_Internal;
-		public static bool DirectXHookEnabled => DirectXHookEnabled_Internal;
+		public static bool Debug = false;
+		public static bool DebugTCPEnabled = false;
+		public static string DebugTCPIP = "localhost";
+		public static int DebugTCPPort = 1024;
+		public static bool DebugLog = false;
+		public static string DebugLogFile = "Elements of Harmony/Elements of Harmony.log";
 
 		private static string OurSelectedLanguageOverride_Internal = "";
 		private static string OurFallbackLanguage_Internal = "en-US";
@@ -34,6 +30,22 @@ namespace ElementsOfHarmony
 			set { OurFallbackLanguage_Internal = value; try { WriteOurSettings(); } catch (Exception) { } }
 		}
 
+		public static class DirectXHook
+		{
+			public static bool Enabled = true;
+			public static int? Width = null;
+			public static int? Height = null;
+			public static FullScreenMode? FullScreenMode = null;
+			public static int? RefreshRate = null;
+			public static int? MSAA = null;
+			public static int? VSyncInterval = null;
+			public static int? TargetFrameRate = null;
+			public static class URP
+			{
+				public static TonemappingMode? TonemappingMode = null;
+			}
+		}
+
 		public static void ReadOurSettings()
 		{
 			// this settings exist because the game can't save a language setting that it doesn't originally support into the game save
@@ -45,16 +57,65 @@ namespace ElementsOfHarmony
 			OurSelectedLanguageOverride_Internal = Config.ReadString("OurSelectedLanguageOverride", OurSelectedLanguageOverride_Internal);
 			OurFallbackLanguage_Internal = Config.ReadString("OurFallbackLanguage", OurFallbackLanguage_Internal);
 
-			Debug_Internal = Config.ReadBoolean("Debug", Debug_Internal);
+			Debug = Config.ReadBoolean("Debug", Debug);
 
-			DebugTCPEnabled_Internal = Config.ReadBoolean("Debug.TCP.Enabled", DebugTCPEnabled_Internal);
-			DebugTCPIP_Internal = Config.ReadString("Debug.TCP.IP", DebugTCPIP_Internal);
-			DebugTCPPort_Internal = Config.ReadInteger("Debug.TCP.Port", DebugTCPPort_Internal);
+			DebugTCPEnabled = Config.ReadBoolean("Debug.TCP.Enabled", DebugTCPEnabled);
+			DebugTCPIP = Config.ReadString("Debug.TCP.IP", DebugTCPIP);
+			DebugTCPPort = Config.ReadInteger("Debug.TCP.Port", DebugTCPPort);
 
-			DebugLog_Internal = Config.ReadBoolean("Debug.Log.Enabled", DebugLog_Internal);
-			DebugLogFile_Internal = Config.ReadString("Debug.Log.File", DebugLogFile_Internal);
+			DebugLog = Config.ReadBoolean("Debug.Log.Enabled", DebugLog);
+			DebugLogFile = Config.ReadString("Debug.Log.File", DebugLogFile);
 
-			DirectXHookEnabled_Internal = Config.ReadBoolean("DirectXHook.Enabled", DirectXHookEnabled_Internal);
+			void ReadSettingsForClass(Type ClassType)
+			{
+				string ClassName = ClassType.Name;
+				Type RootClass = ClassType;
+				while (RootClass.IsNested && RootClass.DeclaringType != typeof(Settings))
+				{
+					RootClass = RootClass.DeclaringType;
+					ClassName = $"{RootClass.Name}.{ClassName}";
+				}
+				foreach (var Field in ClassType.GetFields())
+				{
+					if (Field.FieldType == typeof(bool))
+					{
+						Field.SetValue(null, Config.ReadBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null)));
+					}
+					else if (Field.FieldType == typeof(int))
+					{
+						Field.SetValue(null, Config.ReadInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null)));
+					}
+					else if (Field.FieldType == typeof(bool?))
+					{
+						Field.SetValue(null, Config.ReadBooleanOptional($"{ClassName}.{Field.Name}", (bool?)Field.GetValue(null)));
+					}
+					else if (Field.FieldType == typeof(int?))
+					{
+						Field.SetValue(null, Config.ReadIntegerOptional($"{ClassName}.{Field.Name}", (int?)Field.GetValue(null)));
+					}
+					else if (Field.FieldType == typeof(string))
+					{
+						Field.SetValue(null, Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null) as string));
+					}
+					else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
+					{
+						string[] EnumNames = Enum.GetNames(Field.FieldType);
+						string Read = Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
+						if (Read != null &&
+							EnumNames.FirstOrDefault(N => N.Equals(Read, StringComparison.InvariantCultureIgnoreCase))
+							is string MatchedEnumName)
+						{
+							Field.SetValue(null, Enum.Parse(Field.FieldType, MatchedEnumName));
+						}
+						else
+						{
+							Field.SetValue(null, "");
+						}
+					}
+				}
+			}
+			ReadSettingsForClass(typeof(DirectXHook));
+			ReadSettingsForClass(typeof(DirectXHook.URP));
 
 			WriteOurSettings();
 		}
@@ -72,7 +133,45 @@ namespace ElementsOfHarmony
 			Config.WriteBoolean("Debug.Log.Enabled", DebugLog);
 			Config.WriteString("Debug.Log.File", DebugLogFile);
 
-			Config.WriteBoolean("DirectXHook.Enabled", DirectXHookEnabled);
+			void WriteSettingsForClass(Type ClassType)
+			{
+				string ClassName = ClassType.Name;
+				Type RootClass = ClassType;
+				while (RootClass.IsNested && RootClass.DeclaringType != typeof(Settings))
+				{
+					RootClass = RootClass.DeclaringType;
+					ClassName = $"{RootClass.Name}.{ClassName}";
+				}
+				foreach (var Field in ClassType.GetFields())
+				{
+					if (Field.FieldType == typeof(bool))
+					{
+						Config.WriteBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null));
+					}
+					else if (Field.FieldType == typeof(int))
+					{
+						Config.WriteInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null));
+					}
+					else if (Field.FieldType == typeof(bool?))
+					{
+						Config.WriteBooleanOptional($"{ClassName}.{Field.Name}", (bool?)Field.GetValue(null));
+					}
+					else if (Field.FieldType == typeof(int?))
+					{
+						Config.WriteIntegerOptional($"{ClassName}.{Field.Name}", (int?)Field.GetValue(null));
+					}
+					else if (Field.FieldType == typeof(string))
+					{
+						Config.WriteString($"{ClassName}.{Field.Name}", (string)Field.GetValue(null));
+					}
+					else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
+					{
+						Config.WriteString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
+					}
+				}
+			}
+			WriteSettingsForClass(typeof(DirectXHook));
+			WriteSettingsForClass(typeof(DirectXHook.URP));
 
 			Config.SaveConfig();
 		}

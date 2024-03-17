@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -103,8 +104,8 @@ namespace ElementsOfHarmony
 			}
 		}
 		public static void ExceptionHandler(object sender, UnhandledExceptionEventArgs args)
-        {
-            Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+		{
+			Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
 			Message($"sender.GetType(): {sender.GetType()}");
 			Message($"sender: {sender}");
 			Message($"args: {args}");
@@ -128,8 +129,8 @@ namespace ElementsOfHarmony
 			public static void Postfix(Exception __instance)
 			{
 				if (!UnityEngine.StackTraceUtility.ExtractStackTrace().Contains($"{nameof(ElementsOfHarmony)}.{nameof(Log)}.{nameof(Message)}")) // prevent infinite loop
-                {
-                    Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+				{
+					Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
 					Message($"Exception.StackTrace:\r\n{__instance.StackTrace}");
 					Message($"Exception.GetType(): {__instance.GetType()}");
 					Message($"Exception.Message: {__instance.Message}");
@@ -143,8 +144,8 @@ namespace ElementsOfHarmony
 		public static class LogError
 		{
 			public static void Postfix(object message)
-            {
-                Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+			{
+				Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
 				Message($"Message.GetType(): {message.GetType()}");
 				Message($"Message: {message}");
 				Message("\r\n");
@@ -156,8 +157,8 @@ namespace ElementsOfHarmony
 		public static class LogException
 		{
 			public static void Postfix(Exception exception)
-            {
-                Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+			{
+				Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
 				Message($"Exception.StackTrace:\r\n{exception.StackTrace}");
 				Message($"Exception.GetType(): {exception.GetType()}");
 				Message($"Exception.Message: {exception.Message}");
@@ -167,5 +168,20 @@ namespace ElementsOfHarmony
 
 		#endregion
 
+		[DllImport("User32.dll", CharSet = CharSet.Unicode)]
+		internal extern static int MessageBox(IntPtr hWnd, string Text, string Caption, uint uType);
+
+		internal const uint MB_OK					= 0x00000000;
+		internal const uint MB_OKCANCEL				= 0x00000001;
+		internal const uint MB_ABORTRETRYIGNORE		= 0x00000002;
+		internal const uint MB_YESNOCANCEL			= 0x00000003;
+		internal const uint MB_YESNO				= 0x00000004;
+		internal const uint MB_RETRYCANCEL			= 0x00000005;
+		internal const uint MB_CANCELTRYCONTINUE	= 0x00000006;
+
+		internal const uint MB_ICONERROR		= 0x00000010;
+		internal const uint MB_ICONQUESTION		= 0x00000020;
+		internal const uint MB_ICONWARNING		= 0x00000030;
+		internal const uint MB_ICONINFORMATION	= 0x00000040;
 	}
 }
