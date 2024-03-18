@@ -198,13 +198,29 @@ namespace ElementsOfHarmony
 				int ID = BeginProcessCompletionEvent();
 				switch (ID)
 				{
+					case -10: // CreateSwapChain
+						SwapChainCreating?.Invoke();
+						break;
 					case 10: // CreateSwapChain
-					case 15: // CreateSwapChainForHwnd
 						SwapChainCreated?.Invoke();
 						break;
+					case -15: // CreateSwapChainForHwnd
+						SwapChainForHwndCreating?.Invoke();
+						break;
+					case 15: // CreateSwapChainForHwnd
+						SwapChainForHwndCreated?.Invoke();
+						break;
+					case -8: // Present
+						SwapChainPresenting?.Invoke();
+						break;
 					case 8: // Present
-					case 22: // Present1
 						SwapChainPresented?.Invoke();
+						break;
+					case -22: // Present1
+						SwapChain1Presenting?.Invoke();
+						break;
+					case 22: // Present1
+						SwapChain1Presented?.Invoke();
 						break;
 					case int.MaxValue:
 						return;
@@ -213,8 +229,14 @@ namespace ElementsOfHarmony
 			}
 		}
 
+		public static event Action SwapChainCreating;
 		public static event Action SwapChainCreated;
+		public static event Action SwapChainForHwndCreating;
+		public static event Action SwapChainForHwndCreated;
+		public static event Action SwapChainPresenting;
 		public static event Action SwapChainPresented;
+		public static event Action SwapChain1Presenting;
+		public static event Action SwapChain1Presented;
 
 		#region DirectXHook.dll
 
@@ -252,6 +274,9 @@ namespace ElementsOfHarmony
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		internal extern static IntPtr Get_IDXGIFactory2_CreateSwapChainForHwnd_Original();
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		internal extern static IntPtr Get_LocalVariablesArray();
 
 		#region for dealing with other hooks
 
@@ -380,6 +405,270 @@ namespace ElementsOfHarmony
 						NewTonemappingProfileFabricated = true;
 					}
 				}
+			}
+		}
+
+		public static class SwapChainCreatingEventArgs
+		{
+			public static IntPtr IDXGIFactory_This
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
+				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size), value);
+			}
+			public static IntPtr IUnknown_pDevice
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
+				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size), value);
+			}
+			public static IntPtr DXGI_SWAP_CHAIN_DESC_pDesc
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
+				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size), value);
+			}
+			public static DXGI_SWAP_CHAIN_DESC Desc
+			{
+				get => Marshal.PtrToStructure<DXGI_SWAP_CHAIN_DESC>(DXGI_SWAP_CHAIN_DESC_pDesc);
+				set => Marshal.StructureToPtr(value, DXGI_SWAP_CHAIN_DESC_pDesc, false);
+			}
+		}
+
+		public static class SwapChainCreatedEventArgs
+		{
+			public static IntPtr IDXGIFactory_This
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
+			}
+			public static IntPtr IUnknown_pDevice
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
+			}
+			public static IntPtr DXGI_SWAP_CHAIN_DESC_pDesc
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
+			}
+			public static IntPtr IDXGISwapChain_ppSwapChain
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 3 * IntPtr.Size));
+			}
+			public static DXGI_SWAP_CHAIN_DESC Desc
+			{
+				get => Marshal.PtrToStructure<DXGI_SWAP_CHAIN_DESC>(DXGI_SWAP_CHAIN_DESC_pDesc);
+			}
+			public static IntPtr IDXGISwapChain_ppSwapChain_Deref
+			{
+				get => Marshal.ReadIntPtr(IDXGISwapChain_ppSwapChain);
+				set => Marshal.WriteIntPtr(IDXGISwapChain_ppSwapChain, value);
+			}
+		}
+
+		public static class SwapChainForHwndCreatingEventArgs
+		{
+			public static IntPtr IDXGIFactory2_This
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
+				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size), value);
+			}
+			public static IntPtr IUnknown_pDevice
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
+				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size), value);
+			}
+			public static IntPtr HWND_hWnd
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
+				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size), value);
+			}
+			public static IntPtr DXGI_SWAP_CHAIN_DESC1_pDesc
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 3 * IntPtr.Size));
+				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 3 * IntPtr.Size), value);
+			}
+			public static FullscreenDescOptionalPointers DXGI_SWAP_CHAIN_FULLSCREEN_DESC_pFullscreenDesc
+			{
+				get => Marshal.PtrToStructure<FullscreenDescOptionalPointers>(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 4 * IntPtr.Size));
+			}
+			public static IntPtr IDXGIOutput_pRestrictToOutput
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 5 * IntPtr.Size));
+				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 5 * IntPtr.Size), value);
+			}
+			public static DXGI_SWAP_CHAIN_DESC1 Desc
+			{
+				get => Marshal.PtrToStructure<DXGI_SWAP_CHAIN_DESC1>(DXGI_SWAP_CHAIN_DESC1_pDesc);
+				set => Marshal.StructureToPtr(value, DXGI_SWAP_CHAIN_DESC1_pDesc, false);
+			}
+			public struct FullscreenDescOptionalPointers
+			{
+				public IntPtr _pFullscreenDesc;
+				public IntPtr _OriginalFullscreenDesc;
+				public IntPtr _LocalFullscreenDesc;
+
+				[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006: (Naming rule violation)", Justification = "This is intentional")]
+				public IntPtr pFullscreenDesc
+				{
+					get => Marshal.ReadIntPtr(_pFullscreenDesc);
+					set => Marshal.WriteIntPtr(_pFullscreenDesc, value);
+				}
+				public DXGI_SWAP_CHAIN_FULLSCREEN_DESC? OriginalFullscreenDesc
+				{
+					get
+					{
+						if (_OriginalFullscreenDesc != IntPtr.Zero)
+						{
+							return Marshal.PtrToStructure<DXGI_SWAP_CHAIN_FULLSCREEN_DESC>(_OriginalFullscreenDesc);
+						}
+						else
+						{
+							return null;
+						}
+					}
+				}
+				public DXGI_SWAP_CHAIN_FULLSCREEN_DESC LocalFullscreenDesc
+				{
+					get => Marshal.PtrToStructure<DXGI_SWAP_CHAIN_FULLSCREEN_DESC>(_LocalFullscreenDesc);
+					set => Marshal.StructureToPtr(value, _LocalFullscreenDesc, false);
+				}
+			}
+		}
+
+		public static class SwapChainForHwndCreatedEventArgs
+		{
+			public static IntPtr IDXGIFactory2_This
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
+			}
+			public static IntPtr IUnknown_pDevice
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
+			}
+			public static IntPtr HWND_hWnd
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
+			}
+			public static IntPtr DXGI_SWAP_CHAIN_DESC1_pDesc
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 3 * IntPtr.Size));
+			}
+			public static IntPtr DXGI_SWAP_CHAIN_FULLSCREEN_DESC_pFullscreenDesc
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 4 * IntPtr.Size));
+			}
+			public static IntPtr IDXGIOutput_pRestrictToOutput
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 5 * IntPtr.Size));
+			}
+			public static IntPtr IDXGISwapChain1_ppSwapChain
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 6 * IntPtr.Size));
+			}
+			public static IntPtr IDXGISwapChain1_ppSwapChain_Deref
+			{
+				get => Marshal.ReadIntPtr(IDXGISwapChain1_ppSwapChain);
+				set => Marshal.WriteIntPtr(IDXGISwapChain1_ppSwapChain, value);
+			}
+		}
+
+		public static class SwapChainPresentingEventArgs
+		{
+			public static IntPtr IDXGISwapChain_This
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
+				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size), value);
+			}
+			public static uint SyncInterval
+			{
+				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
+				set => Marshal.WriteInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size), (int)value);
+			}
+			public static uint Flags
+			{
+				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
+				set => Marshal.WriteInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size), (int)value);
+			}
+		}
+
+		public static class SwapChainPresentedEventArgs
+		{
+			public static IntPtr IDXGISwapChain_This
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
+			}
+			public static uint SyncInterval
+			{
+				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
+			}
+			public static uint Flags
+			{
+				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
+			}
+		}
+
+		public static class SwapChain1PresentingEventArgs
+		{
+			public static IntPtr IDXGISwapChain_This
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
+				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size), value);
+			}
+			public static uint SyncInterval
+			{
+				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
+				set => Marshal.WriteInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size), (int)value);
+			}
+			public static uint Flags
+			{
+				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
+				set => Marshal.WriteInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size), (int)value);
+			}
+			public static IntPtr DXGI_PRESENT_PARAMETERS_pPresentParameters
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 3 * IntPtr.Size));
+			}
+			public static DXGI_PRESENT_PARAMETERS? PresentParameters
+			{
+				get
+				{
+					if (DXGI_PRESENT_PARAMETERS_pPresentParameters != IntPtr.Zero)
+					{
+						return Marshal.PtrToStructure<DXGI_PRESENT_PARAMETERS>(DXGI_PRESENT_PARAMETERS_pPresentParameters);
+					}
+					else
+					{
+						return null;
+					}
+				}
+				set
+				{
+					if (value == null)
+					{
+						Marshal.WriteIntPtr(DXGI_PRESENT_PARAMETERS_pPresentParameters, IntPtr.Zero);
+					}
+					else throw new NotImplementedException(); // not yet
+				}
+			}
+		}
+
+		public static class SwapChain1PresentedEventArgs
+		{
+			public static IntPtr IDXGISwapChain_This
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
+			}
+			public static uint SyncInterval
+			{
+				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
+			}
+			public static uint Flags
+			{
+				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
+			}
+			public static IntPtr DXGI_PRESENT_PARAMETERS_pPresentParameters
+			{
+				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 3 * IntPtr.Size));
+			}
+			public static DXGI_PRESENT_PARAMETERS? PresentParameters
+			{
+				get => Marshal.PtrToStructure<DXGI_PRESENT_PARAMETERS>(DXGI_PRESENT_PARAMETERS_pPresentParameters);
 			}
 		}
 
@@ -512,29 +801,75 @@ namespace ElementsOfHarmony
 			DXGI_FORMAT_A4B4G4R4_UNORM = 191,
 		}
 
+		public enum DXGI_MODE_SCANLINE_ORDER : uint
+		{
+			DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED = 0,
+			DXGI_MODE_SCANLINE_ORDER_PROGRESSIVE = 1,
+			DXGI_MODE_SCANLINE_ORDER_UPPER_FIELD_FIRST = 2,
+			DXGI_MODE_SCANLINE_ORDER_LOWER_FIELD_FIRST = 3
+		}
+
+		public enum DXGI_MODE_SCALING : uint
+		{
+			DXGI_MODE_SCALING_UNSPECIFIED = 0,
+			DXGI_MODE_SCALING_CENTERED = 1,
+			DXGI_MODE_SCALING_STRETCHED = 2
+		}
+
+		[Flags]
+		public enum DXGI_USAGE : uint
+		{
+			DXGI_USAGE_SHADER_INPUT = 0x00000010,
+			DXGI_USAGE_RENDER_TARGET_OUTPUT = 0x00000020,
+			DXGI_USAGE_BACK_BUFFER = 0x00000040,
+			DXGI_USAGE_SHARED = 0x00000080,
+			DXGI_USAGE_READ_ONLY = 0x00000100,
+			DXGI_USAGE_DISCARD_ON_PRESENT = 0x00000200,
+			DXGI_USAGE_UNORDERED_ACCESS = 0x00000400
+		}
+
+		public enum DXGI_SWAP_EFFECT : uint
+		{
+			DXGI_SWAP_EFFECT_DISCARD = 0,
+			DXGI_SWAP_EFFECT_SEQUENTIAL = 1,
+			DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL = 3,
+			DXGI_SWAP_EFFECT_FLIP_DISCARD = 4
+		}
+
+		[Flags]
+		public enum DXGI_SWAP_CHAIN_FLAG : uint
+		{
+			DXGI_SWAP_CHAIN_FLAG_NONPREROTATED = 0x1,
+			DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH = 0x2,
+			DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE = 0x4,
+			DXGI_SWAP_CHAIN_FLAG_RESTRICTED_CONTENT = 0x8,
+			DXGI_SWAP_CHAIN_FLAG_RESTRICT_SHARED_RESOURCE_DRIVER = 0x10,
+			DXGI_SWAP_CHAIN_FLAG_DISPLAY_ONLY = 0x20,
+			DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT = 0x40,
+			DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER = 0x80,
+			DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO = 0x100,
+			DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO = 0x200,
+			DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED = 0x400,
+			DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING = 0x800,
+			DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS = 0x1000
+		}
+
 		[StructLayout(LayoutKind.Sequential)]
 		public struct DXGI_RATIONAL
 		{
 			public uint Numerator;
 			public uint Denominator;
-			public static DXGI_RATIONAL? Parse(string Str)
-			{
-				string[] parts = Str.Trim(' ', '{', '}', '[', ']', '(', ')', '<', '>').Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-				if (parts.Length == 2)
-				{
-					DXGI_RATIONAL result;
-					if (uint.TryParse(parts[0].Trim(), out result.Numerator) &&
-						uint.TryParse(parts[1].Trim(), out result.Denominator))
-					{
-						return result;
-					}
-				}
-				return null;
-			}
-			public override string ToString()
-			{
-				return $" {{{Numerator} / {Denominator}}} ";
-			}
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct DXGI_MODE_DESC
+		{
+			public uint Width;
+			public uint Height;
+			public DXGI_RATIONAL RefreshRate;
+			public DXGI_FORMAT Format;
+			public DXGI_MODE_SCANLINE_ORDER ScanlineOrdering;
+			public DXGI_MODE_SCALING Scaling;
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
@@ -542,23 +877,162 @@ namespace ElementsOfHarmony
 		{
 			public uint Count;
 			public uint Quality;
-			public static DXGI_SAMPLE_DESC? Parse(string Str)
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct DXGI_SWAP_CHAIN_DESC
+		{
+			public DXGI_MODE_DESC BufferDesc;
+			public DXGI_SAMPLE_DESC SampleDesc;
+			public DXGI_USAGE BufferUsage;
+			public uint BufferCount;
+			public IntPtr OutputWindow;
+			[MarshalAs(UnmanagedType.Bool)]
+			public bool Windowed;
+			public DXGI_SWAP_EFFECT SwapEffect;
+			public uint Flags;
+		}
+
+		public enum DXGI_SCALING : int
+		{
+			DXGI_SCALING_STRETCH = 0,
+			DXGI_SCALING_NONE = 1,
+			DXGI_SCALING_ASPECT_RATIO_STRETCH = 2
+		}
+
+		public enum DXGI_ALPHA_MODE : int
+		{
+			DXGI_ALPHA_MODE_UNSPECIFIED = 0,
+			DXGI_ALPHA_MODE_PREMULTIPLIED = 1,
+			DXGI_ALPHA_MODE_STRAIGHT = 2,
+			DXGI_ALPHA_MODE_IGNORE = 3,
+			DXGI_ALPHA_MODE_FORCE_DWORD = -1
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct DXGI_SWAP_CHAIN_DESC1
+		{
+			public uint Width;
+			public uint Height;
+			public DXGI_FORMAT Format;
+			[MarshalAs(UnmanagedType.Bool)]
+			public bool Stereo;
+			public DXGI_SAMPLE_DESC SampleDesc;
+			public DXGI_USAGE BufferUsage;
+			public uint BufferCount;
+			public DXGI_SCALING Scaling;
+			public DXGI_SWAP_EFFECT SwapEffect;
+			public DXGI_ALPHA_MODE AlphaMode;
+			public uint Flags;
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC
+		{
+			public DXGI_RATIONAL RefreshRate;
+			public DXGI_MODE_SCANLINE_ORDER ScanlineOrdering;
+			public DXGI_MODE_SCALING Scaling;
+			[MarshalAs(UnmanagedType.Bool)]
+			public bool Windowed;
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct RECT
+		{
+			public int Left, Top, Right, Bottom;
+			public int Width
 			{
-				string[] parts = Str.Trim(' ', '{', '}', '[', ']', '(', ')', '<', '>').Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-				if (parts.Length == 2)
+				get => Right - Left;
+				set => Right = Left + value;
+			}
+			public int Height
+			{
+				get => Bottom - Top;
+				set => Bottom = Top + value;
+			}
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct POINT
+		{
+			public int X, Y;
+		}
+
+		public readonly struct NativeArrayAccess<T>
+			where T : struct
+		{
+			public NativeArrayAccess(IntPtr Address)
+			{
+				this.Address = Address;
+			}
+			private readonly IntPtr Address;
+			public T this[int index]
+			{
+				get => Marshal.PtrToStructure<T>(IntPtr.Add(Address, index * Marshal.SizeOf<T>()));
+				set => Marshal.StructureToPtr(value, IntPtr.Add(Address, index * Marshal.SizeOf<T>()), false);
+			}
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct DXGI_PRESENT_PARAMETERS
+		{
+			public uint DirtyRectsCount;
+			public IntPtr pDirtyRects;
+			public IntPtr pScrollRect;
+			public IntPtr pScrollOffset;
+			public NativeArrayAccess<RECT>? DirtyRects
+			{
+				get
 				{
-					DXGI_SAMPLE_DESC result;
-					if (uint.TryParse(parts[0].Trim(), out result.Count) &&
-						uint.TryParse(parts[1].Trim(), out result.Quality))
+					if (pDirtyRects != IntPtr.Zero)
 					{
-						return result;
+						return new NativeArrayAccess<RECT>(pDirtyRects);
+					}
+					else
+					{
+						return null;
 					}
 				}
-				return null;
 			}
-			public override string ToString()
+			public RECT? ScrollRect
 			{
-				return $" {{{Count} / {Quality}}} ";
+				get
+				{
+					if (pScrollRect != IntPtr.Zero)
+					{
+						return Marshal.PtrToStructure<RECT>(pScrollRect);
+					}
+					else
+					{
+						return null;
+					}
+				}
+				set
+				{
+					if (value == null) throw new ArgumentNullException("value");
+					if (pScrollRect != IntPtr.Zero) throw new NullReferenceException();
+					Marshal.StructureToPtr(value.Value, pScrollRect, false);
+				}
+			}
+			public POINT? ScrollOffset
+			{
+				get
+				{
+					if (pScrollRect != IntPtr.Zero)
+					{
+						return Marshal.PtrToStructure<POINT>(pScrollRect);
+					}
+					else
+					{
+						return null;
+					}
+				}
+				set
+				{
+					if (value == null) throw new ArgumentNullException("value");
+					if (pScrollRect != IntPtr.Zero) throw new NullReferenceException();
+					Marshal.StructureToPtr(value.Value, pScrollRect, false);
+				}
 			}
 		}
 

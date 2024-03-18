@@ -17,6 +17,8 @@ extern "C" {
 	__declspec(dllexport) intptr_t __stdcall Get_IDXGIFactory_CreateSwapChain_Original();
 	__declspec(dllexport) intptr_t __stdcall Get_IDXGIFactory2_CreateSwapChainForHwnd_Original();
 
+	__declspec(dllexport) void** __stdcall Get_LocalVariablesArray();
+
 	__declspec(dllexport) bool __stdcall Get_Present_PreviousDetourHookDetected();
 	__declspec(dllexport) bool __stdcall Get_Present1_PreviousDetourHookDetected();
 	__declspec(dllexport) intptr_t __stdcall Get_GameOverlayRenderer64_DLL_Address();
@@ -58,32 +60,6 @@ IDXGISwapChain1_Present1_Proc IDXGISwapChain1_Present1_Original = nullptr;
 IDXGIFactory_CreateSwapChain_Proc IDXGIFactory_CreateSwapChain_Original = nullptr;
 IDXGIFactory2_CreateSwapChainForHwnd_Proc IDXGIFactory2_CreateSwapChainForHwnd_Original = nullptr;
 
-atomic<bool> Running = false;
-
-HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, UINT SyncInterval, UINT Flags);
-HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* This, UINT SyncInterval, UINT Flags, _In_ const DXGI_PRESENT_PARAMETERS* pPresentParameters);
-HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* This,
-	_In_  IUnknown* pDevice,
-	_In_::DXGI_SWAP_CHAIN_DESC* pDesc,
-	_COM_Outptr_  IDXGISwapChain** ppSwapChain);
-HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFactory2* This,
-	_In_  IUnknown* pDevice,
-	_In_  HWND hWnd,
-	_In_  const ::DXGI_SWAP_CHAIN_DESC1* pDesc,
-	_In_opt_  const ::DXGI_SWAP_CHAIN_FULLSCREEN_DESC* pFullscreenDesc,
-	_In_opt_  IDXGIOutput* pRestrictToOutput,
-	_COM_Outptr_  IDXGISwapChain1** ppSwapChain);
-
-ComPtr<IDXGIFactory> Factory;
-ComPtr<IDXGIFactory2> Factory2;
-ComPtr<IDXGISwapChain> SwapChain;
-ComPtr<IDXGISwapChain1> SwapChain1;
-ComPtr<IDXGIDevice> DXGIDevice;
-HANDLE OnCompletionEvent = NULL;
-HANDLE AckCompletionEvent = NULL;
-HANDLE StopEvent = NULL;
-size_t CompletionID = 0;
-
 intptr_t FactoryVTableAddress = 0;
 intptr_t Factory2VTableAddress = 0;
 intptr_t SwapChainVTableAddress = 0;
@@ -92,15 +68,6 @@ constexpr size_t IDXGIFactory_CreateSwapChain_VTableIndex = 10;
 constexpr size_t IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex = 15;
 constexpr size_t IDXGISwapChain_Present_VTableIndex = 8;
 constexpr size_t IDXGISwapChain1_Present1_VTableIndex = 22;
-
-constexpr WCHAR ClassName[] = L"MAGIC";
-constexpr WCHAR WindowName[] = L"Magic";
-HINSTANCE Module = NULL;
-HWND hWndForTest = NULL;
-HANDLE WindowThread = NULL;
-HANDLE WindowCreated = NULL;
-DWORD CreateHwndForTest(LPVOID Arg);
-LRESULT DummyWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 
 HMODULE		DXGI_DLL = NULL;
 intptr_t	DXGI_DLL_BaseAddress = 0;
@@ -122,10 +89,157 @@ bool Present_PreviousDetourHookDetected = false;
 bool Present1_PreviousDetourHookDetected = false;
 HRESULT DetectPreviousDetourHook();
 
-HRESULT IDXGISwapChain_Present_Patch();
-HRESULT IDXGISwapChain_Present_UnPatch();
-HRESULT IDXGISwapChain1_Present1_Patch();
-HRESULT IDXGISwapChain1_Present1_UnPatch();
+HRESULT IDXGISwapChain_Present_PatchFix();
+HRESULT IDXGISwapChain_Present_UnPatchFix();
+HRESULT IDXGISwapChain1_Present1_PatchFix();
+HRESULT IDXGISwapChain1_Present1_UnPatchFix();
+
+atomic<bool> Running = false;
+HANDLE OnCompletionEvent = NULL;
+HANDLE AckCompletionEvent = NULL;
+HANDLE StopEvent = NULL;
+int CompletionID = 0;
+void* PtrList[8]{ 0 };
+
+HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, UINT SyncInterval, UINT Flags);
+HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* This, UINT SyncInterval, UINT Flags, _In_ const DXGI_PRESENT_PARAMETERS* pPresentParameters);
+HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* This,
+	_In_  IUnknown* pDevice,
+	_In_::DXGI_SWAP_CHAIN_DESC* pDesc,
+	_COM_Outptr_  IDXGISwapChain** ppSwapChain);
+HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFactory2* This,
+	_In_  IUnknown* pDevice,
+	_In_  HWND hWnd,
+	_In_  const ::DXGI_SWAP_CHAIN_DESC1* pDesc,
+	_In_opt_  const ::DXGI_SWAP_CHAIN_FULLSCREEN_DESC* pFullscreenDesc,
+	_In_opt_  IDXGIOutput* pRestrictToOutput,
+	_COM_Outptr_  IDXGISwapChain1** ppSwapChain);
+
+constexpr WCHAR ClassName[] = L"MAGIC";
+constexpr WCHAR WindowName[] = L"Magic";
+HINSTANCE Module = NULL;
+HWND hWndForTest = NULL;
+HANDLE WindowThread = NULL;
+HANDLE WindowCreated = NULL;
+DWORD CreateHwndForTest(LPVOID Arg);
+LRESULT DummyWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
+
+/// <summary>
+/// compare the loaded original Present function with byte code from the original file; 
+/// for a specified number of byte codes, excluding the first five bytes which can hold a jmp instruction: 
+/// we match the byte code with the original file;
+/// If a match exists then we believe that we have found the original byte code;
+/// so next step we compare the first five bytes;
+/// if the first five bytes didn't match, then it must be a detour hook.
+/// if the first five bytes matches however, there were no detour hooks.
+/// </summary>
+/// <returns>if no byte code matched, returns STATUS_ENTRYPOINT_NOT_FOUND</returns>
+HRESULT DetectPreviousDetourHook()
+{
+	BYTE CurrentPresentInstructions[InstructionCompareByteCount];
+	CopyMemory(CurrentPresentInstructions, IDXGISwapChain_Present_Original, InstructionCompareByteCount);
+	CopyMemory(Present_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction));
+	Present_HasLoadedFirstFiveBytesOfInstruction = true;
+
+	BYTE CurrentPresent1Instructions[InstructionCompareByteCount];
+	CopyMemory(CurrentPresent1Instructions, IDXGISwapChain1_Present1_Original, InstructionCompareByteCount);
+	CopyMemory(Present1_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction));
+	Present1_HasLoadedFirstFiveBytesOfInstruction = true;
+
+	wstring RealDllPath = L"C:/Windows/System32/DXGI.dll";
+	HANDLE DLL_File = CreateFileW(RealDllPath.c_str(), GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_READONLY, NULL);
+	if (DLL_File == INVALID_HANDLE_VALUE) {
+		return E_FAIL;
+	}
+
+	size_t CurrentPos = 0x80; // skip the "This program cannot be run in DOS mode" header that every dll have
+	LARGE_INTEGER Large;
+	if (!GetFileSizeEx(DLL_File, &Large)) {
+		return E_FAIL;
+	}
+
+	bool PresentFound = false;
+	bool Present1Found = false;
+	size_t FileSize = Large.QuadPart;
+	while (((CurrentPos + InstructionCompareByteCount) < FileSize) && (!PresentFound || !Present1Found)) {
+		Large.QuadPart = CurrentPos;
+		if (!SetFilePointerEx(DLL_File, Large, nullptr, FILE_BEGIN)) {
+			return E_FAIL;
+		}
+		BYTE OriginalInstructions[InstructionCompareByteCount]{ 0 };
+		if (!ReadFile(DLL_File, OriginalInstructions, InstructionCompareByteCount, nullptr, nullptr)) {
+			return E_FAIL;
+		}
+		if (RtlCompareMemory(CurrentPresentInstructions + 5, OriginalInstructions + 5, InstructionCompareByteCount - 5) == InstructionCompareByteCount - 5) {
+			Present_PreviousDetourHookDetected = RtlCompareMemory(CurrentPresentInstructions, OriginalInstructions, 5) != 5;
+			CopyMemory(Present_OriginalFirstFiveBytesOfInstruction, OriginalInstructions, 5);
+			Present_HasOriginalFirstFiveBytesOfInstruction = true;
+			PresentFound = true;
+		}
+		if (RtlCompareMemory(CurrentPresent1Instructions + 5, OriginalInstructions + 5, InstructionCompareByteCount - 5) == InstructionCompareByteCount - 5) {
+			Present1_PreviousDetourHookDetected = RtlCompareMemory(CurrentPresent1Instructions, OriginalInstructions, 5) != 5;
+			CopyMemory(Present1_OriginalFirstFiveBytesOfInstruction, OriginalInstructions, 5);
+			Present1_HasOriginalFirstFiveBytesOfInstruction = true;
+			Present1Found = true;
+		}
+		CurrentPos += 0x10;
+	}
+	if (!PresentFound) {
+		return STATUS_ENTRYPOINT_NOT_FOUND;
+	}
+
+	if (!CloseHandle(DLL_File)) {
+		return E_FAIL;
+	}
+
+	return S_OK;
+}
+
+HRESULT IDXGISwapChain_Present_PatchFix()
+{
+	DWORD OldProtect;
+	if (!VirtualProtect(IDXGISwapChain_Present_Original, sizeof(Present_OriginalFirstFiveBytesOfInstruction), PAGE_EXECUTE_READWRITE, &OldProtect)) return E_FAIL;
+	if (!Present_HasLoadedFirstFiveBytesOfInstruction) {
+		CopyMemory(Present_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction));
+		Present_HasLoadedFirstFiveBytesOfInstruction = true;
+	}
+	CopyMemory(IDXGISwapChain_Present_Original, Present_OriginalFirstFiveBytesOfInstruction, sizeof(Present_OriginalFirstFiveBytesOfInstruction));
+	if (!VirtualProtect(IDXGISwapChain_Present_Original, sizeof(Present_OriginalFirstFiveBytesOfInstruction), OldProtect, &OldProtect)) return E_FAIL;
+	return S_OK;
+}
+
+HRESULT IDXGISwapChain_Present_UnPatchFix()
+{
+	if (!Present_HasLoadedFirstFiveBytesOfInstruction) return E_NOT_VALID_STATE;
+	DWORD OldProtect;
+	if (!VirtualProtect(IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction), PAGE_EXECUTE_READWRITE, &OldProtect)) return E_FAIL;
+	CopyMemory(IDXGISwapChain_Present_Original, Present_LoadedFirstFiveBytesOfInstruction, sizeof(Present_LoadedFirstFiveBytesOfInstruction));
+	if (!VirtualProtect(IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction), OldProtect, &OldProtect)) return E_FAIL;
+	return S_OK;
+}
+
+HRESULT IDXGISwapChain1_Present1_PatchFix()
+{
+	DWORD OldProtect;
+	if (!VirtualProtect(IDXGISwapChain1_Present1_Original, sizeof(Present_OriginalFirstFiveBytesOfInstruction), PAGE_EXECUTE_READWRITE, &OldProtect)) return E_FAIL;
+	if (!Present1_HasLoadedFirstFiveBytesOfInstruction) {
+		CopyMemory(Present1_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction));
+		Present1_HasLoadedFirstFiveBytesOfInstruction = true;
+	}
+	CopyMemory(IDXGISwapChain1_Present1_Original, Present1_OriginalFirstFiveBytesOfInstruction, sizeof(Present_OriginalFirstFiveBytesOfInstruction));
+	if (!VirtualProtect(IDXGISwapChain1_Present1_Original, sizeof(Present1_OriginalFirstFiveBytesOfInstruction), OldProtect, &OldProtect)) return E_FAIL;
+	return S_OK;
+}
+
+HRESULT IDXGISwapChain1_Present1_UnPatchFix()
+{
+	if (!Present1_HasLoadedFirstFiveBytesOfInstruction) return E_NOT_VALID_STATE;
+	DWORD OldProtect;
+	if (!VirtualProtect(IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction), PAGE_EXECUTE_READWRITE, &OldProtect)) return E_FAIL;
+	CopyMemory(IDXGISwapChain1_Present1_Original, Present1_LoadedFirstFiveBytesOfInstruction, sizeof(Present1_LoadedFirstFiveBytesOfInstruction));
+	if (!VirtualProtect(IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction), OldProtect, &OldProtect)) return E_FAIL;
+	return S_OK;
+}
 
 std::map<IDXGISwapChain*, int> IDXGISwapChain_Present_StackCount;
 HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, UINT SyncInterval, UINT Flags)
@@ -134,15 +248,27 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, 
 		IDXGISwapChain_Present_StackCount[This] = 0;
 	}
 	bool StackOverflowFixNeeded = ++IDXGISwapChain_Present_StackCount[This] >= 2;
+	if (Running && !StackOverflowFixNeeded) {
+		ZeroMemory(PtrList, sizeof(PtrList));
+		PtrList[0] = &This;
+		PtrList[1] = &SyncInterval;
+		PtrList[2] = &Flags;
+		CompletionID = -static_cast<int>(IDXGISwapChain_Present_VTableIndex);
+		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
+		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
+		if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
+			throw exception("synchronization error");
+		}
+	}
 	HRESULT result = 0;
 	if (StackOverflowFixNeeded) {
 		if (Present_HasOriginalFirstFiveBytesOfInstruction) {
 			// I have a fix for this stack overflow which is known caused by steam overlay hook (GameOverlayRenderer64.dll)
 			HRESULT PatchResult = 0;
-			PatchResult = IDXGISwapChain_Present_Patch();
+			PatchResult = IDXGISwapChain_Present_PatchFix();
 			if (FAILED(PatchResult)) throw exception("failed to patch stackoverflow fix");
 			result = IDXGISwapChain_Present_Original(This, ++SyncInterval, Flags);
-			PatchResult = IDXGISwapChain_Present_UnPatch();
+			PatchResult = IDXGISwapChain_Present_UnPatchFix();
 			if (FAILED(PatchResult)) throw exception("failed to patch stackoverflow fix");
 		}
 		else {
@@ -153,8 +279,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, 
 	else {
 		result = IDXGISwapChain_Present_Original(This, ++SyncInterval, Flags);
 	}
-	--IDXGISwapChain_Present_StackCount[This];
-	if (Running) {
+	if (Running && !StackOverflowFixNeeded) {
 		CompletionID = IDXGISwapChain_Present_VTableIndex;
 		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
 		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
@@ -162,6 +287,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, 
 			throw exception("synchronization error");
 		}
 	}
+	--IDXGISwapChain_Present_StackCount[This];
 	return result;
 }
 
@@ -172,15 +298,28 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* Thi
 		IDXGISwapChain1_Present1_StackCount[This] = 0;
 	}
 	bool StackOverflowFixNeeded = ++IDXGISwapChain1_Present1_StackCount[This] >= 2;
+	if (Running && !StackOverflowFixNeeded) {
+		ZeroMemory(PtrList, sizeof(PtrList));
+		PtrList[0] = &This;
+		PtrList[1] = &SyncInterval;
+		PtrList[2] = &Flags;
+		PtrList[3] = &pPresentParameters;
+		CompletionID = -static_cast<int>(IDXGISwapChain1_Present1_VTableIndex);
+		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
+		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
+		if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
+			throw exception("synchronization error");
+		}
+	}
 	HRESULT result = 0;
 	if (StackOverflowFixNeeded) {
 		if (Present1_HasOriginalFirstFiveBytesOfInstruction) {
 			// I have a fix for this stack overflow which is known caused by steam overlay hook (GameOverlayRenderer64.dll)
 			HRESULT PatchResult = 0;
-			PatchResult = IDXGISwapChain1_Present1_Patch();
+			PatchResult = IDXGISwapChain1_Present1_PatchFix();
 			if (FAILED(PatchResult)) throw exception("failed to patch stackoverflow fix");
 			result = IDXGISwapChain1_Present1_Original(This, ++SyncInterval, Flags, pPresentParameters);
-			PatchResult = IDXGISwapChain1_Present1_UnPatch();
+			PatchResult = IDXGISwapChain1_Present1_UnPatchFix();
 			if (FAILED(PatchResult)) throw exception("failed to patch stackoverflow fix");
 		}
 		else {
@@ -191,8 +330,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* Thi
 	else {
 		result = IDXGISwapChain1_Present1_Original(This, ++SyncInterval, Flags, pPresentParameters);
 	}
-	--IDXGISwapChain1_Present1_StackCount[This];
-	if (Running) {
+	if (Running && !StackOverflowFixNeeded) {
 		CompletionID = IDXGISwapChain1_Present1_VTableIndex;
 		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
 		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
@@ -200,6 +338,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* Thi
 			throw exception("synchronization error");
 		}
 	}
+	--IDXGISwapChain1_Present1_StackCount[This];
 	return result;
 }
 
@@ -208,7 +347,21 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* Th
 	_In_::DXGI_SWAP_CHAIN_DESC* pDesc,
 	_COM_Outptr_  IDXGISwapChain** ppSwapChain)
 {
-	DXGI_SWAP_CHAIN_DESC Desc{};
+	DXGI_SWAP_CHAIN_DESC Desc = *pDesc;
+	pDesc = &Desc;
+	if (Running) {
+		ZeroMemory(PtrList, sizeof(PtrList));
+		PtrList[0] = &This;
+		PtrList[1] = &pDevice;
+		PtrList[2] = &pDesc;
+		PtrList[3] = &ppSwapChain;
+		CompletionID = -static_cast<int>(IDXGIFactory_CreateSwapChain_VTableIndex);
+		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
+		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
+		if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
+			throw exception("synchronization error");
+		}
+	}
 	HRESULT result = IDXGIFactory_CreateSwapChain_Original(This, pDevice, pDesc, ppSwapChain);
 	if (Running) {
 		CompletionID = IDXGIFactory_CreateSwapChain_VTableIndex;
@@ -229,8 +382,30 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFac
 	_In_opt_  IDXGIOutput* pRestrictToOutput,
 	_COM_Outptr_  IDXGISwapChain1** ppSwapChain)
 {
-	DXGI_SWAP_CHAIN_DESC1 Desc{};
-	DXGI_SWAP_CHAIN_FULLSCREEN_DESC FullscreenDesc{};
+	DXGI_SWAP_CHAIN_DESC1 Desc = *pDesc;
+	DXGI_SWAP_CHAIN_FULLSCREEN_DESC FullscreenDesc = pFullscreenDesc != nullptr ? *pFullscreenDesc : DXGI_SWAP_CHAIN_FULLSCREEN_DESC{};
+	pDesc = &Desc;
+	if (Running) {
+		ZeroMemory(PtrList, sizeof(PtrList));
+		intptr_t FullscreenDescOptionalPointers[3]{
+			reinterpret_cast<intptr_t>(&pFullscreenDesc), // pointer to local pointer
+			reinterpret_cast<intptr_t>(pFullscreenDesc), // pointer to original struct or nullptr
+			reinterpret_cast<intptr_t>(&FullscreenDesc), // pointer to local struct
+		};
+		PtrList[0] = &This;
+		PtrList[1] = &pDevice;
+		PtrList[2] = &hWnd;
+		PtrList[3] = &pDesc;
+		PtrList[4] = FullscreenDescOptionalPointers;
+		PtrList[5] = &pRestrictToOutput;
+		PtrList[6] = &ppSwapChain;
+		CompletionID = -static_cast<int>(IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex);
+		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
+		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
+		if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
+			throw exception("synchronization error");
+		}
+	}
 	HRESULT result = IDXGIFactory2_CreateSwapChainForHwnd_Original(This, pDevice, hWnd, pDesc, pFullscreenDesc, pRestrictToOutput, ppSwapChain);
 	if (Running) {
 		CompletionID = IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex;
@@ -293,126 +468,14 @@ LRESULT DummyWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 	return DefWindowProcW(hWnd, Msg, wParam, lParam);
 }
 
-/// <summary>
-/// compare the loaded original Present function with byte code from the original file; 
-/// for a specified number of byte codes, excluding the first five bytes which can hold a jmp instruction: 
-/// we match the byte code with the original file;
-/// If a match exists then we believe that we have found the original byte code;
-/// so next step we compare the first five bytes;
-/// if the first five bytes didn't match, then it must be a detour hook.
-/// if the first five bytes matches however, there were no detour hooks.
-/// </summary>
-/// <returns>if no byte code matched, returns STATUS_ENTRYPOINT_NOT_FOUND</returns>
-HRESULT DetectPreviousDetourHook()
-{
-	BYTE CurrentPresentInstructions[InstructionCompareByteCount];
-	CopyMemory(CurrentPresentInstructions, IDXGISwapChain_Present_Original, InstructionCompareByteCount);
-	CopyMemory(Present_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction));
-	Present_HasLoadedFirstFiveBytesOfInstruction = true;
-	
-	BYTE CurrentPresent1Instructions[InstructionCompareByteCount];
-	CopyMemory(CurrentPresent1Instructions, IDXGISwapChain1_Present1_Original, InstructionCompareByteCount);
-	CopyMemory(Present1_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction));
-	Present1_HasLoadedFirstFiveBytesOfInstruction = true;
-
-	wstring RealDllPath = L"C:/Windows/System32/DXGI.dll";
-	HANDLE DLL_File = CreateFileW(RealDllPath.c_str(), GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_READONLY, NULL);
-	if (DLL_File == INVALID_HANDLE_VALUE) {
-		return E_FAIL;
-	}
-	
-	size_t CurrentPos = 0x80; // skip the "This program cannot be run in DOS mode" header that every dll have
-	LARGE_INTEGER Large;
-	if (!GetFileSizeEx(DLL_File, &Large)) {
-		return E_FAIL;
-	}
-
-	bool PresentFound = false;
-	bool Present1Found = false;
-	size_t FileSize = Large.QuadPart;
-	while (((CurrentPos + InstructionCompareByteCount) < FileSize) && (!PresentFound || !Present1Found)) {
-		Large.QuadPart = CurrentPos;
-		if (!SetFilePointerEx(DLL_File, Large, nullptr, FILE_BEGIN)) {
-			return E_FAIL;
-		}
-		BYTE OriginalInstructions[InstructionCompareByteCount]{ 0 };
-		if (!ReadFile(DLL_File, OriginalInstructions, InstructionCompareByteCount, nullptr, nullptr)) {
-			return E_FAIL;
-		}
-		if (RtlCompareMemory(CurrentPresentInstructions + 5, OriginalInstructions + 5, InstructionCompareByteCount - 5) == InstructionCompareByteCount - 5) {
-			Present_PreviousDetourHookDetected = RtlCompareMemory(CurrentPresentInstructions, OriginalInstructions, 5) != 5;
-			CopyMemory(Present_OriginalFirstFiveBytesOfInstruction, OriginalInstructions, 5);
-			Present_HasOriginalFirstFiveBytesOfInstruction = true;
-			PresentFound = true;
-		}
-		if (RtlCompareMemory(CurrentPresent1Instructions + 5, OriginalInstructions + 5, InstructionCompareByteCount - 5) == InstructionCompareByteCount - 5) {
-			Present1_PreviousDetourHookDetected = RtlCompareMemory(CurrentPresent1Instructions, OriginalInstructions, 5) != 5;
-			CopyMemory(Present1_OriginalFirstFiveBytesOfInstruction, OriginalInstructions, 5);
-			Present1_HasOriginalFirstFiveBytesOfInstruction = true;
-			Present1Found = true;
-		}
-		CurrentPos += 0x10;
-	}
-	if (!PresentFound) {
-		return STATUS_ENTRYPOINT_NOT_FOUND;
-	}
-
-	if (!CloseHandle(DLL_File)) {
-		return E_FAIL;
-	}
-	
-	return S_OK;
-}
-
-HRESULT IDXGISwapChain_Present_Patch()
-{
-	DWORD OldProtect;
-	if (!VirtualProtect(IDXGISwapChain_Present_Original, sizeof(Present_OriginalFirstFiveBytesOfInstruction), PAGE_EXECUTE_READWRITE, &OldProtect)) return E_FAIL;
-	if (!Present_HasLoadedFirstFiveBytesOfInstruction) {
-		CopyMemory(Present_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction));
-		Present_HasLoadedFirstFiveBytesOfInstruction = true;
-	}
-	CopyMemory(IDXGISwapChain_Present_Original, Present_OriginalFirstFiveBytesOfInstruction, sizeof(Present_OriginalFirstFiveBytesOfInstruction));
-	if (!VirtualProtect(IDXGISwapChain_Present_Original, sizeof(Present_OriginalFirstFiveBytesOfInstruction), OldProtect, &OldProtect)) return E_FAIL;
-	return S_OK;
-}
-
-HRESULT IDXGISwapChain_Present_UnPatch()
-{
-	if (!Present_HasLoadedFirstFiveBytesOfInstruction) return E_NOT_VALID_STATE;
-	DWORD OldProtect;
-	if (!VirtualProtect(IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction), PAGE_EXECUTE_READWRITE, &OldProtect)) return E_FAIL;
-	CopyMemory(IDXGISwapChain_Present_Original, Present_LoadedFirstFiveBytesOfInstruction, sizeof(Present_LoadedFirstFiveBytesOfInstruction));
-	if (!VirtualProtect(IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction), OldProtect, &OldProtect)) return E_FAIL;
-	return S_OK;
-}
-
-HRESULT IDXGISwapChain1_Present1_Patch()
-{
-	DWORD OldProtect;
-	if (!VirtualProtect(IDXGISwapChain1_Present1_Original, sizeof(Present_OriginalFirstFiveBytesOfInstruction), PAGE_EXECUTE_READWRITE, &OldProtect)) return E_FAIL;
-	if (!Present1_HasLoadedFirstFiveBytesOfInstruction) {
-		CopyMemory(Present1_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction));
-		Present1_HasLoadedFirstFiveBytesOfInstruction = true;
-	}
-	CopyMemory(IDXGISwapChain1_Present1_Original, Present1_OriginalFirstFiveBytesOfInstruction, sizeof(Present_OriginalFirstFiveBytesOfInstruction));
-	if (!VirtualProtect(IDXGISwapChain1_Present1_Original, sizeof(Present1_OriginalFirstFiveBytesOfInstruction), OldProtect, &OldProtect)) return E_FAIL;
-	return S_OK;
-}
-
-HRESULT IDXGISwapChain1_Present1_UnPatch()
-{
-	if (!Present1_HasLoadedFirstFiveBytesOfInstruction) return E_NOT_VALID_STATE;
-	DWORD OldProtect;
-	if (!VirtualProtect(IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction), PAGE_EXECUTE_READWRITE, &OldProtect)) return E_FAIL;
-	CopyMemory(IDXGISwapChain1_Present1_Original, Present1_LoadedFirstFiveBytesOfInstruction, sizeof(Present1_LoadedFirstFiveBytesOfInstruction));
-	if (!VirtualProtect(IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction), OldProtect, &OldProtect)) return E_FAIL;
-	return S_OK;
-}
-
 DWORD __stdcall InstallHook()
 {
 	HRESULT result = 0;
+
+	ComPtr<IDXGIFactory> Factory;
+	ComPtr<IDXGIFactory2> Factory2;
+	ComPtr<IDXGISwapChain> SwapChain;
+	ComPtr<IDXGISwapChain1> SwapChain1;
 
 	if (DXGI_DLL == NULL) {
 		DXGI_DLL = GetModuleHandleW(L"DXGI.dll");
@@ -662,7 +725,7 @@ int __stdcall BeginProcessCompletionEvent()
 
 DWORD __stdcall EndProcessCompletionEvent()
 {
-	CompletionID = SIZE_T_MAX;
+	CompletionID = INT_MAX;
 	if (!SetEvent(AckCompletionEvent)) {
 		return GetLastError();
 	}
@@ -697,6 +760,11 @@ intptr_t __stdcall Get_IDXGIFactory_CreateSwapChain_Original()
 intptr_t __stdcall Get_IDXGIFactory2_CreateSwapChainForHwnd_Original()
 {
 	return reinterpret_cast<intptr_t>(IDXGIFactory2_CreateSwapChainForHwnd_Original);
+}
+
+void** __stdcall Get_LocalVariablesArray()
+{
+	return PtrList;
 }
 
 bool __stdcall Get_Present_PreviousDetourHookDetected()
