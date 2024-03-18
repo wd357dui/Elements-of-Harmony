@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using Melbot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,6 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
-using static UnityEngine.Networking.UnityWebRequest;
 
 namespace ElementsOfHarmony
 {
@@ -323,7 +321,6 @@ namespace ElementsOfHarmony
 			[HarmonyPatch(methodName: "profileRef", methodType: MethodType.Getter)]
 			public static class VolumnProfile_profileRef_getter
 			{
-				public static bool TonemapPatched = false;
 				private static readonly Dictionary<Volume, TonemappingMode?> PreviousValue = new Dictionary<Volume, TonemappingMode?>();
 				public static void Postfix(Volume __instance, VolumeProfile __result)
 				{
@@ -342,7 +339,6 @@ namespace ElementsOfHarmony
 									$"applying value override, " +
 									$"old={TonemappingVolumeComponent.mode.value}, " +
 									$"new={PreviousValue[__instance] = TonemappingVolumeComponent.mode.value = Override}");
-								TonemapPatched = true;
 							}
 						}
 					}
