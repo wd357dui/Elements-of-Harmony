@@ -28,15 +28,25 @@ namespace ElementsOfHarmony
 						Directory.CreateDirectory("Elements of Harmony");
 					}
 				}
-				catch (Exception) { }
+				catch (Exception e)
+				{
+					UnityEngine.Debug.LogError($"UnityEngine.StackTraceUtility.ExtractStackTrace()\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+					UnityEngine.Debug.LogError($"e.StackTrace\r\n{e.StackTrace}");
+                    UnityEngine.Debug.LogError($"e.Message {e.Message}");
+                }
 
 				try
 				{
 					Settings.ReadOurSettings();
-				}
-				catch (Exception) { }
+                }
+                catch (Exception e)
+                {
+                    UnityEngine.Debug.LogError($"UnityEngine.StackTraceUtility.ExtractStackTrace()\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+                    UnityEngine.Debug.LogError($"e.StackTrace\r\n{e.StackTrace}");
+                    UnityEngine.Debug.LogError($"e.Message {e.Message}");
+                }
 
-				Log.InitDebug();
+                Log.InitDebug();
 
 				Localization.Init();
 

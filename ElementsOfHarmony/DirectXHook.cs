@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Melbot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Networking.UnityWebRequest;
 
 namespace ElementsOfHarmony
 {
@@ -321,27 +323,65 @@ namespace ElementsOfHarmony
 			[HarmonyPatch(methodName: "profileRef", methodType: MethodType.Getter)]
 			public static class VolumnProfile_profileRef_getter
 			{
+				public static bool TonemapPatched = false;
 				private static readonly Dictionary<Volume, TonemappingMode?> PreviousValue = new Dictionary<Volume, TonemappingMode?>();
 				public static void Postfix(Volume __instance, VolumeProfile __result)
 				{
 					if (Settings.DirectXHook.URP.TonemappingMode is TonemappingMode Override)
 					{
 						if (__instance.isGlobal &&
-							__result.components.First(VC => VC is Tonemapping) is Tonemapping TonemappingVolumeComponent &&
-							TonemappingVolumeComponent.parameters.First(VP => VP is VolumeParameter<TonemappingMode>) is VolumeParameter<TonemappingMode> TonemappingVolumeParameter)
+							__result.components.First(VC => VC is Tonemapping) is Tonemapping TonemappingVolumeComponent)
 						{
 							if (!PreviousValue.ContainsKey(__instance)) PreviousValue.Add(__instance, null);
 							TonemappingMode? previous = PreviousValue[__instance];
-							if (previous != TonemappingVolumeParameter.value || previous != Override || TonemappingVolumeParameter.value != Override)
+							if (previous != TonemappingVolumeComponent.mode.value || previous != Override || TonemappingVolumeComponent.mode.value != Override)
 							{
 								Log.Message($"Global tonemapping detected, " +
 									$"profile={__instance.name}, " +
 									$"component={TonemappingVolumeComponent.name}, " +
 									$"applying value override, " +
-									$"old={TonemappingVolumeParameter.value}, " +
-									$"new={PreviousValue[__instance] = TonemappingVolumeParameter.value = Override}");
+									$"old={TonemappingVolumeComponent.mode.value}, " +
+									$"new={PreviousValue[__instance] = TonemappingVolumeComponent.mode.value = Override}");
+								TonemapPatched = true;
 							}
 						}
+					}
+				}
+			}
+
+			[HarmonyPatch(typeof(UniversalRenderPipeline))]
+			[HarmonyPatch("UpdateVolumeFramework")]
+			public static class UpdateVolumeFrameworkPatch
+			{
+				private static bool NewTonemappingProfileFabricated = false;
+				public static void Postfix()
+				{
+					if (Settings.DirectXHook.URP.TonemappingMode is TonemappingMode Override &&
+						Settings.DirectXHook.URP.FabricateNewGlobalTonemappingProfile &&
+						!NewTonemappingProfileFabricated)
+					{
+						Log.Message($"fabricating a new global tonemapping profile");
+						GameObject NewGlobalVolumeGameObject = new GameObject(nameof(NewGlobalVolumeGameObject))
+						{
+							layer = 0
+						};
+						Volume NewGlobalVolumeProfile = NewGlobalVolumeGameObject.AddComponent<Volume>();
+						NewGlobalVolumeProfile.name = nameof(NewGlobalVolumeProfile);
+						NewGlobalVolumeProfile.isGlobal = true;
+						NewGlobalVolumeProfile.profile = new VolumeProfile();
+						Tonemapping NewTonemapping = new Tonemapping()
+						{
+							active = true,
+							name = nameof(NewTonemapping)
+						};
+						NewTonemapping.mode.value = Override;
+						NewGlobalVolumeProfile.profile.components.Add(NewTonemapping);
+						Log.Message($"fabricated a new global tonemapping profile - " +
+							$"GameObject={nameof(NewGlobalVolumeGameObject)}, " +
+							$"Volume={nameof(NewGlobalVolumeProfile)}, " +
+							$"Tonemapping={nameof(NewTonemapping)}, " +
+							$"value={NewTonemapping.mode.value}");
+						NewTonemappingProfileFabricated = true;
 					}
 				}
 			}

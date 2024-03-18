@@ -43,6 +43,7 @@ namespace ElementsOfHarmony
 			public static class URP
 			{
 				public static TonemappingMode? TonemappingMode = null;
+				public static bool FabricateNewGlobalTonemappingProfile = false;
 			}
 		}
 
@@ -99,17 +100,14 @@ namespace ElementsOfHarmony
 					}
 					else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
 					{
-						string[] EnumNames = Enum.GetNames(Field.FieldType);
+						Type EnumType = Field.FieldType.IsEnum ? Field.FieldType : Nullable.GetUnderlyingType(Field.FieldType);
+						string[] EnumNames = Enum.GetNames(EnumType);
 						string Read = Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
 						if (Read != null &&
 							EnumNames.FirstOrDefault(N => N.Equals(Read, StringComparison.InvariantCultureIgnoreCase))
 							is string MatchedEnumName)
 						{
-							Field.SetValue(null, Enum.Parse(Field.FieldType, MatchedEnumName));
-						}
-						else
-						{
-							Field.SetValue(null, "");
+							Field.SetValue(null, Enum.Parse(EnumType, MatchedEnumName));
 						}
 					}
 				}
