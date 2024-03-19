@@ -2,9 +2,10 @@
 A localization mod for My Little Pony: A Maretime Bay Adventure (and soon, for **A Zephyr Heights Mystery**) using Harmony API
 
 # New Goal 2024
-A new MLP game from the same developer (or publisher?) is confirmed, it's called **A Zephyr Heights Mystery**.
+A new MLP game from the same developer (Melbot) is confirmed, it's called **A Zephyr Heights Mystery**.
 
 That gives me the drive to remaster this mod, which counts as ~~practice & preparation~~ *actual development* to mod the new game.
+I'm aiming to achieve using this one modding DLL for both games, if possible. (gotta remind myself to investigate the possibility of it later)
 
 - **The goals of this remaster**
 
