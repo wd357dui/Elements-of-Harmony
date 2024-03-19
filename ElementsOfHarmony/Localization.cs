@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 namespace ElementsOfHarmony
@@ -606,6 +607,58 @@ namespace ElementsOfHarmony
 						TryLoadLogoFile(OurLanguage);
 						sprites.Add(OurLanguage);
 						return false;
+					}
+				}
+			}
+
+			[HarmonyPatch(typeof(PreMenu))]
+			[HarmonyPatch("OnData")] // called before menu is first loaded (I think)
+			public static class PreMenuPatch
+			{
+				public static bool Prefix(PreMenu __instance)
+				{
+					// original code
+					BaseSystem baseSystem = NonPersistentSingleton<BaseSystem>.Get();
+					baseSystem.gameSession.previousScene = "MenuScene";
+					baseSystem.gameSession.wearRollers = false;
+					string text = NonPersistentSingleton<BaseSystem>.Get().i2LManager.Get2LetterISOCodeFromSystemLanguage();
+					Debug.Log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Lang: " + text);
+
+					/* original code
+					if (text == "" || text == "ru") // <- saw this while looking for ways to fix text blurriness in menu so I'm replacing it
+					{
+						text = "en-US";
+					}
+					*/
+					// replacement code
+					if (string.IsNullOrEmpty(text))
+					{
+						text = "en-US";
+					}
+
+					// original code
+					DataObject dataObject = Traverse.Create(__instance).Field("dataObject").GetValue<DataObject>();
+					Dictionary<string, object> @object = dataObject.GetObject();
+					if (@object.ContainsKey("lang") && !string.IsNullOrEmpty(@object["lang"].ToString()))
+					{
+						text = @object["lang"].ToString();
+					}
+					NonPersistentSingleton<BaseSystem>.Get().i2LManager.LoadI2L(text, () => Traverse.Create(__instance).Method("OnLoaded").GetValue());
+					LocalizationManager.CurrentLanguage = NonPersistentSingleton<BaseSystem>.Get().i2LManager.GetSystemLanguage(text);
+					return false;
+				}
+			}
+
+			[HarmonyPatch(typeof(GlobalReferences))]
+			[HarmonyPatch("SetCamera")]
+			public static class GlobalReferencesCameraPatch
+			{
+				public static void Postfix(GlobalReferences __instance)
+				{
+					UniversalAdditionalCameraData CameraData = __instance.MainCamera.GetComponent<UniversalAdditionalCameraData>();
+					if (CameraData.antialiasing == AntialiasingMode.FastApproximateAntialiasing) // this is causing the main menu's text blurry
+					{
+						CameraData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing; // so we change it
 					}
 				}
 			}
