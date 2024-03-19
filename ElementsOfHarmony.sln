@@ -11,12 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localizatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "zh-CN", "zh-CN", "{2ACDA54F-5803-489A-BCE9-F828C47BCD55}"
 	ProjectSection(SolutionItems) = preProject
+		Assets\Localization\AMBA\zh-CN\CHI_MLP_logo.png = Assets\Localization\AMBA\zh-CN\CHI_MLP_logo.png
+		Assets\Localization\AMBA\zh-CN\CHI_MLP_logo.psd = Assets\Localization\AMBA\zh-CN\CHI_MLP_logo.psd
 		Assets\Localization\AMBA\zh-CN\zh-CN.txt = Assets\Localization\AMBA\zh-CN\zh-CN.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ru", "ru", "{91849B45-F677-46DA-8AC8-5F3DA32C3C05}"
 	ProjectSection(SolutionItems) = preProject
 		Assets\Localization\AMBA\ru\ru.txt = Assets\Localization\AMBA\ru\ru.txt
+		Assets\Localization\AMBA\ru\RUS_MLP_logo.png = Assets\Localization\AMBA\ru\RUS_MLP_logo.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AMBA", "AMBA", "{E359DCCB-6622-4F69-B0A6-0FE6BD46BF6C}"

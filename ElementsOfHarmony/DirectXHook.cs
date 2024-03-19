@@ -389,12 +389,10 @@ namespace ElementsOfHarmony
 						Volume NewGlobalVolumeProfile = NewGlobalVolumeGameObject.AddComponent<Volume>();
 						NewGlobalVolumeProfile.name = nameof(NewGlobalVolumeProfile);
 						NewGlobalVolumeProfile.isGlobal = true;
-						NewGlobalVolumeProfile.profile = new VolumeProfile();
-						Tonemapping NewTonemapping = new Tonemapping()
-						{
-							active = true,
-							name = nameof(NewTonemapping)
-						};
+						NewGlobalVolumeProfile.profile = ScriptableObject.CreateInstance<VolumeProfile>();
+						Tonemapping NewTonemapping = ScriptableObject.CreateInstance<Tonemapping>();
+						NewTonemapping.active = true;
+						NewTonemapping.name = nameof(NewTonemapping);
 						NewTonemapping.mode.value = Override;
 						NewGlobalVolumeProfile.profile.components.Add(NewTonemapping);
 						Log.Message($"fabricated a new global tonemapping profile - " +

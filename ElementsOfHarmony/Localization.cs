@@ -52,7 +52,7 @@ namespace ElementsOfHarmony
 					{
 						foreach (Tuple<string, AudioType> format in OurSupportedAudioFormats)
 						{
-							if (f.EndsWith(format.Item1, StringComparison.OrdinalIgnoreCase))
+							if (f.EndsWith(format.Item1, StringComparison.InvariantCultureIgnoreCase))
 							{
 								UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip("file:///" + f, format.Item2);
 								req.SendWebRequest().completed += AudioClipLoadComplete;
@@ -210,36 +210,29 @@ namespace ElementsOfHarmony
 
 		public static class AMBA
 		{
+			// if we have a language override, use our override settings, otherwise we follow the game settings
+			public static string TargetLanguage => string.IsNullOrEmpty(Settings.OurSelectedLanguageOverride) ? LocalizationManager.CurrentLanguageCode : Settings.OurSelectedLanguageOverride;
+
 			[HarmonyPatch(typeof(SupportedLanguages))]
 			[HarmonyPatch("GetSupportedLanguages")] // the game use this method to fetch a list of all supported languages
 			public static class GetSupportedLanguagesPatch
 			{
-				public static void Postfix(ref List<SupportedLanguageParams> __result)
+				public static bool Prefix(SupportedLanguages __instance, ref List<SupportedLanguageParams> __result)
 				{
+					var supportedLanguagesField = Traverse.Create(__instance).Field("supportedLanguages");
+					SupportedLanguageParams[] supportedLanguages = supportedLanguagesField.GetValue<SupportedLanguageParams[]>();
 					SupportedLanguageParams en_US = null;
 					foreach (string langCode in OurSupportedLanguageList)
 					{
-						bool languageFound = false;
-						for (int x = 0; x < __result.Count; x++)
+						if (!supportedLanguages.Any(L => L.code == langCode))
 						{
-							if (en_US == null && __result[x].code == "en-US")
-							{
-								en_US = __result[x];
-							}
-							if (langCode == __result[x].code)
-							{
-								languageFound = true;
-								break;
-							}
-						}
-						if (!languageFound)
-						{
+							if (en_US == null) en_US = supportedLanguages.First(L => L.code == "en-US");
 							// our language was not present in the original supported languages list
 							// so we clone a SupportedLanguageParams from en-US and change the language code to our's
 							OurSupportedLanguageParams ourCurrentLang = new OurSupportedLanguageParams(en_US)
 							{
 								code = langCode, // this field alone does not reflect how the game determines the language code
-								localizedAudio = false // this field does not reflect audio localization status, the game handles audio localization differently
+								localizedAudio = true // this field does not reflect audio localization status, the game handles audio localization differently
 							};
 							if (ourCurrentLang.assetReference != null)
 							{
@@ -247,18 +240,18 @@ namespace ElementsOfHarmony
 								if (sourceAsset != null)
 								{
 									sourceAsset.name = "I2Languages_" + langCode; // this is where the game actually determines language code
-									__result.Add(ourCurrentLang);
+									supportedLanguagesField.SetValue(supportedLanguages.Append(ourCurrentLang).ToArray());
 									Log.Message("Language added " + langCode);
 								}
 							}
 						}
 					}
+					__result = new List<SupportedLanguageParams>(supportedLanguages);
+					return false;
 				}
 
-				/// <summary>
-				/// I just want a copy constructor
-				/// </summary>
-				public class OurSupportedLanguageParams : SupportedLanguageParams
+				public class OurSupportedLanguageParams :
+					SupportedLanguageParams // I just want a copy constructor
 				{
 					public OurSupportedLanguageParams(SupportedLanguageParams source)
 					{
@@ -422,8 +415,7 @@ namespace ElementsOfHarmony
 					}
 					if (!string.IsNullOrEmpty(Term))
 					{
-						// if we have a language override, use our override settings, otherwise we follow the game settings
-						string TargetLanguage = string.IsNullOrEmpty(Settings.OurSelectedLanguageOverride) ? LocalizationManager.CurrentLanguageCode : Settings.OurSelectedLanguageOverride;
+						string TargetLanguage = AMBA.TargetLanguage;
 						if (OurTranslations.ContainsKey(TargetLanguage))
 						{
 							// search for the term in our translation list
@@ -558,6 +550,62 @@ namespace ElementsOfHarmony
 					else
 					{
 						Log.Message($"{typeof(ControlsMenuTextFix).FullName} - \"Shift\" not found, this fix may be out of date");
+					}
+				}
+			}
+
+			[HarmonyPatch(typeof(ImageLanguageHandler))]
+			[HarmonyPatch("SetImage")]
+			public static class ImageLanguageHandlerPatch
+			{
+				public static bool Prefix(ImageLanguageHandler __instance)
+				{
+					List<LanguageSprite> sprites = Traverse.Create(__instance).Field("sprites").GetValue<List<LanguageSprite>>();
+					Image image = Traverse.Create(__instance).Field("image").GetValue<Image>();
+
+					void TryLoadLogoFile(LanguageSprite language)
+					{
+						if (LocalizationManager.GetTranslation("Menu/MLP_logo_file") is string LogoFileName)
+						{
+							LogoFileName = Path.Combine("Elements of Harmony/Translations", LogoFileName);
+							Log.Message($"Trying to load localized logo file at {LogoFileName}");
+							try
+							{
+								var Logo_Texture = new Texture2D(2, 2);
+								if (Logo_Texture.LoadImage(File.ReadAllBytes(LogoFileName)))
+								{
+									language.sprite = Sprite.Create(Logo_Texture, language.sprite.rect, language.sprite.pivot);
+								}
+							}
+							catch { }
+						}
+					}
+
+					string TargetLanguage = AMBA.TargetLanguage;
+					LanguageSprite languageSprite;
+					if ((languageSprite = sprites.Find((LanguageSprite t) => t.languageCode == TargetLanguage)) != null)
+					{
+						if (languageSprite.languageCode != "en-US" && languageSprite.sprite.name.StartsWith("ENG_MLP_logo"))
+						{
+							TryLoadLogoFile(languageSprite);
+						}
+
+						image.sprite = languageSprite.sprite;
+						Debug.Log("Logo Language: " + TargetLanguage);
+						return false;
+					}
+					else
+					{
+						LanguageSprite en_US = sprites.First(T => T.languageCode == "en-US");
+						LanguageSprite OurLanguage = new LanguageSprite()
+						{
+							languageCode = TargetLanguage,
+							sprite = en_US.sprite,
+						};
+						Log.Message($"Creating new LanguageSprite for {TargetLanguage}");
+						TryLoadLogoFile(OurLanguage);
+						sprites.Add(OurLanguage);
+						return false;
 					}
 				}
 			}
