@@ -1,21 +1,31 @@
 # Elements of Harmony
-A localization mod for My Little Pony: A Maretime Bay Adventure using Harmony API
+A localization mod for My Little Pony: A Maretime Bay Adventure (and soon, for **A Zephyr Heights Mystery**) using Harmony API
 
 # New Goal 2024
 A new MLP game from the same developer (or publisher?) is confirmed, it's called **A Zephyr Heights Mystery**.
 
-That gives me the drive to begin to remaster this mod,
-which counts as practice & preparation to mod the new game when it comes out
+That gives me the drive to remaster this mod, which counts as ~~practice & preparation~~ *actual development* to mod the new game.
 
 - **The goals of this remaster**
 
-- [ ] Refactor the codebase to meet my newest standards
+- [x] Refactor the codebase to meet my newest standards
 - [ ] Refactor and merge the `Loyalty` branch
 - [ ] Make a patch tool using PowerShell script or something (I just don't want to make a separate program for this)
+- [ ] Various improvements, fixing bugs in the base game (did you hear that Melbot? I'm fixing bugs for you :wink:)
 
-------
+## Bug fixes/Improvements for the base game
 
-- **Optional goals** (*most of these are stuff I wanted to do at the time, some are just for the meme, and the others are there because I wanted to "unlock the true potential" of this mod, but I didn't, fearing that no one would be interested and I would have just wasted lots of time and effort for nothing...* :cry:)
+Here I will list the bugs/improvements that I have fixed/made and will (try to) fix/make in the future:
+
+- [x] In the controls menu, two text fields were not localized, and one text field has a missing character... [Fixed](https://github.com/wd357dui/Elements-of-Harmony/blob/2a5923cbc1d3fa3228c5fb73f5897327704d5832/ElementsOfHarmony/Localization.cs#L523-L563) on March 17
+- [x] Did they [turn off ACES tone mapping for AZHM](https://twitter.com/_DJTHED/status/1767448844374294534)? No problem, let me just invent a way to turn it back on... There, [fixed](https://github.com/wd357dui/Elements-of-Harmony/blob/36c7faa5e737312457d7e2b4177548a45698f455/ElementsOfHarmony/DirectXHook.cs#L320-L347) on March 18, [improved](https://github.com/wd357dui/Elements-of-Harmony/blob/4c6d5775d1d405f62ec779298657258b1b499ccb/ElementsOfHarmony/DirectXHook.cs#L322-L387) later that day *(improvement: in case they don't have ANY tone mapping profile, I offer an option to fabricate a new one)*
+- [x] I saw a line that says "Logo language" in the log, and that's when I knew that I could implement a **logo localization** feature, too. [Implemented](https://github.com/wd357dui/Elements-of-Harmony/blob/4102f64e94fe77489219f200350835ac8305359a/ElementsOfHarmony/Localization.cs#L557-L611) on March 19, recovered the [Russian game logo](https://github.com/wd357dui/Elements-of-Harmony/blob/master/Assets/Localization/AMBA/ru/RUS_MLP_logo.png), made a [Chinese game logo](https://github.com/wd357dui/Elements-of-Harmony/blob/master/Assets/Localization/AMBA/zh-CN/CHI_MLP_logo.png). ***Usage note**: add term `Menu/MLP_logo_file` in the translation txt file, set translated text value as the file name for the logo image file including extension name, and put the image file in the "Elements of Harmony/Translations" folder to apply the logo localization*
+- [x] After some investigation in the logs and some scouting on the Internet, I found the reason why all the text on the main menu appears blurry, it's because the main menu [is using FXAA](https://forum.unity.com/threads/tmpro-same-text-looks-fine-on-ui-but-blurry-in-3d.1077041/#post-6950597)! [Fixed](https://github.com/wd357dui/Elements-of-Harmony/blob/25f33e4213a21f1dab3988d33bbbbf199339e286/ElementsOfHarmony/Localization.cs#L652-L665) on March 19 (when encounters FXAA settings, change it to SMAA)
+- [ ] I watched the [trailer](https://www.youtube.com/watch?v=cpE6W54yvg8) again, and I think that the tone mapping drama thing is not over yet, the mane 6 models (and some other stuff) appears darker than I think should be, seems like they are trying to make things work without tone mapping, but they're approaching it in the wrong direction. I think I'll need to find ways to add another post-process layer to bring the "brightness" back up before the tone-mapping layer. (pending)
+
+## Additional Overall Optional goals
+
+(*most of these are stuff I wanted to do at the time, some are just for the meme, and the others are there because I wanted to "unlock the true potential" of this mod, but I didn't, fearing that no one would be interested and I would have just wasted lots of time and effort for nothing...* :cry:)
 
 - [x] Magic - Hook the DirectX API to acquire the game's swap chain, so that we can render our graphics on top of the original game using Direct2D - *already implemented in 2022, will improve in the future*
 - [x] Loyalty - Kinect motion control - *already implemented in 2022, will refactor in the future*
