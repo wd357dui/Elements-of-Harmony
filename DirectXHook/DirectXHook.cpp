@@ -126,14 +126,14 @@ LRESULT DummyWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 
 /// <summary>
 /// compare the loaded original Present function with byte code from the original file; 
-/// for a specified number of byte codes, excluding the first five bytes which can hold a jmp instruction: 
+/// for a specified number of byte codes, excluding the first five bytes (which can hold a jmp instruction): 
 /// we match the byte code with the original file;
-/// If a match exists then we believe that we have found the original byte code;
+/// If a match exists then we believe that we have found the original function's byte code;
 /// so next step we compare the first five bytes;
 /// if the first five bytes didn't match, then it must be a detour hook.
-/// if the first five bytes matches however, there were no detour hooks.
+/// if the first five bytes did match however, there were no detour hooks.
 /// </summary>
-/// <returns>if no byte code matched, returns STATUS_ENTRYPOINT_NOT_FOUND</returns>
+/// <returns>if no byte code ever matched, returns STATUS_ENTRYPOINT_NOT_FOUND (didn't find the original function)</returns>
 HRESULT DetectPreviousDetourHook()
 {
 	BYTE CurrentPresentInstructions[InstructionCompareByteCount];
@@ -182,7 +182,7 @@ HRESULT DetectPreviousDetourHook()
 			Present1_HasOriginalFirstFiveBytesOfInstruction = true;
 			Present1Found = true;
 		}
-		CurrentPos += 0x10;
+		CurrentPos += 0x10; // it seems that the beginning position of every function are aligned to 0x10
 	}
 	if (!PresentFound) {
 		return STATUS_ENTRYPOINT_NOT_FOUND;
@@ -883,7 +883,7 @@ begin:
 			LastError = GetLastError();
 			return -1;
 		}
-		if (TwentyFive != 25) { // I don't know what 25 means here though
+		if (TwentyFive != 25) { // I don't know what 25 means here though, I don't really know assembly code
 			LastError = E_UNEXPECTED;
 		}
 

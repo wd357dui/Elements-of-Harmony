@@ -1042,7 +1042,7 @@ namespace ElementsOfHarmony
 			{
 				Log.MessageBox(IntPtr.Zero,
 					$"{typeof(DirectXHook).FullName}: A third-party non-detour DirectX hook detected!" + "\r\n" +
-					"Keep in mind that if this other hook causes stack overflow exception I won't be able to fix it!",
+					"Keep in mind that if this other hook somehow causes stack overflow exception I won't be able to fix it!",
 					"I curse the name, the one behind it all", Log.MB_ICONWARNING | Log.MB_OK);
 			}
 		}

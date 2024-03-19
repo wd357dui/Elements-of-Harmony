@@ -65,7 +65,7 @@ namespace ElementsOfHarmony
 				}
 				void LoadAudioClipsRecursive(string directory)
 				{
-					IEnumerable<string> directories = Directory.EnumerateDirectories(directory);
+					IEnumerable<string> directories = Directory.EnumerateDirectories(directory, "*", SearchOption.AllDirectories);
 					foreach (string currentDirectory in directories)
 					{
 						LoadAudioClips(currentDirectory);
@@ -97,7 +97,7 @@ namespace ElementsOfHarmony
 						}
 					}
 				}
-				// look for all audio files recursively in the "Elements of Harmony/AudioClip" folder and all its sub folders
+				// look for all audio files in the "Elements of Harmony/AudioClip" folder and all its sub folders
 				if (Directory.Exists("Elements of Harmony/AudioClip"))
 				{
 					LoadAudioClipsRecursive("Elements of Harmony/AudioClip");
@@ -126,10 +126,7 @@ namespace ElementsOfHarmony
 						{
 							// file name of the txt should be the ISO language code
 							// the content should be tab-separated values (TSV)
-							// where first column is the term (case sensitive)
-							// and second column is the translated text (other columns will be ignored)
-							// please also add your language code (as term) and your language name (as translated text)
-							// so that your language display name can show up in the game menu
+							// see readme file for content specifications
 							string langCode = f.Remove(f.LastIndexOf("."));
 							langCode = langCode.Replace("\\", "/");
 							langCode = langCode.Substring(langCode.LastIndexOf("/") + 1);
@@ -387,7 +384,7 @@ namespace ElementsOfHarmony
 			}
 
 			[HarmonyPatch(typeof(LocalizationManager))]
-			[HarmonyPatch("GetTranslation")] // the game use this method to fetch text translations and to map a "term" to a translated audio clip
+			[HarmonyPatch("GetTranslation")] // the game use this method to fetch text translations, or to map a "term" to a translated audio clip
 			public static class GetTranslationPatch
 			{
 				public static bool Prefix(string Term, ref string __result, out string __state)
@@ -448,7 +445,7 @@ namespace ElementsOfHarmony
 			[HarmonyPatch("DoLocalize")] // the game use this method to fetch translated audio clips
 			public static class UnityStandardAudioSourcePatch
 			{
-				// "mainTranslation" is the term for the specified audio clip
+				// `mainTranslation` is the term string for the requested audio clip
 				public static bool Prefix(LocalizeTarget_UnityStandard_AudioSource __instance, Localize cmp, string mainTranslation)
 				{
 					// code copied from the original method
@@ -466,7 +463,7 @@ namespace ElementsOfHarmony
 					}
 					if (!AudioClipsLoaded)
 					{
-						// if we haven't finished loading our audio clips, we wait until it does
+						// if our audio clips haven't finished loading, we wait until they do
 						AudioClipsLoadedEvent.WaitOne();
 					}
 					bool AudioMatched;
@@ -556,7 +553,7 @@ namespace ElementsOfHarmony
 			}
 
 			[HarmonyPatch(typeof(ImageLanguageHandler))]
-			[HarmonyPatch("SetImage")]
+			[HarmonyPatch("SetImage")] // called when the MLP logo is begin loaded in the main menu (on the top left)
 			public static class ImageLanguageHandlerPatch
 			{
 				public static bool Prefix(ImageLanguageHandler __instance)
@@ -625,7 +622,7 @@ namespace ElementsOfHarmony
 					Debug.Log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Lang: " + text);
 
 					/* original code
-					if (text == "" || text == "ru") // <- saw this while looking for ways to fix text blurriness in menu so I'm replacing it
+					if (text == "" || text == "ru") // <- saw this when I was looking for ways to fix text blurriness in menu so I'm replacing it
 					{
 						text = "en-US";
 					}

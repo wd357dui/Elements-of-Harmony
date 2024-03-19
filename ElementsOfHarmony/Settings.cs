@@ -48,12 +48,15 @@ namespace ElementsOfHarmony
 
 		public static void ReadOurSettings()
 		{
-			// this settings exist because the game can't save a language setting that it doesn't originally support into the game save
+			// this settings exist originally because the game can't save a language setting that it doesn't originally support
+			// into the game save
 			// (so I took the matter into my own hooves)
 			// example:
 			// OurSelectedLanguageOverride=zh-CN
 			// (the value is the ISO language code, same with your translation file name, case sensitive)
-			Config = new EnvFile("Elements of Harmony/Settings.txt");
+			// nowadays I use this to store all kinds of settings
+
+			Config = new EnvFile("Elements of Harmony/Settings.txt"); // thanks Ponywka for writing `EnvFile` by the way
 			OurSelectedLanguageOverride_Internal = Config.ReadString("OurSelectedLanguageOverride", OurSelectedLanguageOverride_Internal);
 			OurFallbackLanguage_Internal = Config.ReadString("OurFallbackLanguage", OurFallbackLanguage_Internal);
 
@@ -77,38 +80,42 @@ namespace ElementsOfHarmony
 				}
 				foreach (var Field in ClassType.GetFields())
 				{
-					if (Field.FieldType == typeof(bool))
+					try
 					{
-						Field.SetValue(null, Config.ReadBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null)));
-					}
-					else if (Field.FieldType == typeof(int))
-					{
-						Field.SetValue(null, Config.ReadInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null)));
-					}
-					else if (Field.FieldType == typeof(bool?))
-					{
-						Field.SetValue(null, Config.ReadBooleanOptional($"{ClassName}.{Field.Name}", (bool?)Field.GetValue(null)));
-					}
-					else if (Field.FieldType == typeof(int?))
-					{
-						Field.SetValue(null, Config.ReadIntegerOptional($"{ClassName}.{Field.Name}", (int?)Field.GetValue(null)));
-					}
-					else if (Field.FieldType == typeof(string))
-					{
-						Field.SetValue(null, Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null) as string));
-					}
-					else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
-					{
-						Type EnumType = Field.FieldType.IsEnum ? Field.FieldType : Nullable.GetUnderlyingType(Field.FieldType);
-						string[] EnumNames = Enum.GetNames(EnumType);
-						string Read = Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
-						if (Read != null &&
-							EnumNames.FirstOrDefault(N => N.Equals(Read, StringComparison.InvariantCultureIgnoreCase))
-							is string MatchedEnumName)
+						if (Field.FieldType == typeof(bool))
 						{
-							Field.SetValue(null, Enum.Parse(EnumType, MatchedEnumName));
+							Field.SetValue(null, Config.ReadBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null)));
+						}
+						else if (Field.FieldType == typeof(int))
+						{
+							Field.SetValue(null, Config.ReadInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null)));
+						}
+						else if (Field.FieldType == typeof(bool?))
+						{
+							Field.SetValue(null, Config.ReadBooleanOptional($"{ClassName}.{Field.Name}", (bool?)Field.GetValue(null)));
+						}
+						else if (Field.FieldType == typeof(int?))
+						{
+							Field.SetValue(null, Config.ReadIntegerOptional($"{ClassName}.{Field.Name}", (int?)Field.GetValue(null)));
+						}
+						else if (Field.FieldType == typeof(string))
+						{
+							Field.SetValue(null, Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null) as string));
+						}
+						else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
+						{
+							Type EnumType = Field.FieldType.IsEnum ? Field.FieldType : Nullable.GetUnderlyingType(Field.FieldType);
+							string[] EnumNames = Enum.GetNames(EnumType);
+							string Read = Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
+							if (Read != null &&
+								EnumNames.FirstOrDefault(N => N.Equals(Read, StringComparison.InvariantCultureIgnoreCase))
+								is string MatchedEnumName)
+							{
+								Field.SetValue(null, Enum.Parse(EnumType, MatchedEnumName));
+							}
 						}
 					}
+					catch { }
 				}
 			}
 			ReadSettingsForClass(typeof(DirectXHook));
@@ -141,30 +148,34 @@ namespace ElementsOfHarmony
 				}
 				foreach (var Field in ClassType.GetFields())
 				{
-					if (Field.FieldType == typeof(bool))
+					try
 					{
-						Config.WriteBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null));
+						if (Field.FieldType == typeof(bool))
+						{
+							Config.WriteBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null));
+						}
+						else if (Field.FieldType == typeof(int))
+						{
+							Config.WriteInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null));
+						}
+						else if (Field.FieldType == typeof(bool?))
+						{
+							Config.WriteBooleanOptional($"{ClassName}.{Field.Name}", (bool?)Field.GetValue(null));
+						}
+						else if (Field.FieldType == typeof(int?))
+						{
+							Config.WriteIntegerOptional($"{ClassName}.{Field.Name}", (int?)Field.GetValue(null));
+						}
+						else if (Field.FieldType == typeof(string))
+						{
+							Config.WriteString($"{ClassName}.{Field.Name}", (string)Field.GetValue(null));
+						}
+						else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
+						{
+							Config.WriteString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
+						}
 					}
-					else if (Field.FieldType == typeof(int))
-					{
-						Config.WriteInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null));
-					}
-					else if (Field.FieldType == typeof(bool?))
-					{
-						Config.WriteBooleanOptional($"{ClassName}.{Field.Name}", (bool?)Field.GetValue(null));
-					}
-					else if (Field.FieldType == typeof(int?))
-					{
-						Config.WriteIntegerOptional($"{ClassName}.{Field.Name}", (int?)Field.GetValue(null));
-					}
-					else if (Field.FieldType == typeof(string))
-					{
-						Config.WriteString($"{ClassName}.{Field.Name}", (string)Field.GetValue(null));
-					}
-					else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
-					{
-						Config.WriteString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
-					}
+					catch { }
 				}
 			}
 			WriteSettingsForClass(typeof(DirectXHook));

@@ -36,7 +36,6 @@ namespace ElementsOfHarmony
 					try
 					{
 						// connect to local server to support immediate log display
-						// this is optional
 						Client = new TcpClient();
 						Client.Connect(new IPEndPoint(IPAddress.Parse(Settings.DebugTCPIP), Settings.DebugTCPPort));
 						Stream = Client.GetStream();
@@ -68,8 +67,6 @@ namespace ElementsOfHarmony
 
 		public static void Message(string message)
 		{
-			// everything we want to log will be written to "Elements of Harmony/Elements of Harmony.log"
-			// and to the local server if connected
 			lock (MessageMutex)
 			{
 				if (LogFile != null)
@@ -80,8 +77,13 @@ namespace ElementsOfHarmony
 				if (Client != null && Stream != null && Client.Connected && Stream.CanWrite)
 				{
 					byte[] buffer = Encoding.UTF8.GetBytes(message);
+					// first, send a 32-bit-integer to indicate the size of the string in bytes
+					// if you're writing a receiving server in Java,
+					// be aware that `int` is in little-endian format for C#
+					// but Java is using big-endian by default
 					Stream.Write(BitConverter.GetBytes(buffer.Length), 0, 4);
 					Stream.Flush();
+					// then we send the actual string in UTF-8
 					Stream.Write(buffer, 0, buffer.Length);
 					Stream.Flush();
 				}
