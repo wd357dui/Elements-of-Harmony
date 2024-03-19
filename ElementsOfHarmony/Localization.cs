@@ -658,6 +658,7 @@ namespace ElementsOfHarmony
 					UniversalAdditionalCameraData CameraData = __instance.MainCamera.GetComponent<UniversalAdditionalCameraData>();
 					if (CameraData.antialiasing == AntialiasingMode.FastApproximateAntialiasing) // this is causing the main menu's text blurry
 					{
+						Log.Message("FXAA settings detected on main camera, changing to SMAA");
 						CameraData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing; // so we change it
 					}
 				}
