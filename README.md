@@ -1,17 +1,19 @@
 # Elements of Harmony
-A localization mod for My Little Pony: A Maretime Bay Adventure (and soon, for **A Zephyr Heights Mystery**) using Harmony API
+This project started as a localization mod for My Little Pony: A Maretime Bay Adventure (and soon, for **A Zephyr Heights Mystery**) using [Harmony API](https://github.com/pardeike/Harmony).
+Nowadays it's gradually becoming a multi-purpose mod that adds features (and fixes bugs if exist) for these MLP games.
 
 # New Goal 2024
-A new MLP game from the same developer (or publisher?) is confirmed, it's called **A Zephyr Heights Mystery**.
+A new MLP game from the same publisher (not the same developer, I was wrong about that, but they *are also from* España, like the previous one) is confirmed, it's called **A Zephyr Heights Mystery**.
 
 That gives me the drive to remaster this mod, which counts as ~~practice & preparation~~ *actual development* to mod the new game.
+I'm aiming to use this same modding DLL for both games, if possible. (gotta remind myself to investigate the possibility of it later)
 
 - **The goals of this remaster**
 
 - [x] Refactor the codebase to meet my newest standards
-- [ ] Refactor and merge the `Loyalty` branch
+- [ ] Refactor and merge the `Loyalty` branch (which is a Kinect V2 motion control mod)
 - [ ] Make a patch tool using PowerShell script or something (I just don't want to make a separate program for this)
-- [ ] Various improvements, fixing bugs in the base game (did you hear that Melbot? I'm fixing bugs for you :wink:)
+- [ ] Various improvements, fix bugs in the base game (did you hear that Melbot? I'm fixing bugs for you so you don't have to :wink:)
 
 ## Bug fixes/Improvements for the base game
 
@@ -21,7 +23,9 @@ Here I will list the bugs/improvements that I have fixed/made and will (try to) 
 - [x] Did they [turn off ACES tone mapping for AZHM](https://twitter.com/_DJTHED/status/1767448844374294534)? No problem, let me just invent a way to turn it back on... There, [fixed](https://github.com/wd357dui/Elements-of-Harmony/blob/36c7faa5e737312457d7e2b4177548a45698f455/ElementsOfHarmony/DirectXHook.cs#L320-L347) on March 18, [improved](https://github.com/wd357dui/Elements-of-Harmony/blob/4c6d5775d1d405f62ec779298657258b1b499ccb/ElementsOfHarmony/DirectXHook.cs#L322-L387) later that day *(improvement: in case they don't have ANY tone mapping profile, I offer an option to fabricate a new one)*
 - [x] I saw a line that says "Logo language" in the log, and that's when I knew that I could implement a **logo localization** feature, too. [Implemented](https://github.com/wd357dui/Elements-of-Harmony/blob/4102f64e94fe77489219f200350835ac8305359a/ElementsOfHarmony/Localization.cs#L557-L611) on March 19, recovered the [Russian game logo](https://github.com/wd357dui/Elements-of-Harmony/blob/master/Assets/Localization/AMBA/ru/RUS_MLP_logo.png), made a [Chinese game logo](https://github.com/wd357dui/Elements-of-Harmony/blob/master/Assets/Localization/AMBA/zh-CN/CHI_MLP_logo.png). ***Usage note**: add term `Menu/MLP_logo_file` in the translation txt file, set translated text value as the file name for the logo image file including extension name, and put the image file in the "Elements of Harmony/Translations" folder to apply the logo localization*
 - [x] After some investigation in the logs and some scouting on the Internet, I found the reason why all the text on the main menu appears blurry, it's because the main menu [is using FXAA](https://forum.unity.com/threads/tmpro-same-text-looks-fine-on-ui-but-blurry-in-3d.1077041/#post-6950597)! [Fixed](https://github.com/wd357dui/Elements-of-Harmony/blob/25f33e4213a21f1dab3988d33bbbbf199339e286/ElementsOfHarmony/Localization.cs#L652-L665) on March 19 (when encounters FXAA settings, change it to SMAA)
-- [ ] I watched the [trailer](https://www.youtube.com/watch?v=cpE6W54yvg8) again, and I think that the tone mapping drama thing is not over yet, the mane 6 models (and some other stuff) appears darker than I think should be, seems like they are trying to make things work without tone mapping, but they're approaching it in the wrong direction. I think I'll need to find ways to add another post-process layer to bring the "brightness" back up before the tone-mapping layer. (pending)
+- [ ] I watched the [trailer](https://www.youtube.com/watch?v=cpE6W54yvg8) again, and I think that the tone mapping drama thing is not over yet, the mane 6 models (and some other stuff) appears darker than I think should be, seems like they are trying to make things work without tone mapping, but they're approaching it in the wrong direction (just like [this](https://twitter.com/_DJTHED/status/1585557117989433344)). I think I'll need to find ways to add another post-process layer to bring the "brightness" back up before the tone-mapping layer. (pending)
+- [ ] All this talk of tone mapping made me sort of want to find ways to enable HDR output for the game. Codes of interest I found are: `Camera.allowHDR` `CameraHDRMode`; ~~The only small problem is that I don't have an HDR display right now, I'm attending college in another province and my HDR TV is back at home~~ (pending)
+- [ ] With all these gradually increasing amounts of settings, I feel like I need to bring the property editor module from my DirectX game engine project (not on GitHub) into this mod, to support real-time adjustments of settings. However, I need to consider whether to use a separate window (already implemented) or re-render controls with Direct2D in-game (not implemented yet), the latter will take time, and may not make it before the game comes out. *(If anyone asks why I don't just use [ImGUI](https://github.com/ocornut/imgui) or something, it's because I don't like using any third-party libraries unless: **(a)** Its intended purpose is spot on & crucial to what I need; **(b)** it's perfect and doesn't have any downsides in my point of view; **(c)** I don't need to bend any rules & standards I have for a project to use that library **(d)** It's beyond my capabilities & time funding to replicate its features by myself, which makes it irreplaceable)*
 
 ## Additional Overall Optional goals
 
