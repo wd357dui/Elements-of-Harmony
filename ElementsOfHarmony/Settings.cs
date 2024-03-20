@@ -39,6 +39,7 @@ namespace ElementsOfHarmony
 			public static int? MSAA = null;
 			public static int? VSyncInterval = null;
 			public static int? TargetFrameRate = null;
+			public static bool? AllowHDR = null;
 			public static class URP
 			{
 				public static bool FabricateNewGlobalVolumeProfile = true;
