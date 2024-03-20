@@ -1,11 +1,11 @@
 # Elements of Harmony
-This project started as a localization mod for My Little Pony: A Maretime Bay Adventure (and soon, for **A Zephyr Heights Mystery**) using [Harmony API](https://github.com/pardeike/Harmony).
-Nowadays it's gradually becoming a multi-purpose mod that adds features (and fixes bugs if exist) for these MLP games.
+This project started as a localization mod for My Little Pony: A Maretime Bay Adventure using [Harmony API](https://github.com/pardeike/Harmony).
+Now it's gradually becoming a multi-purpose mod that adds features (and fixes bugs?).
 
 # New Goal 2024
-A new MLP game from the same publisher (not the same developer, I was wrong about that, but they *are also from* España, like the previous one) is confirmed, it's called **A Zephyr Heights Mystery**.
+A new MLP game from the same publisher (not the same developer, but they *are also from* España, like the previous one) is confirmed, it's called **A Zephyr Heights Mystery**.
 
-That gives me the drive to remaster this mod, which counts as ~~practice & preparation~~ *actual development* to mod the new game.
+That motivated me to remaster this project to use it to mod both games.
 I'm aiming to use this same modding DLL for both games, if possible. (gotta remind myself to investigate the possibility of it later)
 
 - **The goals of this remaster**
