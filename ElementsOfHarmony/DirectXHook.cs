@@ -1,13 +1,12 @@
 ﻿using HarmonyLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using static ElementsOfHarmony.Settings.DirectXHook;
 
 namespace ElementsOfHarmony
 {
@@ -176,12 +175,12 @@ namespace ElementsOfHarmony
 
 		private static readonly UnityEngine.Events.UnityAction<Scene, LoadSceneMode> SceneManager_sceneLoaded = (Scene arg0, LoadSceneMode arg1) =>
 		{
-			Screen.SetResolution(Settings.DirectXHook.Width ?? Screen.width, Settings.DirectXHook.Height ?? Screen.height,
+			Screen.SetResolution(Width ?? Screen.width, Height ?? Screen.height,
 				Settings.DirectXHook.FullScreenMode ?? Screen.fullScreenMode,
-				Settings.DirectXHook.RefreshRate ?? 0);
-			QualitySettings.antiAliasing = Settings.DirectXHook.MSAA ?? QualitySettings.antiAliasing;
-			QualitySettings.vSyncCount = Settings.DirectXHook.VSyncInterval ?? QualitySettings.vSyncCount;
-			Application.targetFrameRate = Settings.DirectXHook.TargetFrameRate ?? Application.targetFrameRate;
+				RefreshRate ?? 0);
+			QualitySettings.antiAliasing = MSAA ?? QualitySettings.antiAliasing;
+			QualitySettings.vSyncCount = VSyncInterval ?? QualitySettings.vSyncCount;
+			Application.targetFrameRate = TargetFrameRate ?? Application.targetFrameRate;
 			SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
 		};
 
@@ -198,6 +197,12 @@ namespace ElementsOfHarmony
 				int ID = BeginProcessCompletionEvent();
 				switch (ID)
 				{
+					case 2: // a new swap chain is being created on the same hWnd,
+							// so the old one should be released
+							// meaning anyone else who is still referencing this IDXGISwapChain
+							// should revoke their reference
+						SwapChainShouldRelease?.Invoke();
+						break;
 					case -10: // CreateSwapChain
 						SwapChainCreating?.Invoke();
 						break;
@@ -229,6 +234,7 @@ namespace ElementsOfHarmony
 			}
 		}
 
+		public static event Action SwapChainShouldRelease;
 		public static event Action SwapChainCreating;
 		public static event Action SwapChainCreated;
 		public static event Action SwapChainForHwndCreating;
@@ -346,24 +352,29 @@ namespace ElementsOfHarmony
 			[HarmonyPatch(methodName: "profileRef", methodType: MethodType.Getter)]
 			public static class VolumnProfile_profileRef_getter
 			{
-				private static readonly Dictionary<Volume, TonemappingMode?> PreviousValue = new Dictionary<Volume, TonemappingMode?>();
 				public static void Postfix(Volume __instance, VolumeProfile __result)
 				{
-					if (Settings.DirectXHook.URP.TonemappingMode is TonemappingMode Override)
+					if (__instance.isGlobal)
 					{
-						if (__instance.isGlobal &&
-							__result.components.First(VC => VC is Tonemapping) is Tonemapping TonemappingVolumeComponent)
+						if (UpdateVolumeFrameworkPatch.NewGlobalVolumeProfile != null &&
+							!ReferenceEquals(UpdateVolumeFrameworkPatch.NewGlobalVolumeProfile, __result))
 						{
-							if (!PreviousValue.ContainsKey(__instance)) PreviousValue.Add(__instance, null);
-							TonemappingMode? previous = PreviousValue[__instance];
-							if (previous != TonemappingVolumeComponent.mode.value || previous != Override || TonemappingVolumeComponent.mode.value != Override)
+							// there can only be one princess in equestria I mean... one global volume component of the same type active in an application
+							foreach (var OurComponent in UpdateVolumeFrameworkPatch.NewGlobalVolumeProfile.components)
 							{
-								Log.Message($"Global tonemapping detected, " +
-									$"profile={__instance.name}, " +
-									$"component={TonemappingVolumeComponent.name}, " +
-									$"applying value override, " +
-									$"old={TonemappingVolumeComponent.mode.value}, " +
-									$"new={PreviousValue[__instance] = TonemappingVolumeComponent.mode.value = Override}");
+								if (OurComponent.active &&
+									__result.TryGet(OurComponent.GetType(), out VolumeComponent ConflictedComponent) &&
+									!ReferenceEquals(ConflictedComponent, OurComponent) &&
+									ConflictedComponent.active)
+								{
+									ConflictedComponent.active = false;
+									Log.Message($"Conflicting volume component detected, " +
+										$"OurComponent.name={OurComponent.name}, " +
+										$"ConflictedComponent.name={ConflictedComponent.name}, " +
+										$"ConflictedComponent.parameters.Count={ConflictedComponent.parameters.Count}, " +
+										$"ConflictedComponent.parameters={{{string.Join(", ", ConflictedComponent.parameters)}}}, " +
+										$"setting it to inactive");
+								}
 							}
 						}
 					}
@@ -374,35 +385,141 @@ namespace ElementsOfHarmony
 			[HarmonyPatch("UpdateVolumeFramework")]
 			public static class UpdateVolumeFrameworkPatch
 			{
-				private static bool NewTonemappingProfileFabricated = false;
+				public static GameObject NewGlobalVolumeGameObject;
+				public static VolumeProfile NewGlobalVolumeProfile;
 				public static void Postfix()
 				{
-					if (Settings.DirectXHook.URP.TonemappingMode is TonemappingMode Override &&
-						Settings.DirectXHook.URP.FabricateNewGlobalTonemappingProfile &&
-						!NewTonemappingProfileFabricated)
+					if (URP.FabricateNewGlobalVolumeProfile &&
+						NewGlobalVolumeProfile == null)
 					{
 						Log.Message($"fabricating a new global tonemapping profile");
-						GameObject NewGlobalVolumeGameObject = new GameObject(nameof(NewGlobalVolumeGameObject))
+
+						NewGlobalVolumeGameObject = new GameObject(nameof(NewGlobalVolumeGameObject))
 						{
 							layer = 0
 						};
-						Volume NewGlobalVolumeProfile = NewGlobalVolumeGameObject.AddComponent<Volume>();
+
+						Volume NewGlobalVolume = NewGlobalVolumeGameObject.AddComponent<Volume>();
+						NewGlobalVolume.name = nameof(NewGlobalVolume);
+						NewGlobalVolume.isGlobal = true;
+						NewGlobalVolume.profile = NewGlobalVolumeProfile = ScriptableObject.CreateInstance<VolumeProfile>();
 						NewGlobalVolumeProfile.name = nameof(NewGlobalVolumeProfile);
-						NewGlobalVolumeProfile.isGlobal = true;
-						NewGlobalVolumeProfile.profile = ScriptableObject.CreateInstance<VolumeProfile>();
-						Tonemapping NewTonemapping = ScriptableObject.CreateInstance<Tonemapping>();
-						NewTonemapping.active = true;
+						Log.Message($"fabricated a new global volume profile - " +
+							$"GameObject={NewGlobalVolumeGameObject.name}, " +
+							$"Volume={NewGlobalVolume.name}, " +
+							$"VolumeProfile={NewGlobalVolumeProfile.name}");
+
+						Tonemapping NewTonemapping = NewGlobalVolumeProfile.Add<Tonemapping>(false);
+						NewTonemapping.active = false;
 						NewTonemapping.name = nameof(NewTonemapping);
-						NewTonemapping.mode.value = Override;
-						NewGlobalVolumeProfile.profile.components.Add(NewTonemapping);
-						Log.Message($"fabricated a new global tonemapping profile - " +
-							$"GameObject={nameof(NewGlobalVolumeGameObject)}, " +
-							$"Volume={nameof(NewGlobalVolumeProfile)}, " +
-							$"Tonemapping={nameof(NewTonemapping)}, " +
+						if (URP.TonemappingMode is TonemappingMode mode)
+						{
+							NewTonemapping.mode.value = mode;
+							NewTonemapping.mode.overrideState = true;
+							NewTonemapping.active = true;
+						}
+						Log.Message($"fabricated a new tonemapping component - " +
+							$"Tonemapping={NewTonemapping.name}, " +
+							$"active={NewTonemapping.active}, " +
 							$"value={NewTonemapping.mode.value}");
-						NewTonemappingProfileFabricated = true;
+
+						ColorAdjustments NewColorAdjustments = NewGlobalVolumeProfile.Add<ColorAdjustments>(false);
+						NewColorAdjustments.active = false;
+						NewColorAdjustments.name = nameof(NewColorAdjustments);
+						Log.Message($"fabricated a new color adjustments component - " +
+							$"ColorAdjustments={NewColorAdjustments.name}");
+						if (URP.ColorAdjustments.PostExposure is float postExposure)
+						{
+							NewColorAdjustments.postExposure.value = postExposure;
+							NewColorAdjustments.postExposure.overrideState = true;
+							NewColorAdjustments.active = true;
+							Log.Message($"postExposure={NewColorAdjustments.postExposure.value}");
+						}
+						if (URP.ColorAdjustments.Contrast.Value is float contrast)
+						{
+							NewColorAdjustments.contrast.value = contrast;
+							NewColorAdjustments.contrast.min = URP.ColorAdjustments.Contrast.Min ?? NewColorAdjustments.contrast.min;
+							NewColorAdjustments.contrast.max = URP.ColorAdjustments.Contrast.Max ?? NewColorAdjustments.contrast.max;
+							NewColorAdjustments.contrast.overrideState = true;
+							NewColorAdjustments.active = true;
+							Log.Message($"contrast={NewColorAdjustments.contrast.value}, " +
+								$"min={NewColorAdjustments.contrast.min}, " +
+								$"max={NewColorAdjustments.contrast.max}");
+						}
+						if (URP.ColorAdjustments.ColorFilter.Color is string color &&
+							color.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries) is string[] RGBA &&
+							RGBA.Length >= 3 && RGBA.Length <= 4 &&
+							float.TryParse(RGBA[0].Trim(), out float R) &&
+							float.TryParse(RGBA[1].Trim(), out float G) &&
+							float.TryParse(RGBA[2].Trim(), out float B))
+						{
+							if (RGBA.Length == 4 && float.TryParse(RGBA[3].Trim(), out float A))
+							{
+								NewColorAdjustments.colorFilter.value = new Color(R, G, B, A);
+							}
+							else
+							{
+								NewColorAdjustments.colorFilter.value = new Color(R, G, B);
+							}
+							NewColorAdjustments.colorFilter.hdr = URP.ColorAdjustments.ColorFilter.HDR ?? NewColorAdjustments.colorFilter.hdr;
+							NewColorAdjustments.colorFilter.showAlpha = URP.ColorAdjustments.ColorFilter.ShowAlpha ?? NewColorAdjustments.colorFilter.showAlpha;
+							NewColorAdjustments.colorFilter.showEyeDropper = URP.ColorAdjustments.ColorFilter.ShowEyeDropper ?? NewColorAdjustments.colorFilter.showEyeDropper;
+							NewColorAdjustments.colorFilter.overrideState = true;
+							NewColorAdjustments.active = true;
+							Log.Message($"colorFilter={NewColorAdjustments.colorFilter.value}, " +
+								$"hdr={NewColorAdjustments.colorFilter.hdr}, " +
+								$"showAlpha={NewColorAdjustments.colorFilter.showAlpha}, " +
+								$"showEyeDropper={NewColorAdjustments.colorFilter.showEyeDropper}");
+						}
+						if (URP.ColorAdjustments.HueShift.Value is float hueShift)
+						{
+							NewColorAdjustments.hueShift.value = hueShift;
+							NewColorAdjustments.hueShift.min = URP.ColorAdjustments.Contrast.Min ?? NewColorAdjustments.hueShift.min;
+							NewColorAdjustments.hueShift.max = URP.ColorAdjustments.Contrast.Max ?? NewColorAdjustments.hueShift.max;
+							NewColorAdjustments.hueShift.overrideState = true;
+							NewColorAdjustments.active = true;
+							Log.Message($"hueShift={NewColorAdjustments.hueShift.value}, " +
+								$"min={NewColorAdjustments.hueShift.min}, " +
+								$"max={NewColorAdjustments.hueShift.max}");
+						}
+						if (URP.ColorAdjustments.Saturation.Value is float saturation)
+						{
+							NewColorAdjustments.saturation.value = saturation;
+							NewColorAdjustments.saturation.min = URP.ColorAdjustments.Saturation.Min ?? NewColorAdjustments.saturation.min;
+							NewColorAdjustments.saturation.max = URP.ColorAdjustments.Saturation.Max ?? NewColorAdjustments.saturation.max;
+							NewColorAdjustments.saturation.overrideState = true;
+							NewColorAdjustments.active = true;
+							Log.Message($"saturation={NewColorAdjustments.saturation.value}, " +
+								$"min={NewColorAdjustments.saturation.min}, " +
+								$"max={NewColorAdjustments.saturation.max}");
+						}
+						Log.Message($"NewColorAdjustments.active={NewColorAdjustments.active}");
+
+						void OnActiveSceneChanged(Scene Old, Scene New)
+						{
+							SceneManager.MoveGameObjectToScene(NewGlobalVolumeGameObject, New);
+							UnityEngine.Object.DontDestroyOnLoad(NewGlobalVolumeGameObject);
+							Log.Message($"moving NewGlobalVolumeGameObject to the new scene {New.name}");
+						}
+						SceneManager.activeSceneChanged += OnActiveSceneChanged;
+						if (SceneManager.sceneCount > 0)
+						{
+							OnActiveSceneChanged(SceneManager.GetSceneAt(0), SceneManager.GetSceneAt(0));
+						}
+						else
+						{
+							Log.Message("there are no scenes? wtf?");
+						}
 					}
 				}
+			}
+		}
+
+		public static class SwapChainShouldReleaseEventArgs
+		{
+			public static IntPtr IDXGISwapChain_SwapChain
+			{
+				get => Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size);
 			}
 		}
 

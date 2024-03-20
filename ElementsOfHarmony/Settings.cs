@@ -41,8 +41,37 @@ namespace ElementsOfHarmony
 			public static int? TargetFrameRate = null;
 			public static class URP
 			{
+				public static bool FabricateNewGlobalVolumeProfile = true;
 				public static TonemappingMode? TonemappingMode = null;
-				public static bool FabricateNewGlobalTonemappingProfile = false;
+				public static class ColorAdjustments
+				{
+					public static float? PostExposure = null;
+					public static class Contrast
+					{
+						public static float? Value = null;
+						public static float? Min = null;
+						public static float? Max = null;
+					}
+					public static class ColorFilter
+					{
+						public static string Color = null;
+						public static bool? HDR = null;
+						public static bool? ShowAlpha = null;
+						public static bool? ShowEyeDropper = null;
+					}
+					public static class HueShift
+					{
+						public static float? Value = null;
+						public static float? Min = null;
+						public static float? Max = null;
+					}
+					public static class Saturation
+					{
+						public static float? Value = null;
+						public static float? Min = null;
+						public static float? Max = null;
+					}
+				}
 			}
 		}
 
@@ -82,7 +111,23 @@ namespace ElementsOfHarmony
 				{
 					try
 					{
-						if (Field.FieldType == typeof(bool))
+						if (Field.FieldType == typeof(bool?))
+						{
+							Field.SetValue(null, Config.ReadBooleanOptional($"{ClassName}.{Field.Name}"));
+						}
+						else if (Field.FieldType == typeof(int?))
+						{
+							Field.SetValue(null, Config.ReadIntegerOptional($"{ClassName}.{Field.Name}"));
+						}
+						else if (Field.FieldType == typeof(float?))
+						{
+							Field.SetValue(null, Config.ReadFloatOptional($"{ClassName}.{Field.Name}"));
+						}
+						else if (Field.FieldType == typeof(string))
+						{
+							Field.SetValue(null, Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null) as string));
+						}
+						else if (Field.FieldType == typeof(bool))
 						{
 							Field.SetValue(null, Config.ReadBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null)));
 						}
@@ -90,17 +135,9 @@ namespace ElementsOfHarmony
 						{
 							Field.SetValue(null, Config.ReadInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null)));
 						}
-						else if (Field.FieldType == typeof(bool?))
+						else if (Field.FieldType == typeof(float))
 						{
-							Field.SetValue(null, Config.ReadBooleanOptional($"{ClassName}.{Field.Name}", (bool?)Field.GetValue(null)));
-						}
-						else if (Field.FieldType == typeof(int?))
-						{
-							Field.SetValue(null, Config.ReadIntegerOptional($"{ClassName}.{Field.Name}", (int?)Field.GetValue(null)));
-						}
-						else if (Field.FieldType == typeof(string))
-						{
-							Field.SetValue(null, Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null) as string));
+							Field.SetValue(null, Config.ReadFloat($"{ClassName}.{Field.Name}", (int)Field.GetValue(null)));
 						}
 						else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
 						{
@@ -117,9 +154,12 @@ namespace ElementsOfHarmony
 					}
 					catch { }
 				}
+				foreach (var Nested in ClassType.GetNestedTypes())
+				{
+					ReadSettingsForClass(Nested);
+				}
 			}
 			ReadSettingsForClass(typeof(DirectXHook));
-			ReadSettingsForClass(typeof(DirectXHook.URP));
 
 			WriteOurSettings();
 		}
@@ -150,15 +190,7 @@ namespace ElementsOfHarmony
 				{
 					try
 					{
-						if (Field.FieldType == typeof(bool))
-						{
-							Config.WriteBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null));
-						}
-						else if (Field.FieldType == typeof(int))
-						{
-							Config.WriteInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null));
-						}
-						else if (Field.FieldType == typeof(bool?))
+						if (Field.FieldType == typeof(bool?))
 						{
 							Config.WriteBooleanOptional($"{ClassName}.{Field.Name}", (bool?)Field.GetValue(null));
 						}
@@ -166,9 +198,25 @@ namespace ElementsOfHarmony
 						{
 							Config.WriteIntegerOptional($"{ClassName}.{Field.Name}", (int?)Field.GetValue(null));
 						}
+						else if (Field.FieldType == typeof(float?))
+						{
+							Config.WriteFloatOptional($"{ClassName}.{Field.Name}", (int?)Field.GetValue(null));
+						}
 						else if (Field.FieldType == typeof(string))
 						{
 							Config.WriteString($"{ClassName}.{Field.Name}", (string)Field.GetValue(null));
+						}
+						else if (Field.FieldType == typeof(bool))
+						{
+							Config.WriteBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null));
+						}
+						else if (Field.FieldType == typeof(int))
+						{
+							Config.WriteInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null));
+						}
+						else if (Field.FieldType == typeof(float))
+						{
+							Config.WriteFloat($"{ClassName}.{Field.Name}", (int)Field.GetValue(null));
 						}
 						else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
 						{
@@ -177,9 +225,12 @@ namespace ElementsOfHarmony
 					}
 					catch { }
 				}
+				foreach (var Nested in ClassType.GetNestedTypes())
+				{
+					WriteSettingsForClass(Nested);
+				}
 			}
 			WriteSettingsForClass(typeof(DirectXHook));
-			WriteSettingsForClass(typeof(DirectXHook.URP));
 
 			Config.SaveConfig();
 		}

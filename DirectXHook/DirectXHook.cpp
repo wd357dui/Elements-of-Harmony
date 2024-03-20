@@ -68,6 +68,7 @@ constexpr size_t IDXGIFactory_CreateSwapChain_VTableIndex = 10;
 constexpr size_t IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex = 15;
 constexpr size_t IDXGISwapChain_Present_VTableIndex = 8;
 constexpr size_t IDXGISwapChain1_Present1_VTableIndex = 22;
+constexpr size_t IUnknown_Release_VTableIndex = 2;
 
 HMODULE		DXGI_DLL = NULL;
 intptr_t	DXGI_DLL_BaseAddress = 0;
@@ -241,6 +242,8 @@ HRESULT IDXGISwapChain1_Present1_UnPatchFix()
 	return S_OK;
 }
 
+std::map<HWND, ComPtr<IDXGISwapChain>> Window_SwapChain_Map;
+
 std::map<IDXGISwapChain*, int> IDXGISwapChain_Present_StackCount;
 HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, UINT SyncInterval, UINT Flags)
 {
@@ -249,6 +252,12 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, 
 	}
 	bool StackOverflowFixNeeded = ++IDXGISwapChain_Present_StackCount[This] >= 2;
 	if (Running && !StackOverflowFixNeeded) {
+		HRESULT result = 0;
+		DXGI_SWAP_CHAIN_DESC Desc{};
+		result = This->GetDesc(&Desc);
+		if (FAILED(result)) throw exception(("SwapChain GetDesc failed " + std::to_string(result)).c_str());
+		result = This->QueryInterface(IID_PPV_ARGS(&Window_SwapChain_Map[Desc.OutputWindow]));
+		if (FAILED(result)) throw exception(("SwapChain QueryInterface failed " + std::to_string(result)).c_str());
 		ZeroMemory(PtrList, sizeof(PtrList));
 		PtrList[0] = &This;
 		PtrList[1] = &SyncInterval;
@@ -266,10 +275,10 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, 
 			// I have a fix for this stack overflow which is known caused by steam overlay hook (GameOverlayRenderer64.dll)
 			HRESULT PatchResult = 0;
 			PatchResult = IDXGISwapChain_Present_PatchFix();
-			if (FAILED(PatchResult)) throw exception("failed to patch stackoverflow fix");
+			if (FAILED(PatchResult)) throw exception(("failed to patch stackoverflow fix - " + std::to_string(PatchResult)).c_str());
 			result = IDXGISwapChain_Present_Original(This, ++SyncInterval, Flags);
 			PatchResult = IDXGISwapChain_Present_UnPatchFix();
-			if (FAILED(PatchResult)) throw exception("failed to patch stackoverflow fix");
+			if (FAILED(PatchResult)) throw exception(("failed to patch stackoverflow fix - " + std::to_string(PatchResult)).c_str());
 		}
 		else {
 			// I don't have a fix for this stack overflow (we're doomed! celestia help us all)
@@ -299,16 +308,23 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* Thi
 	}
 	bool StackOverflowFixNeeded = ++IDXGISwapChain1_Present1_StackCount[This] >= 2;
 	if (Running && !StackOverflowFixNeeded) {
+		HRESULT result = 0;
+		DXGI_SWAP_CHAIN_DESC Desc{};
+		result = This->GetDesc(&Desc);
+		if (FAILED(result)) throw exception(("SwapChain1 GetDesc failed " + std::to_string(result)).c_str());
+		result = This->QueryInterface(IID_PPV_ARGS(&Window_SwapChain_Map[Desc.OutputWindow]));
+		if (FAILED(result)) throw exception(("SwapChain1 QueryInterface failed " + std::to_string(result)).c_str());
 		ZeroMemory(PtrList, sizeof(PtrList));
 		PtrList[0] = &This;
 		PtrList[1] = &SyncInterval;
 		PtrList[2] = &Flags;
 		PtrList[3] = &pPresentParameters;
 		CompletionID = -static_cast<int>(IDXGISwapChain1_Present1_VTableIndex);
-		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
+		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
 		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
-			throw exception("synchronization error");
+		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
+		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
+			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
 		}
 	}
 	HRESULT result = 0;
@@ -317,10 +333,10 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* Thi
 			// I have a fix for this stack overflow which is known caused by steam overlay hook (GameOverlayRenderer64.dll)
 			HRESULT PatchResult = 0;
 			PatchResult = IDXGISwapChain1_Present1_PatchFix();
-			if (FAILED(PatchResult)) throw exception("failed to patch stackoverflow fix");
+			if (FAILED(PatchResult)) throw exception(("failed to patch stackoverflow fix - " + std::to_string(PatchResult)).c_str());
 			result = IDXGISwapChain1_Present1_Original(This, ++SyncInterval, Flags, pPresentParameters);
 			PatchResult = IDXGISwapChain1_Present1_UnPatchFix();
-			if (FAILED(PatchResult)) throw exception("failed to patch stackoverflow fix");
+			if (FAILED(PatchResult)) throw exception(("failed to patch stackoverflow fix - " + std::to_string(PatchResult)).c_str());
 		}
 		else {
 			// I don't have a fix for this stack overflow (we're doomed! celestia help us all)
@@ -332,10 +348,11 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* Thi
 	}
 	if (Running && !StackOverflowFixNeeded) {
 		CompletionID = IDXGISwapChain1_Present1_VTableIndex;
-		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
+		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
 		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
-			throw exception("synchronization error");
+		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
+		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
+			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
 		}
 	}
 	--IDXGISwapChain1_Present1_StackCount[This];
@@ -349,6 +366,18 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* Th
 {
 	DXGI_SWAP_CHAIN_DESC Desc = *pDesc;
 	pDesc = &Desc;
+	if (Window_SwapChain_Map.find(Desc.OutputWindow) != Window_SwapChain_Map.end()) {
+		CompletionID = IUnknown_Release_VTableIndex;
+		ZeroMemory(PtrList, sizeof(PtrList));
+		PtrList[0] = Window_SwapChain_Map[Desc.OutputWindow].Get();
+		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
+		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
+		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
+		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
+			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
+		}
+		Window_SwapChain_Map.erase(Desc.OutputWindow);
+	}
 	if (Running) {
 		ZeroMemory(PtrList, sizeof(PtrList));
 		PtrList[0] = &This;
@@ -356,19 +385,21 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* Th
 		PtrList[2] = &pDesc;
 		PtrList[3] = &ppSwapChain;
 		CompletionID = -static_cast<int>(IDXGIFactory_CreateSwapChain_VTableIndex);
-		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
+		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
 		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
-			throw exception("synchronization error");
+		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
+		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
+			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
 		}
 	}
 	HRESULT result = IDXGIFactory_CreateSwapChain_Original(This, pDevice, pDesc, ppSwapChain);
 	if (Running) {
 		CompletionID = IDXGIFactory_CreateSwapChain_VTableIndex;
-		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
+		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
 		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
-			throw exception("synchronization error");
+		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
+		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
+			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
 		}
 	}
 	return result;
@@ -385,6 +416,18 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFac
 	DXGI_SWAP_CHAIN_DESC1 Desc = *pDesc;
 	DXGI_SWAP_CHAIN_FULLSCREEN_DESC FullscreenDesc = pFullscreenDesc != nullptr ? *pFullscreenDesc : DXGI_SWAP_CHAIN_FULLSCREEN_DESC{};
 	pDesc = &Desc;
+	if (Window_SwapChain_Map.find(hWnd) != Window_SwapChain_Map.end()) {
+		CompletionID = IUnknown_Release_VTableIndex;
+		ZeroMemory(PtrList, sizeof(PtrList));
+		PtrList[0] = Window_SwapChain_Map[hWnd].Get();
+		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
+		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
+		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
+		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
+			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
+		}
+		Window_SwapChain_Map.erase(hWnd);
+	}
 	if (Running) {
 		ZeroMemory(PtrList, sizeof(PtrList));
 		intptr_t FullscreenDescOptionalPointers[3]{
@@ -400,19 +443,21 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFac
 		PtrList[5] = &pRestrictToOutput;
 		PtrList[6] = &ppSwapChain;
 		CompletionID = -static_cast<int>(IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex);
-		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
+		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
 		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
-			throw exception("synchronization error");
+		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
+		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
+			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
 		}
 	}
 	HRESULT result = IDXGIFactory2_CreateSwapChainForHwnd_Original(This, pDevice, hWnd, pDesc, pFullscreenDesc, pRestrictToOutput, ppSwapChain);
 	if (Running) {
 		CompletionID = IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex;
-		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
+		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
 		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
-			throw exception("synchronization error");
+		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
+		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
+			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
 		}
 	}
 	return result;

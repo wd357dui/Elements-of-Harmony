@@ -29,7 +29,7 @@ namespace ElementsOfHarmony
 					if (parts.Length >= 2)
 					{
 						string name = parts[0].Trim();
-						string value = String.Join("=", parts.Skip(1).ToArray()).Trim();
+						string value = string.Join("=", parts.Skip(1).ToArray()).Trim();
 						if (name == "") continue;
 						keyValuePairs.Add(
 							new KeyValuePair()
@@ -108,7 +108,7 @@ namespace ElementsOfHarmony
 			}
 			return defaultValue;
 		}
-
+		
 		public void WriteInteger(string name, int value)
 		{
 			var keyValuePair = keyValuePairs.FirstOrDefault(x => x.Name == name);
@@ -125,17 +125,48 @@ namespace ElementsOfHarmony
 			keyValuePairs.Add(keyValuePair);
 		}
 
-		public bool? ReadBooleanOptional(string name, bool? defaultValue = false)
+		public float ReadFloat(string name, float defaultValue = 0)
 		{
 			var keyValuePair = keyValuePairs.FirstOrDefault(x => x.Name == name);
 			if (keyValuePair != null)
 			{
-				return keyValuePair.Value == "true";
+				try
+				{
+					return float.Parse(keyValuePair.Value);
+				}
+				catch (Exception) { }
 			}
 			return defaultValue;
 		}
 
-		public void WriteBooleanOptional(string name, bool? value)
+		public void WriteFloat(string name, float value)
+		{
+			var keyValuePair = keyValuePairs.FirstOrDefault(x => x.Name == name);
+			if (keyValuePair != null)
+			{
+				keyValuePair.Value = value.ToString();
+				return;
+			}
+			keyValuePair = new KeyValuePair()
+			{
+				Name = name,
+				Value = value.ToString()
+			};
+			keyValuePairs.Add(keyValuePair);
+		}
+
+		public bool? ReadBooleanOptional(string name, bool? defaultValue = null)
+		{
+			var keyValuePair = keyValuePairs.FirstOrDefault(x => x.Name == name);
+			if (keyValuePair != null)
+			{
+				if (string.IsNullOrEmpty(keyValuePair.Value)) return null;
+				else return keyValuePair.Value == "true";
+			}
+			return defaultValue;
+		}
+
+		public void WriteBooleanOptional(string name, bool? value = null)
 		{
 			var keyValuePair = keyValuePairs.FirstOrDefault(x => x.Name == name);
 			if (keyValuePair != null)
@@ -151,7 +182,7 @@ namespace ElementsOfHarmony
 			keyValuePairs.Add(keyValuePair);
 		}
 
-		public int? ReadIntegerOptional(string name, int? defaultValue = 0)
+		public int? ReadIntegerOptional(string name, int? defaultValue = null)
 		{
 			var keyValuePair = keyValuePairs.FirstOrDefault(x => x.Name == name);
 			if (keyValuePair != null)
@@ -165,7 +196,37 @@ namespace ElementsOfHarmony
 			return defaultValue;
 		}
 
-		public void WriteIntegerOptional(string name, int? value)
+		public void WriteIntegerOptional(string name, int? value = null)
+		{
+			var keyValuePair = keyValuePairs.FirstOrDefault(x => x.Name == name);
+			if (keyValuePair != null)
+			{
+				keyValuePair.Value = value?.ToString() ?? "";
+				return;
+			}
+			keyValuePair = new KeyValuePair()
+			{
+				Name = name,
+				Value = value?.ToString() ?? ""
+			};
+			keyValuePairs.Add(keyValuePair);
+		}
+		
+		public float? ReadFloatOptional(string name, float? defaultValue = null)
+		{
+			var keyValuePair = keyValuePairs.FirstOrDefault(x => x.Name == name);
+			if (keyValuePair != null)
+			{
+				try
+				{
+					return float.Parse(keyValuePair.Value);
+				}
+				catch (Exception) { }
+			}
+			return defaultValue;
+		}
+
+		public void WriteFloatOptional(string name, float? value = null)
 		{
 			var keyValuePair = keyValuePairs.FirstOrDefault(x => x.Name == name);
 			if (keyValuePair != null)
