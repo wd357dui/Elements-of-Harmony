@@ -14,9 +14,9 @@ I'm aiming to use this same modding DLL for both games, if possible. (gotta remi
 - [ ] Refactor and merge the `Loyalty` branch (which is a Kinect V2 motion control mod)
 - [ ] Make a patch tool using PowerShell script or something (I just don't want to make a separate program for this)
 - [x] Fix bugs in the AMBA base game (did you hear that Melbot? I'm fixing bugs for you so you don't have to :wink:)
-- [ ] Improvement features for both games
+- [ ] Additional improvements & features for both games
 
-## Bug fixes/Improvements for the base game
+## Bug fixes / Improvements / Additional features
 
 Here I will list the bugs/improvements that I have fixed/made and will (try to) fix/make in the future:
 
