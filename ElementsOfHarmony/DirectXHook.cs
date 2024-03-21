@@ -1090,16 +1090,29 @@ namespace ElementsOfHarmony
 		public readonly struct NativeArrayAccess<T>
 			where T : struct
 		{
-			public NativeArrayAccess(IntPtr Address)
+			public NativeArrayAccess(IntPtr Address, int ElementCount)
 			{
 				this.Address = Address;
+				this.ElementCount = ElementCount;
 			}
 			private readonly IntPtr Address;
+			private readonly int ElementCount;
 			public T this[int index]
 			{
-				get => Marshal.PtrToStructure<T>(IntPtr.Add(Address, index * Marshal.SizeOf<T>()));
-				set => Marshal.StructureToPtr(value, IntPtr.Add(Address, index * Marshal.SizeOf<T>()), false);
+				get
+				{
+					if (Address == IntPtr.Zero) throw new NullReferenceException();
+					else if (index < 0 || index >= ElementCount) throw new IndexOutOfRangeException();
+					else return Marshal.PtrToStructure<T>(IntPtr.Add(Address, index * Marshal.SizeOf<T>()));
+				}
+				set
+				{
+					if (Address == IntPtr.Zero) throw new NullReferenceException();
+					else if (index < 0 || index >= ElementCount) throw new IndexOutOfRangeException();
+					else Marshal.StructureToPtr(value, IntPtr.Add(Address, index * Marshal.SizeOf<T>()), false);
+				}
 			}
+			public int Length => ElementCount;
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
@@ -1115,7 +1128,7 @@ namespace ElementsOfHarmony
 				{
 					if (pDirtyRects != IntPtr.Zero)
 					{
-						return new NativeArrayAccess<RECT>(pDirtyRects);
+						return new NativeArrayAccess<RECT>(pDirtyRects, (int)DirtyRectsCount);
 					}
 					else
 					{
@@ -1138,9 +1151,9 @@ namespace ElementsOfHarmony
 				}
 				set
 				{
-					if (value == null) throw new ArgumentNullException("value");
-					if (pScrollRect != IntPtr.Zero) throw new NullReferenceException();
-					Marshal.StructureToPtr(value.Value, pScrollRect, false);
+					if (value == null) pScrollRect = IntPtr.Zero;
+					else if (pScrollRect == IntPtr.Zero) throw new NullReferenceException();
+					else Marshal.StructureToPtr(value.Value, pScrollRect, false);
 				}
 			}
 			public POINT? ScrollOffset
@@ -1158,9 +1171,9 @@ namespace ElementsOfHarmony
 				}
 				set
 				{
-					if (value == null) throw new ArgumentNullException("value");
-					if (pScrollRect != IntPtr.Zero) throw new NullReferenceException();
-					Marshal.StructureToPtr(value.Value, pScrollRect, false);
+					if (value == null) pScrollOffset = IntPtr.Zero;
+					else if (pScrollOffset == IntPtr.Zero) throw new NullReferenceException();
+					else Marshal.StructureToPtr(value.Value, pScrollOffset, false);
 				}
 			}
 		}
