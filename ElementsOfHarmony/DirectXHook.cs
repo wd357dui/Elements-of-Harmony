@@ -175,12 +175,26 @@ namespace ElementsOfHarmony
 
 		private static readonly UnityEngine.Events.UnityAction<Scene, LoadSceneMode> SceneManager_sceneLoaded = (Scene arg0, LoadSceneMode arg1) =>
 		{
+			if (AllowHDR != null)
+			{
+				foreach (Camera camera in Camera.allCameras)
+				{
+					camera.allowHDR = AllowHDR.Value;
+				}
+			}
+			if (MSAA != null) QualitySettings.antiAliasing = MSAA.Value;
+			if (MSAA != null && MSAA > 0)
+			{
+				foreach (Camera camera in Camera.allCameras)
+				{
+					camera.allowMSAA = true;
+				}
+			}
+			if (VSyncInterval != null) QualitySettings.vSyncCount = VSyncInterval.Value;
+			if (TargetFrameRate != null) Application.targetFrameRate = TargetFrameRate.Value;
 			Screen.SetResolution(Width ?? Screen.width, Height ?? Screen.height,
 				Settings.DirectXHook.FullScreenMode ?? Screen.fullScreenMode,
 				RefreshRate ?? 0);
-			QualitySettings.antiAliasing = MSAA ?? QualitySettings.antiAliasing;
-			QualitySettings.vSyncCount = VSyncInterval ?? QualitySettings.vSyncCount;
-			Application.targetFrameRate = TargetFrameRate ?? Application.targetFrameRate;
 			SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
 		};
 
