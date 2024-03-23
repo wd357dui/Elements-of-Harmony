@@ -1,4 +1,4 @@
-﻿zh-CN	简体中文
+zh-CN	简体中文
 Menu/MLP_logo_file	CHI_MLP_logo.png
 FONTS/DIMBO_REGULAR	
 FONTS/NOTO_SANS	
@@ -7,138 +7,138 @@ VanityItems/Body/CategoryName	身体
 VanityItems/Face/CategoryName	脸部
 VanityItems/Head/CategoryName	头部
 VanityItems/Neck/CategoryName	颈部
-BeachCove/INTRO/EV_01/BC_INTRO_EV_01_01_CS_ZP_01	
-BeachCove/INTRO/EV_01/BC_INTRO_EV_01_02_CVS_SN_01	
-BeachCove/INTRO/EV_01/BC_INTRO_EV_01_03_CVS_ZP_02	
-BeachCove/INTRO/EV_01/BC_INTRO_EV_01_04_CVS_ZP_03	
-BeachCove/INTRO/EV_01/BC_INTRO_EV_01_05_CVS_SN_02	
-BeachCove/INTRO/EV_01/BC_INTRO_EV_01_06_CVS_ZP_04	
-BeachCove/INTRO/EV_01/BC_INTRO_EV_01_07_CVS_ZP_05	
-BeachCove/INTRO/EV_01/BC_INTRO_EV_01_08_CVS_ZP_06	
-BeachCove/INTRO/EV_01/BC_INTRO_EV_01_09_CVS_SN_03	
-BeachCove/INTRO/EV_01/BC_INTRO_EV_01_10_CVS_ZP_07	
-BeachCove/INTRO/EV_01/BC_INTRO_EV_01_11_GP_SN_04	
-BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_01_CVS_SN_01	
-BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_02_CVS_ZP_02	
-BeachCove/MFL/COMP/BC_MFL_COMP_01_CS_SN_01	
-BeachCove/MFL/COMP/BC_MFL_COMP_02_CS_ZP_01	
-BeachCove/MFL/COMP/BC_MFL_COMP_03_CS_ZP_02	
-BeachCove/MFL/COMP/BC_MFL_COMP_04_CS_SN_02	
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_01_CS_ZP_01	欢迎来到W.I.N.G.S.——小马湾著名的“飞行学校”
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_02_CVS_SN_01	有小马似乎很高兴
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_03_CVS_ZP_02	都是我妈妈的主意
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_04_CVS_ZP_03	我其实没有那么热情
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_05_CVS_SN_02	我现在是学员了
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_06_CVS_ZP_04	看来你通过了之前的测试……你马上就可以飞了
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_07_CVS_ZP_05	去找雷鸣和速姆安排你最后的测试
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_08_CVS_ZP_06	然后看你能不能在真正的比赛中打败我
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_09_CVS_SN_03	我现在的速度已经很快了……我不会怯场的！
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_10_CVS_ZP_07	我们拭目以待吧……我会在起飞跑道上等你
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_11_GP_SN_04	我一定能赢得那些翅膀的
+BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_01_CVS_SN_01	当然
+BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_02_CVS_ZP_02	准备开始吧
+BeachCove/MFL/COMP/BC_MFL_COMP_01_CS_SN_01	真是太有趣了！	
+BeachCove/MFL/COMP/BC_MFL_COMP_02_CS_ZP_01	对吧？我是说 是的 很好……你赢得了你的翅膀
+BeachCove/MFL/COMP/BC_MFL_COMP_03_CS_ZP_02	我以皇家的名义祝贺你！
+BeachCove/MFL/COMP/BC_MFL_COMP_04_CS_SN_02	力力！
 BeachCove/MFL/COMP/BC_MFL_COMP_05_CS_Brighhouse_01	
-BeachCove/MFL/COMP/BC_MFL_COMP_06_CS_PP_01	
-BeachCove/MFL/COMP/BC_MFL_COMP_07_CS_IZ_01	
-BeachCove/MFL/COMP/BC_MFL_COMP_08_CS_HC_01	
-BeachCove/MFL/COMP/BC_MFL_COMP_09_CS_Sprout_01	
-BeachCove/MFL/COMP/BC_MFL_COMP_10_CS_HC_02	
-BeachCove/MFL/COMP/BC_MFL_COMP_11_CS_Paint Shop 3_01	
-BeachCove/MFL/COMP/BC_MFL_COMP_12_CS_Sprout_02	
-BeachCove/MFL/COMP/BC_MFL_COMP_13_CS_SN_03	
-BeachCove/MFL/COMP/BC_MFL_COMP_14_CS_ZP_03	
-BeachCove/MFL/COMP/BC_MFL_COMP_15_CS_SN_04	
-BeachCove/MFL/COMP/BC_MFL_COMP_16_CS_Crowd1_01	
-BeachCove/MFL/COMP/BC_MFL_COMP_17_CS_Crowd2_01	
-BeachCove/MFL/COMP/BC_MFL_COMP_18_CS_Sprout_03	
-BeachCove/MFL/COMP/BC_MFL_COMP_19_CS_HC_03	
-BeachCove/MFL/COMP/BC_MFL_COMP_20_CS_Sprout_04	
-BeachCove/MFL/COMP/BC_MFL_COMP_21_CS_SN_05	
+BeachCove/MFL/COMP/BC_MFL_COMP_06_CS_PP_01	哦不！
+BeachCove/MFL/COMP/BC_MFL_COMP_07_CS_IZ_01	哦不！
+BeachCove/MFL/COMP/BC_MFL_COMP_08_CS_HC_01	哦不！
+BeachCove/MFL/COMP/BC_MFL_COMP_09_CS_Sprout_01	哦 很好
+BeachCove/MFL/COMP/BC_MFL_COMP_10_CS_HC_02	等等，那是谁？
+BeachCove/MFL/COMP/BC_MFL_COMP_11_CS_Paint Shop 3_01	小马落水了！
+BeachCove/MFL/COMP/BC_MFL_COMP_12_CS_Sprout_02	好了我要溜了
+BeachCove/MFL/COMP/BC_MFL_COMP_13_CS_SN_03	力力！你还好吗？
+BeachCove/MFL/COMP/BC_MFL_COMP_14_CS_ZP_03	不是太好
+BeachCove/MFL/COMP/BC_MFL_COMP_15_CS_SN_04	魔法似乎突然消失了
+BeachCove/MFL/COMP/BC_MFL_COMP_16_CS_Crowd1_01	天马就不应该来小马湾！
+BeachCove/MFL/COMP/BC_MFL_COMP_17_CS_Crowd2_01	肯定是独角兽搞的鬼！他们很危险！
+BeachCove/MFL/COMP/BC_MFL_COMP_18_CS_Sprout_03	一切都在计划之中……
+BeachCove/MFL/COMP/BC_MFL_COMP_19_CS_HC_03	菜头？是你吗？
+BeachCove/MFL/COMP/BC_MFL_COMP_20_CS_Sprout_04	不！不是我！
+BeachCove/MFL/COMP/BC_MFL_COMP_21_CS_SN_05	我去追他！
 BeachCove/MFL/COMP/BC_MFL_COMP_22_CS_Shimmerwing_01	
-BeachCove/MFL/COMP/BC_MFL_COMP_23_GP_SN_06	
-BeachCove/MFL/DECLINED/BC_MFL_DECLINED_01_CVS_SN_01	
-BeachCove/MFL/DECLINED/BC_MFL_DECLINED_02_CVS_ZP_02	
-BeachCove/MFL/QUESTION/BC_MFL_QUESTION_01_CVS_ZP_01	
-BeachCove/MFL/RETACPTD/BC_MFL_RETACPTD_01_CVS_SN_01	
-BeachCove/MFL/RETDCLND/BC_MFL_RETDCLND_01_CVS_SN_01	
-BeachCove/MFL/RETRY/BC_MFL_RETRY_01_CVS_ZP_01	
-BeachCove/MFL/START/BC_MFL_START_01_CVS_ZP_01	
-BeachCove/MFL/START/BC_MFL_START_02_CVS_ZP_02	
-BeachCove/MFL/START/BC_MFL_START_03_CVS_ZP_03	
-BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_01_CVS_SN_01	
-BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_02_CVS_Zoom_04	
-BeachCove/Q13/COMP/BC_Q13_COMP_01_CVS_Zoom_06	
-BeachCove/Q13/DECLINED/BC_Q13_DECLINED_01_CVS_SN_02	
-BeachCove/Q13/DECLINED/BC_Q13_DECLINED_02_CVS_Zoom_05	
-BeachCove/Q13/POST_01/BC_Q13_POST_01_01_GP_Zoom_10	
-BeachCove/Q13/QUESTION/BC_Q13_QUESTION_01_CVS_Zoom_03	
-BeachCove/Q13/RETACPTD/BC_Q13_RETACPTD_01_CVS_Zoom_08	
-BeachCove/Q13/RETDCLND/BC_Q13_RETDCLND_01_CVS_Zoom_09	
-BeachCove/Q13/RETRY/BC_Q13_RETRY_01_CVS_Zoom_07	
-BeachCove/Q13/START/BC_Q13_START_01_CVS_Zoom_01	
-BeachCove/Q13/START/BC_Q13_START_02_CVS_Zoom_02	
-BeachCove/Q14/COMP/BC_Q14_COMP_01_GP_IZ_01	
-BeachCove/Q14/COMP/BC_Q14_COMP_02_GP_SN_01	
-BeachCove/Q14/EV_01/BC_Q14_EV_01_01_GP_SN_01	
-BeachCove/Q14/EV_02/BC_Q14_EV_02_01_GP_SN_01	
-BeachCove/Q14/EV_03/BC_Q14_EV_03_01_GP_SN_01	
-BeachCove/Q14/EV_04/BC_Q14_EV_04_01_CVS_Sprout_01	
-BeachCove/Q14/EV_04/BC_Q14_EV_04_02_CVS_SN_01	
-BeachCove/Q14/EV_04/BC_Q14_EV_04_03_CVS_Sprout_02	
-BeachCove/Q14/EV_04/BC_Q14_EV_04_04_CVS_Sprout_03	
-BeachCove/Q14/EV_04/BC_Q14_EV_04_05_CVS_Sprout_04	
-BeachCove/Q14/EV_04/BC_Q14_EV_04_06_CVS_SN_02	
-BeachCove/Q14/EV_04/BC_Q14_EV_04_07_CVS_Sprout_05	
-BeachCove/Q14/EV_05/BC_Q14_EV_05_01_GP_SN_03	
-BeachCove/Q14/EV_06/BC_Q14_EV_06_01_CVS_PP_01	
-BeachCove/Q14/EV_06/BC_Q14_EV_06_02_CVS_SN_01	
-BeachCove/Q14/EV_06/BC_Q14_EV_06_03_CVS_PP_02	
-BeachCove/Q14/EV_06/BC_Q14_EV_06_04_CVS_SN_02	
-BeachCove/Q14/EV_06/BC_Q14_EV_06_05_CVS_SN_03	
-BeachCove/Q14/EV_06/BC_Q14_EV_06_06_CVS_PP_03	
-BeachCove/Q14/EV_06/BC_Q14_EV_06_07_CVS_IZ_01	
-BeachCove/Q14/EV_06/BC_Q14_EV_06_08_CVS_SN_04	
-BeachCove/Q14/EV_06/BC_Q14_EV_06_09_CS_IZ_02	
-BeachCove/Q14/EV_07/BC_Q14_EV_07_01_CVS_PaintShop 3_01	
-BeachCove/Q14/EV_07/BC_Q14_EV_07_02_CVS_PaintShop 3_02	
-BeachCove/Q14/EV_07/BC_Q14_EV_07_03_CVS_SN_01	
-BeachCove/Q14/EV_08/BC_Q14_EV_08_01_CVS_RedFloatieGuy_01	
-BeachCove/Q14/EV_08/BC_Q14_EV_08_02_CVS_RedFloatieGuy_02	
-BeachCove/Q14/EV_08/BC_Q14_EV_08_03_CVS_SN_01	
-BeachCove/Q14/EV_08/BC_Q14_EV_08_04_CVS_RedFloatieGuy_03	
-BeachCove/Q14/EV_08/BC_Q14_EV_08_05_CVS_SN_02	
-BeachCove/Q14/EV_09/BC_Q14_EV_09_01_CVS_RedFloatieGuy_01	
-BeachCove/Q14/EV_09/BC_Q14_EV_09_02_CVS_RedFloatieGuy_02	
-BeachCove/Q14/EV_10/BC_Q14_EV_10_01_GP_SN_01	
-BeachCove/Q14/EV_11/BC_Q14_EV_11_01_GP_PaintShop 3_01	
-BeachCove/Q14/EV_12/BC_Q14_EV_12_01_GP_SN_01	
-BeachCove/Q14/EV_13/BC_Q14_EV_13_01_GP_SN_01	
-BeachCove/Q14/MID_01/BC_Q14_MID_01_01_CVS_Sprout_01	
-BeachCove/Q14/MID_02/BC_Q14_MID_02_01_CVS_Sprout_01	
-BeachCove/Q14/MID_02/BC_Q14_MID_02_02_CVS_Sprout_02	
-BeachCove/Q14/MID_02/BC_Q14_MID_02_03_CVS_SN_03	
-BeachCove/Q14/MID_02/BC_Q14_MID_02_04_CVS_Sprout_04	
+BeachCove/MFL/COMP/BC_MFL_COMP_23_GP_SN_06	他往小马街跑！
+BeachCove/MFL/DECLINED/BC_MFL_DECLINED_01_CVS_SN_01	我还没准备好
+BeachCove/MFL/DECLINED/BC_MFL_DECLINED_02_CVS_ZP_02	我也没有
+BeachCove/MFL/QUESTION/BC_MFL_QUESTION_01_CVS_ZP_01	准备好了吗 希悦？
+BeachCove/MFL/RETACPTD/BC_MFL_RETACPTD_01_CVS_SN_01	这次可别摔下去
+BeachCove/MFL/RETDCLND/BC_MFL_RETDCLND_01_CVS_SN_01	算了……高处让我感觉害怕
+BeachCove/MFL/RETRY/BC_MFL_RETRY_01_CVS_ZP_01	想再来翱翔天际吗？
+BeachCove/MFL/START/BC_MFL_START_01_CVS_ZP_01	欢迎来到最后一场比赛……什么什么的
+BeachCove/MFL/START/BC_MFL_START_02_CVS_ZP_02	反正你也比不过我
+BeachCove/MFL/START/BC_MFL_START_03_CVS_ZP_03	但只要你不会掉到海里 就算你通过
+BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_01_CVS_SN_01	我准备好了！
+BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_02_CVS_Zoom_04	这就对了！
+BeachCove/Q13/COMP/BC_Q13_COMP_01_CVS_Zoom_06	干得不错 学员！这是你的奖励
+BeachCove/Q13/DECLINED/BC_Q13_DECLINED_01_CVS_SN_02	我还需要点时间……
+BeachCove/Q13/DECLINED/BC_Q13_DECLINED_02_CVS_Zoom_05	别拖得太久！
+BeachCove/Q13/POST_01/BC_Q13_POST_01_01_GP_Zoom_10	希望你比上一位好些 他总是掉进海里
+BeachCove/Q13/QUESTION/BC_Q13_QUESTION_01_CVS_Zoom_03	准备好接受速度挑战了吗？
+BeachCove/Q13/RETACPTD/BC_Q13_RETACPTD_01_CVS_Zoom_08	准备开始吧！
+BeachCove/Q13/RETDCLND/BC_Q13_RETDCLND_01_CVS_Zoom_09	想跑了可以随时回来
+BeachCove/Q13/RETRY/BC_Q13_RETRY_01_CVS_Zoom_07	啊 你回来了 想再来试一遍吗？
+BeachCove/Q13/START/BC_Q13_START_01_CVS_Zoom_01	看看谁来了！是学员希悦！
+BeachCove/Q13/START/BC_Q13_START_02_CVS_Zoom_02	这是最后一场障碍赛课程，离起飞不远了
+BeachCove/Q14/COMP/BC_Q14_COMP_01_GP_IZ_01	你做得很不错嘛！
+BeachCove/Q14/COMP/BC_Q14_COMP_02_GP_SN_01	多亏了你的帮忙 朋友！
+BeachCove/Q14/EV_01/BC_Q14_EV_01_01_GP_SN_01	嫌疑者是一位天马……可是翅膀掉了
+BeachCove/Q14/EV_02/BC_Q14_EV_02_01_GP_SN_01	这次是粉色鬃毛
+BeachCove/Q14/EV_03/BC_Q14_EV_03_01_GP_SN_01	那位小马有紫色的鬃毛
+BeachCove/Q14/EV_04/BC_Q14_EV_04_01_CVS_Sprout_01	侦探做得不错！有没有符合的小马？
+BeachCove/Q14/EV_04/BC_Q14_EV_04_02_CVS_SN_01	也许吧……但有目击者发现了假的翅膀
+BeachCove/Q14/EV_04/BC_Q14_EV_04_03_CVS_Sprout_02	噢 我怎么……我是说嫌犯怎么那么不小心
+BeachCove/Q14/EV_04/BC_Q14_EV_04_04_CVS_Sprout_03	无论如何 调查得不错 希悦
+BeachCove/Q14/EV_04/BC_Q14_EV_04_05_CVS_Sprout_04	我来没收这些翅膀 作为证据
+BeachCove/Q14/EV_04/BC_Q14_EV_04_06_CVS_SN_02	我想我还是留着吧 以防万一
+BeachCove/Q14/EV_04/BC_Q14_EV_04_07_CVS_Sprout_05	是的好主意 嗯……继续努力！我们还很危险！
+BeachCove/Q14/EV_05/BC_Q14_EV_05_01_GP_SN_03	嗯……菜头好像在隐瞒着什么
+BeachCove/Q14/EV_06/BC_Q14_EV_06_01_CVS_PP_01	今天大家怎么都这么焦躁？呃……
+BeachCove/Q14/EV_06/BC_Q14_EV_06_02_CVS_SN_01	菜头认为你弄糟了力力的壁画
+BeachCove/Q14/EV_06/BC_Q14_EV_06_03_CVS_PP_02	什么？太荒唐了！我才不会去弄脏我的蹄子
+BeachCove/Q14/EV_06/BC_Q14_EV_06_04_CVS_SN_02	我想那算是一种证明吧
+BeachCove/Q14/EV_06/BC_Q14_EV_06_05_CVS_SN_03	只要别太引起注意了 好吗？
+BeachCove/Q14/EV_06/BC_Q14_EV_06_06_CVS_PP_03	但那就是我喜欢做的！
+BeachCove/Q14/EV_06/BC_Q14_EV_06_07_CVS_IZ_01	这里看上去好忙啊！发生什么事了？
+BeachCove/Q14/EV_06/BC_Q14_EV_06_08_CVS_SN_04	好多事情！要到处走 到处修牌子
+BeachCove/Q14/EV_06/BC_Q14_EV_06_09_CS_IZ_02	好的！那我们就需要很多颜料，那个牌子很大！
+BeachCove/Q14/EV_07/BC_Q14_EV_07_01_CVS_PaintShop 3_01	想要颜料吗？没问题！
+BeachCove/Q14/EV_07/BC_Q14_EV_07_02_CVS_PaintShop 3_02	给我个游泳圈 它就是你的了
+BeachCove/Q14/EV_07/BC_Q14_EV_07_03_CVS_SN_01	游泳圈 明白！
+BeachCove/Q14/EV_08/BC_Q14_EV_08_01_CVS_RedFloatieGuy_01	哦 嘿 你有没有见到我的宠物螃蟹？
+BeachCove/Q14/EV_08/BC_Q14_EV_08_02_CVS_RedFloatieGuy_02	她名字叫贝贝
+BeachCove/Q14/EV_08/BC_Q14_EV_08_03_CVS_SN_01	如果我找到她 我可以要你的游泳圈吗？
+BeachCove/Q14/EV_08/BC_Q14_EV_08_04_CVS_RedFloatieGuy_03	当然！我拿它只是以防我需要到水里去找贝贝！
+BeachCove/Q14/EV_08/BC_Q14_EV_08_05_CVS_SN_02	别担心！我会找到她
+BeachCove/Q14/EV_09/BC_Q14_EV_09_01_CVS_RedFloatieGuy_01	贝贝！贝贝！你回来了！
+BeachCove/Q14/EV_09/BC_Q14_EV_09_02_CVS_RedFloatieGuy_02	太谢谢你了！给你 跟我们说好的一样
+BeachCove/Q14/EV_10/BC_Q14_EV_10_01_GP_SN_01	现在 回去找那位爱画牌子的小马
+BeachCove/Q14/EV_11/BC_Q14_EV_11_01_GP_PaintShop 3_01	哦 真不错！给你的颜料
+BeachCove/Q14/EV_12/BC_Q14_EV_12_01_GP_SN_01	所有证据凑齐了！但不可能是这样……
+BeachCove/Q14/EV_13/BC_Q14_EV_13_01_GP_SN_01	好极了！现在回到牌子那里去
+BeachCove/Q14/MID_01/BC_Q14_MID_01_01_CVS_Sprout_01	肯定还有别的线索，找到所有的目击者
+BeachCove/Q14/MID_02/BC_Q14_MID_02_01_CVS_Sprout_01	这很明显是外来威胁
+BeachCove/Q14/MID_02/BC_Q14_MID_02_02_CVS_Sprout_02	天马和独角兽很明显想要毁了这个节日！
+BeachCove/Q14/MID_02/BC_Q14_MID_02_03_CVS_SN_03	那根本说不通！他们是我们的朋友！
+BeachCove/Q14/MID_02/BC_Q14_MID_02_04_CVS_Sprout_04	也许只是你的朋友 希悦
 BeachCove/Q14/MID_02/BC_Q14_MID_02_05_CVS_SN_01	
-BeachCove/Q14/MID_03/BC_Q14_MID_03_01_CVS_PaintShop 3_01	
-BeachCove/Q14/MID_04/BC_Q14_MID_04_01_CVS_RedFloatieGuy_01	
-BeachCove/Q14/MID_05/BC_Q14_MID_05_01_GP_IZ_01	
-BeachCove/Q14/MID_06/BC_Q14_MID_06_01_GP_PP_01	
-BeachCove/Q14/POST_01/BC_Q14_POST_01_01_GP_PaintShop 3_01	
-BeachCove/Q14/POST_02/BC_Q14_POST_02_01_GP_RedFloatieGuy_01	
-BeachCove/Q14/POST_03/BC_Q14_POST_03_01_GP_Sprout_01	
-BeachCove/Q14/POST_04/BC_Q14_POST_04_01_GP_PP_01	
-BeachCove/Q14/POST_05/BC_Q14_POST_05_01_GP_IZ_01	
-BeachCove/Q14/PRE_01/BC_Q14_PRE_01_01_GP_PaintShop 3_01	
-BeachCove/Q14/PRE_02/BC_Q14_PRE_02_01_GP_RedFloatieGuy_01	
-BeachCove/Q14/PRE_03/BC_Q14_PRE_03_01_GP_PP_01	
-BeachCove/Q14/START/BC_Q14_START_01_CVS_Thunder_01	
-BeachCove/Q14/START/BC_Q14_START_02_CVS_Sprout_01	
-BeachCove/Q14/START/BC_Q14_START_03_CVS_Sprout_02	
-BeachCove/Q14/START/BC_Q14_START_04_CVS_Thunder_02	
-BeachCove/Q14/START/BC_Q14_START_05_CVS_Sprout_03	
-BeachCove/Q14/START/BC_Q14_START_06_CVS_SN_01	
-BeachCove/Q14/START/BC_Q14_START_07_CVS_Sprout_04	
-BeachCove/Q14/START/BC_Q14_START_08_CVS_Thunder_03	
-BeachCove/Q14/START/BC_Q14_START_09_CVS_SN_02	
-BeachCove/Q14/START/BC_Q14_START_10_CVS_Sprout_05	
-BeachCove/Q14/START/BC_Q14_START_11_CVS_SN_03	
-BeachCove/Q14/START/BC_Q14_START_12_CVS_Sprout_06	
-BeachCove/Q14/START/BC_Q14_START_13_CVS_SN_04	
-BeachCove/Q14/TOOFAR/BC_Q14_TOOFAR_01_GP_SN_01	
-BeachCove/Q15/COMP/BC_Q15_COMP_01_GP_HC_01	
-BeachCove/Q15/MID_01/BC_Q15_MID_01_01_CVS_HC_01	
-BeachCove/Q15/POST_01/BC_Q15_POST_01_01_CVS_HC_01	
-BeachCove/Q15/START/BC_Q15_START_01_CVS_HC_01	
-BeachCove/Q15/START/BC_Q15_START_02_CVS_HC_02	
-BeachCove/Q15/START/BC_Q15_START_03_CVS_HC_03	
-BeachCove/Q15/TOOFAR/BC_Q15_TOOFAR_01_GP_HC_01	
+BeachCove/Q14/MID_03/BC_Q14_MID_03_01_CVS_PaintShop 3_01	我敢肯定 海滩上一定有小马有游泳圈
+BeachCove/Q14/MID_04/BC_Q14_MID_04_01_CVS_RedFloatieGuy_01	我最后见到她是在海滩尽头的洞穴里
+BeachCove/Q14/MID_05/BC_Q14_MID_05_01_GP_IZ_01	我们需要很多的橙色颜料和很多的魔法！
+BeachCove/Q14/MID_06/BC_Q14_MID_06_01_GP_PP_01	冰激凌们都爱死我的小马湾照片了！
+BeachCove/Q14/POST_01/BC_Q14_POST_01_01_GP_PaintShop 3_01	天马走开……有些刻薄 但这书法很好看！
+BeachCove/Q14/POST_02/BC_Q14_POST_02_01_GP_RedFloatieGuy_01	我再也不会让你离开我眼睛半步了！
+BeachCove/Q14/POST_03/BC_Q14_POST_03_01_GP_Sprout_01	角和翅膀……要留意这些！
+BeachCove/Q14/POST_04/BC_Q14_POST_04_01_GP_PP_01	冰激凌们都爱死我的小马湾照片了！
+BeachCove/Q14/POST_05/BC_Q14_POST_05_01_GP_IZ_01	菜头真的很喜欢小马湾节 在大家面前喊话太有活力了
+BeachCove/Q14/PRE_01/BC_Q14_PRE_01_01_GP_PaintShop 3_01	我不反对任何小马……但我很喜欢画牌子！
+BeachCove/Q14/PRE_02/BC_Q14_PRE_02_01_GP_RedFloatieGuy_01	贝贝！你在哪里！
+BeachCove/Q14/PRE_03/BC_Q14_PRE_03_01_GP_PP_01	希悦！我的粉丝很喜欢你的舞步 他们都为你点赞了！
+BeachCove/Q14/START/BC_Q14_START_01_CVS_Thunder_01	如果有嫌犯 我们会特别留意的
+BeachCove/Q14/START/BC_Q14_START_02_CVS_Sprout_01	但是嫌犯似乎是一位独角兽和一位天马
+BeachCove/Q14/START/BC_Q14_START_03_CVS_Sprout_02	怎么肯定你不会包庇同类呢？
+BeachCove/Q14/START/BC_Q14_START_04_CVS_Thunder_02	是天马又没有罪
+BeachCove/Q14/START/BC_Q14_START_05_CVS_Sprout_03	所有天马和独角兽都有嫌疑
+BeachCove/Q14/START/BC_Q14_START_06_CVS_SN_01	怎么回事？
+BeachCove/Q14/START/BC_Q14_START_07_CVS_Sprout_04	又一例破坏公物！
+BeachCove/Q14/START/BC_Q14_START_08_CVS_Thunder_03	飞行学院的壁画被乱涂乱画了！
+BeachCove/Q14/START/BC_Q14_START_09_CVS_SN_02	我明白了
+BeachCove/Q14/START/BC_Q14_START_10_CVS_Sprout_05	是的！我们必须……
+BeachCove/Q14/START/BC_Q14_START_11_CVS_SN_03	找目击者？
+BeachCove/Q14/START/BC_Q14_START_12_CVS_Sprout_06	没错
+BeachCove/Q14/START/BC_Q14_START_13_CVS_SN_04	好吧 我去到处问问
+BeachCove/Q14/TOOFAR/BC_Q14_TOOFAR_01_GP_SN_01	还不能走 得先独角回收力力的牌子！
+BeachCove/Q15/COMP/BC_Q15_COMP_01_GP_HC_01	任务完成 学员！一点礼物表示感谢
+BeachCove/Q15/MID_01/BC_Q15_MID_01_01_CVS_HC_01	快帮忙赶兔子 希悦！时间快不多了！
+BeachCove/Q15/POST_01/BC_Q15_POST_01_01_CVS_HC_01	在上面要当心 别掉进海里了
+BeachCove/Q15/START/BC_Q15_START_01_CVS_HC_01	希悦！那堆兔子帮在海湾跑得到处都是
+BeachCove/Q15/START/BC_Q15_START_02_CVS_HC_02	他们在起飞跑道上跳来跳去
+BeachCove/Q15/START/BC_Q15_START_03_CVS_HC_03	把他们都赶回来好让比赛可以正常开始
+BeachCove/Q15/TOOFAR/BC_Q15_TOOFAR_01_GP_HC_01	希悦 还有兔子需要赶 帮它们走出那里
 BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01	
 BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01b	
 BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_02_CS_BH_01	
@@ -441,8 +441,8 @@ Mainstreet/Q16/COMP/MS_Q16_COMP_10_CVS_Crowd1_02
 Mainstreet/Q16/COMP/MS_Q16_COMP_11_CVS_SN_06	
 Mainstreet/Q16/COMP/MS_Q16_COMP_12_CVS_Crowd3_03	
 Mainstreet/Q16/COMP/MS_Q16_COMP_13_CVS_Crowd1_03	
-Mainstreet/Q16/COMP/MS_Q16_COMP_14_CVS_Crowd1,2,3_01	
-Mainstreet/Q16/COMP/MS_Q16_COMP_15_CVS_Crowd1,2,3_01	
+"Mainstreet/Q16/COMP/MS_Q16_COMP_14_CVS_Crowd1,2,3_01"	
+"Mainstreet/Q16/COMP/MS_Q16_COMP_15_CVS_Crowd1,2,3_01"	
 Mainstreet/Q16/EV_01/MS_Q16_EV_01_01_GP_Crowd1_01	
 Mainstreet/Q16/EV_02/MS_Q16_EV_02_01_GP_Crowd2_01	
 Mainstreet/Q16/EV_03/MS_Q16_EV_03_01_GP_Crowd3_01	
@@ -919,7 +919,7 @@ Menu/FINANCES	财政
 Menu/GAMEPLAY_PROGRAMMER	游戏性程序员
 Menu/GAME_DESIGNER	游戏设计师
 Menu/GO	开始
-Menu/HASBRO_DISCLAIMER	MLP：小马宝莉（MY LITTLE PONY）和孩之宝（HASBRO）以及所有相关的商标和标识均为孩之宝公司（Hasbro, Inc.）的注册商标。© 2022 Hasbro.
+Menu/HASBRO_DISCLAIMER	"MLP：小马宝莉（MY LITTLE PONY）和孩之宝（HASBRO）以及所有相关的商标和标识均为孩之宝公司（Hasbro, Inc.）的注册商标。© 2022 Hasbro."
 Menu/INTERACT	互动
 Menu/JUMP	跳跃
 Menu/LANGUAGE	语言
@@ -944,7 +944,7 @@ Menu/PRODUCER	制作人
 Menu/REPEAT	重复
 Menu/ROLLERBLADES	轮滑
 Menu/ROTATE	旋转
-Menu/SAVED_GAMES	已保存的游戏
+Menu/SAVED_GAMES	存档
 Menu/SAVE_SAFETY_DEFAULT	此图标出现时请勿关闭主机
 Menu/SAVE_SAFETY_STADIA	此游戏支持自动存档
 Menu/SAVE_SAFETY_SWITCH	此图标出现时请勿关闭主机
@@ -952,10 +952,10 @@ Menu/SELECT	选择
 Menu/SELECT_PLAYERS	选择玩家
 Menu/SETTINGS	设置
 Menu/SFX_VOLUME	音效音量
-Menu/SLOT1	已保存的游戏 1
-Menu/SLOT2	已保存的游戏 2
-Menu/SLOT3	已保存的游戏 3
-Menu/SLOT4	已保存的游戏 4
+Menu/SLOT1	存档 1
+Menu/SLOT2	存档 2
+Menu/SLOT3	存档 3
+Menu/SLOT4	存档 4
 Menu/SLOT_CURRENT	当前
 Menu/SLOT_EMPTY	空闲
 Menu/STADIA_DISCLAIMER	
@@ -1396,8 +1396,8 @@ Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_10_CVS_Crowd1_02	MS_Q16_COMP_10_CVS_Crowd1
 Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_11_CVS_SN_06	MS_Q16_COMP_11_CVS_SN_06_zh-CN
 Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_12_CVS_Crowd3_03	MS_Q16_COMP_12_CVS_Crowd3_03_zh-CN
 Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_13_CVS_Crowd1_03	MS_Q16_COMP_13_CVS_Crowd1_03_zh-CN
-Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_14_CVS_Crowd1,2,3_01	MS_Q16_COMP_14_CVS_Crowd 1 ,2, 3_01_zh-CN
-Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_15_CVS_Crowd1,2,3_01	MS_Q16_COMP_15_CVS_Crowd 1 ,2, 3_01_zh-CN
+"Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_14_CVS_Crowd1,2,3_01"	"MS_Q16_COMP_14_CVS_Crowd 1 ,2, 3_01_zh-CN"
+"Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_15_CVS_Crowd1,2,3_01"	"MS_Q16_COMP_15_CVS_Crowd 1 ,2, 3_01_zh-CN"
 Audio_Mainstreet/Q16/COMP/RandomVariants/MS_Q16_COMP_01_CVS_Crowd2_02_02	MS_Q16_COMP_01_CVS_Crowd 2_02_02_zh-CN
 Audio_Mainstreet/Q16/COMP/RandomVariants/MS_Q16_COMP_01_CVS_Crowd2_02_03	MS_Q16_COMP_01_CVS_Crowd 2_02_03_zh-CN
 Audio_Mainstreet/Q16/EV_01/MS_Q16_EV_01_01_GP_Crowd1_01	MS_Q16_EV_01_01_GP_Crowd1_01_zh-CN
