@@ -288,6 +288,8 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, 
 	else {
 		result = IDXGISwapChain_Present_Original(This, ++SyncInterval, Flags);
 	}
+	--IDXGISwapChain_Present_StackCount[This];
+	if (FAILED(result)) return result;
 	if (Running && !StackOverflowFixNeeded) {
 		CompletionID = IDXGISwapChain_Present_VTableIndex;
 		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
@@ -296,7 +298,6 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, 
 			throw exception("synchronization error");
 		}
 	}
-	--IDXGISwapChain_Present_StackCount[This];
 	return result;
 }
 
@@ -346,6 +347,8 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* Thi
 	else {
 		result = IDXGISwapChain1_Present1_Original(This, ++SyncInterval, Flags, pPresentParameters);
 	}
+	--IDXGISwapChain1_Present1_StackCount[This];
+	if (FAILED(result)) return result;
 	if (Running && !StackOverflowFixNeeded) {
 		CompletionID = IDXGISwapChain1_Present1_VTableIndex;
 		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
@@ -355,7 +358,6 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* Thi
 			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
 		}
 	}
-	--IDXGISwapChain1_Present1_StackCount[This];
 	return result;
 }
 
@@ -393,6 +395,7 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* Th
 		}
 	}
 	HRESULT result = IDXGIFactory_CreateSwapChain_Original(This, pDevice, pDesc, ppSwapChain);
+	if (FAILED(result)) return result;
 	if (Running) {
 		CompletionID = IDXGIFactory_CreateSwapChain_VTableIndex;
 		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
@@ -451,6 +454,7 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFac
 		}
 	}
 	HRESULT result = IDXGIFactory2_CreateSwapChainForHwnd_Original(This, pDevice, hWnd, pDesc, pFullscreenDesc, pRestrictToOutput, ppSwapChain);
+	if (FAILED(result)) return result;
 	if (Running) {
 		CompletionID = IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex;
 		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
