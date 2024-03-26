@@ -20,7 +20,7 @@ BeachCove/INTRO/EV_01/BC_INTRO_EV_01_10_CVS_ZP_07	我们拭目以待吧……我
 BeachCove/INTRO/EV_01/BC_INTRO_EV_01_11_GP_SN_04	我一定能赢得那些翅膀的
 BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_01_CVS_SN_01	当然
 BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_02_CVS_ZP_02	准备开始吧
-BeachCove/MFL/COMP/BC_MFL_COMP_01_CS_SN_01	真是太有趣了！	
+BeachCove/MFL/COMP/BC_MFL_COMP_01_CS_SN_01	真是太有趣了！
 BeachCove/MFL/COMP/BC_MFL_COMP_02_CS_ZP_01	对吧？我是说 是的 很好……你赢得了你的翅膀
 BeachCove/MFL/COMP/BC_MFL_COMP_03_CS_ZP_02	我以皇家的名义祝贺你！
 BeachCove/MFL/COMP/BC_MFL_COMP_04_CS_SN_02	力力！
@@ -139,26 +139,26 @@ BeachCove/Q15/START/BC_Q15_START_01_CVS_HC_01	希悦！那堆兔子帮在海湾�
 BeachCove/Q15/START/BC_Q15_START_02_CVS_HC_02	他们在起飞跑道上跳来跳去
 BeachCove/Q15/START/BC_Q15_START_03_CVS_HC_03	把他们都赶回来好让比赛可以正常开始
 BeachCove/Q15/TOOFAR/BC_Q15_TOOFAR_01_GP_HC_01	希悦 还有兔子需要赶 帮它们走出那里
-BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01	
-BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01b	
+BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01	水晶闪闪屋 小马利亚友谊与魔法的象征
+BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01b	只要独角兽 天马 和陆马之间和谐共处 它的光芒就会一直照亮着小马湾
 BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_02_CS_BH_01	
-BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_03_CS_Narrator_02	
-BrighthouseTuto/Q1/COMP/BHT_Q1_COMP_01_CGP_SN_01	
+BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_03_CS_Narrator_02	但有一位小马会随时帮助大家渡过难关
+BrighthouseTuto/Q1/COMP/BHT_Q1_COMP_01_CGP_SN_01	这才对嘛 整装待发去参加节日！
 BrighthouseTuto/Q1/EV_02/BHT_Q1_EV_02_01_CS_Bunny_01	
-BrighthouseTuto/Q1/EV_03/BHT_Q1_EV_03_02_GP_SN_01	
-BrighthouseTuto/Q1/EV_04/BHT_Q1_EV_04_01_CGP_SN_01	
-BrighthouseTuto/Q1/EV_05/BHT_Q1_EV_05_01_CGP_SN_01	
-BrighthouseTuto/Q1/TOOFAR/BHT_Q1_TOOFAR_01_CGP_SN_01	
-BrighthouseTuto/START/EV_01/BHT_START_EV_01_01_CS_SN_01	
-BrighthouseTuto/START/EV_01/BHT_START_EV_01_02_CS_SN_02	
-BrighthouseTuto/START/EV_01/BHT_START_EV_01_03_CS_SN_03	
-BrighthouseTuto/START/EV_01/BHT_START_EV_01_04_CS_SN_04	
-BrighthouseTuto/START/START/BHT_START_START_08_CS_SN_05	
-MiniGames/DESCRIPTION_DASH	
-MiniGames/DESCRIPTION_FASHION_SHOW	
-MiniGames/DESCRIPTION_HERDING_BUNNIES	
-MiniGames/DESCRIPTION_HERDING_CRABS	
-MiniGames/DESCRIPTION_RUNNER	
+BrighthouseTuto/Q1/EV_03/BHT_Q1_EV_03_02_GP_SN_01	我的包！被那只兔子抢走了！
+BrighthouseTuto/Q1/EV_04/BHT_Q1_EV_04_01_CGP_SN_01	真机灵！也许我能用陆马魔法变那朵花
+BrighthouseTuto/Q1/EV_05/BHT_Q1_EV_05_01_CGP_SN_01	啊哈！只要到那里就行了
+BrighthouseTuto/Q1/TOOFAR/BHT_Q1_TOOFAR_01_CGP_SN_01	我的包！现在还不能走……得先把它找回来
+BrighthouseTuto/START/EV_01/BHT_START_EV_01_01_CS_SN_01	我醒了！我醒了！
+BrighthouseTuto/START/EV_01/BHT_START_EV_01_02_CS_SN_02	等等 大家都去哪了？
+BrighthouseTuto/START/EV_01/BHT_START_EV_01_03_CS_SN_03	呀！在小马街上准备小马湾节！英奇在等着我！
+BrighthouseTuto/START/EV_01/BHT_START_EV_01_04_CS_SN_04	但是有点不对劲
+BrighthouseTuto/START/START/BHT_START_START_08_CS_SN_05	我的包！这次又把它放哪了？
+MiniGames/DESCRIPTION_DASH	锻炼你翱翔天空的技巧
+MiniGames/DESCRIPTION_FASHION_SHOW	展示你的舞步！
+MiniGames/DESCRIPTION_HERDING_BUNNIES	帮英奇赶兔子
+MiniGames/DESCRIPTION_HERDING_CRABS	帮英奇赶螃蟹和兔子
+MiniGames/DESCRIPTION_RUNNER	跟朋友们一起追上菜头
 MiniGames/MULTIPLAYER_CONTROLS	多人游戏需要连接2个控制器至 Nintendo Switch
 MiniGames/MULTIPLAYER_CONTROLS_INDICATION	按“接受”继续
 MiniGames/MULTIPLAYER_CONTROLS_INDICATION[PS4	按“接受”继续
@@ -171,70 +171,70 @@ MiniGames/PROGRESSION_EVALUATION_FAIL	失败
 MiniGames/PROGRESSION_EVALUATION_GO	很好
 MiniGames/PROGRESSION_EVALUATION_GREAT	非常棒
 MiniGames/TIMES_UP	时间到！
-MiniGames/TITLE_DASH	
-MiniGames/TITLE_FASHION_SHOW	
-MiniGames/TITLE_HERDING_BUNNIES	
-MiniGames/TITLE_HERDING_CRABS	
-MiniGames/TITLE_RUNNER	
-Brighthouse/BFLY/EV_01/BH_BFLY_EV_01_01_CVS_SN_01	
-Brighthouse/BFLY/EV_01/BH_BFLY_EV_01_02_CVS_SN_02	
+MiniGames/TITLE_DASH	力力的飞行学院
+MiniGames/TITLE_FASHION_SHOW	琪琪舞步游行
+MiniGames/TITLE_HERDING_BUNNIES	英奇的赶兔子训练
+MiniGames/TITLE_HERDING_CRABS	兔子螃蟹一起来
+MiniGames/TITLE_RUNNER	菜头轮滑追逐赛
+Brighthouse/BFLY/EV_01/BH_BFLY_EV_01_01_CVS_SN_01	???????????
+Brighthouse/BFLY/EV_01/BH_BFLY_EV_01_02_CVS_SN_02	这里是怎么回事？
 Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_04_CVS_Shimmerwing_01	
-Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_05_CVS_SN_04	
-Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_06_CVS_SN_05	
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_05_CVS_SN_04	烁蝶 是你！哇 你力气可真大
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_06_CVS_SN_05	你是怎么困在里面的？
 Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_07_CVS_Shimmerwing_02	
-Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_08_CVS_SN_06	
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_08_CVS_SN_06	抱歉！我听不懂蝴蝶语……
 Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_09_CVS_Shimmerwing_03	
-Brighthouse/BFLY/EV_03/BH_BFLY_EV_03_10_CGP_SN_07	
-Brighthouse/INTRO/EV_01/BH_INTRO_EV_01_01_CS_SN_01	
-Brighthouse/MH/ACCEPTED/BH_MH_ACCEPTED_01_CGP_HC_01	
-Brighthouse/MH/COMP/BH_MH_COMP_01_CS_HC_01	
-Brighthouse/MH/COMP/BH_MH_COMP_02_CS_HC_02	
-Brighthouse/MH/COMP/BH_MH_COMP_03_CS_IZ_01	
-Brighthouse/MH/COMP/BH_MH_COMP_04_CS_HC_03	
+Brighthouse/BFLY/EV_03/BH_BFLY_EV_03_10_CGP_SN_07	她想要我跟着她 得走了！
+Brighthouse/INTRO/EV_01/BH_INTRO_EV_01_01_CS_SN_01	啊 水晶闪闪屋 还是难以相信我们能住在这么魔幻的地方
+Brighthouse/MH/ACCEPTED/BH_MH_ACCEPTED_01_CGP_HC_01	好的！兔子时间！
+Brighthouse/MH/COMP/BH_MH_COMP_01_CS_HC_01	哇！不错 希悦 非常不错
+Brighthouse/MH/COMP/BH_MH_COMP_02_CS_HC_02	看来今年的比赛有看头了
+Brighthouse/MH/COMP/BH_MH_COMP_03_CS_IZ_01	好极了！小马街 我们来了！
+Brighthouse/MH/COMP/BH_MH_COMP_04_CS_HC_03	是的！嗯 等我只要先把这些盒子挪开
 Brighthouse/MH/COMP/BH_MH_COMP_05_CS_HC_04	
-Brighthouse/MH/COMP/BH_MH_COMP_06_CS_SN_01	
-Brighthouse/MH/COMP/BH_MH_COMP_07_CS_HC_05	
-Brighthouse/MH/COMP/BH_MH_COMP_08_CS_IZ_02	
-Brighthouse/MH/DECLINED/BH_MH_DECLINED_01_CVS_HC_01	
-Brighthouse/MH/QUESTION/BH_MH_QUESTION_01_CVS_HC_01	
-Brighthouse/MH/REPACPTD/BH_MH_REPACPTD_01_CGP_SN_01	
-Brighthouse/MH/REPDCLND/BH_MH_REPDCLND_01_CGP_SN_01	
-Brighthouse/MH/REPEAT/BH_MH_REPEAT_01_CVS_HC_01	
-Brighthouse/MH/START/BH_MH_START_01_CVS_HC_01	
-Brighthouse/MH/START/BH_MH_START_02_CVS_HC_02	
-Brighthouse/MH/START/BH_MH_START_03_CVS_HC_03	
-Brighthouse/MH/START/BH_MH_START_04_CVS_HC_04	
-Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_01_CS_SN_01	
-Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_02_CS_IZ_01	
-Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_03_CS_HC_01	
+Brighthouse/MH/COMP/BH_MH_COMP_06_CS_SN_01	我们要帮他吗？
+Brighthouse/MH/COMP/BH_MH_COMP_07_CS_HC_05	不用！这些是我放的 我肯定会负责把他们归回原位…噢！
+Brighthouse/MH/COMP/BH_MH_COMP_08_CS_IZ_02	我觉得他没事 一切都在掌控之中
+Brighthouse/MH/DECLINED/BH_MH_DECLINED_01_CVS_HC_01	退缩了吗？准备好就再回来吧
+Brighthouse/MH/QUESTION/BH_MH_QUESTION_01_CVS_HC_01	准备好赶兔子了吗？
+Brighthouse/MH/REPACPTD/BH_MH_REPACPTD_01_CGP_SN_01	算我一个！
+Brighthouse/MH/REPDCLND/BH_MH_REPDCLND_01_CGP_SN_01	嗯……现在不行 等一会吧？
+Brighthouse/MH/REPEAT/BH_MH_REPEAT_01_CVS_HC_01	回来了？准备好赶兔子了吗？
+Brighthouse/MH/START/BH_MH_START_01_CVS_HC_01	欢迎来到赶兔子大赛官方训练营！
+Brighthouse/MH/START/BH_MH_START_02_CVS_HC_02	规则很简单：将兔子赶到大门外面
+Brighthouse/MH/START/BH_MH_START_03_CVS_HC_03	赶出的兔子越多 你的得分就越高！
+Brighthouse/MH/START/BH_MH_START_04_CVS_HC_04	要留意：大门会改变位置！
+Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_01_CS_SN_01	小马湾节……我们来了！
+Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_02_CS_IZ_01	我们来了！
+Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_03_CS_HC_01	我们来了！
 Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_04_CS_BH_01	
-Brighthouse/Q1/COMP/BH_Q1_COMP_01_CVS_IZ_01	
-Brighthouse/Q1/COMP/BH_Q1_COMP_02_CVS_IZ_02	
-Brighthouse/Q1/COMP/BH_Q1_COMP_03_CVS_SN_01	
-Brighthouse/Q1/EV_01/BH_Q1_EV_01_01_GP_SN_01	
-Brighthouse/Q1/EV_02/BH_Q1_EV_02_01_GP_SN_01	
-Brighthouse/Q1/EV_03/BH_Q1_EV_03_01_GP_SN_01	
-Brighthouse/Q1/MID_01/BH_Q1_MID_01_01_GP_IZ_01	
-Brighthouse/Q1/POST_01/BH_Q1_POST_01_01_CVS_IZ_01	
-Brighthouse/Q1/POST_01/BH_Q1_POST_01_02_CVS_IZ_02	
-Brighthouse/Q1/POST_01/BH_Q1_POST_01_03_CVS_IZ_03	
-Brighthouse/Q1/START/BH_Q1_START_01_CVS_IZ_01	
-Brighthouse/Q1/START/BH_Q1_START_02_CVS_SN_01	
-Brighthouse/Q1/START/BH_Q1_START_03_CVS_IZ_02	
-Brighthouse/Q1/START/BH_Q1_START_04_CVS_IZ_03	
-Brighthouse/Q1/START/BH_Q1_START_05_CVS_IZ_04	
-Brighthouse/Q1/START/BH_Q1_START_06_CVS_IZ_05	
-Brighthouse/Q1/START/BH_Q1_START_07_CVS_SN_02	
-Brighthouse/Q1/TOOFAR/BH_Q1_TOOFAR_01_GP_IZ_01	
-Brighthouse/Q2/COMP/BH_Q2_COMP_01_CGP_HC_01	
+Brighthouse/Q1/COMP/BH_Q1_COMP_01_CVS_IZ_01	谢谢你 希悦！你救了这座桥！
+Brighthouse/Q1/COMP/BH_Q1_COMP_02_CVS_IZ_02	现在 你只要这样的桌子 就能独角回收
+Brighthouse/Q1/COMP/BH_Q1_COMP_03_CVS_SN_01	谢谢指点！我还在试着习惯用这些魔法……
+Brighthouse/Q1/EV_01/BH_Q1_EV_01_01_GP_SN_01	很好！还差两个！
+Brighthouse/Q1/EV_02/BH_Q1_EV_02_01_GP_SN_01	完美！再剩一个……
+Brighthouse/Q1/EV_03/BH_Q1_EV_03_01_GP_SN_01	全都齐了！现在把它们带回去给小艺
+Brighthouse/Q1/MID_01/BH_Q1_MID_01_01_GP_IZ_01	只要有足够的闪粉 什么东西都能独角回收！
+Brighthouse/Q1/POST_01/BH_Q1_POST_01_01_CVS_IZ_01	以前没有魔法 什么事都很难
+Brighthouse/Q1/POST_01/BH_Q1_POST_01_02_CVS_IZ_02	现在 只要有足够的胶水和闪粉 一些都有可能！
+Brighthouse/Q1/POST_01/BH_Q1_POST_01_03_CVS_IZ_03	或者我应该说……独角事！
+Brighthouse/Q1/START/BH_Q1_START_01_CVS_IZ_01	还在这里？最好快点，小马湾在等着我们！
+Brighthouse/Q1/START/BH_Q1_START_02_CVS_SN_01	我知道！是这个方向对吗？
+Brighthouse/Q1/START/BH_Q1_START_03_CVS_IZ_02	是的 但是桥断了！
+Brighthouse/Q1/START/BH_Q1_START_04_CVS_IZ_03	我们可以用独角魔法来回收它 独角回收魔法！ 
+Brighthouse/Q1/START/BH_Q1_START_05_CVS_IZ_04	但是我忘了我的工具在哪放着
+Brighthouse/Q1/START/BH_Q1_START_06_CVS_IZ_05	应该就在附近 能帮我找到它们吗？
+Brighthouse/Q1/START/BH_Q1_START_07_CVS_SN_02	马上就去！
+Brighthouse/Q1/TOOFAR/BH_Q1_TOOFAR_01_GP_IZ_01	我真的很想去小马湾节！别花太长时间
+Brighthouse/Q2/COMP/BH_Q2_COMP_01_CGP_HC_01	你有潜力成为赶兔子比赛的实力选手 你们说对吧？
 Brighthouse/Q2/COMP/BH_Q2_COMP_02_CGP_Bunnies_01	
-Brighthouse/Q2/EV_01/BH_Q2_EV_01_01_GP_SN_01	
-Brighthouse/Q2/EV_02/BH_Q2_EV_02_01_CVS_HC_01	
-Brighthouse/Q2/EV_02/BH_Q2_EV_02_02_CVS_HC_02	
-Brighthouse/Q2/EV_02/BH_Q2_EV_02_03_CVS_HC_03	
-Brighthouse/Q2/EV_03/BH_Q2_EV_03_01_GP_SN_01	
-Brighthouse/Q2/EV_04/BH_Q2_EV_04_01_GP_SN_01	
-Brighthouse/Q2/EV_05/BH_Q2_EV_05_01_GP_SN_01	
+Brighthouse/Q2/EV_01/BH_Q2_EV_01_01_GP_SN_01	我得去找英奇 已经让他等了一会了 他可是很守时的
+Brighthouse/Q2/EV_02/BH_Q2_EV_02_01_CVS_HC_01	很好 希悦 你赶兔子的技巧的确不错
+Brighthouse/Q2/EV_02/BH_Q2_EV_02_02_CVS_HC_02	但你得先喂饱它们！
+Brighthouse/Q2/EV_02/BH_Q2_EV_02_03_CVS_HC_03	赶在他们烦躁之前 去找一些萝卜回来
+Brighthouse/Q2/EV_03/BH_Q2_EV_03_01_GP_SN_01	很好！还差两个！
+Brighthouse/Q2/EV_04/BH_Q2_EV_04_01_GP_SN_01	完美！再剩一个……
+Brighthouse/Q2/EV_05/BH_Q2_EV_05_01_GP_SN_01	三个都齐了！现在回去
 Brighthouse/Q2/MID_01/BH_Q2_MID_01_01_GP_HC_01	
 Brighthouse/Q2/MID_02/BH_Q2_MID_02_01_GP_HC_01	
 Brighthouse/Q2/START/BH_Q2_START_01_CVS_HC_01	
