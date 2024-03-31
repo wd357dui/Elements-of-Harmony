@@ -1,7 +1,9 @@
-﻿using HarmonyLib;
+﻿using Character;
+using HarmonyLib;
 using I2.Loc;
 using Melbot;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -658,6 +660,246 @@ namespace ElementsOfHarmony
 						Log.Message("FXAA settings detected on main camera, changing to SMAA");
 						CameraData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing; // so we change it
 					}
+				}
+			}
+
+			/// <summary>
+			/// Pending additional fix & improvements:
+			/// 1. make load-level-in-advance fix for the bunny+crab herding game same way as the bunny game
+			/// 2. you can move during the "3,2,1" countdown in the bunny and the bunny+crab herding game, need to disable that for fairness
+			/// 3. there are additional blank seconds before countdown begins in the crab game & dance game & fly game, need to remove those
+			/// 4. background music volume is too low in the flying game, multiply its volume by 2 should fix it
+			/// 5. obstacle generators (and maybe other timers) started too early (before the tutorial) due to the call to `InitializeTutorialAndGame`
+			/// 6. tutorial audio from sprout played too early (before tutorial screen showed) probably due to the call to `InitializeTutorialAndGame`
+			/// 7. make sprout move closer to the player as game progresses closer to the finish
+			/// 8. there are localizations for the "evalution" texts ("good" "cool" "perfect"), but they didn't show up
+			/// 
+			/// note:
+			/// I think the song Unicycle Groove can be a potential candidate for Battle of the Bands module
+			/// keep looking for more
+			/// </summary>
+			[HarmonyPatch(typeof(Minigame))]
+			[HarmonyPatch("MoveToNextPhaseIE")] // minigame has following phases: initialization, countdown, tutorial, gameplay, score
+			public static class MinigameMoveToNextPhaseIEPatch
+			{
+				public static bool Prefix(Minigame __instance, ref IEnumerator __result)
+				{
+					MinigamePhase currentPhase = Traverse.Create(__instance).Field("currentPhase").GetValue<MinigamePhase>();
+					MinigamePhase nextPhase = currentPhase?.Next;
+					MinigamePhase nextNextPhase = currentPhase?.Next?.Next;
+					if (currentPhase is InitializationPhase &&
+						nextPhase is CountDownPhase countDownPhase &&
+						nextNextPhase is TutorialPhase tutorialPhase)
+					{
+						Log.Message("minigame starting, relocating the tutorial phase to before the countdown phase");
+						MinigamePhase AfterTutorialAndCountdown = tutorialPhase.Next;
+						Traverse.Create(currentPhase).Field("nextState").SetValue(tutorialPhase);
+						Traverse.Create(tutorialPhase).Field("nextState").SetValue(countDownPhase);
+						Traverse.Create(countDownPhase).Field("nextState").SetValue(AfterTutorialAndCountdown);
+						if (countDownPhase is DashThroughTheSkyCountDownPhase zipp)
+						{
+							Log.Message("fixing initialization for DashThroughTheSkyMiniGame");
+							tutorialPhase.StartCoroutine((Traverse.Create(zipp).Field("minigameBase").GetValue<MinigameBase>() as DashThroughTheSkyMiniGame).InitializeTutorialAndGame());
+						}
+						else if (countDownPhase is RunnerCountDownPhase sprout)
+						{
+							Log.Message("fixing initialization for Runner1MiniGame");
+							tutorialPhase.StartCoroutine((Traverse.Create(sprout).Field("minigameBase").GetValue<MinigameBase>() as Runner1MiniGame).InitializeTutorialAndGame());
+						}
+					}
+					else if (currentPhase is TutorialPhase &&
+						nextPhase is CountDownPhase &&
+						nextNextPhase is GameplayPhase gameplayPhase)
+					{
+						MinigameBase ActualGame = Traverse.Create(gameplayPhase).Field("minigameBase").GetValue<MinigameBase>();
+						if (ActualGame is HerdingBunniesMinigame instance)
+						{
+							Log.Message("countdown is about to start, load level for HerdingBunniesMinigame in advance");
+							// so that it would not change in a sudden after "3, 2, 1, go"
+							HerdingBunniesMinigamePatch.StartGameFirstHalf(instance);
+						}
+					}
+					__result = EnumerateCoroutine(__instance);
+					currentPhase.ExitPhase();
+					Traverse.Create(__instance).Field("currentPhase").SetValue(currentPhase = currentPhase.Next);
+					currentPhase.EnterPhase();
+					return false;
+				}
+
+				public static IEnumerator EnumerateCoroutine(Minigame __instance)
+				{
+					yield return new WaitUntil(() => __instance.AdressablesLoaded());
+				}
+			}
+
+			[HarmonyPatch(typeof(HerdingBunniesMinigame))]
+			[HarmonyPatch("StartGameIE")]
+			public static class HerdingBunniesMinigamePatch
+			{
+				public static void StartGameFirstHalf(HerdingBunniesMinigame __instance)
+				{
+					// first half of StartGameIE
+
+					HerdingMinigames_GUI gui = Traverse.Create(__instance).Field("gui").GetValue<HerdingMinigames_GUI>();
+					List<HerdingBunniesMinigame.BonusLimit> bonusLimits = Traverse.Create(__instance).Field("bonusLimits").GetValue<List<HerdingBunniesMinigame.BonusLimit>>();
+					MinigamePhase minigamePhase = Traverse.Create(__instance).Field("minigamePhase").GetValue<MinigamePhase>();
+
+					__instance.active = true;
+					List<MinigamePJ> list = new List<MinigamePJ>();
+					if (__instance.Mode == MinigamePlayersType.multiplayer)
+					{
+						GameSession gameSession = NonPersistentSingleton<BaseSystem>.Get().gameSession;
+						list.Add(gameSession.GetPjFromPlayer(1));
+						list.Add(gameSession.GetPjFromPlayer(2));
+					}
+					gui.SetGameMode(__instance.Mode, copp: true, list);
+					gui.PauseTimer();
+					Traverse.Create(__instance).Field("bonusLimits").SetValue(
+						bonusLimits.OrderByDescending((HerdingBunniesMinigame.BonusLimit t) => t.numberOfBunnys).ToList());
+
+					Traverse.Create(__instance).Method("RestartGame").GetValue();
+
+					object Value = Traverse.Create(__instance).Field("roundsPrefabs").GetValue<Array>().GetValue(0);
+					SetUpRoundFirstHalf(__instance, ref Value, 0);
+					Traverse.Create(__instance).Field("roundsPrefabs").GetValue<Array>().SetValue(Value, 0);
+
+					if (__instance.Mode == MinigamePlayersType.multiplayer)
+					{
+						Value = Traverse.Create(__instance).Field("roundsPrefabs").GetValue<Array>().GetValue(0);
+						SetUpRoundFirstHalf(__instance, ref Value, 1);
+						Traverse.Create(__instance).Field("roundsPrefabs").GetValue<Array>().SetValue(Value, 0);
+					}
+				}
+
+				public static bool Prefix(HerdingBunniesMinigame __instance, ref IEnumerator __result)
+				{
+					HerdingMinigames_GUI gui = Traverse.Create(__instance).Field("gui").GetValue<HerdingMinigames_GUI>();
+					MinigamePhase minigamePhase = Traverse.Create(__instance).Field("minigamePhase").GetValue<MinigamePhase>();
+
+					// finish up previous calls
+					SetUpRoundSecondHalf(__instance, true);
+
+					// second half of StartGameIE
+
+					__result = EnumerateCoroutine(__instance);
+
+					gui.ShowGUI();
+					minigamePhase.minigame.SetAddressablesLoading(bLoading: false);
+					if (!__instance.audioSource.isPlaying)
+					{
+						__instance.audioSource.loop = true;
+						__instance.audioSource.Play();
+					}
+					Traverse.Create(__instance).Field("herdingCharacters").SetValue(
+						Traverse.Create(__instance).Method("GetHerdingCharacters").GetValue());
+					return false;
+				}
+
+				public static IEnumerator EnumerateCoroutine(HerdingBunniesMinigame __instance)
+				{
+					yield return new WaitUntil(() => Traverse.Create(__instance).Field("bunniesInitialized").GetValue<bool>());
+				}
+
+				public static void SetUpRoundFirstHalf(HerdingBunniesMinigame __instance, ref object info, int nPlayer)
+				{
+					MinigamePhase minigamePhase = Traverse.Create(__instance).Field("minigamePhase").GetValue<MinigamePhase>();
+					HerdingMinigames_GUI gui = Traverse.Create(__instance).Field("gui").GetValue<HerdingMinigames_GUI>();
+					YardSet yards = Traverse.Create(__instance).Field("yards").GetValue<YardSet>();
+
+					((GameplayPhase)minigamePhase).setShotScreen.GoOut();
+					Traverse.Create(__instance).Field("occupiedPositions").SetValue((HerdingMinigames_Positions)0);
+
+					AccessTools.Method(typeof(HerdingBunniesMinigame), "InstantiateYard").Invoke(__instance, new object[] { nPlayer });
+
+					object[] Args = new object[]
+					{
+						info, nPlayer
+					};
+
+					if (nPlayer == 0)
+					{
+						AccessTools.Method(typeof(HerdingBunniesMinigame), "InstantiateBunnies").Invoke(__instance, Args);
+					}
+					AccessTools.Method(typeof(HerdingBunniesMinigame), "InstantiateBunnyHoles").Invoke(__instance, Args);
+					AccessTools.Method(typeof(HerdingBunniesMinigame), "InstantiateMud").Invoke(__instance, Args);
+					AccessTools.Method(typeof(HerdingBunniesMinigame), "InstantiatePumpkins").Invoke(__instance, Args);
+					info = Args[0];
+
+					MLPCharacter mLPCharacter = minigamePhase.minigame.Characters[0];
+					((HerdingBunniesStates)mLPCharacter.bodyController.states).Walk();
+					mLPCharacter.transform.rotation = yards.yard.transform.rotation;
+					mLPCharacter.transform.position = yards.yard.transform.position + yards.yard.transform.forward * 1f - yards.yard.transform.right * 1f;
+					if (__instance.Mode == MinigamePlayersType.multiplayer)
+					{
+						MLPCharacter mLPCharacter2 = minigamePhase.minigame.Characters[1];
+						((HerdingBunniesStates)mLPCharacter2.bodyController.states).Walk();
+						mLPCharacter2.transform.rotation = yards.yard.transform.rotation;
+						mLPCharacter2.transform.position = yards.yard.transform.position + yards.yard.transform.forward * 1f + yards.yard.transform.right * 1f;
+					}
+				}
+
+				public static void SetUpRoundSecondHalf(HerdingBunniesMinigame __instance, bool firstRound = false)
+				{
+					HerdingMinigames_GUI gui = Traverse.Create(__instance).Field("gui").GetValue<HerdingMinigames_GUI>();
+					SequenceNode initPhaseSequenceNode = __instance.initPhaseSequenceNode;
+
+					gui.ShowGUI();
+					gui.SetScore(0, __instance.Scores[0].Value);
+					gui.InitializeTimerAnimation((int)Traverse.Create(__instance).Field("roundsDuration").GetValue<float>());
+					Traverse.Create(__instance).Method("StartTime").GetValue();
+					if (!firstRound)
+					{
+						gui.ShowGoSign(1.5f);
+						initPhaseSequenceNode.ResetNode();
+					}
+				}
+			}
+
+			[HarmonyPatch(typeof(DashThroughTheSkyCountDownPhase))]
+			[HarmonyPatch("EnterPhase")]
+			public static class DashThroughTheSkyCountDownPhasePatch
+			{
+				public static bool Prefix(DashThroughTheSkyCountDownPhase __instance)
+				{
+					bool skip = Traverse.Create(__instance).Field("skip").GetValue<bool>();
+					Minigame minigame = Traverse.Create(__instance).Field("minigame").GetValue<Minigame>();
+					SequenceNode sequenceNode = Traverse.Create(__instance).Field("sequenceNode").GetValue<SequenceNode>();
+
+					Traverse.Create(__instance).Field("game").SetValue(
+						(DashThroughTheSkyMiniGame)Traverse.Create(__instance).Field("minigameBase").GetValue<MinigameBase>());
+					bool flag = false;
+					if (skip && flag)
+					{
+						minigame.MoveToNextPhase();
+					}
+					else
+					{
+						sequenceNode.ResetNode();
+					}
+					return false;
+				}
+			}
+
+			[HarmonyPatch(typeof(RunnerCountDownPhase))]
+			[HarmonyPatch("EnterPhase")]
+			public static class RunnerCountDownPhasePatch
+			{
+				public static bool Prefix(DashThroughTheSkyCountDownPhase __instance)
+				{
+					bool skip = Traverse.Create(__instance).Field("skip").GetValue<bool>();
+					Minigame minigame = Traverse.Create(__instance).Field("minigame").GetValue<Minigame>();
+					SequenceNode sequenceNode = Traverse.Create(__instance).Field("sequenceNode").GetValue<SequenceNode>();
+
+					bool flag = false;
+					if (skip && flag)
+					{
+						minigame.MoveToNextPhase();
+					}
+					else
+					{
+						sequenceNode.ResetNode();
+					}
+					return false;
 				}
 			}
 		}

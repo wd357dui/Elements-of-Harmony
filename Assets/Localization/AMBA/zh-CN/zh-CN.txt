@@ -163,8 +163,8 @@ MiniGames/MULTIPLAYER_CONTROLS	多人游戏需要连接2个控制器至 Nintendo
 MiniGames/MULTIPLAYER_CONTROLS_INDICATION	按“接受”继续
 MiniGames/MULTIPLAYER_CONTROLS_INDICATION[PS4	按“接受”继续
 MiniGames/NEXT_ROUND	下一回合
-MiniGames/PROGRESSION_EVALUATION_0	很好
-MiniGames/PROGRESSION_EVALUATION_1	非常棒
+MiniGames/PROGRESSION_EVALUATION_0	好
+MiniGames/PROGRESSION_EVALUATION_1	很棒
 MiniGames/PROGRESSION_EVALUATION_2	完美
 MiniGames/PROGRESSION_EVALUATION_EXTRA	完美
 MiniGames/PROGRESSION_EVALUATION_FAIL	失败
@@ -863,38 +863,38 @@ ScoreScreen/SCORE_PLAYER1_WIN	玩家 1 获胜
 ScoreScreen/SCORE_PLAYER2_WIN	玩家 2 获胜
 ScoreScreen/SCORE_PLAYER_WIN	{[PLAYER_NAME]} 获胜
 ScoreScreen/SCORE_SCORE	得分
-ScoreScreen/SCORE_TITLE	游戏完成
+ScoreScreen/SCORE_TITLE	游戏结束
 ScoreScreen/SCORE_UNLOCK	小游戏已解锁
-Characters/BigBunny_Name	
+Characters/BigBunny_Name	大兔子
 Characters/Bunny1_Name	兔子
 Characters/Bunny2_Name	兔子
-Characters/CanterlogicGuard_Name	
+Characters/CanterlogicGuard_Name	守卫
 Characters/Crowd1_Name	众马
 Characters/Crowd2_Name	众马
 Characters/Crowd3_Name	众马
 Characters/Fashion1_Name	服装店
 Characters/FlowerShop_Name	花店
-Characters/Hitch_Name	
-Characters/Izzy_Name	
+Characters/Hitch_Name	英奇
+Characters/Izzy_Name	小艺
 Characters/Narrator_Name	旁白
 Characters/PaintShopBeach_Name	牌子画师
 Characters/PaintShopMane_Name	油漆摊位
-Characters/Pipp_Name	
+Characters/Pipp_Name	琪琪
 Characters/Primrose_Name	
 Characters/PumpkinLady_Name	
 Characters/RedFloatieGuy_Name	
-Characters/Shimmerwing_Name	
+Characters/Shimmerwing_Name	烁蝶
 Characters/ShopKeeper1_Name	店员
 Characters/ShopKeeper2_Name	店员
 Characters/ShopKeeper3_Name	店员
 Characters/SmootheShop_Name	冰沙摊位
-Characters/Sprout_Name	
-Characters/Sunny_Name	
-Characters/Thunder_Name	
-Characters/Zipp_Name	
-Characters/Zoom_Name	
-Menu/1P	1个玩家
-Menu/2P	2个玩家
+Characters/Sprout_Name	菜头
+Characters/Sunny_Name	希悦
+Characters/Thunder_Name	雷鸣
+Characters/Zipp_Name	力力
+Characters/Zoom_Name	速姆
+Menu/1P	1 位玩家
+Menu/2P	2 位玩家
 Menu/ACCEPT	确认
 Menu/ANIMATION	动画
 Menu/ART_DIRECTOR_CHARACTER_ARTIST	艺术总监与角色艺术
@@ -919,7 +919,7 @@ Menu/FINANCES	财政
 Menu/GAMEPLAY_PROGRAMMER	游戏性程序员
 Menu/GAME_DESIGNER	游戏设计师
 Menu/GO	开始
-Menu/HASBRO_DISCLAIMER	"MLP：小马宝莉（MY LITTLE PONY）和孩之宝（HASBRO）以及所有相关的商标和标识均为孩之宝公司（Hasbro, Inc.）的注册商标。© 2022 Hasbro."
+Menu/HASBRO_DISCLAIMER	MLP：小马宝莉（MY LITTLE PONY）和孩之宝（HASBRO）以及所有相关的商标和标识均为孩之宝公司（Hasbro, Inc.）的注册商标。© 2022 Hasbro.
 Menu/INTERACT	互动
 Menu/JUMP	跳跃
 Menu/LANGUAGE	语言
@@ -949,7 +949,7 @@ Menu/SAVE_SAFETY_DEFAULT	此图标出现时请勿关闭主机
 Menu/SAVE_SAFETY_STADIA	此游戏支持自动存档
 Menu/SAVE_SAFETY_SWITCH	此图标出现时请勿关闭主机
 Menu/SELECT	选择
-Menu/SELECT_PLAYERS	选择玩家
+Menu/SELECT_PLAYERS	选择角色
 Menu/SETTINGS	设置
 Menu/SFX_VOLUME	音效音量
 Menu/SLOT1	存档 1
@@ -977,8 +977,8 @@ Menu/LEFT	左
 Menu/RIGHT	右
 Menu/MENU_LEFT	上一个
 Menu/MENU_RIGHT	下一个
-Menu/RESET_CONTROLS	重置为默认控制
-XBOX/CHANGE_USER	修改
+Menu/RESET_CONTROLS	恢复默认
+XBOX/CHANGE_USER	切换
 XBOX/LOG_AGAIN	按任意键登录
 Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_01_CS_ZP_01	BC_INTRO_EV_01_01_CS_ZP_01_zh-CN
 Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_02_CVS_SN_01	BC_INTRO_EV_01_02_CVS_SN_01_zh-CN
