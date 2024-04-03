@@ -57,11 +57,11 @@ BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_02_CVS_Zoom_04	这就对了！
 BeachCove/Q13/COMP/BC_Q13_COMP_01_CVS_Zoom_06	干得不错 学员！这是你的奖励
 BeachCove/Q13/DECLINED/BC_Q13_DECLINED_01_CVS_SN_02	我还需要点时间……
 BeachCove/Q13/DECLINED/BC_Q13_DECLINED_02_CVS_Zoom_05	别拖得太久！
-BeachCove/Q13/POST_01/BC_Q13_POST_01_01_GP_Zoom_10	希望你比上一位好些 他总是掉进海里
+BeachCove/Q13/POST_01/BC_Q13_POST_01_01_GP_Zoom_10	希望你飞得比上一位好些 他总是掉进海里
 BeachCove/Q13/QUESTION/BC_Q13_QUESTION_01_CVS_Zoom_03	准备好接受速度挑战了吗？
 BeachCove/Q13/RETACPTD/BC_Q13_RETACPTD_01_CVS_Zoom_08	准备开始吧！
 BeachCove/Q13/RETDCLND/BC_Q13_RETDCLND_01_CVS_Zoom_09	想跑了可以随时回来
-BeachCove/Q13/RETRY/BC_Q13_RETRY_01_CVS_Zoom_07	啊 你回来了 想再来试一遍吗？
+BeachCove/Q13/RETRY/BC_Q13_RETRY_01_CVS_Zoom_07	啊 你回来了 想来再试一遍吗？
 BeachCove/Q13/START/BC_Q13_START_01_CVS_Zoom_01	看看谁来了！是学员希悦！
 BeachCove/Q13/START/BC_Q13_START_02_CVS_Zoom_02	这是最后一场障碍赛课程，离起飞不远了
 BeachCove/Q14/COMP/BC_Q14_COMP_01_GP_IZ_01	你做得很不错嘛！
@@ -193,7 +193,7 @@ Brighthouse/MH/COMP/BH_MH_COMP_03_CS_IZ_01	好极了！小马街 我们来了！
 Brighthouse/MH/COMP/BH_MH_COMP_04_CS_HC_03	是的！嗯 等我只要先把这些盒子挪开
 Brighthouse/MH/COMP/BH_MH_COMP_05_CS_HC_04	
 Brighthouse/MH/COMP/BH_MH_COMP_06_CS_SN_01	我们要帮他吗？
-Brighthouse/MH/COMP/BH_MH_COMP_07_CS_HC_05	不用！这些是我放的 我肯定会负责把他们归回原位…噢！
+Brighthouse/MH/COMP/BH_MH_COMP_07_CS_HC_05	不用！这些是我放的 我肯定会负责把它们归回原位…噢！
 Brighthouse/MH/COMP/BH_MH_COMP_08_CS_IZ_02	我觉得他没事 一切都在掌控之中
 Brighthouse/MH/DECLINED/BH_MH_DECLINED_01_CVS_HC_01	退缩了吗？准备好就再回来吧
 Brighthouse/MH/QUESTION/BH_MH_QUESTION_01_CVS_HC_01	准备好赶兔子了吗？
