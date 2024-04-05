@@ -7,7 +7,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Rendering.Universal;
@@ -24,7 +26,14 @@ namespace ElementsOfHarmony
 		private static readonly ManualResetEventSlim AudioClipsLoadedEvent = new ManualResetEventSlim(false);
 		private static volatile bool AudioClipsLoaded = false;
 
-		private static readonly SortedDictionary<string, SortedDictionary<string, string>> OurTranslations = new SortedDictionary<string, SortedDictionary<string, string>>();
+		private static readonly SortedDictionary<string, SortedDictionary<string, string>> OurTranslations =
+			new SortedDictionary<string, SortedDictionary<string, string>>();
+		private static readonly SortedDictionary<string, string> TermFallback =
+			new SortedDictionary<string, string>()
+			{
+				{ "MLP_Font", "FONTS/NOTO_SANS" }
+			};
+
 		private static string[] OriginalSupportedLanguageList = null;
 		private static string[] OurSupportedLanguageList = null;
 
@@ -67,7 +76,8 @@ namespace ElementsOfHarmony
 				}
 				void LoadAudioClipsRecursive(string directory)
 				{
-					IEnumerable<string> directories = Directory.EnumerateDirectories(directory, "*", SearchOption.AllDirectories);
+					IEnumerable<string> directories = Directory.EnumerateDirectories(directory, "*", SearchOption.AllDirectories).
+						Append(Path.GetFullPath(directory));
 					foreach (string currentDirectory in directories)
 					{
 						LoadAudioClips(currentDirectory);
@@ -160,6 +170,22 @@ namespace ElementsOfHarmony
 			catch (Exception e)
 			{
 				Log.Message(e.StackTrace + "\n" + e.Message);
+			}
+
+			void TryLoadFont(string fontPath)
+			{
+				try
+				{
+					TMP_Settings.fallbackFontAssets.Add(TMP_FontAsset.CreateFontAsset(
+						new Font(fontPath)));
+				}
+				catch { }
+			}
+
+			// load fallback fonts into TMP's fallback fonts
+			foreach (string fallback in Font.GetPathsToOSFonts())
+			{
+				TryLoadFont(fallback);
 			}
 
 			try
@@ -416,6 +442,15 @@ namespace ElementsOfHarmony
 								return false;
 							}
 						}
+						if (TermFallback.TryGetValue(Term, out string FallbackTerm))
+						{
+							// search for the term in our translation list again
+							if (OurTranslations[TargetLanguage].TryGetValue(FallbackTerm, out __result))
+							{
+								Log.Message($"fallback term translation matched! lang={TargetLanguage} term={Term} FallbackTerm={FallbackTerm} result={__result}");
+								return false;
+							}
+						}
 					}
 
 					if (!string.IsNullOrEmpty(Settings.OurSelectedLanguageOverride))
@@ -667,8 +702,8 @@ namespace ElementsOfHarmony
 			///		 UnityWebRequestAsyncOperation always runs & blocks the main thread (as a coroutine perhaps) even if it's invoked on a seperate thread
 			///		 so there is no way to make it run completely on a seperate thread
 			///		 ...fine, whatever, it only causes like 2-3 seconds of black screen before startup anyways, nothing too serious
-			/// 9. increase global music volume and make fly game's music volume comply to music volume settings
-			/// 10. there are localizations for the "evalution" texts ("good" "cool" "perfect"), but they didn't show up
+			/// 9. √ increase global music volume and make fly game's music volume comply to music volume settings
+			/// 10. √ there are localizations for the "evalution" texts ("good" "cool" "perfect"), but they didn't show up
 			/// 11. it seems that there are lots of unused tutorial audios, pending investigate & reactivition
 			/// 12. remove the green filter in crab game as well as in-game area
 			/// </summary>
@@ -733,11 +768,6 @@ namespace ElementsOfHarmony
 									RunnerLevelGeneratorStartMovementPatch.Enabled = false;
 									tutorialPhase.StartCoroutine(runner1MiniGame.InitializeTutorialAndGame());
 								}
-							}
-							if (!(ActualGame is Runner1MiniGame))
-							{
-								// tutorial audios for other minigames are missing, this should fix it
-								ActualGame.audioSource?.Play();
 							}
 						}
 					}
@@ -1077,6 +1107,58 @@ namespace ElementsOfHarmony
 
 			#endregion
 
+			#region Pipp Pipp Dance Parade
+
+			[HarmonyPatch(typeof(PlayerCombo))]
+			[HarmonyPatch("StartGame")]
+			public static class PlayerComboStartGamePatch
+			{
+				public static void Postfix(PlayerCombo __instance)
+				{
+					GameObject Find(GameObject obj, string name)
+					{
+						if (obj.name == name) return obj;
+						foreach (Transform child in obj.transform)
+						{
+							if (Find(child.gameObject, name) is GameObject result)
+							{
+								return result;
+							}
+						}
+						return null;
+					}
+
+					Log.Message("applying fix for dancing game");
+
+					// set evaluation text active
+					__instance.fashionShowCombo.smsPivote.gameObject.SetActive(true);
+
+					// adjust emoji position
+					GameObject emojis = Find(__instance.gameObject, "emojis");
+					emojis.GetComponent<RectTransform>().position += new Vector3(0, 1.0f, 0);
+				}
+			}
+
+			[HarmonyPatch(typeof(PlayerCombo))]
+			[HarmonyPatch("OnSignalHit")]
+			public static class OnSignalHitPatch
+			{
+				public static void Prefix(FashionShowCombo fashionShowCombo)
+				{
+					// stop previous unfinished transition of the evalution text
+					// so that it can keep up with the new hit
+					fashionShowCombo.sms.Rebind();
+				}
+				public static void Postfix(FashionShowCombo fashionShowCombo)
+				{
+					// original position is (-4.2f, -2.8f, 19.0f);
+					// change it so that it doesn't block others and doesn't get blocked by others
+					fashionShowCombo.smsPivote.position = new Vector3(-4.2f, -1.7f, 19.0f);
+				}
+			}
+
+			#endregion
+
 			#region Zipp's Flight Academy
 
 			[HarmonyPatch(typeof(DashThroughTheSkyMiniGame))]
@@ -1085,7 +1167,11 @@ namespace ElementsOfHarmony
 			{
 				public static void Prefix(DashThroughTheSkyMiniGame __instance)
 				{
+					Log.Message("fixing background music volume for DashThroughTheSkyMiniGame");
 					__instance.audioSource.volume = 1.0f;
+					__instance.audioSource.loop = true;
+					__instance.audioSource.outputAudioMixerGroup = __instance.audioSource.outputAudioMixerGroup
+						.audioMixer.FindMatchingGroups("Music").First();
 				}
 			}
 
@@ -1244,6 +1330,148 @@ namespace ElementsOfHarmony
 			}
 
 			#endregion
+
+			[HarmonyPatch(typeof(VolumeSlider))]
+			[HarmonyPatch("SetValue")] // audio volume slider in the audio settings menu
+			public static class VolumeSliderPatch
+			{
+				public static bool Prefix(VolumeSlider __instance, float sliderValue)
+				{
+					__instance.slider.value = Mathf.Clamp01(sliderValue);
+					float num = Mathf.Log(1f + 9f * __instance.slider.value, 10f);
+					__instance.percentage.text = (100f * __instance.slider.value).ToString("F0") + " %";
+					if (__instance.name == "Music")
+					{
+						// allow music to have max volume of +20 db instead of -0 db
+						num *= 1.2f;
+					}
+					__instance.audioMmixer.SetFloat(__instance.volumeParameter, (num - 1f) * 80f);
+					__instance.audioMmixer.GetFloat(__instance.volumeParameter, out var _);
+					return false;
+				}
+			}
+
+			[HarmonyPatch(typeof(LocalizeTarget_UnityUI_Text))]
+			[HarmonyPatch("DoLocalize")] // the game use this function to set font and text for UnityEngine.UI.Text
+			public static class LocalizeTarget_UnityUI_Text_DoLocalizePatch
+			{
+				public static bool Prefix(LocalizeTarget_UnityUI_Text __instance, Localize cmp, string mainTranslation, string secondaryTranslation)
+				{
+					object[] Args = new object[]
+					{
+						mainTranslation, secondaryTranslation
+					};
+					Font secondaryTranslatedObj = TryGetFont(mainTranslation, secondaryTranslation, __instance.mTarget.font) ??
+						(Font)AccessTools.Method(typeof(Localize), "GetSecondaryTranslatedObj")
+						.MakeGenericMethod(typeof(Font))
+						.Invoke(cmp, Args);
+					mainTranslation = (string)Args[0];
+					if (secondaryTranslatedObj != null && secondaryTranslatedObj != __instance.mTarget.font)
+					{
+						__instance.mTarget.font = secondaryTranslatedObj;
+					}
+					if (Traverse.Create(__instance).Field("mInitializeAlignment").GetValue<bool>())
+					{
+						Traverse.Create(__instance).Field("mInitializeAlignment").SetValue(false);
+						Traverse.Create(__instance).Field("mAlignmentWasRTL").SetValue(LocalizationManager.IsRight2Left);
+						Args = new object[]
+						{
+							Traverse.Create(__instance).Field("mAlignmentWasRTL").GetValue<bool>(),
+							__instance.mTarget.alignment,
+							Traverse.Create(__instance).Field("mAlignment_LTR").GetValue<TextAnchor>(),
+							Traverse.Create(__instance).Field("mAlignment_RTL").GetValue<TextAnchor>(),
+						};
+						AccessTools.Method(typeof(LocalizeTarget_UnityUI_Text), "InitAlignment").Invoke(__instance, Args);
+						Traverse.Create(__instance).Field("mAlignment_LTR").SetValue(Args[2]);
+						Traverse.Create(__instance).Field("mAlignment_RTL").SetValue(Args[3]);
+					}
+					else
+					{
+						Args = new object[]
+						{
+							Traverse.Create(__instance).Field("mAlignmentWasRTL").GetValue<bool>(),
+							__instance.mTarget.alignment,
+							Traverse.Create(__instance).Field("mAlignment_LTR").GetValue<TextAnchor>(),
+							Traverse.Create(__instance).Field("mAlignment_RTL").GetValue<TextAnchor>(),
+						};
+						AccessTools.Method(typeof(LocalizeTarget_UnityUI_Text), "InitAlignment").Invoke(__instance, Args);
+						TextAnchor alignRTL = (TextAnchor)Args[2];
+						TextAnchor alignLTR = (TextAnchor)Args[3];
+
+						if ((Traverse.Create(__instance).Field("mAlignmentWasRTL").GetValue<bool>() && Traverse.Create(__instance).Field("mAlignment_RTL").GetValue<TextAnchor>() != alignRTL) ||
+							(!Traverse.Create(__instance).Field("mAlignmentWasRTL").GetValue<bool>() && Traverse.Create(__instance).Field("mAlignment_LTR").GetValue<TextAnchor>() != alignLTR))
+						{
+							Traverse.Create(__instance).Field("mAlignment_LTR").SetValue(alignLTR);
+							Traverse.Create(__instance).Field("mAlignment_RTL").SetValue(alignRTL);
+						}
+						Traverse.Create(__instance).Field("mAlignmentWasRTL").SetValue(LocalizationManager.IsRight2Left);
+					}
+					if (mainTranslation != null && __instance.mTarget.text != mainTranslation)
+					{
+						if (cmp.CorrectAlignmentForRTL)
+						{
+							__instance.mTarget.alignment = LocalizationManager.IsRight2Left ?
+								Traverse.Create(__instance).Field("mAlignment_RTL").GetValue<TextAnchor>() :
+								Traverse.Create(__instance).Field("mAlignment_LTR").GetValue<TextAnchor>();
+						}
+						__instance.mTarget.text = mainTranslation;
+						__instance.mTarget.SetVerticesDirty();
+					}
+					return false;
+				}
+				public static Font TryGetFont(string translation, string font, Font existing)
+				{
+					try
+					{
+						if (string.IsNullOrEmpty(font)) return null;
+
+						string fontFamilyName = new Regex(@"(\w+)").Matches(font)[0].Value;
+
+						if (existing.fontNames.Exists(N => N.StartsWith(fontFamilyName, StringComparison.InvariantCultureIgnoreCase)))
+						{
+							return null;
+						}
+
+						TMP_FontAsset tmp = TMP_Settings.fallbackFontAssets.FirstOrDefault(F =>
+						{
+							return F.faceInfo.familyName.StartsWith(fontFamilyName, StringComparison.InvariantCultureIgnoreCase);
+						});
+
+						if (tmp != null)
+						{
+							tmp.TryAddCharacters(translation);
+
+							if (tmp.HasCharacters(translation, out List<char> missing) || // all characters exists
+								missing.All(C => !new Regex(@"\w").IsMatch($"{C}"))) // character not present, but is not a word anyways
+							{
+								Log.Message($"font matched, fontFamilyName={fontFamilyName}");
+								return LoadedFonts[font] = Font.CreateDynamicFontFromOSFont(fontFamilyName, 36);
+							}
+							else
+							{
+								// this extra check is here because
+								// if we go ahead and set this font regardless of character graph availability
+								// unity would use the same fallbacks from when no font is assigned (which is good)
+								// but the font size would be changed (which is ugly)
+								// 
+								// so even though set a faulty font would not cause error
+								// we still want to avoid doing it
+								Log.Message($"font doesn't have some characters, fontFamilyName={fontFamilyName}, missing.Count={missing.Count} missing={new string(missing.ToArray())}");
+							}
+						}
+						else
+						{
+							Log.Message($"font not found, fontFamilyName={fontFamilyName}");
+						}
+					}
+					catch
+					{
+						Log.Message($"exception happened during TryGetFont");
+					}
+					return null;
+				}
+				private static readonly Dictionary<string, Font> LoadedFonts = new Dictionary<string, Font>();
+			}
 		}
 
 		public static class AZHM
