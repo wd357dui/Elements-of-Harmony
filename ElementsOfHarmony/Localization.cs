@@ -1,11 +1,15 @@
-﻿using HarmonyLib;
+﻿using Character;
+using HarmonyLib;
 using I2.Loc;
 using Melbot;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Rendering.Universal;
@@ -19,10 +23,17 @@ namespace ElementsOfHarmony
 
 		private static readonly SortedDictionary<string, AudioClip> OurAudioClips = new SortedDictionary<string, AudioClip>();
 		private static readonly HashSet<UnityWebRequestAsyncOperation> AudioClipLoadingOperations = new HashSet<UnityWebRequestAsyncOperation>();
-		private static readonly ManualResetEvent AudioClipsLoadedEvent = new ManualResetEvent(false);
+		private static readonly ManualResetEventSlim AudioClipsLoadedEvent = new ManualResetEventSlim(false);
 		private static volatile bool AudioClipsLoaded = false;
 
-		private static readonly SortedDictionary<string, SortedDictionary<string, string>> OurTranslations = new SortedDictionary<string, SortedDictionary<string, string>>();
+		private static readonly SortedDictionary<string, SortedDictionary<string, string>> OurTranslations =
+			new SortedDictionary<string, SortedDictionary<string, string>>();
+		private static readonly SortedDictionary<string, string> TermFallback =
+			new SortedDictionary<string, string>()
+			{
+				{ "MLP_Font", "FONTS/NOTO_SANS" }
+			};
+
 		private static string[] OriginalSupportedLanguageList = null;
 		private static string[] OurSupportedLanguageList = null;
 
@@ -65,7 +76,8 @@ namespace ElementsOfHarmony
 				}
 				void LoadAudioClipsRecursive(string directory)
 				{
-					IEnumerable<string> directories = Directory.EnumerateDirectories(directory, "*", SearchOption.AllDirectories);
+					IEnumerable<string> directories = Directory.EnumerateDirectories(directory, "*", SearchOption.AllDirectories).
+						Append(Path.GetFullPath(directory));
 					foreach (string currentDirectory in directories)
 					{
 						LoadAudioClips(currentDirectory);
@@ -75,16 +87,7 @@ namespace ElementsOfHarmony
 				{
 					UnityWebRequestAsyncOperation req = op as UnityWebRequestAsyncOperation;
 					AudioClip clip = DownloadHandlerAudioClip.GetContent(req.webRequest);
-					string term = req.webRequest.url;
-					term = term.Replace('\\', '/');
-					if (term.Contains("/"))
-					{
-						term = term.Substring(term.LastIndexOf("/") + 1);
-					}
-					if (term.Contains("."))
-					{
-						term = term.Remove(term.LastIndexOf("."));
-					}
+					string term = Path.GetFileNameWithoutExtension(new Uri(req.webRequest.url).LocalPath);
 					lock (AudioClipMutex)
 					{
 						OurAudioClips[term] = clip;
@@ -144,8 +147,8 @@ namespace ElementsOfHarmony
 										string[] pair = line.Split(tab, StringSplitOptions.RemoveEmptyEntries);
 										if (pair.Length >= 2)
 										{
-											string term = pair[0];
-											string text = pair[1].Replace("\\n", "\n");
+											string term = pair[0].Trim('\"');
+											string text = pair[1].Replace("\\n", "\n").Trim('\"');
 											Translations.Add(term, text);
 											Log.Message($"Translation added: term={term} value={text}");
 										}
@@ -167,6 +170,22 @@ namespace ElementsOfHarmony
 			catch (Exception e)
 			{
 				Log.Message(e.StackTrace + "\n" + e.Message);
+			}
+
+			void TryLoadFont(string fontPath)
+			{
+				try
+				{
+					TMP_Settings.fallbackFontAssets.Add(TMP_FontAsset.CreateFontAsset(
+						new Font(fontPath)));
+				}
+				catch { }
+			}
+
+			// load fallback fonts into TMP's fallback fonts
+			foreach (string fallback in Font.GetPathsToOSFonts())
+			{
+				TryLoadFont(fallback);
 			}
 
 			try
@@ -423,6 +442,15 @@ namespace ElementsOfHarmony
 								return false;
 							}
 						}
+						if (TermFallback.TryGetValue(Term, out string FallbackTerm))
+						{
+							// search for the term in our translation list again
+							if (OurTranslations[TargetLanguage].TryGetValue(FallbackTerm, out __result))
+							{
+								Log.Message($"fallback term translation matched! lang={TargetLanguage} term={Term} FallbackTerm={FallbackTerm} result={__result}");
+								return false;
+							}
+						}
 					}
 
 					if (!string.IsNullOrEmpty(Settings.OurSelectedLanguageOverride))
@@ -464,7 +492,7 @@ namespace ElementsOfHarmony
 					if (!AudioClipsLoaded)
 					{
 						// if our audio clips haven't finished loading, we wait until they do
-						AudioClipsLoadedEvent.WaitOne();
+						AudioClipsLoadedEvent.Wait();
 					}
 					bool AudioMatched;
 					if (AudioMatched = OurAudioClips.TryGetValue(mainTranslation, out AudioClip audioClip))
@@ -659,6 +687,790 @@ namespace ElementsOfHarmony
 						CameraData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing; // so we change it
 					}
 				}
+			}
+
+			/// <summary>
+			/// Pending additional fix & improvements:
+			/// 1. √ make load-level-in-advance fix for the bunny+crab herding game same way as the bunny game
+			/// 2. √ there are additional blank seconds before countdown begins in the crab game & dance game & fly game, need to remove those
+			/// 3. √ you can move during the "3,2,1" countdown in the bunny and the bunny+crab herding game, need to disable that for fairness
+			/// 4. √ obstacle generators (and maybe other timers) started too early (before the tutorial) due to the call to `InitializeTutorialAndGame`
+			/// 5. √ tutorial audio from sprout played too early (before tutorial screen showed) probably due to the call to `InitializeTutorialAndGame`
+			/// 6. √ remove additional wait delay in initialization phase caused by coroutine of `InitializeTutorialAndGame`
+			/// 7. √ move Sprout closer to the player as game progresses closer to the finish
+			/// 8. × refactor DoLocalize patch to not wait for unused audio clips
+			///		 UnityWebRequestAsyncOperation always runs & blocks the main thread (as a coroutine perhaps) even if it's invoked on a seperate thread
+			///		 so there is no way to make it run completely on a seperate thread
+			///		 ...fine, whatever, it only causes like 2-3 seconds of black screen before startup anyways, nothing too serious
+			/// 9. √ increase global music volume and make fly game's music volume comply to music volume settings
+			/// 10. √ there are localizations for the "evalution" texts ("good" "cool" "perfect"), but they didn't show up
+			/// 11. it seems that there are lots of unused tutorial audios, pending investigate & reactivition
+			/// 12. remove the green filter in crab game as well as in-game area
+			/// </summary>
+			[HarmonyPatch(typeof(Minigame))]
+			[HarmonyPatch("MoveToNextPhaseIE")] // minigame has following phases: initialization, countdown, tutorial, gameplay, score
+			public static class MinigameMoveToNextPhaseIEPatch
+			{
+				public static bool Prefix(Minigame __instance, ref IEnumerator __result)
+				{
+					MinigamePhase currentPhase = Traverse.Create(__instance).Field("currentPhase").GetValue<MinigamePhase>();
+					MinigamePhase nextPhase = currentPhase?.Next;
+					MinigamePhase nextNextPhase = currentPhase?.Next?.Next;
+					if (currentPhase is InitializationPhase &&
+						nextPhase is CountDownPhase countDownPhase &&
+						nextNextPhase is TutorialPhase tutorialPhase)
+					{
+						Log.Message("minigame starting, relocating the tutorial phase to before the countdown phase");
+						MinigamePhase AfterTutorialAndCountdown = tutorialPhase.Next;
+						Traverse.Create(currentPhase).Field("nextState").SetValue(tutorialPhase);
+						Traverse.Create(tutorialPhase).Field("nextState").SetValue(countDownPhase);
+						Traverse.Create(countDownPhase).Field("nextState").SetValue(AfterTutorialAndCountdown);
+						if (AfterTutorialAndCountdown is GameplayPhase gameplayPhase)
+						{
+							MinigameBase ActualGame = Traverse.Create(gameplayPhase).Field("minigameBase").GetValue<MinigameBase>();
+							if (ActualGame is DashThroughTheSkyMiniGame ||
+								ActualGame is Runner1MiniGame)
+							{
+								// April 2, 2024
+								// `InitializeTutorialAndGame` method wasn't the entirely correct fix for stuck on initialization screen,
+								// THIS is.
+								// I've finally found it...
+								__instance.FullFadeOut();
+
+								// this is the one thing that didn't get called,
+								// that was causing the flying game and the runner game to
+								// stuck on initialization screen and not able to show the tutorial screen...
+								// 
+								// I spent 3 days looking through every bit around the InitializeTutorialAndGame function
+								// and finally, finally after looking through every bit about
+								// DashThroughTheSkyMiniGame, FlyingLevelGenerator,
+								// DashThroughTHeSkypInitializationPhase, DashThroughTheSkyGameplayPhase, DashThroughTheSkyCountDownPhase
+								// TutorialPhase, TutorialScreen, and even the VideoPlayer class,
+								// 
+								// I finally came to a confident conclusion that this method `InitializeTutorialAndGame`
+								// has nothing to do with tutorial initialization;
+								// with that kept in mind, I looked for all the function calls within that method once again,
+								// specifically looked for stuff that has nothing to do with any initialization,
+								// and for stuff that might've been too insignificant to be noticed,
+								// and I've finally, FINALLY, found it...
+								// this easily overlooked method call, called `FullFadeOut`...
+								// it kept escaping my eyes the last few days because I thought that if this is important
+								// it would've been called somewhere down the line already
+								// now it becomes clear that it just didn't...
+								// 
+								// words cannot describe my exhaustion & frustration
+
+								// the runner game still need `InitializeTutorialAndGame` to load the map
+								if (Traverse.Create(gameplayPhase).Field("minigameBase").GetValue<MinigameBase>() is Runner1MiniGame runner1MiniGame)
+								{
+									Log.Message("fixnig Runner1MiniGame, pause movement for faireness");
+									// pause movement so that the character would not run into traps before the game begins
+									RunnerLevelGeneratorStartMovementPatch.Enabled = false;
+									tutorialPhase.StartCoroutine(runner1MiniGame.InitializeTutorialAndGame());
+								}
+							}
+						}
+					}
+					else if (currentPhase is TutorialPhase &&
+						nextPhase is CountDownPhase &&
+						nextNextPhase is GameplayPhase gameplayPhase)
+					{
+						MinigameBase ActualGame = Traverse.Create(gameplayPhase).Field("minigameBase").GetValue<MinigameBase>();
+						if (ActualGame is HerdingBunniesMinigame bunnies)
+						{
+							Log.Message("countdown is about to begin, load level for HerdingBunniesMinigame in advance");
+							// so that it would not change in a sudden after "3, 2, 1, go"
+							HerdingBunniesMinigamePatch.StartGameFirstHalf(bunnies);
+						}
+						else if (ActualGame is HerdingCrabsMinigame crabs)
+						{
+							Log.Message("countdown is about to begin, load level for HerdingCrabsMinigame in advance");
+							// so that it would not change in a sudden after "3, 2, 1, go"
+							HerdingCrabsMinigamePatch.StartGameFirstHalf(crabs);
+						}
+						else if (ActualGame is Runner1MiniGame)
+						{
+							Log.Message($"recover character movement for Runner1MiniGame");
+							RunnerLevelGeneratorStartMovementPatch.Enabled = true;
+							RunnerLevelGeneratorStartMovementPatch.Unpause();
+						}
+						MLPCharacterOnAxisEventPatch.Enabled = false;
+						Log.Message($"disable character movement during countdown for fairness");
+					}
+					else if (currentPhase is CountDownPhase &&
+						nextPhase is GameplayPhase)
+					{
+						MLPCharacterOnAxisEventPatch.Enabled = true;
+						Log.Message($"recover character movement after countdown");
+					}
+					__result = EnumerateCoroutine(__instance);
+					currentPhase.ExitPhase();
+					Traverse.Create(__instance).Field("currentPhase").SetValue(currentPhase = currentPhase.Next);
+					currentPhase.EnterPhase();
+					return false;
+				}
+
+				public static IEnumerator EnumerateCoroutine(Minigame __instance)
+				{
+					yield return new WaitUntil(() => __instance.AdressablesLoaded());
+				}
+			}
+
+			[HarmonyPatch(typeof(SequenceNode))]
+			[HarmonyPatch("OnEnable")]
+			public static class SequenceNodeRemoveRedundantTimers
+			{
+				public static void Postfix(SequenceNode __instance)
+				{
+					int DisableCameraNodeIndex = __instance.nodes.FindIndex(N => N is EnableGameObjectNode);
+					int GoCountDownIndex = __instance.nodes.FindIndex(N => N is GoCountDownNode);
+					if (GoCountDownIndex >= 0 && DisableCameraNodeIndex >= 0 &&
+						GoCountDownIndex > DisableCameraNodeIndex)
+					{
+						int RedundantTimerIndex;
+						do
+						{
+							TimerNode RedundantTimer = null;
+							RedundantTimerIndex = __instance.nodes.FindIndex(DisableCameraNodeIndex,
+								N => (RedundantTimer = N as TimerNode) != null &&
+								RedundantTimer.total > 0.0f && RedundantTimer.total < 3.0f);
+							if (RedundantTimerIndex >= 0 && RedundantTimer != null)
+							{
+								Log.Message($"Removing redundant timer for countdown phase, " +
+									$"name={RedundantTimer.name} time={RedundantTimer.total}");
+								__instance.nodes.RemoveAt(RedundantTimerIndex);
+							}
+						}
+						while (RedundantTimerIndex >= 0);
+					}
+				}
+			}
+
+			[HarmonyPatch(typeof(MLPCharacter))]
+			[HarmonyPatch("OnAxisEvent")]
+			public static class MLPCharacterOnAxisEventPatch
+			{
+				public static bool Enabled = true;
+				public static bool Prefix()
+				{
+					return Enabled;
+				}
+			}
+
+			#region Hitch's Bunny Herding Training
+
+			[HarmonyPatch(typeof(HerdingBunniesMinigame))]
+			[HarmonyPatch("StartGameIE")]
+			public static class HerdingBunniesMinigamePatch
+			{
+				public static void StartGameFirstHalf(HerdingBunniesMinigame __instance)
+				{
+					// first half of StartGameIE
+
+					HerdingMinigames_GUI gui = Traverse.Create(__instance).Field("gui").GetValue<HerdingMinigames_GUI>();
+					List<HerdingBunniesMinigame.BonusLimit> bonusLimits = Traverse.Create(__instance).Field("bonusLimits").GetValue<List<HerdingBunniesMinigame.BonusLimit>>();
+
+					__instance.active = true;
+					List<MinigamePJ> list = new List<MinigamePJ>();
+					if (__instance.Mode == MinigamePlayersType.multiplayer)
+					{
+						GameSession gameSession = NonPersistentSingleton<BaseSystem>.Get().gameSession;
+						list.Add(gameSession.GetPjFromPlayer(1));
+						list.Add(gameSession.GetPjFromPlayer(2));
+					}
+					gui.SetGameMode(__instance.Mode, copp: true, list);
+					gui.PauseTimer();
+					Traverse.Create(__instance).Field("bonusLimits").SetValue(
+						bonusLimits.OrderByDescending((HerdingBunniesMinigame.BonusLimit t) => t.numberOfBunnys).ToList());
+
+					Traverse.Create(__instance).Method("RestartGame").GetValue();
+
+					object Value = Traverse.Create(__instance).Field("roundsPrefabs").GetValue<Array>().GetValue(0);
+					SetUpRoundFirstHalf(__instance, ref Value, 0);
+					Traverse.Create(__instance).Field("roundsPrefabs").GetValue<Array>().SetValue(Value, 0);
+
+					if (__instance.Mode == MinigamePlayersType.multiplayer)
+					{
+						Value = Traverse.Create(__instance).Field("roundsPrefabs").GetValue<Array>().GetValue(0);
+						SetUpRoundFirstHalf(__instance, ref Value, 1);
+						Traverse.Create(__instance).Field("roundsPrefabs").GetValue<Array>().SetValue(Value, 0);
+					}
+				}
+
+				public static bool Prefix(HerdingBunniesMinigame __instance, ref IEnumerator __result)
+				{
+					HerdingMinigames_GUI gui = Traverse.Create(__instance).Field("gui").GetValue<HerdingMinigames_GUI>();
+					MinigamePhase minigamePhase = Traverse.Create(__instance).Field("minigamePhase").GetValue<MinigamePhase>();
+
+					// finish up previous calls
+					SetUpRoundSecondHalf(__instance, true);
+
+					// second half of StartGameIE
+
+					__result = EnumerateCoroutine(__instance);
+
+					gui.ShowGUI();
+					minigamePhase.minigame.SetAddressablesLoading(bLoading: false);
+					if (!__instance.audioSource.isPlaying)
+					{
+						__instance.audioSource.loop = true;
+						__instance.audioSource.Play();
+					}
+					Traverse.Create(__instance).Field("herdingCharacters").SetValue(
+						Traverse.Create(__instance).Method("GetHerdingCharacters").GetValue());
+					return false;
+				}
+
+				public static IEnumerator EnumerateCoroutine(HerdingBunniesMinigame __instance)
+				{
+					yield return new WaitUntil(() => Traverse.Create(__instance).Field("bunniesInitialized").GetValue<bool>());
+				}
+
+				public static void SetUpRoundFirstHalf(HerdingBunniesMinigame __instance, ref object info, int nPlayer)
+				{
+					MinigamePhase minigamePhase = Traverse.Create(__instance).Field("minigamePhase").GetValue<MinigamePhase>();
+					YardSet yards = Traverse.Create(__instance).Field("yards").GetValue<YardSet>();
+
+					((GameplayPhase)minigamePhase).setShotScreen.GoOut();
+					Traverse.Create(__instance).Field("occupiedPositions").SetValue((HerdingMinigames_Positions)0);
+
+					AccessTools.Method(typeof(HerdingBunniesMinigame), "InstantiateYard").Invoke(__instance, new object[] { nPlayer });
+
+					object[] Args = new object[]
+					{
+						info, nPlayer
+					};
+
+					if (nPlayer == 0)
+					{
+						AccessTools.Method(typeof(HerdingBunniesMinigame), "InstantiateBunnies").Invoke(__instance, Args);
+					}
+					AccessTools.Method(typeof(HerdingBunniesMinigame), "InstantiateBunnyHoles").Invoke(__instance, Args);
+					AccessTools.Method(typeof(HerdingBunniesMinigame), "InstantiateMud").Invoke(__instance, Args);
+					AccessTools.Method(typeof(HerdingBunniesMinigame), "InstantiatePumpkins").Invoke(__instance, Args);
+					info = Args[0];
+
+					MLPCharacter mLPCharacter = minigamePhase.minigame.Characters[0];
+					((HerdingBunniesStates)mLPCharacter.bodyController.states).Walk();
+					mLPCharacter.transform.rotation = yards.yard.transform.rotation;
+					mLPCharacter.transform.position = yards.yard.transform.position + yards.yard.transform.forward * 1f - yards.yard.transform.right * 1f;
+					if (__instance.Mode == MinigamePlayersType.multiplayer)
+					{
+						MLPCharacter mLPCharacter2 = minigamePhase.minigame.Characters[1];
+						((HerdingBunniesStates)mLPCharacter2.bodyController.states).Walk();
+						mLPCharacter2.transform.rotation = yards.yard.transform.rotation;
+						mLPCharacter2.transform.position = yards.yard.transform.position + yards.yard.transform.forward * 1f + yards.yard.transform.right * 1f;
+					}
+				}
+
+				public static void SetUpRoundSecondHalf(HerdingBunniesMinigame __instance, bool firstRound = false)
+				{
+					HerdingMinigames_GUI gui = Traverse.Create(__instance).Field("gui").GetValue<HerdingMinigames_GUI>();
+					SequenceNode initPhaseSequenceNode = __instance.initPhaseSequenceNode;
+
+					gui.ShowGUI();
+					gui.SetScore(0, __instance.Scores[0].Value);
+					gui.InitializeTimerAnimation((int)Traverse.Create(__instance).Field("roundsDuration").GetValue<float>());
+					Traverse.Create(__instance).Method("StartTime").GetValue();
+					if (!firstRound)
+					{
+						gui.ShowGoSign(1.5f);
+						initPhaseSequenceNode.ResetNode();
+					}
+				}
+			}
+
+			#endregion
+
+			#region Bunny and Crab Herding Classic
+
+			[HarmonyPatch(typeof(HerdingCrabsMinigame))]
+			[HarmonyPatch("StartGameIE")]
+			public static class HerdingCrabsMinigamePatch
+			{
+				public static void StartGameFirstHalf(HerdingCrabsMinigame __instance)
+				{
+					// first half of StartGameIE
+
+					HerdingMinigames_GUI gui = Traverse.Create(__instance).Field("gui").GetValue<HerdingMinigames_GUI>();
+					List<HerdingCrabsMinigame.BonusLimit> crabsBonusLimits = Traverse.Create(__instance).Field("crabsBonusLimits").GetValue<List<HerdingCrabsMinigame.BonusLimit>>();
+					List<HerdingCrabsMinigame.BonusLimit> bunniesBonusLimits = Traverse.Create(__instance).Field("bunniesBonusLimits").GetValue<List<HerdingCrabsMinigame.BonusLimit>>();
+					MinigamePhase minigamePhase = Traverse.Create(__instance).Field("minigamePhase").GetValue<MinigamePhase>();
+
+					Traverse.Create(__instance).Field("active").SetValue(true);
+					List<MinigamePJ> list = new List<MinigamePJ>();
+					if (__instance.Mode == MinigamePlayersType.multiplayer)
+					{
+						GameSession gameSession = NonPersistentSingleton<BaseSystem>.Get().gameSession;
+						list.Add(gameSession.GetPjFromPlayer(1));
+						list.Add(gameSession.GetPjFromPlayer(2));
+					}
+					gui.SetGameMode(__instance.Mode, copp: true, list);
+					gui.PauseTimer();
+					Traverse.Create(__instance).Field("crabsBonusLimits").SetValue(
+						crabsBonusLimits.OrderByDescending((HerdingCrabsMinigame.BonusLimit t) => t.numberOfAnimals).ToList());
+					Traverse.Create(__instance).Field("bunniesBonusLimits").SetValue(
+						bunniesBonusLimits.OrderByDescending((HerdingCrabsMinigame.BonusLimit t) => t.numberOfAnimals).ToList());
+
+					Traverse.Create(__instance).Method("RestartGame").GetValue();
+
+					object Value = Traverse.Create(__instance).Field("roundsPrefabs").GetValue<Array>().GetValue(0);
+					SetUpRoundFirstHalf(__instance, ref Value);
+					Traverse.Create(__instance).Field("roundsPrefabs").GetValue<Array>().SetValue(Value, 0);
+				}
+
+				public static bool Prefix(HerdingCrabsMinigame __instance, ref IEnumerator __result)
+				{
+					HerdingMinigames_GUI gui = Traverse.Create(__instance).Field("gui").GetValue<HerdingMinigames_GUI>();
+					MinigamePhase minigamePhase = Traverse.Create(__instance).Field("minigamePhase").GetValue<MinigamePhase>();
+
+					// finish up previous calls
+					SetUpRoundSecondHalf(__instance, true);
+
+					// second half of StartGameIE
+
+					__result = EnumerateCoroutine(__instance);
+
+					gui.ShowGUI();
+					minigamePhase.minigame.SetAddressablesLoading(bLoading: false);
+					if (!__instance.audioSource.isPlaying)
+					{
+						__instance.audioSource.loop = true;
+						__instance.audioSource.Play();
+					}
+					Traverse.Create(__instance).Field("herdingCharacters").SetValue(
+						Traverse.Create(__instance).Method("GetHerdingCharacters").GetValue());
+					return false;
+				}
+
+				public static IEnumerator EnumerateCoroutine(HerdingCrabsMinigame __instance)
+				{
+					yield return new WaitUntil(() => Traverse.Create(__instance).Field("bunniesCrabsInitialized").GetValue<bool>());
+				}
+
+				public static void SetUpRoundFirstHalf(HerdingCrabsMinigame __instance, ref object info)
+				{
+					MinigamePhase minigamePhase = Traverse.Create(__instance).Field("minigamePhase").GetValue<MinigamePhase>();
+					HerdingCrabs_Exits herdingCrabsExits = Traverse.Create(__instance).Field("herdingCrabsExits").GetValue<HerdingCrabs_Exits>();
+
+					((GameplayPhase)minigamePhase).setShotScreen.GoOut();
+					Traverse.Create(__instance).Field("occupiedPositions").SetValue((HerdingMinigames_Positions)0);
+
+					AccessTools.Method(typeof(HerdingCrabsMinigame), "InstantiateExits").Invoke(__instance, Array.Empty<object>());
+
+					object[] Args = new object[]
+					{
+						info,
+					};
+
+					AccessTools.Method(typeof(HerdingCrabsMinigame), "InstantiateBunnyHoles").Invoke(__instance, Args);
+					AccessTools.Method(typeof(HerdingCrabsMinigame), "InstantiateMud").Invoke(__instance, Args);
+					AccessTools.Method(typeof(HerdingCrabsMinigame), "InstantiatePumpkins").Invoke(__instance, Args);
+					AccessTools.Method(typeof(HerdingCrabsMinigame), "InstantiateCrabs").Invoke(__instance, Args);
+					AccessTools.Method(typeof(HerdingCrabsMinigame), "InstantiateBunnies").Invoke(__instance, Args);
+					info = Args[0];
+
+					int num = 0;
+					foreach (MLPCharacter character in minigamePhase.minigame.Characters)
+					{
+						((HerdingCrabsStates)character.bodyController.states).Walk();
+						character.GetComponent<HerdingCrabsCharacter>().CleanCrab();
+						if (num == 0)
+						{
+							character.transform.rotation = herdingCrabsExits.BunnyYard.Entrance.transform.rotation;
+							character.transform.position = herdingCrabsExits.BunnyYard.Entrance.transform.position + herdingCrabsExits.BunnyYard.Entrance.transform.forward * 1f - herdingCrabsExits.BunnyYard.Entrance.transform.right * 1f;
+						}
+						else
+						{
+							character.transform.rotation = herdingCrabsExits.BunnyYard.Entrance.transform.rotation;
+							character.transform.position = herdingCrabsExits.BunnyYard.Entrance.transform.position + herdingCrabsExits.BunnyYard.Entrance.transform.forward * 1f + herdingCrabsExits.BunnyYard.Entrance.transform.right * 1f;
+						}
+						num++;
+					}
+				}
+
+				public static void SetUpRoundSecondHalf(HerdingCrabsMinigame __instance, bool firstRound = false)
+				{
+					HerdingMinigames_GUI gui = Traverse.Create(__instance).Field("gui").GetValue<HerdingMinigames_GUI>();
+					SequenceNode initPhaseSequenceNode = __instance.initPhaseSequenceNode;
+
+					gui.ShowGUI();
+					gui.InitializeTimerAnimation((int)Traverse.Create(__instance).Field("roundsDuration").GetValue<float>());
+					Traverse.Create(__instance).Method("StartTime").GetValue();
+					if (!firstRound)
+					{
+						gui.ShowGoSign(1.5f);
+						initPhaseSequenceNode.ResetNode();
+					}
+				}
+			}
+
+			#endregion
+
+			#region Pipp Pipp Dance Parade
+
+			[HarmonyPatch(typeof(PlayerCombo))]
+			[HarmonyPatch("StartGame")]
+			public static class PlayerComboStartGamePatch
+			{
+				public static void Postfix(PlayerCombo __instance)
+				{
+					GameObject Find(GameObject obj, string name)
+					{
+						if (obj.name == name) return obj;
+						foreach (Transform child in obj.transform)
+						{
+							if (Find(child.gameObject, name) is GameObject result)
+							{
+								return result;
+							}
+						}
+						return null;
+					}
+
+					Log.Message("applying fix for dancing game");
+
+					// set evaluation text active
+					__instance.fashionShowCombo.smsPivote.gameObject.SetActive(true);
+
+					// adjust emoji position
+					GameObject emojis = Find(__instance.gameObject, "emojis");
+					emojis.GetComponent<RectTransform>().position += new Vector3(0, 1.0f, 0);
+				}
+			}
+
+			[HarmonyPatch(typeof(PlayerCombo))]
+			[HarmonyPatch("OnSignalHit")]
+			public static class OnSignalHitPatch
+			{
+				public static void Prefix(FashionShowCombo fashionShowCombo)
+				{
+					// stop previous unfinished transition of the evalution text
+					// so that it can keep up with the new hit
+					fashionShowCombo.sms.Rebind();
+				}
+				public static void Postfix(FashionShowCombo fashionShowCombo)
+				{
+					// original position is (-4.2f, -2.8f, 19.0f);
+					// change it so that it doesn't block others and doesn't get blocked by others
+					fashionShowCombo.smsPivote.position = new Vector3(-4.2f, -1.7f, 19.0f);
+				}
+			}
+
+			#endregion
+
+			#region Zipp's Flight Academy
+
+			[HarmonyPatch(typeof(DashThroughTheSkyMiniGame))]
+			[HarmonyPatch("StartGame")]
+			public static class DashThroughTheSkyMiniGameStartPatch
+			{
+				public static void Prefix(DashThroughTheSkyMiniGame __instance)
+				{
+					Log.Message("fixing background music volume for DashThroughTheSkyMiniGame");
+					__instance.audioSource.volume = 1.0f;
+					__instance.audioSource.loop = true;
+					__instance.audioSource.outputAudioMixerGroup = __instance.audioSource.outputAudioMixerGroup
+						.audioMixer.FindMatchingGroups("Music").First();
+				}
+			}
+
+			#endregion
+
+			#region Sprout's Roller Blading Chase
+
+			[HarmonyPatch(typeof(RunnerCountDownPhase))]
+			[HarmonyPatch("EnterPhase")]
+			public static class RunnerCountDownPhasePatch
+			{
+				public static bool Prefix(RunnerCountDownPhase __instance)
+				{
+					Minigame minigame = Traverse.Create(__instance).Field("minigame").GetValue<Minigame>();
+					SequenceNode sequenceNode = Traverse.Create(__instance).Field("sequenceNode").GetValue<SequenceNode>();
+					bool skip = Traverse.Create(__instance).Field("skip").GetValue<bool>();
+
+					//Runner1MiniGame runner1MiniGame = (Runner1MiniGame)minigameBase;
+					//__instance.StartCoroutine(runner1MiniGame.InitializeTutorialAndGame());
+
+					bool flag = false;
+					if (skip && flag)
+					{
+						minigame.MoveToNextPhase();
+					}
+					else
+					{
+						sequenceNode.ResetNode();
+					}
+					return false;
+				}
+			}
+
+			[HarmonyPatch(typeof(RunnerLevelGenerator))]
+			[HarmonyPatch("StartMovement")]
+			public static class RunnerLevelGeneratorStartMovementPatch
+			{
+				public static bool Enabled = true;
+				public static RunnerLevelGenerator previousInstance = null;
+				public static RunnerStates runnerStates = null;
+				public static bool Prefix(RunnerLevelGenerator __instance)
+				{
+					previousInstance = __instance;
+					MinigameCore<Score> minigameCore = Traverse.Create(__instance).Field("minigameCore").GetValue<MinigameCore<Score>>();
+
+					MLPCharacter mLPCharacter = minigameCore.Characters[0];
+					Traverse.Create(__instance).Field("runnerStates").SetValue(runnerStates = (RunnerStates)mLPCharacter.bodyController.states);
+					if (Enabled)
+					{
+						Unpause();
+					}
+					return false;
+				}
+				public static void Unpause()
+				{
+					if (Traverse.Create(previousInstance).Field("bPaused").GetValue<bool>())
+					{
+						Traverse.Create(previousInstance).Field("bPaused").SetValue(false);
+						runnerStates.SetCurrrent(runnerStates.racing);
+					}
+				}
+			}
+
+			[HarmonyPatch(typeof(Runner1MiniGame))]
+			[HarmonyPatch("StartGame")]
+			public static class Runner1MiniGameStartGamePatch
+			{
+				public static void Postfix(Runner1MiniGame __instance)
+				{
+					if (__instance.Mode == MinigamePlayersType.adventure)
+					{
+						Traverse.Create(__instance).Field("fakeTimer").SetValue(float.PositiveInfinity);
+						__instance.StartCoroutine(AssembleSpecialFix(__instance));
+					}
+				}
+
+				/// <summary>
+				/// since setting this variable `fakeTimer` directly within the StartGame's postfix
+				/// has no lasting effect, (gets overriden later by a coroutine which sets it to 100.0f)
+				/// I will come up with my own coroutine that will wait until this variable gets modified by that other coroutine
+				/// to add that additional 45 seconds
+				/// </summary>
+				public static IEnumerator AssembleSpecialFix(Runner1MiniGame __instance)
+				{
+					yield return new WaitUntil(() => !float.IsPositiveInfinity(Traverse.Create(__instance).Field("fakeTimer").GetValue<float>()));
+					Traverse.Create(__instance).Field("fakeTimer").SetValue(
+						Traverse.Create(__instance).Field("fakeTimer").GetValue<float>() + 45.0f);
+				}
+			}
+
+			[HarmonyPatch(typeof(Runner1MiniGame))]
+			[HarmonyPatch("UpdateGame")]
+			public static class Runner1MiniGamePatch
+			{
+				public const float SrcZ = 25.0f;
+				public const float DstZ = 5.6f;
+				public static void Postfix(Runner1MiniGame __instance)
+				{
+					if (__instance.Mode == MinigamePlayersType.adventure &&
+						!Traverse.Create(__instance.GetRunnerLevelGenerator()).Field("bEnd").GetValue<bool>())
+					{
+						float fakeTimer = Traverse.Create(__instance).Field("fakeTimer").GetValue<float>();
+						if (fakeTimer > 0 && !float.IsPositiveInfinity(fakeTimer))
+						{
+							float Progress = 1.0f - (fakeTimer / 145);
+							Progress = Mathf.Clamp(Progress, 0.0f, 1.0f);
+							RunnerStates states = (RunnerStates)__instance.GetEnemy().GetComponent<BodyController>().states;
+							states.racing.GoTo(new Vector3(0.0f, 0.0f, Mathf.Lerp(SrcZ, DstZ, Progress)));
+							// move Sprout closer to the player as time progresses
+						}
+					}
+				}
+			}
+
+			[HarmonyPatch(typeof(RunnerLevelGenerator))]
+			[HarmonyPatch("MoveEnemyFromTrigger")]
+			public static class RunnerLevelGeneratorMoveEnemyFromTriggerPatch
+			{
+				public static bool Prefix(RunnerLevelGenerator __instance, int triggerAdd, bool finish)
+				{
+					bool bEnd = Traverse.Create(__instance).Field("bEnd").GetValue<bool>();
+					if (!bEnd)
+					{
+						if (!finish)
+						{
+							int enemyMovePointPos = Traverse.Create(__instance).Field("enemyMovePointPos").GetValue<int>();
+							List<Transform> enemyMovePoints = Traverse.Create(__instance).Field("enemyMovePoints").GetValue<List<Transform>>();
+							enemyMovePointPos += triggerAdd;
+							enemyMovePointPos = Mathf.Clamp(enemyMovePointPos, 0, enemyMovePoints.Count - 1);
+							//racing.GoTo(enemyMovePoints[enemyMovePointPos].position);
+							Traverse.Create(__instance).Field("enemyMovePointPos").SetValue(enemyMovePointPos);
+						}
+						else
+						{
+							//Transform enemyFinalPoint = Traverse.Create(__instance).Field("enemyFinalPoint").GetValue<Transform>();
+							//racing.GoTo(enemyFinalPoint.position);
+						}
+					}
+					return false;
+				}
+			}
+
+			[HarmonyPatch(typeof(RunnerLevelGenerator))]
+			[HarmonyPatch("MoveEnemyToTrigger")]
+			public static class RunnerLevelGeneratorMoveEnemyToTriggerPatch
+			{
+				public static void Prefix(RunnerLevelGenerator __instance, int triggerAdd)
+				{
+					List<Transform> enemyMovePoints = Traverse.Create(__instance).Field("enemyMovePoints").GetValue<List<Transform>>();
+					int enemyMovePointPos = triggerAdd;
+					enemyMovePointPos = Mathf.Clamp(enemyMovePointPos, 0, enemyMovePoints.Count - 1);
+					//racing.GoTo(enemyMovePoints[enemyMovePointPos].position);
+					//racing.StartTo(enemyMovePoints[enemyMovePointPos].position);
+					Traverse.Create(__instance).Field("enemyMovePointPos").SetValue(enemyMovePointPos);
+				}
+			}
+
+			#endregion
+
+			[HarmonyPatch(typeof(VolumeSlider))]
+			[HarmonyPatch("SetValue")] // audio volume slider in the audio settings menu
+			public static class VolumeSliderPatch
+			{
+				public static bool Prefix(VolumeSlider __instance, float sliderValue)
+				{
+					__instance.slider.value = Mathf.Clamp01(sliderValue);
+					float num = Mathf.Log(1f + 9f * __instance.slider.value, 10f);
+					__instance.percentage.text = (100f * __instance.slider.value).ToString("F0") + " %";
+					if (__instance.name == "Music")
+					{
+						// allow music to have max volume of +20 db instead of -0 db
+						num *= 1.2f;
+					}
+					__instance.audioMmixer.SetFloat(__instance.volumeParameter, (num - 1f) * 80f);
+					__instance.audioMmixer.GetFloat(__instance.volumeParameter, out var _);
+					return false;
+				}
+			}
+
+			[HarmonyPatch(typeof(LocalizeTarget_UnityUI_Text))]
+			[HarmonyPatch("DoLocalize")] // the game use this function to set font and text for UnityEngine.UI.Text
+			public static class LocalizeTarget_UnityUI_Text_DoLocalizePatch
+			{
+				public static bool Prefix(LocalizeTarget_UnityUI_Text __instance, Localize cmp, string mainTranslation, string secondaryTranslation)
+				{
+					object[] Args = new object[]
+					{
+						mainTranslation, secondaryTranslation
+					};
+					Font secondaryTranslatedObj = TryGetFont(mainTranslation, secondaryTranslation, __instance.mTarget.font) ??
+						(Font)AccessTools.Method(typeof(Localize), "GetSecondaryTranslatedObj")
+						.MakeGenericMethod(typeof(Font))
+						.Invoke(cmp, Args);
+					mainTranslation = (string)Args[0];
+					if (secondaryTranslatedObj != null && secondaryTranslatedObj != __instance.mTarget.font)
+					{
+						__instance.mTarget.font = secondaryTranslatedObj;
+					}
+					if (Traverse.Create(__instance).Field("mInitializeAlignment").GetValue<bool>())
+					{
+						Traverse.Create(__instance).Field("mInitializeAlignment").SetValue(false);
+						Traverse.Create(__instance).Field("mAlignmentWasRTL").SetValue(LocalizationManager.IsRight2Left);
+						Args = new object[]
+						{
+							Traverse.Create(__instance).Field("mAlignmentWasRTL").GetValue<bool>(),
+							__instance.mTarget.alignment,
+							Traverse.Create(__instance).Field("mAlignment_LTR").GetValue<TextAnchor>(),
+							Traverse.Create(__instance).Field("mAlignment_RTL").GetValue<TextAnchor>(),
+						};
+						AccessTools.Method(typeof(LocalizeTarget_UnityUI_Text), "InitAlignment").Invoke(__instance, Args);
+						Traverse.Create(__instance).Field("mAlignment_LTR").SetValue(Args[2]);
+						Traverse.Create(__instance).Field("mAlignment_RTL").SetValue(Args[3]);
+					}
+					else
+					{
+						Args = new object[]
+						{
+							Traverse.Create(__instance).Field("mAlignmentWasRTL").GetValue<bool>(),
+							__instance.mTarget.alignment,
+							Traverse.Create(__instance).Field("mAlignment_LTR").GetValue<TextAnchor>(),
+							Traverse.Create(__instance).Field("mAlignment_RTL").GetValue<TextAnchor>(),
+						};
+						AccessTools.Method(typeof(LocalizeTarget_UnityUI_Text), "InitAlignment").Invoke(__instance, Args);
+						TextAnchor alignRTL = (TextAnchor)Args[2];
+						TextAnchor alignLTR = (TextAnchor)Args[3];
+
+						if ((Traverse.Create(__instance).Field("mAlignmentWasRTL").GetValue<bool>() && Traverse.Create(__instance).Field("mAlignment_RTL").GetValue<TextAnchor>() != alignRTL) ||
+							(!Traverse.Create(__instance).Field("mAlignmentWasRTL").GetValue<bool>() && Traverse.Create(__instance).Field("mAlignment_LTR").GetValue<TextAnchor>() != alignLTR))
+						{
+							Traverse.Create(__instance).Field("mAlignment_LTR").SetValue(alignLTR);
+							Traverse.Create(__instance).Field("mAlignment_RTL").SetValue(alignRTL);
+						}
+						Traverse.Create(__instance).Field("mAlignmentWasRTL").SetValue(LocalizationManager.IsRight2Left);
+					}
+					if (mainTranslation != null && __instance.mTarget.text != mainTranslation)
+					{
+						if (cmp.CorrectAlignmentForRTL)
+						{
+							__instance.mTarget.alignment = LocalizationManager.IsRight2Left ?
+								Traverse.Create(__instance).Field("mAlignment_RTL").GetValue<TextAnchor>() :
+								Traverse.Create(__instance).Field("mAlignment_LTR").GetValue<TextAnchor>();
+						}
+						__instance.mTarget.text = mainTranslation;
+						__instance.mTarget.SetVerticesDirty();
+					}
+					return false;
+				}
+				public static Font TryGetFont(string translation, string font, Font existing)
+				{
+					try
+					{
+						if (string.IsNullOrEmpty(font)) return null;
+
+						string fontFamilyName = new Regex(@"(\w+)").Matches(font)[0].Value;
+
+						if (existing.fontNames.Exists(N => N.StartsWith(fontFamilyName, StringComparison.InvariantCultureIgnoreCase)))
+						{
+							return null;
+						}
+
+						TMP_FontAsset tmp = TMP_Settings.fallbackFontAssets.FirstOrDefault(F =>
+						{
+							return F.faceInfo.familyName.StartsWith(fontFamilyName, StringComparison.InvariantCultureIgnoreCase);
+						});
+
+						if (tmp != null)
+						{
+							tmp.TryAddCharacters(translation);
+
+							if (tmp.HasCharacters(translation, out List<char> missing) || // all characters exists
+								missing.All(C => !new Regex(@"\w").IsMatch($"{C}"))) // character not present, but is not a word anyways
+							{
+								Log.Message($"font matched, fontFamilyName={fontFamilyName}");
+								return LoadedFonts[font] = Font.CreateDynamicFontFromOSFont(fontFamilyName, 36);
+							}
+							else
+							{
+								// this extra check is here because
+								// if we go ahead and set this font regardless of character graph availability
+								// unity would use the same fallbacks from when no font is assigned (which is good)
+								// but the font size would be changed (which is ugly)
+								// 
+								// so even though set a faulty font would not cause error
+								// we still want to avoid doing it
+								Log.Message($"font doesn't have some characters, fontFamilyName={fontFamilyName}, missing.Count={missing.Count} missing={new string(missing.ToArray())}");
+							}
+						}
+						else
+						{
+							Log.Message($"font not found, fontFamilyName={fontFamilyName}");
+						}
+					}
+					catch
+					{
+						Log.Message($"exception happened during TryGetFont");
+					}
+					return null;
+				}
+				private static readonly Dictionary<string, Font> LoadedFonts = new Dictionary<string, Font>();
 			}
 		}
 
