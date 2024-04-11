@@ -172,20 +172,15 @@ namespace ElementsOfHarmony
 				Log.Message(e.StackTrace + "\n" + e.Message);
 			}
 
-			void TryLoadFont(string fontPath)
+			// load fallback fonts into TMP's fallback fonts
+			foreach (string fallback in Font.GetPathsToOSFonts())
 			{
 				try
 				{
 					TMP_Settings.fallbackFontAssets.Add(TMP_FontAsset.CreateFontAsset(
-						new Font(fontPath)));
+						new Font(fallback)));
 				}
 				catch { }
-			}
-
-			// load fallback fonts into TMP's fallback fonts
-			foreach (string fallback in Font.GetPathsToOSFonts())
-			{
-				TryLoadFont(fallback);
 			}
 
 			try
