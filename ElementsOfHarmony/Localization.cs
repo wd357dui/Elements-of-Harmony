@@ -12,8 +12,11 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using static ElementsOfHarmony.DirectXHook.RenderHooks;
+using static NormalizedHoofsteps;
 
 namespace ElementsOfHarmony
 {
@@ -231,14 +234,13 @@ namespace ElementsOfHarmony
 			{
 				public static bool Prefix(SupportedLanguages __instance, ref List<SupportedLanguageParams> __result)
 				{
-					var supportedLanguagesField = Traverse.Create(__instance).Field("supportedLanguages");
-					SupportedLanguageParams[] supportedLanguages = supportedLanguagesField.GetValue<SupportedLanguageParams[]>();
+					var supportedLanguages = Traverse.Create(__instance).Field<SupportedLanguageParams[]>("supportedLanguages");
 					SupportedLanguageParams en_US = null;
 					foreach (string langCode in OurSupportedLanguageList)
 					{
-						if (!supportedLanguages.Any(L => L.code == langCode))
+						if (!supportedLanguages.Value.Any(L => L.code == langCode))
 						{
-							if (en_US == null) en_US = supportedLanguages.First(L => L.code == "en-US");
+							if (en_US == null) en_US = supportedLanguages.Value.First(L => L.code == "en-US");
 							// our language was not present in the original supported languages list
 							// so we clone a SupportedLanguageParams from en-US and change the language code to our's
 							OurSupportedLanguageParams ourCurrentLang = new OurSupportedLanguageParams(en_US)
@@ -252,13 +254,13 @@ namespace ElementsOfHarmony
 								if (sourceAsset != null)
 								{
 									sourceAsset.name = "I2Languages_" + langCode; // this is where the game actually determines language code
-									supportedLanguagesField.SetValue(supportedLanguages.Append(ourCurrentLang).ToArray());
+									supportedLanguages.Value = supportedLanguages.Value.Append(ourCurrentLang).ToArray();
 									Log.Message("Language added " + langCode);
 								}
 							}
 						}
 					}
-					__result = new List<SupportedLanguageParams>(supportedLanguages);
+					__result = new List<SupportedLanguageParams>(supportedLanguages.Value);
 					return false;
 				}
 
@@ -284,7 +286,7 @@ namespace ElementsOfHarmony
 					SupportedLanguageParams supportedLanguageParams2 = supportedLanguageParams.Find((SupportedLanguageParams x) => x.code == LocalizationManager.CurrentLanguageCode);
 					string TargetLanguage = string.IsNullOrEmpty(Settings.OurSelectedLanguageOverride) ? LocalizationManager.CurrentLanguageCode : Settings.OurSelectedLanguageOverride;
 					int index = supportedLanguageParams.FindIndex((SupportedLanguageParams x) => x.code == TargetLanguage);
-					Traverse.Create(__instance).Field("index").SetValue(index);
+					Traverse.Create(__instance).Field<int>("index").Value = index;
 					Traverse.Create(__instance).Method("ShowLangname", TargetLanguage).GetValue();
 					// now the menu will show our override language instead of previous working language when player opens up language settings
 					return false;
@@ -498,7 +500,10 @@ namespace ElementsOfHarmony
 					{
 						// if we failed to match the specified audio clip, we look for it in the original game assets
 						audioClip = cmp.FindTranslatedObject<AudioClip>(mainTranslation);
-						AudioMatched = audioClip != null;
+						if (AudioMatched = audioClip != null)
+						{
+							Log.Message($"Audio: term matched in game's original assets - {mainTranslation}");
+						}
 					}
 					if (!AudioMatched)
 					{
@@ -511,9 +516,11 @@ namespace ElementsOfHarmony
 						}
 						audioClip = cmp.FindTranslatedObject<AudioClip>(fallback);
 						AudioMatched = audioClip != null;
+						Log.Message($"Audio: term matched for English fallback - {fallback}");
 					}
 					if (!AudioMatched)
 					{
+						Log.Message($"Audio: term not matched!! - {mainTranslation}");
 						// and if all of the above didn't work, we'll let the game handle it
 						return true;
 					}
@@ -581,8 +588,8 @@ namespace ElementsOfHarmony
 			{
 				public static bool Prefix(ImageLanguageHandler __instance)
 				{
-					List<LanguageSprite> sprites = Traverse.Create(__instance).Field("sprites").GetValue<List<LanguageSprite>>();
-					Image image = Traverse.Create(__instance).Field("image").GetValue<Image>();
+					List<LanguageSprite> sprites = Traverse.Create(__instance).Field<List<LanguageSprite>>("sprites").Value;
+					Image image = Traverse.Create(__instance).Field<Image>("image").Value;
 
 					void TryLoadLogoFile(LanguageSprite language)
 					{
@@ -699,8 +706,8 @@ namespace ElementsOfHarmony
 			///		 ...fine, whatever, it only causes like 2-3 seconds of black screen before startup anyways, nothing too serious
 			/// 9. √ increase global music volume and make fly game's music volume comply to music volume settings
 			/// 10. √ there are localizations for the "evalution" texts ("good" "cool" "perfect"), but they didn't show up
-			/// 11. it seems that there are lots of unused tutorial audios, pending investigate & reactivition
-			/// 12. remove the green filter in crab game as well as in-game area
+			/// 11. √ remove the green filter in crab game as well as in-game area
+			/// 12. √ it seems that there are lots of unused tutorial audios, pending investigate & reactivition
 			/// </summary>
 			[HarmonyPatch(typeof(Minigame))]
 			[HarmonyPatch("MoveToNextPhaseIE")] // minigame has following phases: initialization, countdown, tutorial, gameplay, score
@@ -708,16 +715,16 @@ namespace ElementsOfHarmony
 			{
 				public static bool Prefix(Minigame __instance, ref IEnumerator __result)
 				{
-					MinigamePhase currentPhase = Traverse.Create(__instance).Field("currentPhase").GetValue<MinigamePhase>();
-					MinigamePhase nextPhase = currentPhase?.Next;
-					MinigamePhase nextNextPhase = currentPhase?.Next?.Next;
-					if (currentPhase is InitializationPhase &&
+					var currentPhase = Traverse.Create(__instance).Field<MinigamePhase>("currentPhase");
+					var nextPhase = currentPhase.Value?.Next;
+					var nextNextPhase = currentPhase.Value?.Next?.Next;
+					if (currentPhase.Value is InitializationPhase &&
 						nextPhase is CountDownPhase countDownPhase &&
 						nextNextPhase is TutorialPhase tutorialPhase)
 					{
 						Log.Message("minigame starting, relocating the tutorial phase to before the countdown phase");
 						MinigamePhase AfterTutorialAndCountdown = tutorialPhase.Next;
-						Traverse.Create(currentPhase).Field("nextState").SetValue(tutorialPhase);
+						Traverse.Create(currentPhase.Value).Field("nextState").SetValue(tutorialPhase);
 						Traverse.Create(tutorialPhase).Field("nextState").SetValue(countDownPhase);
 						Traverse.Create(countDownPhase).Field("nextState").SetValue(AfterTutorialAndCountdown);
 						if (AfterTutorialAndCountdown is GameplayPhase gameplayPhase)
@@ -766,7 +773,7 @@ namespace ElementsOfHarmony
 							}
 						}
 					}
-					else if (currentPhase is TutorialPhase &&
+					else if (currentPhase.Value is TutorialPhase &&
 						nextPhase is CountDownPhase &&
 						nextNextPhase is GameplayPhase gameplayPhase)
 					{
@@ -792,16 +799,16 @@ namespace ElementsOfHarmony
 						MLPCharacterOnAxisEventPatch.Enabled = false;
 						Log.Message($"disable character movement during countdown for fairness");
 					}
-					else if (currentPhase is CountDownPhase &&
+					else if (currentPhase.Value is CountDownPhase &&
 						nextPhase is GameplayPhase)
 					{
 						MLPCharacterOnAxisEventPatch.Enabled = true;
 						Log.Message($"recover character movement after countdown");
 					}
 					__result = EnumerateCoroutine(__instance);
-					currentPhase.ExitPhase();
-					Traverse.Create(__instance).Field("currentPhase").SetValue(currentPhase = currentPhase.Next);
-					currentPhase.EnterPhase();
+					currentPhase.Value.ExitPhase();
+					currentPhase.Value = currentPhase.Value.Next;
+					currentPhase.Value.EnterPhase();
 					return false;
 				}
 
@@ -1252,8 +1259,7 @@ namespace ElementsOfHarmony
 				public static IEnumerator AssembleSpecialFix(Runner1MiniGame __instance)
 				{
 					yield return new WaitUntil(() => !float.IsPositiveInfinity(Traverse.Create(__instance).Field("fakeTimer").GetValue<float>()));
-					Traverse.Create(__instance).Field("fakeTimer").SetValue(
-						Traverse.Create(__instance).Field("fakeTimer").GetValue<float>() + 45.0f);
+					Traverse.Create(__instance).Field<float>("fakeTimer").Value += 45.0f;
 				}
 			}
 
@@ -1292,17 +1298,18 @@ namespace ElementsOfHarmony
 					{
 						if (!finish)
 						{
-							int enemyMovePointPos = Traverse.Create(__instance).Field("enemyMovePointPos").GetValue<int>();
+							var enemyMovePointPos = Traverse.Create(__instance).Field<int>("enemyMovePointPos");
 							List<Transform> enemyMovePoints = Traverse.Create(__instance).Field("enemyMovePoints").GetValue<List<Transform>>();
-							enemyMovePointPos += triggerAdd;
-							enemyMovePointPos = Mathf.Clamp(enemyMovePointPos, 0, enemyMovePoints.Count - 1);
-							//racing.GoTo(enemyMovePoints[enemyMovePointPos].position);
-							Traverse.Create(__instance).Field("enemyMovePointPos").SetValue(enemyMovePointPos);
+							enemyMovePointPos.Value += triggerAdd;
+							enemyMovePointPos.Value = Mathf.Clamp(enemyMovePointPos.Value, 0, enemyMovePoints.Count - 1);
+							//racing.GoTo(enemyMovePoints[enemyMovePointPos].position); // original code
 						}
 						else
 						{
-							//Transform enemyFinalPoint = Traverse.Create(__instance).Field("enemyFinalPoint").GetValue<Transform>();
-							//racing.GoTo(enemyFinalPoint.position);
+							/* original code
+							Transform enemyFinalPoint = Traverse.Create(__instance).Field("enemyFinalPoint").GetValue<Transform>();
+							racing.GoTo(enemyFinalPoint.position);
+							*/
 						}
 					}
 					return false;
@@ -1316,11 +1323,13 @@ namespace ElementsOfHarmony
 				public static void Prefix(RunnerLevelGenerator __instance, int triggerAdd)
 				{
 					List<Transform> enemyMovePoints = Traverse.Create(__instance).Field("enemyMovePoints").GetValue<List<Transform>>();
-					int enemyMovePointPos = triggerAdd;
-					enemyMovePointPos = Mathf.Clamp(enemyMovePointPos, 0, enemyMovePoints.Count - 1);
-					//racing.GoTo(enemyMovePoints[enemyMovePointPos].position);
-					//racing.StartTo(enemyMovePoints[enemyMovePointPos].position);
-					Traverse.Create(__instance).Field("enemyMovePointPos").SetValue(enemyMovePointPos);
+					var enemyMovePointPos = Traverse.Create(__instance).Field<int>("enemyMovePointPos");
+					enemyMovePointPos.Value = triggerAdd;
+					enemyMovePointPos.Value = Mathf.Clamp(enemyMovePointPos.Value, 0, enemyMovePoints.Count - 1);
+					/* original code
+					racing.GoTo(enemyMovePoints[enemyMovePointPos].position);
+					racing.StartTo(enemyMovePoints[enemyMovePointPos].position);
+					*/
 				}
 			}
 
@@ -1440,7 +1449,7 @@ namespace ElementsOfHarmony
 								missing.All(C => !new Regex(@"\w").IsMatch($"{C}"))) // character not present, but is not a word anyways
 							{
 								Log.Message($"font matched, fontFamilyName={fontFamilyName}");
-								return LoadedFonts[font] = Font.CreateDynamicFontFromOSFont(fontFamilyName, 36);
+								return Font.CreateDynamicFontFromOSFont(fontFamilyName, 36);
 							}
 							else
 							{
@@ -1465,7 +1474,68 @@ namespace ElementsOfHarmony
 					}
 					return null;
 				}
-				private static readonly Dictionary<string, Font> LoadedFonts = new Dictionary<string, Font>();
+			}
+
+			[HarmonyPatch(typeof(Volume))] // Unity calls this to get volume profiles
+			[HarmonyPatch(methodName: "profileRef", methodType: MethodType.Getter)]
+			public static class VolumnProfile_profileRef_getter
+			{
+				public static void Postfix(Volume __instance, VolumeProfile __result)
+				{
+					if (__result.name.Contains("Pantano")) // "Swamp"
+					{
+						// if we just change the property right now, somewhere will trigger
+						// "collection modified during iteration" exception,
+						// so we wait for an appropriate time to do it
+						__instance.StartCoroutine(DelaySetDisable(__instance));
+					}
+				}
+				public static IEnumerator DelaySetDisable(Volume __instance)
+				{
+					yield return null; // wait until caller function finish
+					__instance.enabled = false; // now disable the green filter for swamp areas
+				}
+			}
+
+			[HarmonyPatch(typeof(TutorialScreen))]
+			[HarmonyPatch("Show")] // called when tutorial is showing
+			public static class TutorialScreenShowPatch
+			{
+				public static bool Prefix()
+				{
+					TutorialScreenPatch.PlayAudio.Clear();
+					return true;
+				}
+			}
+
+			[HarmonyPatch(typeof(TutorialScreen))]
+			[HarmonyPatch("IEShowTutorialStep")] // called when tutorial is showing
+			public static class TutorialScreenPatch
+			{
+				public static Dictionary<string, bool> PlayAudio = new Dictionary<string, bool>();
+				public static bool Prefix(TutorialScreen __instance)
+				{
+					var tutorialStep = Traverse.Create(__instance).Field<TutorialStep>("tutorialStep").Value;
+
+					tutorialStep.audioTerm = $"Audio_{tutorialStep.descriptionTerm}";
+					Log.Message($"fixing tutorial audio, tutorialStep.audioTerm={tutorialStep.audioTerm}");
+					if (!PlayAudio.TryGetValue(tutorialStep.audioTerm, out bool ShouldPlay))
+					{
+						PlayAudio.Add(tutorialStep.audioTerm, ShouldPlay = true);
+					}
+					if (ShouldPlay)
+					{
+						// hearing the instructions repeating constantly is annoying,
+						// so we add this check to halve the frequency of repeats
+						__instance.audioSource.mute = false;
+					}
+					else
+					{
+						__instance.audioSource.mute = true;
+					}
+					PlayAudio[tutorialStep.audioTerm] = !ShouldPlay;
+					return true;
+				}
 			}
 		}
 
