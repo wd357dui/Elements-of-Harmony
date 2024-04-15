@@ -121,7 +121,7 @@ namespace ElementsOfHarmony
 		{
 			public static IEnumerable<MethodBase> TargetMethods()
 			{
-				return new List<MethodBase> {
+				return new MethodBase[] {
 					AccessTools.Constructor(typeof(Exception), new Type[0]),
 					AccessTools.Constructor(typeof(Exception), new Type[1]{ typeof(string) }),
 					AccessTools.Constructor(typeof(Exception), new Type[2]{ typeof(string), typeof(Exception) }),

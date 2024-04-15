@@ -15,8 +15,6 @@ using UnityEngine.Networking;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
-using static ElementsOfHarmony.DirectXHook.RenderHooks;
-using static NormalizedHoofsteps;
 
 namespace ElementsOfHarmony
 {
@@ -691,24 +689,6 @@ namespace ElementsOfHarmony
 				}
 			}
 
-			/// <summary>
-			/// Pending additional fix & improvements:
-			/// 1. √ make load-level-in-advance fix for the bunny+crab herding game same way as the bunny game
-			/// 2. √ there are additional blank seconds before countdown begins in the crab game & dance game & fly game, need to remove those
-			/// 3. √ you can move during the "3,2,1" countdown in the bunny and the bunny+crab herding game, need to disable that for fairness
-			/// 4. √ obstacle generators (and maybe other timers) started too early (before the tutorial) due to the call to `InitializeTutorialAndGame`
-			/// 5. √ tutorial audio from sprout played too early (before tutorial screen showed) probably due to the call to `InitializeTutorialAndGame`
-			/// 6. √ remove additional wait delay in initialization phase caused by coroutine of `InitializeTutorialAndGame`
-			/// 7. √ move Sprout closer to the player as game progresses closer to the finish
-			/// 8. × refactor DoLocalize patch to not wait for unused audio clips
-			///		 UnityWebRequestAsyncOperation always runs & blocks the main thread (as a coroutine perhaps) even if it's invoked on a seperate thread
-			///		 so there is no way to make it run completely on a seperate thread
-			///		 ...fine, whatever, it only causes like 2-3 seconds of black screen before startup anyways, nothing too serious
-			/// 9. √ increase global music volume and make fly game's music volume comply to music volume settings
-			/// 10. √ there are localizations for the "evalution" texts ("good" "cool" "perfect"), but they didn't show up
-			/// 11. √ remove the green filter in crab game as well as in-game area
-			/// 12. √ it seems that there are lots of unused tutorial audios, pending investigate & reactivition
-			/// </summary>
 			[HarmonyPatch(typeof(Minigame))]
 			[HarmonyPatch("MoveToNextPhaseIE")] // minigame has following phases: initialization, countdown, tutorial, gameplay, score
 			public static class MinigameMoveToNextPhaseIEPatch
@@ -718,66 +698,58 @@ namespace ElementsOfHarmony
 					var currentPhase = Traverse.Create(__instance).Field<MinigamePhase>("currentPhase");
 					var nextPhase = currentPhase.Value?.Next;
 					var nextNextPhase = currentPhase.Value?.Next?.Next;
-					if (currentPhase.Value is InitializationPhase &&
-						nextPhase is CountDownPhase countDownPhase &&
-						nextNextPhase is TutorialPhase tutorialPhase)
+					var nextNextNextPhase = currentPhase.Value?.Next?.Next?.Next;
+
+					Action AdditionalActionPre = null;
+					Action AdditionalActionPost = null;
+					Func<bool> WaitUntilCondition = null;
+
+					if (nextPhase is CountDownPhase countDownPhase &&
+						nextNextPhase is TutorialPhase tutorialPhase &&
+						nextNextNextPhase is GameplayPhase gameplayPhase)
 					{
 						Log.Message("minigame starting, relocating the tutorial phase to before the countdown phase");
 						MinigamePhase AfterTutorialAndCountdown = tutorialPhase.Next;
 						Traverse.Create(currentPhase.Value).Field("nextState").SetValue(tutorialPhase);
 						Traverse.Create(tutorialPhase).Field("nextState").SetValue(countDownPhase);
 						Traverse.Create(countDownPhase).Field("nextState").SetValue(AfterTutorialAndCountdown);
-						if (AfterTutorialAndCountdown is GameplayPhase gameplayPhase)
+
+						MinigameBase ActualGame = Traverse.Create(gameplayPhase).Field("minigameBase").GetValue<MinigameBase>();
+						if (ActualGame is DashThroughTheSkyMiniGame ||
+							ActualGame is Runner1MiniGame)
 						{
-							MinigameBase ActualGame = Traverse.Create(gameplayPhase).Field("minigameBase").GetValue<MinigameBase>();
-							if (ActualGame is DashThroughTheSkyMiniGame ||
-								ActualGame is Runner1MiniGame)
+							AdditionalActionPre = () =>
 							{
-								// April 2, 2024
-								// `InitializeTutorialAndGame` method wasn't the entirely correct fix for stuck on initialization screen,
-								// THIS is.
-								// I've finally found it...
-								__instance.FullFadeOut();
+								__instance.StartCoroutine(Traverse.Create(ActualGame).Method("InitializeTutorialAndGame").GetValue<IEnumerator>());
+							};
+							var flyingStarted = Traverse.Create(ActualGame).Field("flyingStarted");
+							var runnerStarted = Traverse.Create(ActualGame).Field("runnerStarted");
+							if (flyingStarted.FieldExists())
+							{
+								WaitUntilCondition = () => flyingStarted.GetValue<bool>();
+							}
+							else if (runnerStarted.FieldExists())
+							{
+								WaitUntilCondition = () => runnerStarted.GetValue<bool>();
 
-								// this is the one thing that didn't get called,
-								// that was causing the flying game and the runner game to
-								// stuck on initialization screen and not able to show the tutorial screen...
-								// 
-								// I spent 3 days looking through every bit around the InitializeTutorialAndGame function
-								// and finally, finally after looking through every bit about
-								// DashThroughTheSkyMiniGame, FlyingLevelGenerator,
-								// DashThroughTHeSkypInitializationPhase, DashThroughTheSkyGameplayPhase, DashThroughTheSkyCountDownPhase
-								// TutorialPhase, TutorialScreen, and even the VideoPlayer class,
-								// 
-								// I finally came to a confident conclusion that this method `InitializeTutorialAndGame`
-								// has nothing to do with tutorial initialization;
-								// with that kept in mind, I looked for all the function calls within that method once again,
-								// specifically looked for stuff that has nothing to do with any initialization,
-								// and for stuff that might've been too insignificant to be noticed,
-								// and I've finally, FINALLY, found it...
-								// this easily overlooked method call, called `FullFadeOut`...
-								// it kept escaping my eyes the last few days because I thought that if this is important
-								// it would've been called somewhere down the line already
-								// now it becomes clear that it just didn't...
-								// 
-								// words cannot describe my exhaustion & frustration
-
-								// the runner game still need `InitializeTutorialAndGame` to load the map
-								if (Traverse.Create(gameplayPhase).Field("minigameBase").GetValue<MinigameBase>() is Runner1MiniGame runner1MiniGame)
+								/* debug: enable this code to start runner game in cinematic (story) mode
+								AdditionalActionPost = () =>
 								{
-									Log.Message("fixnig Runner1MiniGame, pause movement for faireness");
-									// pause movement so that the character would not run into traps before the game begins
-									RunnerLevelGeneratorStartMovementPatch.Enabled = false;
-									tutorialPhase.StartCoroutine(runner1MiniGame.InitializeTutorialAndGame());
-								}
+									var generator = (ActualGame as Runner1MiniGame).GetRunnerLevelGenerator();
+									if (generator is RunnerLevelPredefinedGenerator predef)
+									{
+										Traverse.Create(predef).Field<PredefinedRoadData>("levelDefinedRoads").Value = predef.levelDefinedRoadsCinematic;
+									}
+								};
+								*/
 							}
 						}
 					}
 					else if (currentPhase.Value is TutorialPhase &&
 						nextPhase is CountDownPhase &&
-						nextNextPhase is GameplayPhase gameplayPhase)
+						nextNextPhase is GameplayPhase gameplay)
 					{
-						MinigameBase ActualGame = Traverse.Create(gameplayPhase).Field("minigameBase").GetValue<MinigameBase>();
+						MinigameBase ActualGame = Traverse.Create(gameplay).Field("minigameBase").GetValue<MinigameBase>();
 						if (ActualGame is HerdingBunniesMinigame bunnies)
 						{
 							Log.Message("countdown is about to begin, load level for HerdingBunniesMinigame in advance");
@@ -790,11 +762,9 @@ namespace ElementsOfHarmony
 							// so that it would not change in a sudden after "3, 2, 1, go"
 							HerdingCrabsMinigamePatch.StartGameFirstHalf(crabs);
 						}
-						else if (ActualGame is Runner1MiniGame)
+						else if (ActualGame is Runner1MiniGame runner)
 						{
-							Log.Message($"recover character movement for Runner1MiniGame");
-							RunnerLevelGeneratorStartMovementPatch.Enabled = true;
-							RunnerLevelGeneratorStartMovementPatch.Unpause();
+							runner.GetRunnerLevelGenerator().StartMovement();
 						}
 						MLPCharacterOnAxisEventPatch.Enabled = false;
 						Log.Message($"disable character movement during countdown for fairness");
@@ -805,16 +775,22 @@ namespace ElementsOfHarmony
 						MLPCharacterOnAxisEventPatch.Enabled = true;
 						Log.Message($"recover character movement after countdown");
 					}
-					__result = EnumerateCoroutine(__instance);
+					__result = MoveToNext(__instance, currentPhase, AdditionalActionPre, WaitUntilCondition, AdditionalActionPost);
+					return false;
+				}
+				public static IEnumerator MoveToNext(Minigame __instance, Traverse<MinigamePhase> currentPhase,
+					Action AdditionalActionPre, Func<bool> WaitUntilCondition, Action AdditionalActionPost)
+				{
+					yield return new WaitUntil(() => __instance.AdressablesLoaded());
+					AdditionalActionPre?.Invoke();
+					if (WaitUntilCondition != null)
+					{
+						yield return new WaitUntil(WaitUntilCondition);
+					}
+					AdditionalActionPost?.Invoke();
 					currentPhase.Value.ExitPhase();
 					currentPhase.Value = currentPhase.Value.Next;
 					currentPhase.Value.EnterPhase();
-					return false;
-				}
-
-				public static IEnumerator EnumerateCoroutine(Minigame __instance)
-				{
-					yield return new WaitUntil(() => __instance.AdressablesLoaded());
 				}
 			}
 
@@ -1153,12 +1129,14 @@ namespace ElementsOfHarmony
 				}
 				public static void Postfix(FashionShowCombo fashionShowCombo)
 				{
-					// original position is (-4.2f, -2.8f, 19.0f);
+					// original position is (-4.2f, -2.8f, 19.0f) for singleplayer
 					// change it so that it doesn't block others and doesn't get blocked by others
-					fashionShowCombo.smsPivote.position = new Vector3(-4.2f, -1.7f, 19.0f);
+					var position = fashionShowCombo.smsPivote.position;
+					position.y = -1.7f;
+					fashionShowCombo.smsPivote.position = position;
 				}
 			}
-
+			
 			#endregion
 
 			#region Zipp's Flight Academy
@@ -1181,109 +1159,73 @@ namespace ElementsOfHarmony
 
 			#region Sprout's Roller Blading Chase
 
-			[HarmonyPatch(typeof(RunnerCountDownPhase))]
-			[HarmonyPatch("EnterPhase")]
-			public static class RunnerCountDownPhasePatch
-			{
-				public static bool Prefix(RunnerCountDownPhase __instance)
-				{
-					Minigame minigame = Traverse.Create(__instance).Field("minigame").GetValue<Minigame>();
-					SequenceNode sequenceNode = Traverse.Create(__instance).Field("sequenceNode").GetValue<SequenceNode>();
-					bool skip = Traverse.Create(__instance).Field("skip").GetValue<bool>();
-
-					//Runner1MiniGame runner1MiniGame = (Runner1MiniGame)minigameBase;
-					//__instance.StartCoroutine(runner1MiniGame.InitializeTutorialAndGame());
-
-					bool flag = false;
-					if (skip && flag)
-					{
-						minigame.MoveToNextPhase();
-					}
-					else
-					{
-						sequenceNode.ResetNode();
-					}
-					return false;
-				}
-			}
-
-			[HarmonyPatch(typeof(RunnerLevelGenerator))]
-			[HarmonyPatch("StartMovement")]
-			public static class RunnerLevelGeneratorStartMovementPatch
-			{
-				public static bool Enabled = true;
-				public static RunnerLevelGenerator previousInstance = null;
-				public static RunnerStates runnerStates = null;
-				public static bool Prefix(RunnerLevelGenerator __instance)
-				{
-					previousInstance = __instance;
-					MinigameCore<Score> minigameCore = Traverse.Create(__instance).Field("minigameCore").GetValue<MinigameCore<Score>>();
-
-					MLPCharacter mLPCharacter = minigameCore.Characters[0];
-					Traverse.Create(__instance).Field("runnerStates").SetValue(runnerStates = (RunnerStates)mLPCharacter.bodyController.states);
-					if (Enabled)
-					{
-						Unpause();
-					}
-					return false;
-				}
-				public static void Unpause()
-				{
-					if (Traverse.Create(previousInstance).Field("bPaused").GetValue<bool>())
-					{
-						Traverse.Create(previousInstance).Field("bPaused").SetValue(false);
-						runnerStates.SetCurrrent(runnerStates.racing);
-					}
-				}
-			}
-
 			[HarmonyPatch(typeof(Runner1MiniGame))]
 			[HarmonyPatch("StartGame")]
 			public static class Runner1MiniGameStartGamePatch
 			{
-				public static void Postfix(Runner1MiniGame __instance)
+				public static Runner1MiniGame previousInstance = null;
+				public static bool Prefix(Runner1MiniGame __instance)
 				{
-					if (__instance.Mode == MinigamePlayersType.adventure)
+					if (previousInstance == null)
 					{
-						Traverse.Create(__instance).Field("fakeTimer").SetValue(float.PositiveInfinity);
-						__instance.StartCoroutine(AssembleSpecialFix(__instance));
+						previousInstance = __instance;
+						if (RunnerCinematic.CheckCinematic(__instance))
+						{
+							__instance.StartCoroutine(RunnerCinematic.StartFirstDialog(__instance));
+						}
+						var fakeTimer = Traverse.Create(__instance).Field<float>("fakeTimer");
+						fakeTimer.Value = float.PositiveInfinity; // cannot set value here directly
+						__instance.StartCoroutine(FixFakeTimer(fakeTimer));
+						return true;
 					}
+					else return false;
 				}
-
-				/// <summary>
-				/// since setting this variable `fakeTimer` directly within the StartGame's postfix
-				/// has no lasting effect, (gets overriden later by a coroutine which sets it to 100.0f)
-				/// I will come up with my own coroutine that will wait until this variable gets modified by that other coroutine
-				/// to add that additional 45 seconds
-				/// </summary>
-				public static IEnumerator AssembleSpecialFix(Runner1MiniGame __instance)
+				public static IEnumerator FixFakeTimer(Traverse<float> __instance)
 				{
-					yield return new WaitUntil(() => !float.IsPositiveInfinity(Traverse.Create(__instance).Field("fakeTimer").GetValue<float>()));
-					Traverse.Create(__instance).Field<float>("fakeTimer").Value += 45.0f;
+					// must wait for it to get assigned by some code first
+					yield return new WaitUntil(() => !float.IsPositiveInfinity(__instance.Value));
+					if (RunnerCinematic.IsCinematic)
+					{
+						// approximate duration is about 140 seconds or so
+						__instance.Value += 40f;
+					}
+					else
+					{
+						// approximate duration is about 130 seconds or so
+						__instance.Value += 30f;
+					}
 				}
 			}
 
 			[HarmonyPatch(typeof(Runner1MiniGame))]
 			[HarmonyPatch("UpdateGame")]
-			public static class Runner1MiniGamePatch
+			public static class Runner1MiniGameUpdatePatch
 			{
 				public const float SrcZ = 25.0f;
-				public const float DstZ = 5.6f;
+				public const float DstZ = 7.0f;
 				public static void Postfix(Runner1MiniGame __instance)
 				{
 					if (__instance.Mode == MinigamePlayersType.adventure &&
 						!Traverse.Create(__instance.GetRunnerLevelGenerator()).Field("bEnd").GetValue<bool>())
 					{
-						float fakeTimer = Traverse.Create(__instance).Field("fakeTimer").GetValue<float>();
-						if (fakeTimer > 0 && !float.IsPositiveInfinity(fakeTimer))
-						{
-							float Progress = 1.0f - (fakeTimer / 145);
-							Progress = Mathf.Clamp(Progress, 0.0f, 1.0f);
-							RunnerStates states = (RunnerStates)__instance.GetEnemy().GetComponent<BodyController>().states;
-							states.racing.GoTo(new Vector3(0.0f, 0.0f, Mathf.Lerp(SrcZ, DstZ, Progress)));
-							// move Sprout closer to the player as time progresses
-						}
+						float fakeTimer = Traverse.Create(__instance).Field<float>("fakeTimer").Value;
+
+						float Progress = fakeTimer / 100f;
+						Progress = 1.0f - Mathf.Clamp(Progress, 0.0f, 1.0f);
+						RunnerStates states = (RunnerStates)__instance.GetEnemy().GetComponent<BodyController>().states;
+						states.racing.GoTo(new Vector3(0.0f, 0.0f, Mathf.Lerp(SrcZ, DstZ, Progress)));
 					}
+				}
+			}
+
+			[HarmonyPatch(typeof(Runner1MiniGame))]
+			[HarmonyPatch("FinishGame")]
+			public static class Runner1MiniGameFinishGamePatch
+			{
+				public static void Postfix()
+				{
+					Runner1MiniGameStartGamePatch.previousInstance = null;
+					PredefinedGeneratorPatch.num = 0;
 				}
 			}
 
@@ -1320,7 +1262,7 @@ namespace ElementsOfHarmony
 			[HarmonyPatch("MoveEnemyToTrigger")]
 			public static class RunnerLevelGeneratorMoveEnemyToTriggerPatch
 			{
-				public static void Prefix(RunnerLevelGenerator __instance, int triggerAdd)
+				public static bool Prefix(RunnerLevelGenerator __instance, int triggerAdd)
 				{
 					List<Transform> enemyMovePoints = Traverse.Create(__instance).Field("enemyMovePoints").GetValue<List<Transform>>();
 					var enemyMovePointPos = Traverse.Create(__instance).Field<int>("enemyMovePointPos");
@@ -1330,9 +1272,264 @@ namespace ElementsOfHarmony
 					racing.GoTo(enemyMovePoints[enemyMovePointPos].position);
 					racing.StartTo(enemyMovePoints[enemyMovePointPos].position);
 					*/
+					return false;
 				}
 			}
 
+			[HarmonyPatch(typeof(RunnerLevelGenerator))]
+			[HarmonyPatch("ChangeVcamIE")]
+			public static class RunnerLevelGeneratorChangeVcamIEPatch
+			{
+				public static bool Prefix(bool continueGame, bool returnToMainCam, ref Action action)
+				{
+					if (!RunnerCinematic.IsCinematic) return true;
+					if (continueGame && returnToMainCam)
+					{
+						// trigger the corresponding dialog after this cutscene
+						action += () => RunnerCinematic.PostCutscene(Runner1MiniGameStartGamePatch.previousInstance);
+					}
+					return true;
+				}
+			}
+
+			[HarmonyPatch(typeof(Runner1MiniGame))]
+			[HarmonyPatch("TriggerObstacle")]
+			public static class TriggerObstaclePatch
+			{
+				public static void Postfix(GameObject triggerObject, GameObject character)
+				{
+					if (!RunnerCinematic.IsCinematic) return;
+					if (triggerObject.name.Contains("Bunny"))
+					{
+						if (character.name == "Enemy")
+						{
+							Runner1MiniGameStartGamePatch.previousInstance.StartCoroutine(
+								RunnerCinematic.StartSproutHitDialog(Runner1MiniGameStartGamePatch.previousInstance));
+						}
+						else
+						{
+							Runner1MiniGameStartGamePatch.previousInstance.StartCoroutine(
+								RunnerCinematic.StartSunnyHitDialog(Runner1MiniGameStartGamePatch.previousInstance));
+						}
+					}
+				}
+			}
+
+			[HarmonyPatch(typeof(Runner1MiniGame))]
+			[HarmonyPatch("TriggerRoadCinematic")]
+			public static class TriggerRoadCinematicPatch
+			{
+				public static bool ShouldContinue = false;
+				public static bool Prefix(Runner1MiniGame __instance, GameObject triggerObject, GameObject character, int triggerAdd)
+				{
+					if (!RunnerCinematic.IsCinematic) return true;
+					if (!ShouldContinue)
+					{
+						// any running dialog should stop immediately so that this cutscene can start
+						RunnerCinematic.NeedToStop = true;
+						__instance.StartCoroutine(Trigger(__instance, triggerObject, character, triggerAdd));
+						return false;
+					}
+					else
+					{
+						return ShouldContinue;
+					}
+				}
+				public static IEnumerator Trigger(Runner1MiniGame __instance, GameObject triggerObject, GameObject character, int triggerAdd)
+				{
+					yield return new WaitUntil(() => !RunnerCinematic.IsDialogPlaying);
+					ShouldContinue = true;
+					AccessTools.Method(typeof(Runner1MiniGame), "TriggerRoadCinematic").Invoke(__instance, new object[] { triggerObject, character, triggerAdd });
+					ShouldContinue = false;
+					RunnerCinematic.NeedToStop = false;
+				}
+			}
+
+			[HarmonyPatch(typeof(RunnerLevelPredefinedGenerator))]
+			[HarmonyPatch("SpawnRoad")]
+			public static class PredefinedGeneratorPatch
+			{
+				public static int num = 0;
+				public static void Postfix(LevelRoad road)
+				{
+					Log.Message($"SpawnRoad, num={++num}, road.roadType={road.roadType}");
+					if (num == 75 && road.roadType == LevelRoadType.cinematic)
+					{
+						Runner1MiniGameStartGamePatch.previousInstance.StartCoroutine(
+							RunnerCinematic.StartPreRoyalSistersDialog(Runner1MiniGameStartGamePatch.previousInstance));
+					}
+					else if (num == 117 && road.roadType == LevelRoadType.cinematic)
+					{
+						RunnerCinematic.StartNearFinishDialog(Runner1MiniGameStartGamePatch.previousInstance);
+					}
+				}
+			}
+
+			public static class RunnerCinematic
+			{
+				public static bool IsCinematic = false;
+				/// <summary>
+				/// chech if current game mode is "Cinematic"
+				/// </summary>
+				public static bool CheckCinematic(Runner1MiniGame __instance)
+				{
+					RunnerLevelPredefinedGenerator predefined = __instance.GetRunnerLevelGenerator() as RunnerLevelPredefinedGenerator;
+					return IsCinematic = ReferenceEquals(
+						Traverse.Create(predefined).Field<PredefinedRoadData>("levelDefinedRoads").Value,
+						predefined.levelDefinedRoadsCinematic);
+				}
+
+				public static bool HasPlayedSunnyHit = false;
+				public static bool HasPlayedSproutHit = false;
+				public static bool HasPlayedPostHitch = false;
+
+				public static bool IsDialogPlaying = false;
+				public static bool NeedToStop = false;
+				public static IEnumerator StartDialog(Runner1MiniGame __instance, params MessageObject[] messages)
+				{
+					IsDialogPlaying = true;
+
+					// I'm just gonna borrow a ShowMessageSequence
+					ShowMessageSequence ShowMessage = __instance.gameObject.GetComponentInChildren<ShowMessageSequence>(true);
+					ShowMessage.enabled = true;
+					ShowMessage.gameObject.SetActive(true);
+
+					// will give back soon
+					MessageObject[] messagesBackup = ShowMessage.messageSequence.messages;
+
+					var sequenceIndex = Traverse.Create(ShowMessage).Field<int>("sequenceIndex");
+					var soundDuration = Traverse.Create(ShowMessage).Field<float>("soundDuration");
+
+					Log.Message("dialog starting");
+
+					sequenceIndex.Value = -1;
+					ShowMessage.messageSequence.messages = messages;
+
+					float delay = 0.0f, startTime = 0.0f;
+					for (int i = 0; i < messages.Length; i++)
+					{
+						if (NeedToStop) break;
+						Log.Message($"dialog={messages[i].textTerm}");
+						ShowMessage.ShowNextMessage();
+						startTime = Time.time;
+						delay = soundDuration.Value;
+						yield return new WaitWhile(() => (Time.time <= (startTime + delay)) && !NeedToStop);
+					}
+
+					Log.Message("dialog ending");
+
+					// restore initial status
+					PopupsUI popupsUI = ShowMessage.GetResource<PopupsUI>();
+					popupsUI.popupAudio.audioSource?.Stop();
+					popupsUI.popupHud.normalConversation.gameObject.SetActive(false);
+					ShowMessage.messageSequence.messages = messagesBackup;
+					sequenceIndex.Value = -1;
+
+					IsDialogPlaying = false;
+				}
+
+				public static MessageObject AssembleDialogMessage(string term)
+				{
+					MessageObject message = ScriptableObject.CreateInstance<MessageObject>();
+					message.textTerm = term;
+					message.options = Array.Empty<LocalizedTerm>();
+					message.AutoComplete();
+					message.autoComplete = true;
+					if (term.Contains("_Sprout_"))
+					{
+						message.title = SpeakerTitle.NONE; // using SpeakerTitle.SPROUT doesn't work (Sprout's name doesn't show up in subtitles)
+						message.npcName = "Characters/Sprout_Name"; // so we use npcName instead
+					}
+					return message;
+				}
+
+				public static IEnumerator StartFirstDialog(Runner1MiniGame __instance)
+				{
+					// Sunny: "Sprout! Don't run, we can still fix all this."
+					MessageObject MS_MR_EV_01_01_GP_SN_01 = AssembleDialogMessage("Mainstreet/MR/EV_01/MS_MR_EV_01_01_GP_SN_01");
+
+					// Sprout: "Fix this!"
+					MessageObject MS_MR_EV_01_02_GP_Sprout_01 = AssembleDialogMessage("Mainstreet/MR/EV_01/MS_MR_EV_01_02_GP_Sprout_01");
+
+					yield return new WaitForSeconds(1f);
+					__instance.StartCoroutine(StartDialog(__instance, MS_MR_EV_01_01_GP_SN_01, MS_MR_EV_01_02_GP_Sprout_01));
+				}
+
+				public static void StartPostHitchDialog(Runner1MiniGame __instance)
+				{
+					// Sunny: "I'll be careful!"
+					MessageObject MS_MR_EV_02_02_GP_SN_01 = AssembleDialogMessage("Mainstreet/MR/EV_02/MS_MR_EV_02_02_GP_SN_01");
+
+					__instance.StartCoroutine(StartDialog(__instance, MS_MR_EV_02_02_GP_SN_01));
+					HasPlayedPostHitch = true;
+				}
+
+				public static IEnumerator StartSproutHitDialog(Runner1MiniGame __instance)
+				{
+					yield return new WaitForSeconds(0.6f);
+					if (!IsDialogPlaying && !HasPlayedSproutHit && !NeedToStop && HasPlayedPostHitch)
+					{
+						// Sprout: "Where are they coming from!"
+						MessageObject MS_MR_EV_02_05_GP_Sprout_02 = AssembleDialogMessage("Mainstreet/MR/EV_02/MS_MR_EV_02_05_GP_Sprout_02");
+
+						__instance.StartCoroutine(StartDialog(__instance, MS_MR_EV_02_05_GP_Sprout_02));
+						HasPlayedSproutHit = true;
+					}
+				}
+
+				public static IEnumerator StartSunnyHitDialog(Runner1MiniGame __instance)
+				{
+					yield return new WaitForSeconds(0.6f);
+					if (!IsDialogPlaying && !HasPlayedSunnyHit && !NeedToStop && HasPlayedPostHitch)
+					{
+						// Sunny: "Oh come on!"
+						MessageObject MS_MR_EV_02_03_GP_SN_02 = AssembleDialogMessage("Mainstreet/MR/EV_02/MS_MR_EV_02_03_GP_SN_02");
+
+						__instance.StartCoroutine(StartDialog(__instance, MS_MR_EV_02_03_GP_SN_02));
+						HasPlayedSunnyHit = true;
+					}
+				}
+
+				public static IEnumerator StartPreRoyalSistersDialog(Runner1MiniGame __instance)
+				{
+					NeedToStop = true;
+					yield return new WaitUntil(() => !IsDialogPlaying);
+					NeedToStop = false;
+
+					// Sprout: "You'll never catch me!"
+					MessageObject MS_MR_EV_03_01_GP_Sprout_01 = AssembleDialogMessage("Mainstreet/MR/EV_03/MS_MR_EV_03_01_GP_Sprout_01");
+
+					__instance.StartCoroutine(StartDialog(__instance, MS_MR_EV_03_01_GP_Sprout_01));
+				}
+
+				public static void StartPostRoyalSistersDialog(Runner1MiniGame __instance)
+				{
+					// Sunny: "I won't let you down!"
+					MessageObject MS_MR_EV_03_05_CS_SN_02 = AssembleDialogMessage("Mainstreet/MR/EV_03/MS_MR_EV_03_05_CS_SN_02");
+
+					__instance.StartCoroutine(StartDialog(__instance, MS_MR_EV_03_05_CS_SN_02));
+				}
+				
+				public static void StartNearFinishDialog(Runner1MiniGame __instance)
+				{
+					// Sunny: "I'm getting closer!"
+					MessageObject MS_MR_EV_07_01_GP_SN_01 = AssembleDialogMessage("Mainstreet/MR/EV_07/MS_MR_EV_07_01_GP_SN_01");
+
+					__instance.StartCoroutine(StartDialog(__instance, MS_MR_EV_07_01_GP_SN_01));
+				}
+				
+				public static void PostCutscene(Runner1MiniGame __instance)
+				{
+					if (!HasPlayedPostHitch)
+					{
+						StartPostHitchDialog(__instance);
+					}
+					else
+					{
+						StartPostRoyalSistersDialog(__instance);
+					}
+				}
+			}
 			#endregion
 
 			[HarmonyPatch(typeof(VolumeSlider))]
@@ -1492,7 +1689,7 @@ namespace ElementsOfHarmony
 				}
 				public static IEnumerator DelaySetDisable(Volume __instance)
 				{
-					yield return null; // wait until caller function finish
+					yield return null; // wait for a right moment
 					__instance.enabled = false; // now disable the green filter for swamp areas
 				}
 			}
@@ -1517,15 +1714,18 @@ namespace ElementsOfHarmony
 				{
 					var tutorialStep = Traverse.Create(__instance).Field<TutorialStep>("tutorialStep").Value;
 
-					tutorialStep.audioTerm = $"Audio_{tutorialStep.descriptionTerm}";
-					Log.Message($"fixing tutorial audio, tutorialStep.audioTerm={tutorialStep.audioTerm}");
+					if (tutorialStep.audioTerm == "-")
+					{
+						tutorialStep.audioTerm = $"Audio_{tutorialStep.descriptionTerm}";
+						Log.Message($"fixing tutorial audio, tutorialStep.audioTerm={tutorialStep.audioTerm}");
+					}
 					if (!PlayAudio.TryGetValue(tutorialStep.audioTerm, out bool ShouldPlay))
 					{
 						PlayAudio.Add(tutorialStep.audioTerm, ShouldPlay = true);
 					}
 					if (ShouldPlay)
 					{
-						// hearing the instructions repeating constantly is annoying,
+						// hearing the instructions audio repeatedly is annoying,
 						// so we add this check to halve the frequency of repeats
 						__instance.audioSource.mute = false;
 					}

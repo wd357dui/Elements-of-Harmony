@@ -235,618 +235,618 @@ Brighthouse/Q2/EV_02/BH_Q2_EV_02_03_CVS_HC_03	赶在他们烦躁之前 去找一
 Brighthouse/Q2/EV_03/BH_Q2_EV_03_01_GP_SN_01	很好！还差两个！
 Brighthouse/Q2/EV_04/BH_Q2_EV_04_01_GP_SN_01	完美！再剩一个……
 Brighthouse/Q2/EV_05/BH_Q2_EV_05_01_GP_SN_01	三个都齐了！现在回去
-Brighthouse/Q2/MID_01/BH_Q2_MID_01_01_GP_HC_01	
-Brighthouse/Q2/MID_02/BH_Q2_MID_02_01_GP_HC_01	
-Brighthouse/Q2/START/BH_Q2_START_01_CVS_HC_01	
-Brighthouse/Q2/START/BH_Q2_START_02_CVS_HC_02	
-Brighthouse/Q2/START/BH_Q2_START_03_CVS_SN_02	
-Brighthouse/Q2/START/BH_Q2_START_04_CVS_HC_03	
-Brighthouse/Q2/START/BH_Q2_START_05_CVS_HC_04	
-Brighthouse/Q2/START/BH_Q2_START_06_CVS_HC_05	
-Brighthouse/Q2/START/BH_Q2_START_07_CVS_SN_03	
-Brighthouse/Q2/START/BH_Q2_START_08_CVS_HC_06	
+Brighthouse/Q2/MID_01/BH_Q2_MID_01_01_GP_HC_01	兔子会朝远离你的方向跳，把它们赶到我这里来
+Brighthouse/Q2/MID_02/BH_Q2_MID_02_01_GP_HC_01	那边小山上有个花园，里面应该有些萝卜
+Brighthouse/Q2/START/BH_Q2_START_01_CVS_HC_01	原来你在这！我正在找你呢
+Brighthouse/Q2/START/BH_Q2_START_02_CVS_HC_02	就剩你一个了
+Brighthouse/Q2/START/BH_Q2_START_03_CVS_SN_02	剩我一个 干什么？
+Brighthouse/Q2/START/BH_Q2_START_04_CVS_HC_03	锻炼放牧的技巧
+Brighthouse/Q2/START/BH_Q2_START_05_CVS_HC_04	最新的小马湾传统
+Brighthouse/Q2/START/BH_Q2_START_06_CVS_HC_05	赶兔子大赛
+Brighthouse/Q2/START/BH_Q2_START_07_CVS_SN_03	真的要这么做吗？这样兔子太可怜了吧……
+Brighthouse/Q2/START/BH_Q2_START_08_CVS_HC_06	兔子们都很喜欢，它们都告诉我了！
 Brighthouse/Q2/START/BH_Q2_START_09_CVS_Bunnies_01	
-Brighthouse/Q2/START/BH_Q2_START_10_CVS_HC_07	
-Brighthouse/Q2/START/BH_Q2_START_11_CVS_SN_04	
-Brighthouse/Q2/START/BH_Q2_START_12_CVS_HC_08	
-Brighthouse/Q2/START/BH_Q2_START_14_CVS_HC_10	
-Brighthouse/Q2/START/BH_Q2_START_15_CVS_HC_11	
-Brighthouse/Q2/START/BH_Q2_START_16_CVS_HC_12	
-Brighthouse/Q2/START/BH_Q2_START_17_CVS_SN_05	
-Brighthouse/Q2/TOOFAR/BH_Q2_TOOFAR_01_GP_HC_01	
-Brighthouse/Q3/START/BH_Q3_START_13_CVS_HC_09	
-Mainstreet/End/EV_05/MS_End_EV_05_01_CS_Sprout_01	
-Mainstreet/End/EV_05/MS_End_EV_05_02_CS_SN_01	
-Mainstreet/End/EV_05/MS_End_EV_05_03_CS_Sprout_02	
-Mainstreet/End/EV_05/MS_End_EV_05_04_CS_SN_02	
-Mainstreet/End/EV_05/MS_End_EV_05_05_CS_Sprout_03	
-Mainstreet/End/EV_05/MS_End_EV_05_06_CS_Sprout_04	
-Mainstreet/End/EV_05/MS_End_EV_05_07_CS_HC_01	
-Mainstreet/End/EV_05/MS_End_EV_05_08_CS_ZP_01	
-Mainstreet/End/EV_05/MS_End_EV_05_09_CS_SN_03	
+Brighthouse/Q2/START/BH_Q2_START_10_CVS_HC_07	看见了吧？
+Brighthouse/Q2/START/BH_Q2_START_11_CVS_SN_04	那好吧 我该怎么做？
+Brighthouse/Q2/START/BH_Q2_START_12_CVS_HC_08	嗯……有些兔子总是喜欢朝小马街那边跑
+Brighthouse/Q2/START/BH_Q2_START_14_CVS_HC_10	还剩下3只兔子没有找到，它们应该不远
+Brighthouse/Q2/START/BH_Q2_START_15_CVS_HC_11	帮我把它们找回来 好吗？
+Brighthouse/Q2/START/BH_Q2_START_16_CVS_HC_12	它们会朝远离你的方向跳，把它们赶到我这里来
+Brighthouse/Q2/START/BH_Q2_START_17_CVS_SN_05	没问题！马上开始！
+Brighthouse/Q2/TOOFAR/BH_Q2_TOOFAR_01_GP_HC_01	兔子还没赶完呢 希悦
+Brighthouse/Q3/START/BH_Q3_START_13_CVS_HC_09	所以我用盒子把大门挡住了
+Mainstreet/End/EV_05/MS_End_EV_05_01_CS_Sprout_01	你……你……
+Mainstreet/End/EV_05/MS_End_EV_05_02_CS_SN_01	嘿 没事的 我们又不会打你
+Mainstreet/End/EV_05/MS_End_EV_05_03_CS_Sprout_02	你……不会吗？
+Mainstreet/End/EV_05/MS_End_EV_05_04_CS_SN_02	不会的 我们只是想让一切恢复正常
+Mainstreet/End/EV_05/MS_End_EV_05_05_CS_Sprout_03	但那是我想要的！
+Mainstreet/End/EV_05/MS_End_EV_05_06_CS_Sprout_04	最近几个月我总感觉适应不了 那些魔法和陌生小马 我……我只是
+Mainstreet/End/EV_05/MS_End_EV_05_07_CS_HC_01	菜头……新事物很难适应 我通常也不太喜欢容易失控的东西
+Mainstreet/End/EV_05/MS_End_EV_05_08_CS_ZP_01	但有时候，改变是一件好事。只要我们敞开心扉去接纳它，它就能激发出我们最好的一面。
+Mainstreet/End/EV_05/MS_End_EV_05_09_CS_SN_03	力力 你的翅膀！
 Mainstreet/End/EV_05/MS_End_EV_05_09_CS_ZP_01B	
-Mainstreet/End/EV_05/MS_End_EV_05_10_CS_IZ_01	
+Mainstreet/End/EV_05/MS_End_EV_05_10_CS_IZ_01	噢！魔法回来了！
 Mainstreet/End/EV_05/MS_End_EV_05_11_CS_BH_01	
-Mainstreet/End/EV_05/MS_End_EV_05_12_CS_PP_01	
-Mainstreet/End/EV_05/MS_End_EV_05_13_CS_IZ_02	
-Mainstreet/End/EV_05/MS_End_EV_05_14_CS_SN_04	
-Mainstreet/End/EV_05/MS_End_EV_05_15_CS_Sprout_05	
-Mainstreet/End/EV_05/MS_End_EV_05_16_CS_HC_02	
-Mainstreet/End/EV_05/MS_End_EV_05_17_CS_SN_05	
-Mainstreet/End/EV_05/MS_End_EV_05_18_CS_IZ_03	
-Mainstreet/End/EV_05/MS_End_EV_05_19_CS_PP_02	
-Mainstreet/End/EV_05/MS_End_EV_05_20_CS_ZP_02	
-Mainstreet/End/EV_05/MS_End_EV_05_21_CS_PP_03	
-Mainstreet/INTRO/EV_01/MS_INTRO_EV_01_01_CS_Narrator_01	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_01_CS_PP_01	
+Mainstreet/End/EV_05/MS_End_EV_05_12_CS_PP_01	有时改变很棒 就好比化妆
+Mainstreet/End/EV_05/MS_End_EV_05_13_CS_IZ_02	或者闪粉！
+Mainstreet/End/EV_05/MS_End_EV_05_14_CS_SN_04	或者交新朋友
+Mainstreet/End/EV_05/MS_End_EV_05_15_CS_Sprout_05	也许我只是反应过度了……所以你们不生我的气？
+Mainstreet/End/EV_05/MS_End_EV_05_16_CS_HC_02	伙计……只要小马湾恢复平静
+Mainstreet/End/EV_05/MS_End_EV_05_17_CS_SN_05	我们就都是朋友
+Mainstreet/End/EV_05/MS_End_EV_05_18_CS_IZ_03	而且友谊仍然是魔法！
+Mainstreet/End/EV_05/MS_End_EV_05_19_CS_PP_02	嘿 菜头 我有一个主意可以让你高兴起来！
+Mainstreet/End/EV_05/MS_End_EV_05_20_CS_ZP_02	不 不不不不
+Mainstreet/End/EV_05/MS_End_EV_05_21_CS_PP_03	舞步跳起来！
+Mainstreet/INTRO/EV_01/MS_INTRO_EV_01_01_CS_Narrator_01	小马湾节回来了，各族小马在此庆祝各自的特别与才华。有一天，希悦，一切会回到从前的样子
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_01_CS_PP_01	欢迎来到小马街，小马湾的中心，姑娘们！
 Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_02_CS_HC_01	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_03_CS_PP_02	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_04_CS_SN_01	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_05_CS_IZ_01	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_06_CS_PP_03	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_07_CS_Bystanders_01	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_08_CS_PP_04	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_09_CS_SN_02	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_10_CS_IZ_02	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_11_CS_HC_02	
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_03_CS_PP_02	额……欢迎~所有小马！想不想看一场精彩的演出？
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_04_CS_SN_01	额……当然？
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_05_CS_IZ_01	我们想看！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_06_CS_PP_03	那你们绝对不能错过琪琪游行！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_07_CS_Bystanders_01	琪琪游行！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_08_CS_PP_04	全镇所有小马都会在那里！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_09_CS_SN_02	是的，我们都会去支持你的！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_10_CS_IZ_02	我可以带很多闪粉！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_11_CS_HC_02	而且我写了这首新鲜出炉的曲子 是这样唱的……
 Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_12_CS_PP_05	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_13_CS_HC_03	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_14_CS_PP_06	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_15_CS_HC_04	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_16_CS_IZ_03	
-Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_17_CS_HC_05	
-Mainstreet/M5S/EV_01/MS_M5S_EV_01_02_CS_ZP_01	
-Mainstreet/M5S/EV_01/MS_M5S_EV_01_03_CS_SN_02	
-Mainstreet/M5S/EV_01/MS_M5S_EV_01_04_CVS_PP_01	
-Mainstreet/M5S/EV_01/MS_M5S_EV_01_05_CVS_IZ_01	
-Mainstreet/M5S/EV_01/MS_M5S_EV_01_06_CVS_SN_03	
-Mainstreet/M5S/EV_01/MS_M5S_EV_01_07_CVS_ZP_02	
-Mainstreet/M5S/EV_01/MS_M5S_EV_01_08_CVS_PP_02	
-Mainstreet/M5S/EV_01/MS_M5S_EV_01_09_CVS_PP_03	
-Mainstreet/M5S/EV_01/MS_M5S_EV_01_10_CVS_ZP_03	
-Mainstreet/M5S/EV_01/MS_M5S_EV_01_11_CVS_SN_04	
-Mainstreet/M5S/EV_01/MS_M5S_EV_01_12_CVS_HC_01	
-Mainstreet/M5S/EV_01/MS_M5S_EV_01_13_CVS_SN_05	
-Mainstreet/M5S/EV_02/MS_M5S_EV_02_01_CVS_IZ_01	
-Mainstreet/M5S/EV_02/MS_M5S_EV_02_02_CVS_SN_01	
-Mainstreet/M5S/EV_03/MS_M5S_EV_03_01_CVS_ZP_01	
-Mainstreet/M5S/EV_03/MS_M5S_EV_03_02_CVS_PP_01	
-Mainstreet/M5S/EV_03/MS_M5S_EV_03_03_CVS_SN_01	
-Mainstreet/M5S/EV_04/MS_M5S_EV_04_01_GP_SN_01	
-Mainstreet/M5S/EV_04/MS_M5S_EV_04_02_GP_SN_02	
-Mainstreet/M5S/EV_05/MS_M5S_EV_05_01_GP_SN_01	
-Mainstreet/M5S/EV_06/MS_M5S_EV_06_01_CVS_HC_01	
-Mainstreet/M5S/EV_06/MS_M5S_EV_06_02_CVS_HC_02	
-Mainstreet/M5S/EV_06/MS_M5S_EV_06_03_CVS_SN_01	
-Mainstreet/M5S/TOOFAR/MS_M5S_TOOFAR_01_GP_SN_01	
-Mainstreet/MF/ACCEPTED/MS_MF_ACCEPTED_01_CVS_PP_01	
-Mainstreet/MF/ACCEPTED/MS_MF_ACCEPTED_02_CVS_PP_02	
-Mainstreet/MF/COMP/MS_MF_COMP_01_CVS_PP_01	
-Mainstreet/MF/COMP/MS_MF_COMP_02_CVS_PP_02	
-Mainstreet/MF/COMP/MS_MF_COMP_03_CVS_SN_01	
-Mainstreet/MF/COMP/MS_MF_COMP_04_CVS_PP_03	
-Mainstreet/MF/COMP/MS_MF_COMP_05_CVS_PP_04	
-Mainstreet/MF/COMP/MS_MF_COMP_06_CVS_PP_05	
-Mainstreet/MF/COMP/MS_MF_COMP_07_CVS_SN_02	
-Mainstreet/MF/DECLINED/MS_MF_DECLINED_01_CVS_PP_01	
-Mainstreet/MF/QUESTION/MS_MF_QUESTION_01_CVS_PP_01	
-Mainstreet/MF/REPACPTD/MS_MF_REPACPTD_01_CVS_SN_01	
-Mainstreet/MF/REPDCLND/MS_MF_REPDCLND_01_CVS_SN_01	
-Mainstreet/MF/REPEAT/MS_MF_REPEAT_01_CVS_PP_01	
-Mainstreet/MF/START/MS_MF_START_01_CVS_PP_01	
-Mainstreet/MF/START/MS_MF_START_02_CVS_SN_01	
-Mainstreet/MF/START/MS_MF_START_03_CVS_PP_02	
-Mainstreet/MF/START/MS_MF_START_04_CVS_SN_02	
-Mainstreet/MR/EV_01/MS_MR_EV_01_01_GP_SN_01	
-Mainstreet/MR/EV_01/MS_MR_EV_01_02_GP_Sprout_01	
-Mainstreet/MR/EV_02/MS_MR_EV_02_01_CS_HC_01	
-Mainstreet/MR/EV_02/MS_MR_EV_02_02_GP_SN_01	
-Mainstreet/MR/EV_02/MS_MR_EV_02_03_GP_SN_02	
-Mainstreet/MR/EV_02/MS_MR_EV_02_04_GP_Sprout_01	
-Mainstreet/MR/EV_02/MS_MR_EV_02_05_GP_Sprout_02	
-Mainstreet/MR/EV_03/MS_MR_EV_03_01_GP_Sprout_01	
-Mainstreet/MR/EV_03/MS_MR_EV_03_02_GP_SN_01	
-Mainstreet/MR/EV_03/MS_MR_EV_03_03_CS_PP_01	
-Mainstreet/MR/EV_03/MS_MR_EV_03_04_CS_ZP_01	
-Mainstreet/MR/EV_03/MS_MR_EV_03_05_CS_SN_02	
-Mainstreet/MR/EV_04/MS_MR_EV_04_01_CS_Sprout_01	
-Mainstreet/MR/EV_04/MS_MR_EV_04_02_CS_IZ_01	
-Mainstreet/MR/EV_07/MS_MR_EV_07_01_GP_SN_01	
-Mainstreet/MR/EV_08/MS_MR_EV_08_01_GP_SN_01	
-Mainstreet/MR/EV_09/MS_MR_EV_09_01_GP_Sprout_01	
-Mainstreet/MR/EV_10/MS_MR_EV_10_01_GP_Sprout_01	
-Mainstreet/MR/EV_11/MS_MR_EV_11_01_GP_Sprout_01	
-Mainstreet/MR/EV_12/MS_MR_EV_12_01_GP_Sprout_01	
-Mainstreet/MR/EV_13/MS_MR_EV_13_01_GP_Sprout_01	
-Mainstreet/MR/REPACPTD/MS_MR_REPACPTD_01_CVS_SN_01	
-Mainstreet/MR/REPDCLND/MS_MR_REPDCLND_01_CVS_SN_01	
-Mainstreet/MR/REPEAT/MS_MR_REPEAT_01_CVS_Sprout_01	
-Mainstreet/MR/REPEAT/MS_MR_REPEAT_02_CVS_Sprout_02	
-Mainstreet/MR/START/MS_MR_START_01_CS_SN_01	
-Mainstreet/Q11/ACCEPTED/MS_Q11_ACCEPTED_04_CVS_SN_01	
-Mainstreet/Q11/BLK/MS_Q11_BLK_01_GP_BigBunny_01	
-Mainstreet/Q11/BLK/MS_Q11_BLK_02_GP_Bunnies_01	
-Mainstreet/Q11/BLK/MS_Q11_BLK_03_GP_SN_01	
-Mainstreet/Q11/COMP/MS_Q11_COMP_01_CS_HC_01	
-Mainstreet/Q11/COMP/MS_Q11_COMP_02_CS_BigBunny_01	
-Mainstreet/Q11/COMP/MS_Q11_COMP_03_CS_Bunnies_01	
-Mainstreet/Q11/COMP/MS_Q11_COMP_04_CS_SN_01	
-Mainstreet/Q11/COMP/MS_Q11_COMP_05_CS_HC_02	
-Mainstreet/Q11/COMP/MS_Q11_COMP_06_CS_Bunnies_02	
-Mainstreet/Q11/COMP/MS_Q11_COMP_07_CS_SN_02	
-Mainstreet/Q11/COMP/MS_Q11_COMP_08_CS_Bunnies_03	
-Mainstreet/Q11/DECLINED/MS_Q11_DECLINED_05_CVS_SN_01	
-Mainstreet/Q11/EV_01/MS_Q11_EV_01_01_CVS_SmoothieShop_01	
-Mainstreet/Q11/EV_01/MS_Q11_EV_01_02_CVS_SmoothieShop_02	
-Mainstreet/Q11/EV_02/MS_Q11_EV_02_01_CVS_BigBunny_01	
-Mainstreet/Q11/EV_02/MS_Q11_EV_02_02_CVS_HC_01	
-Mainstreet/Q11/EV_02/MS_Q11_EV_02_03_CVS_HC_02	
-Mainstreet/Q11/EV_02/MS_Q11_EV_02_04_CVS_SN_01	
-Mainstreet/Q11/EV_03/MS_Q11_EV_03_01_CVS_FashionPony_01	
-Mainstreet/Q11/EV_03/MS_Q11_EV_03_02_CVS_FashionPony_02	
-Mainstreet/Q11/EV_03/MS_Q11_EV_03_03_CVS_SN_01	
-Mainstreet/Q11/EV_04/MS_Q11_EV_04_05_CVS_HC_01	
-Mainstreet/Q11/EV_04/MS_Q11_EV_04_06_CVS_BigBunny_01	
-Mainstreet/Q11/EV_04/MS_Q11_EV_04_07_CVS_HC_02	
-Mainstreet/Q11/EV_04/MS_Q11_EV_04_08_CVS_BigBunny_02	
-Mainstreet/Q11/EV_04/MS_Q11_EV_04_09_CVS_HC_03	
-Mainstreet/Q11/EV_04/MS_Q11_EV_04_10_CVS_BigBunny_03	
-Mainstreet/Q11/EV_04/MS_Q11_EV_04_11_CVS_HC_04	
-Mainstreet/Q11/EV_04/MS_Q11_EV_04_12_CVS_SN_01	
-Mainstreet/Q11/EV_05/MS_Q11_EV_05_01_GP_SN_01	
-Mainstreet/Q11/EV_06/MS_Q11_EV_06_01_GP_SN_01	
-Mainstreet/Q11/EV_07/MS_Q11_EV_07_01_GP_SN_01	
-Mainstreet/Q11/EV_08/MS_Q11_EV_08_01_GP_SN_01	
-Mainstreet/Q11/EV_09/MS_Q11_EV_09_04_GP_FashionPony_01	
-Mainstreet/Q11/MID_01/MS_Q11_MID_01_01_GP_HC_01	
-Mainstreet/Q11/MID_02/MS_Q11_MID_02_01_GP_HC_01	
-Mainstreet/Q11/MID_03/MS_Q11_MID_03_01_GP_HC_01	
-Mainstreet/Q11/POST_01/MS_Q11_POST_01_01_GP_SmoothieShop_01	
-Mainstreet/Q11/POST_02/MS_Q11_POST_02_01_GP_FashionPony_01	
-Mainstreet/Q11/PRE_01/MS_Q11_PRE_01_01_GP_SmoothieShop_01	
-Mainstreet/Q11/PRE_02/MS_Q11_PRE_02_01_GP_FashionPony_01	
-Mainstreet/Q11/PRE_03/MS_Q11_PRE_03_01_GP_ScaredNPC_01	
-Mainstreet/Q11/QUESTION/MS_Q11_QUESTION_03_CVS_SmoothieShop_01	
-Mainstreet/Q11/RETACPTD/MS_Q11_RETACPTD_08_CVS_SN_01	
-Mainstreet/Q11/RETDCLND/MS_Q11_RETDCLND_07_CVS_SN_01	
-Mainstreet/Q11/RETRY/MS_Q11_RETRY_06_CVS_SmoothieShop_01	
-Mainstreet/Q11/START/MS_Q11_START_01_CS_Big Bunny_01	
-Mainstreet/Q11/START/MS_Q11_START_02_CS_Bunnies_01	
-Mainstreet/Q11/START/MS_Q11_START_03_CS_HC_01	
-Mainstreet/Q11/START/MS_Q11_START_04_CS_Bunnies_02	
-Mainstreet/Q11/START/MS_Q11_START_05_CS_SN_01	
-Mainstreet/Q11/START/MS_Q11_START_06_CS_HC_02	
-Mainstreet/Q11/START/MS_Q11_START_07_CS_HC_03	
-Mainstreet/Q11/START/MS_Q11_START_08_CS_BigBunny_02	
-Mainstreet/Q11/START/MS_Q11_START_09_CS_Bunnies_03	
-Mainstreet/Q11/START/MS_Q11_START_10_CS_SN_02	
-Mainstreet/Q11/START/MS_Q11_START_11_CS_BigBunny_03	
-Mainstreet/Q11/START/MS_Q11_START_12_CS_HC_04	
-Mainstreet/Q11/START/MS_Q11_START_13_CS_BigBunny_04	
-Mainstreet/Q11/START/MS_Q11_START_14_CS_Bunnies_04	
-Mainstreet/Q11/START/MS_Q11_START_15_CS_HC_05	
-Mainstreet/Q11/START/MS_Q11_START_16_CS_SN_03	
-Mainstreet/Q11/TOOFAR/MS_Q11_TOOFAR_01_GP_SN_01	
-Mainstreet/Q16/BLK/MS_Q16_BLK_01_GP_Canterlogic Guard_01	
-Mainstreet/Q16/COMP/MS_Q16_COMP_01_CVS_Crowd2_02	
-Mainstreet/Q16/COMP/MS_Q16_COMP_02_CVS_Crowd3_02	
-Mainstreet/Q16/COMP/MS_Q16_COMP_03_CVS_SN_01	
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_13_CS_HC_03	当然，我会去的，以粉丝的身份！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_14_CS_PP_06	好极了！游行那里再见，姑娘们！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_15_CS_HC_04	呃……
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_16_CS_IZ_03	我去制作装饰！一会见！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_17_CS_HC_05	我去公园门口站岗
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_02_CS_ZP_01	嘿 希悦
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_03_CS_SN_02	菜头跑到旧马速工厂里去了！我们得把他追出来！
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_04_CVS_PP_01	但镇子上大家都讨厌我们了 还有什么意义？
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_05_CVS_IZ_01	这都是些误会 我们都是朋友
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_06_CVS_SN_03	我们只要抓住菜头 他会向大家解释清楚
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_07_CVS_ZP_02	但是没有魔法 我们飞不起来
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_08_CVS_PP_02	虽然在这里过得很开心
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_09_CVS_PP_03	但我们也许应该回西风高地去跟妈妈在一起
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_10_CVS_ZP_03	在那里没有小马讨厌我们
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_11_CVS_SN_04	这样是不对的，我们得解决这个问题！
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_12_CVS_HC_01	我们得做点什么，但是怎么才能通过大门？
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_13_CVS_SN_05	我去到处找找看，也许有什么可以帮忙
+Mainstreet/M5S/EV_02/MS_M5S_EV_02_01_CVS_IZ_01	希悦……我是不是也应该离开小镇？也许眼下这是最好的安排
+Mainstreet/M5S/EV_02/MS_M5S_EV_02_02_CVS_SN_01	不！肯定有办法通过大门的
+Mainstreet/M5S/EV_03/MS_M5S_EV_03_01_CVS_ZP_01	谢谢帮忙 希悦
+Mainstreet/M5S/EV_03/MS_M5S_EV_03_02_CVS_PP_01	但是已经太晚了
+Mainstreet/M5S/EV_03/MS_M5S_EV_03_03_CVS_SN_01	帮助朋友 任何时候都不算晚！
+Mainstreet/M5S/EV_04/MS_M5S_EV_04_01_GP_SN_01	如果我能非常快速地通过这个斜坡……
+Mainstreet/M5S/EV_04/MS_M5S_EV_04_02_GP_SN_02	可以用轮滑！
+Mainstreet/M5S/EV_05/MS_M5S_EV_05_01_GP_SN_01	大门打不开……肯定有别的办法
+Mainstreet/M5S/EV_06/MS_M5S_EV_06_01_CVS_HC_01	我不想违反法律，但是如果你有办法可以跳过去……
+Mainstreet/M5S/EV_06/MS_M5S_EV_06_02_CVS_HC_02	我可以假装没看见
+Mainstreet/M5S/EV_06/MS_M5S_EV_06_03_CVS_SN_01	跳过去？嗯……
+Mainstreet/M5S/TOOFAR/MS_M5S_TOOFAR_01_GP_SN_01	我还不能离开，朋友们都在指望着我……
+Mainstreet/MF/ACCEPTED/MS_MF_ACCEPTED_01_CVS_PP_01	好戏开始了！
+Mainstreet/MF/ACCEPTED/MS_MF_ACCEPTED_02_CVS_PP_02	快穿好装扮，没时间浪费了！
+Mainstreet/MF/COMP/MS_MF_COMP_01_CVS_PP_01	你的舞步可真棒，希悦！
+Mainstreet/MF/COMP/MS_MF_COMP_02_CVS_PP_02	我都不知道你有这么大的潜力
+Mainstreet/MF/COMP/MS_MF_COMP_03_CVS_SN_01	我也很惊讶！是你教的不错！
+Mainstreet/MF/COMP/MS_MF_COMP_04_CVS_PP_03	作为感谢，给你这个
+Mainstreet/MF/COMP/MS_MF_COMP_05_CVS_PP_04	小马湾节徽章！
+Mainstreet/MF/COMP/MS_MF_COMP_06_CVS_PP_05	现在你可以去小镇公园参加赶兔子比赛了
+Mainstreet/MF/COMP/MS_MF_COMP_07_CVS_SN_02	我越来越喜欢小马湾了
+Mainstreet/MF/DECLINED/MS_MF_DECLINED_01_CVS_PP_01	别花的太久！观众都在等着呢！
+Mainstreet/MF/QUESTION/MS_MF_QUESTION_01_CVS_PP_01	你的表演一定会很精彩！准备好跳舞了吗？
+Mainstreet/MF/REPACPTD/MS_MF_REPACPTD_01_CVS_SN_01	当然！为什么不
+Mainstreet/MF/REPDCLND/MS_MF_REPDCLND_01_CVS_SN_01	也许一会吧
+Mainstreet/MF/REPEAT/MS_MF_REPEAT_01_CVS_PP_01	嘿 希悦！想再跳会舞吗？
+Mainstreet/MF/START/MS_MF_START_01_CVS_PP_01	舞服？可我需要的是舞者！
+Mainstreet/MF/START/MS_MF_START_02_CVS_SN_01	所以你需要我另找一位舞者 对吗？
+Mainstreet/MF/START/MS_MF_START_03_CVS_PP_02	不用！最好的舞者就在我眼前
+Mainstreet/MF/START/MS_MF_START_04_CVS_SN_02	我……
+Mainstreet/MR/EV_01/MS_MR_EV_01_01_GP_SN_01	菜头！等等！我们还能解决这个问题
+Mainstreet/MR/EV_01/MS_MR_EV_01_02_GP_Sprout_01	先解决这个吧！
+Mainstreet/MR/EV_02/MS_MR_EV_02_01_CS_HC_01	希悦！兔子们会去挡着他，但是你自己也要当心！
+Mainstreet/MR/EV_02/MS_MR_EV_02_02_GP_SN_01	我会留意的！
+Mainstreet/MR/EV_02/MS_MR_EV_02_03_GP_SN_02	噢 拜托！
+Mainstreet/MR/EV_02/MS_MR_EV_02_04_GP_Sprout_01	好！
+Mainstreet/MR/EV_02/MS_MR_EV_02_05_GP_Sprout_02	它们是从哪来的！
+Mainstreet/MR/EV_03/MS_MR_EV_03_01_GP_Sprout_01	你永远也抓不到我！
+Mainstreet/MR/EV_03/MS_MR_EV_03_02_GP_SN_01	怎么回事？
+Mainstreet/MR/EV_03/MS_MR_EV_03_03_CS_PP_01	我们来分散他的注意力，希悦。抓住他！
+Mainstreet/MR/EV_03/MS_MR_EV_03_04_CS_ZP_01	不管有没有魔法，我们不能丢下朋友不管！
+Mainstreet/MR/EV_03/MS_MR_EV_03_05_CS_SN_02	我不会让你们失望的！
+Mainstreet/MR/EV_04/MS_MR_EV_04_01_CS_Sprout_01	你为什么就是不停下
+Mainstreet/MR/EV_04/MS_MR_EV_04_02_CS_IZ_01	我也正打算问同样的问题
+Mainstreet/MR/EV_07/MS_MR_EV_07_01_GP_SN_01	快追上了！
+Mainstreet/MR/EV_08/MS_MR_EV_08_01_GP_SN_01	好！
+Mainstreet/MR/EV_09/MS_MR_EV_09_01_GP_Sprout_01	不！
+Mainstreet/MR/EV_10/MS_MR_EV_10_01_GP_Sprout_01	只是走运而已
+Mainstreet/MR/EV_11/MS_MR_EV_11_01_GP_Sprout_01	哈哈！
+Mainstreet/MR/EV_12/MS_MR_EV_12_01_GP_Sprout_01	尝尝这个！
+Mainstreet/MR/EV_13/MS_MR_EV_13_01_GP_Sprout_01	噢！
+Mainstreet/MR/REPACPTD/MS_MR_REPACPTD_01_CVS_SN_01	应该会很有趣
+Mainstreet/MR/REPDCLND/MS_MR_REPDCLND_01_CVS_SN_01	也许下次吧
+Mainstreet/MR/REPEAT/MS_MR_REPEAT_01_CVS_Sprout_01	嘿 希悦 你想不想……再来一次比赛？
+Mainstreet/MR/REPEAT/MS_MR_REPEAT_02_CVS_Sprout_02	我会“假装”逃跑再让你追一次 我演技可是很棒的
+Mainstreet/MR/START/MS_MR_START_01_CS_SN_01	Aaaaaaaaaaaaah
+Mainstreet/Q11/ACCEPTED/MS_Q11_ACCEPTED_04_CVS_SN_01	Let's go!
+Mainstreet/Q11/BLK/MS_Q11_BLK_01_GP_BigBunny_01	*nobox*
+Mainstreet/Q11/BLK/MS_Q11_BLK_02_GP_Bunnies_01	*nobox*
+Mainstreet/Q11/BLK/MS_Q11_BLK_03_GP_SN_01	我觉得它们不会让我过去
+Mainstreet/Q11/COMP/MS_Q11_COMP_01_CS_HC_01	"And that's it, you extortionist!"
+Mainstreet/Q11/COMP/MS_Q11_COMP_02_CS_BigBunny_01	*nobox*
+Mainstreet/Q11/COMP/MS_Q11_COMP_03_CS_Bunnies_01	*nobox*
+Mainstreet/Q11/COMP/MS_Q11_COMP_04_CS_SN_01	他直接丢下了他的朋友？
+Mainstreet/Q11/COMP/MS_Q11_COMP_05_CS_HC_02	我觉得他没有真正的朋友 希悦
+Mainstreet/Q11/COMP/MS_Q11_COMP_06_CS_Bunnies_02	*nobox*
+Mainstreet/Q11/COMP/MS_Q11_COMP_07_CS_SN_02	"Well, you can always count on us guys!"
+Mainstreet/Q11/COMP/MS_Q11_COMP_08_CS_Bunnies_03	*nobox*
+Mainstreet/Q11/DECLINED/MS_Q11_DECLINED_05_CVS_SN_01	一会吧……
+Mainstreet/Q11/EV_01/MS_Q11_EV_01_01_CVS_SmoothieShop_01	Extra Fresh huh? Of course! But they are delicate...
+Mainstreet/Q11/EV_01/MS_Q11_EV_01_02_CVS_SmoothieShop_02	You'll have to deliver it fast or it'll go to waste before you can say hoofness!
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_01_CVS_BigBunny_01	*nobox*
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_02_CVS_HC_01	"What? Another ""demand""?"
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_03_CVS_HC_02	"Now he wants a pair of ""cool shades""..."
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_04_CVS_SN_01	Cool shades? Ugh. OK.
+Mainstreet/Q11/EV_03/MS_Q11_EV_03_01_CVS_FashionPony_01	Oh it's you again. You want a pair of sunglasses huh?
+Mainstreet/Q11/EV_03/MS_Q11_EV_03_02_CVS_FashionPony_02	Easy. I managed to ruin your flower... Can you grow it back?
+Mainstreet/Q11/EV_03/MS_Q11_EV_03_03_CVS_SN_01	Uh... Sure!
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_05_CVS_HC_01	Alright. You can go now.
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_06_CVS_BigBunny_01	*nobox*
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_07_CVS_HC_02	He says he has ONE last request.
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_08_CVS_BigBunny_02	*nobox*
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_09_CVS_HC_03	Three balloons?? What for?
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_10_CVS_BigBunny_03	*nobox*
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_11_CVS_HC_04	"OK fine... Three balloons, yup."
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_12_CVS_SN_01	"Three Balloons it is, I'm on it..."
+Mainstreet/Q11/EV_05/MS_Q11_EV_05_01_GP_SN_01	"One balloon, two more to go!"
+Mainstreet/Q11/EV_06/MS_Q11_EV_06_01_GP_SN_01	Only one left. Where have i seen one before?
+Mainstreet/Q11/EV_07/MS_Q11_EV_07_01_GP_SN_01	And three. I'll go take these to him.
+Mainstreet/Q11/EV_08/MS_Q11_EV_08_01_GP_SN_01	I should probably check out Zipp's Flight school in Beach Cove.
+Mainstreet/Q11/EV_09/MS_Q11_EV_09_04_GP_FashionPony_01	Thank you! Here!
+Mainstreet/Q11/MID_01/MS_Q11_MID_01_01_GP_HC_01	"Make sure the Smoothie is extra fresh, Sunny."
+Mainstreet/Q11/MID_02/MS_Q11_MID_02_01_GP_HC_01	You might find cool shades at the nearby shop.
+Mainstreet/Q11/MID_03/MS_Q11_MID_03_01_GP_HC_01	"I've seen balloons around Mane St, go check, Sunny."
+Mainstreet/Q11/POST_01/MS_Q11_POST_01_01_GP_SmoothieShop_01	"Smoothies, fresh and SUPER fresh! They'll freeze your manes off!"
+Mainstreet/Q11/POST_02/MS_Q11_POST_02_01_GP_FashionPony_01	I'll try to keep this flower alive...
+Mainstreet/Q11/PRE_01/MS_Q11_PRE_01_01_GP_SmoothieShop_01	Super fresh smoothies! Don't let them melt!
+Mainstreet/Q11/PRE_02/MS_Q11_PRE_02_01_GP_FashionPony_01	All kinds of stylish eyewear! Try'em on!
+Mainstreet/Q11/PRE_03/MS_Q11_PRE_03_01_GP_ScaredNPC_01	Those bunnies blocking the entrance to Beach Cove are up to no good...
+Mainstreet/Q11/QUESTION/MS_Q11_QUESTION_03_CVS_SmoothieShop_01	Are you ready for it?
+Mainstreet/Q11/RETACPTD/MS_Q11_RETACPTD_08_CVS_SN_01	Let's go!
+Mainstreet/Q11/RETDCLND/MS_Q11_RETDCLND_07_CVS_SN_01	Maybe later...
+Mainstreet/Q11/RETRY/MS_Q11_RETRY_06_CVS_SmoothieShop_01	That wasn't fresh enough... Should we try again?
+Mainstreet/Q11/START/MS_Q11_START_01_CS_Big Bunny_01	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_02_CS_Bunnies_01	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_03_CS_HC_01	Everypony calm down! What's happening?
+Mainstreet/Q11/START/MS_Q11_START_04_CS_Bunnies_02	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_05_CS_SN_01	What are they saying?
+Mainstreet/Q11/START/MS_Q11_START_06_CS_HC_02	His name is Marcel... and he has requests.
+Mainstreet/Q11/START/MS_Q11_START_07_CS_HC_03	He says they've hijacked the road and won't budge until they get what they want
+Mainstreet/Q11/START/MS_Q11_START_08_CS_BigBunny_02	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_09_CS_Bunnies_03	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_10_CS_SN_02	And what do they want?
+Mainstreet/Q11/START/MS_Q11_START_11_CS_BigBunny_03	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_12_CS_HC_04	"He ""demands"" an extra fresh smoothie"
+Mainstreet/Q11/START/MS_Q11_START_13_CS_BigBunny_04	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_14_CS_Bunnies_04	*nobox*
+Mainstreet/Q11/START/MS_Q11_START_15_CS_HC_05	Can you find one of those? I'll keep an eye on them.
+Mainstreet/Q11/START/MS_Q11_START_16_CS_SN_03	Extra fresh smoothie coming right up!
+Mainstreet/Q11/TOOFAR/MS_Q11_TOOFAR_01_GP_SN_01	Hitch needs my help with that bunny gang.
+Mainstreet/Q16/BLK/MS_Q16_BLK_01_GP_Canterlogic Guard_01	工厂关门了……正在装修
+Mainstreet/Q16/COMP/MS_Q16_COMP_01_CVS_Crowd2_02	天马滚回去！
+Mainstreet/Q16/COMP/MS_Q16_COMP_02_CVS_Crowd3_02	这里不欢迎独角兽！
+Mainstreet/Q16/COMP/MS_Q16_COMP_03_CVS_SN_01	所有小马停下！
 Mainstreet/Q16/COMP/MS_Q16_COMP_04_CVS_Crowd_01	
-Mainstreet/Q16/COMP/MS_Q16_COMP_05_CVS_SN_02	
-Mainstreet/Q16/COMP/MS_Q16_COMP_06_CVS_SN_03	
-Mainstreet/Q16/COMP/MS_Q16_COMP_07_CVS_SN_04	
-Mainstreet/Q16/COMP/MS_Q16_COMP_08_CVS_SN_05	
-Mainstreet/Q16/COMP/MS_Q16_COMP_09_CVS_Crowd2_03	
-Mainstreet/Q16/COMP/MS_Q16_COMP_10_CVS_Crowd1_02	
-Mainstreet/Q16/COMP/MS_Q16_COMP_11_CVS_SN_06	
-Mainstreet/Q16/COMP/MS_Q16_COMP_12_CVS_Crowd3_03	
-Mainstreet/Q16/COMP/MS_Q16_COMP_13_CVS_Crowd1_03	
+Mainstreet/Q16/COMP/MS_Q16_COMP_05_CVS_SN_02	Can't you see this is not who you are?
+Mainstreet/Q16/COMP/MS_Q16_COMP_06_CVS_SN_03	天马和独角兽，他们都和你们一样有真心有梦想
+Mainstreet/Q16/COMP/MS_Q16_COMP_07_CVS_SN_04	他们不是外者！他们是我们的邻居和朋友！
+Mainstreet/Q16/COMP/MS_Q16_COMP_08_CVS_SN_05	"Together, we all pony kinds brought magic back and made us all happier!"
+Mainstreet/Q16/COMP/MS_Q16_COMP_09_CVS_Crowd2_03	我的确喜欢魔法！
+Mainstreet/Q16/COMP/MS_Q16_COMP_10_CVS_Crowd1_02	是啊 我也是！
+Mainstreet/Q16/COMP/MS_Q16_COMP_11_CVS_SN_06	"Somepony is threatening magic, and we'll catch him together!"
+Mainstreet/Q16/COMP/MS_Q16_COMP_12_CVS_Crowd3_03	台子上的小马说得对！
+Mainstreet/Q16/COMP/MS_Q16_COMP_13_CVS_Crowd1_03	Let's bring magic back!
 "Mainstreet/Q16/COMP/MS_Q16_COMP_14_CVS_Crowd1,2,3_01"	
-"Mainstreet/Q16/COMP/MS_Q16_COMP_15_CVS_Crowd1,2,3_01"	
-Mainstreet/Q16/EV_01/MS_Q16_EV_01_01_GP_Crowd1_01	
-Mainstreet/Q16/EV_02/MS_Q16_EV_02_01_GP_Crowd2_01	
-Mainstreet/Q16/EV_03/MS_Q16_EV_03_01_GP_Crowd3_01	
-Mainstreet/Q16/START/MS_Q16_START_01_CGP_SN_01	
-Mainstreet/Q16/START/MS_Q16_START_02_CGP_SN_02	
-Mainstreet/Q16/TOOFAR/MS_Q16_TOOFAR_01_GP_SN_01	
-Mainstreet/Q4/ACCEPTED/MS_Q4_ACCEPTED_01_CVS_SN_01	
+"Mainstreet/Q16/COMP/MS_Q16_COMP_15_CVS_Crowd1,2,3_01"	魔法！魔法！魔法！
+Mainstreet/Q16/EV_01/MS_Q16_EV_01_01_GP_Crowd1_01	我现在没时间聊天！
+Mainstreet/Q16/EV_02/MS_Q16_EV_02_01_GP_Crowd2_01	我忙着抗议呢！
+Mainstreet/Q16/EV_03/MS_Q16_EV_03_01_GP_Crowd3_01	我只会听站在台子上的小马说话！
+Mainstreet/Q16/START/MS_Q16_START_01_CGP_SN_01	他往那里跑了！我得想办法驱散这群小马
+Mainstreet/Q16/START/MS_Q16_START_02_CGP_SN_02	只要想办法吸引大家的注意力 我得找个高点的地方
+Mainstreet/Q16/TOOFAR/MS_Q16_TOOFAR_01_GP_SN_01	现在还不能放弃！得尽快追上菜头！
+Mainstreet/Q4/ACCEPTED/MS_Q4_ACCEPTED_01_CVS_SN_01	好的！我是说……是！
 Mainstreet/Q4/ACCEPTED/MS_Q4_ACCEPTED_02_CVS_Thunder_02	
-Mainstreet/Q4/COMP/MS_Q4_COMP_01_CVS_Thunder_01	
-Mainstreet/Q4/COMP/MS_Q4_COMP_02_CVS_Thunder_02	
-Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_01_CVS_SN_01	
-Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_02_CVS_Thunder_02	
-Mainstreet/Q4/POST_01/MS_Q4_POST_01_01_GP_Thunder_01	
-Mainstreet/Q4/QUESTION/MS_Q4_QUESTION_01_CVS_Thunder_01	
-Mainstreet/Q4/RETACPTD/MS_Q4_RETACPTD_01_CVS_SN_01	
-Mainstreet/Q4/RETDCLND/MS_Q4_RETDCLND_01_CVS_SN_01	
-Mainstreet/Q4/RETRY/MS_Q4_RETRY_01_CVS_Thunder_01	
-Mainstreet/Q4/START/MS_Q4_START_01_CVS_Thunder_01	
-Mainstreet/Q4/START/MS_Q4_START_02_CVS_SN_01	
-Mainstreet/Q4/START/MS_Q4_START_03_CVS_Thunder_02	
-Mainstreet/Q4/START/MS_Q4_START_04_CVS_Thunder_03	
-Mainstreet/Q4/START/MS_Q4_START_05_CVS_Thunder_04	
-Mainstreet/Q4/START/MS_Q4_START_06_CVS_SN_02	
-Mainstreet/Q4/START/MS_Q4_START_07_CVS_Thunder_05	
-Mainstreet/Q4/START/MS_Q4_START_08_CVS_SN_03	
-Mainstreet/Q4/START/MS_Q4_START_09_CVS_Thunder_06	
-Mainstreet/Q4/START/MS_Q4_START_10_CVS_Thunder_07	
-Mainstreet/Q5/COMP/MS_Q5_COMP_01_CS_PP_01	
-Mainstreet/Q5/COMP/MS_Q5_COMP_02_CS_SN_01	
-Mainstreet/Q5/COMP/MS_Q5_COMP_03_CS_PP_02	
-Mainstreet/Q5/COMP/MS_Q5_COMP_04_CS_PP_03	
-Mainstreet/Q5/EV_01/MS_Q5_EV_01_01_GP_SN_01	
-Mainstreet/Q5/EV_02/MS_Q5_EV_02_01_GP_SN_01	
-Mainstreet/Q5/EV_03/MS_Q5_EV_03_01_GP_SN_01	
-Mainstreet/Q5/EV_04/MS_Q5_EV_04_01_CVS_Sprout_01	
-Mainstreet/Q5/EV_04/MS_Q5_EV_04_02_CVS_Sprout_02	
-Mainstreet/Q5/EV_04/MS_Q5_EV_04_03_CVS_Sprout_03	
-Mainstreet/Q5/EV_04/MS_Q5_EV_04_04_CVS_SN_01	
-Mainstreet/Q5/EV_04/MS_Q5_EV_04_05_CVS_Sprout_04	
-Mainstreet/Q5/EV_04/MS_Q5_EV_04_06_CVS_SN_02	
-Mainstreet/Q5/EV_04/MS_Q5_EV_04_07_CVS_Sprout_05	
-Mainstreet/Q5/EV_05/MS_Q5_EV_05_01_GP_SN_01	
-Mainstreet/Q5/EV_06/MS_Q5_EV_06_01_CVS_IZ_01	
-Mainstreet/Q5/EV_06/MS_Q5_EV_06_02_CVS_SN_01	
-Mainstreet/Q5/EV_06/MS_Q5_EV_06_03_CVS_IZ_02	
-Mainstreet/Q5/EV_06/MS_Q5_EV_06_04_CVS_IZ_03	
-Mainstreet/Q5/EV_06/MS_Q5_EV_06_05_CVS_SN_02	
-Mainstreet/Q5/EV_06/MS_Q5_EV_06_06_CVS_IZ_04	
-Mainstreet/Q5/EV_06/MS_Q5_EV_06_07_CVS_SN_03	
-Mainstreet/Q5/EV_06/MS_Q5_EV_06_08_CVS_IZ_05	
-Mainstreet/Q5/EV_06/MS_Q5_EV_06_09_CVS_SN_04	
-Mainstreet/Q5/EV_07/MS_Q5_EV_07_01_CVS_PaintShop_01	
-Mainstreet/Q5/EV_07/MS_Q5_EV_07_02_CVS_SN_01	
-Mainstreet/Q5/EV_07/MS_Q5_EV_07_03_CVS_PaintShop_02	
-Mainstreet/Q5/EV_07/MS_Q5_EV_07_04_CVS_SN_02	
-Mainstreet/Q5/EV_07/MS_Q5_EV_07_05_CVS_PaintShop_03	
-Mainstreet/Q5/EV_07/MS_Q5_EV_07_06_CVS_PaintShop_04	
-Mainstreet/Q5/EV_07/MS_Q5_EV_07_07_CVS_SN_03	
-Mainstreet/Q5/EV_07/MS_Q5_EV_07_08_CVS_PaintShop_05	
-Mainstreet/Q5/EV_07/MS_Q5_EV_07_09_CVS_PaintShop_06	
-Mainstreet/Q5/EV_07/MS_Q5_EV_07_10_CVS_PaintShop_07	
-Mainstreet/Q5/EV_07/MS_Q5_EV_07_11_CVS_PaintShop_08	
-Mainstreet/Q5/EV_07/MS_Q5_EV_07_12_CVS_SN_04	
-Mainstreet/Q5/EV_08/MS_Q5_EV_08_01_CVS_FashionPony_01	
-Mainstreet/Q5/EV_08/MS_Q5_EV_08_02_CVS_SN_01	
-Mainstreet/Q5/EV_08/MS_Q5_EV_08_03_CVS_FashionPony_02	
-Mainstreet/Q5/EV_08/MS_Q5_EV_08_04_CVS_FashionPony_03	
-Mainstreet/Q5/EV_08/MS_Q5_EV_08_05_CVS_SN_02	
-Mainstreet/Q5/EV_08/MS_Q5_EV_08_06_CVS_FashionPony_04	
-Mainstreet/Q5/EV_08/MS_Q5_EV_08_07_CVS_FashionPony_05	
-Mainstreet/Q5/EV_08/MS_Q5_EV_08_08_CVS_SN_03	
-Mainstreet/Q5/EV_09/MS_Q5_EV_09_01_CVS_FlowerShop_01	
-Mainstreet/Q5/EV_09/MS_Q5_EV_09_02_CVS_SN_01	
-Mainstreet/Q5/EV_09/MS_Q5_EV_09_03_CVS_FlowerShop_02	
-Mainstreet/Q5/EV_09/MS_Q5_EV_09_04_CVS_FlowerShop_03	
-Mainstreet/Q5/EV_09/MS_Q5_EV_09_05_CVS_SN_02	
-Mainstreet/Q5/EV_09/MS_Q5_EV_09_06_CVS_FlowerShop_04	
-Mainstreet/Q5/EV_10/MS_Q5_EV_10_01_GP_FlowerShop_01	
-Mainstreet/Q5/EV_11/MS_Q5_EV_11_01_GP_FashionPony_01	
-Mainstreet/Q5/EV_12/MS_Q5_EV_12_01_CVS_PaintShop_01	
-Mainstreet/Q5/EV_12/MS_Q5_EV_12_02_CVS_SN_01	
-Mainstreet/Q5/EV_12/MS_Q5_EV_12_03_CVS_PaintShop_02	
-Mainstreet/Q5/EV_12/MS_Q5_EV_12_04_CVS_SN_02	
-Mainstreet/Q5/EV_12/MS_Q5_EV_12_05_CVS_PaintShop_03	
-Mainstreet/Q5/EV_13/MS_Q5_EV_13_01_GP_SN_03	
-Mainstreet/Q5/EV_14/MS_Q5_EV_14_01_GP_SN_01	
-Mainstreet/Q5/EV_15/MS_Q5_EV_15_01_GP_SN_01	
-Mainstreet/Q5/MID_01/MS_Q5_MID_01_01_GP_Sprout_01	
-Mainstreet/Q5/MID_02/MS_Q5_MID_02_01_CVS_IZ_01	
-Mainstreet/Q5/MID_03/MS_Q5_MID_03_01_CVS_Thunder_01	
-Mainstreet/Q5/MID_04/MS_Q5_MID_04_01_CVS_FashionPony_01	
-Mainstreet/Q5/MID_05/MS_Q5_MID_05_01_GP_PaintShop_01	
-Mainstreet/Q5/MID_06/MS_Q5_MID_06_01_CVS_PP_01	
-Mainstreet/Q5/MID_06/MS_Q5_MID_06_02_CVS_PP_02	
-Mainstreet/Q5/MID_06/MS_Q5_MID_06_03_CVS_SN_01	
-Mainstreet/Q5/MID_07/MS_Q5_MID_07_01_CVS_IZ_01	
-Mainstreet/Q5/POST_01/MS_Q5_POST_01_01_CVS_IZ_01	
-Mainstreet/Q5/POST_02/MS_Q5_POST_02_01_CVS_PaintShop_01	
-Mainstreet/Q5/POST_03/MS_Q5_POST_03_01_CVS_FashionPony_01	
-Mainstreet/Q5/POST_04/MS_Q5_POST_04_01_CVS_FlowerShop_01	
-Mainstreet/Q5/POST_05/MS_Q5_POST_05_01_CVS_Sprout_01	
-Mainstreet/Q5/POST_05/MS_Q5_POST_05_02_CVS_SN_01	
-Mainstreet/Q5/POST_05/MS_Q5_POST_05_03_CVS_Sprout_02	
-Mainstreet/Q5/PRE_01/MS_Q5_PRE_01_01_CVS_IZ_01	
-Mainstreet/Q5/PRE_02/MS_Q5_PRE_02_01_CVS_PaintShop_01	
-Mainstreet/Q5/PRE_03/MS_Q5_PRE_03_01_CVS_FashionPony_01	
-Mainstreet/Q5/PRE_04/MS_Q5_PRE_04_01_CVS_FlowerShop_01	
+Mainstreet/Q4/COMP/MS_Q4_COMP_01_CVS_Thunder_01	做得好 希悦学员！
+Mainstreet/Q4/COMP/MS_Q4_COMP_02_CVS_Thunder_02	You've got some moves after all. You've earned this.
+Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_01_CVS_SN_01	我还没准备好……
+Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_02_CVS_Thunder_02	Boring! We all have to do it sooner or later.
+Mainstreet/Q4/POST_01/MS_Q4_POST_01_01_GP_Thunder_01	"W.I.N.G.S stands for ""The Wonderful Institute of No-Gravity Skywalking’, cool huh?"
+Mainstreet/Q4/QUESTION/MS_Q4_QUESTION_01_CVS_Thunder_01	准备好练习了吗？
+Mainstreet/Q4/RETACPTD/MS_Q4_RETACPTD_01_CVS_SN_01	当然
+Mainstreet/Q4/RETDCLND/MS_Q4_RETDCLND_01_CVS_SN_01	现在还不行
+Mainstreet/Q4/RETRY/MS_Q4_RETRY_01_CVS_Thunder_01	想再试一次吗 希悦学员？
+Mainstreet/Q4/START/MS_Q4_START_01_CVS_Thunder_01	呃……嘿！你想去哪？
+Mainstreet/Q4/START/MS_Q4_START_02_CVS_SN_01	去参加琪琪游行？
+Mainstreet/Q4/START/MS_Q4_START_03_CVS_Thunder_02	回答错误 希悦是吧？
+Mainstreet/Q4/START/MS_Q4_START_04_CVS_Thunder_03	你已经自动加入了 W.I.N.G.S. 学院
+Mainstreet/Q4/START/MS_Q4_START_05_CVS_Thunder_04	"You're listed as a ""rookie winged pony"" and must begin your training ASAP."
+Mainstreet/Q4/START/MS_Q4_START_06_CVS_SN_02	But I barely know how to fly.
+Mainstreet/Q4/START/MS_Q4_START_07_CVS_Thunder_05	Well... That's the point isn't it?
+Mainstreet/Q4/START/MS_Q4_START_08_CVS_SN_03	I guess that makes sense...
+Mainstreet/Q4/START/MS_Q4_START_09_CVS_Thunder_06	First you must test your skills on the ground with an obstacle course.
+Mainstreet/Q4/START/MS_Q4_START_10_CVS_Thunder_07	Grab all the crystals in time if you want to earn your wings.
+Mainstreet/Q5/COMP/MS_Q5_COMP_01_CS_PP_01	"Aw thank you SO much, Sunny!"
+Mainstreet/Q5/COMP/MS_Q5_COMP_02_CS_SN_01	Anything for Maretime Bay Day!
+Mainstreet/Q5/COMP/MS_Q5_COMP_03_CS_PP_02	I'll wait at the Mane Melody! The crowd will flood in!
+Mainstreet/Q5/COMP/MS_Q5_COMP_04_CS_PP_03	Come everypony! The show is about to start!
+Mainstreet/Q5/EV_01/MS_Q5_EV_01_01_GP_SN_01	The suspect is a unicorn... Hmm.
+Mainstreet/Q5/EV_02/MS_Q5_EV_02_01_GP_SN_01	Whoever did this has purple fur.
+Mainstreet/Q5/EV_03/MS_Q5_EV_03_01_GP_SN_01	The saboteur has a long blue mane.
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_01_CVS_Sprout_01	Great detective work!
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_02_CVS_Sprout_02	"A unicorn with purple fur and a long blue mane, huh?"
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_03_CVS_Sprout_03	"I think it's clear who did this, Sunny."
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_04_CVS_SN_01	No! Izzy would never do anything like that.
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_05_CVS_Sprout_04	As a sheriff deputy I'm afraid I'll have to arrest her.
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_06_CVS_SN_02	No wait! I'll talk to her.
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_07_CVS_Sprout_05	You better find her before I do.
+Mainstreet/Q5/EV_05/MS_Q5_EV_05_01_GP_SN_01	"You're right about that, I have to find her."
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_01_CVS_IZ_01	Hey Sunny! Isn't Maretime Bay Day the greatest?
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_02_CVS_SN_01	Well... Somepony messed with Pipp's billboard
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_03_CVS_IZ_02	Oh no! That's terrible.
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_04_CVS_IZ_03	I have an idea! We could unicycle it.
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_05_CVS_SN_02	Yes! That will prove you didn't do it.
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_06_CVS_IZ_04	I didn't do what?
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_07_CVS_SN_03	Nothing! What do we need?
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_08_CVS_IZ_05	We need paint! Lots of pink paint! Can you find some?
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_09_CVS_SN_04	"Paint, got it!"
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_01_CVS_PaintShop_01	Oh hello! Were you looking for some paint?
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_02_CVS_SN_01	Yes! I need lots of pink paint.
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_03_CVS_PaintShop_02	Wonderful! And what do you have to trade?
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_04_CVS_SN_02	Trade?
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_05_CVS_PaintShop_03	"It's Maretime Bay Day! Money is not allowed, only trade."
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_06_CVS_PaintShop_04	It's bad for business but it does lift the spirit.
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_07_CVS_SN_03	And what would you want for the paint?
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_08_CVS_PaintShop_05	Well... I wanted to be a pegasus guard when I grew up.
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_09_CVS_PaintShop_06	Having a shop is great but...
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_10_CVS_PaintShop_07	If I could only try on one of those cool guard helmets.
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_11_CVS_PaintShop_08	Maybe you could find one for me?
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_12_CVS_SN_04	Pegasus guard Helmet it is. I'll find one!
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_01_CVS_FashionPony_01	What fabulous costume can I get for ya?
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_02_CVS_SN_01	I'm looking for a Guard Helmet
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_03_CVS_FashionPony_02	"A guard helmet! Such a good choice, yes!"
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_04_CVS_FashionPony_03	"I do have one, but..."
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_05_CVS_SN_02	But you want a trade
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_06_CVS_FashionPony_04	It's the Maretime Bay Day!
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_07_CVS_FashionPony_05	And all I'm asking for is a fabulous red flower.
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_08_CVS_SN_03	"Fabulous red flower? Deal, I'll get you one!"
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_01_CVS_FlowerShop_01	You need a red flower?
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_02_CVS_SN_01	I'll trade you anything.
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_03_CVS_FlowerShop_02	"Ah! I wish I could, but I traded my red flowers away."
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_04_CVS_FlowerShop_03	But I do have red seeds planted in these pots.
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_05_CVS_SN_02	Well... I could use magic to grow them... If you're ok with it
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_06_CVS_FlowerShop_04	More than OK! Please try it on these.
+Mainstreet/Q5/EV_10/MS_Q5_EV_10_01_GP_FlowerShop_01	Isn't magic wonderful? Enjoy!
+Mainstreet/Q5/EV_11/MS_Q5_EV_11_01_GP_FashionPony_01	"Gorgeous flower! Here, a brand new helmet, honey."
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_01_CVS_PaintShop_01	Look at that Helmet! Let me try it on.
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_02_CVS_SN_01	Looks good!
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_03_CVS_PaintShop_02	"Doesn't it? ""For Equestria!!"""
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_04_CVS_SN_02	"Yeah... ""For equestria"""
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_05_CVS_PaintShop_03	A trade is a trade! Here is the pink paint.
+Mainstreet/Q5/EV_13/MS_Q5_EV_13_01_GP_SN_03	"Perfect, we can fix the billboard now!"
+Mainstreet/Q5/EV_14/MS_Q5_EV_14_01_GP_SN_01	Got all the clues. Gotta go talk to Sprout.
+Mainstreet/Q5/EV_15/MS_Q5_EV_15_01_GP_SN_01	I'm liking this trading thing. Now to the paint shop!
+Mainstreet/Q5/MID_01/MS_Q5_MID_01_01_GP_Sprout_01	"We need more clues, keep asking."
+Mainstreet/Q5/MID_02/MS_Q5_MID_02_01_CVS_IZ_01	"Everypony is setting up shop for Maretime Bay Day, the stand you look for should be nearby!"
+Mainstreet/Q5/MID_03/MS_Q5_MID_03_01_CVS_Thunder_01	What? My helmet? No way. Find somepony else.
+Mainstreet/Q5/MID_04/MS_Q5_MID_04_01_CVS_FashionPony_01	"Somepony must have flowers nearby, honey."
+Mainstreet/Q5/MID_05/MS_Q5_MID_05_01_GP_PaintShop_01	Come back when you find that helmet.
+Mainstreet/Q5/MID_06/MS_Q5_MID_06_01_CVS_PP_01	"Please, help me clean up my image! "
+Mainstreet/Q5/MID_06/MS_Q5_MID_06_02_CVS_PP_02	Nopony is going to come with my face looking like THAT!
+Mainstreet/Q5/MID_06/MS_Q5_MID_06_03_CVS_SN_01	"No worries! I'll be fixed up faster that you can say ""raspberry bubblegum""."
+Mainstreet/Q5/MID_07/MS_Q5_MID_07_01_CVS_IZ_01	"That'll do it! Head to the billboard, it's uni-cycling time."
+Mainstreet/Q5/POST_01/MS_Q5_POST_01_01_CVS_IZ_01	"Wow wee! Mane Street is looking real fancy, isn't it?"
+Mainstreet/Q5/POST_02/MS_Q5_POST_02_01_CVS_PaintShop_01	Paint! The best colors in Maretime Bay!
+Mainstreet/Q5/POST_03/MS_Q5_POST_03_01_CVS_FashionPony_01	Costumes for Maretime Bay Day! Dress up and glow up!
+Mainstreet/Q5/POST_04/MS_Q5_POST_04_01_CVS_FlowerShop_01	Pots and seeds! Grow beautiful flowers of all colors!
+Mainstreet/Q5/POST_05/MS_Q5_POST_05_01_CVS_Sprout_01	Have you found Izzy yet?
+Mainstreet/Q5/POST_05/MS_Q5_POST_05_02_CVS_SN_01	Izzy hasn't done anything wrong!
+Mainstreet/Q5/POST_05/MS_Q5_POST_05_03_CVS_Sprout_02	We'll see about that. Something smells fishy here...
+Mainstreet/Q5/PRE_01/MS_Q5_PRE_01_01_CVS_IZ_01	"Wow wee! Mane Street is looking real fancy, isn't it?"
+Mainstreet/Q5/PRE_02/MS_Q5_PRE_02_01_CVS_PaintShop_01	Paint! The best colors in Maretime Bay!
+Mainstreet/Q5/PRE_03/MS_Q5_PRE_03_01_CVS_FashionPony_01	Costumes for Maretime Bay Day! Dress up and glow up!
+Mainstreet/Q5/PRE_04/MS_Q5_PRE_04_01_CVS_FlowerShop_01	Pots and seeds! Grow beautiful flowers of all colors!
 Mainstreet/Q5/START/MS_Q5_START_01_CS_PP_01	
-Mainstreet/Q5/START/MS_Q5_START_02_CS_SN_01	
-Mainstreet/Q5/START/MS_Q5_START_03_CS_PP_02	
-Mainstreet/Q5/START/MS_Q5_START_04_CS_PP_03	
-Mainstreet/Q5/START/MS_Q5_START_05_CS_PP_04	
-Mainstreet/Q5/START/MS_Q5_START_06_CS_Sprout_01	
-Mainstreet/Q5/START/MS_Q5_START_07_CS_PP_05	
-Mainstreet/Q5/START/MS_Q5_START_08_CS_Sprout_02	
-Mainstreet/Q5/START/MS_Q5_START_09_CS_Sprout_03	
-Mainstreet/Q5/START/MS_Q5_START_10_CS_PP_06	
-Mainstreet/Q5/START/MS_Q5_START_11_CS_Sprout_04	
+Mainstreet/Q5/START/MS_Q5_START_02_CS_SN_01	Pipp! What's wrong?
+Mainstreet/Q5/START/MS_Q5_START_03_CS_PP_02	What's wrong? Everything is wrong!
+Mainstreet/Q5/START/MS_Q5_START_04_CS_PP_03	My beautiful billboard have been destroyed!
+Mainstreet/Q5/START/MS_Q5_START_05_CS_PP_04	Nopony will come to my show like this!
+Mainstreet/Q5/START/MS_Q5_START_06_CS_Sprout_01	Outrageous! Maretime Bay is not safe!
+Mainstreet/Q5/START/MS_Q5_START_07_CS_PP_05	Who would do something like this!?
+Mainstreet/Q5/START/MS_Q5_START_08_CS_Sprout_02	Somepony is out there trying to ruin the event. We must find him!
+Mainstreet/Q5/START/MS_Q5_START_09_CS_Sprout_03	Or her...
+Mainstreet/Q5/START/MS_Q5_START_10_CS_PP_06	Or her??
+Mainstreet/Q5/START/MS_Q5_START_11_CS_Sprout_04	Nopony CAN be left unsuspected!
 Mainstreet/Q5/START/MS_Q5_START_12_CS_SN_02	
-Mainstreet/Q5/START/MS_Q5_START_13_CS_Sprout_05	
-Mainstreet/Q5/START/MS_Q5_START_14_CS_Sprout_06	
-Mainstreet/Q5/START/MS_Q5_START_15_CS_SN_03	
-Mainstreet/Q5/TOOFAR/MS_Q5_TOOFAR_01_GP_SN_01	
-Mainstreet/Q6/COMP/MS_Q6_COMP_01_CVS_Primrose_01	
-Mainstreet/Q6/COMP/MS_Q6_COMP_02_CVS_SN_01	
-Mainstreet/Q6/COMP/MS_Q6_COMP_03_CVS_Primrose_02	
-Mainstreet/Q6/COMP/MS_Q6_COMP_04_CVS_SN_02	
-Mainstreet/Q6/COMP/MS_Q6_COMP_05_CVS_SN_03	
-Mainstreet/Q6/COMP/MS_Q6_COMP_06_CVS_Primrose_03	
-Mainstreet/Q6/COMP/MS_Q6_COMP_07_CVS_Primrose_04	
-Mainstreet/Q6/COMP/MS_Q6_COMP_08_CVS_SN_04	
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_01_CVS_SN_01	
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_02_CVS_Primrose_01	
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_03_CVS_SN_02	
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_04_CVS_Primrose_02	
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_05_CVS_SN_03	
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_06_CVS_Primrose_03	
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_07_CVS_SN_04	
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_08_CVS_Primrose_04	
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_09_CVS_SN_05	
-Mainstreet/Q6/EV_02/MS_Q6_EV_02_01_GP_ShopKeeper1_01	
-Mainstreet/Q6/EV_03/MS_Q6_EV_03_01_GP_ShopKeeper2_01	
-Mainstreet/Q6/EV_04/MS_Q6_EV_04_01_GP_ShopKeeper3_01	
-Mainstreet/Q6/EV_05/MS_Q6_EV_05_01_GP_SN_01	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_01_CVS_Primrose_01	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_02_CVS_SN_01	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_03_CVS_Primrose_02	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_04_CVS_SN_02	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_05_CVS_Primrose_03	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_06_CVS_SN_03	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_07_CVS_Primrose_04	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_08_CVS_SN_04	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_09_CVS_Primrose_05	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_10_CVS_SN_05	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_11_CVS_Primrose_06	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_12_CVS_Primrose_07	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_13_CVS_SN_06	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_14_CVS_SN_07	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_15_CVS_Primrose_08	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_16_CVS_SN_08	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_17_CVS_SN_09	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_18_CVS_Primrose_09	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_19_CVS_SN_10	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_20_CVS_Primrose_10	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_21_CVS_SN_11	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_22_CVS_Primrose_11	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_23_CVS_SN_12	
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_24_CVS_SN_13	
-Mainstreet/Q6/EV_07/MS_Q6_EV_07_01_CVS_SN_01	
-Mainstreet/Q6/EV_07/MS_Q6_EV_07_02_CVS_SN_02	
-Mainstreet/Q6/EV_07/MS_Q6_EV_07_03_CVS_SmoothieShop_01	
-Mainstreet/Q6/EV_07/MS_Q6_EV_07_04_CVS_SN_03	
-Mainstreet/Q6/EV_07/MS_Q6_EV_07_05_CVS_SmoothieShop_02	
-Mainstreet/Q6/EV_07/MS_Q6_EV_07_06_CVS_SmoothieShop_03	
-Mainstreet/Q6/EV_08/MS_Q6_EV_08_01_GP_SmoothieShop_01	
-Mainstreet/Q6/EV_09/MS_Q6_EV_09_01_GP_SN_01	
-Mainstreet/Q6/EV_10/MS_Q6_EV_10_01_GP_SN_01	
-Mainstreet/Q6/MID_01/MS_Q6_MID_01_01_CVS_PP_01	
-Mainstreet/Q6/MID_01/MS_Q6_MID_01_02_CVS_PP_02	
-Mainstreet/Q6/MID_02/MS_Q6_MID_02_01_GP_Primrose_05	
-Mainstreet/Q6/MID_03/MS_Q6_MID_03_01_GP_Primrose_01	
-Mainstreet/Q6/MID_04/MS_Q6_MID_04_01_CVS_SmoothieShop_01	
-Mainstreet/Q6/POST_01/MS_Q6_POST_01_01_CVS_SmoothieShop_01	
-Mainstreet/Q6/POST_02/MS_Q6_POST_02_01_GP_ShopKeeper1_01	
-Mainstreet/Q6/POST_03/MS_Q6_POST_03_01_GP_ShopKeeper2_01	
-Mainstreet/Q6/POST_04/MS_Q6_POST_04_01_GP_ShopKeeper3_01	
-Mainstreet/Q6/PRE_01/MS_Q6_PRE_01_01_CVS_SmoothieShop_01	
-Mainstreet/Q6/PRE_02/MS_Q6_PRE_02_01_GP_ShopKeeper1_01	
-Mainstreet/Q6/PRE_03/MS_Q6_PRE_03_01_GP_ShopKeeper2_01	
-Mainstreet/Q6/PRE_04/MS_Q6_PRE_04_01_GP_ShopKeeper3_01	
-Mainstreet/Q6/START/MS_Q6_START_01_CVS_PP_01	
-Mainstreet/Q6/START/MS_Q6_START_02_CVS_SN_01	
-Mainstreet/Q6/START/MS_Q6_START_03_CVS_PP_02	
-Mainstreet/Q6/START/MS_Q6_START_04_CVS_PP_03	
-Mainstreet/Q6/START/MS_Q6_START_05_CVS_PP_04	
-Mainstreet/Q6/START/MS_Q6_START_06_CVS_PP_05	
-Mainstreet/Q6/START/MS_Q6_START_07_CVS_SN_02	
-Mainstreet/Q6/START/MS_Q6_START_08_CVS_PP_06	
-Mainstreet/Q6/START/MS_Q6_START_09_CVS_SN_03	
-Mainstreet/Q6/START/MS_Q6_START_10_CVS_PP_07	
-Mainstreet/Q6/TOOFAR/MS_Q6_TOOFAR_01_GP_SN_01	
-Mainstreet/Q7/COMP/MS_Q7_COMP_01_CVS_HC_01	
-Mainstreet/Q7/COMP/MS_Q7_COMP_02_CS_HC_01	
-Mainstreet/Q7/COMP/MS_Q7_COMP_03_CS_HC_02	
+Mainstreet/Q5/START/MS_Q5_START_13_CS_Sprout_05	Somepony had to see it happen!
+Mainstreet/Q5/START/MS_Q5_START_14_CS_Sprout_06	I need you to ask every last pony in this area.
+Mainstreet/Q5/START/MS_Q5_START_15_CS_SN_03	I'll ask around!
+Mainstreet/Q5/TOOFAR/MS_Q5_TOOFAR_01_GP_SN_01	"Can't leave now, I got things to do!"
+Mainstreet/Q6/COMP/MS_Q6_COMP_01_CVS_Primrose_01	Thank you so much!
+Mainstreet/Q6/COMP/MS_Q6_COMP_02_CVS_SN_01	"It's just smoothies, easy peasy."
+Mainstreet/Q6/COMP/MS_Q6_COMP_03_CVS_Primrose_02	No... Thank you for encouraging to be myself.
+Mainstreet/Q6/COMP/MS_Q6_COMP_04_CVS_SN_02	It's always the best thing you can be.
+Mainstreet/Q6/COMP/MS_Q6_COMP_05_CVS_SN_03	"And remember, he LOVES bunnies."
+Mainstreet/Q6/COMP/MS_Q6_COMP_06_CVS_Primrose_03	"Bunnies, yes! Can you take these clothes to Pipp?"
+Mainstreet/Q6/COMP/MS_Q6_COMP_07_CVS_Primrose_04	She'll find a better use for them than me.
+Mainstreet/Q6/COMP/MS_Q6_COMP_08_CVS_SN_04	Sure thing! She knows her fashion.
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_01_CVS_SN_01	Hey! Is that you Primrose?
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_02_CVS_Primrose_01	Oh. No! Primrose is... Gone. Poof.
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_03_CVS_SN_02	It's you. Primrose!
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_04_CVS_Primrose_02	Yes! It's me! But I can't go to the show!
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_05_CVS_SN_03	But why? Is something wrong?
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_06_CVS_Primrose_03	It's just that... I have nothing pretty to wear!
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_07_CVS_SN_04	Just that? I'll find some clothes for you.
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_08_CVS_Primrose_04	Would you do that for me? I need three pieces.
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_09_CVS_SN_05	Three? Consider it done!
+Mainstreet/Q6/EV_02/MS_Q6_EV_02_01_GP_ShopKeeper1_01	For Pipp's show. A very special piece.
+Mainstreet/Q6/EV_03/MS_Q6_EV_03_01_GP_ShopKeeper2_01	"Clothes for the ponywalk, coming up!"
+Mainstreet/Q6/EV_04/MS_Q6_EV_04_01_GP_ShopKeeper3_01	You'll get so many compliments with this.
+Mainstreet/Q6/EV_05/MS_Q6_EV_05_01_GP_SN_01	"I got them all, time to bring them back to Primrose."
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_01_CVS_Primrose_01	Oh. You got them?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_02_CVS_SN_01	Yes! Now you can perform at the show!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_03_CVS_Primrose_02	But... I can't. No! I can't I can't!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_04_CVS_SN_02	What? Why not?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_05_CVS_Primrose_03	Because! What if he doesn't like these?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_06_CVS_SN_03	He? Who's He?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_07_CVS_Primrose_04	"Hitch! Who else! He's so kind to everypony, so thoughtful, so... him."
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_08_CVS_SN_04	Aw... I see. But Hitch is not into fashion like that!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_09_CVS_Primrose_05	He's not? Are... you sure?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_10_CVS_SN_05	"Nah, he's more into herding bunnies and stuff like that."
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_11_CVS_Primrose_06	I thought I would impress him looking my best on the ponywalk.
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_12_CVS_Primrose_07	But I'm too shy...
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_13_CVS_SN_06	Why? You shouldn't be!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_14_CVS_SN_07	You're perfect just the way you are.
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_15_CVS_Primrose_08	Am I?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_16_CVS_SN_08	Yes! All you need to be is you.
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_17_CVS_SN_09	You could just walk up to him and say: Hi!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_18_CVS_Primrose_09	I don't know...  I'd... i'd feel much better if I had an excuse to talk to him.
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_19_CVS_SN_10	What if you casually had a smoothie to spare?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_20_CVS_Primrose_10	I guess that'd be a good excuse...
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_21_CVS_SN_11	He LOVES pumpkin spice smoothies!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_22_CVS_Primrose_11	Could you get me one of those?
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_23_CVS_SN_12	Yes! I'll be your smoothie operator!
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_24_CVS_SN_13	But my smoothie cart is in the shop! Where can I find a smoothie now?
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_01_CVS_SN_01	Hey there! My smoothie cart's cooler broke...
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_02_CVS_SN_02	Can you spot me a couple smoothies? I'll get you back!
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_03_CVS_SmoothieShop_01	"Oh sure, Sunny, you got it! What ya need?"
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_04_CVS_SN_03	"Great! Two pumpkin spice smoothies, please!"
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_05_CVS_SmoothieShop_02	Oh no!! Can't make those... I ran out of pumpkin cream!
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_06_CVS_SmoothieShop_03	If you bring some pumpkins I'll make them for ya.
+Mainstreet/Q6/EV_08/MS_Q6_EV_08_01_GP_SmoothieShop_01	One pumpkin spice smoothie coming right up!
+Mainstreet/Q6/EV_09/MS_Q6_EV_09_01_GP_SN_01	"I got all the pumpkins, now to the smoothie shop!"
+Mainstreet/Q6/EV_10/MS_Q6_EV_10_01_GP_SN_01	I should go see Pipp and break the news...
+Mainstreet/Q6/MID_01/MS_Q6_MID_01_01_CVS_PP_01	You haven't found Primrose yet?
+Mainstreet/Q6/MID_01/MS_Q6_MID_01_02_CVS_PP_02	"Ugh, Classic Primrose! She's probably hiding somewhere."
+Mainstreet/Q6/MID_02/MS_Q6_MID_02_01_GP_Primrose_05	Ask at the shops. I ordered three pieces for the show.
+Mainstreet/Q6/MID_03/MS_Q6_MID_03_01_GP_Primrose_01	I saw the smoothie truck parked nearby...
+Mainstreet/Q6/MID_04/MS_Q6_MID_04_01_CVS_SmoothieShop_01	Smoothies! Fruity and yummy smoothies!
+Mainstreet/Q6/POST_01/MS_Q6_POST_01_01_CVS_SmoothieShop_01	Smoothies! Fruity and yummy smoothies!
+Mainstreet/Q6/POST_02/MS_Q6_POST_02_01_GP_ShopKeeper1_01	The Pipp Pipp Parade should be fabulous!
+Mainstreet/Q6/POST_03/MS_Q6_POST_03_01_GP_ShopKeeper2_01	Princess Pipp sure knows how to put on a show.
+Mainstreet/Q6/POST_04/MS_Q6_POST_04_01_GP_ShopKeeper3_01	"I didn't like trading at first, but it's growing on me."
+Mainstreet/Q6/PRE_01/MS_Q6_PRE_01_01_CVS_SmoothieShop_01	Smoothies! Fruity and yummy smoothies!
+Mainstreet/Q6/PRE_02/MS_Q6_PRE_02_01_GP_ShopKeeper1_01	The best Zephyr Heights fashion!
+Mainstreet/Q6/PRE_03/MS_Q6_PRE_03_01_GP_ShopKeeper2_01	"Unicorns are tough to shop hats for, they pierce through them all."
+Mainstreet/Q6/PRE_04/MS_Q6_PRE_04_01_GP_ShopKeeper3_01	Bridlewood silks and fashion!
+Mainstreet/Q6/START/MS_Q6_START_01_CVS_PP_01	Did you find out who ruined my billboards?
+Mainstreet/Q6/START/MS_Q6_START_02_CVS_SN_01	Actually... no.
+Mainstreet/Q6/START/MS_Q6_START_03_CVS_PP_02	"Oh well, it looks beautiful now. That's what matters."
+Mainstreet/Q6/START/MS_Q6_START_04_CVS_PP_03	Sunny! The crowd is here but something is missing...
+Mainstreet/Q6/START/MS_Q6_START_05_CVS_PP_04	Primrose!! My backup dancer!!
+Mainstreet/Q6/START/MS_Q6_START_06_CVS_PP_05	There can be no dance show with no dancer! Will you find her?
+Mainstreet/Q6/START/MS_Q6_START_07_CVS_SN_02	Sure! Where should I look?
+Mainstreet/Q6/START/MS_Q6_START_08_CVS_PP_06	I'm not sure. She likes hiding... And smoothies!
+Mainstreet/Q6/START/MS_Q6_START_09_CVS_SN_03	I'll find her.
+Mainstreet/Q6/START/MS_Q6_START_10_CVS_PP_07	The show must go on!
+Mainstreet/Q6/TOOFAR/MS_Q6_TOOFAR_01_GP_SN_01	I'm not done yet!
+Mainstreet/Q7/COMP/MS_Q7_COMP_01_CVS_HC_01	Look. At. You! Maretime Bay Day badge and all.
+Mainstreet/Q7/COMP/MS_Q7_COMP_02_CS_HC_01	"You look ready for some bunny herding, don't you?"
+Mainstreet/Q7/COMP/MS_Q7_COMP_03_CS_HC_02	let's go to Town Park.
 Mainstreet/Q7/COMP/MS_Q7_COMP_04_CS_BH_01	
-Mainstreet/Q7/EV_01/MS_Q7_EV_01_01_GP_HC_01	
-Mainstreet/Q7/EV_01/MS_Q7_EV_01_02_GP_HC_02	
-Mainstreet/Q7/EV_01/MS_Q7_EV_01_03_GP_HC_03	
-Mainstreet/Q7/POST_01/MS_Q7_POST_01_01_CVS_HC_01	
-Mainstreet/Q7/POST_01/MS_Q7_POST_01_02_CVS_Primrose_01	
-Mainstreet/Q7/POST_01/MS_Q7_POST_01_03_CVS_HC_02	
-Mainstreet/Q7/POST_01/MS_Q7_POST_01_04_CVS_Primrose_02	
+Mainstreet/Q7/EV_01/MS_Q7_EV_01_01_GP_HC_01	I'm sorry Sunny. But I can't let you in without the Maretime Bay Day Badge.
+Mainstreet/Q7/EV_01/MS_Q7_EV_01_02_GP_HC_02	The herding competition is very serious and official.
+Mainstreet/Q7/EV_01/MS_Q7_EV_01_03_GP_HC_03	Find a magic mirror and put the medal on.
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_01_CVS_HC_01	"Yeah, bunnies will say the funniest things sometimes!"
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_02_CVS_Primrose_01	"Will you tell me everything about them, Sheriff Hitch?"
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_03_CVS_HC_02	Well... Sure! And you can call me just Hitch
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_04_CVS_Primrose_02	"Ah, Ok... Hitch..."
 Mainstreet/Q7/POST_01/MS_Q7_POST_01_05_CVS_SN_01	
-Mainstreet/Q7/START/MS_Q7_START_01_CVS_HC_01	
-Mainstreet/Q7/START/MS_Q7_START_02_CVS_HC_02	
-Mainstreet/SS/EV_01/MS_SS_EV_01_01_CGP_Sprout_01	
-Mainstreet/SS/EV_01/MS_SS_EV_01_02_CGP_Sprout_02	
-Mainstreet/SS/EV_01/MS_SS_EV_01_03_CGP_Sprout_03	
-Mainstreet/SS/EV_01/MS_SS_EV_01_04_CGP_Sprout_04	
-Mainstreet/SS/EV_01/MS_SS_EV_01_05_CGP_Sprout_05	
-Mainstreet/SS/EV_01/MS_SS_EV_01_06_CGP_Sprout_06	
-Mainstreet/SS/EV_01/MS_SS_EV_01_07_CGP_Sprout_07	
-Mainstreet/SS/EV_01/MS_SS_EV_01_08_CGP_Sprout_08	
-Mainstreet/SS/EV_01/MS_SS_EV_01_09_CGP_Sprout_09	
-Mainstreet/SS/EV_02/MS_SS_EV_02_10_GP_Crowd1_01	
-Mainstreet/SS/EV_03/MS_SS_EV_03_11_GP_Crowd2_01	
-Mainstreet/SS/EV_04/MS_SS_EV_04_01_GP_Sprout_01	
-Mainstreet/SS/EV_04/MS_SS_EV_04_02_GP_Sprout_02	
-TownPark/MC/ACCEPTED/TP_MC_ACCEPTED_01_CVS_HC_01	
-TownPark/MC/ACCEPTED/TP_MC_ACCEPTED_02_CVS_SN_01	
-TownPark/MC/COMP/TP_MC_COMP_01_CS_HC_01	
-TownPark/MC/COMP/TP_MC_COMP_02_CS_SN_01	
-TownPark/MC/COMP/TP_MC_COMP_03_CS_HC_02	
-TownPark/MC/COMP/TP_MC_COMP_04_CS_SN_02	
-TownPark/MC/COMP/TP_MC_COMP_05_CS_HC_03	
-TownPark/MC/COMP/TP_MC_COMP_06_CS_SN_03	
-TownPark/MC/COMP/TP_MC_COMP_07_CS_Sprout_01	
-TownPark/MC/COMP/TP_MC_COMP_08_CS_Sprout_02	
-TownPark/MC/COMP/TP_MC_COMP_09_CS_HC_04	
-TownPark/MC/COMP/TP_MC_COMP_10_CS_Sprout_03	
-TownPark/MC/COMP/TP_MC_COMP_11_CS_Sprout_04	
-TownPark/MC/COMP/TP_MC_COMP_12_CS_HC_04	
-TownPark/MC/COMP/TP_MC_COMP_13_CS_Sprout_05	
-TownPark/MC/COMP/TP_MC_COMP_14_CS_HC_05	
-TownPark/MC/COMP/TP_MC_COMP_15_CS_SN_05	
-TownPark/MC/COMP/TP_MC_COMP_16_CS_HC_06	
-TownPark/MC/DECLINED/TP_MC_DECLINED_01_CVS_SN_01	
-TownPark/MC/DECLINED/TP_MC_DECLINED_02_CVS_HC_01	
-TownPark/MC/EV_01/TP_MC_EV_01_01_GP_SN_01	
-TownPark/MC/EV_02/TP_MC_EV_02_01_GP_Sprout_01	
-TownPark/MC/EV_03/TP_MC_EV_03_01_GP_SN_01	
-TownPark/MC/POST_01/TP_MC_POST_01_01_GP_IZ_01	
-TownPark/MC/QUESTION/TP_MC_QUESTION_01_CVS_HC_01	
-TownPark/MC/REPACPTD/TP_MC_REPACPTD_01_CVS_SN_01	
-TownPark/MC/REPDCLND/TP_MC_REPDCLND_01_CVS_SN_01	
-TownPark/MC/REPEAT/TP_MC_REPEAT_01_CVS_HC_01	
-TownPark/MC/START/TP_MC_START_01_CVS_HC_01	
-TownPark/MC/START/TP_MC_START_02_CVS_HC_02	
-TownPark/MC/START/TP_MC_START_03_CVS_HC_03	
-TownPark/MC/START/TP_MC_START_04_CVS_HC_04	
-TownPark/Q10/COMP/TP_Q10_COMP_01_CVS_HC_01	
-TownPark/Q10/COMP/TP_Q10_COMP_02_CVS_HC_02	
-TownPark/Q10/COMP/TP_Q10_COMP_03_CVS_SN_01	
-TownPark/Q10/EV_01/TP_Q10_EV_01_01_GP_HC_01	
-TownPark/Q10/EV_02/TP_Q10_EV_02_01_GP_SN_01	
-TownPark/Q10/EV_03/TP_Q10_EV_03_01_GP_SN_01	
-TownPark/Q10/EV_04/TP_Q10_EV_04_01_GP_SN_01	
-TownPark/Q10/MID_01/TP_Q10_MID_01_01_GP_HC_01	
-TownPark/Q10/START/TP_Q10_START_01_CVS_HC_01	
-TownPark/Q10/START/TP_Q10_START_02_CVS_HC_02	
-TownPark/Q10/START/TP_Q10_START_03_CVS_HC_03	
-TownPark/Q10/TOOFAR/TP_Q10_TOOFAR_01_GP_HC_01	
-TownPark/Q12/ACCEPTED/TP_Q12_ACCEPTED_01_CVS_SN_01	
-TownPark/Q12/COMP/TP_Q12_COMP_01_CVS_Zoom_01	
-TownPark/Q12/DECLINED/TP_Q12_DECLINED_01_CVS_SN_01	
-TownPark/Q12/POST_01/TP_Q12_POST_01_01_CVS_Zoom_01	
-TownPark/Q12/QUESTION/TP_Q12_QUESTION_01_CVS_Zoom_01	
-TownPark/Q12/RETACPTD/TP_Q12_RETACPTD_01_CVS_SN_01	
-TownPark/Q12/RETDCLND/TP_Q12_RETDCLND_01_CVS_SN_01	
-TownPark/Q12/RETRY/TP_Q12_RETRY_01_CVS_Zoom_01	
-TownPark/Q12/START/TP_Q12_START_01_CVS_Zoom_01	
-TownPark/Q12/START/TP_Q12_START_02_CVS_Zoom_02	
-TownPark/Q12/START/TP_Q12_START_03_CVS_SN_01	
-TownPark/Q12/START/TP_Q12_START_04_CVS_Zoom_03	
-TownPark/Q8/COMP/TP_Q8_COMP_01_CVS_IZ_01	
-TownPark/Q8/COMP/TP_Q8_COMP_02_CVS_HC_01	
-TownPark/Q8/COMP/TP_Q8_COMP_03_CVS_HC_02	
-TownPark/Q8/COMP/TP_Q8_COMP_04_CVS_SN_01	
-TownPark/Q8/COMP/TP_Q8_COMP_05_CVS_HC_03	
-TownPark/Q8/EV_01/TP_Q8_EV_01_01_GP_SN_01	
-TownPark/Q8/EV_02/TP_Q8_EV_02_01_GP_SN_01	
-TownPark/Q8/EV_03/TP_Q8_EV_03_01_GP_SN_01	
-TownPark/Q8/EV_04/TP_Q8_EV_04_01_CVS_ZP_01	
-TownPark/Q8/EV_04/TP_Q8_EV_04_02_CVS_ZP_02	
-TownPark/Q8/EV_04/TP_Q8_EV_04_03_CVS_SN_01	
-TownPark/Q8/EV_04/TP_Q8_EV_04_04_CVS_ZP_03	
-TownPark/Q8/EV_04/TP_Q8_EV_04_05_CVS_Sprout_01	
-TownPark/Q8/EV_04/TP_Q8_EV_04_06_CVS_Sprout_02	
-TownPark/Q8/EV_04/TP_Q8_EV_04_07_CVS_ZP_04	
-TownPark/Q8/EV_04/TP_Q8_EV_04_08_CVS_Sprout_03	
-TownPark/Q8/EV_04/TP_Q8_EV_04_09_CVS_Sprout_04	
-TownPark/Q8/EV_04/TP_Q8_EV_04_10_CVS_Sprout_05	
-TownPark/Q8/EV_04/TP_Q8_EV_04_11_CVS_SN_02	
+Mainstreet/Q7/START/MS_Q7_START_01_CVS_HC_01	You can't go into Town Park until you get the Maretime Bay Day medal.
+Mainstreet/Q7/START/MS_Q7_START_02_CVS_HC_02	"In the meantime, Pipp needs help with her show."
+Mainstreet/SS/EV_01/MS_SS_EV_01_01_CGP_Sprout_01	Citizens of Maretime Bay!
+Mainstreet/SS/EV_01/MS_SS_EV_01_02_CGP_Sprout_02	There is no reason to be alarmed!
+Mainstreet/SS/EV_01/MS_SS_EV_01_03_CGP_Sprout_03	But these are truly scary times!
+Mainstreet/SS/EV_01/MS_SS_EV_01_04_CGP_Sprout_04	"There's not one, but at least two criminals in town."
+Mainstreet/SS/EV_01/MS_SS_EV_01_05_CGP_Sprout_05	We are looking into the case but all I can share for now...
+Mainstreet/SS/EV_01/MS_SS_EV_01_06_CGP_Sprout_06	"...Is that the criminals are not from Maretime Bay,"
+Mainstreet/SS/EV_01/MS_SS_EV_01_07_CGP_Sprout_07	Since neither of them is a respectable Earth Pony.
+Mainstreet/SS/EV_01/MS_SS_EV_01_08_CGP_Sprout_08	No reason to be alarmed.
+Mainstreet/SS/EV_01/MS_SS_EV_01_09_CGP_Sprout_09	But watch out at all times!
+Mainstreet/SS/EV_02/MS_SS_EV_02_10_GP_Crowd1_01	I'm scared!
+Mainstreet/SS/EV_03/MS_SS_EV_03_11_GP_Crowd2_01	What are we going to do?
+Mainstreet/SS/EV_04/MS_SS_EV_04_01_GP_Sprout_01	We can't let this happen again.
+Mainstreet/SS/EV_04/MS_SS_EV_04_02_GP_Sprout_02	We'll take the criminals to justice
+TownPark/MC/ACCEPTED/TP_MC_ACCEPTED_01_CVS_HC_01	Great! But there's no way you'll ever beat my record.
+TownPark/MC/ACCEPTED/TP_MC_ACCEPTED_02_CVS_SN_01	"We shall see, buddy."
+TownPark/MC/COMP/TP_MC_COMP_01_CS_HC_01	Whoah Sunny that was... That was pretty good!
+TownPark/MC/COMP/TP_MC_COMP_02_CS_SN_01	You're impressed?
+TownPark/MC/COMP/TP_MC_COMP_03_CS_HC_02	Me? Nah...
+TownPark/MC/COMP/TP_MC_COMP_04_CS_SN_02	You can say it...
+TownPark/MC/COMP/TP_MC_COMP_05_CS_HC_03	Aaalright... Maybe I'm a tiny bit impressed.
+TownPark/MC/COMP/TP_MC_COMP_06_CS_SN_03	Ha! I knew it!
+TownPark/MC/COMP/TP_MC_COMP_07_CS_Sprout_01	Sheriff Hitch!
+TownPark/MC/COMP/TP_MC_COMP_08_CS_Sprout_02	There's yet another terrible threat to the town!
+TownPark/MC/COMP/TP_MC_COMP_09_CS_HC_04	Threat? What is it this time?
+TownPark/MC/COMP/TP_MC_COMP_10_CS_Sprout_03	Furious rabbits have ganged up in Mane St.
+TownPark/MC/COMP/TP_MC_COMP_11_CS_Sprout_04	They're blocking the entrance to Beach Cove.
+TownPark/MC/COMP/TP_MC_COMP_12_CS_HC_04	"I'll go check, but it can't be that serious"
+TownPark/MC/COMP/TP_MC_COMP_13_CS_Sprout_05	"Oh it IS very serious, Sheriff Hitch."
+TownPark/MC/COMP/TP_MC_COMP_14_CS_HC_05	Can you go check Sunny? I'll catch up to you.
+TownPark/MC/COMP/TP_MC_COMP_15_CS_SN_05	Yes Sheriff Hitch!
+TownPark/MC/COMP/TP_MC_COMP_16_CS_HC_06	Ugh...
+TownPark/MC/DECLINED/TP_MC_DECLINED_01_CVS_SN_01	Not yet. I have things to do first.
+TownPark/MC/DECLINED/TP_MC_DECLINED_02_CVS_HC_01	Come back whenever you're ready to herd!
+TownPark/MC/EV_01/TP_MC_EV_01_01_GP_SN_01	I should head back to Mane St and see about those bunnies.
+TownPark/MC/EV_02/TP_MC_EV_02_01_GP_Sprout_01	Wrong way! Mane Street is in the OPPOSITE direction!
+TownPark/MC/EV_03/TP_MC_EV_03_01_GP_SN_01	I should probably go back to Mane St.
+TownPark/MC/POST_01/TP_MC_POST_01_01_GP_IZ_01	"Mane Street? Pass the billboard and it's right there, can't miss it!"
+TownPark/MC/QUESTION/TP_MC_QUESTION_01_CVS_HC_01	Are you ready for herding??
+TownPark/MC/REPACPTD/TP_MC_REPACPTD_01_CVS_SN_01	Let's herd some critters!
+TownPark/MC/REPDCLND/TP_MC_REPDCLND_01_CVS_SN_01	"Nah, I need a bunny break..."
+TownPark/MC/REPEAT/TP_MC_REPEAT_01_CVS_HC_01	Do you feel like herding again?
+TownPark/MC/START/TP_MC_START_01_CVS_HC_01	The moment has finally arrived!
+TownPark/MC/START/TP_MC_START_02_CVS_HC_02	Welcome to the brand new Bunny and Crab Herding Classic!
+TownPark/MC/START/TP_MC_START_03_CVS_HC_03	The more bunnies and crabs you herd into the goals the higher your score will be.
+TownPark/MC/START/TP_MC_START_04_CVS_HC_04	"Crabs will hide in the mud puddles, watch out for those!"
+TownPark/Q10/COMP/TP_Q10_COMP_01_CVS_HC_01	"Awesome, Sunny! You are pretty good at this."
+TownPark/Q10/COMP/TP_Q10_COMP_02_CVS_HC_02	And these crabs gave me an idea...
+TownPark/Q10/COMP/TP_Q10_COMP_03_CVS_SN_01	Hmmm...
+TownPark/Q10/EV_01/TP_Q10_EV_01_01_GP_HC_01	"You need to avoid the puddles of mud, crabs love hiding in them!"
+TownPark/Q10/EV_02/TP_Q10_EV_02_01_GP_SN_01	"That wasn't so bad, right little crabby?"
+TownPark/Q10/EV_03/TP_Q10_EV_03_01_GP_SN_01	One more!
+TownPark/Q10/EV_04/TP_Q10_EV_04_01_GP_SN_01	That makes three.
+TownPark/Q10/MID_01/TP_Q10_MID_01_01_GP_HC_01	"Unlike how bunnies hop away from you, crabs will follow you around instead."
+TownPark/Q10/START/TP_Q10_START_01_CVS_HC_01	Something odd is happening with the animals.
+TownPark/Q10/START/TP_Q10_START_02_CVS_HC_02	3 crabs have crawled out of the Beach all the way here.
+TownPark/Q10/START/TP_Q10_START_03_CVS_HC_03	Could you herd them here so I can keep an eye on them?
+TownPark/Q10/TOOFAR/TP_Q10_TOOFAR_01_GP_HC_01	"Come on Sunny, I need those crabs!"
+TownPark/Q12/ACCEPTED/TP_Q12_ACCEPTED_01_CVS_SN_01	"Sure, why not!"
+TownPark/Q12/COMP/TP_Q12_COMP_01_CVS_Zoom_01	Not bad cadet! You're almost flying already.
+TownPark/Q12/DECLINED/TP_Q12_DECLINED_01_CVS_SN_01	Maybe later.
+TownPark/Q12/POST_01/TP_Q12_POST_01_01_CVS_Zoom_01	You are showing signs of improvement Cadet!
+TownPark/Q12/QUESTION/TP_Q12_QUESTION_01_CVS_Zoom_01	Care to try the obstacle course in them?
+TownPark/Q12/RETACPTD/TP_Q12_RETACPTD_01_CVS_SN_01	Gotta practice my moves!
+TownPark/Q12/RETDCLND/TP_Q12_RETDCLND_01_CVS_SN_01	"I'll pass thanks, maybe later"
+TownPark/Q12/RETRY/TP_Q12_RETRY_01_CVS_Zoom_01	Well... At least you tried! Want to try again?
+TownPark/Q12/START/TP_Q12_START_01_CVS_Zoom_01	Cadet Starscout! Welcome back!
+TownPark/Q12/START/TP_Q12_START_02_CVS_Zoom_02	I see that you're using the high speed equipment?
+TownPark/Q12/START/TP_Q12_START_03_CVS_SN_01	Oh you mean my...
+TownPark/Q12/START/TP_Q12_START_04_CVS_Zoom_03	Rollerblades!
+TownPark/Q8/COMP/TP_Q8_COMP_01_CVS_IZ_01	Wowzies! A true work of uni-cycling art!
+TownPark/Q8/COMP/TP_Q8_COMP_02_CVS_HC_01	Much better!
+TownPark/Q8/COMP/TP_Q8_COMP_03_CVS_HC_02	"You did make me look pretty good, huh?"
+TownPark/Q8/COMP/TP_Q8_COMP_04_CVS_SN_01	It wasn't easy...
+TownPark/Q8/COMP/TP_Q8_COMP_05_CVS_HC_03	Hey! Well... Thank you all the same.
+TownPark/Q8/EV_01/TP_Q8_EV_01_01_GP_SN_01	Whoever did this is a Pegasus... Strange.
+TownPark/Q8/EV_02/TP_Q8_EV_02_01_GP_SN_01	The suspect has bright white fur.
+TownPark/Q8/EV_03/TP_Q8_EV_03_01_GP_SN_01	A short pink and blue mane?
+TownPark/Q8/EV_04/TP_Q8_EV_04_01_CVS_ZP_01	We have all the clues! Perfect!
+TownPark/Q8/EV_04/TP_Q8_EV_04_02_CVS_ZP_02	But that description...
+TownPark/Q8/EV_04/TP_Q8_EV_04_03_CVS_SN_01	That's you Zipp!
+TownPark/Q8/EV_04/TP_Q8_EV_04_04_CVS_ZP_03	I wasn't even here!
+TownPark/Q8/EV_04/TP_Q8_EV_04_05_CVS_Sprout_01	Aha! Pegasi can easily fly off the crime scene!
+TownPark/Q8/EV_04/TP_Q8_EV_04_06_CVS_Sprout_02	I'm afraid I'll have to arrest you
+TownPark/Q8/EV_04/TP_Q8_EV_04_07_CVS_ZP_04	No you won't! Sorry!
+TownPark/Q8/EV_04/TP_Q8_EV_04_08_CVS_Sprout_03	Ugh! Criminal at large!
+TownPark/Q8/EV_04/TP_Q8_EV_04_09_CVS_Sprout_04	We have to prevent Maretime Bay from these attacks.
+TownPark/Q8/EV_04/TP_Q8_EV_04_10_CVS_Sprout_05	I'll warn the citizens of the imminent danger!
+TownPark/Q8/EV_04/TP_Q8_EV_04_11_CVS_SN_02	Somehthing doesn't add up... Why would my friends do any of this?
 TownPark/Q8/EV_04/TP_Q8_EV_04_12_CVS_BH_01	
-TownPark/Q8/EV_05/TP_Q8_EV_05_13_GP_SN_03	
-TownPark/Q8/EV_06/TP_Q8_EV_06_01_CVS_IZ_01	
-TownPark/Q8/EV_06/TP_Q8_EV_06_02_CVS_SN_01	
-TownPark/Q8/EV_06/TP_Q8_EV_06_03_CVS_IZ_02	
-TownPark/Q8/EV_06/TP_Q8_EV_06_04_CVS_SN_02	
-TownPark/Q8/EV_06/TP_Q8_EV_06_05_CVS_IZ_03	
-TownPark/Q8/EV_06/TP_Q8_EV_06_06_CVS_SN_04	
-TownPark/Q8/EV_07/TP_Q8_EV_07_01_CVS_PaintGuy2_01	
-TownPark/Q8/EV_07/TP_Q8_EV_07_02_CVS_PaintGuy2_02	
-TownPark/Q8/EV_07/TP_Q8_EV_07_03_CVS_SN_01	
-TownPark/Q8/EV_07/TP_Q8_EV_07_04_CVS_PaintGuy2_03	
-TownPark/Q8/EV_07/TP_Q8_EV_07_05_CVS_SN_02	
-TownPark/Q8/EV_08/TP_Q8_EV_08_01_GP_SN_01	
-TownPark/Q8/EV_09/TP_Q8_EV_09_01_GP_SN_01	
-TownPark/Q8/EV_10/TP_Q8_EV_10_01_CVS_PaintGuy2_01	
-TownPark/Q8/EV_10/TP_Q8_EV_10_02_CVS_PaintGuy2_02	
-TownPark/Q8/EV_10/TP_Q8_EV_10_03_CVS_SN_01	
-TownPark/Q8/EV_11/TP_Q8_EV_11_01_CVS_PumpkinLady_01	
-TownPark/Q8/EV_11/TP_Q8_EV_11_02_CVS_PumpkinLady_02	
-TownPark/Q8/EV_11/TP_Q8_EV_11_03_CVS_PumpkinLady_03	
-TownPark/Q8/EV_12/TP_Q8_EV_12_01_GP_SN_01	
-TownPark/Q8/EV_13/TP_Q8_EV_13_01_GP_SN_01	
-TownPark/Q8/EV_14/TP_Q8_EV_14_01_GP_SN_01	
-TownPark/Q8/EV_15/TP_Q8_EV_15_01_CVS_PaintGuy2_01	
-TownPark/Q8/EV_15/TP_Q8_EV_15_02_CVS_PaintGuy2_02	
-TownPark/Q8/EV_16/TP_Q8_EV_16_01_GP_SN_01	
-TownPark/Q8/MID_01/TP_Q8_MID_01_01_GP_ZP_01	
-TownPark/Q8/MID_02/TP_Q8_MID_02_01_GP_PaintGuy2_01	
-TownPark/Q8/MID_03/TP_Q8_MID_03_01_GP_PaintGuy2_01	
-TownPark/Q8/MID_04/TP_Q8_MID_04_01_GP_IZ_01	
-TownPark/Q8/MID_05/TP_Q8_MID_05_01_GP_HC_01	
-TownPark/Q8/MID_06/TP_Q8_MID_06_01_GP_PaintGuy2_01	
-TownPark/Q8/POST_01/TP_Q8_POST_01_01_GP_Sprout_01	
-TownPark/Q8/POST_02/TP_Q8_POST_02_01_GP_PaintGuy2_01	
-TownPark/Q8/POST_03/TP_Q8_POST_03_01_GP_PumpkinLady_01	
-TownPark/Q8/POST_04/TP_Q8_POST_04_01_GP_IZ_01	
-TownPark/Q8/PRE_01/TP_Q8_PRE_01_01_GP_PaintGuy2_01	
-TownPark/Q8/PRE_02/TP_Q8_PRE_02_01_GP_PumpkinLady_01	
-TownPark/Q8/START/TP_Q8_START_01_CS_HC_01	
-TownPark/Q8/START/TP_Q8_START_02_CS_SN_01	
-TownPark/Q8/START/TP_Q8_START_03_CS_HC_02	
-TownPark/Q8/START/TP_Q8_START_04_CS_SN_02	
-TownPark/Q8/START/TP_Q8_START_05_CS_HC_03	
-TownPark/Q8/START/TP_Q8_START_06_CS_HC_04	
-TownPark/Q8/START/TP_Q8_START_07_CS_SN_03	
-TownPark/Q8/START/TP_Q8_START_08_CS_ZP_01	
-TownPark/Q8/START/TP_Q8_START_09_CS_HC_05	
-TownPark/Q8/START/TP_Q8_START_10_CS_ZP_02	
-TownPark/Q8/START/TP_Q8_START_11_CS_ZP_03	
-TownPark/Q8/START/TP_Q8_START_12_CS_ZP_04	
-TownPark/Q8/START/TP_Q8_START_13_CS_SN_04	
-TownPark/Q8/TOOFAR/TP_Q8_TOOFAR_01_GP_SN_01	
-TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_01_CVS_SN_01	
-TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_02_CVS_Zoom_01	
-TownPark/Q9/COMP/TP_Q9_COMP_01_CVS_Zoom_01	
-TownPark/Q9/COMP/TP_Q9_COMP_02_CVS_Zoom_02	
-TownPark/Q9/COMP/TP_Q9_COMP_03_CVS_Zoom_03	
-TownPark/Q9/COMP/TP_Q9_COMP_04_CVS_SN_01	
-TownPark/Q9/COMP/TP_Q9_COMP_05_CVS_Zoom_04	
-TownPark/Q9/COMP/TP_Q9_COMP_06_CVS_SN_02	
-TownPark/Q9/DECLINED/TP_Q9_DECLINED_01_CVS_SN_01	
-TownPark/Q9/DECLINED/TP_Q9_DECLINED_02_CVS_Zoom_01	
-TownPark/Q9/QUESTION/TP_Q9_QUESTION_01_CVS_Zoom_01	
-TownPark/Q9/RETACPTD/TP_Q9_RETACPTD_01_CVS_SN_01	
-TownPark/Q9/RETDCLND/TP_Q9_RETDCLND_01_CVS_SN_01	
-TownPark/Q9/RETRY/TP_Q9_RETRY_01_CVS_Zoom_01	
-TownPark/Q9/START/TP_Q9_START_01_CVS_Zoom_01	
-TownPark/Q9/START/TP_Q9_START_02_CVS_SN_01	
-TownPark/Q9/START/TP_Q9_START_03_CVS_Zoom_02	
-TownPark/Q9/START/TP_Q9_START_04_CVS_Zoom_03	
-TownPark/Q9/START/TP_Q9_START_05_CVS_SN_02	
-TownPark/Q9/START/TP_Q9_START_06_CVS_Zoom_04	
-VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT1	
-VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT2	
-VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT1	
-VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT2	
-VideoTutorials/VIDEOTUTORIAL_HC_SPECIALPTUT1	
-VideoTutorials/VIDEOTUTORIAL_IZ_UNICYCLINGTUT1	
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT1	
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT10	
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT11	
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT2	
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT3	
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT4	
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT5	
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT6	
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT7	
-VideoTutorials/VIDEOTUTORIAL_PP_MAGICMTUT1	
-VideoTutorials/VIDEOTUTORIAL_SN_BUTTERTUT1	
-VideoTutorials/VIDEOTUTORIAL_SN_CLEARGAME	
-VideoTutorials/VIDEOTUTORIAL_SN_JUMPTUT1	使用此按钮跳跃
-VideoTutorials/VIDEOTUTORIAL_SN_KICKTUT1	
-VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT1	
-VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT2	
-VideoTutorials/VIDEOTUTORIAL_SN_MOVTUT1	使用此按钮向任意方向移动
-VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT3	
-VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT2	
-VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT3	
-VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT4	
-VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT5	
+TownPark/Q8/EV_05/TP_Q8_EV_05_13_GP_SN_03	I guess I should get that billboard fixed...
+TownPark/Q8/EV_06/TP_Q8_EV_06_01_CVS_IZ_01	I kinda like the horns on Hitch. It's quite a work of art!
+TownPark/Q8/EV_06/TP_Q8_EV_06_02_CVS_SN_01	Yeah... But I think we should uni-cycle it a bit.
+TownPark/Q8/EV_06/TP_Q8_EV_06_03_CVS_IZ_02	Really?
+TownPark/Q8/EV_06/TP_Q8_EV_06_04_CVS_SN_02	Yeah... What do we need?
+TownPark/Q8/EV_06/TP_Q8_EV_06_05_CVS_IZ_03	A bunch of yellow paint would be a good start!
+TownPark/Q8/EV_06/TP_Q8_EV_06_06_CVS_SN_04	Alright! I'll get some.
+TownPark/Q8/EV_07/TP_Q8_EV_07_01_CVS_PaintGuy2_01	"Yellow paint? I could trade you some, yeah."
+TownPark/Q8/EV_07/TP_Q8_EV_07_02_CVS_PaintGuy2_02	I'm making this fruit salad but I need some ingredients.
+TownPark/Q8/EV_07/TP_Q8_EV_07_03_CVS_SN_01	What do you need?
+TownPark/Q8/EV_07/TP_Q8_EV_07_04_CVS_PaintGuy2_03	Could you fetch me some apples and pears?
+TownPark/Q8/EV_07/TP_Q8_EV_07_05_CVS_SN_02	I'll go get them.
+TownPark/Q8/EV_08/TP_Q8_EV_08_01_GP_SN_01	Great!! One more to go.
+TownPark/Q8/EV_09/TP_Q8_EV_09_01_GP_SN_01	"Great, now back to the paint shop"
+TownPark/Q8/EV_10/TP_Q8_EV_10_01_CVS_PaintGuy2_01	Beautiful fruits! And now the most important one.
+TownPark/Q8/EV_10/TP_Q8_EV_10_02_CVS_PaintGuy2_02	A big pumpkin to mix it all in. A real big one!
+TownPark/Q8/EV_10/TP_Q8_EV_10_03_CVS_SN_01	Fun! Giant pumpkin it is!
+TownPark/Q8/EV_11/TP_Q8_EV_11_01_CVS_PumpkinLady_01	"Aw Sunny, I'd give you my biggest pumpkin"
+TownPark/Q8/EV_11/TP_Q8_EV_11_02_CVS_PumpkinLady_02	"But it's still growing, could you use your magic on it?"
+TownPark/Q8/EV_11/TP_Q8_EV_11_03_CVS_PumpkinLady_03	Grow it big and it's all yours
+TownPark/Q8/EV_12/TP_Q8_EV_12_01_GP_SN_01	Great! Just a little a bit more...
+TownPark/Q8/EV_13/TP_Q8_EV_13_01_GP_SN_01	Oops... That is MASSIVE! How am I supposed to roll this back?
+TownPark/Q8/EV_14/TP_Q8_EV_14_01_GP_SN_01	That's all the clues but...
+TownPark/Q8/EV_15/TP_Q8_EV_15_01_CVS_PaintGuy2_01	"Hoofness gracious!! That's some pumpkin, filly! Thanks I guess..."
+TownPark/Q8/EV_15/TP_Q8_EV_15_02_CVS_PaintGuy2_02	Here. You've earned it... Paint away!
+TownPark/Q8/EV_16/TP_Q8_EV_16_01_GP_SN_01	Great! Back to the billboard.
+TownPark/Q8/MID_01/TP_Q8_MID_01_01_GP_ZP_01	"We need more clues, keep asking around."
+TownPark/Q8/MID_02/TP_Q8_MID_02_01_GP_PaintGuy2_01	You'll find apple and pear trees nearby.
+TownPark/Q8/MID_03/TP_Q8_MID_03_01_GP_PaintGuy2_01	Great but I still need the other fruit.
+TownPark/Q8/MID_04/TP_Q8_MID_04_01_GP_IZ_01	Should we paint the black tooth back in?
+TownPark/Q8/MID_05/TP_Q8_MID_05_01_GP_HC_01	Somepony needs to get the billboard fixed! For the bunnies sake...
+TownPark/Q8/MID_06/TP_Q8_MID_06_01_GP_PaintGuy2_01	There is a pumpkin patch not far from here. Ask for the biggest one.
+TownPark/Q8/POST_01/TP_Q8_POST_01_01_GP_Sprout_01	Suspects are multiplying... Maretime Bay is not safe!
+TownPark/Q8/POST_02/TP_Q8_POST_02_01_GP_PaintGuy2_01	i wonder if I could turn this pumpkin into a moving home...
+TownPark/Q8/POST_03/TP_Q8_POST_03_01_GP_PumpkinLady_01	Earth magic is way stronger than I thought...
+TownPark/Q8/POST_04/TP_Q8_POST_04_01_GP_IZ_01	Goooood luck with the herding competition! You got this.
+TownPark/Q8/PRE_01/TP_Q8_PRE_01_01_GP_PaintGuy2_01	Hmmmm fruits are so tasty this season.
+TownPark/Q8/PRE_02/TP_Q8_PRE_02_01_GP_PumpkinLady_01	Pumpkins! Tasty and decorative!
+TownPark/Q8/START/TP_Q8_START_01_CS_HC_01	And here we are! Everything ready for the Herding Classic...
+TownPark/Q8/START/TP_Q8_START_02_CS_SN_01	Uh... Are you OK?
+TownPark/Q8/START/TP_Q8_START_03_CS_HC_02	Look! MY billboard!
+TownPark/Q8/START/TP_Q8_START_04_CS_SN_02	Doesn't look so bad...
+TownPark/Q8/START/TP_Q8_START_05_CS_HC_03	Look at my teeth!
+TownPark/Q8/START/TP_Q8_START_06_CS_HC_04	"It's sabotage! We have to do some detective work, don't we?"
+TownPark/Q8/START/TP_Q8_START_07_CS_SN_03	Who would want to ruin Maretime Bay Day so bad?
+TownPark/Q8/START/TP_Q8_START_08_CS_ZP_01	Did I hear detective work? I love detecting! Got a solid PI resume.
+TownPark/Q8/START/TP_Q8_START_09_CS_HC_05	"Shouldn't you be at the Flight ""University""?"
+TownPark/Q8/START/TP_Q8_START_10_CS_ZP_02	Meh. Everypony is more into tanning it seems.
+TownPark/Q8/START/TP_Q8_START_11_CS_ZP_03	And we must find those witnesses! Which is WAY more fun.
+TownPark/Q8/START/TP_Q8_START_12_CS_ZP_04	"Ask around, somepony must have seen it happen."
+TownPark/Q8/START/TP_Q8_START_13_CS_SN_04	"Ugh. OK, I'll investigate."
+TownPark/Q8/TOOFAR/TP_Q8_TOOFAR_01_GP_SN_01	I gotta to help Hitch fix his not-so-terrible billboard...
+TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_01_CVS_SN_01	I guess so...
+TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_02_CVS_Zoom_01	Let's see how you do...
+TownPark/Q9/COMP/TP_Q9_COMP_01_CVS_Zoom_01	Well well well... I'm impressed!
+TownPark/Q9/COMP/TP_Q9_COMP_02_CVS_Zoom_02	We might make a high flyer of you after all.
+TownPark/Q9/COMP/TP_Q9_COMP_03_CVS_Zoom_03	Here's your reward.
+TownPark/Q9/COMP/TP_Q9_COMP_04_CVS_SN_01	"Hey! Those are my rollerblades, I was looking for them!"
+TownPark/Q9/COMP/TP_Q9_COMP_05_CVS_Zoom_04	You are most welcome.
+TownPark/Q9/COMP/TP_Q9_COMP_06_CVS_SN_02	Well... Thanks?
+TownPark/Q9/DECLINED/TP_Q9_DECLINED_01_CVS_SN_01	Uh... I don't think so.
+TownPark/Q9/DECLINED/TP_Q9_DECLINED_02_CVS_Zoom_01	You won't earn your wings with that attitude.
+TownPark/Q9/QUESTION/TP_Q9_QUESTION_01_CVS_Zoom_01	Are you ready?
+TownPark/Q9/RETACPTD/TP_Q9_RETACPTD_01_CVS_SN_01	"Sure, let's give it a shot!"
+TownPark/Q9/RETDCLND/TP_Q9_RETDCLND_01_CVS_SN_01	"Uh, I don't think so."
+TownPark/Q9/RETRY/TP_Q9_RETRY_01_CVS_Zoom_01	"That's not terrible I guess, but you need to improve. Care to try again?"
+TownPark/Q9/START/TP_Q9_START_01_CVS_Zoom_01	Ah! Cadet Starscout! I heard of you.
+TownPark/Q9/START/TP_Q9_START_02_CVS_SN_01	"You already knew me Zoom, remember?"
+TownPark/Q9/START/TP_Q9_START_03_CVS_Zoom_02	Unimportant details cadet.
+TownPark/Q9/START/TP_Q9_START_04_CVS_Zoom_03	You're here for a review of your motor skills.
+TownPark/Q9/START/TP_Q9_START_05_CVS_SN_02	My what?
+TownPark/Q9/START/TP_Q9_START_06_CVS_Zoom_04	Your prowess in the advanced obstacle course.
+VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT1	使用左摇杆移动
+VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT2	将兔子赶至大门处得分
+VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT1	使用左摇杆移动
+VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT2	将兔子和螃蟹赶至对应的大门得分
+VideoTutorials/VIDEOTUTORIAL_HC_SPECIALPTUT1	This is a Special Piñata!\nFind them all to unlock new characters and play with your friends.
+VideoTutorials/VIDEOTUTORIAL_IZ_UNICYCLINGTUT1	当你碰到这样的桌子时 按这个按钮进行独角回收！
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT1	Fillies and gentlecolts!!
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT10	Use this command or press this button and dance to the beat.
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT11	"The better your timing, the better your score!"
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT2	Welcome to the Pipp Pipp Parade! Maretime Bay Day edition!
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT3	First we have to dress up!
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT4	Pick the most fabulous outfit from the menu.
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT5	Press this button to put it on.
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT6	Press these buttons or move to the sides to see other accessories.
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT7	Press this button when you're ready to glow up!
+VideoTutorials/VIDEOTUTORIAL_PP_MAGICMTUT1	Look for magic mirrors!\nUse them with this button to dress up for any occassion!
+VideoTutorials/VIDEOTUTORIAL_SN_BUTTERTUT1	跟随蝴蝶找到你下一步目标
+VideoTutorials/VIDEOTUTORIAL_SN_CLEARGAME	你可以继续随意探寻小马湾！\n继续玩各种小游戏 找到剩余的魔法币
+VideoTutorials/VIDEOTUTORIAL_SN_JUMPTUT1	按此按钮跳跃
+VideoTutorials/VIDEOTUTORIAL_SN_KICKTUT1	Press this button to shake the tree.\nDon't forget to pick the goodies!
+VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT1	可以用我的陆马魔法让植物快速长大 按此按钮使用
+VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT2	利用它们跳至更高的地方
+VideoTutorials/VIDEOTUTORIAL_SN_MOVTUT1	Push this command in any direction to move around.
+VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT3	按此按钮跳过陷阱 如果你能做到
+VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT2	按此按钮穿上轮滑鞋
+VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT3	如果想慢下来 按此按钮将它们脱下
+VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT4	按方向键左右移动躲开障碍物
+VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT5	通过圆环可以加速
 VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_BUTTERTUT	蝴蝶向导
 VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_CLEARGAME	游戏已通关
 VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_JUMPTUT	跳跃
@@ -919,7 +919,7 @@ Menu/FINANCES	财政
 Menu/GAMEPLAY_PROGRAMMER	游戏性程序员
 Menu/GAME_DESIGNER	游戏设计师
 Menu/GO	开始
-Menu/HASBRO_DISCLAIMER	MLP：小马宝莉（MY LITTLE PONY）和孩之宝（HASBRO）以及所有相关的商标和标识均为孩之宝公司（Hasbro, Inc.）的注册商标。© 2022 Hasbro.
+Menu/HASBRO_DISCLAIMER	"MLP：小马宝莉（MY LITTLE PONY）和孩之宝（HASBRO）以及所有相关的商标和标识均为孩之宝公司（Hasbro, Inc.）的注册商标。© 2022 Hasbro."
 Menu/INTERACT	互动
 Menu/JUMP	跳跃
 Menu/LANGUAGE	语言
