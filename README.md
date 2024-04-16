@@ -8,25 +8,39 @@ A new MLP game from the same publisher (not the same developer, but they *are fr
 That motivated me to remaster this project to use it to mod both games.
 I'm aiming to use this same modding DLL for both games, if possible. (gotta remind myself to investigate the possibility of it later)
 
-- **The goals of this remaster**
+- **The goals of this remaster (before moving on to the next stage of development)**
 
 - [x] Refactor the codebase to meet my newest standards
-- [ ] Refactor and merge the `Loyalty` branch (which is a Kinect V2 motion control mod)
-- [ ] Make a patch tool using PowerShell script or something (I just don't want to make a separate program for this)
 - [x] Fix bugs in the AMBA base game (did you hear that Melbot? I'm fixing bugs for you so you don't have to :wink:)
-- [ ] Additional improvements & features for both games
+- [x] Additional small improvements & small features
+- [ ] Refactor and merge the `Loyalty` branch (which is a Kinect V2 motion control mod)
 
 ## Bug fixes / Improvements / Additional features
 
 Here I will list the bugs/improvements that I have fixed/made and will (try to) fix/make in the future:
 
 - [x] **(for AMBA)** In the controls menu, two text fields were not localized, and one text field has a missing character... [Fixed](https://github.com/wd357dui/Elements-of-Harmony/blob/2a5923cbc1d3fa3228c5fb73f5897327704d5832/ElementsOfHarmony/Localization.cs#L523-L563) on March 17
-- [x] **(for AZHM)** Did they [turn off ACES tone mapping for AZHM](https://twitter.com/_DJTHED/status/1767448844374294534)? No problem, let me just invent a way to turn it back on... There, ~~[fixed](https://github.com/wd357dui/Elements-of-Harmony/blob/36c7faa5e737312457d7e2b4177548a45698f455/ElementsOfHarmony/DirectXHook.cs#L320-L347) on March 18, [improved](https://github.com/wd357dui/Elements-of-Harmony/blob/4c6d5775d1d405f62ec779298657258b1b499ccb/ElementsOfHarmony/DirectXHook.cs#L322-L387) later that day *(improvement: in case they don't have ANY tone mapping profile, I offer an option to fabricate a new one)*~~ [Newest fix](https://github.com/wd357dui/Elements-of-Harmony/blob/1229ea2797f30bb2ab82959192c87078cb805fe8/ElementsOfHarmony/DirectXHook.cs#L351-L515), prefer to create new volume profile and take over tone mapping and other post process settings completely.
-- [x] **(for AMBA)** I saw a line that says "Logo language" in the log, and that's when I knew that I could implement a **logo localization** feature, too. [Implemented](https://github.com/wd357dui/Elements-of-Harmony/blob/4102f64e94fe77489219f200350835ac8305359a/ElementsOfHarmony/Localization.cs#L557-L611) on March 19, recovered the [Russian game logo](https://github.com/wd357dui/Elements-of-Harmony/blob/master/Assets/Localization/AMBA/ru/RUS_MLP_logo.png), made a [Chinese game logo](https://github.com/wd357dui/Elements-of-Harmony/blob/master/Assets/Localization/AMBA/zh-CN/CHI_MLP_logo.png). ***Usage note**: add term `Menu/MLP_logo_file` in the translation txt file, set translated text value as the file name for the logo image file including extension name, and put the image file in the "Elements of Harmony/Translations" folder to apply the logo localization*
+- [x] **(for AZHM, can be used for both)** Did they [turn off ACES tone mapping for AZHM](https://twitter.com/_DJTHED/status/1767448844374294534)? No problem, let me just invent a way to turn it back on... There, [fixed](https://github.com/wd357dui/Elements-of-Harmony/blob/1229ea2797f30bb2ab82959192c87078cb805fe8/ElementsOfHarmony/DirectXHook.cs#L351-L515)
+- [x] **(for AMBA)** I saw a line that says "Logo language" in the log, and that's when I knew that I could implement a **logo localization** feature, too. [Implemented](https://github.com/wd357dui/Elements-of-Harmony/blob/4102f64e94fe77489219f200350835ac8305359a/ElementsOfHarmony/Localization.cs#L557-L611) on March 19, recovered the [Russian game logo](https://github.com/wd357dui/Elements-of-Harmony/blob/master/Assets/Localization/AMBA/ru/RUS_MLP_logo.png), made a [Chinese game logo](https://github.com/wd357dui/Elements-of-Harmony/blob/master/Assets/Localization/AMBA/zh-CN/CHI_MLP_logo.png).
 - [x] **(for AMBA)** After some investigation in the logs and some scouting on the Internet, I found the reason why all the text on the main menu appears blurry, it's because the main menu [is using FXAA](https://forum.unity.com/threads/tmpro-same-text-looks-fine-on-ui-but-blurry-in-3d.1077041/#post-6950597)! [Fixed](https://github.com/wd357dui/Elements-of-Harmony/blob/25f33e4213a21f1dab3988d33bbbbf199339e286/ElementsOfHarmony/Localization.cs#L652-L665) on March 19 (when encounters FXAA settings, change it to SMAA)
-- [x] **(for AZHM)** I watched the [trailer](https://www.youtube.com/watch?v=cpE6W54yvg8) again, and I think that the tone mapping drama thing is not over yet, the mane 6 models (and some other stuff) appears darker than I think should be, seems like they are trying to make things work without tone mapping, but they're approaching it in the wrong direction (similar to [this](https://twitter.com/_DJTHED/status/1585557117989433344)). ~~I think I'll need to find ways to add another post-process layer to bring the "brightness" back up before the tone-mapping layer.~~ Found a way to override color adjustment (along with other post-process) settings, [implemented](https://github.com/wd357dui/Elements-of-Harmony/blob/1229ea2797f30bb2ab82959192c87078cb805fe8/ElementsOfHarmony/DirectXHook.cs#L351-L515) on March 21.
-- [ ] All this talk of tone mapping made me sort of want to find ways to enable HDR output for the game. Codes of interest I found are: `Camera.allowHDR`; [implemented](https://github.com/wd357dui/Elements-of-Harmony/blob/2f8c7b6a488d60cb6b9a1ee5718e91e750bad1ca/ElementsOfHarmony/DirectXHook.cs#L178-L184) on March 21 but didn't test it out yet, I don't have an HDR display right now, I'm attending college in another province and my HDR TV is back at home...
-- [ ] With all these gradually increasing amounts of settings, I feel like I need to bring the property editor module from my DirectX game engine project (not on GitHub) into this mod, to support real-time adjustments of settings. However, I need to consider whether to use a separate window (already implemented) or re-render controls with Direct2D in-game (not implemented yet), the latter will take time, and may not make it before the game comes out. *(If anyone asks why I don't just use [ImGUI](https://github.com/ocornut/imgui) or something, it's because I don't like using any third-party libraries unless: **(a)** Its intended purpose is spot on & crucial to what I need; **(b)** it's perfect and doesn't have any downsides in my point of view; **(c)** I don't need to bend any rules & standards I have for a project to use that library **(d)** It's beyond my capabilities & time funding to replicate its features by myself, which makes it irreplaceable)*
+
+- [x] All this talk of tone mapping made me sort of want to find ways to enable HDR output for the game. Codes of interest I found are: `Camera.allowHDR`; [implemented](https://github.com/wd357dui/Elements-of-Harmony/blob/2f8c7b6a488d60cb6b9a1ee5718e91e750bad1ca/ElementsOfHarmony/DirectXHook.cs#L178-L184) on March 21 but didn't test it out yet, I don't have an HDR display right now, I'm attending college in another province and my HDR TV is back at home...
+- [ ] With all these gradually increasing amounts of settings, I feel like I need to bring the property editor module from my DirectX game engine project (not on GitHub) into this mod, to support real-time adjustments of settings. However, I need to consider whether to use a separate window (already implemented) or re-render controls with Direct2D in-game (not implemented yet), the latter will take time, and may not make it before the game comes out. *(If anyone asks why I don't just use [ImGUI](https://github.com/ocornut/imgui) or something, it's because I don't like using any third-party libraries)*
+
+> [!NOTE]
+> It's been some time since I haven't updated this (in favor of development efficiency), so I couldn't keep track and post the code links anymore, so I'm just going to post only the descriptions for these below. ( - April, 16)
+
+- [x] **(for both)** `DirectXHook` - fixes compatibility with the Steam overlay hook by temporarily un-patching Steam's hook when [Present](https://learn.microsoft.com/en-us/windows/win32/api/dxgi/nf-dxgi-idxgiswapchain-present) is being called more than one time for a single frame (being called more than one time but has returned 0 times)
+- [x] **(for both)** Implement display settings in `Settings.txt`, resolution, fullscreen, refresh rate, anti-aliasing, v-sync, target framerate
+- [x] **(for AMBA)** Background music was too quiet, I adjusted it so that setting 100% is now +20db instead of -0db
+- [x] **(for AMBA)** Move all minigame tutorials to appear before the "3, 2, 1, go" countdown
+- [x] **(for AMBA)** Recover audio instructions from many of the minigame tutorials (yes they all used to have audio, but some are disabled in release)
+- [x] **(for AMBA)** Fix **Zipp's Flight Academy** minigame's background music volume (was too quiet and didn't comply with the menu's audio settings)
+- [x] **(for AMBA)** Recover the hit evaluation text ("good", "cool", "perfect") in the **Pipp Pipp Dance Parade** minigame (yes, this existed in the game but was disabled in release)
+- [x] **(for AMBA)** In the **Sprout's Roller Blading Chase** minigame, shorten the distance between Sprout and the player as the game progresses while in singleplayer mode
+- [x] **(for AMBA)** In the **Sprout's Roller Blading Chase** minigame, play some of the unused audio clips in story mode ("story mode" means entering the minigame through the story instead of from the main menu)
+- [x] **(for AMBA)** Remove the green filter in the swamp area (in Town Park where the herding crabs minigame is) and in the herding crabs minigame
+- [ ] **(for AMBA, can be used for both)** Implement custom font?... I spent 4 days trying out different ideas, but after finally understanding the situation, I've concluded that this is not possible until I implement the `Generosity` module mentioned in the [Additional Overall Optional goals](#additional-overall-optional-goals) section
 
 ## Additional Overall Optional goals
 
@@ -36,10 +50,11 @@ Here I will list the bugs/improvements that I have fixed/made and will (try to) 
 - [x] Loyalty - Kinect motion control - *already implemented in 2022, will refactor in the future*
 - [ ] Generosity - Enable the game to load custom models - *didn't figure out how to make Unity load assets at run time yet, maybe it's not possible, at least not legally, I may need to turn the entire Unity engine inside out*
 - [ ] Laughter - Add online multiplayer functionality, you should be able to see other players as any pony they choose, there will be text chat and voice chat, and you should be able to compete with other players in a minigame - *this is the one I'm most interested in, the only dilemma is how to host a game; P2P or dedicated server? Is there any funding for a server?*
-- [ ] Kindness - Dedicated online server program - *maybe this should be a separate GitHub project on its own, and maybe this functionality didn't completely match the title, so maybe in the future I'll reuse this title for something else*
-- [ ] Honesty - Online multiplayer anti-cheat? - *well this one is just for the meme, I didn't come up with anything actually useful that matches the title (I mean who would cheat in this game?)... so maybe in the future I'll reuse this title for something else*
 - [ ] Battle of the Bands - Add the ability to add custom songs to the music minigame - *I think it's possible, and fun (probably)*
 - [ ] Friendship Games - Add new minigames - *might not be possible before I turn the entire unity engine inside out*
+- [ ] Loyalty (Extended) - implement VR support
+
+------
 
 > [!NOTE]
 > Everything beyond this line is legacy documentation from 2022
