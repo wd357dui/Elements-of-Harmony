@@ -28,7 +28,7 @@ Here I will list the bugs/improvements that I have fixed/made and will (try to) 
 - [ ] With all these gradually increasing amounts of settings, I feel like I need to bring the property editor module from my DirectX game engine project (not on GitHub) into this mod, to support real-time adjustments of settings. However, I need to consider whether to use a separate window (already implemented) or re-render controls with Direct2D in-game (not implemented yet), the latter will take time, and may not make it before the game comes out. *(If anyone asks why I don't just use [ImGUI](https://github.com/ocornut/imgui) or something, it's because I don't like using any third-party libraries)*
 
 > [!NOTE]
-> It's been some time since I haven't updated this (in favor of development efficiency), so I couldn't keep track and post the code links anymore, so I'm just going to post only the descriptions for these below. ( - April, 16)
+> It's been some time since I updated this (in favor of development efficiency), so I couldn't keep track and post the code links anymore, so for these below, I'm just going to post only the descriptions. ( - April, 16)
 
 - [x] **(for both)** `DirectXHook` - fixes compatibility with the Steam overlay hook by temporarily un-patching Steam's hook when [Present](https://learn.microsoft.com/en-us/windows/win32/api/dxgi/nf-dxgi-idxgiswapchain-present) is being called more than one time for a single frame (being called more than one time but has returned 0 times)
 - [x] **(for both)** Implement display settings in `Settings.txt`, resolution, fullscreen, refresh rate, anti-aliasing, v-sync, target framerate
