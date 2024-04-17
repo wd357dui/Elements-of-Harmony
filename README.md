@@ -51,7 +51,7 @@ Here I will list the bugs/improvements that I have fixed/made and will (try to) 
 - [ ] Generosity - Enable the game to load custom models - *[AssetBundle.LoadAsset](https://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html) seems like a promising lead*
 - [ ] Laughter - Add online multiplayer functionality, you should be able to see other players as any pony they choose, there will be text chat and voice chat, and you should be able to compete with other players in a minigame - *this is the one I'm most interested in, the only dilemma is how to host a game; P2P or dedicated server? Is there any funding for a server?*
 - [ ] Battle of the Bands - Add the ability to add custom songs to the music minigame - *I think it's possible, and fun (probably)*
-- [ ] Friendship Games - Add new minigames - *my current idea is to build new projects in Unity and then abuse [AssetBundle.LoadAsset](https://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html) to implement this*
+- [ ] Friendship Games - Add new minigames - *my current idea is to create new projects in Unity, make the gameplay there, build it, and then abuse [AssetBundle.LoadAsset](https://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html) and [Assembly.Load](https://learn.microsoft.com/dotnet/api/system.reflection.assembly.load) to implement this*
 - [ ] Loyalty (Extended) - implement VR support
 
 ------
