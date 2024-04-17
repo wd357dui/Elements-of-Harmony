@@ -28,7 +28,7 @@ Here I will list the bugs/improvements that I have fixed/made and will (try to) 
 - [ ] With all these gradually increasing amounts of settings, I feel like I need to bring the property editor module from my DirectX game engine project (not on GitHub) into this mod, to support real-time adjustments of settings. However, I need to consider whether to use a separate window (already implemented) or re-render controls with Direct2D in-game (not implemented yet), the latter will take time, and may not make it before the game comes out. *(If anyone asks why I don't just use [ImGUI](https://github.com/ocornut/imgui) or something, it's because I don't like using any third-party libraries)*
 
 > [!NOTE]
-> It's been some time since I updated this (in favor of development efficiency), so I couldn't keep track and post the code links anymore, so for these below, I'm just going to post only the descriptions. ( - April, 16)
+> It's been some time since I updated this (in favor of development efficiency), so I couldn't keep track and post the code links anymore, so for these below, I'm just going to post only the descriptions. (April, 16)
 
 - [x] **(for both)** `DirectXHook` - fixes compatibility with the Steam overlay hook by temporarily un-patching Steam's hook when [Present](https://learn.microsoft.com/en-us/windows/win32/api/dxgi/nf-dxgi-idxgiswapchain-present) is being called more than one time for a single frame (being called more than one time but has returned 0 times)
 - [x] **(for both)** Implement display settings in `Settings.txt`, resolution, fullscreen, refresh rate, anti-aliasing, v-sync, target framerate
@@ -48,10 +48,10 @@ Here I will list the bugs/improvements that I have fixed/made and will (try to) 
 
 - [x] Magic - Hook the DirectX API to acquire the game's swap chain, so that we can render our graphics on top of the original game using Direct2D - *already implemented in 2022, will improve in the future*
 - [x] Loyalty - Kinect motion control - *already implemented in 2022, will refactor in the future*
-- [ ] Generosity - Enable the game to load custom models - *didn't figure out how to make Unity load assets at run time yet, maybe it's not possible, at least not legally, I may need to turn the entire Unity engine inside out*
+- [ ] Generosity - Enable the game to load custom models - *[AssetBundle.LoadAsset](https://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html) seems like a promising lead*
 - [ ] Laughter - Add online multiplayer functionality, you should be able to see other players as any pony they choose, there will be text chat and voice chat, and you should be able to compete with other players in a minigame - *this is the one I'm most interested in, the only dilemma is how to host a game; P2P or dedicated server? Is there any funding for a server?*
 - [ ] Battle of the Bands - Add the ability to add custom songs to the music minigame - *I think it's possible, and fun (probably)*
-- [ ] Friendship Games - Add new minigames - *might not be possible before I turn the entire unity engine inside out*
+- [ ] Friendship Games - Add new minigames - *my current idea is to build new projects in Unity and then abuse [AssetBundle.LoadAsset](https://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html) to implement this*
 - [ ] Loyalty (Extended) - implement VR support
 
 ------
