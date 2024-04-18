@@ -185,7 +185,7 @@ Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_07_CVS_Shimmerwing_02
 Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_08_CVS_SN_06	抱歉！我听不懂蝴蝶语……
 Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_09_CVS_Shimmerwing_03	
 Brighthouse/BFLY/EV_03/BH_BFLY_EV_03_10_CGP_SN_07	她想要我跟着她 得走了！
-Brighthouse/INTRO/EV_01/BH_INTRO_EV_01_01_CS_SN_01	啊 水晶闪闪屋 还是难以相信我们能住在这么魔幻的地方
+Brighthouse/INTRO/EV_01/BH_INTRO_EV_01_01_CS_SN_01	啊 水晶闪闪屋 还是难以相信我们能住在这么梦幻的地方
 Brighthouse/MH/ACCEPTED/BH_MH_ACCEPTED_01_CGP_HC_01	好的！兔子时间！
 Brighthouse/MH/COMP/BH_MH_COMP_01_CS_HC_01	哇！不错 希悦 非常不错
 Brighthouse/MH/COMP/BH_MH_COMP_02_CS_HC_02	看来今年的比赛有看头了
