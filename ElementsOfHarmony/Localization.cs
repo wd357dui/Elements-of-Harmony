@@ -149,7 +149,7 @@ namespace ElementsOfHarmony
 										if (pair.Length >= 2)
 										{
 											string term = pair[0].Trim('\"');
-											string text = pair[1].Replace("\\n", "\n").Trim('\"');
+											string text = pair[1].Replace(@"\n", "\n").Trim('\"').Replace("\"\"", "\"");
 											Translations.Add(term, text);
 											Log.Message($"Translation added: term={term} value={text}");
 										}
