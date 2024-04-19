@@ -574,9 +574,9 @@ Mainstreet/Q6/COMP/MS_Q6_COMP_05_CVS_SN_03	记住了 他超爱兔子的
 Mainstreet/Q6/COMP/MS_Q6_COMP_06_CVS_Primrose_03	兔子 是的！你能把这些舞服带给琪琪吗？
 Mainstreet/Q6/COMP/MS_Q6_COMP_07_CVS_Primrose_04	在她那里能有更好的用处
 Mainstreet/Q6/COMP/MS_Q6_COMP_08_CVS_SN_04	当然可以 她了解自己的时尚
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_01_CVS_SN_01	嘿！是你吗Primrose？
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_02_CVS_Primrose_01	哦 不是！Primrose不见了……消失了
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_03_CVS_SN_02	是你 Primrose！
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_01_CVS_SN_01	嘿！是你吗 珀曼蔷薇？
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_02_CVS_Primrose_01	哦 不是！珀曼蔷薇不见了……消失了
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_03_CVS_SN_02	是你 蔷薇！
 Mainstreet/Q6/EV_01/MS_Q6_EV_01_04_CVS_Primrose_02	是的！是我！但是我不能去参加演出
 Mainstreet/Q6/EV_01/MS_Q6_EV_01_05_CVS_SN_03	为什么？怎么了？
 Mainstreet/Q6/EV_01/MS_Q6_EV_01_06_CVS_Primrose_03	只是……我没有好看的衣服可以穿
@@ -586,7 +586,7 @@ Mainstreet/Q6/EV_01/MS_Q6_EV_01_09_CVS_SN_05	三件？包在我身上！
 Mainstreet/Q6/EV_02/MS_Q6_EV_02_01_GP_ShopKeeper1_01	这是给琪琪的演出专门设计的
 Mainstreet/Q6/EV_03/MS_Q6_EV_03_01_GP_ShopKeeper2_01	舞蹈演出服这就送上来
 Mainstreet/Q6/EV_04/MS_Q6_EV_04_01_GP_ShopKeeper3_01	这个肯定会迎来很多称赞
-Mainstreet/Q6/EV_05/MS_Q6_EV_05_01_GP_SN_01	都拿到了 拿回去给 Primrose
+Mainstreet/Q6/EV_05/MS_Q6_EV_05_01_GP_SN_01	都拿到了 拿回去给蔷薇
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_01_CVS_Primrose_01	哦 你都找到了？
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_02_CVS_SN_01	是的！现在你可以去参加演出了！
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_03_CVS_Primrose_02	但是……我不能！不能不能！
@@ -620,8 +620,8 @@ Mainstreet/Q6/EV_07/MS_Q6_EV_07_06_CVS_SmoothieShop_03	但如果你能给我些�
 Mainstreet/Q6/EV_08/MS_Q6_EV_08_01_GP_SmoothieShop_01	南瓜口味的冰沙 马上来！
 Mainstreet/Q6/EV_09/MS_Q6_EV_09_01_GP_SN_01	南瓜都集齐了 现在去冰沙摊位那边
 Mainstreet/Q6/EV_10/MS_Q6_EV_10_01_GP_SN_01	我该去琪琪那里把事情告诉她……
-Mainstreet/Q6/MID_01/MS_Q6_MID_01_01_CVS_PP_01	你还没找到 Primrose 吗？
-Mainstreet/Q6/MID_01/MS_Q6_MID_01_02_CVS_PP_02	唉 Primrose真是的 她可能在哪里躲着
+Mainstreet/Q6/MID_01/MS_Q6_MID_01_01_CVS_PP_01	你还没找到蔷薇吗？
+Mainstreet/Q6/MID_01/MS_Q6_MID_01_02_CVS_PP_02	唉 蔷薇可真是的 她可能在哪里躲着
 Mainstreet/Q6/MID_02/MS_Q6_MID_02_01_GP_Primrose_05	问问服装店 我订购了三件不同的穿戴
 Mainstreet/Q6/MID_03/MS_Q6_MID_03_01_GP_Primrose_01	我在附近看到有冰沙车停着
 Mainstreet/Q6/MID_04/MS_Q6_MID_04_01_CVS_SmoothieShop_01	冰沙！水果味的冰沙！
@@ -637,7 +637,7 @@ Mainstreet/Q6/START/MS_Q6_START_01_CVS_PP_01	你找到是谁弄坏了我的牌�
 Mainstreet/Q6/START/MS_Q6_START_02_CVS_SN_01	实际上……没有
 Mainstreet/Q6/START/MS_Q6_START_03_CVS_PP_02	嗯算了 反正现在看起来好多了 就这样就行
 Mainstreet/Q6/START/MS_Q6_START_04_CVS_PP_03	希悦！观众都来了，可还缺了什么……
-Mainstreet/Q6/START/MS_Q6_START_05_CVS_PP_04	Primrose！我的搭档舞者！
+Mainstreet/Q6/START/MS_Q6_START_05_CVS_PP_04	珀曼蔷薇！我的搭档舞者！
 Mainstreet/Q6/START/MS_Q6_START_06_CVS_PP_05	没有舞者怎么举办舞会！可以帮我找找她吗？
 Mainstreet/Q6/START/MS_Q6_START_07_CVS_SN_02	当然！我该去哪里找？
 Mainstreet/Q6/START/MS_Q6_START_08_CVS_PP_06	我不确定……她喜欢藏起来……还喜欢冰沙！
@@ -880,7 +880,7 @@ Characters/Narrator_Name	旁白
 Characters/PaintShopBeach_Name	牌子画师
 Characters/PaintShopMane_Name	油漆店
 Characters/Pipp_Name	琪琪
-Characters/Primrose_Name	
+Characters/Primrose_Name	珀曼蔷薇
 Characters/PumpkinLady_Name	南瓜女士
 Characters/RedFloatieGuy_Name	救生圈小马
 Characters/Shimmerwing_Name	烁蝶
