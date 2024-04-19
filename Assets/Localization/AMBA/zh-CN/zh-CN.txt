@@ -43,7 +43,7 @@ BeachCove/MFL/COMP/BC_MFL_COMP_19_CS_HC_03	菜头？是你吗？
 BeachCove/MFL/COMP/BC_MFL_COMP_20_CS_Sprout_04	不！不是我！
 BeachCove/MFL/COMP/BC_MFL_COMP_21_CS_SN_05	我去追他！
 BeachCove/MFL/COMP/BC_MFL_COMP_22_CS_Shimmerwing_01	
-BeachCove/MFL/COMP/BC_MFL_COMP_23_GP_SN_06	他往小马街跑！
+BeachCove/MFL/COMP/BC_MFL_COMP_23_GP_SN_06	他在往小马街跑！
 BeachCove/MFL/DECLINED/BC_MFL_DECLINED_01_CVS_SN_01	我还没准备好
 BeachCove/MFL/DECLINED/BC_MFL_DECLINED_02_CVS_ZP_02	我也没有
 BeachCove/MFL/QUESTION/BC_MFL_QUESTION_01_CVS_ZP_01	准备好了吗 希悦？
@@ -190,7 +190,7 @@ Brighthouse/MH/ACCEPTED/BH_MH_ACCEPTED_01_CGP_HC_01	好的！兔子时间！
 Brighthouse/MH/COMP/BH_MH_COMP_01_CS_HC_01	哇！不错 希悦 非常不错
 Brighthouse/MH/COMP/BH_MH_COMP_02_CS_HC_02	看来今年的比赛有看头了
 Brighthouse/MH/COMP/BH_MH_COMP_03_CS_IZ_01	好极了！小马街 我们来了！
-Brighthouse/MH/COMP/BH_MH_COMP_04_CS_HC_03	是的！嗯 等我只要先把这些盒子挪开
+Brighthouse/MH/COMP/BH_MH_COMP_04_CS_HC_03	是的！嗯 只要等我先把这些盒子挪开
 Brighthouse/MH/COMP/BH_MH_COMP_05_CS_HC_04	
 Brighthouse/MH/COMP/BH_MH_COMP_06_CS_SN_01	我们要帮他吗？
 Brighthouse/MH/COMP/BH_MH_COMP_07_CS_HC_05	不用！这些是我放的 我肯定会负责把它们归回原位…噢！
@@ -209,14 +209,14 @@ Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_02_CS_IZ_01	我们来了！
 Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_03_CS_HC_01	我们来了！
 Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_04_CS_BH_01	
 Brighthouse/Q1/COMP/BH_Q1_COMP_01_CVS_IZ_01	谢谢你 希悦！你救了这座桥！
-Brighthouse/Q1/COMP/BH_Q1_COMP_02_CVS_IZ_02	现在 你只要这样的桌子 就能独角回收
+Brighthouse/Q1/COMP/BH_Q1_COMP_02_CVS_IZ_02	现在 你只要碰到这样的桌子 就能独角回收
 Brighthouse/Q1/COMP/BH_Q1_COMP_03_CVS_SN_01	谢谢指点！我还在试着习惯用这些魔法……
 Brighthouse/Q1/EV_01/BH_Q1_EV_01_01_GP_SN_01	很好！还差两个！
 Brighthouse/Q1/EV_02/BH_Q1_EV_02_01_GP_SN_01	完美！再剩一个……
 Brighthouse/Q1/EV_03/BH_Q1_EV_03_01_GP_SN_01	全都齐了！现在把它们带回去给小艺
 Brighthouse/Q1/MID_01/BH_Q1_MID_01_01_GP_IZ_01	只要有足够的闪粉 什么东西都能独角回收！
 Brighthouse/Q1/POST_01/BH_Q1_POST_01_01_CVS_IZ_01	以前没有魔法 什么事都很难
-Brighthouse/Q1/POST_01/BH_Q1_POST_01_02_CVS_IZ_02	现在 只要有足够的胶水和闪粉 一些都有可能！
+Brighthouse/Q1/POST_01/BH_Q1_POST_01_02_CVS_IZ_02	现在 只要有足够的胶水和闪粉 任何事都有可能！
 Brighthouse/Q1/POST_01/BH_Q1_POST_01_03_CVS_IZ_03	或者我应该说……独角事！
 Brighthouse/Q1/START/BH_Q1_START_01_CVS_IZ_01	还在这里？最好快点，小马湾在等着我们！
 Brighthouse/Q1/START/BH_Q1_START_02_CVS_SN_01	我知道！是这个方向对吗？
@@ -236,7 +236,7 @@ Brighthouse/Q2/EV_03/BH_Q2_EV_03_01_GP_SN_01	很好！还差两个！
 Brighthouse/Q2/EV_04/BH_Q2_EV_04_01_GP_SN_01	完美！再剩一个……
 Brighthouse/Q2/EV_05/BH_Q2_EV_05_01_GP_SN_01	三个都齐了！现在回去
 Brighthouse/Q2/MID_01/BH_Q2_MID_01_01_GP_HC_01	兔子会朝远离你的方向跳，把它们赶到我这里来
-Brighthouse/Q2/MID_02/BH_Q2_MID_02_01_GP_HC_01	那边小山上有个花园，里面应该有些萝卜
+Brighthouse/Q2/MID_02/BH_Q2_MID_02_01_GP_HC_01	记得刚才坡上的花园吗？里面应该有些萝卜
 Brighthouse/Q2/START/BH_Q2_START_01_CVS_HC_01	原来你在这！我正在找你呢
 Brighthouse/Q2/START/BH_Q2_START_02_CVS_HC_02	就剩你一个了
 Brighthouse/Q2/START/BH_Q2_START_03_CVS_SN_02	剩我一个 干什么？
@@ -249,14 +249,14 @@ Brighthouse/Q2/START/BH_Q2_START_09_CVS_Bunnies_01
 Brighthouse/Q2/START/BH_Q2_START_10_CVS_HC_07	看见了吧？
 Brighthouse/Q2/START/BH_Q2_START_11_CVS_SN_04	那好吧 我该怎么做？
 Brighthouse/Q2/START/BH_Q2_START_12_CVS_HC_08	嗯……有些兔子总是喜欢朝小马街那边跑
-Brighthouse/Q2/START/BH_Q2_START_14_CVS_HC_10	还剩下3只兔子没有找到，它们应该不远
+Brighthouse/Q2/START/BH_Q2_START_14_CVS_HC_10	还剩下三只兔子没有找到，它们应该不远
 Brighthouse/Q2/START/BH_Q2_START_15_CVS_HC_11	帮我把它们找回来 好吗？
 Brighthouse/Q2/START/BH_Q2_START_16_CVS_HC_12	它们会朝远离你的方向跳，把它们赶到我这里来
 Brighthouse/Q2/START/BH_Q2_START_17_CVS_SN_05	没问题！马上开始！
 Brighthouse/Q2/TOOFAR/BH_Q2_TOOFAR_01_GP_HC_01	兔子还没赶完呢 希悦
 Brighthouse/Q3/START/BH_Q3_START_13_CVS_HC_09	所以我用盒子把大门挡住了
 Mainstreet/End/EV_05/MS_End_EV_05_01_CS_Sprout_01	你……你……
-Mainstreet/End/EV_05/MS_End_EV_05_02_CS_SN_01	嘿 没事的 我们又不会打你
+Mainstreet/End/EV_05/MS_End_EV_05_02_CS_SN_01	嘿 没事的 我们不会伤害你的
 Mainstreet/End/EV_05/MS_End_EV_05_03_CS_Sprout_02	你……不会吗？
 Mainstreet/End/EV_05/MS_End_EV_05_04_CS_SN_02	不会的 我们只是想让一切恢复正常
 Mainstreet/End/EV_05/MS_End_EV_05_05_CS_Sprout_03	但那是我想要的！
@@ -327,7 +327,7 @@ Mainstreet/MF/COMP/MS_MF_COMP_03_CVS_SN_01	我也很惊讶！是你教的不错�
 Mainstreet/MF/COMP/MS_MF_COMP_04_CVS_PP_03	作为感谢，给你这个
 Mainstreet/MF/COMP/MS_MF_COMP_05_CVS_PP_04	小马湾节徽章！
 Mainstreet/MF/COMP/MS_MF_COMP_06_CVS_PP_05	现在你可以去小镇公园参加赶兔子比赛了
-Mainstreet/MF/COMP/MS_MF_COMP_07_CVS_SN_02	我越来越喜欢小马湾了
+Mainstreet/MF/COMP/MS_MF_COMP_07_CVS_SN_02	我越来越喜欢小马湾节了
 Mainstreet/MF/DECLINED/MS_MF_DECLINED_01_CVS_PP_01	别花的太久！观众都在等着呢！
 Mainstreet/MF/QUESTION/MS_MF_QUESTION_01_CVS_PP_01	你的表演一定会很精彩！准备好跳舞了吗？
 Mainstreet/MF/REPACPTD/MS_MF_REPACPTD_01_CVS_SN_01	当然！为什么不
@@ -337,7 +337,7 @@ Mainstreet/MF/START/MS_MF_START_01_CVS_PP_01	舞服？可我需要的是舞者�
 Mainstreet/MF/START/MS_MF_START_02_CVS_SN_01	所以你需要我另找一位舞者 对吗？
 Mainstreet/MF/START/MS_MF_START_03_CVS_PP_02	不用！最好的舞者就在我眼前
 Mainstreet/MF/START/MS_MF_START_04_CVS_SN_02	我……
-Mainstreet/MR/EV_01/MS_MR_EV_01_01_GP_SN_01	菜头！等等！我们还能解决这个问题
+Mainstreet/MR/EV_01/MS_MR_EV_01_01_GP_SN_01	菜头！别跑！我们还能解决这个问题
 Mainstreet/MR/EV_01/MS_MR_EV_01_02_GP_Sprout_01	先解决这个吧！
 Mainstreet/MR/EV_02/MS_MR_EV_02_01_CS_HC_01	希悦！兔子们会去挡着他，但是你自己也要当心！
 Mainstreet/MR/EV_02/MS_MR_EV_02_02_GP_SN_01	我会留意的！
@@ -402,7 +402,7 @@ Mainstreet/Q11/MID_01/MS_Q11_MID_01_01_GP_HC_01	确保冰沙是新鲜的 希悦
 Mainstreet/Q11/MID_02/MS_Q11_MID_02_01_GP_HC_01	附近的摊位上应该有太阳镜
 Mainstreet/Q11/MID_03/MS_Q11_MID_03_01_GP_HC_01	我在小马街上看到有气球 去找找 希悦
 Mainstreet/Q11/POST_01/MS_Q11_POST_01_01_GP_SmoothieShop_01	冰沙 特制新鲜版！保证能把你冻成冰！
-Mainstreet/Q11/POST_02/MS_Q11_POST_02_01_GP_FashionPony_01	这次我会保证这朵花好好活着……
+Mainstreet/Q11/POST_02/MS_Q11_POST_02_01_GP_FashionPony_01	这次我会试着让这朵花好好活着……
 Mainstreet/Q11/PRE_01/MS_Q11_PRE_01_01_GP_SmoothieShop_01	特制新鲜冰沙！别等它化了！
 Mainstreet/Q11/PRE_02/MS_Q11_PRE_02_01_GP_FashionPony_01	各种时髦眼镜！来试试吧！
 Mainstreet/Q11/PRE_03/MS_Q11_PRE_03_01_GP_ScaredNPC_01	那些兔子挡着去海滩小屋的路……
@@ -454,14 +454,14 @@ Mainstreet/Q4/ACCEPTED/MS_Q4_ACCEPTED_02_CVS_Thunder_02
 Mainstreet/Q4/COMP/MS_Q4_COMP_01_CVS_Thunder_01	做得好 希悦学员！
 Mainstreet/Q4/COMP/MS_Q4_COMP_02_CVS_Thunder_02	你的本领不错 这是你应得的
 Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_01_CVS_SN_01	我还没准备好……
-Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_02_CVS_Thunder_02	无聊 我们早晚都得做
+Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_02_CVS_Thunder_02	无聊 我们早晚都得练
 Mainstreet/Q4/POST_01/MS_Q4_POST_01_01_GP_Thunder_01	"W.I.N.G.S 全称是 ""The Wonderful Institute of No-Gravity Skywalking"" 很酷吧？"
 Mainstreet/Q4/QUESTION/MS_Q4_QUESTION_01_CVS_Thunder_01	准备好练习了吗？
 Mainstreet/Q4/RETACPTD/MS_Q4_RETACPTD_01_CVS_SN_01	当然
 Mainstreet/Q4/RETDCLND/MS_Q4_RETDCLND_01_CVS_SN_01	现在还不行
 Mainstreet/Q4/RETRY/MS_Q4_RETRY_01_CVS_Thunder_01	想再试一次吗 希悦学员？
 Mainstreet/Q4/START/MS_Q4_START_01_CVS_Thunder_01	呃……嘿！你想去哪？
-Mainstreet/Q4/START/MS_Q4_START_02_CVS_SN_01	去参加琪琪游行？
+Mainstreet/Q4/START/MS_Q4_START_02_CVS_SN_01	去参加琪琪游行……吧？
 Mainstreet/Q4/START/MS_Q4_START_03_CVS_Thunder_02	回答错误 希悦是吧？
 Mainstreet/Q4/START/MS_Q4_START_04_CVS_Thunder_03	你已经自动加入了 W.I.N.G.S. 学院
 Mainstreet/Q4/START/MS_Q4_START_05_CVS_Thunder_04	你已被列为“带翅膀的小马新手”必须立刻开始你的训练
@@ -476,13 +476,13 @@ Mainstreet/Q5/COMP/MS_Q5_COMP_03_CS_PP_02	我会去美乐蒂等着！观众会�
 Mainstreet/Q5/COMP/MS_Q5_COMP_04_CS_PP_03	来吧各位小马！演出要开始了！
 Mainstreet/Q5/EV_01/MS_Q5_EV_01_01_GP_SN_01	嫌犯是独角兽……嗯……
 Mainstreet/Q5/EV_02/MS_Q5_EV_02_01_GP_SN_01	目标小马是紫色的
-Mainstreet/Q5/EV_03/MS_Q5_EV_03_01_GP_SN_01	破坏者留着长发
+Mainstreet/Q5/EV_03/MS_Q5_EV_03_01_GP_SN_01	破坏者留着蓝色的长发
 Mainstreet/Q5/EV_04/MS_Q5_EV_04_01_CVS_Sprout_01	调查的不错！
-Mainstreet/Q5/EV_04/MS_Q5_EV_04_02_CVS_Sprout_02	紫色 长发的独角兽 是吗？
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_02_CVS_Sprout_02	紫色身子 蓝色长发的独角兽 是吗？
 Mainstreet/Q5/EV_04/MS_Q5_EV_04_03_CVS_Sprout_03	这很明显是谁，希悦
 Mainstreet/Q5/EV_04/MS_Q5_EV_04_04_CVS_SN_01	不！小艺才不会做那种事呢
 Mainstreet/Q5/EV_04/MS_Q5_EV_04_05_CVS_Sprout_04	作为副警长 我得要逮捕她
-Mainstreet/Q5/EV_04/MS_Q5_EV_04_06_CVS_SN_02	不 等等 我去跟她说说
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_06_CVS_SN_02	不 等等 我去跟她说一说
 Mainstreet/Q5/EV_04/MS_Q5_EV_04_07_CVS_Sprout_05	你最好在我之前找到她
 Mainstreet/Q5/EV_05/MS_Q5_EV_05_01_GP_SN_01	这一点你说得对 我得去找到她
 Mainstreet/Q5/EV_06/MS_Q5_EV_06_01_CVS_IZ_01	嘿 希悦！小马湾可真棒
@@ -492,7 +492,7 @@ Mainstreet/Q5/EV_06/MS_Q5_EV_06_04_CVS_IZ_03	我有个主意！我们可以给�
 Mainstreet/Q5/EV_06/MS_Q5_EV_06_05_CVS_SN_02	是的！那样就能证明不是你做的
 Mainstreet/Q5/EV_06/MS_Q5_EV_06_06_CVS_IZ_04	什么不是我做的？
 Mainstreet/Q5/EV_06/MS_Q5_EV_06_07_CVS_SN_03	没什么！需要什么材料？
-Mainstreet/Q5/EV_06/MS_Q5_EV_06_08_CVS_IZ_05	我们需要颜料！很多颜料！你能找找吗？
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_08_CVS_IZ_05	我们需要颜料！很多粉色颜料！你能找找吗？
 Mainstreet/Q5/EV_06/MS_Q5_EV_06_09_CVS_SN_04	颜料 知道了！
 Mainstreet/Q5/EV_07/MS_Q5_EV_07_01_CVS_PaintShop_01	你好！你在找颜料吗？
 Mainstreet/Q5/EV_07/MS_Q5_EV_07_02_CVS_SN_01	是的！我需要很多粉色颜料
@@ -508,16 +508,16 @@ Mainstreet/Q5/EV_07/MS_Q5_EV_07_11_CVS_PaintShop_08	你能帮我找一个吗？
 Mainstreet/Q5/EV_07/MS_Q5_EV_07_12_CVS_SN_04	天马守卫头盔 我去找！
 Mainstreet/Q5/EV_08/MS_Q5_EV_08_01_CVS_FashionPony_01	想要什么样的礼服？
 Mainstreet/Q5/EV_08/MS_Q5_EV_08_02_CVS_SN_01	我想找一个守卫头盔
-Mainstreet/Q5/EV_08/MS_Q5_EV_08_03_CVS_FashionPony_02	守卫头盔！选的好！
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_03_CVS_FashionPony_02	守卫头盔？选的好！
 Mainstreet/Q5/EV_08/MS_Q5_EV_08_04_CVS_FashionPony_03	我的确有一个，但是……
 Mainstreet/Q5/EV_08/MS_Q5_EV_08_05_CVS_SN_02	但是你想要交换
 Mainstreet/Q5/EV_08/MS_Q5_EV_08_06_CVS_FashionPony_04	今天是小马湾节！
 Mainstreet/Q5/EV_08/MS_Q5_EV_08_07_CVS_FashionPony_05	我只想要一朵好看的红色的花
 Mainstreet/Q5/EV_08/MS_Q5_EV_08_08_CVS_SN_03	红色的花？好的 我去给你找一朵
 Mainstreet/Q5/EV_09/MS_Q5_EV_09_01_CVS_FlowerShop_01	想要红花吗？
-Mainstreet/Q5/EV_09/MS_Q5_EV_09_02_CVS_SN_01	我可以交换
-Mainstreet/Q5/EV_09/MS_Q5_EV_09_03_CVS_FlowerShop_02	啊，我也想，可是，红色的已经没了
-Mainstreet/Q5/EV_09/MS_Q5_EV_09_04_CVS_FlowerShop_03	不过我有些种子种在这些花盆里
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_02_CVS_SN_01	我可以交换任何东西！
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_03_CVS_FlowerShop_02	啊，我也想，可是，红色的已经没有了
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_04_CVS_FlowerShop_03	不过我有些种子 种在这些花盆里
 Mainstreet/Q5/EV_09/MS_Q5_EV_09_05_CVS_SN_02	嗯……我可以用我的魔法让它们快速长大……如果你乐意的话
 Mainstreet/Q5/EV_09/MS_Q5_EV_09_06_CVS_FlowerShop_04	非常乐意！试试吧
 Mainstreet/Q5/EV_10/MS_Q5_EV_10_01_GP_FlowerShop_01	魔法可真奇妙！
@@ -542,14 +542,14 @@ Mainstreet/Q5/MID_07/MS_Q5_MID_07_01_CVS_IZ_01	这样就行了！准备去牌子
 Mainstreet/Q5/POST_01/MS_Q5_POST_01_01_CVS_IZ_01	哇！小马街可真漂亮啊
 Mainstreet/Q5/POST_02/MS_Q5_POST_02_01_CVS_PaintShop_01	颜料！小马湾最好的颜料！
 Mainstreet/Q5/POST_03/MS_Q5_POST_03_01_CVS_FashionPony_01	为小马湾节专门设计的服饰！
-Mainstreet/Q5/POST_04/MS_Q5_POST_04_01_CVS_FlowerShop_01	花盆和种子！种各种各样颜色的花朵！
+Mainstreet/Q5/POST_04/MS_Q5_POST_04_01_CVS_FlowerShop_01	花盆和种子！种各种颜色的花朵！
 Mainstreet/Q5/POST_05/MS_Q5_POST_05_01_CVS_Sprout_01	你找到小艺了吗？
 Mainstreet/Q5/POST_05/MS_Q5_POST_05_02_CVS_SN_01	小艺什么都没做！
 Mainstreet/Q5/POST_05/MS_Q5_POST_05_03_CVS_Sprout_02	不久就知道了 事情有些不对劲
 Mainstreet/Q5/PRE_01/MS_Q5_PRE_01_01_CVS_IZ_01	哇！小马街可真漂亮啊
 Mainstreet/Q5/PRE_02/MS_Q5_PRE_02_01_CVS_PaintShop_01	颜料！小马湾最好的颜料！
 Mainstreet/Q5/PRE_03/MS_Q5_PRE_03_01_CVS_FashionPony_01	为小马湾节专门设计的服饰！
-Mainstreet/Q5/PRE_04/MS_Q5_PRE_04_01_CVS_FlowerShop_01	花盆和种子！种各种各样颜色的花朵！
+Mainstreet/Q5/PRE_04/MS_Q5_PRE_04_01_CVS_FlowerShop_01	花盆和种子！种各种颜色的花朵！
 Mainstreet/Q5/START/MS_Q5_START_01_CS_PP_01	
 Mainstreet/Q5/START/MS_Q5_START_02_CS_SN_01	琪琪！出什么事了？
 Mainstreet/Q5/START/MS_Q5_START_03_CS_PP_02	什么事？天大的事！
@@ -572,9 +572,9 @@ Mainstreet/Q6/COMP/MS_Q6_COMP_03_CVS_Primrose_02	不是……谢谢你鼓励我�
 Mainstreet/Q6/COMP/MS_Q6_COMP_04_CVS_SN_02	做你自己永远是最好的选择
 Mainstreet/Q6/COMP/MS_Q6_COMP_05_CVS_SN_03	记住了 他超爱兔子的
 Mainstreet/Q6/COMP/MS_Q6_COMP_06_CVS_Primrose_03	兔子 是的！你能把这些舞服带给琪琪吗？
-Mainstreet/Q6/COMP/MS_Q6_COMP_07_CVS_Primrose_04	在她手里能有更好的用处
-Mainstreet/Q6/COMP/MS_Q6_COMP_08_CVS_SN_04	当然可以
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_01_CVS_SN_01	嘿！Primrose！是你吗？
+Mainstreet/Q6/COMP/MS_Q6_COMP_07_CVS_Primrose_04	在她那里能有更好的用处
+Mainstreet/Q6/COMP/MS_Q6_COMP_08_CVS_SN_04	当然可以 她了解自己的时尚
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_01_CVS_SN_01	嘿！是你吗Primrose？
 Mainstreet/Q6/EV_01/MS_Q6_EV_01_02_CVS_Primrose_01	哦 不是！Primrose不见了……消失了
 Mainstreet/Q6/EV_01/MS_Q6_EV_01_03_CVS_SN_02	是你 Primrose！
 Mainstreet/Q6/EV_01/MS_Q6_EV_01_04_CVS_Primrose_02	是的！是我！但是我不能去参加演出
@@ -584,7 +584,7 @@ Mainstreet/Q6/EV_01/MS_Q6_EV_01_07_CVS_SN_04	就这个事？我去给你找些�
 Mainstreet/Q6/EV_01/MS_Q6_EV_01_08_CVS_Primrose_04	你真的愿意帮我吗？我需要三件不同的穿戴
 Mainstreet/Q6/EV_01/MS_Q6_EV_01_09_CVS_SN_05	三件？包在我身上！
 Mainstreet/Q6/EV_02/MS_Q6_EV_02_01_GP_ShopKeeper1_01	这是给琪琪的演出专门设计的
-Mainstreet/Q6/EV_03/MS_Q6_EV_03_01_GP_ShopKeeper2_01	演出服这就送上来
+Mainstreet/Q6/EV_03/MS_Q6_EV_03_01_GP_ShopKeeper2_01	舞蹈演出服这就送上来
 Mainstreet/Q6/EV_04/MS_Q6_EV_04_01_GP_ShopKeeper3_01	这个肯定会迎来很多称赞
 Mainstreet/Q6/EV_05/MS_Q6_EV_05_01_GP_SN_01	都拿到了 拿回去给 Primrose
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_01_CVS_Primrose_01	哦 你都找到了？
@@ -604,7 +604,7 @@ Mainstreet/Q6/EV_06/MS_Q6_EV_06_14_CVS_SN_07	做你自己就是最好的
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_15_CVS_Primrose_08	是吗？
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_16_CVS_SN_08	是的！你只需要做好你自己
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_17_CVS_SN_09	你只需要走上前去说一声：嗨！
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_18_CVS_Primrose_09	我不知道……我想……也许如果有别的理由跟他说话 我就会好点
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_18_CVS_Primrose_09	我不知道……我想……也许如果有借口跟他说话会好点
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_19_CVS_SN_10	要是你有一杯多余的冰沙可以分享呢？
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_20_CVS_Primrose_10	听上去是个不错的理由
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_21_CVS_SN_11	他超爱南瓜口味的冰沙！
@@ -724,17 +724,17 @@ TownPark/Q12/RETACPTD/TP_Q12_RETACPTD_01_CVS_SN_01	可以练练我的动作！
 TownPark/Q12/RETDCLND/TP_Q12_RETDCLND_01_CVS_SN_01	谢谢 不了 一会吧
 TownPark/Q12/RETRY/TP_Q12_RETRY_01_CVS_Zoom_01	至少你努力了 想再试一遍吗？
 TownPark/Q12/START/TP_Q12_START_01_CVS_Zoom_01	希悦学员！欢迎回来！
-TownPark/Q12/START/TP_Q12_START_02_CVS_Zoom_02	你已经用上了高速装备
+TownPark/Q12/START/TP_Q12_START_02_CVS_Zoom_02	看来你已经用上了高速装备
 TownPark/Q12/START/TP_Q12_START_03_CVS_SN_01	哦 你是说我的
 TownPark/Q12/START/TP_Q12_START_04_CVS_Zoom_03	轮滑鞋！
 TownPark/Q8/COMP/TP_Q8_COMP_01_CVS_IZ_01	哇塞 真是独角回收艺术品
 TownPark/Q8/COMP/TP_Q8_COMP_02_CVS_HC_01	好多了
 TownPark/Q8/COMP/TP_Q8_COMP_03_CVS_HC_02	你确实把我画得很好看
-TownPark/Q8/COMP/TP_Q8_COMP_04_CVS_SN_01	这个不太容易……
+TownPark/Q8/COMP/TP_Q8_COMP_04_CVS_SN_01	这不太容易……
 TownPark/Q8/COMP/TP_Q8_COMP_05_CVS_HC_03	嗯……总之谢谢你
 TownPark/Q8/EV_01/TP_Q8_EV_01_01_GP_SN_01	作案者是天马……很奇怪
 TownPark/Q8/EV_02/TP_Q8_EV_02_01_GP_SN_01	嫌犯是白色的
-TownPark/Q8/EV_03/TP_Q8_EV_03_01_GP_SN_01	粉蓝相间的鬃毛？
+TownPark/Q8/EV_03/TP_Q8_EV_03_01_GP_SN_01	短的、粉蓝相间的鬃毛？
 TownPark/Q8/EV_04/TP_Q8_EV_04_01_CVS_ZP_01	所有线索集齐了
 TownPark/Q8/EV_04/TP_Q8_EV_04_02_CVS_ZP_02	但是这个描述……
 TownPark/Q8/EV_04/TP_Q8_EV_04_03_CVS_SN_01	指的是你 力力
@@ -767,19 +767,19 @@ TownPark/Q8/EV_10/TP_Q8_EV_10_03_CVS_SN_01	巨大的南瓜 好的
 TownPark/Q8/EV_11/TP_Q8_EV_11_01_CVS_PumpkinLady_01	哦 希悦 我可以给你我最大的南瓜
 TownPark/Q8/EV_11/TP_Q8_EV_11_02_CVS_PumpkinLady_02	但是它还没长出来 你可以用你的魔法吗？
 TownPark/Q8/EV_11/TP_Q8_EV_11_03_CVS_PumpkinLady_03	把它长大 它就是你的了
-TownPark/Q8/EV_12/TP_Q8_EV_12_01_GP_SN_01	好！再差一点就到了
+TownPark/Q8/EV_12/TP_Q8_EV_12_01_GP_SN_01	好！再差一点就成了
 TownPark/Q8/EV_13/TP_Q8_EV_13_01_GP_SN_01	哦……这也太大了！这该怎么弄回去？
 TownPark/Q8/EV_14/TP_Q8_EV_14_01_GP_SN_01	线索集齐了 可是……
 TownPark/Q8/EV_15/TP_Q8_EV_15_01_CVS_PaintGuy2_01	我的天哪！好大的南瓜！嗯……谢谢……
 TownPark/Q8/EV_15/TP_Q8_EV_15_02_CVS_PaintGuy2_02	给 你应得的 随意画吧
 TownPark/Q8/EV_16/TP_Q8_EV_16_01_GP_SN_01	很好！现在回到牌子那里去
 TownPark/Q8/MID_01/TP_Q8_MID_01_01_GP_ZP_01	我们需要更多线索 继续到处问问
-TownPark/Q8/MID_02/TP_Q8_MID_02_01_GP_PaintGuy2_01	附近可以找到苹果和梨子树
+TownPark/Q8/MID_02/TP_Q8_MID_02_01_GP_PaintGuy2_01	在附近可以找到苹果树和梨子树
 TownPark/Q8/MID_03/TP_Q8_MID_03_01_GP_PaintGuy2_01	很好 但是还需要一个水果
 TownPark/Q8/MID_04/TP_Q8_MID_04_01_GP_IZ_01	我们要不要把牙齿画回去？
-TownPark/Q8/MID_05/TP_Q8_MID_05_01_GP_HC_01	需要把牌子修好！天哪……
+TownPark/Q8/MID_05/TP_Q8_MID_05_01_GP_HC_01	看在兔子的份上 需要有小马把牌子修好！
 TownPark/Q8/MID_06/TP_Q8_MID_06_01_GP_PaintGuy2_01	这附近有一小块南瓜地 去要一块大的
-TownPark/Q8/POST_01/TP_Q8_POST_01_01_GP_Sprout_01	嫌犯越来越多了……小马湾有有危险！
+TownPark/Q8/POST_01/TP_Q8_POST_01_01_GP_Sprout_01	嫌犯越来越多了……小马湾有危险！
 TownPark/Q8/POST_02/TP_Q8_POST_02_01_GP_PaintGuy2_01	也许我能把这个南瓜做成一个可移动的房子
 TownPark/Q8/POST_03/TP_Q8_POST_03_01_GP_PumpkinLady_01	陆马魔法比我想象的还要强大
 TownPark/Q8/POST_04/TP_Q8_POST_04_01_GP_IZ_01	祝你比赛好运！你可以的
@@ -804,7 +804,7 @@ TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_02_CVS_Zoom_01	来看看你的表现
 TownPark/Q9/COMP/TP_Q9_COMP_01_CVS_Zoom_01	好好好……让我印象深刻
 TownPark/Q9/COMP/TP_Q9_COMP_02_CVS_Zoom_02	也许你真能达标成为一名高级飞行员
 TownPark/Q9/COMP/TP_Q9_COMP_03_CVS_Zoom_03	这是你的奖励
-TownPark/Q9/COMP/TP_Q9_COMP_04_CVS_SN_01	嘿！是我的轮滑鞋！我就在找它们呢！
+TownPark/Q9/COMP/TP_Q9_COMP_04_CVS_SN_01	嘿！是我的轮滑鞋！我正打算找呢！
 TownPark/Q9/COMP/TP_Q9_COMP_05_CVS_Zoom_04	不用客气
 TownPark/Q9/COMP/TP_Q9_COMP_06_CVS_SN_02	呃……谢谢？
 TownPark/Q9/DECLINED/TP_Q9_DECLINED_01_CVS_SN_01	呃……我觉得不行
@@ -816,7 +816,7 @@ TownPark/Q9/RETRY/TP_Q9_RETRY_01_CVS_Zoom_01	应该不是很糟糕 但你需要�
 TownPark/Q9/START/TP_Q9_START_01_CVS_Zoom_01	啊 希悦学员 我听说过你
 TownPark/Q9/START/TP_Q9_START_02_CVS_SN_01	你早就认识我了 速姆 记得吗？
 TownPark/Q9/START/TP_Q9_START_03_CVS_Zoom_02	别在乎那些细节 学员
-TownPark/Q9/START/TP_Q9_START_04_CVS_Zoom_03	来这里是为了评估你的运动技能。
+TownPark/Q9/START/TP_Q9_START_04_CVS_Zoom_03	来这里是为了评估你的运动技能
 TownPark/Q9/START/TP_Q9_START_05_CVS_SN_02	我的什么？
 TownPark/Q9/START/TP_Q9_START_06_CVS_Zoom_04	你在高级障碍赛中的表现水平
 VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT1	使用左摇杆移动
@@ -824,33 +824,33 @@ VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT2	将兔子赶至大门处得分
 VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT1	使用左摇杆移动
 VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT2	将兔子和螃蟹赶至对应的大门得分
 VideoTutorials/VIDEOTUTORIAL_HC_SPECIALPTUT1	这是一个特别皮纳塔！\n找到它们来解锁新角色 并与朋友们一起玩
-VideoTutorials/VIDEOTUTORIAL_IZ_UNICYCLINGTUT1	当你碰到这样的桌子时 按这个按钮进行独角回收！
+VideoTutorials/VIDEOTUTORIAL_IZ_UNICYCLINGTUT1	当你碰到这样的桌子时 按B键进行独角回收！
 VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT1	女士们先生们
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT10	使用方向键或确定键跟随节奏
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT10	使用方向键和A键跟随节奏
 VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT11	命中的越多 分数越高！
 VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT2	欢迎来到琪琪游行 小马湾节版本！
 VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT3	首先我们得穿上好看的衣服！
 VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT4	在菜单中选择最好看的服装
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT5	使用此按钮穿上
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT6	使用这些按钮或向边缘移动来查看更多配饰
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT5	按A键穿上
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT6	按LB、RB或向边缘移动来查看更多配饰
 VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT7	当你准备好时 按这个按钮
-VideoTutorials/VIDEOTUTORIAL_PP_MAGICMTUT1	留意魔法镜子！\n使用此按钮随时更换装扮！
+VideoTutorials/VIDEOTUTORIAL_PP_MAGICMTUT1	留意魔法镜子！\n按B键随时更换装扮！
 VideoTutorials/VIDEOTUTORIAL_SN_BUTTERTUT1	跟随蝴蝶找到你下一步目标
 VideoTutorials/VIDEOTUTORIAL_SN_CLEARGAME	你可以继续随意探寻小马湾！\n继续玩各种小游戏 找到剩余的魔法币
-VideoTutorials/VIDEOTUTORIAL_SN_JUMPTUT1	使用此按钮跳跃
-VideoTutorials/VIDEOTUTORIAL_SN_KICKTUT1	使用此按钮踢树\n别玩了收集掉下的魔法币！
-VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT1	可以用我的陆马魔法让植物快速长大 使用此按钮使用
+VideoTutorials/VIDEOTUTORIAL_SN_JUMPTUT1	按A键跳跃
+VideoTutorials/VIDEOTUTORIAL_SN_KICKTUT1	使用此按钮踢树\n别忘了收集掉下的物品！
+VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT1	可以用我的陆马魔法让植物快速长大 按B键使用
 VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT2	利用它们跳至更高的地方
-VideoTutorials/VIDEOTUTORIAL_SN_MOVTUT1	使用此按钮移动
-VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT3	使用此按钮跳过陷阱
-VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT2	使用此按钮穿上轮滑鞋
-VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT3	如果想慢下来 使用此按钮将它们脱下
-VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT4	按方向键左右移动躲开障碍物
+VideoTutorials/VIDEOTUTORIAL_SN_MOVTUT1	使用左摇杆移动
+VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT3	按A键跳过陷阱
+VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT2	按Y键穿上轮滑鞋
+VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT3	如果想慢下来 按Y键将它们脱下
+VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT4	用左摇杆左右移动躲开障碍物
 VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT5	通过圆环可以加速
 VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_BUTTERTUT	蝴蝶向导
 VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_CLEARGAME	游戏已通关
 VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_JUMPTUT	跳跃
-VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_KICKTUT	踢
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_KICKTUT	踢树
 VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_MAGICMTUT	魔法镜子
 VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_MAGICPTUT	陆马魔法
 VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_MOVTUT	移动
