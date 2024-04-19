@@ -1173,13 +1173,17 @@ namespace ElementsOfHarmony
 						{
 							__instance.StartCoroutine(RunnerCinematic.StartFirstDialog(__instance));
 						}
+						/* I've had enough of this fakeTimer, it's inconsistent every time no matter what I try
+						 * 
 						var fakeTimer = Traverse.Create(__instance).Field<float>("fakeTimer");
 						fakeTimer.Value = float.PositiveInfinity; // cannot set value here directly
 						__instance.StartCoroutine(FixFakeTimer(fakeTimer));
+						*/
 						return true;
 					}
 					else return false;
 				}
+				/*
 				public static IEnumerator FixFakeTimer(Traverse<float> __instance)
 				{
 					// must wait for it to get assigned by some code first
@@ -1195,6 +1199,7 @@ namespace ElementsOfHarmony
 						__instance.Value += 30f;
 					}
 				}
+				*/
 			}
 
 			[HarmonyPatch(typeof(Runner1MiniGame))]
@@ -1208,9 +1213,12 @@ namespace ElementsOfHarmony
 					if (__instance.Mode == MinigamePlayersType.adventure &&
 						!Traverse.Create(__instance.GetRunnerLevelGenerator()).Field("bEnd").GetValue<bool>())
 					{
+						/* I've had enough of this fakeTimer, it's inconsistent every time no matter what I try
+						 * 
 						float fakeTimer = Traverse.Create(__instance).Field<float>("fakeTimer").Value;
-
 						float Progress = fakeTimer / 100f;
+						*/
+						float Progress = 1.0f - (PredefinedGeneratorPatch.num / 120f);
 						Progress = 1.0f - Mathf.Clamp(Progress, 0.0f, 1.0f);
 						RunnerStates states = (RunnerStates)__instance.GetEnemy().GetComponent<BodyController>().states;
 						states.racing.GoTo(new Vector3(0.0f, 0.0f, Mathf.Lerp(SrcZ, DstZ, Progress)));

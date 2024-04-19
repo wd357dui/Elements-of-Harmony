@@ -358,27 +358,27 @@ Mainstreet/MR/EV_10/MS_MR_EV_10_01_GP_Sprout_01	只是走运而已
 Mainstreet/MR/EV_11/MS_MR_EV_11_01_GP_Sprout_01	哈哈！
 Mainstreet/MR/EV_12/MS_MR_EV_12_01_GP_Sprout_01	尝尝这个！
 Mainstreet/MR/EV_13/MS_MR_EV_13_01_GP_Sprout_01	噢！
-Mainstreet/MR/REPACPTD/MS_MR_REPACPTD_01_CVS_SN_01	应该会很有趣
+Mainstreet/MR/REPACPTD/MS_MR_REPACPTD_01_CVS_SN_01	我想 应该会很有趣
 Mainstreet/MR/REPDCLND/MS_MR_REPDCLND_01_CVS_SN_01	也许下次吧
-Mainstreet/MR/REPEAT/MS_MR_REPEAT_01_CVS_Sprout_01	嘿 希悦 你想不想……再来一次比赛？
+Mainstreet/MR/REPEAT/MS_MR_REPEAT_01_CVS_Sprout_01	嘿 希悦 你想不想……再来一场比赛？
 Mainstreet/MR/REPEAT/MS_MR_REPEAT_02_CVS_Sprout_02	我会“假装”逃跑再让你追一次 我演技可是很棒的
-Mainstreet/MR/START/MS_MR_START_01_CS_SN_01	
-Mainstreet/Q11/ACCEPTED/MS_Q11_ACCEPTED_04_CVS_SN_01	
+Mainstreet/MR/START/MS_MR_START_01_CS_SN_01	啊啊啊啊啊
+Mainstreet/Q11/ACCEPTED/MS_Q11_ACCEPTED_04_CVS_SN_01	走吧
 Mainstreet/Q11/BLK/MS_Q11_BLK_01_GP_BigBunny_01	
 Mainstreet/Q11/BLK/MS_Q11_BLK_02_GP_Bunnies_01	
 Mainstreet/Q11/BLK/MS_Q11_BLK_03_GP_SN_01	我觉得他们不会让我过去
-Mainstreet/Q11/COMP/MS_Q11_COMP_01_CS_HC_01	
+Mainstreet/Q11/COMP/MS_Q11_COMP_01_CS_HC_01	够了吧 小敲诈者
 Mainstreet/Q11/COMP/MS_Q11_COMP_02_CS_BigBunny_01	
 Mainstreet/Q11/COMP/MS_Q11_COMP_03_CS_Bunnies_01	
 Mainstreet/Q11/COMP/MS_Q11_COMP_04_CS_SN_01	他直接丢下了他的朋友？
 Mainstreet/Q11/COMP/MS_Q11_COMP_05_CS_HC_02	我觉得他没有真正的朋友 希悦
 Mainstreet/Q11/COMP/MS_Q11_COMP_06_CS_Bunnies_02	
-Mainstreet/Q11/COMP/MS_Q11_COMP_07_CS_SN_02	
+Mainstreet/Q11/COMP/MS_Q11_COMP_07_CS_SN_02	只要有我们在就不用担心
 Mainstreet/Q11/COMP/MS_Q11_COMP_08_CS_Bunnies_03	
 Mainstreet/Q11/DECLINED/MS_Q11_DECLINED_05_CVS_SN_01	一会吧……
 Mainstreet/Q11/EV_01/MS_Q11_EV_01_01_CVS_SmoothieShop_01	新鲜特制版？没问题！但是它非常脆弱……
 Mainstreet/Q11/EV_01/MS_Q11_EV_01_02_CVS_SmoothieShop_02	你得非常快地把它送到目的地 不然它很快就会化掉
-Mainstreet/Q11/EV_02/MS_Q11_EV_02_01_CVS_BigBunny_01	
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_01_CVS_BigBunny_01	Y exijo un par de gafas de sol geniales
 Mainstreet/Q11/EV_02/MS_Q11_EV_02_02_CVS_HC_01	什么？又有要求？
 Mainstreet/Q11/EV_02/MS_Q11_EV_02_03_CVS_HC_02	现在他想要一副太阳镜
 Mainstreet/Q11/EV_02/MS_Q11_EV_02_04_CVS_SN_01	太阳镜？呃好吧
@@ -386,11 +386,11 @@ Mainstreet/Q11/EV_03/MS_Q11_EV_03_01_CVS_FashionPony_01	哦 是你啊 想要太�
 Mainstreet/Q11/EV_03/MS_Q11_EV_03_02_CVS_FashionPony_02	很简单，我不小心把刚才的花弄坏了……你能把它复原吗？
 Mainstreet/Q11/EV_03/MS_Q11_EV_03_03_CVS_SN_01	额……当然！
 Mainstreet/Q11/EV_04/MS_Q11_EV_04_05_CVS_HC_01	好了，你现在可以让开路了
-Mainstreet/Q11/EV_04/MS_Q11_EV_04_06_CVS_BigBunny_01	
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_06_CVS_BigBunny_01	Y una cosa más
 Mainstreet/Q11/EV_04/MS_Q11_EV_04_07_CVS_HC_02	他说他还剩最后一个要求
-Mainstreet/Q11/EV_04/MS_Q11_EV_04_08_CVS_BigBunny_02	
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_08_CVS_BigBunny_02	Dame tres globos
 Mainstreet/Q11/EV_04/MS_Q11_EV_04_09_CVS_HC_03	三个气球？为什么？
-Mainstreet/Q11/EV_04/MS_Q11_EV_04_10_CVS_BigBunny_03	
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_10_CVS_BigBunny_03	¡O yo no haré los videotutoriales para ti!
 Mainstreet/Q11/EV_04/MS_Q11_EV_04_11_CVS_HC_04	呃好吧……三个气球
 Mainstreet/Q11/EV_04/MS_Q11_EV_04_12_CVS_SN_01	那就三个气球吧，我去找
 Mainstreet/Q11/EV_05/MS_Q11_EV_05_01_GP_SN_01	一个气球，还剩两个
@@ -420,9 +420,9 @@ Mainstreet/Q11/START/MS_Q11_START_07_CS_HC_03	他说他们劫持了这条路，�
 Mainstreet/Q11/START/MS_Q11_START_08_CS_BigBunny_02	
 Mainstreet/Q11/START/MS_Q11_START_09_CS_Bunnies_03	
 Mainstreet/Q11/START/MS_Q11_START_10_CS_SN_02	他们想要什么
-Mainstreet/Q11/START/MS_Q11_START_11_CS_BigBunny_03	
+Mainstreet/Q11/START/MS_Q11_START_11_CS_BigBunny_03	Te exijo un batido extra fresco
 Mainstreet/Q11/START/MS_Q11_START_12_CS_HC_04	他要求一杯特制新鲜的冰沙
-Mainstreet/Q11/START/MS_Q11_START_13_CS_BigBunny_04	
+Mainstreet/Q11/START/MS_Q11_START_13_CS_BigBunny_04	Eso es
 Mainstreet/Q11/START/MS_Q11_START_14_CS_Bunnies_04	
 Mainstreet/Q11/START/MS_Q11_START_15_CS_HC_05	你能去找找吗？我会看着他们
 Mainstreet/Q11/START/MS_Q11_START_16_CS_SN_03	特制新鲜冰沙马上来！
@@ -455,7 +455,7 @@ Mainstreet/Q4/COMP/MS_Q4_COMP_01_CVS_Thunder_01	做得好 希悦学员！
 Mainstreet/Q4/COMP/MS_Q4_COMP_02_CVS_Thunder_02	你的本领不错 这是你应得的
 Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_01_CVS_SN_01	我还没准备好……
 Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_02_CVS_Thunder_02	无聊 我们早晚都得做
-Mainstreet/Q4/POST_01/MS_Q4_POST_01_01_GP_Thunder_01	
+Mainstreet/Q4/POST_01/MS_Q4_POST_01_01_GP_Thunder_01	"W.I.N.G.S 全称是 ""The Wonderful Institute of No-Gravity Skywalking"" 很酷吧？"
 Mainstreet/Q4/QUESTION/MS_Q4_QUESTION_01_CVS_Thunder_01	准备好练习了吗？
 Mainstreet/Q4/RETACPTD/MS_Q4_RETACPTD_01_CVS_SN_01	当然
 Mainstreet/Q4/RETDCLND/MS_Q4_RETDCLND_01_CVS_SN_01	现在还不行
@@ -574,9 +574,9 @@ Mainstreet/Q6/COMP/MS_Q6_COMP_05_CVS_SN_03	记住了 他超爱兔子的
 Mainstreet/Q6/COMP/MS_Q6_COMP_06_CVS_Primrose_03	兔子 是的！你能把这些舞服带给琪琪吗？
 Mainstreet/Q6/COMP/MS_Q6_COMP_07_CVS_Primrose_04	在她手里能有更好的用处
 Mainstreet/Q6/COMP/MS_Q6_COMP_08_CVS_SN_04	当然可以
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_01_CVS_SN_01	
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_02_CVS_Primrose_01	
-Mainstreet/Q6/EV_01/MS_Q6_EV_01_03_CVS_SN_02	
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_01_CVS_SN_01	嘿！Primrose！是你吗？
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_02_CVS_Primrose_01	哦 不是！Primrose不见了……消失了
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_03_CVS_SN_02	是你 Primrose！
 Mainstreet/Q6/EV_01/MS_Q6_EV_01_04_CVS_Primrose_02	是的！是我！但是我不能去参加演出
 Mainstreet/Q6/EV_01/MS_Q6_EV_01_05_CVS_SN_03	为什么？怎么了？
 Mainstreet/Q6/EV_01/MS_Q6_EV_01_06_CVS_Primrose_03	只是……我没有好看的衣服可以穿
@@ -586,7 +586,7 @@ Mainstreet/Q6/EV_01/MS_Q6_EV_01_09_CVS_SN_05	三件？包在我身上！
 Mainstreet/Q6/EV_02/MS_Q6_EV_02_01_GP_ShopKeeper1_01	这是给琪琪的演出专门设计的
 Mainstreet/Q6/EV_03/MS_Q6_EV_03_01_GP_ShopKeeper2_01	演出服这就送上来
 Mainstreet/Q6/EV_04/MS_Q6_EV_04_01_GP_ShopKeeper3_01	这个肯定会迎来很多称赞
-Mainstreet/Q6/EV_05/MS_Q6_EV_05_01_GP_SN_01	
+Mainstreet/Q6/EV_05/MS_Q6_EV_05_01_GP_SN_01	都拿到了 拿回去给 Primrose
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_01_CVS_Primrose_01	哦 你都找到了？
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_02_CVS_SN_01	是的！现在你可以去参加演出了！
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_03_CVS_Primrose_02	但是……我不能！不能不能！
@@ -620,8 +620,8 @@ Mainstreet/Q6/EV_07/MS_Q6_EV_07_06_CVS_SmoothieShop_03	但如果你能给我些�
 Mainstreet/Q6/EV_08/MS_Q6_EV_08_01_GP_SmoothieShop_01	南瓜口味的冰沙 马上来！
 Mainstreet/Q6/EV_09/MS_Q6_EV_09_01_GP_SN_01	南瓜都集齐了 现在去冰沙摊位那边
 Mainstreet/Q6/EV_10/MS_Q6_EV_10_01_GP_SN_01	我该去琪琪那里把事情告诉她……
-Mainstreet/Q6/MID_01/MS_Q6_MID_01_01_CVS_PP_01	
-Mainstreet/Q6/MID_01/MS_Q6_MID_01_02_CVS_PP_02	
+Mainstreet/Q6/MID_01/MS_Q6_MID_01_01_CVS_PP_01	你还没找到 Primrose 吗？
+Mainstreet/Q6/MID_01/MS_Q6_MID_01_02_CVS_PP_02	唉 Primrose真是的 她可能在哪里躲着
 Mainstreet/Q6/MID_02/MS_Q6_MID_02_01_GP_Primrose_05	问问服装店 我订购了三件不同的穿戴
 Mainstreet/Q6/MID_03/MS_Q6_MID_03_01_GP_Primrose_01	我在附近看到有冰沙车停着
 Mainstreet/Q6/MID_04/MS_Q6_MID_04_01_CVS_SmoothieShop_01	冰沙！水果味的冰沙！
@@ -637,7 +637,7 @@ Mainstreet/Q6/START/MS_Q6_START_01_CVS_PP_01	你找到是谁弄坏了我的牌�
 Mainstreet/Q6/START/MS_Q6_START_02_CVS_SN_01	实际上……没有
 Mainstreet/Q6/START/MS_Q6_START_03_CVS_PP_02	嗯算了 反正现在看起来好多了 就这样就行
 Mainstreet/Q6/START/MS_Q6_START_04_CVS_PP_03	希悦！观众都来了，可还缺了什么……
-Mainstreet/Q6/START/MS_Q6_START_05_CVS_PP_04	
+Mainstreet/Q6/START/MS_Q6_START_05_CVS_PP_04	Primrose！我的搭档舞者！
 Mainstreet/Q6/START/MS_Q6_START_06_CVS_PP_05	没有舞者怎么举办舞会！可以帮我找找她吗？
 Mainstreet/Q6/START/MS_Q6_START_07_CVS_SN_02	当然！我该去哪里找？
 Mainstreet/Q6/START/MS_Q6_START_08_CVS_PP_06	我不确定……她喜欢藏起来……还喜欢冰沙！
@@ -863,7 +863,7 @@ ScoreScreen/SCORE_PLAYER1_WIN	玩家 1 获胜
 ScoreScreen/SCORE_PLAYER2_WIN	玩家 2 获胜
 ScoreScreen/SCORE_PLAYER_WIN	{[PLAYER_NAME]} 获胜
 ScoreScreen/SCORE_SCORE	得分
-ScoreScreen/SCORE_TITLE	游戏完成
+ScoreScreen/SCORE_TITLE	游戏结束
 ScoreScreen/SCORE_UNLOCK	小游戏已解锁
 Characters/BigBunny_Name	马塞洛
 Characters/Bunny1_Name	兔子
@@ -944,7 +944,7 @@ Menu/PRODUCER	制作人
 Menu/REPEAT	重复
 Menu/ROLLERBLADES	轮滑
 Menu/ROTATE	旋转
-Menu/SAVED_GAMES	已保存的游戏
+Menu/SAVED_GAMES	存档
 Menu/SAVE_SAFETY_DEFAULT	此图标出现时请勿关闭主机
 Menu/SAVE_SAFETY_STADIA	此游戏支持自动存档
 Menu/SAVE_SAFETY_SWITCH	此图标出现时请勿关闭主机
