@@ -3,12 +3,14 @@
 using namespace std;
 
 extern "C" {
-	__declspec(dllexport) DWORD __stdcall InstallHook();
-	__declspec(dllexport) DWORD __stdcall UninstallHook();
-	__declspec(dllexport) DWORD __stdcall SetRunning(bool Running);
+	__declspec(dllexport) HRESULT __stdcall InstallHook();
+	__declspec(dllexport) HRESULT __stdcall UninstallHook();
+	__declspec(dllexport) HRESULT __stdcall SetRunning(bool Running);
 
 	__declspec(dllexport) int __stdcall BeginProcessCompletionEvent();
-	__declspec(dllexport) DWORD __stdcall EndProcessCompletionEvent();
+	__declspec(dllexport) HRESULT __stdcall EndProcessCompletionEvent();
+
+	__declspec(dllexport) UINT __stdcall GetCurrentBufferIndex();
 
 	__declspec(dllexport) intptr_t __stdcall Get_DXGI_DLL_Address();
 	__declspec(dllexport) DWORD __stdcall Get_DXGI_DLL_ImageSize();
@@ -244,6 +246,7 @@ HRESULT IDXGISwapChain1_Present1_UnPatchFix()
 
 std::map<HWND, ComPtr<IDXGISwapChain>> Window_SwapChain_Map;
 
+IDXGISwapChain* PreviousSwapChain;
 std::map<IDXGISwapChain*, int> IDXGISwapChain_Present_StackCount;
 HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, UINT SyncInterval, UINT Flags)
 {
@@ -262,6 +265,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, 
 		PtrList[0] = &This;
 		PtrList[1] = &SyncInterval;
 		PtrList[2] = &Flags;
+		PreviousSwapChain = This;
 		CompletionID = -static_cast<int>(IDXGISwapChain_Present_VTableIndex);
 		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
 		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
@@ -517,7 +521,7 @@ LRESULT DummyWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 	return DefWindowProcW(hWnd, Msg, wParam, lParam);
 }
 
-DWORD __stdcall InstallHook()
+HRESULT __stdcall InstallHook()
 {
 	HRESULT result = 0;
 
@@ -528,11 +532,11 @@ DWORD __stdcall InstallHook()
 
 	if (DXGI_DLL == NULL) {
 		DXGI_DLL = GetModuleHandleW(L"DXGI.dll");
-		if (DXGI_DLL == NULL) return GetLastError();
+		if (DXGI_DLL == NULL) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	}
 	MODULEINFO Info{};
 	if (!GetModuleInformation(GetCurrentProcess(), DXGI_DLL, &Info, sizeof(MODULEINFO))) {
-		return GetLastError();
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	}
 	DXGI_DLL_BaseAddress = reinterpret_cast<intptr_t>(Info.lpBaseOfDll);
 	DXGI_DLL_ImageSize = Info.SizeOfImage;
@@ -543,7 +547,7 @@ DWORD __stdcall InstallHook()
 	if (GameOverlayRenderer64_DLL != NULL) {
 		MODULEINFO Info{};
 		if (!GetModuleInformation(GetCurrentProcess(), GameOverlayRenderer64_DLL, &Info, sizeof(MODULEINFO))) {
-			return GetLastError();
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 		}
 		GameOverlayRenderer64_DLL_BaseAddress = reinterpret_cast<intptr_t>(Info.lpBaseOfDll);
 		GameOverlayRenderer64_DLL_ImageSize = Info.SizeOfImage;
@@ -574,16 +578,16 @@ DWORD __stdcall InstallHook()
 
 	WindowCreated = CreateEventW(nullptr, TRUE, FALSE, nullptr);
 	if (WindowCreated == NULL) {
-		return GetLastError();
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	}
 	WindowThread = CreateThread(nullptr, 0, CreateHwndForTest, nullptr, 0, nullptr);
 	if (WindowThread == NULL) {
-		return GetLastError();
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	}
 
 	HANDLE WaitHandles[2]{ WindowCreated, WindowThread };
 	if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
-		return GetLastError();
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	}
 
 	DWORD OldProtect;
@@ -645,46 +649,46 @@ DWORD __stdcall InstallHook()
 	bool Discord = false;
 	result = DetectPreviousDetourHook();
 	if (result == STATUS_ENTRYPOINT_NOT_FOUND) Discord = true;
-	else if (result == E_FAIL) return GetLastError();
+	else if (result == E_FAIL) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	else if (FAILED(result)) return result;
 
 	// changing function pointers
 	if (SwapChain1VTableAddress != 0) {
 		VTable = reinterpret_cast<intptr_t*>(SwapChain1VTableAddress);
 
-		if (!VirtualProtect(VTable + IDXGISwapChain1_Present1_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return GetLastError();
+		if (!VirtualProtect(VTable + IDXGISwapChain1_Present1_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 		VTable[IDXGISwapChain1_Present1_VTableIndex] = reinterpret_cast<intptr_t>(IDXGISwapChain1_Present1_Override);
-		if (!VirtualProtect(VTable + IDXGISwapChain1_Present1_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return GetLastError();
+		if (!VirtualProtect(VTable + IDXGISwapChain1_Present1_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	}
 
 	VTable = reinterpret_cast<intptr_t*>(SwapChainVTableAddress);
 
-	if (!VirtualProtect(VTable + IDXGISwapChain_Present_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return GetLastError();
+	if (!VirtualProtect(VTable + IDXGISwapChain_Present_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	VTable[IDXGISwapChain_Present_VTableIndex] = reinterpret_cast<intptr_t>(IDXGISwapChain_Present_Override);
-	if (!VirtualProtect(VTable + IDXGISwapChain_Present_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return GetLastError();
+	if (!VirtualProtect(VTable + IDXGISwapChain_Present_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 
 	if (Factory2VTableAddress != 0) {
 		VTable = reinterpret_cast<intptr_t*>(Factory2VTableAddress);
 
-		if (!VirtualProtect(VTable + IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return GetLastError();
+		if (!VirtualProtect(VTable + IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 		VTable[IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex] = reinterpret_cast<intptr_t>(IDXGIFactory2_CreateSwapChainForHwnd_Override);
-		if (!VirtualProtect(VTable + IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return GetLastError();
+		if (!VirtualProtect(VTable + IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	}
 
 	VTable = reinterpret_cast<intptr_t*>(FactoryVTableAddress);
 
-	if (!VirtualProtect(VTable + IDXGIFactory_CreateSwapChain_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return GetLastError();
+	if (!VirtualProtect(VTable + IDXGIFactory_CreateSwapChain_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	VTable[IDXGIFactory_CreateSwapChain_VTableIndex] = reinterpret_cast<intptr_t>(IDXGIFactory_CreateSwapChain_Override);
-	if (!VirtualProtect(VTable + IDXGIFactory_CreateSwapChain_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return GetLastError();
+	if (!VirtualProtect(VTable + IDXGIFactory_CreateSwapChain_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	
 	SwapChain.Reset();
 	Device.Reset();
 
 	if (!PostMessageW(hWndForTest, WM_CLOSE, 0, 0)) {
-		return GetLastError();
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	}
 	if (WaitForSingleObject(WindowThread, INFINITE) != WAIT_OBJECT_0) {
-		return GetLastError();
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	}
 
 	CloseHandle(WindowCreated);
@@ -697,7 +701,7 @@ DWORD __stdcall InstallHook()
 	return Discord ? ::Discord : result;
 }
 
-DWORD __stdcall UninstallHook()
+HRESULT __stdcall UninstallHook()
 {
 	intptr_t* VTable = nullptr;
 	DWORD OldProtect = 0;
@@ -706,18 +710,18 @@ DWORD __stdcall UninstallHook()
 		VTable = reinterpret_cast<intptr_t*>(Factory2VTableAddress);
 
 		if (IDXGIFactory2_CreateSwapChainForHwnd_Original != nullptr) {
-			if (!VirtualProtect(VTable + IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return GetLastError();
+			if (!VirtualProtect(VTable + IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 			VTable[IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex] = reinterpret_cast<intptr_t>(IDXGIFactory2_CreateSwapChainForHwnd_Original);
-			if (!VirtualProtect(VTable + IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return GetLastError();
+			if (!VirtualProtect(VTable + IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 		}
 	}
 	if (FactoryVTableAddress != 0) {
 		VTable = reinterpret_cast<intptr_t*>(FactoryVTableAddress);
 
 		if (IDXGIFactory_CreateSwapChain_Original != nullptr) {
-			if (!VirtualProtect(VTable + IDXGIFactory_CreateSwapChain_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return GetLastError();
+			if (!VirtualProtect(VTable + IDXGIFactory_CreateSwapChain_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 			VTable[IDXGIFactory_CreateSwapChain_VTableIndex] = reinterpret_cast<intptr_t>(IDXGIFactory_CreateSwapChain_Original);
-			if (!VirtualProtect(VTable + IDXGIFactory_CreateSwapChain_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return GetLastError();
+			if (!VirtualProtect(VTable + IDXGIFactory_CreateSwapChain_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 		}
 	}
 
@@ -725,18 +729,18 @@ DWORD __stdcall UninstallHook()
 		VTable = reinterpret_cast<intptr_t*>(SwapChain1VTableAddress);
 
 		if (IDXGISwapChain1_Present1_Original != nullptr) {
-			if (!VirtualProtect(VTable + IDXGISwapChain1_Present1_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return GetLastError();
+			if (!VirtualProtect(VTable + IDXGISwapChain1_Present1_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 			VTable[IDXGISwapChain1_Present1_VTableIndex] = reinterpret_cast<intptr_t>(IDXGISwapChain1_Present1_Original);
-			if (!VirtualProtect(VTable + IDXGISwapChain1_Present1_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return GetLastError();
+			if (!VirtualProtect(VTable + IDXGISwapChain1_Present1_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 		}
 	}
 	if (SwapChainVTableAddress != 0) {
 		VTable = reinterpret_cast<intptr_t*>(SwapChainVTableAddress);
 
 		if (IDXGISwapChain_Present_Original != nullptr) {
-			if (!VirtualProtect(VTable + IDXGISwapChain_Present_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return GetLastError();
+			if (!VirtualProtect(VTable + IDXGISwapChain_Present_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 			VTable[IDXGISwapChain_Present_VTableIndex] = reinterpret_cast<intptr_t>(IDXGISwapChain_Present_Original);
-			if (!VirtualProtect(VTable + IDXGISwapChain_Present_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return GetLastError();
+			if (!VirtualProtect(VTable + IDXGISwapChain_Present_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 		}
 	}
 
@@ -747,17 +751,17 @@ DWORD __stdcall UninstallHook()
 	return S_OK;
 }
 
-DWORD __stdcall SetRunning(bool Running)
+HRESULT __stdcall SetRunning(bool Running)
 {
 	::Running = Running;
 	if (!Running) {
 		if (!SetEvent(StopEvent)) {
-			return GetLastError();
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 		}
 	}
 	else {
 		if (!ResetEvent(StopEvent)) {
-			return GetLastError();
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 		}
 	}
 	return S_OK;
@@ -772,13 +776,29 @@ int __stdcall BeginProcessCompletionEvent()
 	else return static_cast<int>(CompletionID);
 }
 
-DWORD __stdcall EndProcessCompletionEvent()
+HRESULT __stdcall EndProcessCompletionEvent()
 {
 	CompletionID = INT_MAX;
 	if (!SetEvent(AckCompletionEvent)) {
-		return GetLastError();
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
 	}
 	return S_OK;
+}
+
+UINT __stdcall GetCurrentBufferIndex()
+{
+	DXGI_SWAP_CHAIN_DESC1 Desc1{};
+	ComPtr<IDXGISwapChain3> SwapChain3;
+	PreviousSwapChain->QueryInterface<IDXGISwapChain3>(&SwapChain3);
+	if (SwapChain3 != nullptr && SUCCEEDED(SwapChain3->GetDesc1(&Desc1))) {
+		switch (Desc1.SwapEffect)
+		{
+		case DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_FLIP_DISCARD:
+		case DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL:
+			return SwapChain3->GetCurrentBackBufferIndex();
+		}
+	}
+	else return 0;
 }
 
 intptr_t __stdcall Get_DXGI_DLL_Address()

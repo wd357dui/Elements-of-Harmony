@@ -8,9 +8,19 @@
 #undef DrawText
 #include <DXGI.h>
 #include <DXGI1_2.h>
+#include <DXGI1_3.h>
+#include <DXGI1_4.h>
+#include <DXGI1_5.h>
+#include <DXGI1_6.h>
 #include <D3D11.h>
+#include <D3D11_1.h>
+#include <D3D11_2.h>
+#include <D3D11_3.h>
+#include <D3D11_4.h>
 #include <D2D1.h>
 #include <D2D1_1.h>
+#include <D2D1_2.h>
+#include <D2D1_3.h>
 #include <DWrite.h>
 #pragma pop_macro("DrawText")
 
@@ -23,6 +33,7 @@ using Microsoft::WRL::ComPtr;
 #include <algorithm>
 #include <map>
 #include <optional>
+#include <set>
 #include <string>
 #include <vector>
 
