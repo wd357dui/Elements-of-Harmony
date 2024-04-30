@@ -81,7 +81,7 @@ namespace ElementsOfHarmony
 		{
 			public static class KinectControl
 			{
-				public static bool Enabled = true;
+				public static bool Enabled = false;
 			}
 		}
 

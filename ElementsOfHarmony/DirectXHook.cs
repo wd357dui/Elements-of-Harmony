@@ -621,9 +621,14 @@ namespace ElementsOfHarmony
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		public extern static int SetFontParams(this IntPtr pInstance,
-			DWRITE_TEXT_ALIGNMENT TextAlignment, DWRITE_PARAGRAPH_ALIGNMENT ParagraphAlignment, DWRITE_WORD_WRAPPING WordWrapping,
-			DWRITE_READING_DIRECTION ReadingDirection, DWRITE_FLOW_DIRECTION FlowDirection, float IncrementalTabStop,
-			DWRITE_LINE_SPACING_METHOD LineSpacingMethod, float LineSpacing, float Baseline);
+			DWRITE_TEXT_ALIGNMENT TextAlignment = DWRITE_TEXT_ALIGNMENT.NULL,
+			DWRITE_PARAGRAPH_ALIGNMENT ParagraphAlignment = DWRITE_PARAGRAPH_ALIGNMENT.NULL,
+			DWRITE_WORD_WRAPPING WordWrapping = DWRITE_WORD_WRAPPING.NULL,
+			DWRITE_READING_DIRECTION ReadingDirection = DWRITE_READING_DIRECTION.NULL,
+			DWRITE_FLOW_DIRECTION FlowDirection = DWRITE_FLOW_DIRECTION.NULL,
+			float IncrementalTabStop = float.NaN,
+			DWRITE_LINE_SPACING_METHOD LineSpacingMethod = DWRITE_LINE_SPACING_METHOD.NULL,
+			float LineSpacing = float.NaN, float Baseline = float.NaN);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		public extern static int SetGDICompatibleText(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string Str,

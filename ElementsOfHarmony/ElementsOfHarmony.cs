@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
+using System.Threading;
 
 namespace ElementsOfHarmony
 {
@@ -57,7 +59,25 @@ namespace ElementsOfHarmony
 
 				if (Settings.Loyalty.KinectControl.Enabled)
 				{
-					KinectControl.Init();
+					try
+					{
+						Assembly KinectControl = Assembly.Load("KinectControl");
+						KinectControl.GetType("ElementsOfHarmony.KinectControl")
+							.GetMethod("Init", BindingFlags.Public | BindingFlags.Static)
+							.Invoke(null, Array.Empty<object>());
+					}
+					catch (Exception e)
+					{
+						if (e.InnerException is FileNotFoundException ex &&
+							ex.Message.StartsWith("Could not load file or assembly 'Microsoft.Kinect") &&
+							ex.Message.EndsWith("or one of its dependencies."))
+						{
+							new Thread(() => Log.MessageBox(IntPtr.Zero,
+								"Unable to load Kinect motion control module, because Kinect V2 Runtime cannot be loaded.\r\n" +
+								"Please install Kinect V2 Runtime (or SDK) before running the `ElementsOfHarmony - Loyalty - KinectControl` mod.",
+								"Kinect V2 Runtime not loaded", Log.MB_OK | Log.MB_ICONWARNING)).Start();
+						}
+					}
 				}
 			}
 		}
