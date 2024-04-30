@@ -24,6 +24,7 @@ extern "C" {
 		_In_ Device* pInstance);
 
 	__declspec(dllexport) HRESULT __stdcall SetColor(_In_ Device* pInstance, D2D1_COLOR_F Color);
+	__declspec(dllexport) HRESULT __stdcall SetOpacity(_In_ Device* pInstance, float Opacity);
 	__declspec(dllexport) HRESULT __stdcall SetFont(_In_ Device* pInstance, LPCWSTR FontFamily,
 		DWRITE_FONT_WEIGHT FontWeight, DWRITE_FONT_STYLE FontStyle, DWRITE_FONT_STRETCH FontStretch,
 		float FontSize, LPCWSTR FontLocale);
@@ -122,16 +123,17 @@ HRESULT Device::Init(IDXGIDevice* DeviceDXGI)
 	if (Device2D != nullptr && Context2D != nullptr) return S_OK;
 
 	result = D2D1CreateDevice(DeviceDXGI, D2D1_CREATION_PROPERTIES{
-		.threadingMode = D2D1_THREADING_MODE_MULTI_THREADED,
+		.threadingMode = D2D1_THREADING_MODE_SINGLE_THREADED, // D2D1_THREADING_MODE_MULTI_THREADED,
 #ifdef _DEBUG
 			.debugLevel = D2D1_DEBUG_LEVEL_WARNING,
 #else
 			.debugLevel = D2D1_DEBUG_LEVEL_NONE,
 #endif
-			.options = D2D1_DEVICE_CONTEXT_OPTIONS_ENABLE_MULTITHREADED_OPTIMIZATIONS,
+			.options = D2D1_DEVICE_CONTEXT_OPTIONS_NONE // D2D1_DEVICE_CONTEXT_OPTIONS_ENABLE_MULTITHREADED_OPTIMIZATIONS,
 		}, &Device2D);
 	if (FAILED(result)) return result;
-	result = Device2D->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_ENABLE_MULTITHREADED_OPTIMIZATIONS, &Context2D);
+//	result = Device2D->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_ENABLE_MULTITHREADED_OPTIMIZATIONS, &Context2D);
+	result = Device2D->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_NONE, &Context2D);
 	if (FAILED(result)) return result;
 
 	return result;
@@ -187,13 +189,14 @@ HRESULT __stdcall SurfaceBeginDraw(_In_ IDXGISurface* Surface, _Out_ Device** pp
 	*ppInstance = &DeviceResources[DeviceDXGI];
 	ComPtr<ID2D1DeviceContext> Context = (*ppInstance)->Context2D;
 
+	/*
 	ComPtr<ID2D1Factory> Factory;
 	ComPtr<ID2D1Multithread> Multithread;
 	Context->GetFactory(&Factory);
 	result = Factory.As(&Multithread);
 	if (FAILED(result)) return result;
 	Multithread->Enter();
-	if (FAILED(result)) return result;
+	*/
 
 	Context->BeginDraw();
 	Context->SetTarget(RenderTargets[Surface].Target.Get());
@@ -220,10 +223,12 @@ HRESULT __stdcall StereoSurfaceBeginDraw(_In_ IDXGISurface* SurfaceLeft, _In_ ID
 	ComPtr<ID2D1Multithread> Multithread;
 	ComPtr<ID2D1CommandList> CommandList;
 
+	/*
 	Context->GetFactory(&Factory);
 	result = Factory.As(&Multithread);
 	if (FAILED(result)) return result;
 	Multithread->Enter();
+	*/
 
 	result = Context->CreateCommandList(&CommandList);
 	if (FAILED(result)) return result;
@@ -272,13 +277,14 @@ HRESULT __stdcall SurfaceEndDraw(_In_ IDXGISurface* Surface, _In_ Device* pInsta
 	result = Context->EndDraw();
 	if (FAILED(result)) return result;
 
+	/*
 	ComPtr<ID2D1Factory> Factory;
 	ComPtr<ID2D1Multithread> Multithread;
 	Context->GetFactory(&Factory);
 	result = Factory.As(&Multithread);
 	if (FAILED(result)) return result;
 	Multithread->Leave();
-	if (FAILED(result)) return result;
+	*/
 
 	return result;
 }
@@ -310,13 +316,14 @@ HRESULT __stdcall StereoSurfaceEndDraw(_In_ IDXGISurface* SurfaceLeft, _In_ IDXG
 	result = Context->EndDraw();
 	if (FAILED(result)) return result;
 
+	/*
 	ComPtr<ID2D1Factory> Factory;
 	ComPtr<ID2D1Multithread> Multithread;
 	Context->GetFactory(&Factory);
 	result = Factory.As(&Multithread);
 	if (FAILED(result)) return result;
 	Multithread->Leave();
-	if (FAILED(result)) return result;
+	*/
 
 	return result;
 }
@@ -330,6 +337,15 @@ HRESULT __stdcall SetColor(_In_ Device* pInstance, D2D1_COLOR_F Color)
 		pInstance->SolidColorBrush->SetColor(Color);
 		return S_OK;
 	}
+}
+
+HRESULT __stdcall SetOpacity(_In_ Device* pInstance, float Opacity)
+{
+	if (pInstance->SolidColorBrush != nullptr) {
+		pInstance->SolidColorBrush->SetOpacity(Opacity);
+		return S_OK;
+	}
+	return E_POINTER;
 }
 
 HRESULT __stdcall SetFont(_In_ Device* pInstance,
@@ -348,20 +364,49 @@ HRESULT __stdcall SetFontParams(_In_ Device* pInstance,
 {
 	HRESULT result = 0;
 	if (pInstance->DWriteTextFormat != nullptr) {
-		result = pInstance->DWriteTextFormat->SetTextAlignment(TextAlignment);
-		if (FAILED(result)) return result;
-		result = pInstance->DWriteTextFormat->SetParagraphAlignment(ParagraphAlignment);
-		if (FAILED(result)) return result;
-		result = pInstance->DWriteTextFormat->SetWordWrapping(WordWrapping);
-		if (FAILED(result)) return result;
-		result = pInstance->DWriteTextFormat->SetReadingDirection(ReadingDirection);
-		if (FAILED(result)) return result;
-		result = pInstance->DWriteTextFormat->SetFlowDirection(FlowDirection);
-		if (FAILED(result)) return result;
-		result = pInstance->DWriteTextFormat->SetIncrementalTabStop(IncrementalTabStop);
-		if (FAILED(result)) return result;
-		result = pInstance->DWriteTextFormat->SetLineSpacing(LineSpacingMethod, LineSpacing, Baseline);
-		if (FAILED(result)) return result;
+		if (TextAlignment != -1) {
+			result = pInstance->DWriteTextFormat->SetTextAlignment(TextAlignment);
+			if (FAILED(result)) return result;
+		}
+		if (ParagraphAlignment != -1) {
+			result = pInstance->DWriteTextFormat->SetParagraphAlignment(ParagraphAlignment);
+			if (FAILED(result)) return result;
+		}
+		if (WordWrapping != -1) {
+			result = pInstance->DWriteTextFormat->SetWordWrapping(WordWrapping);
+			if (FAILED(result)) return result;
+		}
+		if (ReadingDirection != -1) {
+			result = pInstance->DWriteTextFormat->SetReadingDirection(ReadingDirection);
+			if (FAILED(result)) return result;
+		}
+		if (FlowDirection != -1) {
+			result = pInstance->DWriteTextFormat->SetFlowDirection(FlowDirection);
+			if (FAILED(result)) return result;
+		}
+		if (IncrementalTabStop != -1) {
+			result = pInstance->DWriteTextFormat->SetIncrementalTabStop(IncrementalTabStop);
+			if (FAILED(result)) return result;
+		}
+		if (LineSpacingMethod != -1 || !isnan(LineSpacing) || !isnan(Baseline))
+		{
+			if (LineSpacingMethod != -1) {
+				float _;
+				pInstance->DWriteTextFormat->GetLineSpacing(&LineSpacingMethod, &_, &_);
+			}
+			if (isnan(LineSpacing)) {
+				float _;
+				DWRITE_LINE_SPACING_METHOD discard;
+				pInstance->DWriteTextFormat->GetLineSpacing(&discard, &LineSpacing, &_);
+			}
+			if (isnan(Baseline)) {
+				float _;
+				DWRITE_LINE_SPACING_METHOD discard;
+				pInstance->DWriteTextFormat->GetLineSpacing(&discard, &_, &Baseline);
+			}
+			result = pInstance->DWriteTextFormat->SetLineSpacing(LineSpacingMethod, LineSpacing, Baseline);
+			if (FAILED(result)) return result;
+		}
 		return S_OK;
 	}
 	return E_POINTER;
