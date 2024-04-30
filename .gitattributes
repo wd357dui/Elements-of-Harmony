@@ -1,3 +1,6 @@
+# detect .h header files as C++ instead of C
+*.h linguist-language=C++
+
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################

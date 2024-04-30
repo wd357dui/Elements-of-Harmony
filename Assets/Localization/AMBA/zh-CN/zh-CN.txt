@@ -1,0 +1,1869 @@
+zh-CN	简体中文
+Menu/MLP_logo_file	CHI_MLP_logo.png
+FONTS/DIMBO_REGULAR	
+FONTS/NOTO_SANS	
+FONTS/ROBOTO_MEDIUM	
+MiniGames/MULTIPLAYER_CONTROLS_INDICATION[PS4	按“接受”继续
+VanityItems/Body/CategoryName	身体
+VanityItems/Face/CategoryName	脸部
+VanityItems/Head/CategoryName	头部
+VanityItems/Neck/CategoryName	颈部
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_01_CS_ZP_01	欢迎来到W.I.N.G.S.——小马湾著名的飞行学院
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_02_CVS_SN_01	有小马似乎很高兴
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_03_CVS_ZP_02	都是我妈妈的主意
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_04_CVS_ZP_03	我其实没有那么热情
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_05_CVS_SN_02	我现在是学员了
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_06_CVS_ZP_04	看来你通过了之前的测试……你马上就可以飞了
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_07_CVS_ZP_05	去找雷鸣和速姆安排你最后的测试
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_08_CVS_ZP_06	然后看你能不能在真正的比赛中打败我
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_09_CVS_SN_03	我现在的速度已经很快了……我不会怯场的！
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_10_CVS_ZP_07	我们拭目以待吧……我会在起飞跑道上等你
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_11_GP_SN_04	我一定能赢得那些翅膀的
+BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_01_CVS_SN_01	当然
+BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_02_CVS_ZP_02	准备开始吧
+BeachCove/MFL/COMP/BC_MFL_COMP_01_CS_SN_01	真是太有趣了！
+BeachCove/MFL/COMP/BC_MFL_COMP_02_CS_ZP_01	对吧？我是说 是的 很好……你赢得了你的翅膀
+BeachCove/MFL/COMP/BC_MFL_COMP_03_CS_ZP_02	我以皇家的名义祝贺你！
+BeachCove/MFL/COMP/BC_MFL_COMP_04_CS_SN_02	力力！
+BeachCove/MFL/COMP/BC_MFL_COMP_05_CS_Brighhouse_01	
+BeachCove/MFL/COMP/BC_MFL_COMP_06_CS_PP_01	哦不！
+BeachCove/MFL/COMP/BC_MFL_COMP_07_CS_IZ_01	哦不！
+BeachCove/MFL/COMP/BC_MFL_COMP_08_CS_HC_01	哦不！
+BeachCove/MFL/COMP/BC_MFL_COMP_09_CS_Sprout_01	哦 很好
+BeachCove/MFL/COMP/BC_MFL_COMP_10_CS_HC_02	等等，那是谁？
+BeachCove/MFL/COMP/BC_MFL_COMP_11_CS_Paint Shop 3_01	小马落水了！
+BeachCove/MFL/COMP/BC_MFL_COMP_12_CS_Sprout_02	好了我要溜了
+BeachCove/MFL/COMP/BC_MFL_COMP_13_CS_SN_03	力力！你还好吗？
+BeachCove/MFL/COMP/BC_MFL_COMP_14_CS_ZP_03	不是太好
+BeachCove/MFL/COMP/BC_MFL_COMP_15_CS_SN_04	魔法似乎突然消失了
+BeachCove/MFL/COMP/BC_MFL_COMP_16_CS_Crowd1_01	天马就不应该来小马湾！
+BeachCove/MFL/COMP/BC_MFL_COMP_17_CS_Crowd2_01	肯定是独角兽搞的鬼！他们很危险！
+BeachCove/MFL/COMP/BC_MFL_COMP_18_CS_Sprout_03	一切都在计划之中……
+BeachCove/MFL/COMP/BC_MFL_COMP_19_CS_HC_03	菜头？是你吗？
+BeachCove/MFL/COMP/BC_MFL_COMP_20_CS_Sprout_04	不！不是我！
+BeachCove/MFL/COMP/BC_MFL_COMP_21_CS_SN_05	我去追他！
+BeachCove/MFL/COMP/BC_MFL_COMP_22_CS_Shimmerwing_01	
+BeachCove/MFL/COMP/BC_MFL_COMP_23_GP_SN_06	他在往小马街跑！
+BeachCove/MFL/DECLINED/BC_MFL_DECLINED_01_CVS_SN_01	我还没准备好
+BeachCove/MFL/DECLINED/BC_MFL_DECLINED_02_CVS_ZP_02	我也没有
+BeachCove/MFL/QUESTION/BC_MFL_QUESTION_01_CVS_ZP_01	准备好了吗 希悦？
+BeachCove/MFL/RETACPTD/BC_MFL_RETACPTD_01_CVS_SN_01	这次可别摔下去
+BeachCove/MFL/RETDCLND/BC_MFL_RETDCLND_01_CVS_SN_01	算了……高处让我感觉害怕
+BeachCove/MFL/RETRY/BC_MFL_RETRY_01_CVS_ZP_01	想再来翱翔天际吗？
+BeachCove/MFL/START/BC_MFL_START_01_CVS_ZP_01	欢迎来到最后一场比赛……什么什么的
+BeachCove/MFL/START/BC_MFL_START_02_CVS_ZP_02	反正你也比不过我
+BeachCove/MFL/START/BC_MFL_START_03_CVS_ZP_03	但只要你不会掉到海里 就算你通过
+BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_01_CVS_SN_01	我准备好了！
+BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_02_CVS_Zoom_04	这就对了！
+BeachCove/Q13/COMP/BC_Q13_COMP_01_CVS_Zoom_06	干得不错 学员！这是你的奖励
+BeachCove/Q13/DECLINED/BC_Q13_DECLINED_01_CVS_SN_02	我还需要点时间……
+BeachCove/Q13/DECLINED/BC_Q13_DECLINED_02_CVS_Zoom_05	别拖得太久！
+BeachCove/Q13/POST_01/BC_Q13_POST_01_01_GP_Zoom_10	希望你比上一位飞得好些 他总是掉进海里
+BeachCove/Q13/QUESTION/BC_Q13_QUESTION_01_CVS_Zoom_03	准备好接受速度挑战了吗？
+BeachCove/Q13/RETACPTD/BC_Q13_RETACPTD_01_CVS_Zoom_08	准备开始吧！
+BeachCove/Q13/RETDCLND/BC_Q13_RETDCLND_01_CVS_Zoom_09	想跑了可以随时回来
+BeachCove/Q13/RETRY/BC_Q13_RETRY_01_CVS_Zoom_07	啊 你回来了 想来再试一遍吗？
+BeachCove/Q13/START/BC_Q13_START_01_CVS_Zoom_01	看看谁来了！是学员希悦！
+BeachCove/Q13/START/BC_Q13_START_02_CVS_Zoom_02	这是最后一场障碍赛课程，离起飞不远了
+BeachCove/Q14/COMP/BC_Q14_COMP_01_GP_IZ_01	你做得很不错嘛！
+BeachCove/Q14/COMP/BC_Q14_COMP_02_GP_SN_01	多亏了你的帮忙 朋友！
+BeachCove/Q14/EV_01/BC_Q14_EV_01_01_GP_SN_01	嫌疑者是一位天马……可是翅膀掉了
+BeachCove/Q14/EV_02/BC_Q14_EV_02_01_GP_SN_01	这次是粉色的
+BeachCove/Q14/EV_03/BC_Q14_EV_03_01_GP_SN_01	那位小马的鬃毛是紫色的
+BeachCove/Q14/EV_04/BC_Q14_EV_04_01_CVS_Sprout_01	侦探做得不错！有没有符合的小马？
+BeachCove/Q14/EV_04/BC_Q14_EV_04_02_CVS_SN_01	也许吧……但有目击者发现了假的翅膀
+BeachCove/Q14/EV_04/BC_Q14_EV_04_03_CVS_Sprout_02	噢 我怎么……我是说嫌犯怎么那么不小心
+BeachCove/Q14/EV_04/BC_Q14_EV_04_04_CVS_Sprout_03	无论如何 调查得不错 希悦
+BeachCove/Q14/EV_04/BC_Q14_EV_04_05_CVS_Sprout_04	我来没收这些翅膀 作为证据
+BeachCove/Q14/EV_04/BC_Q14_EV_04_06_CVS_SN_02	我想我还是留着吧 以防万一
+BeachCove/Q14/EV_04/BC_Q14_EV_04_07_CVS_Sprout_05	是的好主意 嗯……继续努力！我们还很危险！
+BeachCove/Q14/EV_05/BC_Q14_EV_05_01_GP_SN_03	嗯……菜头好像在隐瞒着什么
+BeachCove/Q14/EV_06/BC_Q14_EV_06_01_CVS_PP_01	今天大家怎么都这么焦躁？呃……
+BeachCove/Q14/EV_06/BC_Q14_EV_06_02_CVS_SN_01	菜头认为你弄糟了力力的壁画
+BeachCove/Q14/EV_06/BC_Q14_EV_06_03_CVS_PP_02	什么？太荒唐了！我才不会去弄脏我的蹄子
+BeachCove/Q14/EV_06/BC_Q14_EV_06_04_CVS_SN_02	我想那算是一种证明吧
+BeachCove/Q14/EV_06/BC_Q14_EV_06_05_CVS_SN_03	只要别太引起注意了 好吗？
+BeachCove/Q14/EV_06/BC_Q14_EV_06_06_CVS_PP_03	但那就是我喜欢做的！
+BeachCove/Q14/EV_06/BC_Q14_EV_06_07_CVS_IZ_01	这里看上去好忙啊！发生什么事了？
+BeachCove/Q14/EV_06/BC_Q14_EV_06_08_CVS_SN_04	好多事情！要到处走 到处修牌子
+BeachCove/Q14/EV_06/BC_Q14_EV_06_09_CS_IZ_02	好的！那我们就需要很多颜料，那个牌子很大！
+BeachCove/Q14/EV_07/BC_Q14_EV_07_01_CVS_PaintShop 3_01	想要颜料吗？没问题！
+BeachCove/Q14/EV_07/BC_Q14_EV_07_02_CVS_PaintShop 3_02	给我个游泳圈 它就是你的了
+BeachCove/Q14/EV_07/BC_Q14_EV_07_03_CVS_SN_01	游泳圈 明白！
+BeachCove/Q14/EV_08/BC_Q14_EV_08_01_CVS_RedFloatieGuy_01	哦 嘿 你有没有见到我的宠物螃蟹？
+BeachCove/Q14/EV_08/BC_Q14_EV_08_02_CVS_RedFloatieGuy_02	她名字叫贝贝
+BeachCove/Q14/EV_08/BC_Q14_EV_08_03_CVS_SN_01	如果我找到她 我可以要你的游泳圈吗？
+BeachCove/Q14/EV_08/BC_Q14_EV_08_04_CVS_RedFloatieGuy_03	当然！我拿它只是以防我需要到水里去找贝贝！
+BeachCove/Q14/EV_08/BC_Q14_EV_08_05_CVS_SN_02	别担心！我会找到她
+BeachCove/Q14/EV_09/BC_Q14_EV_09_01_CVS_RedFloatieGuy_01	贝贝！贝贝！你回来了！
+BeachCove/Q14/EV_09/BC_Q14_EV_09_02_CVS_RedFloatieGuy_02	太谢谢你了！给你 跟我们说好的一样
+BeachCove/Q14/EV_10/BC_Q14_EV_10_01_GP_SN_01	现在 回去找那位爱画牌子的小马
+BeachCove/Q14/EV_11/BC_Q14_EV_11_01_GP_PaintShop 3_01	哦 真不错！给你的颜料
+BeachCove/Q14/EV_12/BC_Q14_EV_12_01_GP_SN_01	所有证据凑齐了！但不可能是这样……
+BeachCove/Q14/EV_13/BC_Q14_EV_13_01_GP_SN_01	好极了！现在回到牌子那里去
+BeachCove/Q14/MID_01/BC_Q14_MID_01_01_CVS_Sprout_01	肯定还有别的线索，找到所有的目击者
+BeachCove/Q14/MID_02/BC_Q14_MID_02_01_CVS_Sprout_01	这很明显是外来威胁
+BeachCove/Q14/MID_02/BC_Q14_MID_02_02_CVS_Sprout_02	天马和独角兽很明显想要毁了这个节日！
+BeachCove/Q14/MID_02/BC_Q14_MID_02_03_CVS_SN_03	那根本说不通！他们是我们的朋友！
+BeachCove/Q14/MID_02/BC_Q14_MID_02_04_CVS_Sprout_04	也许只是你的朋友 希悦
+BeachCove/Q14/MID_02/BC_Q14_MID_02_05_CVS_SN_01	
+BeachCove/Q14/MID_03/BC_Q14_MID_03_01_CVS_PaintShop 3_01	我敢肯定 海滩上一定有小马有游泳圈
+BeachCove/Q14/MID_04/BC_Q14_MID_04_01_CVS_RedFloatieGuy_01	我最后见到她是在海滩尽头的洞穴里
+BeachCove/Q14/MID_05/BC_Q14_MID_05_01_GP_IZ_01	我们需要很多的橙色颜料和很多的魔法！
+BeachCove/Q14/MID_06/BC_Q14_MID_06_01_GP_PP_01	冰激凌们都爱死我的小马湾照片了！
+BeachCove/Q14/POST_01/BC_Q14_POST_01_01_GP_PaintShop 3_01	天马走开……有些刻薄 但这书法很好看！
+BeachCove/Q14/POST_02/BC_Q14_POST_02_01_GP_RedFloatieGuy_01	我再也不会让你离开我眼睛半步了！
+BeachCove/Q14/POST_03/BC_Q14_POST_03_01_GP_Sprout_01	角和翅膀……要留意这些！
+BeachCove/Q14/POST_04/BC_Q14_POST_04_01_GP_PP_01	冰激凌们都爱死我的小马湾照片了！
+BeachCove/Q14/POST_05/BC_Q14_POST_05_01_GP_IZ_01	菜头真的很喜欢小马湾节 在大家面前喊话太有活力了
+BeachCove/Q14/PRE_01/BC_Q14_PRE_01_01_GP_PaintShop 3_01	我不反对任何小马……但我很喜欢画牌子！
+BeachCove/Q14/PRE_02/BC_Q14_PRE_02_01_GP_RedFloatieGuy_01	贝贝！你在哪里！
+BeachCove/Q14/PRE_03/BC_Q14_PRE_03_01_GP_PP_01	希悦！我的粉丝很喜欢你的舞步 他们都为你点赞了！
+BeachCove/Q14/START/BC_Q14_START_01_CVS_Thunder_01	如果有嫌犯 我们会特别留意的
+BeachCove/Q14/START/BC_Q14_START_02_CVS_Sprout_01	但是嫌犯似乎是一位独角兽和一位天马
+BeachCove/Q14/START/BC_Q14_START_03_CVS_Sprout_02	怎么肯定你不会包庇同类呢？
+BeachCove/Q14/START/BC_Q14_START_04_CVS_Thunder_02	是天马又没有罪
+BeachCove/Q14/START/BC_Q14_START_05_CVS_Sprout_03	所有天马和独角兽都有嫌疑
+BeachCove/Q14/START/BC_Q14_START_06_CVS_SN_01	怎么回事？
+BeachCove/Q14/START/BC_Q14_START_07_CVS_Sprout_04	又一例破坏公物！
+BeachCove/Q14/START/BC_Q14_START_08_CVS_Thunder_03	飞行学院的壁画被乱涂乱画了！
+BeachCove/Q14/START/BC_Q14_START_09_CVS_SN_02	我明白了
+BeachCove/Q14/START/BC_Q14_START_10_CVS_Sprout_05	是的！我们必须……
+BeachCove/Q14/START/BC_Q14_START_11_CVS_SN_03	找目击者？
+BeachCove/Q14/START/BC_Q14_START_12_CVS_Sprout_06	没错
+BeachCove/Q14/START/BC_Q14_START_13_CVS_SN_04	好吧 我去到处问问
+BeachCove/Q14/TOOFAR/BC_Q14_TOOFAR_01_GP_SN_01	还不能走 得先独角回收力力的牌子！
+BeachCove/Q15/COMP/BC_Q15_COMP_01_GP_HC_01	任务完成 学员！一点礼物表示感谢
+BeachCove/Q15/MID_01/BC_Q15_MID_01_01_CVS_HC_01	快帮忙赶兔子 希悦！时间快不多了！
+BeachCove/Q15/POST_01/BC_Q15_POST_01_01_CVS_HC_01	在上面要当心 别掉进海里了
+BeachCove/Q15/START/BC_Q15_START_01_CVS_HC_01	希悦！那堆兔子帮在海湾跑得到处都是
+BeachCove/Q15/START/BC_Q15_START_02_CVS_HC_02	他们在起飞跑道上跳来跳去
+BeachCove/Q15/START/BC_Q15_START_03_CVS_HC_03	把他们都赶回来好让比赛可以正常开始
+BeachCove/Q15/TOOFAR/BC_Q15_TOOFAR_01_GP_HC_01	希悦 还有兔子需要赶 帮它们走出那里
+BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01	水晶闪闪屋 小马利亚友谊与魔法的象征
+BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01b	只要独角兽 天马 和陆马之间和谐共处 它的光芒就会一直照亮着小马湾
+BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_02_CS_BH_01	
+BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_03_CS_Narrator_02	但有一位小马会随时帮助大家渡过难关
+BrighthouseTuto/Q1/COMP/BHT_Q1_COMP_01_CGP_SN_01	这才对嘛 整装待发去参加节日！
+BrighthouseTuto/Q1/EV_02/BHT_Q1_EV_02_01_CS_Bunny_01	
+BrighthouseTuto/Q1/EV_03/BHT_Q1_EV_03_02_GP_SN_01	我的包！被那只兔子抢走了！
+BrighthouseTuto/Q1/EV_04/BHT_Q1_EV_04_01_CGP_SN_01	真机灵！也许我能用陆马魔法变那朵花
+BrighthouseTuto/Q1/EV_05/BHT_Q1_EV_05_01_CGP_SN_01	啊哈！只要到那里就行了
+BrighthouseTuto/Q1/TOOFAR/BHT_Q1_TOOFAR_01_CGP_SN_01	我的包！现在还不能走……得先把它找回来
+BrighthouseTuto/START/EV_01/BHT_START_EV_01_01_CS_SN_01	我醒了！我醒了！
+BrighthouseTuto/START/EV_01/BHT_START_EV_01_02_CS_SN_02	等等 大家都去哪了？
+BrighthouseTuto/START/EV_01/BHT_START_EV_01_03_CS_SN_03	呀！在小马街上准备小马湾节！英奇在等着我！
+BrighthouseTuto/START/EV_01/BHT_START_EV_01_04_CS_SN_04	但是有点不对劲
+BrighthouseTuto/START/START/BHT_START_START_08_CS_SN_05	我的包！这次又把它放哪了？
+MiniGames/DESCRIPTION_DASH	锻炼你翱翔天空的技巧
+MiniGames/DESCRIPTION_FASHION_SHOW	展示你的舞步！
+MiniGames/DESCRIPTION_HERDING_BUNNIES	帮英奇赶兔子
+MiniGames/DESCRIPTION_HERDING_CRABS	帮英奇赶螃蟹和兔子
+MiniGames/DESCRIPTION_RUNNER	跟朋友们一起追上菜头
+MiniGames/MULTIPLAYER_CONTROLS	多人游戏需要连接2个控制器至 Nintendo Switch
+MiniGames/MULTIPLAYER_CONTROLS_INDICATION	按“接受”继续
+MiniGames/NEXT_ROUND	下一回合
+MiniGames/PROGRESSION_EVALUATION_0	很好
+MiniGames/PROGRESSION_EVALUATION_1	非常棒
+MiniGames/PROGRESSION_EVALUATION_2	完美
+MiniGames/PROGRESSION_EVALUATION_EXTRA	完美
+MiniGames/PROGRESSION_EVALUATION_FAIL	失败
+MiniGames/PROGRESSION_EVALUATION_GO	很好
+MiniGames/PROGRESSION_EVALUATION_GREAT	非常棒
+MiniGames/TIMES_UP	时间到！
+MiniGames/TITLE_DASH	力力的飞行学院
+MiniGames/TITLE_FASHION_SHOW	琪琪舞步游行
+MiniGames/TITLE_HERDING_BUNNIES	英奇的赶兔子训练
+MiniGames/TITLE_HERDING_CRABS	兔子螃蟹一起来
+MiniGames/TITLE_RUNNER	菜头轮滑追逐赛
+Brighthouse/BFLY/EV_01/BH_BFLY_EV_01_01_CVS_SN_01	???????????
+Brighthouse/BFLY/EV_01/BH_BFLY_EV_01_02_CVS_SN_02	这里是怎么回事？
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_04_CVS_Shimmerwing_01	
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_05_CVS_SN_04	烁蝶 是你！哇 你力气可真大
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_06_CVS_SN_05	你是怎么困在里面的？
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_07_CVS_Shimmerwing_02	
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_08_CVS_SN_06	抱歉！我听不懂蝴蝶语……
+Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_09_CVS_Shimmerwing_03	
+Brighthouse/BFLY/EV_03/BH_BFLY_EV_03_10_CGP_SN_07	她想要我跟着她 得走了！
+Brighthouse/INTRO/EV_01/BH_INTRO_EV_01_01_CS_SN_01	啊 水晶闪闪屋 还是难以相信我们能住在这么魔幻的地方
+Brighthouse/MH/ACCEPTED/BH_MH_ACCEPTED_01_CGP_HC_01	好的！兔子时间！
+Brighthouse/MH/COMP/BH_MH_COMP_01_CS_HC_01	哇！不错 希悦 非常不错
+Brighthouse/MH/COMP/BH_MH_COMP_02_CS_HC_02	看来今年的比赛有看头了
+Brighthouse/MH/COMP/BH_MH_COMP_03_CS_IZ_01	好极了！小马街 我们来了！
+Brighthouse/MH/COMP/BH_MH_COMP_04_CS_HC_03	是的！嗯 只要等我先把这些盒子挪开
+Brighthouse/MH/COMP/BH_MH_COMP_05_CS_HC_04	
+Brighthouse/MH/COMP/BH_MH_COMP_06_CS_SN_01	我们要帮他吗？
+Brighthouse/MH/COMP/BH_MH_COMP_07_CS_HC_05	不用！这些是我放的 我肯定会负责把它们归回原位…噢！
+Brighthouse/MH/COMP/BH_MH_COMP_08_CS_IZ_02	我觉得他没事 一切都在掌控之中
+Brighthouse/MH/DECLINED/BH_MH_DECLINED_01_CVS_HC_01	退缩了吗？准备好就再回来吧
+Brighthouse/MH/QUESTION/BH_MH_QUESTION_01_CVS_HC_01	准备好赶兔子了吗？
+Brighthouse/MH/REPACPTD/BH_MH_REPACPTD_01_CGP_SN_01	算我一个！
+Brighthouse/MH/REPDCLND/BH_MH_REPDCLND_01_CGP_SN_01	嗯……现在不行 等一会吧？
+Brighthouse/MH/REPEAT/BH_MH_REPEAT_01_CVS_HC_01	回来了？准备好赶兔子了吗？
+Brighthouse/MH/START/BH_MH_START_01_CVS_HC_01	欢迎来到赶兔子大赛官方训练营！
+Brighthouse/MH/START/BH_MH_START_02_CVS_HC_02	规则很简单：将兔子赶到大门外面
+Brighthouse/MH/START/BH_MH_START_03_CVS_HC_03	赶出的兔子越多 你的得分就越高！
+Brighthouse/MH/START/BH_MH_START_04_CVS_HC_04	要留意：大门会改变位置！
+Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_01_CS_SN_01	小马湾节……我们来了！
+Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_02_CS_IZ_01	我们来了！
+Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_03_CS_HC_01	我们来了！
+Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_04_CS_BH_01	
+Brighthouse/Q1/COMP/BH_Q1_COMP_01_CVS_IZ_01	谢谢你 希悦！你救了这座桥！
+Brighthouse/Q1/COMP/BH_Q1_COMP_02_CVS_IZ_02	现在 你只要碰到这样的桌子 就能独角回收
+Brighthouse/Q1/COMP/BH_Q1_COMP_03_CVS_SN_01	谢谢指点！我还在试着习惯用这些魔法……
+Brighthouse/Q1/EV_01/BH_Q1_EV_01_01_GP_SN_01	很好！还差两个！
+Brighthouse/Q1/EV_02/BH_Q1_EV_02_01_GP_SN_01	完美！再剩一个……
+Brighthouse/Q1/EV_03/BH_Q1_EV_03_01_GP_SN_01	全都齐了！现在把它们带回去给小艺
+Brighthouse/Q1/MID_01/BH_Q1_MID_01_01_GP_IZ_01	只要有足够的闪粉 什么东西都能独角回收！
+Brighthouse/Q1/POST_01/BH_Q1_POST_01_01_CVS_IZ_01	以前没有魔法 什么事都很难
+Brighthouse/Q1/POST_01/BH_Q1_POST_01_02_CVS_IZ_02	现在 只要有足够的胶水和闪粉 任何事都有可能！
+Brighthouse/Q1/POST_01/BH_Q1_POST_01_03_CVS_IZ_03	或者我应该说……独角事！
+Brighthouse/Q1/START/BH_Q1_START_01_CVS_IZ_01	还在这里？最好快点，小马湾在等着我们！
+Brighthouse/Q1/START/BH_Q1_START_02_CVS_SN_01	我知道！是这个方向对吗？
+Brighthouse/Q1/START/BH_Q1_START_03_CVS_IZ_02	是的 但是桥断了！
+Brighthouse/Q1/START/BH_Q1_START_04_CVS_IZ_03	我们可以用独角魔法来回收它 独角回收魔法！
+Brighthouse/Q1/START/BH_Q1_START_05_CVS_IZ_04	但是我忘了我的工具在哪放着
+Brighthouse/Q1/START/BH_Q1_START_06_CVS_IZ_05	应该就在附近 能帮我找到它们吗？
+Brighthouse/Q1/START/BH_Q1_START_07_CVS_SN_02	马上就去！
+Brighthouse/Q1/TOOFAR/BH_Q1_TOOFAR_01_GP_IZ_01	我真的很想去小马湾节！别花太长时间
+Brighthouse/Q2/COMP/BH_Q2_COMP_01_CGP_HC_01	你有潜力成为赶兔子比赛的实力选手 你们说对吧？
+Brighthouse/Q2/COMP/BH_Q2_COMP_02_CGP_Bunnies_01	
+Brighthouse/Q2/EV_01/BH_Q2_EV_01_01_GP_SN_01	我得去找英奇 已经让他等了一会了 他可是很守时的
+Brighthouse/Q2/EV_02/BH_Q2_EV_02_01_CVS_HC_01	很好 希悦 你赶兔子的技巧的确不错
+Brighthouse/Q2/EV_02/BH_Q2_EV_02_02_CVS_HC_02	但你得先喂饱它们！
+Brighthouse/Q2/EV_02/BH_Q2_EV_02_03_CVS_HC_03	赶在他们烦躁之前 去找一些萝卜回来
+Brighthouse/Q2/EV_03/BH_Q2_EV_03_01_GP_SN_01	很好！还差两个！
+Brighthouse/Q2/EV_04/BH_Q2_EV_04_01_GP_SN_01	完美！再剩一个……
+Brighthouse/Q2/EV_05/BH_Q2_EV_05_01_GP_SN_01	三个都齐了！现在回去
+Brighthouse/Q2/MID_01/BH_Q2_MID_01_01_GP_HC_01	兔子会朝远离你的方向跳，把它们赶到我这里来
+Brighthouse/Q2/MID_02/BH_Q2_MID_02_01_GP_HC_01	记得刚才坡上的花园吗？里面应该有些萝卜
+Brighthouse/Q2/START/BH_Q2_START_01_CVS_HC_01	原来你在这！我正在找你呢
+Brighthouse/Q2/START/BH_Q2_START_02_CVS_HC_02	就剩你一个了
+Brighthouse/Q2/START/BH_Q2_START_03_CVS_SN_02	剩我一个 干什么？
+Brighthouse/Q2/START/BH_Q2_START_04_CVS_HC_03	锻炼放牧的技巧
+Brighthouse/Q2/START/BH_Q2_START_05_CVS_HC_04	最新的小马湾传统
+Brighthouse/Q2/START/BH_Q2_START_06_CVS_HC_05	赶兔子大赛
+Brighthouse/Q2/START/BH_Q2_START_07_CVS_SN_03	真的要这么做吗？这样兔子太可怜了吧……
+Brighthouse/Q2/START/BH_Q2_START_08_CVS_HC_06	兔子们都很喜欢，它们都告诉我了！
+Brighthouse/Q2/START/BH_Q2_START_09_CVS_Bunnies_01	
+Brighthouse/Q2/START/BH_Q2_START_10_CVS_HC_07	看见了吧？
+Brighthouse/Q2/START/BH_Q2_START_11_CVS_SN_04	那好吧 我该怎么做？
+Brighthouse/Q2/START/BH_Q2_START_12_CVS_HC_08	嗯……有些兔子总是喜欢朝小马街那边跑
+Brighthouse/Q2/START/BH_Q2_START_14_CVS_HC_10	还剩下三只兔子没有找到，它们应该不远
+Brighthouse/Q2/START/BH_Q2_START_15_CVS_HC_11	帮我把它们找回来 好吗？
+Brighthouse/Q2/START/BH_Q2_START_16_CVS_HC_12	它们会朝远离你的方向跳，把它们赶到我这里来
+Brighthouse/Q2/START/BH_Q2_START_17_CVS_SN_05	没问题！马上开始！
+Brighthouse/Q2/TOOFAR/BH_Q2_TOOFAR_01_GP_HC_01	兔子还没赶完呢 希悦
+Brighthouse/Q3/START/BH_Q3_START_13_CVS_HC_09	所以我用盒子把大门挡住了
+Mainstreet/End/EV_05/MS_End_EV_05_01_CS_Sprout_01	你……你……
+Mainstreet/End/EV_05/MS_End_EV_05_02_CS_SN_01	嘿 没事的 我们不会伤害你的
+Mainstreet/End/EV_05/MS_End_EV_05_03_CS_Sprout_02	你……不会吗？
+Mainstreet/End/EV_05/MS_End_EV_05_04_CS_SN_02	不会的 我们只是想让一切恢复正常
+Mainstreet/End/EV_05/MS_End_EV_05_05_CS_Sprout_03	但那是我想要的！
+Mainstreet/End/EV_05/MS_End_EV_05_06_CS_Sprout_04	最近几个月我总感觉适应不了 那些魔法和陌生小马 我……我只是
+Mainstreet/End/EV_05/MS_End_EV_05_07_CS_HC_01	菜头……新事物很难适应 我通常也不太喜欢容易失控的东西
+Mainstreet/End/EV_05/MS_End_EV_05_08_CS_ZP_01	但有时候，改变是一件好事。只要我们敞开心扉去接纳它，它就能激发出我们最好的一面。
+Mainstreet/End/EV_05/MS_End_EV_05_09_CS_SN_03	力力 你的翅膀！
+Mainstreet/End/EV_05/MS_End_EV_05_09_CS_ZP_01B	
+Mainstreet/End/EV_05/MS_End_EV_05_10_CS_IZ_01	噢！魔法回来了！
+Mainstreet/End/EV_05/MS_End_EV_05_11_CS_BH_01	
+Mainstreet/End/EV_05/MS_End_EV_05_12_CS_PP_01	有时改变很棒 就好比化妆
+Mainstreet/End/EV_05/MS_End_EV_05_13_CS_IZ_02	或者闪粉！
+Mainstreet/End/EV_05/MS_End_EV_05_14_CS_SN_04	或者交新朋友
+Mainstreet/End/EV_05/MS_End_EV_05_15_CS_Sprout_05	也许我只是反应过度了……所以你们不生我的气？
+Mainstreet/End/EV_05/MS_End_EV_05_16_CS_HC_02	伙计……只要小马湾恢复平静
+Mainstreet/End/EV_05/MS_End_EV_05_17_CS_SN_05	我们就都是朋友
+Mainstreet/End/EV_05/MS_End_EV_05_18_CS_IZ_03	而且友谊仍然是魔法！
+Mainstreet/End/EV_05/MS_End_EV_05_19_CS_PP_02	嘿 菜头 我有一个主意可以让你高兴起来！
+Mainstreet/End/EV_05/MS_End_EV_05_20_CS_ZP_02	不 不不不不
+Mainstreet/End/EV_05/MS_End_EV_05_21_CS_PP_03	舞步跳起来！
+Mainstreet/INTRO/EV_01/MS_INTRO_EV_01_01_CS_Narrator_01	小马湾节回来了，各族小马在此庆祝各自的特别与才华。有一天，希悦，一切会回到从前的样子
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_01_CS_PP_01	欢迎来到小马街，小马湾的中心，姑娘们！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_02_CS_HC_01	
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_03_CS_PP_02	额……欢迎~所有小马！想不想看一场精彩的演出？
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_04_CS_SN_01	额……当然？
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_05_CS_IZ_01	我们想看！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_06_CS_PP_03	那你们绝对不能错过琪琪游行！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_07_CS_Bystanders_01	琪琪游行！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_08_CS_PP_04	全镇所有小马都会在那里！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_09_CS_SN_02	是的，我们都会去支持你的！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_10_CS_IZ_02	我可以带很多闪粉！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_11_CS_HC_02	而且我写了这首新鲜出炉的曲子 是这样唱的……
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_12_CS_PP_05	
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_13_CS_HC_03	当然，我会去的，以粉丝的身份！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_14_CS_PP_06	好极了！游行那里再见，姑娘们！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_15_CS_HC_04	呃……
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_16_CS_IZ_03	我去制作装饰！一会见！
+Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_17_CS_HC_05	我去公园门口站岗
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_02_CS_ZP_01	嘿 希悦
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_03_CS_SN_02	菜头跑到旧马速工厂里去了！我们得把他追出来！
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_04_CVS_PP_01	但镇子上大家都讨厌我们了 还有什么意义？
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_05_CVS_IZ_01	这都是些误会 我们都是朋友
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_06_CVS_SN_03	我们只要抓住菜头 他会向大家解释清楚
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_07_CVS_ZP_02	但是没有魔法 我们飞不起来
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_08_CVS_PP_02	虽然在这里过得很开心
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_09_CVS_PP_03	但我们也许应该回西风高地去跟妈妈在一起
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_10_CVS_ZP_03	在那里没有小马讨厌我们
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_11_CVS_SN_04	这样是不对的，我们得解决这个问题！
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_12_CVS_HC_01	我们得做点什么，但是怎么才能通过大门？
+Mainstreet/M5S/EV_01/MS_M5S_EV_01_13_CVS_SN_05	我去到处找找看，也许有什么可以帮忙
+Mainstreet/M5S/EV_02/MS_M5S_EV_02_01_CVS_IZ_01	希悦……我是不是也应该离开小镇？也许眼下这是最好的安排
+Mainstreet/M5S/EV_02/MS_M5S_EV_02_02_CVS_SN_01	不！肯定有办法通过大门的
+Mainstreet/M5S/EV_03/MS_M5S_EV_03_01_CVS_ZP_01	谢谢帮忙 希悦
+Mainstreet/M5S/EV_03/MS_M5S_EV_03_02_CVS_PP_01	但是已经太晚了
+Mainstreet/M5S/EV_03/MS_M5S_EV_03_03_CVS_SN_01	帮助朋友 任何时候都不算晚！
+Mainstreet/M5S/EV_04/MS_M5S_EV_04_01_GP_SN_01	如果我能非常快速地通过这个斜坡……
+Mainstreet/M5S/EV_04/MS_M5S_EV_04_02_GP_SN_02	可以用轮滑！
+Mainstreet/M5S/EV_05/MS_M5S_EV_05_01_GP_SN_01	大门打不开……肯定有别的办法
+Mainstreet/M5S/EV_06/MS_M5S_EV_06_01_CVS_HC_01	我不想违反法律，但是如果你有办法可以跳过去……
+Mainstreet/M5S/EV_06/MS_M5S_EV_06_02_CVS_HC_02	我可以假装没看见
+Mainstreet/M5S/EV_06/MS_M5S_EV_06_03_CVS_SN_01	跳过去？嗯……
+Mainstreet/M5S/TOOFAR/MS_M5S_TOOFAR_01_GP_SN_01	我还不能离开，朋友们都在指望着我……
+Mainstreet/MF/ACCEPTED/MS_MF_ACCEPTED_01_CVS_PP_01	好戏开始了！
+Mainstreet/MF/ACCEPTED/MS_MF_ACCEPTED_02_CVS_PP_02	快穿好装扮，没时间浪费了！
+Mainstreet/MF/COMP/MS_MF_COMP_01_CVS_PP_01	你的舞步可真棒，希悦！
+Mainstreet/MF/COMP/MS_MF_COMP_02_CVS_PP_02	我都不知道你有这么大的潜力
+Mainstreet/MF/COMP/MS_MF_COMP_03_CVS_SN_01	我也很惊讶！是你教的不错！
+Mainstreet/MF/COMP/MS_MF_COMP_04_CVS_PP_03	作为感谢，给你这个
+Mainstreet/MF/COMP/MS_MF_COMP_05_CVS_PP_04	小马湾节徽章！
+Mainstreet/MF/COMP/MS_MF_COMP_06_CVS_PP_05	现在你可以去小镇公园参加赶兔子比赛了
+Mainstreet/MF/COMP/MS_MF_COMP_07_CVS_SN_02	我越来越喜欢小马湾节了
+Mainstreet/MF/DECLINED/MS_MF_DECLINED_01_CVS_PP_01	别花的太久！观众都在等着呢！
+Mainstreet/MF/QUESTION/MS_MF_QUESTION_01_CVS_PP_01	你的表演一定会很精彩！准备好跳舞了吗？
+Mainstreet/MF/REPACPTD/MS_MF_REPACPTD_01_CVS_SN_01	当然！为什么不
+Mainstreet/MF/REPDCLND/MS_MF_REPDCLND_01_CVS_SN_01	也许一会吧
+Mainstreet/MF/REPEAT/MS_MF_REPEAT_01_CVS_PP_01	嘿 希悦！想再跳会舞吗？
+Mainstreet/MF/START/MS_MF_START_01_CVS_PP_01	舞服？可我需要的是舞者！
+Mainstreet/MF/START/MS_MF_START_02_CVS_SN_01	所以你需要我另找一位舞者 对吗？
+Mainstreet/MF/START/MS_MF_START_03_CVS_PP_02	不用！最好的舞者就在我眼前
+Mainstreet/MF/START/MS_MF_START_04_CVS_SN_02	我……
+Mainstreet/MR/EV_01/MS_MR_EV_01_01_GP_SN_01	菜头！别跑！我们还能解决这个问题
+Mainstreet/MR/EV_01/MS_MR_EV_01_02_GP_Sprout_01	先解决这个吧！
+Mainstreet/MR/EV_02/MS_MR_EV_02_01_CS_HC_01	希悦！兔子们会去挡着他，但是你自己也要当心！
+Mainstreet/MR/EV_02/MS_MR_EV_02_02_GP_SN_01	我会留意的！
+Mainstreet/MR/EV_02/MS_MR_EV_02_03_GP_SN_02	噢 拜托！
+Mainstreet/MR/EV_02/MS_MR_EV_02_04_GP_Sprout_01	好！
+Mainstreet/MR/EV_02/MS_MR_EV_02_05_GP_Sprout_02	它们是从哪来的！
+Mainstreet/MR/EV_03/MS_MR_EV_03_01_GP_Sprout_01	你永远也抓不到我！
+Mainstreet/MR/EV_03/MS_MR_EV_03_02_GP_SN_01	怎么回事？
+Mainstreet/MR/EV_03/MS_MR_EV_03_03_CS_PP_01	我们来分散他的注意力，希悦。抓住他！
+Mainstreet/MR/EV_03/MS_MR_EV_03_04_CS_ZP_01	不管有没有魔法，我们不能丢下朋友不管！
+Mainstreet/MR/EV_03/MS_MR_EV_03_05_CS_SN_02	我不会让你们失望的！
+Mainstreet/MR/EV_04/MS_MR_EV_04_01_CS_Sprout_01	你为什么就是不停下
+Mainstreet/MR/EV_04/MS_MR_EV_04_02_CS_IZ_01	我也正打算问同样的问题
+Mainstreet/MR/EV_07/MS_MR_EV_07_01_GP_SN_01	快追上了！
+Mainstreet/MR/EV_08/MS_MR_EV_08_01_GP_SN_01	好！
+Mainstreet/MR/EV_09/MS_MR_EV_09_01_GP_Sprout_01	不！
+Mainstreet/MR/EV_10/MS_MR_EV_10_01_GP_Sprout_01	只是走运而已
+Mainstreet/MR/EV_11/MS_MR_EV_11_01_GP_Sprout_01	哈哈！
+Mainstreet/MR/EV_12/MS_MR_EV_12_01_GP_Sprout_01	尝尝这个！
+Mainstreet/MR/EV_13/MS_MR_EV_13_01_GP_Sprout_01	噢！
+Mainstreet/MR/REPACPTD/MS_MR_REPACPTD_01_CVS_SN_01	我想 应该会很有趣
+Mainstreet/MR/REPDCLND/MS_MR_REPDCLND_01_CVS_SN_01	也许下次吧
+Mainstreet/MR/REPEAT/MS_MR_REPEAT_01_CVS_Sprout_01	嘿 希悦 你想不想……再来一场比赛？
+Mainstreet/MR/REPEAT/MS_MR_REPEAT_02_CVS_Sprout_02	我会“假装”逃跑再让你追一次 我演技可是很棒的
+Mainstreet/MR/START/MS_MR_START_01_CS_SN_01	啊啊啊啊啊
+Mainstreet/Q11/ACCEPTED/MS_Q11_ACCEPTED_04_CVS_SN_01	走吧
+Mainstreet/Q11/BLK/MS_Q11_BLK_01_GP_BigBunny_01	
+Mainstreet/Q11/BLK/MS_Q11_BLK_02_GP_Bunnies_01	
+Mainstreet/Q11/BLK/MS_Q11_BLK_03_GP_SN_01	我觉得他们不会让我过去
+Mainstreet/Q11/COMP/MS_Q11_COMP_01_CS_HC_01	够了吧 小敲诈者
+Mainstreet/Q11/COMP/MS_Q11_COMP_02_CS_BigBunny_01	
+Mainstreet/Q11/COMP/MS_Q11_COMP_03_CS_Bunnies_01	
+Mainstreet/Q11/COMP/MS_Q11_COMP_04_CS_SN_01	他直接丢下了他的朋友？
+Mainstreet/Q11/COMP/MS_Q11_COMP_05_CS_HC_02	我觉得他没有真正的朋友 希悦
+Mainstreet/Q11/COMP/MS_Q11_COMP_06_CS_Bunnies_02	
+Mainstreet/Q11/COMP/MS_Q11_COMP_07_CS_SN_02	只要有我们在就不用担心
+Mainstreet/Q11/COMP/MS_Q11_COMP_08_CS_Bunnies_03	
+Mainstreet/Q11/DECLINED/MS_Q11_DECLINED_05_CVS_SN_01	一会吧……
+Mainstreet/Q11/EV_01/MS_Q11_EV_01_01_CVS_SmoothieShop_01	新鲜特制版？没问题！但是它非常脆弱……
+Mainstreet/Q11/EV_01/MS_Q11_EV_01_02_CVS_SmoothieShop_02	你得非常快地把它送到目的地 不然它很快就会化掉
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_01_CVS_BigBunny_01	Y exijo un par de gafas de sol geniales
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_02_CVS_HC_01	什么？又有要求？
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_03_CVS_HC_02	现在他想要一副太阳镜
+Mainstreet/Q11/EV_02/MS_Q11_EV_02_04_CVS_SN_01	太阳镜？呃好吧
+Mainstreet/Q11/EV_03/MS_Q11_EV_03_01_CVS_FashionPony_01	哦 是你啊 想要太阳镜是吗？
+Mainstreet/Q11/EV_03/MS_Q11_EV_03_02_CVS_FashionPony_02	很简单，我不小心把刚才的花弄坏了……你能把它复原吗？
+Mainstreet/Q11/EV_03/MS_Q11_EV_03_03_CVS_SN_01	额……当然！
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_05_CVS_HC_01	好了，你现在可以让开路了
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_06_CVS_BigBunny_01	Y una cosa más
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_07_CVS_HC_02	他说他还剩最后一个要求
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_08_CVS_BigBunny_02	Dame tres globos
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_09_CVS_HC_03	三个气球？为什么？
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_10_CVS_BigBunny_03	¡O yo no haré los videotutoriales para ti!
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_11_CVS_HC_04	呃好吧……三个气球
+Mainstreet/Q11/EV_04/MS_Q11_EV_04_12_CVS_SN_01	那就三个气球吧，我去找
+Mainstreet/Q11/EV_05/MS_Q11_EV_05_01_GP_SN_01	一个气球，还剩两个
+Mainstreet/Q11/EV_06/MS_Q11_EV_06_01_GP_SN_01	再剩一个 在哪里见到过呢？
+Mainstreet/Q11/EV_07/MS_Q11_EV_07_01_GP_SN_01	三个齐了 现在把它们给他
+Mainstreet/Q11/EV_08/MS_Q11_EV_08_01_GP_SN_01	我应该去海滩小湾 找力力的飞行学院
+Mainstreet/Q11/EV_09/MS_Q11_EV_09_04_GP_FashionPony_01	谢谢！给你
+Mainstreet/Q11/MID_01/MS_Q11_MID_01_01_GP_HC_01	确保冰沙是新鲜的 希悦
+Mainstreet/Q11/MID_02/MS_Q11_MID_02_01_GP_HC_01	附近的摊位上应该有太阳镜
+Mainstreet/Q11/MID_03/MS_Q11_MID_03_01_GP_HC_01	我在小马街上看到有气球 去找找 希悦
+Mainstreet/Q11/POST_01/MS_Q11_POST_01_01_GP_SmoothieShop_01	冰沙 特制新鲜版！保证能把你冻成冰！
+Mainstreet/Q11/POST_02/MS_Q11_POST_02_01_GP_FashionPony_01	这次我会试着让这朵花好好活着……
+Mainstreet/Q11/PRE_01/MS_Q11_PRE_01_01_GP_SmoothieShop_01	特制新鲜冰沙！别等它化了！
+Mainstreet/Q11/PRE_02/MS_Q11_PRE_02_01_GP_FashionPony_01	各种时髦眼镜！来试试吧！
+Mainstreet/Q11/PRE_03/MS_Q11_PRE_03_01_GP_ScaredNPC_01	那些兔子挡着去海滩小屋的路……
+Mainstreet/Q11/QUESTION/MS_Q11_QUESTION_03_CVS_SmoothieShop_01	准备好了吗？
+Mainstreet/Q11/RETACPTD/MS_Q11_RETACPTD_08_CVS_SN_01	出发吧！
+Mainstreet/Q11/RETDCLND/MS_Q11_RETDCLND_07_CVS_SN_01	一会吧……
+Mainstreet/Q11/RETRY/MS_Q11_RETRY_06_CVS_SmoothieShop_01	不够新鲜……想再试一遍吗？
+Mainstreet/Q11/START/MS_Q11_START_01_CS_Big Bunny_01	
+Mainstreet/Q11/START/MS_Q11_START_02_CS_Bunnies_01	
+Mainstreet/Q11/START/MS_Q11_START_03_CS_HC_01	大家冷静！发生什么事了？
+Mainstreet/Q11/START/MS_Q11_START_04_CS_Bunnies_02	
+Mainstreet/Q11/START/MS_Q11_START_05_CS_SN_01	他们在说什么？
+Mainstreet/Q11/START/MS_Q11_START_06_CS_HC_02	他的名字叫马塞洛……他有一些要求
+Mainstreet/Q11/START/MS_Q11_START_07_CS_HC_03	他说他们劫持了这条路，除非满足他们的要求，否则是不会让开的
+Mainstreet/Q11/START/MS_Q11_START_08_CS_BigBunny_02	
+Mainstreet/Q11/START/MS_Q11_START_09_CS_Bunnies_03	
+Mainstreet/Q11/START/MS_Q11_START_10_CS_SN_02	他们想要什么
+Mainstreet/Q11/START/MS_Q11_START_11_CS_BigBunny_03	Te exijo un batido extra fresco
+Mainstreet/Q11/START/MS_Q11_START_12_CS_HC_04	他要求一杯特制新鲜的冰沙
+Mainstreet/Q11/START/MS_Q11_START_13_CS_BigBunny_04	Eso es
+Mainstreet/Q11/START/MS_Q11_START_14_CS_Bunnies_04	
+Mainstreet/Q11/START/MS_Q11_START_15_CS_HC_05	你能去找找吗？我会看着他们
+Mainstreet/Q11/START/MS_Q11_START_16_CS_SN_03	特制新鲜冰沙马上来！
+Mainstreet/Q11/TOOFAR/MS_Q11_TOOFAR_01_GP_SN_01	英奇需要我帮忙处理那帮兔子
+Mainstreet/Q16/BLK/MS_Q16_BLK_01_GP_Canterlogic Guard_01	工厂关门了……正在装修
+Mainstreet/Q16/COMP/MS_Q16_COMP_01_CVS_Crowd2_02	天马滚回去！
+Mainstreet/Q16/COMP/MS_Q16_COMP_02_CVS_Crowd3_02	这里不欢迎独角兽！
+Mainstreet/Q16/COMP/MS_Q16_COMP_03_CVS_SN_01	所有小马停下！
+Mainstreet/Q16/COMP/MS_Q16_COMP_04_CVS_Crowd_01	
+Mainstreet/Q16/COMP/MS_Q16_COMP_05_CVS_SN_02	难道你们看不出 这不是你们真正的自我吗？
+Mainstreet/Q16/COMP/MS_Q16_COMP_06_CVS_SN_03	天马和独角兽，他们都和你们一样有真心有梦想
+Mainstreet/Q16/COMP/MS_Q16_COMP_07_CVS_SN_04	他们不是外者！他们是我们的邻居和朋友！
+Mainstreet/Q16/COMP/MS_Q16_COMP_08_CVS_SN_05	我们小马各族一起带回了魔法，让我们的生活更加美好！
+Mainstreet/Q16/COMP/MS_Q16_COMP_09_CVS_Crowd2_03	我的确喜欢魔法！
+Mainstreet/Q16/COMP/MS_Q16_COMP_10_CVS_Crowd1_02	是啊 我也是！
+Mainstreet/Q16/COMP/MS_Q16_COMP_11_CVS_SN_06	有小马想要摧毁魔法，我们可以一起抓住他！
+Mainstreet/Q16/COMP/MS_Q16_COMP_12_CVS_Crowd3_03	台子上的小马说得对！
+Mainstreet/Q16/COMP/MS_Q16_COMP_13_CVS_Crowd1_03	我们把魔法带回来！
+"Mainstreet/Q16/COMP/MS_Q16_COMP_14_CVS_Crowd1,2,3_01"	
+"Mainstreet/Q16/COMP/MS_Q16_COMP_15_CVS_Crowd1,2,3_01"	魔法！魔法！魔法！
+Mainstreet/Q16/EV_01/MS_Q16_EV_01_01_GP_Crowd1_01	我现在没时间聊天！
+Mainstreet/Q16/EV_02/MS_Q16_EV_02_01_GP_Crowd2_01	我忙着抗议呢！
+Mainstreet/Q16/EV_03/MS_Q16_EV_03_01_GP_Crowd3_01	我只会听站在台子上的小马说话！
+Mainstreet/Q16/START/MS_Q16_START_01_CGP_SN_01	他往那里跑了！我得想办法驱散这群小马
+Mainstreet/Q16/START/MS_Q16_START_02_CGP_SN_02	只要想办法吸引大家的注意力 我得找个高点的地方
+Mainstreet/Q16/TOOFAR/MS_Q16_TOOFAR_01_GP_SN_01	现在还不能放弃！得尽快追上菜头！
+Mainstreet/Q4/ACCEPTED/MS_Q4_ACCEPTED_01_CVS_SN_01	好的……我是说……是！
+Mainstreet/Q4/ACCEPTED/MS_Q4_ACCEPTED_02_CVS_Thunder_02	
+Mainstreet/Q4/COMP/MS_Q4_COMP_01_CVS_Thunder_01	做得好 希悦学员！
+Mainstreet/Q4/COMP/MS_Q4_COMP_02_CVS_Thunder_02	你的本领不错 这是你应得的
+Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_01_CVS_SN_01	我还没准备好……
+Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_02_CVS_Thunder_02	无聊 我们早晚都得练
+Mainstreet/Q4/POST_01/MS_Q4_POST_01_01_GP_Thunder_01	"W.I.N.G.S 全称是 ""The Wonderful Institute of No-Gravity Skywalking"" 很酷吧？"
+Mainstreet/Q4/QUESTION/MS_Q4_QUESTION_01_CVS_Thunder_01	准备好练习了吗？
+Mainstreet/Q4/RETACPTD/MS_Q4_RETACPTD_01_CVS_SN_01	当然
+Mainstreet/Q4/RETDCLND/MS_Q4_RETDCLND_01_CVS_SN_01	现在还不行
+Mainstreet/Q4/RETRY/MS_Q4_RETRY_01_CVS_Thunder_01	想再试一次吗 希悦学员？
+Mainstreet/Q4/START/MS_Q4_START_01_CVS_Thunder_01	呃……嘿！你想去哪？
+Mainstreet/Q4/START/MS_Q4_START_02_CVS_SN_01	去参加琪琪游行……吧？
+Mainstreet/Q4/START/MS_Q4_START_03_CVS_Thunder_02	回答错误 希悦是吧？
+Mainstreet/Q4/START/MS_Q4_START_04_CVS_Thunder_03	你已经自动加入了 W.I.N.G.S. 学院
+Mainstreet/Q4/START/MS_Q4_START_05_CVS_Thunder_04	你已被列为“带翅膀的小马新手”必须立刻开始你的训练
+Mainstreet/Q4/START/MS_Q4_START_06_CVS_SN_02	但是我还不怎么会飞
+Mainstreet/Q4/START/MS_Q4_START_07_CVS_Thunder_05	所以才要训练啊
+Mainstreet/Q4/START/MS_Q4_START_08_CVS_SN_03	好吧 有道理
+Mainstreet/Q4/START/MS_Q4_START_09_CVS_Thunder_06	首先你得在地面上通过一个障碍赛课程
+Mainstreet/Q4/START/MS_Q4_START_10_CVS_Thunder_07	在限定时间内拿到所有水晶来赢得你的翅膀
+Mainstreet/Q5/COMP/MS_Q5_COMP_01_CS_PP_01	啊 真是太感谢你了 希悦！
+Mainstreet/Q5/COMP/MS_Q5_COMP_02_CS_SN_01	为了小马湾节 什么都可以
+Mainstreet/Q5/COMP/MS_Q5_COMP_03_CS_PP_02	我会去美乐蒂等着！观众会接踵而来
+Mainstreet/Q5/COMP/MS_Q5_COMP_04_CS_PP_03	来吧各位小马！演出要开始了！
+Mainstreet/Q5/EV_01/MS_Q5_EV_01_01_GP_SN_01	嫌犯是独角兽……嗯……
+Mainstreet/Q5/EV_02/MS_Q5_EV_02_01_GP_SN_01	目标小马是紫色的
+Mainstreet/Q5/EV_03/MS_Q5_EV_03_01_GP_SN_01	破坏者留着蓝色的长发
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_01_CVS_Sprout_01	调查的不错！
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_02_CVS_Sprout_02	紫色身子 蓝色长发的独角兽 是吗？
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_03_CVS_Sprout_03	这很明显是谁，希悦
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_04_CVS_SN_01	不！小艺才不会做那种事呢
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_05_CVS_Sprout_04	作为副警长 我得要逮捕她
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_06_CVS_SN_02	不 等等 我去跟她说一说
+Mainstreet/Q5/EV_04/MS_Q5_EV_04_07_CVS_Sprout_05	你最好在我之前找到她
+Mainstreet/Q5/EV_05/MS_Q5_EV_05_01_GP_SN_01	这一点你说得对 我得去找到她
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_01_CVS_IZ_01	嘿 希悦！小马湾可真棒
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_02_CVS_SN_01	嗯……有小马弄脏了琪琪的牌子
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_03_CVS_IZ_02	哦 不 那可真糟糕
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_04_CVS_IZ_03	我有个主意！我们可以给它独角回收
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_05_CVS_SN_02	是的！那样就能证明不是你做的
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_06_CVS_IZ_04	什么不是我做的？
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_07_CVS_SN_03	没什么！需要什么材料？
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_08_CVS_IZ_05	我们需要颜料！很多粉色颜料！你能找找吗？
+Mainstreet/Q5/EV_06/MS_Q5_EV_06_09_CVS_SN_04	颜料 知道了！
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_01_CVS_PaintShop_01	你好！你在找颜料吗？
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_02_CVS_SN_01	是的！我需要很多粉色颜料
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_03_CVS_PaintShop_02	很好！拿什么做交换？
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_04_CVS_SN_02	交换？
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_05_CVS_PaintShop_03	今天是小马湾节！不许用钱，只许交换
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_06_CVS_PaintShop_04	虽然对生意不好 但很有节日氛围
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_07_CVS_SN_03	那你想要什么来换颜料呢？
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_08_CVS_PaintShop_05	嗯……我长大以后想做天马守卫
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_09_CVS_PaintShop_06	开店很不错 但是
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_10_CVS_PaintShop_07	我非常想要一个那种好看的守卫头盔
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_11_CVS_PaintShop_08	你能帮我找一个吗？
+Mainstreet/Q5/EV_07/MS_Q5_EV_07_12_CVS_SN_04	天马守卫头盔 我去找！
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_01_CVS_FashionPony_01	想要什么样的礼服？
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_02_CVS_SN_01	我想找一个守卫头盔
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_03_CVS_FashionPony_02	守卫头盔？选的好！
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_04_CVS_FashionPony_03	我的确有一个，但是……
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_05_CVS_SN_02	但是你想要交换
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_06_CVS_FashionPony_04	今天是小马湾节！
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_07_CVS_FashionPony_05	我只想要一朵好看的红色的花
+Mainstreet/Q5/EV_08/MS_Q5_EV_08_08_CVS_SN_03	红色的花？好的 我去给你找一朵
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_01_CVS_FlowerShop_01	想要红花吗？
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_02_CVS_SN_01	我可以交换任何东西！
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_03_CVS_FlowerShop_02	啊，我也想，可是，红色的已经没有了
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_04_CVS_FlowerShop_03	不过我有些种子 种在这些花盆里
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_05_CVS_SN_02	嗯……我可以用我的魔法让它们快速长大……如果你乐意的话
+Mainstreet/Q5/EV_09/MS_Q5_EV_09_06_CVS_FlowerShop_04	非常乐意！试试吧
+Mainstreet/Q5/EV_10/MS_Q5_EV_10_01_GP_FlowerShop_01	魔法可真奇妙！
+Mainstreet/Q5/EV_11/MS_Q5_EV_11_01_GP_FashionPony_01	好漂亮的花！给你 崭新的头盔 亲爱的
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_01_CVS_PaintShop_01	看看这个头盔！我来穿上试试
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_02_CVS_SN_01	很好看！
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_03_CVS_PaintShop_02	是吧？“为了小马利亚！”
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_04_CVS_SN_02	对……“为了小马利亚”
+Mainstreet/Q5/EV_12/MS_Q5_EV_12_05_CVS_PaintShop_03	按之前说好的 给你粉色颜料
+Mainstreet/Q5/EV_13/MS_Q5_EV_13_01_GP_SN_03	很好 现在能修好牌子了
+Mainstreet/Q5/EV_14/MS_Q5_EV_14_01_GP_SN_01	线索集齐了 该去找菜头了
+Mainstreet/Q5/EV_15/MS_Q5_EV_15_01_GP_SN_01	我开始喜欢交换了 现在去颜料店！
+Mainstreet/Q5/MID_01/MS_Q5_MID_01_01_GP_Sprout_01	我们需要更多的线索 继续问别的小马
+Mainstreet/Q5/MID_02/MS_Q5_MID_02_01_CVS_IZ_01	所有小马都在为小马湾节准备 你找的摊位应该不远
+Mainstreet/Q5/MID_03/MS_Q5_MID_03_01_CVS_Thunder_01	什么？我的头盔？没门！另找别的小马吧
+Mainstreet/Q5/MID_04/MS_Q5_MID_04_01_CVS_FashionPony_01	肯定有小马在哪里卖花 亲爱的
+Mainstreet/Q5/MID_05/MS_Q5_MID_05_01_GP_PaintShop_01	找到头盔后来找我
+Mainstreet/Q5/MID_06/MS_Q5_MID_06_01_CVS_PP_01	拜托帮我整理好我的形象
+Mainstreet/Q5/MID_06/MS_Q5_MID_06_02_CVS_PP_02	我的脸那个样子 没有小马会来看我的演出的！
+Mainstreet/Q5/MID_06/MS_Q5_MID_06_03_CVS_SN_01	别担心！眨眼之势就能修好
+Mainstreet/Q5/MID_07/MS_Q5_MID_07_01_CVS_IZ_01	这样就行了！准备去牌子那里 独角回收时间！
+Mainstreet/Q5/POST_01/MS_Q5_POST_01_01_CVS_IZ_01	哇！小马街可真漂亮啊
+Mainstreet/Q5/POST_02/MS_Q5_POST_02_01_CVS_PaintShop_01	颜料！小马湾最好的颜料！
+Mainstreet/Q5/POST_03/MS_Q5_POST_03_01_CVS_FashionPony_01	为小马湾节专门设计的服饰！
+Mainstreet/Q5/POST_04/MS_Q5_POST_04_01_CVS_FlowerShop_01	花盆和种子！种各种颜色的花朵！
+Mainstreet/Q5/POST_05/MS_Q5_POST_05_01_CVS_Sprout_01	你找到小艺了吗？
+Mainstreet/Q5/POST_05/MS_Q5_POST_05_02_CVS_SN_01	小艺什么都没做！
+Mainstreet/Q5/POST_05/MS_Q5_POST_05_03_CVS_Sprout_02	不久就知道了 事情有些不对劲
+Mainstreet/Q5/PRE_01/MS_Q5_PRE_01_01_CVS_IZ_01	哇！小马街可真漂亮啊
+Mainstreet/Q5/PRE_02/MS_Q5_PRE_02_01_CVS_PaintShop_01	颜料！小马湾最好的颜料！
+Mainstreet/Q5/PRE_03/MS_Q5_PRE_03_01_CVS_FashionPony_01	为小马湾节专门设计的服饰！
+Mainstreet/Q5/PRE_04/MS_Q5_PRE_04_01_CVS_FlowerShop_01	花盆和种子！种各种颜色的花朵！
+Mainstreet/Q5/START/MS_Q5_START_01_CS_PP_01	
+Mainstreet/Q5/START/MS_Q5_START_02_CS_SN_01	琪琪！出什么事了？
+Mainstreet/Q5/START/MS_Q5_START_03_CS_PP_02	什么事？天大的事！
+Mainstreet/Q5/START/MS_Q5_START_04_CS_PP_03	我漂亮的牌子被毁了！
+Mainstreet/Q5/START/MS_Q5_START_05_CS_PP_04	这样子就没有小马会愿意来看我的演出了
+Mainstreet/Q5/START/MS_Q5_START_06_CS_Sprout_01	岂有此理！小马湾受到了威胁
+Mainstreet/Q5/START/MS_Q5_START_07_CS_PP_05	谁会做这种事呢？
+Mainstreet/Q5/START/MS_Q5_START_08_CS_Sprout_02	有小马想要毁掉节日 我们得找到他！
+Mainstreet/Q5/START/MS_Q5_START_09_CS_Sprout_03	或者她
+Mainstreet/Q5/START/MS_Q5_START_10_CS_PP_06	或者“她”？
+Mainstreet/Q5/START/MS_Q5_START_11_CS_Sprout_04	没有小马能摆脱嫌疑
+Mainstreet/Q5/START/MS_Q5_START_12_CS_SN_02	
+Mainstreet/Q5/START/MS_Q5_START_13_CS_Sprout_05	肯定有小马目击者
+Mainstreet/Q5/START/MS_Q5_START_14_CS_Sprout_06	我需要你去问这片区域所有的小马
+Mainstreet/Q5/START/MS_Q5_START_15_CS_SN_03	我会去问问的
+Mainstreet/Q5/TOOFAR/MS_Q5_TOOFAR_01_GP_SN_01	现在还不能走 有很多事还没办完
+Mainstreet/Q6/COMP/MS_Q6_COMP_01_CVS_Primrose_01	真的太感谢了！
+Mainstreet/Q6/COMP/MS_Q6_COMP_02_CVS_SN_01	只是冰沙而已，没什么大不了的
+Mainstreet/Q6/COMP/MS_Q6_COMP_03_CVS_Primrose_02	不是……谢谢你鼓励我做我自己
+Mainstreet/Q6/COMP/MS_Q6_COMP_04_CVS_SN_02	做你自己永远是最好的选择
+Mainstreet/Q6/COMP/MS_Q6_COMP_05_CVS_SN_03	记住了 他超爱兔子的
+Mainstreet/Q6/COMP/MS_Q6_COMP_06_CVS_Primrose_03	兔子 是的！你能把这些舞服带给琪琪吗？
+Mainstreet/Q6/COMP/MS_Q6_COMP_07_CVS_Primrose_04	在她那里能有更好的用处
+Mainstreet/Q6/COMP/MS_Q6_COMP_08_CVS_SN_04	当然可以 她了解自己的时尚
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_01_CVS_SN_01	嘿！是你吗 珀曼蔷薇？
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_02_CVS_Primrose_01	哦 不是！珀曼蔷薇不见了……消失了
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_03_CVS_SN_02	是你 蔷薇！
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_04_CVS_Primrose_02	是的！是我！但是我不能去参加演出
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_05_CVS_SN_03	为什么？怎么了？
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_06_CVS_Primrose_03	只是……我没有好看的衣服可以穿
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_07_CVS_SN_04	就这个事？我去给你找些穿的！
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_08_CVS_Primrose_04	你真的愿意帮我吗？我需要三件不同的穿戴
+Mainstreet/Q6/EV_01/MS_Q6_EV_01_09_CVS_SN_05	三件？包在我身上！
+Mainstreet/Q6/EV_02/MS_Q6_EV_02_01_GP_ShopKeeper1_01	这是给琪琪的演出专门设计的
+Mainstreet/Q6/EV_03/MS_Q6_EV_03_01_GP_ShopKeeper2_01	舞蹈演出服这就送上来
+Mainstreet/Q6/EV_04/MS_Q6_EV_04_01_GP_ShopKeeper3_01	这个肯定会迎来很多称赞
+Mainstreet/Q6/EV_05/MS_Q6_EV_05_01_GP_SN_01	都拿到了 拿回去给蔷薇
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_01_CVS_Primrose_01	哦 你都找到了？
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_02_CVS_SN_01	是的！现在你可以去参加演出了！
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_03_CVS_Primrose_02	但是……我不能！不能不能！
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_04_CVS_SN_02	什么？为什么？
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_05_CVS_Primrose_03	因为！要是他不喜欢怎么办？
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_06_CVS_SN_03	他？他是谁？
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_07_CVS_Primrose_04	当然是英奇！他是那么的友好 那么的体贴 那么的……他
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_08_CVS_SN_04	哦……我懂了 但是 时尚不是英奇喜欢的
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_09_CVS_Primrose_05	不是吗？你……确定吗？
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_10_CVS_SN_05	他更喜欢赶兔子之类的事情
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_11_CVS_Primrose_06	我本来想着 如果我舞跳的好 就能吸引他的注意
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_12_CVS_Primrose_07	但是我不敢去
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_13_CVS_SN_06	为什么？不用害怕！
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_14_CVS_SN_07	做你自己就是最好的
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_15_CVS_Primrose_08	是吗？
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_16_CVS_SN_08	是的！你只需要做好你自己
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_17_CVS_SN_09	你只需要走上前去说一声：嗨！
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_18_CVS_Primrose_09	我不知道……我想……也许如果有借口跟他说话会好点
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_19_CVS_SN_10	要是你有一杯多余的冰沙可以分享呢？
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_20_CVS_Primrose_10	听上去是个不错的理由
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_21_CVS_SN_11	他超爱南瓜口味的冰沙！
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_22_CVS_Primrose_11	你能帮我拿点吗？
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_23_CVS_SN_12	可以！我来当你的冰沙操作员！
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_24_CVS_SN_13	不过我的冰沙车还在维修！我该去哪里找冰沙呢？
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_01_CVS_SN_01	嘿 你好！我冰沙车里的冰箱坏了
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_02_CVS_SN_02	你能帮我做点冰沙吗？我之后会还你的
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_03_CVS_SmoothieShop_01	没问题 希悦 你需要什么？
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_04_CVS_SN_03	好的！两份南瓜口味的冰沙！
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_05_CVS_SmoothieShop_02	哦不！那些做不了……我南瓜奶油用完了！
+Mainstreet/Q6/EV_07/MS_Q6_EV_07_06_CVS_SmoothieShop_03	但如果你能给我些南瓜的话 我可以现做
+Mainstreet/Q6/EV_08/MS_Q6_EV_08_01_GP_SmoothieShop_01	南瓜口味的冰沙 马上来！
+Mainstreet/Q6/EV_09/MS_Q6_EV_09_01_GP_SN_01	南瓜都集齐了 现在去冰沙摊位那边
+Mainstreet/Q6/EV_10/MS_Q6_EV_10_01_GP_SN_01	我该去琪琪那里把事情告诉她……
+Mainstreet/Q6/MID_01/MS_Q6_MID_01_01_CVS_PP_01	你还没找到蔷薇吗？
+Mainstreet/Q6/MID_01/MS_Q6_MID_01_02_CVS_PP_02	唉 蔷薇可真是的 她可能在哪里躲着
+Mainstreet/Q6/MID_02/MS_Q6_MID_02_01_GP_Primrose_05	问问服装店 我订购了三件不同的穿戴
+Mainstreet/Q6/MID_03/MS_Q6_MID_03_01_GP_Primrose_01	我在附近看到有冰沙车停着
+Mainstreet/Q6/MID_04/MS_Q6_MID_04_01_CVS_SmoothieShop_01	冰沙！水果味的冰沙！
+Mainstreet/Q6/POST_01/MS_Q6_POST_01_01_CVS_SmoothieShop_01	冰沙！水果味的冰沙！
+Mainstreet/Q6/POST_02/MS_Q6_POST_02_01_GP_ShopKeeper1_01	琪琪游行肯定会大获成功
+Mainstreet/Q6/POST_03/MS_Q6_POST_03_01_GP_ShopKeeper2_01	琪琪公主真的很会表演
+Mainstreet/Q6/POST_04/MS_Q6_POST_04_01_GP_ShopKeeper3_01	我本来不太喜欢交换 但我现在开始改变注意了
+Mainstreet/Q6/PRE_01/MS_Q6_PRE_01_01_CVS_SmoothieShop_01	冰沙！水果味的冰沙！
+Mainstreet/Q6/PRE_02/MS_Q6_PRE_02_01_GP_ShopKeeper1_01	西风高地的最新时尚！
+Mainstreet/Q6/PRE_03/MS_Q6_PRE_03_01_GP_ShopKeeper2_01	帽子很难卖给独角兽 他们很容易会戳破帽子
+Mainstreet/Q6/PRE_04/MS_Q6_PRE_04_01_GP_ShopKeeper3_01	来自缰绳森林的时尚丝绸！
+Mainstreet/Q6/START/MS_Q6_START_01_CVS_PP_01	你找到是谁弄坏了我的牌子吗？
+Mainstreet/Q6/START/MS_Q6_START_02_CVS_SN_01	实际上……没有
+Mainstreet/Q6/START/MS_Q6_START_03_CVS_PP_02	嗯算了 反正现在看起来好多了 就这样就行
+Mainstreet/Q6/START/MS_Q6_START_04_CVS_PP_03	希悦！观众都来了，可还缺了什么……
+Mainstreet/Q6/START/MS_Q6_START_05_CVS_PP_04	珀曼蔷薇！我的搭档舞者！
+Mainstreet/Q6/START/MS_Q6_START_06_CVS_PP_05	没有舞者怎么举办舞会！可以帮我找找她吗？
+Mainstreet/Q6/START/MS_Q6_START_07_CVS_SN_02	当然！我该去哪里找？
+Mainstreet/Q6/START/MS_Q6_START_08_CVS_PP_06	我不确定……她喜欢藏起来……还喜欢冰沙！
+Mainstreet/Q6/START/MS_Q6_START_09_CVS_SN_03	我去找她
+Mainstreet/Q6/START/MS_Q6_START_10_CVS_PP_07	演出必须继续
+Mainstreet/Q6/TOOFAR/MS_Q6_TOOFAR_01_GP_SN_01	还没完事呢
+Mainstreet/Q7/COMP/MS_Q7_COMP_01_CVS_HC_01	看 看 你！戴着小马湾节徽章和各种装扮
+Mainstreet/Q7/COMP/MS_Q7_COMP_02_CS_HC_01	准备好参加赶兔子大赛了吗？
+Mainstreet/Q7/COMP/MS_Q7_COMP_03_CS_HC_02	我们去小镇公园吧
+Mainstreet/Q7/COMP/MS_Q7_COMP_04_CS_BH_01	
+Mainstreet/Q7/EV_01/MS_Q7_EV_01_01_GP_HC_01	对不起 希悦 你得带着小马湾节徽章才能进来
+Mainstreet/Q7/EV_01/MS_Q7_EV_01_02_GP_HC_02	这场比赛是非常正规和严肃的
+Mainstreet/Q7/EV_01/MS_Q7_EV_01_03_GP_HC_03	找一面魔法镜子把它戴上
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_01_CVS_HC_01	是啊 兔子们经常会说一些很有趣的话
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_02_CVS_Primrose_01	能跟我仔细讲讲吗 英奇警长？
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_03_CVS_HC_02	嗯 当然！而且你可以只叫我英奇就好
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_04_CVS_Primrose_02	啊 好的……英奇……
+Mainstreet/Q7/POST_01/MS_Q7_POST_01_05_CVS_SN_01	
+Mainstreet/Q7/START/MS_Q7_START_01_CVS_HC_01	你得先获得小马湾节徽章才能进入小镇公园
+Mainstreet/Q7/START/MS_Q7_START_02_CVS_HC_02	同时 琪琪的演出需要你的帮忙
+Mainstreet/SS/EV_01/MS_SS_EV_01_01_CGP_Sprout_01	小马湾的居民们！
+Mainstreet/SS/EV_01/MS_SS_EV_01_02_CGP_Sprout_02	不用过度惊慌
+Mainstreet/SS/EV_01/MS_SS_EV_01_03_CGP_Sprout_03	虽然确实是特殊时期！
+Mainstreet/SS/EV_01/MS_SS_EV_01_04_CGP_Sprout_04	镇子上出现了不止一个 而是两个嫌犯
+Mainstreet/SS/EV_01/MS_SS_EV_01_05_CGP_Sprout_05	我们还在调查案件 但目前我能透露的是
+Mainstreet/SS/EV_01/MS_SS_EV_01_06_CGP_Sprout_06	嫌犯不是来自小马湾
+Mainstreet/SS/EV_01/MS_SS_EV_01_07_CGP_Sprout_07	他们都不是陆马
+Mainstreet/SS/EV_01/MS_SS_EV_01_08_CGP_Sprout_08	无需过度惊慌
+Mainstreet/SS/EV_01/MS_SS_EV_01_09_CGP_Sprout_09	但要时刻留意！
+Mainstreet/SS/EV_02/MS_SS_EV_02_10_GP_Crowd1_01	我害怕！
+Mainstreet/SS/EV_03/MS_SS_EV_03_11_GP_Crowd2_01	我们该怎么办？
+Mainstreet/SS/EV_04/MS_SS_EV_04_01_GP_Sprout_01	我们不能让此类事件再次发生
+Mainstreet/SS/EV_04/MS_SS_EV_04_02_GP_Sprout_02	必须让嫌犯绳之以法
+TownPark/MC/ACCEPTED/TP_MC_ACCEPTED_01_CVS_HC_01	好极了！但你肯定不能打破我的记录
+TownPark/MC/ACCEPTED/TP_MC_ACCEPTED_02_CVS_SN_01	我们拭目以待吧
+TownPark/MC/COMP/TP_MC_COMP_01_CS_HC_01	哇 希悦……分数可真高！
+TownPark/MC/COMP/TP_MC_COMP_02_CS_SN_01	你觉得很厉害吧？
+TownPark/MC/COMP/TP_MC_COMP_03_CS_HC_02	我觉得吗？
+TownPark/MC/COMP/TP_MC_COMP_04_CS_SN_02	说出来吧
+TownPark/MC/COMP/TP_MC_COMP_05_CS_HC_03	好吧……我确实有点觉得你很厉害
+TownPark/MC/COMP/TP_MC_COMP_06_CS_SN_03	哈！我就知道！
+TownPark/MC/COMP/TP_MC_COMP_07_CS_Sprout_01	英奇警长！
+TownPark/MC/COMP/TP_MC_COMP_08_CS_Sprout_02	小镇上又出现了一个大威胁
+TownPark/MC/COMP/TP_MC_COMP_09_CS_HC_04	威胁？这次又怎么了？
+TownPark/MC/COMP/TP_MC_COMP_10_CS_Sprout_03	一群焦躁的兔子占领了小马街
+TownPark/MC/COMP/TP_MC_COMP_11_CS_Sprout_04	他们在挡着去往海滩小湾的路
+TownPark/MC/COMP/TP_MC_COMP_12_CS_HC_04	我去看看 应该没那么严重吧
+TownPark/MC/COMP/TP_MC_COMP_13_CS_Sprout_05	哦 问题很严重 英奇警长
+TownPark/MC/COMP/TP_MC_COMP_14_CS_HC_05	你能先去吗 希悦？我一会就过去
+TownPark/MC/COMP/TP_MC_COMP_15_CS_SN_05	好的 “英奇警长”！
+TownPark/MC/COMP/TP_MC_COMP_16_CS_HC_06	呃……
+TownPark/MC/DECLINED/TP_MC_DECLINED_01_CVS_SN_01	现在还不行……我还有别的事情没忙完
+TownPark/MC/DECLINED/TP_MC_DECLINED_02_CVS_HC_01	准备了就回来
+TownPark/MC/EV_01/TP_MC_EV_01_01_GP_SN_01	我应该去小马街调查兔子的问题
+TownPark/MC/EV_02/TP_MC_EV_02_01_GP_Sprout_01	走错了！小马街在相反的方向！
+TownPark/MC/EV_03/TP_MC_EV_03_01_GP_SN_01	我应该回到小马街去
+TownPark/MC/POST_01/TP_MC_POST_01_01_GP_IZ_01	小马街？路过牌子就是！应该很明显！
+TownPark/MC/QUESTION/TP_MC_QUESTION_01_CVS_HC_01	准备好参加大赛了吗？
+TownPark/MC/REPACPTD/TP_MC_REPACPTD_01_CVS_SN_01	小动物们来吧
+TownPark/MC/REPDCLND/TP_MC_REPDCLND_01_CVS_SN_01	不了 我需要休息一会
+TownPark/MC/REPEAT/TP_MC_REPEAT_01_CVS_HC_01	想再比一场吗？
+TownPark/MC/START/TP_MC_START_01_CVS_HC_01	这一刻终于到来了
+TownPark/MC/START/TP_MC_START_02_CVS_HC_02	欢迎来到 兔子螃蟹一起来
+TownPark/MC/START/TP_MC_START_03_CVS_HC_03	赶进大门的兔子和螃蟹越多 得分越高
+TownPark/MC/START/TP_MC_START_04_CVS_HC_04	螃蟹喜欢进泥坑里去 所以要留意
+TownPark/Q10/COMP/TP_Q10_COMP_01_CVS_HC_01	很棒 希悦！你做得很好
+TownPark/Q10/COMP/TP_Q10_COMP_02_CVS_HC_02	这些螃蟹给了我一个主意……
+TownPark/Q10/COMP/TP_Q10_COMP_03_CVS_SN_01	嗯……
+TownPark/Q10/EV_01/TP_Q10_EV_01_01_GP_HC_01	你得避免泥坑 螃蟹喜欢躲在那里面
+TownPark/Q10/EV_02/TP_Q10_EV_02_01_GP_SN_01	那还不错，对吧，小螃蟹？
+TownPark/Q10/EV_03/TP_Q10_EV_03_01_GP_SN_01	还有一只！
+TownPark/Q10/EV_04/TP_Q10_EV_04_01_GP_SN_01	三只了
+TownPark/Q10/MID_01/TP_Q10_MID_01_01_GP_HC_01	与兔子不同的是 螃蟹会跟着你跑
+TownPark/Q10/START/TP_Q10_START_01_CVS_HC_01	动物们有些不对劲
+TownPark/Q10/START/TP_Q10_START_02_CVS_HC_02	三只螃蟹离开了海滩 跑到这里来了
+TownPark/Q10/START/TP_Q10_START_03_CVS_HC_03	你能把它们赶到这里来吗？我好看着他们
+TownPark/Q10/TOOFAR/TP_Q10_TOOFAR_01_GP_HC_01	来吧，希悦，我需要那些螃蟹！
+TownPark/Q12/ACCEPTED/TP_Q12_ACCEPTED_01_CVS_SN_01	当然 为什么不！
+TownPark/Q12/COMP/TP_Q12_COMP_01_CVS_Zoom_01	不错 学员 你已经几乎会飞了
+TownPark/Q12/DECLINED/TP_Q12_DECLINED_01_CVS_SN_01	一会吧
+TownPark/Q12/POST_01/TP_Q12_POST_01_01_CVS_Zoom_01	学员，你有进步的迹象！
+TownPark/Q12/QUESTION/TP_Q12_QUESTION_01_CVS_Zoom_01	想穿着来试试障碍赛吗？
+TownPark/Q12/RETACPTD/TP_Q12_RETACPTD_01_CVS_SN_01	可以练练我的动作！
+TownPark/Q12/RETDCLND/TP_Q12_RETDCLND_01_CVS_SN_01	谢谢 不了 一会吧
+TownPark/Q12/RETRY/TP_Q12_RETRY_01_CVS_Zoom_01	至少你努力了 想再试一遍吗？
+TownPark/Q12/START/TP_Q12_START_01_CVS_Zoom_01	希悦学员！欢迎回来！
+TownPark/Q12/START/TP_Q12_START_02_CVS_Zoom_02	看来你已经用上了高速装备
+TownPark/Q12/START/TP_Q12_START_03_CVS_SN_01	哦 你是说我的
+TownPark/Q12/START/TP_Q12_START_04_CVS_Zoom_03	轮滑鞋！
+TownPark/Q8/COMP/TP_Q8_COMP_01_CVS_IZ_01	哇塞 真是独角回收艺术品
+TownPark/Q8/COMP/TP_Q8_COMP_02_CVS_HC_01	好多了
+TownPark/Q8/COMP/TP_Q8_COMP_03_CVS_HC_02	你确实把我画得很好看
+TownPark/Q8/COMP/TP_Q8_COMP_04_CVS_SN_01	这不太容易……
+TownPark/Q8/COMP/TP_Q8_COMP_05_CVS_HC_03	嗯……总之谢谢你
+TownPark/Q8/EV_01/TP_Q8_EV_01_01_GP_SN_01	作案者是天马……很奇怪
+TownPark/Q8/EV_02/TP_Q8_EV_02_01_GP_SN_01	嫌犯是白色的
+TownPark/Q8/EV_03/TP_Q8_EV_03_01_GP_SN_01	短的、粉蓝相间的鬃毛？
+TownPark/Q8/EV_04/TP_Q8_EV_04_01_CVS_ZP_01	所有线索集齐了
+TownPark/Q8/EV_04/TP_Q8_EV_04_02_CVS_ZP_02	但是这个描述……
+TownPark/Q8/EV_04/TP_Q8_EV_04_03_CVS_SN_01	指的是你 力力
+TownPark/Q8/EV_04/TP_Q8_EV_04_04_CVS_ZP_03	我根本就不在这里！
+TownPark/Q8/EV_04/TP_Q8_EV_04_05_CVS_Sprout_01	啊哈！天马可以轻松飞离现场
+TownPark/Q8/EV_04/TP_Q8_EV_04_06_CVS_Sprout_02	很抱歉我得要逮捕你
+TownPark/Q8/EV_04/TP_Q8_EV_04_07_CVS_ZP_04	你逮捕不到
+TownPark/Q8/EV_04/TP_Q8_EV_04_08_CVS_Sprout_03	啊 嫌犯逃跑了！
+TownPark/Q8/EV_04/TP_Q8_EV_04_09_CVS_Sprout_04	我们得阻止小马湾继续承受这些攻击
+TownPark/Q8/EV_04/TP_Q8_EV_04_10_CVS_Sprout_05	我去告诉市民们即将到来的危险！
+TownPark/Q8/EV_04/TP_Q8_EV_04_11_CVS_SN_02	事情有些不对劲……我的朋友们怎么会做这些事情？
+TownPark/Q8/EV_04/TP_Q8_EV_04_12_CVS_BH_01	
+TownPark/Q8/EV_05/TP_Q8_EV_05_13_GP_SN_03	我得去把牌子修好……
+TownPark/Q8/EV_06/TP_Q8_EV_06_01_CVS_IZ_01	我比较喜欢英奇的角 这真是艺术品！
+TownPark/Q8/EV_06/TP_Q8_EV_06_02_CVS_SN_01	是啊……但我觉得我们应该把它独角回收
+TownPark/Q8/EV_06/TP_Q8_EV_06_03_CVS_IZ_02	真的？
+TownPark/Q8/EV_06/TP_Q8_EV_06_04_CVS_SN_02	是的……需要什么？
+TownPark/Q8/EV_06/TP_Q8_EV_06_05_CVS_IZ_03	首先可以来一些黄色颜料！
+TownPark/Q8/EV_06/TP_Q8_EV_06_06_CVS_SN_04	好的！我去找一些
+TownPark/Q8/EV_07/TP_Q8_EV_07_01_CVS_PaintGuy2_01	黄色颜料？是的 我可以交换一些
+TownPark/Q8/EV_07/TP_Q8_EV_07_02_CVS_PaintGuy2_02	我在做这份水果沙拉 但我需要一些原料
+TownPark/Q8/EV_07/TP_Q8_EV_07_03_CVS_SN_01	你需要什么？
+TownPark/Q8/EV_07/TP_Q8_EV_07_04_CVS_PaintGuy2_03	你可以帮我拿一些苹果和梨子吗？
+TownPark/Q8/EV_07/TP_Q8_EV_07_05_CVS_SN_02	我去拿
+TownPark/Q8/EV_08/TP_Q8_EV_08_01_GP_SN_01	好！再剩一个
+TownPark/Q8/EV_09/TP_Q8_EV_09_01_GP_SN_01	好极了 现在回去颜料店那里
+TownPark/Q8/EV_10/TP_Q8_EV_10_01_CVS_PaintGuy2_01	好棒的水果！现在再剩最重要的一个
+TownPark/Q8/EV_10/TP_Q8_EV_10_02_CVS_PaintGuy2_02	一个大南瓜把它们混合到一块 要非常大的
+TownPark/Q8/EV_10/TP_Q8_EV_10_03_CVS_SN_01	巨大的南瓜 好的
+TownPark/Q8/EV_11/TP_Q8_EV_11_01_CVS_PumpkinLady_01	哦 希悦 我可以给你我最大的南瓜
+TownPark/Q8/EV_11/TP_Q8_EV_11_02_CVS_PumpkinLady_02	但是它还没长出来 你可以用你的魔法吗？
+TownPark/Q8/EV_11/TP_Q8_EV_11_03_CVS_PumpkinLady_03	把它长大 它就是你的了
+TownPark/Q8/EV_12/TP_Q8_EV_12_01_GP_SN_01	好！再差一点就成了
+TownPark/Q8/EV_13/TP_Q8_EV_13_01_GP_SN_01	哦……这也太大了！这该怎么弄回去？
+TownPark/Q8/EV_14/TP_Q8_EV_14_01_GP_SN_01	线索集齐了 可是……
+TownPark/Q8/EV_15/TP_Q8_EV_15_01_CVS_PaintGuy2_01	我的天哪！好大的南瓜！嗯……谢谢……
+TownPark/Q8/EV_15/TP_Q8_EV_15_02_CVS_PaintGuy2_02	给 你应得的 随意画吧
+TownPark/Q8/EV_16/TP_Q8_EV_16_01_GP_SN_01	很好！现在回到牌子那里去
+TownPark/Q8/MID_01/TP_Q8_MID_01_01_GP_ZP_01	我们需要更多线索 继续到处问问
+TownPark/Q8/MID_02/TP_Q8_MID_02_01_GP_PaintGuy2_01	在附近可以找到苹果树和梨子树
+TownPark/Q8/MID_03/TP_Q8_MID_03_01_GP_PaintGuy2_01	很好 但是还需要一个水果
+TownPark/Q8/MID_04/TP_Q8_MID_04_01_GP_IZ_01	我们要不要把牙齿画回去？
+TownPark/Q8/MID_05/TP_Q8_MID_05_01_GP_HC_01	看在兔子的份上 需要有小马把牌子修好！
+TownPark/Q8/MID_06/TP_Q8_MID_06_01_GP_PaintGuy2_01	这附近有一小块南瓜地 去要一块大的
+TownPark/Q8/POST_01/TP_Q8_POST_01_01_GP_Sprout_01	嫌犯越来越多了……小马湾有危险！
+TownPark/Q8/POST_02/TP_Q8_POST_02_01_GP_PaintGuy2_01	也许我能把这个南瓜做成一个可移动的房子
+TownPark/Q8/POST_03/TP_Q8_POST_03_01_GP_PumpkinLady_01	陆马魔法比我想象的还要强大
+TownPark/Q8/POST_04/TP_Q8_POST_04_01_GP_IZ_01	祝你比赛好运！你可以的
+TownPark/Q8/PRE_01/TP_Q8_PRE_01_01_GP_PaintGuy2_01	嗯……这个季节的水果很可口
+TownPark/Q8/PRE_02/TP_Q8_PRE_02_01_GP_PumpkinLady_01	南瓜！好吃又可以做装饰！
+TownPark/Q8/START/TP_Q8_START_01_CS_HC_01	我们到了！一切准备好……什么
+TownPark/Q8/START/TP_Q8_START_02_CS_SN_01	呃……你还好吗？
+TownPark/Q8/START/TP_Q8_START_03_CS_HC_02	看我的牌子！
+TownPark/Q8/START/TP_Q8_START_04_CS_SN_02	没有那么糟嘛
+TownPark/Q8/START/TP_Q8_START_05_CS_HC_03	看看我的牙齿！
+TownPark/Q8/START/TP_Q8_START_06_CS_HC_04	这是搞破坏！看来我们得做一些调查了
+TownPark/Q8/START/TP_Q8_START_07_CS_SN_03	谁会这么想要毁掉小马湾节呢？
+TownPark/Q8/START/TP_Q8_START_08_CS_ZP_01	有谁说调查吗？我喜欢调查！我有可靠的私家侦探资历
+TownPark/Q8/START/TP_Q8_START_09_CS_HC_05	你不是应该在飞行学院吗？
+TownPark/Q8/START/TP_Q8_START_10_CS_ZP_02	啊 大家都想着晒太阳去了
+TownPark/Q8/START/TP_Q8_START_11_CS_ZP_03	而且我们得找目击者！这件事有趣多了
+TownPark/Q8/START/TP_Q8_START_12_CS_ZP_04	到处问问 肯定有小马看见过什么
+TownPark/Q8/START/TP_Q8_START_13_CS_SN_04	呃 好吧 我去调查
+TownPark/Q8/TOOFAR/TP_Q8_TOOFAR_01_GP_SN_01	得去帮英奇修好那个 不太糟糕的牌子
+TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_01_CVS_SN_01	我想是的……
+TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_02_CVS_Zoom_01	来看看你的表现
+TownPark/Q9/COMP/TP_Q9_COMP_01_CVS_Zoom_01	好好好……让我印象深刻
+TownPark/Q9/COMP/TP_Q9_COMP_02_CVS_Zoom_02	也许你真能达标成为一名高级飞行员
+TownPark/Q9/COMP/TP_Q9_COMP_03_CVS_Zoom_03	这是你的奖励
+TownPark/Q9/COMP/TP_Q9_COMP_04_CVS_SN_01	嘿！是我的轮滑鞋！我正打算找呢！
+TownPark/Q9/COMP/TP_Q9_COMP_05_CVS_Zoom_04	不用客气
+TownPark/Q9/COMP/TP_Q9_COMP_06_CVS_SN_02	呃……谢谢？
+TownPark/Q9/DECLINED/TP_Q9_DECLINED_01_CVS_SN_01	呃……我觉得不行
+TownPark/Q9/DECLINED/TP_Q9_DECLINED_02_CVS_Zoom_01	这个态度可赢不得翅膀
+TownPark/Q9/QUESTION/TP_Q9_QUESTION_01_CVS_Zoom_01	准备好了吗？
+TownPark/Q9/RETACPTD/TP_Q9_RETACPTD_01_CVS_SN_01	当然 我们来试试！
+TownPark/Q9/RETDCLND/TP_Q9_RETDCLND_01_CVS_SN_01	呃 我觉得还不行
+TownPark/Q9/RETRY/TP_Q9_RETRY_01_CVS_Zoom_01	应该不是很糟糕 但你需要改进 想再试一遍吗？
+TownPark/Q9/START/TP_Q9_START_01_CVS_Zoom_01	啊 希悦学员 我听说过你
+TownPark/Q9/START/TP_Q9_START_02_CVS_SN_01	你早就认识我了 速姆 记得吗？
+TownPark/Q9/START/TP_Q9_START_03_CVS_Zoom_02	别在乎那些细节 学员
+TownPark/Q9/START/TP_Q9_START_04_CVS_Zoom_03	来这里是为了评估你的运动技能
+TownPark/Q9/START/TP_Q9_START_05_CVS_SN_02	我的什么？
+TownPark/Q9/START/TP_Q9_START_06_CVS_Zoom_04	你在高级障碍赛中的表现水平
+VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT1	使用左摇杆移动
+VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT2	将兔子赶至大门处得分
+VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT1	使用左摇杆移动
+VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT2	将兔子和螃蟹赶至对应的大门得分
+VideoTutorials/VIDEOTUTORIAL_HC_SPECIALPTUT1	这是一个特别皮纳塔！\n找到它们来解锁新角色 并与朋友们一起玩
+VideoTutorials/VIDEOTUTORIAL_IZ_UNICYCLINGTUT1	当你碰到这样的桌子时 按B键进行独角回收！
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT1	女士们先生们
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT10	使用方向键和A键跟随节奏
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT11	命中的越多 分数越高！
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT2	欢迎来到琪琪游行 小马湾节版本！
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT3	首先我们得穿上好看的衣服！
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT4	在菜单中选择最好看的服装
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT5	按A键穿上
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT6	按LB、RB或向边缘移动来查看更多配饰
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT7	当你准备好时 按这个按钮
+VideoTutorials/VIDEOTUTORIAL_PP_MAGICMTUT1	留意魔法镜子！\n按B键随时更换装扮！
+VideoTutorials/VIDEOTUTORIAL_SN_BUTTERTUT1	跟随蝴蝶找到你下一步目标
+VideoTutorials/VIDEOTUTORIAL_SN_CLEARGAME	你可以继续随意探寻小马湾！\n继续玩各种小游戏 找到剩余的魔法币
+VideoTutorials/VIDEOTUTORIAL_SN_JUMPTUT1	按A键跳跃
+VideoTutorials/VIDEOTUTORIAL_SN_KICKTUT1	使用此按钮踢树\n别忘了收集掉下的物品！
+VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT1	可以用我的陆马魔法让植物快速长大 按B键使用
+VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT2	利用它们跳至更高的地方
+VideoTutorials/VIDEOTUTORIAL_SN_MOVTUT1	使用左摇杆移动
+VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT3	按A键跳过陷阱
+VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT2	按Y键穿上轮滑鞋
+VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT3	如果想慢下来 按Y键将它们脱下
+VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT4	用左摇杆左右移动躲开障碍物
+VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT5	通过圆环可以加速
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_BUTTERTUT	蝴蝶向导
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_CLEARGAME	游戏已通关
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_JUMPTUT	跳跃
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_KICKTUT	踢树
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_MAGICMTUT	魔法镜子
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_MAGICPTUT	陆马魔法
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_MOVTUT	移动
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_ROLLERTUT	轮滑
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_SPECIALPTUT	特别皮纳塔
+VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_UNICYCLINGTUT	独角回收
+ScoreScreen/SCORE_DRAW	平局
+ScoreScreen/SCORE_MAGIC_BITS	魔法币
+ScoreScreen/SCORE_PLAYER1_WIN	玩家 1 获胜
+ScoreScreen/SCORE_PLAYER2_WIN	玩家 2 获胜
+ScoreScreen/SCORE_PLAYER_WIN	{[PLAYER_NAME]} 获胜
+ScoreScreen/SCORE_SCORE	得分
+ScoreScreen/SCORE_TITLE	游戏结束
+ScoreScreen/SCORE_UNLOCK	小游戏已解锁
+Characters/BigBunny_Name	马塞洛
+Characters/Bunny1_Name	兔子
+Characters/Bunny2_Name	兔子
+Characters/CanterlogicGuard_Name	守卫
+Characters/Crowd1_Name	众马
+Characters/Crowd2_Name	众马
+Characters/Crowd3_Name	众马
+Characters/Fashion1_Name	服装店
+Characters/FlowerShop_Name	花店
+Characters/Hitch_Name	英奇
+Characters/Izzy_Name	小艺
+Characters/Narrator_Name	旁白
+Characters/PaintShopBeach_Name	牌子画师
+Characters/PaintShopMane_Name	油漆店
+Characters/Pipp_Name	琪琪
+Characters/Primrose_Name	珀曼蔷薇
+Characters/PumpkinLady_Name	南瓜女士
+Characters/RedFloatieGuy_Name	救生圈小马
+Characters/Shimmerwing_Name	烁蝶
+Characters/ShopKeeper1_Name	店员
+Characters/ShopKeeper2_Name	店员
+Characters/ShopKeeper3_Name	店员
+Characters/SmootheShop_Name	冰沙摊位
+Characters/Sprout_Name	菜头
+Characters/Sunny_Name	希悦
+Characters/Thunder_Name	雷鸣
+Characters/Zipp_Name	力力
+Characters/Zoom_Name	速姆
+Menu/1P	1 位玩家
+Menu/2P	2 位玩家
+Menu/ACCEPT	确认
+Menu/ANIMATION	动画
+Menu/ART_DIRECTOR_CHARACTER_ARTIST	艺术总监与角色艺术
+Menu/AUDIO	声音
+Menu/BACK	返回
+Menu/BEACHCOVE_TITLE	海滩小湾
+Menu/BRIGHTHOUSE_TITLE	水晶闪闪屋
+Menu/BUSINESS_DEV	商务扩展
+Menu/CHANGE_SLOT_CONFIRMATION	确实要切换存档吗？
+Menu/CONTINUE	继续
+Menu/CONTROLLER_DISCONNECTED	请重新连接控制器
+Menu/CONTROLS	控制
+Menu/CREATIVE_DIRECTOR	创意总监
+Menu/DELETE	删除
+Menu/DELETE_CONFIRMATION	确实要删除吗？
+Menu/DISMISS	忽略
+Menu/ENVIRONMENT_AND_VFX	环境与视觉艺术
+Menu/ENVIRONMENT_ARTIST_AND_LEVEL	环境艺术
+Menu/EXIT	退出
+Menu/EXIT_CONFIRMATION	确实要退出吗？
+Menu/FINANCES	财政
+Menu/GAMEPLAY_PROGRAMMER	游戏性程序员
+Menu/GAME_DESIGNER	游戏设计师
+Menu/GO	开始
+Menu/HASBRO_DISCLAIMER	"MLP：小马宝莉（MY LITTLE PONY）和孩之宝（HASBRO）以及所有相关的商标和标识均为孩之宝公司（Hasbro, Inc.）的注册商标。© 2022 Hasbro."
+Menu/INTERACT	互动
+Menu/JUMP	跳跃
+Menu/LANGUAGE	语言
+Menu/LEAD_ANIMATOR	首席动画师
+Menu/LEAD_PROGRAMMER	首席程序员
+Menu/MAIN_VOLUME	主音量
+Menu/MANESTREET_TITLE	小马街
+Menu/MENU_VOLUME	菜单音量
+Menu/MINIGAMES	小游戏
+Menu/MOVEMENT	移动
+Menu/MUSIC_SFX	音乐与音效音量
+Menu/MUSIC_VOLUME	音乐音量
+Menu/NEXT	下一个
+Menu/NO	否
+Menu/P1	玩家 1
+Menu/P2	玩家 2
+Menu/PAUSE	暂停
+Menu/PAUSE_MENU	暂停菜单
+Menu/PLAY	开始游戏
+Menu/PLAYER_READY	准备就绪
+Menu/PRODUCER	制作人
+Menu/REPEAT	重复
+Menu/ROLLERBLADES	轮滑
+Menu/ROTATE	旋转
+Menu/SAVED_GAMES	存档
+Menu/SAVE_SAFETY_DEFAULT	此图标出现时请勿关闭主机
+Menu/SAVE_SAFETY_STADIA	此游戏支持自动存档
+Menu/SAVE_SAFETY_SWITCH	此图标出现时请勿关闭主机
+Menu/SELECT	选择
+Menu/SELECT_PLAYERS	选择角色
+Menu/SETTINGS	设置
+Menu/SFX_VOLUME	音效音量
+Menu/SLOT1	存档 1
+Menu/SLOT2	存档 2
+Menu/SLOT3	存档 3
+Menu/SLOT4	存档 4
+Menu/SLOT_CURRENT	当前
+Menu/SLOT_EMPTY	空闲
+Menu/STADIA_DISCLAIMER	
+Menu/STUDIO_DIRECTOR	工作室总监
+Menu/TECHNICAL_DIRECTOR	技术总监
+Menu/TITLE_NAME	小马宝莉：小马湾冒险
+Menu/TOTAL_GAME_BITS	游戏总计
+Menu/TOWNPARK_TITLE	小镇公园
+Menu/TUTORIAL	教程
+Menu/TUTORIALS	教程
+Menu/TUTORIAL_TITLE	闪闪屋小山
+Menu/UI_GAMEPLAY_PROGRAMMER	交互界面与游戏性编程
+Menu/UNLOCKED	已解锁
+Menu/VOICE_VOLUME	对白音量
+Menu/YES	是
+Menu/UP	上
+Menu/DOWN	下
+Menu/LEFT	左
+Menu/RIGHT	右
+Menu/MENU_LEFT	上一个
+Menu/MENU_RIGHT	下一个
+Menu/RESET_CONTROLS	恢复默认
+XBOX/CHANGE_USER	切换
+XBOX/LOG_AGAIN	按任意键登录
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_01_CS_ZP_01	BC_INTRO_EV_01_01_CS_ZP_01_zh-CN
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_02_CVS_SN_01	BC_INTRO_EV_01_02_CVS_SN_01_zh-CN
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_03_CVS_ZP_02	BC_INTRO_EV_01_03_CVS_ZP_02_zh-CN
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_04_CVS_ZP_03	BC_INTRO_EV_01_04_CVS_ZP_03_zh-CN
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_05_CVS_SN_02	BC_INTRO_EV_01_05_CVS_SN_02_zh-CN
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_06_CVS_ZP_04	BC_INTRO_EV_01_06_CVS_ZP_04_zh-CN
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_07_CVS_ZP_05	BC_INTRO_EV_01_07_CVS_ZP_05_zh-CN
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_08_CVS_ZP_06	BC_INTRO_EV_01_08_CVS_ZP_06_zh-CN
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_09_CVS_SN_03	BC_INTRO_EV_01_09_CVS_SN_03_zh-CN
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_10_CVS_ZP_07	BC_INTRO_EV_01_10_CVS_ZP_07_zh-CN
+Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_11_GP_SN_04	BC_INTRO_EV_01_11_GP_SN_04_zh-CN
+Audio_BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_01_CVS_SN_01	BC_MFL_ACCEPTED_01_CVS_SN_01_zh-CN
+Audio_BeachCove/MFL/ACCEPTED/BC_MFL_ACCEPTED_02_CVS_ZP_02	BC_MFL_ACCEPTED_02_CVS_ZP_02_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_01_CS_SN_01	BC_MFL_COMP_01_CS_SN_01_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_02_CS_ZP_01	BC_MFL_COMP_02_CS_ZP_01_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_03_CS_ZP_02	BC_MFL_COMP_03_CS_ZP_02_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_04_CS_SN_02	BC_MFL_COMP_04_CS_SN_02_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_06_CS_PP_01	BC_MFL_COMP_06_CS_PP_01_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_07_CS_IZ_01	BC_MFL_COMP_07_CS_IZ_01_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_08_CS_HC_01	BC_MFL_COMP_08_CS_HC_01_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_09_CS_Sprout_01	BC_MFL_COMP_09_CS_Sprout_01_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_10_CS_HC_02	BC_MFL_COMP_10_CS_HC_02_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_11_CS_Paint Shop 3_01	BC_MFL_COMP_11_CS_Paint Shop 3_01_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_12_CS_Sprout_02	BC_MFL_COMP_12_CS_Sprout_02_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_13_CS_SN_03	BC_MFL_COMP_13_CS_SN_03_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_14_CS_ZP_03	BC_MFL_COMP_14_CS_ZP_03_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_15_CS_SN_04	BC_MFL_COMP_15_CS_SN_04_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_16_CS_Crowd1_01	BC_MFL_COMP_16_CS_Crowd1_01_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_17_CS_Crowd2_01	BC_MFL_COMP_17_CS_Crowd2_01_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_18_CS_Sprout_03	BC_MFL_COMP_18_CS_Sprout_03_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_19_CS_HC_03	BC_MFL_COMP_19_CS_HC_03_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_20_CS_Sprout_04	BC_MFL_COMP_20_CS_Sprout_04_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_21_CS_SN_05	BC_MFL_COMP_21_CS_SN_05_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_22_CS_Shimmerwing_01	BC_MFL_COMP_22_CS_Shimmerwing_01_zh-CN
+Audio_BeachCove/MFL/COMP/BC_MFL_COMP_23_GP_SN_06	BC_MFL_COMP_23_GP_SN_06_zh-CN
+Audio_BeachCove/MFL/DECLINED/BC_MFL_DECLINED_01_CVS_SN_01	BC_MFL_DECLINED_01_CVS_SN_01_zh-CN
+Audio_BeachCove/MFL/DECLINED/BC_MFL_DECLINED_02_CVS_ZP_02	BC_MFL_DECLINED_02_CVS_ZP_02_zh-CN
+Audio_BeachCove/MFL/QUESTION/BC_MFL_QUESTION_01_CVS_ZP_01	BC_MFL_QUESTION_01_CVS_ZP_01_zh-CN
+Audio_BeachCove/MFL/RETACPTD/BC_MFL_RETACPTD_01_CVS_SN_01	BC_MFL_RETACPTD_01_CVS_SN_01_zh-CN
+Audio_BeachCove/MFL/RETDCLND/BC_MFL_RETDCLND_01_CVS_SN_01	BC_MFL_RETDCLND_01_CVS_SN_01_zh-CN
+Audio_BeachCove/MFL/RETRY/BC_MFL_RETRY_01_CVS_ZP_01	BC_MFL_RETRY_01_CVS_ZP_01_zh-CN
+Audio_BeachCove/MFL/START/BC_MFL_START_01_CVS_ZP_01	BC_MFL_START_01_CVS_ZP_01_zh-CN
+Audio_BeachCove/MFL/START/BC_MFL_START_02_CVS_ZP_02	BC_MFL_START_02_CVS_ZP_02_zh-CN
+Audio_BeachCove/MFL/START/BC_MFL_START_03_CVS_ZP_03	BC_MFL_START_03_CVS_ZP_03_zh-CN
+Audio_BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_01_CVS_SN_01	BC_Q13_ACCEPTED_01_CVS_SN_01_zh-CN
+Audio_BeachCove/Q13/ACCEPTED/BC_Q13_ACCEPTED_02_CVS_Zoom_04	BC_Q13_ACCEPTED_02_CVS_Zoom_04_zh-CN
+Audio_BeachCove/Q13/COMP/BC_Q13_COMP_01_CVS_Zoom_06	BC_Q13_COMP_01_CVS_Zoom_06_zh-CN
+Audio_BeachCove/Q13/DECLINED/BC_Q13_DECLINED_01_CVS_SN_02	BC_Q13_DECLINED_01_CVS_SN_02_zh-CN
+Audio_BeachCove/Q13/DECLINED/BC_Q13_DECLINED_02_CVS_Zoom_05	BC_Q13_DECLINED_02_CVS_Zoom_05_zh-CN
+Audio_BeachCove/Q13/POST_01/BC_Q13_POST_01_01_GP_Zoom_10	BC_Q13_POST_01_01_GP_Zoom_10_zh-CN
+Audio_BeachCove/Q13/QUESTION/BC_Q13_QUESTION_01_CVS_Zoom_03	BC_Q13_QUESTION_01_CVS_Zoom_03_zh-CN
+Audio_BeachCove/Q13/RETACPTD/BC_Q13_RETACPTD_01_CVS_Zoom_08	BC_Q13_RETACPTD_01_CVS_Zoom_08_zh-CN
+Audio_BeachCove/Q13/RETDCLND/BC_Q13_RETDCLND_01_CVS_Zoom_09	BC_Q13_RETDCLND_01_CVS_Zoom_09_zh-CN
+Audio_BeachCove/Q13/RETRY/BC_Q13_RETRY_01_CVS_Zoom_07	BC_Q13_RETRY_01_CVS_Zoom_07_zh-CN
+Audio_BeachCove/Q13/START/BC_Q13_START_01_CVS_Zoom_01	BC_Q13_START_01_CVS_Zoom_01_zh-CN
+Audio_BeachCove/Q13/START/BC_Q13_START_02_CVS_Zoom_02	BC_Q13_START_02_CVS_Zoom_02_zh-CN
+Audio_BeachCove/Q14/COMP/BC_Q14_COMP_01_GP_IZ_01	BC_Q14_COMP_01_GP_IZ_01_zh-CN
+Audio_BeachCove/Q14/COMP/BC_Q14_COMP_02_GP_SN_01	BC_Q14_COMP_02_GP_SN_01_zh-CN
+Audio_BeachCove/Q14/EV_01/BC_Q14_EV_01_01_GP_SN_01	BC_Q14_EV_01_01_GP_SN_01_zh-CN
+Audio_BeachCove/Q14/EV_02/BC_Q14_EV_02_01_GP_SN_01	BC_Q14_EV_02_01_GP_SN_01_zh-CN
+Audio_BeachCove/Q14/EV_03/BC_Q14_EV_03_01_GP_SN_01	BC_Q14_EV_03_01_GP_SN_01_zh-CN
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_01_CVS_Sprout_01	BC_Q14_EV_04_01_CVS_Sprout_01_zh-CN
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_02_CVS_SN_01	BC_Q14_EV_04_02_CVS_SN_01_zh-CN
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_03_CVS_Sprout_02	BC_Q14_EV_04_03_CVS_Sprout_02_zh-CN
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_04_CVS_Sprout_03	BC_Q14_EV_04_04_CVS_Sprout_03_zh-CN
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_05_CVS_Sprout_04	BC_Q14_EV_04_05_CVS_Sprout_04_zh-CN
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_06_CVS_SN_02	BC_Q14_EV_04_06_CVS_SN_02_zh-CN
+Audio_BeachCove/Q14/EV_04/BC_Q14_EV_04_07_CVS_Sprout_05	BC_Q14_EV_04_07_CVS_Sprout_05_zh-CN
+Audio_BeachCove/Q14/EV_05/BC_Q14_EV_05_01_GP_SN_03	BC_Q14_EV_05_01_GP_SN_03_zh-CN
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_01_CVS_PP_01	BC_Q14_EV_06_01_CVS_PP_01_zh-CN
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_02_CVS_SN_01	BC_Q14_EV_06_02_CVS_SN_01_zh-CN
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_03_CVS_PP_02	BC_Q14_EV_06_03_CVS_PP_02_zh-CN
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_04_CVS_SN_02	BC_Q14_EV_06_04_CVS_SN_02_zh-CN
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_05_CVS_SN_03	BC_Q14_EV_06_05_CVS_SN_03_zh-CN
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_06_CVS_PP_03	BC_Q14_EV_06_06_CVS_PP_03_zh-CN
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_07_CVS_IZ_01	BC_Q14_EV_06_07_CVS_IZ_01_zh-CN
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_08_CVS_SN_04	BC_Q14_EV_06_08_CVS_SN_04_zh-CN
+Audio_BeachCove/Q14/EV_06/BC_Q14_EV_06_09_CS_IZ_02	BC_Q14_EV_06_09_CS_IZ_02_zh-CN
+Audio_BeachCove/Q14/EV_07/BC_Q14_EV_07_01_CVS_PaintShop 3_01	BC_Q14_EV_07_01_CVS_PaintShop 3_01_zh-CN
+Audio_BeachCove/Q14/EV_07/BC_Q14_EV_07_02_CVS_PaintShop 3_02	BC_Q14_EV_07_02_CVS_PaintShop 3_02_zh-CN
+Audio_BeachCove/Q14/EV_07/BC_Q14_EV_07_03_CVS_SN_01	BC_Q14_EV_07_03_CVS_SN_01_zh-CN
+Audio_BeachCove/Q14/EV_08/BC_Q14_EV_08_01_CVS_RedFloatieGuy_01	BC_Q14_EV_08_01_CVS_RedFloatieGuy_01_zh-CN
+Audio_BeachCove/Q14/EV_08/BC_Q14_EV_08_02_CVS_RedFloatieGuy_02	BC_Q14_EV_08_02_CVS_RedFloatieGuy_02_zh-CN
+Audio_BeachCove/Q14/EV_08/BC_Q14_EV_08_03_CVS_SN_01	BC_Q14_EV_08_03_CVS_SN_01_zh-CN
+Audio_BeachCove/Q14/EV_08/BC_Q14_EV_08_04_CVS_RedFloatieGuy_03	BC_Q14_EV_08_04_CVS_RedFloatieGuy_03_zh-CN
+Audio_BeachCove/Q14/EV_08/BC_Q14_EV_08_05_CVS_SN_02	BC_Q14_EV_08_05_CVS_SN_02_zh-CN
+Audio_BeachCove/Q14/EV_09/BC_Q14_EV_09_01_CVS_RedFloatieGuy_01	BC_Q14_EV_09_01_CVS_RedFloatieGuy_01_zh-CN
+Audio_BeachCove/Q14/EV_09/BC_Q14_EV_09_02_CVS_RedFloatieGuy_02	BC_Q14_EV_09_02_CVS_RedFloatieGuy_02_zh-CN
+Audio_BeachCove/Q14/EV_10/BC_Q14_EV_10_01_GP_SN_01	BC_Q14_EV_10_01_GP_SN_01_zh-CN
+Audio_BeachCove/Q14/EV_11/BC_Q14_EV_11_01_GP_PaintShop 3_01	BC_Q14_EV_11_01_GP_PaintShop 3_01_zh-CN
+Audio_BeachCove/Q14/EV_12/BC_Q14_EV_12_01_GP_SN_01	BC_Q14_EV_12_01_GP_SN_01_zh-CN
+Audio_BeachCove/Q14/EV_13/BC_Q14_EV_13_01_GP_SN_01	BC_Q14_EV_13_01_GP_SN_01_zh-CN
+Audio_BeachCove/Q14/MID_01/BC_Q14_MID_01_01_CVS_Sprout_01	BC_Q14_MID_01_01_CVS_Sprout_01_zh-CN
+Audio_BeachCove/Q14/MID_02/BC_Q14_MID_02_01_CVS_Sprout_01	BC_Q14_MID_02_01_CVS_Sprout_01_zh-CN
+Audio_BeachCove/Q14/MID_02/BC_Q14_MID_02_02_CVS_Sprout_02	BC_Q14_MID_02_02_CVS_Sprout_02_zh-CN
+Audio_BeachCove/Q14/MID_02/BC_Q14_MID_02_03_CVS_SN_03	BC_Q14_MID_02_03_CVS_SN_03_zh-CN
+Audio_BeachCove/Q14/MID_02/BC_Q14_MID_02_04_CVS_Sprout_04	BC_Q14_MID_02_04_CVS_Sprout_04_zh-CN
+Audio_BeachCove/Q14/MID_02/BC_Q14_MID_02_05_CVS_SN_01	BC_Q14_MID_02_05_CVS_SN_01_zh-CN
+Audio_BeachCove/Q14/MID_03/BC_Q14_MID_03_01_CVS_PaintShop 3_01	BC_Q14_MID_03_01_CVS_PaintShop 3_01_zh-CN
+Audio_BeachCove/Q14/MID_04/BC_Q14_MID_04_01_CVS_RedFloatieGuy_01	BC_Q14_MID_04_01_CVS_RedFloatieGuy_01_zh-CN
+Audio_BeachCove/Q14/MID_05/BC_Q14_MID_05_01_GP_IZ_01	BC_Q14_MID_05_01_GP_IZ_01_zh-CN
+Audio_BeachCove/Q14/MID_06/BC_Q14_MID_06_01_GP_PP_01	BC_Q14_MID_06_01_GP_PP_01_zh-CN
+Audio_BeachCove/Q14/POST_01/BC_Q14_POST_01_01_GP_PaintShop 3_01	BC_Q14_POST_01_01_GP_PaintShop 3_01_zh-CN
+Audio_BeachCove/Q14/POST_02/BC_Q14_POST_02_01_GP_RedFloatieGuy_01	BC_Q14_POST_02_01_GP_RedFloatieGuy_01_zh-CN
+Audio_BeachCove/Q14/POST_03/BC_Q14_POST_03_01_GP_Sprout_01	BC_Q14_POST_03_01_GP_Sprout_01_zh-CN
+Audio_BeachCove/Q14/POST_04/BC_Q14_POST_04_01_GP_PP_01	BC_Q14_POST_04_01_GP_PP_01_zh-CN
+Audio_BeachCove/Q14/POST_05/BC_Q14_POST_05_01_GP_IZ_01	BC_Q14_POST_05_01_GP_IZ_01_zh-CN
+Audio_BeachCove/Q14/PRE_01/BC_Q14_PRE_01_01_GP_PaintShop 3_01	BC_Q14_PRE_01_01_GP_PaintShop 3_01_zh-CN
+Audio_BeachCove/Q14/PRE_02/BC_Q14_PRE_02_01_GP_RedFloatieGuy_01	BC_Q14_PRE_02_01_GP_RedFloatieGuy_01_zh-CN
+Audio_BeachCove/Q14/PRE_03/BC_Q14_PRE_03_01_GP_PP_01	BC_Q14_PRE_03_01_GP_PP_01_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_01_CVS_Thunder_01	BC_Q14_START_01_CVS_Thunder_01_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_02_CVS_Sprout_01	BC_Q14_START_02_CVS_Sprout_01_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_03_CVS_Sprout_02	BC_Q14_START_03_CVS_Sprout_02_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_04_CVS_Thunder_02	BC_Q14_START_04_CVS_Thunder_02_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_05_CVS_Sprout_03	BC_Q14_START_05_CVS_Sprout_03_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_06_CVS_SN_01	BC_Q14_START_06_CVS_SN_01_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_07_CVS_Sprout_04	BC_Q14_START_07_CVS_Sprout_04_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_08_CVS_Thunder_03	BC_Q14_START_08_CVS_Thunder_03_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_09_CVS_SN_02	BC_Q14_START_09_CVS_SN_02_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_10_CVS_Sprout_05	BC_Q14_START_10_CVS_Sprout_05_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_11_CVS_SN_03	BC_Q14_START_11_CVS_SN_03_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_12_CVS_Sprout_06	BC_Q14_START_12_CVS_Sprout_06_zh-CN
+Audio_BeachCove/Q14/START/BC_Q14_START_13_CVS_SN_04	BC_Q14_START_13_CVS_SN_04_zh-CN
+Audio_BeachCove/Q14/TOOFAR/BC_Q14_TOOFAR_01_GP_SN_01	BC_Q14_TOOFAR_01_GP_SN_01_zh-CN
+Audio_BeachCove/Q15/COMP/BC_Q15_COMP_01_GP_HC_01	BC_Q15_COMP_01_GP_HC_01_zh-CN
+Audio_BeachCove/Q15/MID_01/BC_Q15_MID_01_01_CVS_HC_01	BC_Q15_MID_01_01_CVS_HC_01_zh-CN
+Audio_BeachCove/Q15/POST_01/BC_Q15_POST_01_01_CVS_HC_01	BC_Q15_POST_01_01_CVS_HC_01_zh-CN
+Audio_BeachCove/Q15/START/BC_Q15_START_01_CVS_HC_01	BC_Q15_START_01_CVS_HC_01_zh-CN
+Audio_BeachCove/Q15/START/BC_Q15_START_02_CVS_HC_02	BC_Q15_START_02_CVS_HC_02_zh-CN
+Audio_BeachCove/Q15/START/BC_Q15_START_03_CVS_HC_03	BC_Q15_START_03_CVS_HC_03_zh-CN
+Audio_BeachCove/Q15/TOOFAR/BC_Q15_TOOFAR_01_GP_HC_01	BC_Q15_TOOFAR_01_GP_HC_01_zh-CN
+Audio_Minigames/COUNTDOWN_FASHION	EFO_PP_Minigame_06_zh-CN
+Audio_Minigames/COUNTDOWN_FLYING	EFO_ZP_Minigame_06_zh-CN
+Audio_Minigames/COUNTDOWN_HERDING	EFO_HC_Minigame_06_zh-CN
+Audio_Minigames/COUNTDOWN_HERDINGC	EFO_IZ_Minigame_06_zh-CN
+Audio_Minigames/COUNTDOWN_RUNNER	EFO_Sprout_Minigame_06_zh-CN
+Audio_Minigames/TITLE_DASH	EFO_SN_Game_Menu_4_zh-CN
+Audio_Minigames/TITLE_FASHION_SHOW	EFO_SN_Game_Menu_3_zh-CN
+Audio_Minigames/TITLE_HERDING_BUNNIES	EFO_SN_Game_Menu_1_zh-CN
+Audio_Minigames/TITLE_HERDING_CRABS	EFO_SN_Game_Menu_2_zh-CN
+Audio_Minigames/TITLE_RUNNER	EFO_SN_Game_Menu_5_zh-CN
+Audio_Brighthouse/BFLY/EV_01/BH_BFLY_EV_01_01_CVS_SN_01	BH_BFLY_EV_01_01_CVS_SN_01_zh-CN
+Audio_Brighthouse/BFLY/EV_01/BH_BFLY_EV_01_02_CVS_SN_02	BH_BFLY_EV_01_02_CVS_SN_02_zh-CN
+Audio_Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_04_CVS_Shimmerwing_01	BH_BFLY_EV_02_04_CVS_Shimmerwing_01_zh-CN
+Audio_Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_05_CVS_SN_04	BH_BFLY_EV_02_05_CVS_SN_04_zh-CN
+Audio_Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_06_CVS_SN_05	BH_BFLY_EV_02_06_CVS_SN_05_zh-CN
+Audio_Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_07_CVS_Shimmerwing_02	BH_BFLY_EV_02_07_CVS_Shimmerwing_02_zh-CN
+Audio_Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_08_CVS_SN_06	BH_BFLY_EV_02_08_CVS_SN_06_zh-CN
+Audio_Brighthouse/BFLY/EV_02/BH_BFLY_EV_02_09_CVS_Shimmerwing_03	BH_BFLY_EV_02_09_CVS_Shimmerwing_03_zh-CN
+Audio_Brighthouse/BFLY/EV_03/BH_BFLY_EV_03_10_CGP_SN_07	BH_BFLY_EV_03_10_CGP_SN_07_zh-CN
+Audio_Brighthouse/INTRO/EV_01/BH_INTRO_EV_01_01_CS_SN_01	BH_INTRO_EV_01_01_CS_SN_01_zh-CN
+Audio_Brighthouse/MH/ACCEPTED/BH_MH_ACCEPTED_01_CGP_HC_01	BH_MH_ACCEPTED_01_CGP_HC_01_zh-CN
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_01_CS_HC_01	BH_MH_COMP_01_CS_HC_01_zh-CN
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_02_CS_HC_02	BH_MH_COMP_02_CS_HC_02_zh-CN
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_03_CS_IZ_01	BH_MH_COMP_03_CS_IZ_01_zh-CN
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_04_CS_HC_03	BH_MH_COMP_04_CS_HC_03_zh-CN
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_05_CS_HC_04	BH_MH_COMP_05_CS_HC_04_zh-CN
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_06_CS_SN_01	BH_MH_COMP_06_CS_SN_01_zh-CN
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_07_CS_HC_05	BH_MH_COMP_07_CS_HC_05_zh-CN
+Audio_Brighthouse/MH/COMP/BH_MH_COMP_08_CS_IZ_02	BH_MH_COMP_08_CS_IZ_02_zh-CN
+Audio_Brighthouse/MH/DECLINED/BH_MH_DECLINED_01_CVS_HC_01	BH_MH_DECLINED_01_CVS_HC_01_zh-CN
+Audio_Brighthouse/MH/QUESTION/BH_MH_QUESTION_01_CVS_HC_01	BH_MH_QUESTION_01_CVS_HC_01_zh-CN
+Audio_Brighthouse/MH/REPACPTD/BH_MH_REPACPTD_01_CGP_SN_01	BH_MH_REPACPTD_01_CGP_SN_01_zh-CN
+Audio_Brighthouse/MH/REPDCLND/BH_MH_REPDCLND_01_CGP_SN_01	BH_MH_REPDCLND_01_CGP_SN_01_zh-CN
+Audio_Brighthouse/MH/REPEAT/BH_MH_REPEAT_01_CVS_HC_01	BH_MH_REPEAT_01_CVS_HC_01_zh-CN
+Audio_Brighthouse/MH/START/BH_MH_START_01_CVS_HC_01	BH_MH_START_01_CVS_HC_01_zh-CN
+Audio_Brighthouse/MH/START/BH_MH_START_02_CVS_HC_02	BH_MH_START_02_CVS_HC_02_zh-CN
+Audio_Brighthouse/MH/START/BH_MH_START_03_CVS_HC_03	BH_MH_START_03_CVS_HC_03_zh-CN
+Audio_Brighthouse/MH/START/BH_MH_START_04_CVS_HC_04	BH_MH_START_04_CVS_HC_04_zh-CN
+Audio_Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_01_CS_SN_01	BH_OUTRO_EV_01_01_CS_SN_01_zh-CN
+Audio_Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_02_CS_IZ_01	BH_OUTRO_EV_01_02_CS_IZ_01_zh-CN
+Audio_Brighthouse/OUTRO/EV_01/BH_OUTRO_EV_01_03_CS_HC_01	BH_OUTRO_EV_01_03_CS_HC_01_zh-CN
+Audio_Brighthouse/Q1/COMP/BH_Q1_COMP_01_CVS_IZ_01	BH_Q1_COMP_01_CVS_IZ_01_zh-CN
+Audio_Brighthouse/Q1/COMP/BH_Q1_COMP_02_CVS_IZ_02	BH_Q1_COMP_02_CVS_IZ_02_zh-CN
+Audio_Brighthouse/Q1/COMP/BH_Q1_COMP_03_CVS_SN_01	BH_Q1_COMP_03_CVS_SN_01_zh-CN
+Audio_Brighthouse/Q1/EV_01/BH_Q1_EV_01_01_GP_SN_01	BH_Q1_EV_01_01_GP_SN_01_zh-CN
+Audio_Brighthouse/Q1/EV_02/BH_Q1_EV_02_01_GP_SN_01	BH_Q1_EV_02_01_GP_SN_01_zh-CN
+Audio_Brighthouse/Q1/EV_03/BH_Q1_EV_03_01_GP_SN_01	BH_Q1_EV_03_01_GP_SN_01_zh-CN
+Audio_Brighthouse/Q1/MID_01/BH_Q1_MID_01_01_GP_IZ_01	BH_Q1_MID_01_01_GP_IZ_01_zh-CN
+Audio_Brighthouse/Q1/POST_01/BH_Q1_POST_01_01_CVS_IZ_01	BH_Q1_POST_01_01_CVS_IZ_01_zh-CN
+Audio_Brighthouse/Q1/POST_01/BH_Q1_POST_01_02_CVS_IZ_02	BH_Q1_POST_01_02_CVS_IZ_02_zh-CN
+Audio_Brighthouse/Q1/POST_01/BH_Q1_POST_01_03_CVS_IZ_03	BH_Q1_POST_01_03_CVS_IZ_03_zh-CN
+Audio_Brighthouse/Q1/START/BH_Q1_START_01_CVS_IZ_01	BH_Q1_START_01_CVS_IZ_01_zh-CN
+Audio_Brighthouse/Q1/START/BH_Q1_START_02_CVS_SN_01	BH_Q1_START_02_CVS_SN_01_zh-CN
+Audio_Brighthouse/Q1/START/BH_Q1_START_03_CVS_IZ_02	BH_Q1_START_03_CVS_IZ_02_zh-CN
+Audio_Brighthouse/Q1/START/BH_Q1_START_04_CVS_IZ_03	BH_Q1_START_04_CVS_IZ_03_zh-CN
+Audio_Brighthouse/Q1/START/BH_Q1_START_05_CVS_IZ_04	BH_Q1_START_05_CVS_IZ_04_zh-CN
+Audio_Brighthouse/Q1/START/BH_Q1_START_06_CVS_IZ_05	BH_Q1_START_06_CVS_IZ_05_zh-CN
+Audio_Brighthouse/Q1/START/BH_Q1_START_07_CVS_SN_02	BH_Q1_START_07_CVS_SN_02_zh-CN
+Audio_Brighthouse/Q1/TOOFAR/BH_Q1_TOOFAR_01_GP_IZ_01	BH_Q1_TOOFAR_01_GP_IZ_01_zh-CN
+Audio_Brighthouse/Q2/COMP/BH_Q2_COMP_01_CGP_HC_01	BH_Q2_COMP_01_CGP_HC_01_zh-CN
+Audio_Brighthouse/Q2/COMP/BH_Q2_COMP_02_CGP_Bunnies_01	BH_Q2_COMP_02_CGP_Bunnies_01_zh-CN
+Audio_Brighthouse/Q2/EV_01/BH_Q2_EV_01_01_GP_SN_01	BH_Q2_EV_01_01_GP_SN_01_zh-CN
+Audio_Brighthouse/Q2/EV_02/BH_Q2_EV_02_01_CVS_HC_01	BH_Q2_EV_02_01_CVS_HC_01_zh-CN
+Audio_Brighthouse/Q2/EV_02/BH_Q2_EV_02_02_CVS_HC_02	BH_Q2_EV_02_02_CVS_HC_02_zh-CN
+Audio_Brighthouse/Q2/EV_02/BH_Q2_EV_02_03_CVS_HC_03	BH_Q2_EV_02_03_CVS_HC_03_zh-CN
+Audio_Brighthouse/Q2/EV_03/BH_Q2_EV_03_01_GP_SN_01	BH_Q2_EV_03_01_GP_SN_01_zh-CN
+Audio_Brighthouse/Q2/EV_04/BH_Q2_EV_04_01_GP_SN_01	BH_Q2_EV_04_01_GP_SN_01_zh-CN
+Audio_Brighthouse/Q2/EV_05/BH_Q2_EV_05_01_GP_SN_01	BH_Q2_EV_05_01_GP_SN_01_zh-CN
+Audio_Brighthouse/Q2/MID_01/BH_Q2_MID_01_01_GP_HC_01	BH_Q2_MID_01_01_GP_HC_01_zh-CN
+Audio_Brighthouse/Q2/MID_02/BH_Q2_MID_02_01_GP_HC_01	BH_Q2_MID_02_01_GP_HC_01_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_01_CVS_HC_01	BH_Q2_START_01_CVS_HC_01_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_02_CVS_HC_02	BH_Q2_START_02_CVS_HC_02_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_03_CVS_SN_02	BH_Q2_START_03_CVS_SN_02_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_04_CVS_HC_03	BH_Q2_START_04_CVS_HC_03_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_05_CVS_HC_04	BH_Q2_START_05_CVS_HC_04_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_06_CVS_HC_05	BH_Q2_START_06_CVS_HC_05_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_07_CVS_SN_03	BH_Q2_START_07_CVS_SN_03_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_08_CVS_HC_06	BH_Q2_START_08_CVS_HC_06_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_09_CVS_Bunnies_01	BH_Q2_START_09_CVS_Bunnies_01_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_10_CVS_HC_07	BH_Q2_START_10_CVS_HC_07_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_11_CVS_SN_04	BH_Q2_START_11_CVS_SN_04_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_12_CVS_HC_08	BH_Q2_START_12_CVS_HC_08_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_14_CVS_HC_10	BH_Q2_START_14_CVS_HC_10_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_15_CVS_HC_11	BH_Q2_START_15_CVS_HC_11_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_16_CVS_HC_12	BH_Q2_START_16_CVS_HC_12_zh-CN
+Audio_Brighthouse/Q2/START/BH_Q2_START_17_CVS_SN_05	BH_Q2_START_17_CVS_SN_05_zh-CN
+Audio_Brighthouse/Q2/TOOFAR/BH_Q2_TOOFAR_01_GP_HC_01	BH_Q2_TOOFAR_01_GP_HC_01_zh-CN
+Audio_Brighthouse/Q3/START/BH_Q3_START_13_CVS_HC_09	BH_Q3_START_13_CVS_HC_09_zh-CN
+Audio_BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01	BHT_INTRO_EV_01_01_CS_Narrator_01_zh-CN
+Audio_BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_01_CS_Narrator_01b	BHT_INTRO_EV_01_01_CS_Narrator_01b_zh-CN
+Audio_BrighthouseTuto/INTRO/EV_01/BHT_INTRO_EV_01_03_CS_Narrator_02	BHT_INTRO_EV_01_03_CS_Narrator_02_zh-CN
+Audio_BrighthouseTuto/Q1/COMP/BHT_Q1_COMP_01_CGP_SN_01	BHT_Q1_COMP_01_CGP_SN_01_zh-CN
+Audio_BrighthouseTuto/Q1/EV_02/BHT_Q1_EV_02_01_CS_Bunny_01	BHT_Q1_EV_02_01_CS_Bunny_01_zh-CN
+Audio_BrighthouseTuto/Q1/EV_03/BHT_Q1_EV_03_02_GP_SN_01	BHT_Q1_EV_03_02_GP_SN_01_zh-CN
+Audio_BrighthouseTuto/Q1/EV_04/BHT_Q1_EV_04_01_CGP_SN_01	BHT_Q1_EV_04_01_CGP_SN_01_zh-CN
+Audio_BrighthouseTuto/Q1/EV_05/BHT_Q1_EV_05_01_CGP_SN_01	BHT_Q1_EV_05_01_CGP_SN_01_zh-CN
+Audio_BrighthouseTuto/Q1/TOOFAR/BHT_Q1_TOOFAR_01_CGP_SN_01	BHT_Q1_TOOFAR_01_CGP_SN_01_zh-CN
+Audio_BrighthouseTuto/START/EV_01/BHT_START_EV_01_01_CS_SN_01	BHT_START_EV_01_01_CS_SN_01_zh-CN
+Audio_BrighthouseTuto/START/EV_01/BHT_START_EV_01_02_CS_SN_02	BHT_START_EV_01_02_CS_SN_02_zh-CN
+Audio_BrighthouseTuto/START/EV_01/BHT_START_EV_01_03_CS_SN_03	BHT_START_EV_01_03_CS_SN_03_zh-CN
+Audio_BrighthouseTuto/START/EV_01/BHT_START_EV_01_04_CS_SN_04	BHT_START_EV_01_04_CS_SN_04_zh-CN
+Audio_BrighthouseTuto/START/START/BHT_START_START_08_CS_SN_05	BHT_START_START_08_CS_SN_05_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_01_CS_Sprout_01	MS_End_EV_05_01_CS_Sprout_01_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_02_CS_SN_01	MS_End_EV_05_02_CS_SN_01_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_03_CS_Sprout_02	MS_End_EV_05_03_CS_Sprout_02_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_04_CS_SN_02	MS_End_EV_05_04_CS_SN_02_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_05_CS_Sprout_03	MS_End_EV_05_05_CS_Sprout_03_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_06_CS_Sprout_04	MS_End_EV_05_06_CS_Sprout_04_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_07_CS_HC_01	MS_End_EV_05_07_CS_HC_01_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_08_CS_ZP_01	MS_End_EV_05_08_CS_ZP_01_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_09_CS_SN_03	MS_End_EV_05_09_CS_SN_03_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_10_CS_IZ_01	MS_End_EV_05_10_CS_IZ_01_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_12_CS_PP_01	MS_End_EV_05_12_CS_PP_01_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_13_CS_IZ_02	MS_End_EV_05_13_CS_IZ_02_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_14_CS_SN_04	MS_End_EV_05_14_CS_SN_04_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_15_CS_Sprout_05	MS_End_EV_05_15_CS_Sprout_05_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_16_CS_HC_02	MS_End_EV_05_16_CS_HC_02_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_17_CS_SN_05	MS_End_EV_05_17_CS_SN_05_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_18_CS_IZ_03	MS_End_EV_05_18_CS_IZ_03_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_19_CS_PP_02	MS_End_EV_05_19_CS_PP_02_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_20_CS_ZP_02	MS_End_EV_05_20_CS_ZP_02_zh-CN
+Audio_Mainstreet/End/EV_05/MS_End_EV_05_21_CS_PP_03	MS_End_EV_05_21_CS_PP_03_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_01_CS_PP_01	MS_INTRO_EV_02_01_CS_PP_01_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_02_CS_HC_01	MS_INTRO_EV_02_02_CS_HC_01_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_03_CS_PP_02	MS_INTRO_EV_02_03_CS_PP_02_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_04_CS_SN_01	MS_INTRO_EV_02_04_CS_SN_01_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_05_CS_IZ_01	MS_INTRO_EV_02_05_CS_IZ_01_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_06_CS_PP_03	MS_INTRO_EV_02_06_CS_PP_03_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_07_CS_Bystanders_01	MS_INTRO_EV_02_07_CS_Bystanders_01_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_08_CS_PP_04	MS_INTRO_EV_02_08_CS_PP_04_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_09_CS_SN_02	MS_INTRO_EV_02_09_CS_SN_02_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_10_CS_IZ_02	MS_INTRO_EV_02_10_CS_IZ_02_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_11_CS_HC_02	MS_INTRO_EV_02_11_CS_HC_02_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_12_CS_PP_05	MS_INTRO_EV_02_12_CS_PP_05_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_13_CS_HC_03	MS_INTRO_EV_02_13_CS_HC_03_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_14_CS_PP_06	MS_INTRO_EV_02_14_CS_PP_06_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_15_CS_HC_04	MS_INTRO_EV_02_15_CS_HC_04_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_16_CS_IZ_03	MS_INTRO_EV_02_16_CS_IZ_03_zh-CN
+Audio_Mainstreet/INTRO/EV_02/MS_INTRO_EV_02_17_CS_HC_05	MS_INTRO_EV_02_17_CS_HC_05_zh-CN
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_02_CS_ZP_01	MS_M5S_EV_01_02_CS_ZP_01_zh-CN
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_03_CS_SN_02	MS_M5S_EV_01_03_CS_SN_02_zh-CN
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_04_CVS_PP_01	MS_M5S_EV_01_04_CVS_PP_01_zh-CN
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_05_CVS_IZ_01	MS_M5S_EV_01_05_CVS_IZ_01_zh-CN
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_06_CVS_SN_03	MS_M5S_EV_01_06_CVS_SN_03_zh-CN
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_07_CVS_ZP_02	MS_M5S_EV_01_07_CVS_ZP_02_zh-CN
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_08_CVS_PP_02	MS_M5S_EV_01_08_CVS_PP_02_zh-CN
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_09_CVS_PP_03	MS_M5S_EV_01_09_CVS_PP_03_zh-CN
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_10_CVS_ZP_03	MS_M5S_EV_01_10_CVS_ZP_03_zh-CN
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_11_CVS_SN_04	MS_M5S_EV_01_11_CVS_SN_04_zh-CN
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_12_CVS_HC_01	MS_M5S_EV_01_12_CVS_HC_01_zh-CN
+Audio_Mainstreet/M5S/EV_01/MS_M5S_EV_01_13_CVS_SN_05	MS_M5S_EV_01_13_CVS_SN_05_zh-CN
+Audio_Mainstreet/M5S/EV_02/MS_M5S_EV_02_01_CVS_IZ_01	MS_M5S_EV_02_01_CVS_IZ_01_zh-CN
+Audio_Mainstreet/M5S/EV_02/MS_M5S_EV_02_02_CVS_SN_01	MS_M5S_EV_02_02_CVS_SN_01_zh-CN
+Audio_Mainstreet/M5S/EV_03/MS_M5S_EV_03_01_CVS_ZP_01	MS_M5S_EV_03_01_CVS_ZP_01_zh-CN
+Audio_Mainstreet/M5S/EV_03/MS_M5S_EV_03_02_CVS_PP_01	MS_M5S_EV_03_02_CVS_PP_01_zh-CN
+Audio_Mainstreet/M5S/EV_03/MS_M5S_EV_03_03_CVS_SN_01	MS_M5S_EV_03_03_CVS_SN_01_zh-CN
+Audio_Mainstreet/M5S/EV_04/MS_M5S_EV_04_01_GP_SN_01	MS_M5S_EV_04_01_GP_SN_01_zh-CN
+Audio_Mainstreet/M5S/EV_04/MS_M5S_EV_04_02_GP_SN_02	MS_M5S_EV_04_02_GP_SN_02_zh-CN
+Audio_Mainstreet/M5S/EV_05/MS_M5S_EV_05_01_GP_SN_01	MS_M5S_EV_05_01_GP_SN_01_zh-CN
+Audio_Mainstreet/M5S/EV_06/MS_M5S_EV_06_01_CVS_HC_01	MS_M5S_EV_06_01_CVS_HC_01_zh-CN
+Audio_Mainstreet/M5S/EV_06/MS_M5S_EV_06_02_CVS_HC_02	MS_M5S_EV_06_02_CVS_HC_02_zh-CN
+Audio_Mainstreet/M5S/EV_06/MS_M5S_EV_06_03_CVS_SN_01	MS_M5S_EV_06_03_CVS_SN_01_zh-CN
+Audio_Mainstreet/M5S/TOOFAR/MS_M5S_TOOFAR_01_GP_SN_01	MS_M5S_TOOFAR_01_GP_SN_01_zh-CN
+Audio_Mainstreet/MF/ACCEPTED/MS_MF_ACCEPTED_01_CVS_PP_01	MS_MF_ACCEPTED_01_CVS_PP_01_zh-CN
+Audio_Mainstreet/MF/ACCEPTED/MS_MF_ACCEPTED_02_CVS_PP_02	MS_MF_ACCEPTED_02_CVS_PP_02_zh-CN
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_01_CVS_PP_01	MS_MF_COMP_01_CVS_PP_01_zh-CN
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_02_CVS_PP_02	MS_MF_COMP_02_CVS_PP_02_zh-CN
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_03_CVS_SN_01	MS_MF_COMP_03_CVS_SN_01_zh-CN
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_04_CVS_PP_03	MS_MF_COMP_04_CVS_PP_03_zh-CN
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_05_CVS_PP_04	MS_MF_COMP_05_CVS_PP_04_zh-CN
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_06_CVS_PP_05	MS_MF_COMP_06_CVS_PP_05_zh-CN
+Audio_Mainstreet/MF/COMP/MS_MF_COMP_07_CVS_SN_02	MS_MF_COMP_07_CVS_SN_02_zh-CN
+Audio_Mainstreet/MF/DECLINED/MS_MF_DECLINED_01_CVS_PP_01	MS_MF_DECLINED_01_CVS_PP_01_zh-CN
+Audio_Mainstreet/MF/QUESTION/MS_MF_QUESTION_01_CVS_PP_01	MS_MF_QUESTION_01_CVS_PP_01_zh-CN
+Audio_Mainstreet/MF/REPACPTD/MS_MF_REPACPTD_01_CVS_SN_01	MS_MF_REPACPTD_01_CVS_SN_01_zh-CN
+Audio_Mainstreet/MF/REPDCLND/MS_MF_REPDCLND_01_CVS_SN_01	MS_MF_REPDCLND_01_CVS_SN_01_zh-CN
+Audio_Mainstreet/MF/REPEAT/MS_MF_REPEAT_01_CVS_PP_01	MS_MF_REPEAT_01_CVS_PP_01_zh-CN
+Audio_Mainstreet/MF/START/MS_MF_START_01_CVS_PP_01	MS_MF_START_01_CVS_PP_01_zh-CN
+Audio_Mainstreet/MF/START/MS_MF_START_02_CVS_SN_01	MS_MF_START_02_CVS_SN_01_zh-CN
+Audio_Mainstreet/MF/START/MS_MF_START_03_CVS_PP_02	MS_MF_START_03_CVS_PP_02_zh-CN
+Audio_Mainstreet/MF/START/MS_MF_START_04_CVS_SN_02	MS_MF_START_04_CVS_SN_02_zh-CN
+Audio_Mainstreet/MR/EV_01/MS_MR_EV_01_01_GP_SN_01	MS_MR_EV_01_01_GP_SN_01_zh-CN
+Audio_Mainstreet/MR/EV_01/MS_MR_EV_01_02_GP_Sprout_01	MS_MR_EV_01_02_GP_Sprout_01_zh-CN
+Audio_Mainstreet/MR/EV_02/MS_MR_EV_02_01_CS_HC_01	MS_MR_EV_02_01_CS_HC_01_zh-CN
+Audio_Mainstreet/MR/EV_02/MS_MR_EV_02_02_GP_SN_01	MS_MR_EV_02_02_GP_SN_01_zh-CN
+Audio_Mainstreet/MR/EV_02/MS_MR_EV_02_03_GP_SN_02	MS_MR_EV_02_03_GP_SN_02_zh-CN
+Audio_Mainstreet/MR/EV_02/MS_MR_EV_02_04_GP_Sprout_01	MS_MR_EV_02_04_GP_Sprout_01_zh-CN
+Audio_Mainstreet/MR/EV_02/MS_MR_EV_02_05_GP_Sprout_02	MS_MR_EV_02_05_GP_Sprout_02_zh-CN
+Audio_Mainstreet/MR/EV_03/MS_MR_EV_03_01_GP_Sprout_01	MS_MR_EV_03_01_GP_Sprout_01_zh-CN
+Audio_Mainstreet/MR/EV_03/MS_MR_EV_03_02_GP_SN_01	MS_MR_EV_03_02_GP_SN_01_zh-CN
+Audio_Mainstreet/MR/EV_03/MS_MR_EV_03_03_CS_PP_01	MS_MR_EV_03_03_CS_PP_01_zh-CN
+Audio_Mainstreet/MR/EV_03/MS_MR_EV_03_04_CS_ZP_01	MS_MR_EV_03_04_CS_ZP_01_zh-CN
+Audio_Mainstreet/MR/EV_03/MS_MR_EV_03_05_CS_SN_02	MS_MR_EV_03_05_CS_SN_02_zh-CN
+Audio_Mainstreet/MR/EV_04/MS_MR_EV_04_01_CS_Sprout_01	MS_MR_EV_04_01_CS_Sprout_01_zh-CN
+Audio_Mainstreet/MR/EV_04/MS_MR_EV_04_02_CS_IZ_01	MS_MR_EV_04_02_CS_IZ_01_zh-CN
+Audio_Mainstreet/MR/EV_07/MS_MR_EV_07_01_GP_SN_01	MS_MR_EV_07_01_GP_SN_01_zh-CN
+Audio_Mainstreet/MR/EV_08/MS_MR_EV_08_01_GP_SN_01	MS_MR_EV_08_01_GP_SN_01_zh-CN
+Audio_Mainstreet/MR/EV_09/MS_MR_EV_09_01_GP_Sprout_01	MS_MR_EV_09_01_GP_Sprout_01_zh-CN
+Audio_Mainstreet/MR/EV_10/MS_MR_EV_10_01_GP_Sprout_01	MS_MR_EV_10_01_GP_Sprout_01_zh-CN
+Audio_Mainstreet/MR/EV_11/MS_MR_EV_11_01_GP_Sprout_01	MS_MR_EV_11_01_GP_Sprout_01_zh-CN
+Audio_Mainstreet/MR/EV_12/MS_MR_EV_12_01_GP_Sprout_01	MS_MR_EV_12_01_GP_Sprout_01_zh-CN
+Audio_Mainstreet/MR/EV_13/MS_MR_EV_13_01_GP_Sprout_01	MS_MR_EV_13_01_GP_Sprout_01_zh-CN
+Audio_Mainstreet/MR/REPACPTD/MS_MR_REPACPTD_01_CVS_SN_01	MS_MR_REPACPTD_01_CVS_SN_01_zh-CN
+Audio_Mainstreet/MR/REPDCLND/MS_MR_REPDCLND_01_CVS_SN_01	MS_MR_REPDCLND_01_CVS_SN_01_zh-CN
+Audio_Mainstreet/MR/REPEAT/MS_MR_REPEAT_01_CVS_Sprout_01	MS_MR_REPEAT_01_CVS_Sprout_01_zh-CN
+Audio_Mainstreet/MR/REPEAT/MS_MR_REPEAT_02_CVS_Sprout_02	MS_MR_REPEAT_02_CVS_Sprout_02_zh-CN
+Audio_Mainstreet/MR/START/MS_MR_START_01_CS_SN_01	MS_MR_START_01_CS_SN_01_zh-CN
+Audio_Mainstreet/Q11/ACCEPTED/MS_Q11_ACCEPTED_04_CVS_SN_01	MS_Q11_ACCEPTED_04_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q11/BLK/MS_Q11_BLK_01_GP_BigBunny_01	MS_Q11_BLK_01_GP_BigBunny_01_zh-CN
+Audio_Mainstreet/Q11/BLK/MS_Q11_BLK_02_GP_Bunnies_01	MS_Q11_BLK_02_GP_Bunnies_01_zh-CN
+Audio_Mainstreet/Q11/BLK/MS_Q11_BLK_03_GP_SN_01	MS_Q11_BLK_03_GP_SN_01_zh-CN
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_01_CS_HC_01	MS_Q11_COMP_01_CS_HC_01_zh-CN
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_02_CS_BigBunny_01	MS_Q11_COMP_02_CS_BigBunny_01_zh-CN
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_03_CS_Bunnies_01	MS_Q11_COMP_03_CS_Bunnies_01_zh-CN
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_04_CS_SN_01	MS_Q11_COMP_04_CS_SN_01_zh-CN
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_05_CS_HC_02	MS_Q11_COMP_05_CS_HC_02_zh-CN
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_06_CS_Bunnies_02	MS_Q11_COMP_06_CS_Bunnies_02_zh-CN
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_07_CS_SN_02	MS_Q11_COMP_07_CS_SN_02_zh-CN
+Audio_Mainstreet/Q11/COMP/MS_Q11_COMP_08_CS_Bunnies_03	MS_Q11_COMP_08_CS_Bunnies_03_zh-CN
+Audio_Mainstreet/Q11/DECLINED/MS_Q11_DECLINED_05_CVS_SN_01	MS_Q11_DECLINED_05_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q11/EV_01/MS_Q11_EV_01_01_CVS_SmoothieShop_01	MS_Q11_EV_01_01_CVS_SmoothieShop_01_zh-CN
+Audio_Mainstreet/Q11/EV_01/MS_Q11_EV_01_02_CVS_SmoothieShop_02	MS_Q11_EV_01_02_CVS_SmoothieShop_02_zh-CN
+Audio_Mainstreet/Q11/EV_02/MS_Q11_EV_02_01_CVS_BigBunny_01	MS_Q11_EV_02_01_CVS_BigBunny_01_zh-CN
+Audio_Mainstreet/Q11/EV_02/MS_Q11_EV_02_02_CVS_HC_01	MS_Q11_EV_02_02_CVS_HC_01_zh-CN
+Audio_Mainstreet/Q11/EV_02/MS_Q11_EV_02_03_CVS_HC_02	MS_Q11_EV_02_03_CVS_HC_02_zh-CN
+Audio_Mainstreet/Q11/EV_02/MS_Q11_EV_02_04_CVS_SN_01	MS_Q11_EV_02_04_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q11/EV_03/MS_Q11_EV_03_01_CVS_FashionPony_01	MS_Q11_EV_03_01_CVS_FashionPony_01_zh-CN
+Audio_Mainstreet/Q11/EV_03/MS_Q11_EV_03_02_CVS_FashionPony_02	MS_Q11_EV_03_02_CVS_FashionPony_02_zh-CN
+Audio_Mainstreet/Q11/EV_03/MS_Q11_EV_03_03_CVS_SN_01	MS_Q11_EV_03_03_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_05_CVS_HC_01	MS_Q11_EV_04_05_CVS_HC_01_zh-CN
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_06_CVS_BigBunny_01	MS_Q11_EV_04_06_CVS_BigBunny_01_zh-CN
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_07_CVS_HC_02	MS_Q11_EV_04_07_CVS_HC_02_zh-CN
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_08_CVS_BigBunny_02	MS_Q11_EV_04_08_CVS_BigBunny_02_zh-CN
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_09_CVS_HC_03	MS_Q11_EV_04_09_CVS_HC_03_zh-CN
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_10_CVS_BigBunny_03	MS_Q11_EV_04_10_CVS_BigBunny_03_zh-CN
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_11_CVS_HC_04	MS_Q11_EV_04_11_CVS_HC_04_zh-CN
+Audio_Mainstreet/Q11/EV_04/MS_Q11_EV_04_12_CVS_SN_01	MS_Q11_EV_04_12_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q11/EV_05/MS_Q11_EV_05_01_GP_SN_01	MS_Q11_EV_05_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q11/EV_06/MS_Q11_EV_06_01_GP_SN_01	MS_Q11_EV_06_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q11/EV_07/MS_Q11_EV_07_01_GP_SN_01	MS_Q11_EV_07_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q11/EV_08/MS_Q11_EV_08_01_GP_SN_01	MS_Q11_EV_08_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q11/EV_09/MS_Q11_EV_09_04_GP_FashionPony_01	MS_Q11_EV_09_04_GP_FashionPony_01_zh-CN
+Audio_Mainstreet/Q11/MID_01/MS_Q11_MID_01_01_GP_HC_01	MS_Q11_MID_01_01_GP_HC_01_zh-CN
+Audio_Mainstreet/Q11/MID_02/MS_Q11_MID_02_01_GP_HC_01	MS_Q11_MID_02_01_GP_HC_01_zh-CN
+Audio_Mainstreet/Q11/MID_03/MS_Q11_MID_03_01_GP_HC_01	MS_Q11_MID_03_01_GP_HC_01_zh-CN
+Audio_Mainstreet/Q11/POST_01/MS_Q11_POST_01_01_GP_SmoothieShop_01	MS_Q11_POST_01_01_GP_SmoothieShop_01_zh-CN
+Audio_Mainstreet/Q11/POST_02/MS_Q11_POST_02_01_GP_FashionPony_01	MS_Q11_POST_02_01_GP_FashionPony_01_zh-CN
+Audio_Mainstreet/Q11/PRE_01/MS_Q11_PRE_01_01_GP_SmoothieShop_01	MS_Q11_PRE_01_01_GP_SmoothieShop_01_zh-CN
+Audio_Mainstreet/Q11/PRE_02/MS_Q11_PRE_02_01_GP_FashionPony_01	MS_Q11_PRE_02_01_GP_FashionPony_01_zh-CN
+Audio_Mainstreet/Q11/PRE_03/MS_Q11_PRE_03_01_GP_ScaredNPC_01	MS_Q11_PRE_03_01_GP_ScaredNPC_01_zh-CN
+Audio_Mainstreet/Q11/QUESTION/MS_Q11_QUESTION_03_CVS_SmoothieShop_01	MS_Q11_QUESTION_03_CVS_SmoothieShop_01_zh-CN
+Audio_Mainstreet/Q11/RETACPTD/MS_Q11_RETACPTD_08_CVS_SN_01	MS_Q11_RETACPTD_08_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q11/RETDCLND/MS_Q11_RETDCLND_07_CVS_SN_01	MS_Q11_RETDCLND_07_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q11/RETRY/MS_Q11_RETRY_06_CVS_SmoothieShop_01	MS_Q11_RETRY_06_CVS_SmoothieShop_01_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_01_CS_Big Bunny_01	MS_Q11_START_01_CS_BigBunny_01_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_02_CS_Bunnies_01	MS_Q11_START_02_CS_Bunnies_01_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_03_CS_HC_01	MS_Q11_START_03_CS_HC_01_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_04_CS_Bunnies_02	MS_Q11_START_04_CS_Bunnies_02_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_05_CS_SN_01	MS_Q11_START_05_CS_SN_01_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_06_CS_HC_02	MS_Q11_START_06_CS_HC_02_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_07_CS_HC_03	MS_Q11_START_07_CS_HC_03_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_08_CS_BigBunny_02	MS_Q11_START_08_CS_BigBunny_02_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_09_CS_Bunnies_03	MS_Q11_START_09_CS_Bunnies_03_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_10_CS_SN_02	MS_Q11_START_10_CS_SN_02_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_11_CS_BigBunny_03	MS_Q11_START_11_CS_BigBunny_03_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_12_CS_HC_04	MS_Q11_START_12_CS_HC_04_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_13_CS_BigBunny_04	MS_Q11_START_13_CS_BigBunny_04_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_14_CS_Bunnies_04	MS_Q11_START_14_CS_Bunnies_04_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_15_CS_HC_05	MS_Q11_START_15_CS_HC_05_zh-CN
+Audio_Mainstreet/Q11/START/MS_Q11_START_16_CS_SN_03	MS_Q11_START_16_CS_SN_03_zh-CN
+Audio_Mainstreet/Q11/TOOFAR/MS_Q11_TOOFAR_01_GP_SN_01	MS_Q11_TOOFAR_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q16/BLK/MS_Q16_BLK_01_GP_Canterlogic Guard_01	MS_Q16_BLK_01_GP_Canterlogic Guard_01_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_01_CVS_Crowd2_02	MS_Q16_COMP_01_CVS_Crowd2_02_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_02_CVS_Crowd3_02	MS_Q16_COMP_02_CVS_Crowd3_02_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_03_CVS_SN_01	MS_Q16_COMP_03_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_04_CVS_Crowd_01	MS_Q16_COMP_04_CVS_Crowd_01_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_05_CVS_SN_02	MS_Q16_COMP_05_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_06_CVS_SN_03	MS_Q16_COMP_06_CVS_SN_03_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_07_CVS_SN_04	MS_Q16_COMP_07_CVS_SN_04_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_08_CVS_SN_05	MS_Q16_COMP_08_CVS_SN_05_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_09_CVS_Crowd2_03	MS_Q16_COMP_09_CVS_Crowd2_03_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_10_CVS_Crowd1_02	MS_Q16_COMP_10_CVS_Crowd1_02_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_11_CVS_SN_06	MS_Q16_COMP_11_CVS_SN_06_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_12_CVS_Crowd3_03	MS_Q16_COMP_12_CVS_Crowd3_03_zh-CN
+Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_13_CVS_Crowd1_03	MS_Q16_COMP_13_CVS_Crowd1_03_zh-CN
+"Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_14_CVS_Crowd1,2,3_01"	"MS_Q16_COMP_14_CVS_Crowd 1 ,2, 3_01_zh-CN"
+"Audio_Mainstreet/Q16/COMP/MS_Q16_COMP_15_CVS_Crowd1,2,3_01"	"MS_Q16_COMP_15_CVS_Crowd 1 ,2, 3_01_zh-CN"
+Audio_Mainstreet/Q16/COMP/RandomVariants/MS_Q16_COMP_01_CVS_Crowd2_02_02	MS_Q16_COMP_01_CVS_Crowd 2_02_02_zh-CN
+Audio_Mainstreet/Q16/COMP/RandomVariants/MS_Q16_COMP_01_CVS_Crowd2_02_03	MS_Q16_COMP_01_CVS_Crowd 2_02_03_zh-CN
+Audio_Mainstreet/Q16/EV_01/MS_Q16_EV_01_01_GP_Crowd1_01	MS_Q16_EV_01_01_GP_Crowd1_01_zh-CN
+Audio_Mainstreet/Q16/EV_02/MS_Q16_EV_02_01_GP_Crowd2_01	MS_Q16_EV_02_01_GP_Crowd2_01_zh-CN
+Audio_Mainstreet/Q16/EV_03/MS_Q16_EV_03_01_GP_Crowd3_01	MS_Q16_EV_03_01_GP_Crowd3_01_zh-CN
+Audio_Mainstreet/Q16/START/MS_Q16_START_01_CGP_SN_01	MS_Q16_START_01_CGP_SN_01_zh-CN
+Audio_Mainstreet/Q16/START/MS_Q16_START_02_CGP_SN_02	MS_Q16_START_02_CGP_SN_02_zh-CN
+Audio_Mainstreet/Q16/TOOFAR/MS_Q16_TOOFAR_01_GP_SN_01	MS_Q16_TOOFAR_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q4/ACCEPTED/MS_Q4_ACCEPTED_01_CVS_SN_01	MS_Q4_ACCEPTED_01_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q4/ACCEPTED/MS_Q4_ACCEPTED_02_CVS_Thunder_02	MS_Q4_ACCEPTED_02_CVS_Thunder_02_zh-CN
+Audio_Mainstreet/Q4/COMP/MS_Q4_COMP_01_CVS_Thunder_01	MS_Q4_COMP_01_CVS_Thunder_01_zh-CN
+Audio_Mainstreet/Q4/COMP/MS_Q4_COMP_02_CVS_Thunder_02	MS_Q4_COMP_02_CVS_Thunder_02_zh-CN
+Audio_Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_01_CVS_SN_01	MS_Q4_DECLINED_01_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q4/DECLINED/MS_Q4_DECLINED_02_CVS_Thunder_02	MS_Q4_DECLINED_02_CVS_Thunder_02_zh-CN
+Audio_Mainstreet/Q4/POST_01/MS_Q4_POST_01_01_GP_Thunder_01	MS_Q4_POST_01_01_GP_Thunder_01_zh-CN
+Audio_Mainstreet/Q4/QUESTION/MS_Q4_QUESTION_01_CVS_Thunder_01	MS_Q4_QUESTION_01_CVS_Thunder_01_zh-CN
+Audio_Mainstreet/Q4/RETACPTD/MS_Q4_RETACPTD_01_CVS_SN_01	MS_Q4_RETACPTD_01_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q4/RETDCLND/MS_Q4_RETDCLND_01_CVS_SN_01	MS_Q4_RETDCLND_01_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q4/RETRY/MS_Q4_RETRY_01_CVS_Thunder_01	MS_Q4_RETRY_01_CVS_Thunder_01_zh-CN
+Audio_Mainstreet/Q4/START/MS_Q4_START_01_CVS_Thunder_01	MS_Q4_START_01_CVS_Thunder_01_zh-CN
+Audio_Mainstreet/Q4/START/MS_Q4_START_02_CVS_SN_01	MS_Q4_START_02_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q4/START/MS_Q4_START_03_CVS_Thunder_02	MS_Q4_START_03_CVS_Thunder_02_zh-CN
+Audio_Mainstreet/Q4/START/MS_Q4_START_04_CVS_Thunder_03	MS_Q4_START_04_CVS_Thunder_03_zh-CN
+Audio_Mainstreet/Q4/START/MS_Q4_START_05_CVS_Thunder_04	MS_Q4_START_05_CVS_Thunder_04_zh-CN
+Audio_Mainstreet/Q4/START/MS_Q4_START_06_CVS_SN_02	MS_Q4_START_06_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q4/START/MS_Q4_START_07_CVS_Thunder_05	MS_Q4_START_07_CVS_Thunder_05_zh-CN
+Audio_Mainstreet/Q4/START/MS_Q4_START_08_CVS_SN_03	MS_Q4_START_08_CVS_SN_03_zh-CN
+Audio_Mainstreet/Q4/START/MS_Q4_START_09_CVS_Thunder_06	MS_Q4_START_09_CVS_Thunder_06_zh-CN
+Audio_Mainstreet/Q4/START/MS_Q4_START_10_CVS_Thunder_07	MS_Q4_START_10_CVS_Thunder_07_zh-CN
+Audio_Mainstreet/Q5/COMP/MS_Q5_COMP_01_CS_PP_01	MS_Q5_COMP_01_CS_PP_01_zh-CN
+Audio_Mainstreet/Q5/COMP/MS_Q5_COMP_02_CS_SN_01	MS_Q5_COMP_02_CS_SN_01_zh-CN
+Audio_Mainstreet/Q5/COMP/MS_Q5_COMP_03_CS_PP_02	MS_Q5_COMP_03_CS_PP_02_zh-CN
+Audio_Mainstreet/Q5/COMP/MS_Q5_COMP_04_CS_PP_03	MS_Q5_COMP_04_CS_PP_03_zh-CN
+Audio_Mainstreet/Q5/EV_01/MS_Q5_EV_01_01_GP_SN_01	MS_Q5_EV_01_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q5/EV_02/MS_Q5_EV_02_01_GP_SN_01	MS_Q5_EV_02_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q5/EV_03/MS_Q5_EV_03_01_GP_SN_01	MS_Q5_EV_03_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_01_CVS_Sprout_01	MS_Q5_EV_04_01_CVS_Sprout_01_zh-CN
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_02_CVS_Sprout_02	MS_Q5_EV_04_02_CVS_Sprout_02_zh-CN
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_03_CVS_Sprout_03	MS_Q5_EV_04_03_CVS_Sprout_03_zh-CN
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_04_CVS_SN_01	MS_Q5_EV_04_04_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_05_CVS_Sprout_04	MS_Q5_EV_04_05_CVS_Sprout_04_zh-CN
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_06_CVS_SN_02	MS_Q5_EV_04_06_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q5/EV_04/MS_Q5_EV_04_07_CVS_Sprout_05	MS_Q5_EV_04_07_CVS_Sprout_05_zh-CN
+Audio_Mainstreet/Q5/EV_05/MS_Q5_EV_05_01_GP_SN_01	MS_Q5_EV_05_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_01_CVS_IZ_01	MS_Q5_EV_06_01_CVS_IZ_01_zh-CN
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_02_CVS_SN_01	MS_Q5_EV_06_02_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_03_CVS_IZ_02	MS_Q5_EV_06_03_CVS_IZ_02_zh-CN
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_04_CVS_IZ_03	MS_Q5_EV_06_04_CVS_IZ_03_zh-CN
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_05_CVS_SN_02	MS_Q5_EV_06_05_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_06_CVS_IZ_04	MS_Q5_EV_06_06_CVS_IZ_04_zh-CN
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_07_CVS_SN_03	MS_Q5_EV_06_07_CVS_SN_03_zh-CN
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_08_CVS_IZ_05	MS_Q5_EV_06_08_CVS_IZ_05_zh-CN
+Audio_Mainstreet/Q5/EV_06/MS_Q5_EV_06_09_CVS_SN_04	MS_Q5_EV_06_09_CVS_SN_04_zh-CN
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_01_CVS_PaintShop_01	MS_Q5_EV_07_01_CVS_PaintShop_01_zh-CN
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_02_CVS_SN_01	MS_Q5_EV_07_02_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_03_CVS_PaintShop_02	MS_Q5_EV_07_03_CVS_PaintShop_02_zh-CN
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_04_CVS_SN_02	MS_Q5_EV_07_04_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_05_CVS_PaintShop_03	MS_Q5_EV_07_05_CVS_PaintShop_03_zh-CN
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_06_CVS_PaintShop_04	MS_Q5_EV_07_06_CVS_PaintShop_04_zh-CN
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_07_CVS_SN_03	MS_Q5_EV_07_07_CVS_SN_03_zh-CN
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_08_CVS_PaintShop_05	MS_Q5_EV_07_08_CVS_PaintShop_05_zh-CN
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_09_CVS_PaintShop_06	MS_Q5_EV_07_09_CVS_PaintShop_06_zh-CN
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_10_CVS_PaintShop_07	MS_Q5_EV_07_10_CVS_PaintShop_07_zh-CN
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_11_CVS_PaintShop_08	MS_Q5_EV_07_11_CVS_PaintShop_08_zh-CN
+Audio_Mainstreet/Q5/EV_07/MS_Q5_EV_07_12_CVS_SN_04	MS_Q5_EV_07_12_CVS_SN_04_zh-CN
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_01_CVS_FashionPony_01	MS_Q5_EV_08_01_CVS_FashionPony_01_zh-CN
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_02_CVS_SN_01	MS_Q5_EV_08_02_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_03_CVS_FashionPony_02	MS_Q5_EV_08_03_CVS_FashionPony_02_zh-CN
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_04_CVS_FashionPony_03	MS_Q5_EV_08_04_CVS_FashionPony_03_zh-CN
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_05_CVS_SN_02	MS_Q5_EV_08_05_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_06_CVS_FashionPony_04	MS_Q5_EV_08_06_CVS_FashionPony_04_zh-CN
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_07_CVS_FashionPony_05	MS_Q5_EV_08_07_CVS_FashionPony_05_zh-CN
+Audio_Mainstreet/Q5/EV_08/MS_Q5_EV_08_08_CVS_SN_03	MS_Q5_EV_08_08_CVS_SN_03_zh-CN
+Audio_Mainstreet/Q5/EV_09/MS_Q5_EV_09_01_CVS_FlowerShop_01	MS_Q5_EV_09_01_CVS_FlowerShop_01_zh-CN
+Audio_Mainstreet/Q5/EV_09/MS_Q5_EV_09_02_CVS_SN_01	MS_Q5_EV_09_02_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q5/EV_09/MS_Q5_EV_09_03_CVS_FlowerShop_02	MS_Q5_EV_09_03_CVS_FlowerShop_02_zh-CN
+Audio_Mainstreet/Q5/EV_09/MS_Q5_EV_09_04_CVS_FlowerShop_03	MS_Q5_EV_09_04_CVS_FlowerShop_03_zh-CN
+Audio_Mainstreet/Q5/EV_09/MS_Q5_EV_09_05_CVS_SN_02	MS_Q5_EV_09_05_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q5/EV_09/MS_Q5_EV_09_06_CVS_FlowerShop_04	MS_Q5_EV_09_06_CVS_FlowerShop_04_zh-CN
+Audio_Mainstreet/Q5/EV_10/MS_Q5_EV_10_01_GP_FlowerShop_01	MS_Q5_EV_10_01_GP_FlowerShop_01_zh-CN
+Audio_Mainstreet/Q5/EV_11/MS_Q5_EV_11_01_GP_FashionPony_01	MS_Q5_EV_11_01_GP_FashionPony_01_zh-CN
+Audio_Mainstreet/Q5/EV_12/MS_Q5_EV_12_01_CVS_PaintShop_01	MS_Q5_EV_12_01_CVS_PaintShop_01_zh-CN
+Audio_Mainstreet/Q5/EV_12/MS_Q5_EV_12_02_CVS_SN_01	MS_Q5_EV_12_02_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q5/EV_12/MS_Q5_EV_12_03_CVS_PaintShop_02	MS_Q5_EV_12_03_CVS_PaintShop_02_zh-CN
+Audio_Mainstreet/Q5/EV_12/MS_Q5_EV_12_04_CVS_SN_02	MS_Q5_EV_12_04_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q5/EV_12/MS_Q5_EV_12_05_CVS_PaintShop_03	MS_Q5_EV_12_05_CVS_PaintShop_03_zh-CN
+Audio_Mainstreet/Q5/EV_13/MS_Q5_EV_13_01_GP_SN_03	MS_Q5_EV_13_01_GP_SN_03_zh-CN
+Audio_Mainstreet/Q5/EV_14/MS_Q5_EV_14_01_GP_SN_01	MS_Q5_EV_14_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q5/EV_15/MS_Q5_EV_15_01_GP_SN_01	MS_Q5_EV_15_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q5/MID_01/MS_Q5_MID_01_01_GP_Sprout_01	MS_Q5_MID_01_01_GP_Sprout_01_zh-CN
+Audio_Mainstreet/Q5/MID_02/MS_Q5_MID_02_01_CVS_IZ_01	MS_Q5_MID_02_01_CVS_IZ_01_zh-CN
+Audio_Mainstreet/Q5/MID_03/MS_Q5_MID_03_01_CVS_Thunder_01	MS_Q5_MID_03_01_CVS_Thunder_01_zh-CN
+Audio_Mainstreet/Q5/MID_04/MS_Q5_MID_04_01_CVS_FashionPony_01	MS_Q5_MID_04_01_CVS_FashionPony_01_zh-CN
+Audio_Mainstreet/Q5/MID_05/MS_Q5_MID_05_01_GP_PaintShop_01	MS_Q5_MID_05_01_GP_PaintShop_01_zh-CN
+Audio_Mainstreet/Q5/MID_06/MS_Q5_MID_06_01_CVS_PP_01	MS_Q5_MID_06_01_CVS_PP_01_zh-CN
+Audio_Mainstreet/Q5/MID_06/MS_Q5_MID_06_02_CVS_PP_02	MS_Q5_MID_06_02_CVS_PP_02_zh-CN
+Audio_Mainstreet/Q5/MID_06/MS_Q5_MID_06_03_CVS_SN_01	MS_Q5_MID_06_03_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q5/MID_07/MS_Q5_MID_07_01_CVS_IZ_01	MS_Q5_MID_07_01_CVS_IZ_01_zh-CN
+Audio_Mainstreet/Q5/POST_01/MS_Q5_POST_01_01_CVS_IZ_01	MS_Q5_POST_01_01_CVS_IZ_01_zh-CN
+Audio_Mainstreet/Q5/POST_02/MS_Q5_POST_02_01_CVS_PaintShop_01	MS_Q5_POST_02_01_CVS_PaintShop_01_zh-CN
+Audio_Mainstreet/Q5/POST_03/MS_Q5_POST_03_01_CVS_FashionPony_01	MS_Q5_POST_03_01_CVS_FashionPony_01_zh-CN
+Audio_Mainstreet/Q5/POST_04/MS_Q5_POST_04_01_CVS_FlowerShop_01	MS_Q5_POST_04_01_CVS_FlowerShop_01_zh-CN
+Audio_Mainstreet/Q5/POST_05/MS_Q5_POST_05_01_CVS_Sprout_01	MS_Q5_POST_05_01_CVS_Sprout_01_zh-CN
+Audio_Mainstreet/Q5/POST_05/MS_Q5_POST_05_02_CVS_SN_01	MS_Q5_POST_05_02_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q5/POST_05/MS_Q5_POST_05_03_CVS_Sprout_02	MS_Q5_POST_05_03_CVS_Sprout_02_zh-CN
+Audio_Mainstreet/Q5/PRE_01/MS_Q5_PRE_01_01_CVS_IZ_01	MS_Q5_PRE_01_01_CVS_IZ_01_zh-CN
+Audio_Mainstreet/Q5/PRE_02/MS_Q5_PRE_02_01_CVS_PaintShop_01	MS_Q5_PRE_02_01_CVS_PaintShop_01_zh-CN
+Audio_Mainstreet/Q5/PRE_03/MS_Q5_PRE_03_01_CVS_FashionPony_01	MS_Q5_PRE_03_01_CVS_FashionPony_01_zh-CN
+Audio_Mainstreet/Q5/PRE_04/MS_Q5_PRE_04_01_CVS_FlowerShop_01	MS_Q5_PRE_04_01_CVS_FlowerShop_01_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_01_CS_PP_01	MS_Q5_START_01_CS_PP_01_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_02_CS_SN_01	MS_Q5_START_02_CS_SN_01_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_03_CS_PP_02	MS_Q5_START_03_CS_PP_02_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_04_CS_PP_03	MS_Q5_START_04_CS_PP_03_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_05_CS_PP_04	MS_Q5_START_05_CS_PP_04_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_06_CS_Sprout_01	MS_Q5_START_06_CS_Sprout_01_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_07_CS_PP_05	MS_Q5_START_07_CS_PP_05_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_08_CS_Sprout_02	MS_Q5_START_08_CS_Sprout_02_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_09_CS_Sprout_03	MS_Q5_START_09_CS_Sprout_03_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_10_CS_PP_06	MS_Q5_START_10_CS_PP_06_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_11_CS_Sprout_04	MS_Q5_START_11_CS_Sprout_04_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_12_CS_SN_02	MS_Q5_START_12_CS_SN_02_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_13_CS_Sprout_05	MS_Q5_START_13_CS_Sprout_05_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_14_CS_Sprout_06	MS_Q5_START_14_CS_Sprout_06_zh-CN
+Audio_Mainstreet/Q5/START/MS_Q5_START_15_CS_SN_03	MS_Q5_START_15_CS_SN_03_zh-CN
+Audio_Mainstreet/Q5/TOOFAR/MS_Q5_TOOFAR_01_GP_SN_01	MS_Q5_TOOFAR_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_01_CVS_Primrose_01	MS_Q6_COMP_01_CVS_Primrose_01_zh-CN
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_02_CVS_SN_01	MS_Q6_COMP_02_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_03_CVS_Primrose_02	MS_Q6_COMP_03_CVS_Primrose_02_zh-CN
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_04_CVS_SN_02	MS_Q6_COMP_04_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_05_CVS_SN_03	MS_Q6_COMP_05_CVS_SN_03_zh-CN
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_06_CVS_Primrose_03	MS_Q6_COMP_06_CVS_Primrose_03_zh-CN
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_07_CVS_Primrose_04	MS_Q6_COMP_07_CVS_Primrose_04_zh-CN
+Audio_Mainstreet/Q6/COMP/MS_Q6_COMP_08_CVS_SN_04	MS_Q6_COMP_08_CVS_SN_04_zh-CN
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_01_CVS_SN_01	MS_Q6_EV_01_01_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_02_CVS_Primrose_01	MS_Q6_EV_01_02_CVS_Primrose_01_zh-CN
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_03_CVS_SN_02	MS_Q6_EV_01_03_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_04_CVS_Primrose_02	MS_Q6_EV_01_04_CVS_Primrose_02_zh-CN
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_05_CVS_SN_03	MS_Q6_EV_01_05_CVS_SN_03_zh-CN
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_06_CVS_Primrose_03	MS_Q6_EV_01_06_CVS_Primrose_03_zh-CN
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_07_CVS_SN_04	MS_Q6_EV_01_07_CVS_SN_04_zh-CN
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_08_CVS_Primrose_04	MS_Q6_EV_01_08_CVS_Primrose_04_zh-CN
+Audio_Mainstreet/Q6/EV_01/MS_Q6_EV_01_09_CVS_SN_05	MS_Q6_EV_01_09_CVS_SN_05_zh-CN
+Audio_Mainstreet/Q6/EV_02/MS_Q6_EV_02_01_GP_ShopKeeper1_01	MS_Q6_EV_02_01_GP_ShopKeeper1_01_zh-CN
+Audio_Mainstreet/Q6/EV_03/MS_Q6_EV_03_01_GP_ShopKeeper2_01	MS_Q6_EV_03_01_GP_ShopKeeper2_01_zh-CN
+Audio_Mainstreet/Q6/EV_04/MS_Q6_EV_04_01_GP_ShopKeeper3_01	MS_Q6_EV_04_01_GP_ShopKeeper3_01_zh-CN
+Audio_Mainstreet/Q6/EV_05/MS_Q6_EV_05_01_GP_SN_01	MS_Q6_EV_05_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_01_CVS_Primrose_01	MS_Q6_EV_06_01_CVS_Primrose_01_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_02_CVS_SN_01	MS_Q6_EV_06_02_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_03_CVS_Primrose_02	MS_Q6_EV_06_03_CVS_Primrose_02_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_04_CVS_SN_02	MS_Q6_EV_06_04_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_05_CVS_Primrose_03	MS_Q6_EV_06_05_CVS_Primrose_03_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_06_CVS_SN_03	MS_Q6_EV_06_06_CVS_SN_03_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_07_CVS_Primrose_04	MS_Q6_EV_06_07_CVS_Primrose_04_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_08_CVS_SN_04	MS_Q6_EV_06_08_CVS_SN_04_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_09_CVS_Primrose_05	MS_Q6_EV_06_09_CVS_Primrose_05_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_10_CVS_SN_05	MS_Q6_EV_06_10_CVS_SN_05_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_11_CVS_Primrose_06	MS_Q6_EV_06_11_CVS_Primrose_06_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_12_CVS_Primrose_07	MS_Q6_EV_06_12_CVS_Primrose_07_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_13_CVS_SN_06	MS_Q6_EV_06_13_CVS_SN_06_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_14_CVS_SN_07	MS_Q6_EV_06_14_CVS_SN_07_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_15_CVS_Primrose_08	MS_Q6_EV_06_15_CVS_Primrose_08_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_16_CVS_SN_08	MS_Q6_EV_06_16_CVS_SN_08_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_17_CVS_SN_09	MS_Q6_EV_06_17_CVS_SN_09_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_18_CVS_Primrose_09	MS_Q6_EV_06_18_CVS_Primrose_09_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_19_CVS_SN_10	MS_Q6_EV_06_19_CVS_SN_10_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_20_CVS_Primrose_10	MS_Q6_EV_06_20_CVS_Primrose_10_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_21_CVS_SN_11	MS_Q6_EV_06_21_CVS_SN_11_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_22_CVS_Primrose_11	MS_Q6_EV_06_22_CVS_Primrose_11_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_23_CVS_SN_12	MS_Q6_EV_06_23_CVS_SN_12_zh-CN
+Audio_Mainstreet/Q6/EV_06/MS_Q6_EV_06_24_CVS_SN_13	MS_Q6_EV_06_24_CVS_SN_13_zh-CN
+Audio_Mainstreet/Q6/EV_07/MS_Q6_EV_07_01_CVS_SN_01	MS_Q6_EV_07_01_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q6/EV_07/MS_Q6_EV_07_02_CVS_SN_02	MS_Q6_EV_07_02_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q6/EV_07/MS_Q6_EV_07_03_CVS_SmoothieShop_01	MS_Q6_EV_07_03_CVS_SmoothieShop_01_zh-CN
+Audio_Mainstreet/Q6/EV_07/MS_Q6_EV_07_04_CVS_SN_03	MS_Q6_EV_07_04_CVS_SN_03_zh-CN
+Audio_Mainstreet/Q6/EV_07/MS_Q6_EV_07_05_CVS_SmoothieShop_02	MS_Q6_EV_07_05_CVS_SmoothieShop_02_zh-CN
+Audio_Mainstreet/Q6/EV_07/MS_Q6_EV_07_06_CVS_SmoothieShop_03	MS_Q6_EV_07_06_CVS_SmoothieShop_03_zh-CN
+Audio_Mainstreet/Q6/EV_08/MS_Q6_EV_08_01_GP_SmoothieShop_01	MS_Q6_EV_08_01_GP_SmoothieShop_01_zh-CN
+Audio_Mainstreet/Q6/EV_09/MS_Q6_EV_09_01_GP_SN_01	MS_Q6_EV_09_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q6/EV_10/MS_Q6_EV_10_01_GP_SN_01	MS_Q6_EV_10_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q6/MID_01/MS_Q6_MID_01_01_CVS_PP_01	MS_Q6_MID_01_01_CVS_PP_01_zh-CN
+Audio_Mainstreet/Q6/MID_01/MS_Q6_MID_01_02_CVS_PP_02	MS_Q6_MID_01_02_CVS_PP_02_zh-CN
+Audio_Mainstreet/Q6/MID_02/MS_Q6_MID_02_01_GP_Primrose_05	MS_Q6_MID_02_01_GP_Primrose_05_zh-CN
+Audio_Mainstreet/Q6/MID_03/MS_Q6_MID_03_01_GP_Primrose_01	MS_Q6_MID_03_01_GP_Primrose_01_zh-CN
+Audio_Mainstreet/Q6/MID_04/MS_Q6_MID_04_01_CVS_SmoothieShop_01	MS_Q6_MID_04_01_CVS_SmoothieShop_01_zh-CN
+Audio_Mainstreet/Q6/POST_01/MS_Q6_POST_01_01_CVS_SmoothieShop_01	MS_Q6_POST_01_01_CVS_SmoothieShop_01_zh-CN
+Audio_Mainstreet/Q6/POST_02/MS_Q6_POST_02_01_GP_ShopKeeper1_01	MS_Q6_POST_02_01_GP_ShopKeeper1_01_zh-CN
+Audio_Mainstreet/Q6/POST_03/MS_Q6_POST_03_01_GP_ShopKeeper2_01	MS_Q6_POST_03_01_GP_ShopKeeper2_01_zh-CN
+Audio_Mainstreet/Q6/POST_04/MS_Q6_POST_04_01_GP_ShopKeeper3_01	MS_Q6_POST_04_01_GP_ShopKeeper3_01_zh-CN
+Audio_Mainstreet/Q6/PRE_01/MS_Q6_PRE_01_01_CVS_SmoothieShop_01	MS_Q6_PRE_01_01_CVS_SmoothieShop_01_zh-CN
+Audio_Mainstreet/Q6/PRE_02/MS_Q6_PRE_02_01_GP_ShopKeeper1_01	MS_Q6_PRE_02_01_GP_ShopKeeper1_01_zh-CN
+Audio_Mainstreet/Q6/PRE_03/MS_Q6_PRE_03_01_GP_ShopKeeper2_01	MS_Q6_PRE_03_01_GP_ShopKeeper2_01_zh-CN
+Audio_Mainstreet/Q6/PRE_04/MS_Q6_PRE_04_01_GP_ShopKeeper3_01	MS_Q6_PRE_04_01_GP_ShopKeeper3_01_zh-CN
+Audio_Mainstreet/Q6/START/MS_Q6_START_01_CVS_PP_01	MS_Q6_START_01_CVS_PP_01_zh-CN
+Audio_Mainstreet/Q6/START/MS_Q6_START_02_CVS_SN_01	MS_Q6_START_02_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q6/START/MS_Q6_START_03_CVS_PP_02	MS_Q6_START_03_CVS_PP_02_zh-CN
+Audio_Mainstreet/Q6/START/MS_Q6_START_04_CVS_PP_03	MS_Q6_START_04_CVS_PP_03_zh-CN
+Audio_Mainstreet/Q6/START/MS_Q6_START_05_CVS_PP_04	MS_Q6_START_05_CVS_PP_04_zh-CN
+Audio_Mainstreet/Q6/START/MS_Q6_START_06_CVS_PP_05	MS_Q6_START_06_CVS_PP_05_zh-CN
+Audio_Mainstreet/Q6/START/MS_Q6_START_07_CVS_SN_02	MS_Q6_START_07_CVS_SN_02_zh-CN
+Audio_Mainstreet/Q6/START/MS_Q6_START_08_CVS_PP_06	MS_Q6_START_08_CVS_PP_06_zh-CN
+Audio_Mainstreet/Q6/START/MS_Q6_START_09_CVS_SN_03	MS_Q6_START_09_CVS_SN_03_zh-CN
+Audio_Mainstreet/Q6/START/MS_Q6_START_10_CVS_PP_07	MS_Q6_START_10_CVS_PP_07_zh-CN
+Audio_Mainstreet/Q6/TOOFAR/MS_Q6_TOOFAR_01_GP_SN_01	MS_Q6_TOOFAR_01_GP_SN_01_zh-CN
+Audio_Mainstreet/Q7/COMP/MS_Q7_COMP_01_CVS_HC_01	MS_Q7_COMP_01_CVS_HC_01_zh-CN
+Audio_Mainstreet/Q7/COMP/MS_Q7_COMP_02_CS_HC_01	MS_Q7_COMP_02_CS_HC_01_zh-CN
+Audio_Mainstreet/Q7/COMP/MS_Q7_COMP_03_CS_HC_02	MS_Q7_COMP_03_CS_HC_02_zh-CN
+Audio_Mainstreet/Q7/EV_01/MS_Q7_EV_01_01_GP_HC_01	MS_Q7_EV_01_01_GP_HC_01_zh-CN
+Audio_Mainstreet/Q7/EV_01/MS_Q7_EV_01_02_GP_HC_02	MS_Q7_EV_01_02_GP_HC_02_zh-CN
+Audio_Mainstreet/Q7/EV_01/MS_Q7_EV_01_03_GP_HC_03	MS_Q7_EV_01_03_GP_HC_03_zh-CN
+Audio_Mainstreet/Q7/POST_01/MS_Q7_POST_01_01_CVS_HC_01	MS_Q7_POST_01_01_CVS_HC_01_zh-CN
+Audio_Mainstreet/Q7/POST_01/MS_Q7_POST_01_02_CVS_Primrose_01	MS_Q7_POST_01_02_CVS_Primrose_01_zh-CN
+Audio_Mainstreet/Q7/POST_01/MS_Q7_POST_01_03_CVS_HC_02	MS_Q7_POST_01_03_CVS_HC_02_zh-CN
+Audio_Mainstreet/Q7/POST_01/MS_Q7_POST_01_04_CVS_Primrose_02	MS_Q7_POST_01_04_CVS_Primrose_02_zh-CN
+Audio_Mainstreet/Q7/POST_01/MS_Q7_POST_01_05_CVS_SN_01	MS_Q7_POST_01_05_CVS_SN_01_zh-CN
+Audio_Mainstreet/Q7/START/MS_Q7_START_01_CVS_HC_01	MS_Q7_START_01_CVS_HC_01_zh-CN
+Audio_Mainstreet/Q7/START/MS_Q7_START_02_CVS_HC_02	MS_Q7_START_02_CVS_HC_02_zh-CN
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_01_CGP_Sprout_01	MS_SS_EV_01_01_CGP_Sprout_01_zh-CN
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_02_CGP_Sprout_02	MS_SS_EV_01_02_CGP_Sprout_02_zh-CN
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_03_CGP_Sprout_03	MS_SS_EV_01_03_CGP_Sprout_03_zh-CN
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_04_CGP_Sprout_04	MS_SS_EV_01_04_CGP_Sprout_04_zh-CN
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_05_CGP_Sprout_05	MS_SS_EV_01_05_CGP_Sprout_05_zh-CN
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_06_CGP_Sprout_06	MS_SS_EV_01_06_CGP_Sprout_06_zh-CN
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_07_CGP_Sprout_07	MS_SS_EV_01_07_CGP_Sprout_07_zh-CN
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_08_CGP_Sprout_08	MS_SS_EV_01_08_CGP_Sprout_08_zh-CN
+Audio_Mainstreet/SS/EV_01/MS_SS_EV_01_09_CGP_Sprout_09	MS_SS_EV_01_09_CGP_Sprout_09_zh-CN
+Audio_Mainstreet/SS/EV_02/MS_SS_EV_02_10_GP_Crowd1_01	MS_SS_EV_02_10_GP_Crowd1_01_zh-CN
+Audio_Mainstreet/SS/EV_03/MS_SS_EV_03_11_GP_Crowd2_01	MS_SS_EV_03_11_GP_Crowd2_01_zh-CN
+Audio_Mainstreet/SS/EV_04/MS_SS_EV_04_01_GP_Sprout_01	MS_SS_EV_04_01_GP_Sprout_01_zh-CN
+Audio_Mainstreet/SS/EV_04/MS_SS_EV_04_02_GP_Sprout_02	MS_SS_EV_04_02_GP_Sprout_02_zh-CN
+Audio_TownPark/MC/ACCEPTED/TP_MC_ACCEPTED_01_CVS_HC_01	TP_MC_ACCEPTED_01_CVS_HC_01_zh-CN
+Audio_TownPark/MC/ACCEPTED/TP_MC_ACCEPTED_02_CVS_SN_01	TP_MC_ACCEPTED_02_CVS_SN_01_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_01_CS_HC_01	TP_MC_COMP_01_CS_HC_01_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_02_CS_SN_01	TP_MC_COMP_02_CS_SN_01_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_03_CS_HC_02	TP_MC_COMP_03_CS_HC_02_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_04_CS_SN_02	TP_MC_COMP_04_CS_SN_02_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_05_CS_HC_03	TP_MC_COMP_05_CS_HC_03_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_06_CS_SN_03	TP_MC_COMP_06_CS_SN_03_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_07_CS_Sprout_01	TP_MC_COMP_07_CS_Sprout_01_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_08_CS_Sprout_02	TP_MC_COMP_08_CS_Sprout_02_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_09_CS_HC_04	TP_MC_COMP_09_CS_HC_04_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_10_CS_Sprout_03	TP_MC_COMP_10_CS_Sprout_03_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_11_CS_Sprout_04	TP_MC_COMP_11_CS_Sprout_04_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_12_CS_HC_04	TP_MC_COMP_12_CS_HC_04_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_13_CS_Sprout_05	TP_MC_COMP_13_CS_Sprout_05_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_14_CS_HC_05	TP_MC_COMP_14_CS_HC_05_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_15_CS_SN_05	TP_MC_COMP_15_CS_SN_05_zh-CN
+Audio_TownPark/MC/COMP/TP_MC_COMP_16_CS_HC_06	TP_MC_COMP_16_CS_HC_06_zh-CN
+Audio_TownPark/MC/DECLINED/TP_MC_DECLINED_01_CVS_SN_01	TP_MC_DECLINED_01_CVS_SN_01_zh-CN
+Audio_TownPark/MC/DECLINED/TP_MC_DECLINED_02_CVS_HC_01	TP_MC_DECLINED_02_CVS_HC_01_zh-CN
+Audio_TownPark/MC/EV_01/TP_MC_EV_01_01_GP_SN_01	TP_MC_EV_01_01_GP_SN_01_zh-CN
+Audio_TownPark/MC/EV_02/TP_MC_EV_02_01_GP_Sprout_01	TP_MC_EV_02_01_GP_Sprout_01_zh-CN
+Audio_TownPark/MC/EV_03/TP_MC_EV_03_01_GP_SN_01	TP_MC_EV_03_01_GP_SN_01_zh-CN
+Audio_TownPark/MC/POST_01/TP_MC_POST_01_01_GP_IZ_01	TP_MC_POST_01_01_GP_IZ_01_zh-CN
+Audio_TownPark/MC/QUESTION/TP_MC_QUESTION_01_CVS_HC_01	TP_MC_QUESTION_01_CVS_HC_01_zh-CN
+Audio_TownPark/MC/REPACPTD/TP_MC_REPACPTD_01_CVS_SN_01	TP_MC_REPACPTD_01_CVS_SN_01_zh-CN
+Audio_TownPark/MC/REPDCLND/TP_MC_REPDCLND_01_CVS_SN_01	TP_MC_REPDCLND_01_CVS_SN_01_zh-CN
+Audio_TownPark/MC/REPEAT/TP_MC_REPEAT_01_CVS_HC_01	TP_MC_REPEAT_01_CVS_HC_01_zh-CN
+Audio_TownPark/MC/START/TP_MC_START_01_CVS_HC_01	TP_MC_START_01_CVS_HC_01_zh-CN
+Audio_TownPark/MC/START/TP_MC_START_02_CVS_HC_02	TP_MC_START_02_CVS_HC_02_zh-CN
+Audio_TownPark/MC/START/TP_MC_START_03_CVS_HC_03	TP_MC_START_03_CVS_HC_03_zh-CN
+Audio_TownPark/MC/START/TP_MC_START_04_CVS_HC_04	TP_MC_START_04_CVS_HC_04_zh-CN
+Audio_TownPark/Q10/COMP/TP_Q10_COMP_01_CVS_HC_01	TP_Q10_COMP_01_CVS_HC_01_zh-CN
+Audio_TownPark/Q10/COMP/TP_Q10_COMP_02_CVS_HC_02	TP_Q10_COMP_02_CVS_HC_02_zh-CN
+Audio_TownPark/Q10/COMP/TP_Q10_COMP_03_CVS_SN_01	TP_Q10_COMP_03_CVS_SN_01_zh-CN
+Audio_TownPark/Q10/EV_01/TP_Q10_EV_01_01_GP_HC_01	TP_Q10_EV_01_01_GP_HC_01_zh-CN
+Audio_TownPark/Q10/EV_02/TP_Q10_EV_02_01_GP_SN_01	TP_Q10_EV_02_01_GP_SN_01_zh-CN
+Audio_TownPark/Q10/EV_03/TP_Q10_EV_03_01_GP_SN_01	TP_Q10_EV_03_01_GP_SN_01_zh-CN
+Audio_TownPark/Q10/EV_04/TP_Q10_EV_04_01_GP_SN_01	TP_Q10_EV_04_01_GP_SN_01_zh-CN
+Audio_TownPark/Q10/MID_01/TP_Q10_MID_01_01_GP_HC_01	TP_Q10_MID_01_01_GP_HC_01_zh-CN
+Audio_TownPark/Q10/START/TP_Q10_START_01_CVS_HC_01	TP_Q10_START_01_CVS_HC_01_zh-CN
+Audio_TownPark/Q10/START/TP_Q10_START_02_CVS_HC_02	TP_Q10_START_02_CVS_HC_02_zh-CN
+Audio_TownPark/Q10/START/TP_Q10_START_03_CVS_HC_03	TP_Q10_START_03_CVS_HC_03_zh-CN
+Audio_TownPark/Q10/TOOFAR/TP_Q10_TOOFAR_01_GP_HC_01	TP_Q10_TOOFAR_01_GP_HC_01_zh-CN
+Audio_TownPark/Q12/ACCEPTED/TP_Q12_ACCEPTED_01_CVS_SN_01	TP_Q12_ACCEPTED_01_CVS_SN_01_zh-CN
+Audio_TownPark/Q12/COMP/TP_Q12_COMP_01_CVS_Zoom_01	TP_Q12_COMP_01_CVS_Zoom_01_zh-CN
+Audio_TownPark/Q12/DECLINED/TP_Q12_DECLINED_01_CVS_SN_01	TP_Q12_DECLINED_01_CVS_SN_01_zh-CN
+Audio_TownPark/Q12/POST_01/TP_Q12_POST_01_01_CVS_Zoom_01	TP_Q12_POST_01_01_CVS_Zoom_01_zh-CN
+Audio_TownPark/Q12/QUESTION/TP_Q12_QUESTION_01_CVS_Zoom_01	TP_Q12_QUESTION_01_CVS_Zoom_01_zh-CN
+Audio_TownPark/Q12/RETACPTD/TP_Q12_RETACPTD_01_CVS_SN_01	TP_Q12_RETACPTD_01_CVS_SN_01_zh-CN
+Audio_TownPark/Q12/RETDCLND/TP_Q12_RETDCLND_01_CVS_SN_01	TP_Q12_RETDCLND_01_CVS_SN_01_zh-CN
+Audio_TownPark/Q12/RETRY/TP_Q12_RETRY_01_CVS_Zoom_01	TP_Q12_RETRY_01_CVS_Zoom_01_zh-CN
+Audio_TownPark/Q12/START/TP_Q12_START_01_CVS_Zoom_01	TP_Q12_START_01_CVS_Zoom_01_zh-CN
+Audio_TownPark/Q12/START/TP_Q12_START_02_CVS_Zoom_02	TP_Q12_START_02_CVS_Zoom_02_zh-CN
+Audio_TownPark/Q12/START/TP_Q12_START_03_CVS_SN_01	TP_Q12_START_03_CVS_SN_01_zh-CN
+Audio_TownPark/Q12/START/TP_Q12_START_04_CVS_Zoom_03	TP_Q12_START_04_CVS_Zoom_03_zh-CN
+Audio_TownPark/Q8/COMP/TP_Q8_COMP_01_CVS_IZ_01	TP_Q8_COMP_01_CVS_IZ_01_zh-CN
+Audio_TownPark/Q8/COMP/TP_Q8_COMP_02_CVS_HC_01	TP_Q8_COMP_02_CVS_HC_01_zh-CN
+Audio_TownPark/Q8/COMP/TP_Q8_COMP_03_CVS_HC_02	TP_Q8_COMP_03_CVS_HC_02_zh-CN
+Audio_TownPark/Q8/COMP/TP_Q8_COMP_04_CVS_SN_01	TP_Q8_COMP_04_CVS_SN_01_zh-CN
+Audio_TownPark/Q8/COMP/TP_Q8_COMP_05_CVS_HC_03	TP_Q8_COMP_05_CVS_HC_03_zh-CN
+Audio_TownPark/Q8/EV_01/TP_Q8_EV_01_01_GP_SN_01	TP_Q8_EV_01_01_GP_SN_01_zh-CN
+Audio_TownPark/Q8/EV_02/TP_Q8_EV_02_01_GP_SN_01	TP_Q8_EV_02_01_GP_SN_01_zh-CN
+Audio_TownPark/Q8/EV_03/TP_Q8_EV_03_01_GP_SN_01	TP_Q8_EV_03_01_GP_SN_01_zh-CN
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_01_CVS_ZP_01	TP_Q8_EV_04_01_CVS_ZP_01_zh-CN
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_02_CVS_ZP_02	TP_Q8_EV_04_02_CVS_ZP_02_zh-CN
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_03_CVS_SN_01	TP_Q8_EV_04_03_CVS_SN_01_zh-CN
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_04_CVS_ZP_03	TP_Q8_EV_04_04_CVS_ZP_03_zh-CN
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_05_CVS_Sprout_01	TP_Q8_EV_04_05_CVS_Sprout_01_zh-CN
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_06_CVS_Sprout_02	TP_Q8_EV_04_06_CVS_Sprout_02_zh-CN
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_07_CVS_ZP_04	TP_Q8_EV_04_07_CVS_ZP_04_zh-CN
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_08_CVS_Sprout_03	TP_Q8_EV_04_08_CVS_Sprout_03_zh-CN
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_09_CVS_Sprout_04	TP_Q8_EV_04_09_CVS_Sprout_04_zh-CN
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_10_CVS_Sprout_05	TP_Q8_EV_04_10_CVS_Sprout_05_zh-CN
+Audio_TownPark/Q8/EV_04/TP_Q8_EV_04_11_CVS_SN_02	TP_Q8_EV_04_11_CVS_SN_02_zh-CN
+Audio_TownPark/Q8/EV_05/TP_Q8_EV_05_13_GP_SN_03	TP_Q8_EV_05_13_GP_SN_03_zh-CN
+Audio_TownPark/Q8/EV_06/TP_Q8_EV_06_01_CVS_IZ_01	TP_Q8_EV_06_01_CVS_IZ_01_zh-CN
+Audio_TownPark/Q8/EV_06/TP_Q8_EV_06_02_CVS_SN_01	TP_Q8_EV_06_02_CVS_SN_01_zh-CN
+Audio_TownPark/Q8/EV_06/TP_Q8_EV_06_03_CVS_IZ_02	TP_Q8_EV_06_03_CVS_IZ_02_zh-CN
+Audio_TownPark/Q8/EV_06/TP_Q8_EV_06_04_CVS_SN_02	TP_Q8_EV_06_04_CVS_SN_02_zh-CN
+Audio_TownPark/Q8/EV_06/TP_Q8_EV_06_05_CVS_IZ_03	TP_Q8_EV_06_05_CVS_IZ_03_zh-CN
+Audio_TownPark/Q8/EV_06/TP_Q8_EV_06_06_CVS_SN_04	TP_Q8_EV_06_06_CVS_SN_04_zh-CN
+Audio_TownPark/Q8/EV_07/TP_Q8_EV_07_01_CVS_PaintGuy2_01	TP_Q8_EV_07_01_CVS_PaintGuy2_01_zh-CN
+Audio_TownPark/Q8/EV_07/TP_Q8_EV_07_02_CVS_PaintGuy2_02	TP_Q8_EV_07_02_CVS_PaintGuy2_02_zh-CN
+Audio_TownPark/Q8/EV_07/TP_Q8_EV_07_03_CVS_SN_01	TP_Q8_EV_07_03_CVS_SN_01_zh-CN
+Audio_TownPark/Q8/EV_07/TP_Q8_EV_07_04_CVS_PaintGuy2_03	TP_Q8_EV_07_04_CVS_PaintGuy2_03_zh-CN
+Audio_TownPark/Q8/EV_07/TP_Q8_EV_07_05_CVS_SN_02	TP_Q8_EV_07_05_CVS_SN_02_zh-CN
+Audio_TownPark/Q8/EV_08/TP_Q8_EV_08_01_GP_SN_01	TP_Q8_EV_08_01_GP_SN_01_zh-CN
+Audio_TownPark/Q8/EV_09/TP_Q8_EV_09_01_GP_SN_01	TP_Q8_EV_09_01_GP_SN_01_zh-CN
+Audio_TownPark/Q8/EV_10/TP_Q8_EV_10_01_CVS_PaintGuy2_01	TP_Q8_EV_10_01_CVS_PaintGuy2_01_zh-CN
+Audio_TownPark/Q8/EV_10/TP_Q8_EV_10_02_CVS_PaintGuy2_02	TP_Q8_EV_10_02_CVS_PaintGuy2_02_zh-CN
+Audio_TownPark/Q8/EV_10/TP_Q8_EV_10_03_CVS_SN_01	TP_Q8_EV_10_03_CVS_SN_01_zh-CN
+Audio_TownPark/Q8/EV_11/TP_Q8_EV_11_01_CVS_PumpkinLady_01	TP_Q8_EV_11_01_CVS_PumpkinLady_01_zh-CN
+Audio_TownPark/Q8/EV_11/TP_Q8_EV_11_02_CVS_PumpkinLady_02	TP_Q8_EV_11_02_CVS_PumpkinLady_02_zh-CN
+Audio_TownPark/Q8/EV_11/TP_Q8_EV_11_03_CVS_PumpkinLady_03	TP_Q8_EV_11_03_CVS_PumpkinLady_03_zh-CN
+Audio_TownPark/Q8/EV_12/TP_Q8_EV_12_01_GP_SN_01	TP_Q8_EV_12_01_GP_SN_01_zh-CN
+Audio_TownPark/Q8/EV_13/TP_Q8_EV_13_01_GP_SN_01	TP_Q8_EV_13_01_GP_SN_01_zh-CN
+Audio_TownPark/Q8/EV_14/TP_Q8_EV_14_01_GP_SN_01	TP_Q8_EV_14_01_GP_SN_01_zh-CN
+Audio_TownPark/Q8/EV_15/TP_Q8_EV_15_01_CVS_PaintGuy2_01	TP_Q8_EV_15_01_CVS_PaintGuy2_01_zh-CN
+Audio_TownPark/Q8/EV_15/TP_Q8_EV_15_02_CVS_PaintGuy2_02	TP_Q8_EV_15_02_CVS_PaintGuy2_02_zh-CN
+Audio_TownPark/Q8/EV_16/TP_Q8_EV_16_01_GP_SN_01	TP_Q8_EV_16_01_GP_SN_01_zh-CN
+Audio_TownPark/Q8/MID_01/TP_Q8_MID_01_01_GP_ZP_01	TP_Q8_MID_01_01_GP_ZP_01_zh-CN
+Audio_TownPark/Q8/MID_02/TP_Q8_MID_02_01_GP_PaintGuy2_01	TP_Q8_MID_02_01_GP_PaintGuy2_01_zh-CN
+Audio_TownPark/Q8/MID_03/TP_Q8_MID_03_01_GP_PaintGuy2_01	TP_Q8_MID_03_01_GP_PaintGuy2_01_zh-CN
+Audio_TownPark/Q8/MID_04/TP_Q8_MID_04_01_GP_IZ_01	TP_Q8_MID_04_01_GP_IZ_01_zh-CN
+Audio_TownPark/Q8/MID_05/TP_Q8_MID_05_01_GP_HC_01	TP_Q8_MID_05_01_GP_HC_01_zh-CN
+Audio_TownPark/Q8/MID_06/TP_Q8_MID_06_01_GP_PaintGuy2_01	TP_Q8_MID_06_01_GP_PaintGuy2_01_zh-CN
+Audio_TownPark/Q8/POST_01/TP_Q8_POST_01_01_GP_Sprout_01	TP_Q8_POST_01_01_GP_Sprout_01_zh-CN
+Audio_TownPark/Q8/POST_02/TP_Q8_POST_02_01_GP_PaintGuy2_01	TP_Q8_POST_02_01_GP_PaintGuy2_01_zh-CN
+Audio_TownPark/Q8/POST_03/TP_Q8_POST_03_01_GP_PumpkinLady_01	TP_Q8_POST_03_01_GP_PumpkinLady_01_zh-CN
+Audio_TownPark/Q8/POST_04/TP_Q8_POST_04_01_GP_IZ_01	TP_Q8_POST_04_01_GP_IZ_01_zh-CN
+Audio_TownPark/Q8/PRE_01/TP_Q8_PRE_01_01_GP_PaintGuy2_01	TP_Q8_PRE_01_01_GP_PaintGuy2_01_zh-CN
+Audio_TownPark/Q8/PRE_02/TP_Q8_PRE_02_01_GP_PumpkinLady_01	TP_Q8_PRE_02_01_GP_PumpkinLady_01_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_01_CS_HC_01	TP_Q8_START_01_CS_HC_01_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_02_CS_SN_01	TP_Q8_START_02_CS_SN_01_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_03_CS_HC_02	TP_Q8_START_03_CS_HC_02_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_04_CS_SN_02	TP_Q8_START_04_CS_SN_02_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_05_CS_HC_03	TP_Q8_START_05_CS_HC_03_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_06_CS_HC_04	TP_Q8_START_06_CS_HC_04_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_07_CS_SN_03	TP_Q8_START_07_CS_SN_03_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_08_CS_ZP_01	TP_Q8_START_08_CS_ZP_01_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_09_CS_HC_05	TP_Q8_START_09_CS_HC_05_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_10_CS_ZP_02	TP_Q8_START_10_CS_ZP_02_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_11_CS_ZP_03	TP_Q8_START_11_CS_ZP_03_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_12_CS_ZP_04	TP_Q8_START_12_CS_ZP_04_zh-CN
+Audio_TownPark/Q8/START/TP_Q8_START_13_CS_SN_04	TP_Q8_START_13_CS_SN_04_zh-CN
+Audio_TownPark/Q8/TOOFAR/TP_Q8_TOOFAR_01_GP_SN_01	TP_Q8_TOOFAR_01_GP_SN_01_zh-CN
+Audio_TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_01_CVS_SN_01	TP_Q9_ACCEPTED_01_CVS_SN_01_zh-CN
+Audio_TownPark/Q9/ACCEPTED/TP_Q9_ACCEPTED_02_CVS_Zoom_01	TP_Q9_ACCEPTED_02_CVS_Zoom_01_zh-CN
+Audio_TownPark/Q9/COMP/TP_Q9_COMP_01_CVS_Zoom_01	TP_Q9_COMP_01_CVS_Zoom_01_zh-CN
+Audio_TownPark/Q9/COMP/TP_Q9_COMP_02_CVS_Zoom_02	TP_Q9_COMP_02_CVS_Zoom_02_zh-CN
+Audio_TownPark/Q9/COMP/TP_Q9_COMP_03_CVS_Zoom_03	TP_Q9_COMP_03_CVS_Zoom_03_zh-CN
+Audio_TownPark/Q9/COMP/TP_Q9_COMP_04_CVS_SN_01	TP_Q9_COMP_04_CVS_SN_01_zh-CN
+Audio_TownPark/Q9/COMP/TP_Q9_COMP_05_CVS_Zoom_04	TP_Q9_COMP_05_CVS_Zoom_04_zh-CN
+Audio_TownPark/Q9/COMP/TP_Q9_COMP_06_CVS_SN_02	TP_Q9_COMP_06_CVS_SN_02_zh-CN
+Audio_TownPark/Q9/DECLINED/TP_Q9_DECLINED_01_CVS_SN_01	TP_Q9_DECLINED_01_CVS_SN_01_zh-CN
+Audio_TownPark/Q9/DECLINED/TP_Q9_DECLINED_02_CVS_Zoom_01	TP_Q9_DECLINED_02_CVS_Zoom_01_zh-CN
+Audio_TownPark/Q9/QUESTION/TP_Q9_QUESTION_01_CVS_Zoom_01	TP_Q9_QUESTION_01_CVS_Zoom_01_zh-CN
+Audio_TownPark/Q9/RETACPTD/TP_Q9_RETACPTD_01_CVS_SN_01	TP_Q9_RETACPTD_01_CVS_SN_01_zh-CN
+Audio_TownPark/Q9/RETDCLND/TP_Q9_RETDCLND_01_CVS_SN_01	TP_Q9_RETDCLND_01_CVS_SN_01_zh-CN
+Audio_TownPark/Q9/RETRY/TP_Q9_RETRY_01_CVS_Zoom_01	TP_Q9_RETRY_01_CVS_Zoom_01_zh-CN
+Audio_TownPark/Q9/START/TP_Q9_START_01_CVS_Zoom_01	TP_Q9_START_01_CVS_Zoom_01_zh-CN
+Audio_TownPark/Q9/START/TP_Q9_START_02_CVS_SN_01	TP_Q9_START_02_CVS_SN_01_zh-CN
+Audio_TownPark/Q9/START/TP_Q9_START_03_CVS_Zoom_02	TP_Q9_START_03_CVS_Zoom_02_zh-CN
+Audio_TownPark/Q9/START/TP_Q9_START_04_CVS_Zoom_03	TP_Q9_START_04_CVS_Zoom_03_zh-CN
+Audio_TownPark/Q9/START/TP_Q9_START_05_CVS_SN_02	TP_Q9_START_05_CVS_SN_02_zh-CN
+Audio_TownPark/Q9/START/TP_Q9_START_06_CVS_Zoom_04	TP_Q9_START_06_CVS_Zoom_04_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT1	VIDEOTUTORIAL_HC_HERDINGBTUT1_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_HC_HERDINGBTUT2	VIDEOTUTORIAL_HC_HERDINGBTUT2_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT1	VIDEOTUTORIAL_HC_HERDINGCTUT1_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT2	VIDEOTUTORIAL_HC_HERDINGCTUT2_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_HC_SPECIALPTUT1	VIDEOTUTORIAL_HC_SPECIALPTUT1_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_IZ_UNICYCLINGTUT1	VIDEOTUTORIAL_IZ_UNICYCLINGTUT1_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT1	VIDEOTUTORIAL_PP_FASHIONTUT1_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT10	VIDEOTUTORIAL_PP_FASHIONTUT10_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT11	VIDEOTUTORIAL_PP_FASHIONTUT11_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT12	VIDEOTUTORIAL_PP_FASHIONTUT12_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT2	VIDEOTUTORIAL_PP_FASHIONTUT2_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT3	VIDEOTUTORIAL_PP_FASHIONTUT3_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT4	VIDEOTUTORIAL_PP_FASHIONTUT4_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT5	VIDEOTUTORIAL_PP_FASHIONTUT5_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT6	VIDEOTUTORIAL_PP_FASHIONTUT6_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT7	VIDEOTUTORIAL_PP_FASHIONTUT7_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT8	VIDEOTUTORIAL_PP_FASHIONTUT8_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT9	VIDEOTUTORIAL_PP_FASHIONTUT9_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_PP_MAGICMTUT1	VIDEOTUTORIAL_PP_MAGICMTUT1_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_SN_BUTTERTUT1	VIDEOTUTORIAL_SN_BUTTERTUT1_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_SN_CLEARGAME	VIDEOTUTORIAL_SN_CLEARGAME_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_SN_KICKTUT1	VIDEOTUTORIAL_SN_KICKTUT1_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT1	VIDEOTUTORIAL_SN_MAGICPTUT1_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT2	VIDEOTUTORIAL_SN_MAGICPTUT2_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT1	VIDEOTUTORIAL_SP_FASTWINTTUT1_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT2	VIDEOTUTORIAL_SP_FASTWINTTUT2_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT3	VIDEOTUTORIAL_SP_FASTWINTTUT3_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT4	VIDEOTUTORIAL_SP_FASTWINTTUT4_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT1	VIDEOTUTORIAL_ZM_ROLLERTUT1_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT2	VIDEOTUTORIAL_ZM_ROLLERTUT2_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT3	VIDEOTUTORIAL_ZM_ROLLERTUT3_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT4	VIDEOTUTORIAL_ZP_DASHSKYTUT4_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT5	VIDEOTUTORIAL_ZP_DASHSKYTUT5_zh-CN
+Audio_VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT6	VIDEOTUTORIAL_ZP_DASHSKYTUT6_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_01	EFO_SN_Misc_02_05_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_02	EFO_SN_Misc_02_08_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_03	EFO_SN_Misc_02_09_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_04	EFO_SN_Misc_02_10_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_05	EFO_SN_Misc_02_11_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_06	EFO_SN_Misc_02_12_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_07	EFO_SN_Misc_02_13_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_08	EFO_SN_Misc_02_14_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_09	EFO_SN_Misc_02_16_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_10	EFO_SN_Misc_02_17_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_11	EFO_SN_Misc_02_23_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_12	EFO_SN_Misc_02_28_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_13	EFO_SN_Misc_02_29_zh-CN
+Audio_Characters/SUNNY/JUMPS/SUNNY_JUMP_14	EFO_SN_Misc_02_zh-CN
+Audio_Characters/SUNNY/KICKS/SUNNY_KICK_01	SUNNY_KICK_01_v1_zh-CN
+Audio_Characters/SUNNY/LANDING/SUNNY_LANDING_01	EFO_SN_Misc_02_03_zh-CN
+Audio_Characters/SUNNY/LANDING/SUNNY_LANDING_02	EFO_SN_Misc_02_04_zh-CN
+Audio_Characters/SUNNY/LANDING/SUNNY_LANDING_03	EFO_SN_Misc_02_06_zh-CN
+Audio_Characters/SUNNY/LANDING/SUNNY_LANDING_04	EFO_SN_Misc_02_10_zh-CN
+Audio_Characters/SUNNY/LANDING/SUNNY_LANDING_05	EFO_SN_Misc_02_14_zh-CN
+Audio_Characters/SUNNY/MAGIC/SUNNY_MAGIC_01	EFO_SN_Minigame_01_zh-CN
+Audio_Characters/SUNNY/MAGIC/SUNNY_MAGIC_02	EFO_SN_Minigame_03_zh-CN
+Audio_Characters/SUNNY/MAGIC/SUNNY_MAGIC_03	EFO_SN_Misc_01_zh-CN
+Audio_Characters/SUNNY/MAGIC/SUNNY_MAGIC_04	EFO_SN_Misc_09_02_zh-CN
+Audio_Characters/SUNNY/MAGIC/SUNNY_MAGIC_05	EFO_SN_Misc_09_04_zh-CN
+Audio_Characters/SUNNY/MAGIC/SUNNY_MAGIC_06	EFO_SN_Unycicling_02_zh-CN
+Audio/AUDIO	EFO_SN_Menu_05_zh-CN
+Audio/CONTROLS_AUDIO	EFO_SN_Menu_06_zh-CN
+Audio/EXIT	EFO_SN_Menu_04_zh-CN
+Audio/HITCH_GO	efo_hc_minigame_06_go_zh-CN
+Audio/HITCH_ONE	efo_hc_minigame_06_1_zh-CN
+Audio/HITCH_THREE	efo_hc_minigame_06_3_zh-CN
+Audio/HITCH_TWO	efo_hc_minigame_06_2_zh-CN
+Audio/IZZY_GO	efo_iz_minigame_06_go_zh-CN
+Audio/IZZY_ONE	efo_iz_minigame_06_1_zh-CN
+Audio/IZZY_THREE	efo_iz_minigame_06_3_zh-CN
+Audio/IZZY_TWO	efo_iz_minigame_06_2_zh-CN
+Audio/LANGUAGE	EFO_SN_Menu_14_zh-CN
+Audio/MAIN_VOLUME	EFO_SN_Menu_09_zh-CN
+Audio/MENU_VOLUME	EFO_SN_Menu_13_zh-CN
+Audio/MINIGAMES_AUDIO	EFO_SN_Menu_02_zh-CN
+Audio/MUSIC_VOLUME	EFO_SN_Menu_10_zh-CN
+Audio/PIPP_GO	efo_pp_minigame_06_go_zh-CN
+Audio/PIPP_ONE	efo_pp_minigame_06_1_zh-CN
+Audio/PIPP_THREE	efo_pp_minigame_06_3_zh-CN
+Audio/PIPP_TWO	efo_pp_minigame_06_2_zh-CN
+Audio/PLAY	EFO_SN_Menu_01_zh-CN
+Audio/SAVED_GAMES	EFO_SN_Menu_08_zh-CN
+Audio/SETTINGS_AUDIO	EFO_SN_Menu_03_zh-CN
+Audio/SFX_VOLUME	EFO_SN_Menu_12_zh-CN
+Audio/SPROUT_GO	efo_sprout_minigame_06_go_zh-CN
+Audio/SPROUT_ONE	efo_sprout_minigame_06_1_zh-CN
+Audio/SPROUT_THREE	efo_sprout_minigame_06_3_zh-CN
+Audio/SPROUT_TWO	efo_sprout_minigame_06_2_zh-CN
+Audio/VOICE_VOLUME	EFO_SN_Menu_11_zh-CN
+Audio/ZIPP_GO	efo_zp_minigame_06_go_zh-CN
+Audio/ZIPP_ONE	efo_zp_minigame_06_1_zh-CN
+Audio/ZIPP_THREE	efo_zp_minigame_06_3_zh-CN
+Audio/ZIPP_TWO	efo_zp_minigame_06_2_zh-CN
