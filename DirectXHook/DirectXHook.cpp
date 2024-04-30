@@ -798,7 +798,7 @@ UINT __stdcall GetCurrentBufferIndex()
 			return SwapChain3->GetCurrentBackBufferIndex();
 		}
 	}
-	else return 0;
+	return 0;
 }
 
 intptr_t __stdcall Get_DXGI_DLL_Address()
