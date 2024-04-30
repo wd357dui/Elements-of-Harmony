@@ -30,6 +30,8 @@ namespace ElementsOfHarmony
 				SynchornizationThread.Start();
 				SetRunning(true);
 
+				InitOverlay();
+
 				// apply all of our patch procedures using Harmony API
 				Harmony element = new Harmony($"{typeof(DirectXHook).FullName}");
 				int Num = 0;
@@ -395,6 +397,8 @@ namespace ElementsOfHarmony
 		{
 			SetRunning(false);
 			Marshal.GetExceptionForHR(UninstallHook());
+
+			ReleaseOverlay();
 		}
 
 		/// <summary>
@@ -605,55 +609,55 @@ namespace ElementsOfHarmony
 			IntPtr pInstance);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int SetColor(this IntPtr pInstance, D2D1_COLOR_F Color);
+		public extern static int SetColor(this IntPtr pInstance, D2D1_COLOR_F Color);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int SetFont(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string FontFamily,
+		public extern static int SetFont(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string FontFamily,
 			DWRITE_FONT_WEIGHT FontWeight, DWRITE_FONT_STYLE FontStyle, DWRITE_FONT_STRETCH FontStretch,
 			float FontSize, [MarshalAs(UnmanagedType.LPWStr)] string FontLocale);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int SetFontParams(this IntPtr pInstance,
+		public extern static int SetFontParams(this IntPtr pInstance,
 			DWRITE_TEXT_ALIGNMENT TextAlignment, DWRITE_PARAGRAPH_ALIGNMENT ParagraphAlignment, DWRITE_WORD_WRAPPING WordWrapping,
 			DWRITE_READING_DIRECTION ReadingDirection, DWRITE_FLOW_DIRECTION FlowDirection, float IncrementalTabStop,
 			DWRITE_LINE_SPACING_METHOD LineSpacingMethod, float LineSpacing, float Baseline);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int SetGDICompatibleText(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string Str,
+		public extern static int SetGDICompatibleText(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string Str,
 			float LayoutWidth, float LayoutHeight, float PixelsPerDip);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void DrawEllipse(this IntPtr pInstance, D2D1_POINT_2F Point, float RadiusX, float RadiusY, float StrokeWidth);
+		public extern static void DrawEllipse(this IntPtr pInstance, D2D1_POINT_2F Point, float RadiusX, float RadiusY, float StrokeWidth);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void DrawLine(this IntPtr pInstance, D2D1_POINT_2F Src, D2D1_POINT_2F Dst, float StrokeWidth);
+		public extern static void DrawLine(this IntPtr pInstance, D2D1_POINT_2F Src, D2D1_POINT_2F Dst, float StrokeWidth);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void DrawRectangle(this IntPtr pInstance, D2D1_RECT_F Rect, float RoundedRadiusX, float RoundedRadiusY, float StrokeWidth);
+		public extern static void DrawRectangle(this IntPtr pInstance, D2D1_RECT_F Rect, float RoundedRadiusX, float RoundedRadiusY, float StrokeWidth);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void DrawPlainText(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string Str, D2D1_RECT_F Rect);
+		public extern static void DrawPlainText(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string Str, D2D1_RECT_F Rect);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int DrawGDICompatibleText(this IntPtr pInstance, D2D1_POINT_2F Origin);
+		public extern static int DrawGDICompatibleText(this IntPtr pInstance, D2D1_POINT_2F Origin);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int DrawGDICompatibleTextMetrics(this IntPtr pInstance, uint Index, uint Length, float OriginX, float OriginY);
+		public extern static int DrawGDICompatibleTextMetrics(this IntPtr pInstance, uint Index, uint Length, float OriginX, float OriginY);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int DrawGDICompatibleTextCaret(this IntPtr pInstance, bool Trailing, float StrokeWidth);
+		public extern static int DrawGDICompatibleTextCaret(this IntPtr pInstance, bool Trailing, float StrokeWidth);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void FillEllipse(this IntPtr pInstance, D2D1_POINT_2F Point, float RadiusX, float RadiusY);
+		public extern static void FillEllipse(this IntPtr pInstance, D2D1_POINT_2F Point, float RadiusX, float RadiusY);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void FillRectangle(this IntPtr pInstance, D2D1_RECT_F Rect, float RoundedRadiusX, float RoundedRadiusY);
+		public extern static void FillRectangle(this IntPtr pInstance, D2D1_RECT_F Rect, float RoundedRadiusX, float RoundedRadiusY);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void SetTransform(this IntPtr pInstance, Matrix3x2F Matrix);
+		public extern static void SetTransform(this IntPtr pInstance, Matrix3x2F Matrix);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void SetDpi(this IntPtr pInstance, float DpiX, float DpiY);
+		public extern static void SetDpi(this IntPtr pInstance, float DpiX, float DpiY);
 
 		#endregion
 
