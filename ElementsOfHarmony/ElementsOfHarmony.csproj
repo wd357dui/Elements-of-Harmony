@@ -118,6 +118,7 @@
     <Compile Include="DirectXHook.cs" />
     <Compile Include="ElementsOfHarmony.cs" />
     <Compile Include="EnvFile.cs" />
+    <Compile Include="NativeInterface.cs" />
     <Compile Include="Localization.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
