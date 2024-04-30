@@ -610,7 +610,10 @@ namespace ElementsOfHarmony
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		public extern static int SetColor(this IntPtr pInstance, D2D1_COLOR_F Color);
-		
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		public extern static int SetOpacity(this IntPtr pInstance, float Opacity);
+
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		public extern static int SetFont(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string FontFamily,
 			DWRITE_FONT_WEIGHT FontWeight, DWRITE_FONT_STYLE FontStyle, DWRITE_FONT_STRETCH FontStretch,
