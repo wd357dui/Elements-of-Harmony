@@ -53,6 +53,13 @@ namespace ElementsOfHarmony
 			{
 				OverlayDraw += DirectXHook_OverlayDraw;
 			}
+
+			Application.quitting += Application_quitting;
+		}
+
+		private static void Application_quitting()
+		{
+			reader?.Dispose();
 		}
 
 		public class PlayerStatus
