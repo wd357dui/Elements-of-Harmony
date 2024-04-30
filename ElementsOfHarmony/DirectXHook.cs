@@ -621,9 +621,14 @@ namespace ElementsOfHarmony
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		public extern static int SetFontParams(this IntPtr pInstance,
-			DWRITE_TEXT_ALIGNMENT TextAlignment, DWRITE_PARAGRAPH_ALIGNMENT ParagraphAlignment, DWRITE_WORD_WRAPPING WordWrapping,
-			DWRITE_READING_DIRECTION ReadingDirection, DWRITE_FLOW_DIRECTION FlowDirection, float IncrementalTabStop,
-			DWRITE_LINE_SPACING_METHOD LineSpacingMethod, float LineSpacing, float Baseline);
+			DWRITE_TEXT_ALIGNMENT TextAlignment = DWRITE_TEXT_ALIGNMENT.NULL,
+			DWRITE_PARAGRAPH_ALIGNMENT ParagraphAlignment = DWRITE_PARAGRAPH_ALIGNMENT.NULL,
+			DWRITE_WORD_WRAPPING WordWrapping = DWRITE_WORD_WRAPPING.NULL,
+			DWRITE_READING_DIRECTION ReadingDirection = DWRITE_READING_DIRECTION.NULL,
+			DWRITE_FLOW_DIRECTION FlowDirection = DWRITE_FLOW_DIRECTION.NULL,
+			float IncrementalTabStop = float.NaN,
+			DWRITE_LINE_SPACING_METHOD LineSpacingMethod = DWRITE_LINE_SPACING_METHOD.NULL,
+			float LineSpacing = float.NaN, float Baseline = float.NaN);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		public extern static int SetGDICompatibleText(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string Str,
@@ -1552,7 +1557,9 @@ namespace ElementsOfHarmony
 			/// <summary>
 			/// Align text to the leading side, and also justify text to fill the lines.
 			/// </summary>
-			DWRITE_TEXT_ALIGNMENT_JUSTIFIED
+			DWRITE_TEXT_ALIGNMENT_JUSTIFIED,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1574,7 +1581,9 @@ namespace ElementsOfHarmony
 			/// <summary>
 			/// The center of the paragraph is aligned to the center of the flow of the layout box.
 			/// </summary>
-			DWRITE_PARAGRAPH_ALIGNMENT_CENTER
+			DWRITE_PARAGRAPH_ALIGNMENT_CENTER,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1609,6 +1618,8 @@ namespace ElementsOfHarmony
 			/// Wrap between any valid characters clusters.
 			/// </summary>
 			DWRITE_WORD_WRAPPING_CHARACTER = 4,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1635,6 +1646,8 @@ namespace ElementsOfHarmony
 			/// Reading progresses from bottom to top.
 			/// </summary>
 			DWRITE_READING_DIRECTION_BOTTOM_TO_TOP = 3,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1661,6 +1674,8 @@ namespace ElementsOfHarmony
 			/// Text lines are placed from right to left.
 			/// </summary>
 			DWRITE_FLOW_DIRECTION_RIGHT_TO_LEFT = 3,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1682,7 +1697,9 @@ namespace ElementsOfHarmony
 			/// <summary>
 			/// Line spacing and baseline distances are proportional to the computed values based on the content, the size of the fonts and inline objects.
 			/// </summary>
-			DWRITE_LINE_SPACING_METHOD_PROPORTIONAL
+			DWRITE_LINE_SPACING_METHOD_PROPORTIONAL,
+
+			NULL = -1,
 		};
 
 		#endregion
