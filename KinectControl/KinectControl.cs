@@ -1,11 +1,7 @@
-﻿using Character;
-using HarmonyLib;
-using Melbot;
+﻿using HarmonyLib;
 using Microsoft.Kinect;
 using System;
-using System.Collections;
 using System.Runtime.InteropServices;
-using System.Security.Policy;
 using UnityEngine;
 using static ElementsOfHarmony.DirectXHook;
 
@@ -202,7 +198,8 @@ namespace ElementsOfHarmony
 						Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
 						Device.FillEllipse(RightCenter, Scale * 150.0f, Scale * 150.0f);
 
-						DelayAction += () => {
+						DelayAction += () =>
+						{
 
 							void DrawOutlinedText(string Text, D2D1_RECT_F Rect, float PX = 1.0f, float PY = 1.0f, float NX = -1.0f, float NY = -1.0f)
 							{
