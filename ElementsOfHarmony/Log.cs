@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text;
-using static BansheeGz.BGSpline.Curve.BGCc;
 
 namespace ElementsOfHarmony
 {

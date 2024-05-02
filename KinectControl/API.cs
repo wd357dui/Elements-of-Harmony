@@ -90,7 +90,6 @@ namespace Microsoft.Kinect
 		private readonly ManualResetEvent StopEvent;
 		private readonly Thread WaitThread;
 
-		private const int E_FAIL = unchecked((int)0x80004005);
 		internal BodyFrameReader(IntPtr pInstance) : base(pInstance)
 		{
 			StopEvent = new ManualResetEvent(false);
@@ -122,7 +121,7 @@ namespace Microsoft.Kinect
 								FrameArrived?.Invoke(this, EventArgs);
 							}
 						}
-						catch (COMException e) when (e.HResult == E_FAIL)
+						catch (COMException e)
 						{
 							// this happens occasionally for some frames for no reason...
 							// doesn't cause errors for later frames though
