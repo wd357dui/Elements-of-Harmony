@@ -1,8 +1,11 @@
-﻿using HarmonyLib;
+﻿using Character;
+using HarmonyLib;
+using Melbot;
 using Microsoft.Kinect;
 using System;
-using System.Linq;
+using System.Collections;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using UnityEngine;
 using static ElementsOfHarmony.DirectXHook;
 
@@ -11,12 +14,14 @@ namespace ElementsOfHarmony
 	public static class KinectControl
 	{
 		private static KinectSensor sensor;
+		private static BodyFrameSource source;
 		private static BodyFrameReader reader;
 		public static void Init()
 		{
 			sensor = KinectSensor.GetDefault();
-			reader = sensor.BodyFrameSource.OpenReader();
-			sensor.Open();
+			source = sensor.BodyFrameSource;
+			reader = source.OpenReader();
+			Marshal.ThrowExceptionForHR(sensor.Open());
 
 			// apply all of our patch procedures using Harmony API
 			Harmony element = new Harmony($"{typeof(KinectControl).FullName}");
@@ -59,13 +64,269 @@ namespace ElementsOfHarmony
 
 		private static void Application_quitting()
 		{
+			sensor?.Dispose();
+			source?.Dispose();
 			reader?.Dispose();
+		}
+
+		private static Body[] Bodies;
+		private static PlayerStatus Player1, Player2;
+		private static readonly Color Player1Color = new Color(0.92f, 0.0f, 0.57f, 1.0f);
+		private static readonly Color Player2Color = new Color(0.19f, 0.66f, 0.92f, 1.0f);
+		private const float Highlight = 0.9f;
+		private const float Transparent = 0.4f;
+		private const float NestedTransparent = 0.3f;
+		private const float FadedTransparent = 0.1f;
+		private const float Threshold = 0.01f;
+
+		private static void Reader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
+		{
+			using (BodyFrameReference reference = e.FrameReference)
+			{
+				using (BodyFrame frame = reference.AcquireFrame())
+				{
+					if (frame == null) return;
+					if (Bodies == null || Bodies.Length != source.BodyCount)
+					{
+						Bodies = new Body[source.BodyCount];
+						Player1 = Player2 = null;
+					}
+					frame.GetAndRefreshBodyData(Bodies);
+
+					// invalidate player status if lost track
+					if (Player1?.BodyIndex is int PreviousIndex1 && !Bodies[PreviousIndex1].IsTracked)
+					{
+						Player1 = null;
+					}
+					if (Player2?.BodyIndex is int PreviousIndex2 && !Bodies[PreviousIndex2].IsTracked)
+					{
+						Player2 = null;
+					}
+
+					// select new tracked body
+					if (Player1 == null)
+					{
+						for (int n = 0; n < Bodies.Length; n++)
+						{
+							if (Bodies[n].IsTracked && n != Player2?.BodyIndex)
+							{
+								Player1 = new PlayerStatus(n);
+								break;
+							}
+						}
+					}
+					if (Player2 == null)
+					{
+						for (int n = 0; n < Bodies.Length; n++)
+						{
+							if (Bodies[n].IsTracked && n != Player1?.BodyIndex)
+							{
+								Player2 = new PlayerStatus(n);
+								break;
+							}
+						}
+					}
+
+					if (Player1?.BodyIndex is int Index1) Player1.UpdateHandStatus(Bodies[Index1]);
+					if (Player2?.BodyIndex is int Index2) Player2.UpdateHandStatus(Bodies[Index2]);
+
+					for (int n = 0; n < Bodies.Length; n++)
+					{
+						Bodies[n]?.Dispose();
+					}
+				}
+			}
+		}
+		private static void DirectXHook_OverlayDraw(IntPtr Device)
+		{
+			void DrawPlayerControls(PlayerStatus Player, Color PlayerColor)
+			{
+				if (Player == null) return;
+				lock (Player)
+				{
+					Action DelayAction = null;
+
+					float Scale = (Screen.currentResolution.width / 1920.0f + Screen.currentResolution.height / 1080.0f) / 2;
+					Scale *= Screen.dpi / 96.0f;
+
+					Marshal.ThrowExceptionForHR(Device.SetFont("Segoe UI",
+						DWRITE_FONT_WEIGHT.DWRITE_FONT_WEIGHT_NORMAL,
+						DWRITE_FONT_STYLE.DWRITE_FONT_STYLE_NORMAL,
+						DWRITE_FONT_STRETCH.DWRITE_FONT_STRETCH_NORMAL,
+						Scale * 96.0f * 0.75f, "en-US"));
+					Marshal.ThrowExceptionForHR(Device.SetFontParams(DWRITE_TEXT_ALIGNMENT.DWRITE_TEXT_ALIGNMENT_CENTER,
+						DWRITE_PARAGRAPH_ALIGNMENT.DWRITE_PARAGRAPH_ALIGNMENT_CENTER));
+
+					bool LeftShouldHighlight = false;
+					if (Player.LeftStartPosCloserToHead == true &&
+						Player.LeftStartPos is Vector2 LeftCenter)
+					{
+						// left starting pos is legal
+						LeftShouldHighlight = true;
+
+						// convert to screen space
+						LeftCenter += new Vector2(1.0f, 1.0f);
+						LeftCenter *= new Vector2(0.5f, 0.5f);
+						LeftCenter.y = 1.0f - LeftCenter.y;
+						LeftCenter *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+
+						// left stick's circle
+						Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray));
+						Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
+						Device.FillEllipse(LeftCenter, Scale * 150.0f, Scale * 150.0f);
+
+						// left stick's arrows
+						Marshal.ThrowExceptionForHR(Device.SetColor(Color.white));
+						Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
+						Device.DrawPlainText("◀", new D2D1_RECT_F() { Left = LeftCenter.x - Scale * 200.0f, Top = LeftCenter.y, Right = LeftCenter.x, Bottom = LeftCenter.y });
+						Device.DrawPlainText("▲", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y - Scale * 200.0f, Right = LeftCenter.x, Bottom = LeftCenter.y });
+						Device.DrawPlainText("▶", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y, Right = LeftCenter.x + Scale * 200.0f, Bottom = LeftCenter.y });
+						Device.DrawPlainText("▼", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y, Right = LeftCenter.x, Bottom = LeftCenter.y + Scale * 200.0f });
+					}
+
+					bool RightShouldHighlight = false;
+					if (Player.RightStartPosCloserToHead == true &&
+						Player.RightStartPos is Vector2 RightCenter)
+					{
+						// right starting pos is legal
+						RightShouldHighlight = true;
+
+						// convert to screen space
+						RightCenter += new Vector2(1.0f, 1.0f);
+						RightCenter *= new Vector2(0.5f, 0.5f);
+						RightCenter.y = 1.0f - RightCenter.y;
+						RightCenter *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+
+						// right stick's circle
+						Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray));
+						Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
+						Device.FillEllipse(RightCenter, Scale * 150.0f, Scale * 150.0f);
+
+						DelayAction += () => {
+
+							void DrawOutlinedText(string Text, D2D1_RECT_F Rect, float PX = 1.0f, float PY = 1.0f, float NX = -1.0f, float NY = -1.0f)
+							{
+								PX = Scale * PX;
+								PY = Scale * PY;
+								NX = Scale * NX;
+								NY = Scale * NY;
+								Marshal.ThrowExceptionForHR(Device.SetOpacity(1.0f));
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + NX, Top = Rect.Top + NY, Right = Rect.Right + NX, Bottom = Rect.Bottom + NY });
+								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + NX, Top = Rect.Top + 0, Right = Rect.Right + NX, Bottom = Rect.Bottom + 0 });
+								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + NX, Top = Rect.Top + PY, Right = Rect.Right + NX, Bottom = Rect.Bottom + PY });
+								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + 0, Top = Rect.Top + PY, Right = Rect.Right + 0, Bottom = Rect.Bottom + PY });
+								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + 0, Top = Rect.Top + NY, Right = Rect.Right + 0, Bottom = Rect.Bottom + NY });
+								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + PX, Top = Rect.Top + NY, Right = Rect.Right + PX, Bottom = Rect.Bottom + NY });
+								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + PX, Top = Rect.Top + 0, Right = Rect.Right + PX, Bottom = Rect.Bottom + 0 });
+								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + PX, Top = Rect.Top + PY, Right = Rect.Right + PX, Bottom = Rect.Bottom + PY });
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.white));
+								Device.DrawPlainText(Text, Rect);
+							}
+
+							// A button
+							Marshal.ThrowExceptionForHR(Device.SetColor(Color.green));
+							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.South == true ? Highlight : NestedTransparent));
+							Device.FillEllipse(RightCenter + new Vector2(0.0f, Scale * 100.0f), Scale * 50.0f, Scale * 50.0f);
+							DrawOutlinedText("A", new D2D1_RECT_F()
+							{
+								Left = RightCenter.x,
+								Top = RightCenter.y - Scale * 10.0f,
+								Right = RightCenter.x,
+								Bottom = RightCenter.y + Scale * 200.0f
+							});
+
+							// B button
+							Marshal.ThrowExceptionForHR(Device.SetColor(Color.red));
+							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.East == true ? Highlight : NestedTransparent));
+							Device.FillEllipse(RightCenter + new Vector2(Scale * 100.0f, 0.0f), Scale * 50.0f, Scale * 50.0f);
+							DrawOutlinedText("B", new D2D1_RECT_F()
+							{
+								Left = RightCenter.x,
+								Top = RightCenter.y - Scale * 10.0f,
+								Right = RightCenter.x + Scale * 200.0f,
+								Bottom = RightCenter.y
+							}, PY: 2.0f); // outline of "B" need an additional Y offset to look right
+
+							// Y button
+							Marshal.ThrowExceptionForHR(Device.SetColor(Color.yellow));
+							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.North == true ? Highlight : NestedTransparent));
+							Device.FillEllipse(RightCenter + new Vector2(0.0f, Scale * -100.0f), Scale * 50.0f, Scale * 50.0f);
+							DrawOutlinedText("Y", new D2D1_RECT_F()
+							{
+								Left = RightCenter.x,
+								Top = RightCenter.y - Scale * 200.0f - Scale * 10.0f,
+								Right = RightCenter.x,
+								Bottom = RightCenter.y
+							});
+
+							// Menu button
+							Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.West == true ? Highlight : NestedTransparent));
+							Device.FillEllipse(RightCenter + new Vector2(Scale * -100.0f, 0.0f), Scale * 50.0f, Scale * 50.0f);
+							DrawOutlinedText("≡", new D2D1_RECT_F()
+							{
+								Left = RightCenter.x - Scale * 200.0f,
+								Top = RightCenter.y - Scale * 20.0f, // this symbol needs to be moved a little bit more to the up
+								Right = RightCenter.x,
+								Bottom = RightCenter.y
+							});
+						};
+					}
+
+					if (Player.LeftPos is Vector2 Left &&
+						Player.LeftShoulderPos is Vector2 LeftShoulder)
+					{
+						// convert to screen space
+						Left += new Vector2(1.0f, 1.0f);
+						Left *= new Vector2(0.5f, 0.5f);
+						Left.y = 1.0f - Left.y;
+						Left *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+						LeftShoulder += new Vector2(1.0f, 1.0f);
+						LeftShoulder *= new Vector2(0.5f, 0.5f);
+						LeftShoulder.y = 1.0f - LeftShoulder.y;
+						LeftShoulder *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+
+						// draw a line from left shoulder to left hand, and draw a circle on the left hand
+						Marshal.ThrowExceptionForHR(Device.SetColor(PlayerColor));
+						Marshal.ThrowExceptionForHR(Device.SetOpacity(LeftShouldHighlight ? Highlight : Player.LeftPosCloserToHead ? Transparent : FadedTransparent));
+						Device.DrawLine(LeftShoulder, Left, Scale * 10.0f);
+						Device.FillEllipse(Left, Scale * 40.0f, Scale * 40.0f);
+					}
+					if (Player.RightPos is Vector2 Right &&
+						Player.RightShoulderPos is Vector2 RightShoulder)
+					{
+						// convert to screen space
+						Right += new Vector2(1.0f, 1.0f);
+						Right *= new Vector2(0.5f, 0.5f);
+						Right.y = 1.0f - Right.y;
+						Right *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+						RightShoulder += new Vector2(1.0f, 1.0f);
+						RightShoulder *= new Vector2(0.5f, 0.5f);
+						RightShoulder.y = 1.0f - RightShoulder.y;
+						RightShoulder *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+
+						// draw a line from right shoulder to right hand, and draw a circle on the right hand
+						Marshal.ThrowExceptionForHR(Device.SetColor(PlayerColor));
+						Marshal.ThrowExceptionForHR(Device.SetOpacity(RightShouldHighlight ? Highlight : Player.RightPosCloserToHead ? Transparent : FadedTransparent));
+						Device.DrawLine(RightShoulder, Right, Scale * 10.0f);
+						Device.FillEllipse(Right, Scale * 40.0f, Scale * 40.0f);
+					}
+
+					DelayAction?.Invoke();
+				}
+			}
+			DrawPlayerControls(Player1, Player1Color);
+			DrawPlayerControls(Player2, Player2Color);
 		}
 
 		public class PlayerStatus
 		{
-			public PlayerStatus(Body body) { Body = body; }
-			public Body Body;
+			public PlayerStatus(int BodyIndex)
+			{
+				this.BodyIndex = BodyIndex;
+			}
+			public readonly int BodyIndex;
 
 			public enum Hand
 			{
@@ -84,7 +345,7 @@ namespace ElementsOfHarmony
 			public bool LeftPosCloserToHead = false, RightPosCloserToHead = false; // hand current pos is closer to head
 			public Vector2 LeftPos = Vector2.negativeInfinity, RightPos = Vector2.negativeInfinity; // hand current pos
 			public Vector2 LeftShoulderPos = Vector2.negativeInfinity, RightShoulderPos = Vector2.negativeInfinity; // shoulder current pos
-			public void UpdateHandStatus()
+			public void UpdateHandStatus(Body Body)
 			{
 				lock (this)
 				{
@@ -118,16 +379,18 @@ namespace ElementsOfHarmony
 					LeftStatus = HandStatus(Body.HandLeftState, ref PreviousLeftHolding);
 					RightStatus = HandStatus(Body.HandRightState, ref PreviousRightHolding);
 
-					bool CloserToHead(Vector2 Pos) =>
-						(Pos - Body.Joints[JointType.Head].Position.ToVector2()).sqrMagnitude <
-						(Pos - Body.Joints[JointType.FootLeft].Position.ToVector2()).sqrMagnitude;
+					var Joints = Body.Joints;
 
-					void UpdateHandStartPos(Hand Status, ref Vector2? StartPos, ref bool? StartPosCloserToHead)
+					bool CloserToHead(Vector2 Pos) =>
+						(Pos - Joints[JointType.Head].Position.XY()).sqrMagnitude <
+						(Pos - Joints[JointType.SpineBase].Position.XY()).sqrMagnitude;
+
+					void UpdateHandStartPos(Hand Status, ref Vector2? StartPos, ref bool? StartPosCloserToHead, Vector2 HandPos)
 					{
 						switch (Status)
 						{
 							case Hand.EnterHolding:
-								StartPos = Body.Joints[JointType.HandLeft].Position.ToVector2();
+								StartPos = HandPos;
 								StartPosCloserToHead = CloserToHead(StartPos.Value);
 								break;
 							case Hand.ExitHolding:
@@ -137,16 +400,23 @@ namespace ElementsOfHarmony
 								break;
 						}
 					}
-					UpdateHandStartPos(LeftStatus, ref LeftStartPos, ref LeftStartPosCloserToHead);
-					UpdateHandStartPos(RightStatus, ref RightStartPos, ref RightStartPosCloserToHead);
+					UpdateHandStartPos(LeftStatus, ref LeftStartPos, ref LeftStartPosCloserToHead, Joints[JointType.HandLeft].Position.XY());
+					UpdateHandStartPos(RightStatus, ref RightStartPos, ref RightStartPosCloserToHead, Joints[JointType.HandRight].Position.XY());
 
-					LeftPos = Body.Joints[JointType.HandLeft].Position.ToVector2();
-					RightPos = Body.Joints[JointType.HandRight].Position.ToVector2();
-					LeftPosCloserToHead = CloserToHead(Body.Joints[JointType.HandLeft].Position.ToVector2());
-					RightPosCloserToHead = CloserToHead(Body.Joints[JointType.HandRight].Position.ToVector2());
-					LeftShoulderPos = Body.Joints[JointType.ShoulderLeft].Position.ToVector2();
-					RightShoulderPos = Body.Joints[JointType.ShoulderRight].Position.ToVector2();
+					LeftPos = Joints[JointType.HandLeft].Position.XY();
+					RightPos = Joints[JointType.HandRight].Position.XY();
+					LeftPosCloserToHead = CloserToHead(Joints[JointType.HandLeft].Position.XY());
+					RightPosCloserToHead = CloserToHead(Joints[JointType.HandRight].Position.XY());
+					LeftShoulderPos = Joints[JointType.ShoulderLeft].Position.XY();
+					RightShoulderPos = Joints[JointType.ShoulderRight].Position.XY();
 				}
+			}
+
+			private Vector2 AdjustStick(Vector2 V2)
+			{
+				V2.x *= 5.0f / 6.0f; // aspect ratio of depth sensor is 6:5, convert to 1:1
+				V2.x *= (float)Screen.currentResolution.width / Screen.currentResolution.height; // and then convert to screen ratio
+				return V2;
 			}
 
 			/// <summary>
@@ -158,9 +428,9 @@ namespace ElementsOfHarmony
 				{
 					lock (this)
 					{
-						if (LeftStartPosCloserToHead == true && LeftPos != null && LeftStartPos != null)
+						if (LeftStartPos != null && LeftStartPosCloserToHead == true)
 						{
-							return LeftPos - LeftStartPos.Value;
+							return AdjustStick(LeftPos - LeftStartPos.Value);
 						}
 						return null;
 					}
@@ -176,203 +446,74 @@ namespace ElementsOfHarmony
 				{
 					lock (this)
 					{
-						if (RightStartPosCloserToHead == true && RightPos != null && RightStartPos != null)
+						if (RightStartPos != null && RightStartPosCloserToHead == true)
 						{
-							return RightPos - RightStartPos.Value;
+							return AdjustStick(RightPos - RightStartPos.Value);
 						}
 						return null;
 					}
 				}
 			}
 
-			public bool? LeftThresholdCrossed => LeftStartPos == null ? (bool?)null : (LeftPos - LeftStartPos)?.sqrMagnitude >= Threshold;
-			public bool? RightThresholdCrossed => RightStartPos == null ? (bool?)null : (RightPos - RightStartPos)?.sqrMagnitude >= Threshold;
+			public bool? LeftThresholdCrossed => LeftStick is Vector2 S ? S.sqrMagnitude >= Threshold : (bool?)null;
+			public bool? RightThresholdCrossed => RightStick is Vector2 S ? S.sqrMagnitude >= Threshold : (bool?)null;
 
 			/// <summary>
 			/// dpad left
 			/// </summary>
-			public bool? Left => LeftThresholdCrossed == null ? (bool?)null : LeftPos.x < 0.0f && Math.Abs(LeftPos.x) > Math.Abs(LeftPos.y);
+			public bool? Left => LeftThresholdCrossed == null ? (bool?)null :
+				LeftThresholdCrossed == true && LeftStick.Value.x < 0.0f && Math.Abs(LeftStick.Value.x) > Math.Abs(LeftStick.Value.y);
 
 			/// <summary>
 			/// dpad up
 			/// </summary>
-			public bool? Up => LeftThresholdCrossed == null ? (bool?)null : LeftPos.y > 0.0f && Math.Abs(LeftPos.x) < Math.Abs(LeftPos.y);
+			public bool? Up => LeftThresholdCrossed == null ? (bool?)null :
+				LeftThresholdCrossed == true && LeftStick.Value.y > 0.0f && Math.Abs(LeftStick.Value.x) < Math.Abs(LeftStick.Value.y);
 
 			/// <summary>
 			/// dpad right
 			/// </summary>
-			public bool? Right => LeftThresholdCrossed == null ? (bool?)null : LeftPos.x > 0.0f && Math.Abs(LeftPos.x) > Math.Abs(LeftPos.y);
+			public bool? Right => LeftThresholdCrossed == null ? (bool?)null :
+				LeftThresholdCrossed == true && LeftStick.Value.x > 0.0f && Math.Abs(LeftStick.Value.x) > Math.Abs(LeftStick.Value.y);
 
 			/// <summary>
 			/// dpad down
 			/// </summary>
-			public bool? Down => LeftThresholdCrossed == null ? (bool?)null : LeftPos.y < 0.0f && Math.Abs(LeftPos.x) < Math.Abs(LeftPos.y);
+			public bool? Down => LeftThresholdCrossed == null ? (bool?)null :
+				LeftThresholdCrossed == true && LeftStick.Value.y < 0.0f && Math.Abs(LeftStick.Value.x) < Math.Abs(LeftStick.Value.y);
 
 			/// <summary>
 			/// xbox A button
 			/// </summary>
-			public bool? South => RightThresholdCrossed == null ? (bool?)null : RightPos.y < 0.0f && Math.Abs(RightPos.x) < Math.Abs(RightPos.y);
+			public bool? South => RightThresholdCrossed == null ? (bool?)null :
+				RightThresholdCrossed == true && RightStick.Value.y < 0.0f && Math.Abs(RightStick.Value.x) < Math.Abs(RightStick.Value.y);
 
 			/// <summary>
 			/// xbox B button
 			/// </summary>
-			public bool? East => RightThresholdCrossed == null ? (bool?)null : RightPos.x > 0.0f && Math.Abs(RightPos.x) > Math.Abs(RightPos.y);
+			public bool? East => RightThresholdCrossed == null ? (bool?)null :
+				RightThresholdCrossed == true && RightStick.Value.x > 0.0f && Math.Abs(RightStick.Value.x) > Math.Abs(RightStick.Value.y);
 
 			/// <summary>
 			/// xbox X button (but we're using this as menu button, because the game didn't use the X button and we need a menu button)
 			/// </summary>
-			public bool? West => RightThresholdCrossed == null ? (bool?)null : RightPos.x < 0.0f && Math.Abs(RightPos.x) > Math.Abs(RightPos.y);
+			public bool? West => RightThresholdCrossed == null ? (bool?)null :
+				RightThresholdCrossed == true && RightStick.Value.x < 0.0f && Math.Abs(RightStick.Value.x) > Math.Abs(RightStick.Value.y);
 
 			/// <summary>
 			/// xbox Y button
 			/// </summary>
-			public bool? North => RightThresholdCrossed == null ? (bool?)null : RightPos.y > 0.0f && Math.Abs(RightPos.x) < Math.Abs(RightPos.y);
+			public bool? North => RightThresholdCrossed == null ? (bool?)null :
+				RightThresholdCrossed == true && RightStick.Value.y > 0.0f && Math.Abs(RightStick.Value.x) < Math.Abs(RightStick.Value.y);
 		}
 
-		private static Body[] Bodies;
-		private static PlayerStatus Player1, Player2;
-		private static readonly Color Player1Color = new Color(0.92f, 0.0f, 0.57f, 1.0f);
-		private static readonly Color Player2Color = new Color(0.19f, 0.66f, 0.92f, 1.0f);
-		private const float Highlight = 0.9f;
-		private const float Transparent = 0.3f;
-		private const float NestedTransparent = 0.2f;
-		private const float FadedTransparent = 0.1f;
-		private const float ExtraTransparent = 0.02f;
-		private const float Threshold = 0.3f;
-
-		private static void Reader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
-		{
-			using (BodyFrame frame = e.FrameReference.AcquireFrame())
-			{
-				if (frame == null) return;
-				if (Bodies == null || Bodies.Length != frame.BodyCount)
-				{
-					Bodies = new Body[frame.BodyCount];
-					Player1 = Player2 = null;
-				}
-				frame.GetAndRefreshBodyData(Bodies);
-
-				// invalidate player status if lost track
-				if (Player1?.Body.IsTracked == false) Player1 = null;
-				if (Player2?.Body.IsTracked == false) Player2 = null;
-
-				// select new tracked body
-				if (Player1 == null && Bodies.FirstOrDefault(B => B.IsTracked && B != Player2?.Body) is Body body1) Player1 = new PlayerStatus(body1);
-				if (Player2 == null && Bodies.FirstOrDefault(B => B.IsTracked && B != Player1?.Body) is Body body2) Player2 = new PlayerStatus(body2);
-
-				Player1?.UpdateHandStatus();
-				Player2?.UpdateHandStatus();
-			}
-		}
-		private static void DirectXHook_OverlayDraw(IntPtr Device)
-		{
-			void DrawPlayerControls(PlayerStatus Player, Color PlayerColor)
-			{
-				if (Player == null) return;
-				lock (Player)
-				{
-					Action DelayAction = null;
-
-					Marshal.ThrowExceptionForHR(Device.SetFont("Segoe UI",
-						DWRITE_FONT_WEIGHT.DWRITE_FONT_WEIGHT_NORMAL,
-						DWRITE_FONT_STYLE.DWRITE_FONT_STYLE_NORMAL,
-						DWRITE_FONT_STRETCH.DWRITE_FONT_STRETCH_NORMAL,
-						96.0f, "en-US"));
-					Marshal.ThrowExceptionForHR(Device.SetFontParams(DWRITE_TEXT_ALIGNMENT.DWRITE_TEXT_ALIGNMENT_CENTER,
-						DWRITE_PARAGRAPH_ALIGNMENT.DWRITE_PARAGRAPH_ALIGNMENT_CENTER));
-
-					bool LeftShouldHighlight = false;
-					if (Player.LeftStartPosCloserToHead == true &&
-						Player.LeftStartPos is Vector2 LeftCenter)
-					{
-						// left starting pos is legal
-						LeftShouldHighlight = true;
-
-						// left stick's circle
-						Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray));
-						Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
-						Device.FillEllipse(LeftCenter, 150.0f, 150.0f);
-
-						// left stick's arrows
-						Marshal.ThrowExceptionForHR(Device.SetColor(Color.white));
-						Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
-						Device.DrawPlainText("◀", new D2D1_RECT_F() { Left = LeftCenter.x - 100.0f, Top = LeftCenter.y, Right = LeftCenter.x, Bottom = LeftCenter.y });
-						Device.DrawPlainText("▲", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y - 100.0f, Right = LeftCenter.x, Bottom = LeftCenter.y });
-						Device.DrawPlainText("▶", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y, Right = LeftCenter.x + 100.0f, Bottom = LeftCenter.y });
-						Device.DrawPlainText("▼", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y, Right = LeftCenter.x, Bottom = LeftCenter.y + 100.0f });
-					}
-
-					bool RightShouldHighlight = false;
-					if (Player.RightStartPosCloserToHead == true &&
-						Player.RightStartPos is Vector2 RightCenter)
-					{
-						// right starting pos is legal
-						RightShouldHighlight = true;
-
-						// right stick's circle
-						Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray));
-						Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
-						Device.FillEllipse(RightCenter, 150.0f, 150.0f);
-
-						DelayAction += () => {
-							// A button
-							Marshal.ThrowExceptionForHR(Device.SetColor(Color.green));
-							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.South == true ? Highlight : NestedTransparent));
-							Device.FillEllipse(RightCenter + new Vector2(0.0f, 100.0f), 50.0f, 50.0f);
-							Device.DrawPlainText("A", new D2D1_RECT_F() { Left = RightCenter.x, Top = RightCenter.y, Right = RightCenter.x, Bottom = RightCenter.y + 100.0f });
-
-							// B button
-							Marshal.ThrowExceptionForHR(Device.SetColor(Color.red));
-							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.East == true ? Highlight : NestedTransparent));
-							Device.FillEllipse(RightCenter + new Vector2(100.0f, 0.0f), 50.0f, 50.0f);
-							Device.DrawPlainText("B", new D2D1_RECT_F() { Left = RightCenter.x, Top = RightCenter.y, Right = RightCenter.x + 100.0f, Bottom = RightCenter.y });
-
-							// Y button
-							Marshal.ThrowExceptionForHR(Device.SetColor(Color.yellow));
-							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.North == true ? Highlight : NestedTransparent));
-							Device.FillEllipse(RightCenter + new Vector2(0.0f, -100.0f), 50.0f, 50.0f);
-							Device.DrawPlainText("Y", new D2D1_RECT_F() { Left = RightCenter.x, Top = RightCenter.y - 100.0f, Right = RightCenter.x, Bottom = RightCenter.y });
-
-							// Menu button
-							Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
-							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.West == true ? Highlight : ExtraTransparent));
-							Device.FillEllipse(RightCenter + new Vector2(-100.0f, 0.0f), 50.0f, 50.0f);
-							Device.DrawPlainText("≡", new D2D1_RECT_F() { Left = RightCenter.x - 100.0f, Top = RightCenter.y, Right = RightCenter.x, Bottom = RightCenter.y });
-						};
-					}
-
-					if (Player.LeftPos is Vector2 Left &&
-						Player.LeftShoulderPos is Vector2 LeftShoulder)
-					{
-						// draw a line from left shoulder to left hand, and draw a circle on the left hand
-						Marshal.ThrowExceptionForHR(Device.SetColor(PlayerColor));
-						Marshal.ThrowExceptionForHR(Device.SetOpacity(LeftShouldHighlight ? Highlight : Player.LeftPosCloserToHead ? Transparent : FadedTransparent));
-						Device.DrawLine(LeftShoulder, Left, 10.0f);
-						Device.FillEllipse(Left, 40.0f, 40.0f);
-					}
-					if (Player.RightPos is Vector2 Right &&
-						Player.RightShoulderPos is Vector2 RightShoulder)
-					{
-						// draw a line from right shoulder to right hand, and draw a circle on the right hand
-						Marshal.ThrowExceptionForHR(Device.SetColor(PlayerColor));
-						Marshal.ThrowExceptionForHR(Device.SetOpacity(RightShouldHighlight ? Highlight : Player.RightPosCloserToHead ? Transparent : FadedTransparent));
-						Device.DrawLine(RightShoulder, Right, 10.0f);
-						Device.FillEllipse(Right, 40.0f, 40.0f);
-					}
-
-					DelayAction?.Invoke();
-				}
-			}
-			DrawPlayerControls(Player1, Player1Color);
-			DrawPlayerControls(Player2, Player2Color);
-		}
+		public static Vector2 XY(this Vector3 V3) => new Vector2(V3.x, V3.y);
 
 		public static class AMBA
 		{
 			public struct ButtonStatus
 			{
-				public bool? LeftThresholdCrossed, RightThresholdCrossed,
-					Left, Up, Right, Down,
+				public bool? Left, Up, Right, Down,
 					South, East, West, North;
 			}
 			public static ButtonStatus? PreviousPlayer1Status = null, PreviousPlayer2Status = null,
@@ -386,14 +527,13 @@ namespace ElementsOfHarmony
 					PreviousPlayer1Status = CurrentPlayer1Status;
 					PreviousPlayer2Status = CurrentPlayer2Status;
 
-					ButtonStatus GetStatus(PlayerStatus Player)
+					ButtonStatus? GetStatus(PlayerStatus Player)
 					{
+						if (Player == null) return null;
 						lock (Player)
 						{
 							return new ButtonStatus()
 							{
-								LeftThresholdCrossed = Player.LeftThresholdCrossed,
-								RightThresholdCrossed = Player.RightThresholdCrossed,
 								Left = Player.Left,
 								Up = Player.Up,
 								Right = Player.Right,
@@ -406,17 +546,8 @@ namespace ElementsOfHarmony
 						}
 					}
 
-					if (Player1 != null)
-					{
-						CurrentPlayer1Status = GetStatus(Player1);
-					}
-					else CurrentPlayer1Status = null;
-
-					if (Player2 != null)
-					{
-						CurrentPlayer2Status = GetStatus(Player2);
-					}
-					else CurrentPlayer2Status = null;
+					CurrentPlayer1Status = GetStatus(Player1);
+					CurrentPlayer2Status = GetStatus(Player2);
 
 					PreviousFrame = Time.frameCount;
 				}
@@ -426,22 +557,22 @@ namespace ElementsOfHarmony
 			[HarmonyPatch("GetAxis")]
 			public static class GetAxisOverride
 			{
-				public static bool Prefix(GamePadInput __instance, ref Vector3 __result)
+				public static void Postfix(GamePadInput __instance, ref Vector3 __result)
 				{
 					EnsureFrameUpdate();
-					if (__instance is XBOXGamePadInput && (__instance.index == 1 ? Player1 : __instance.index == 2 ? Player2 : null) is PlayerStatus Player)
+					if (__instance is XBOXGamePadInput &&
+						(__instance.index == 0 ? Player1 : __instance.index == 1 ? Player2 : null) is PlayerStatus Player)
 					{
 						lock (Player)
 						{
 							if (Player?.LeftStick is Vector2 Axis)
 							{
+								Axis *= 2.5f; // adjust sensitivity
 								__result.x = Axis.x;
 								__result.z = Axis.y;
-								return false;
 							}
 						}
 					}
-					return true;
 				}
 			}
 
@@ -449,12 +580,12 @@ namespace ElementsOfHarmony
 			[HarmonyPatch("GetButtonDown")]
 			public static class GetButtonDownOverride
 			{
-				public static bool Prefix(ref bool __result, GamePadInput __instance, MLPAction mlpAction)
+				public static void Postfix(ref bool __result, GamePadInput __instance, MLPAction mlpAction)
 				{
 					EnsureFrameUpdate();
 					if (__instance is XBOXGamePadInput &&
-						(__instance.index == 1 ? CurrentPlayer1Status : __instance.index == 2 ? CurrentPlayer1Status : null) is ButtonStatus Current &&
-						(__instance.index == 1 ? PreviousPlayer1Status : __instance.index == 2 ? PreviousPlayer1Status : null) is ButtonStatus Previous)
+						(__instance.index == 0 ? CurrentPlayer1Status : __instance.index == 1 ? CurrentPlayer2Status : null) is ButtonStatus Current &&
+						(__instance.index == 0 ? PreviousPlayer1Status : __instance.index == 1 ? PreviousPlayer2Status : null) is ButtonStatus Previous)
 					{
 						switch (mlpAction)
 						{
@@ -462,37 +593,32 @@ namespace ElementsOfHarmony
 								if (Current.Right == true && Previous.Right == false)
 								{
 									__result = true;
-									return false;
 								}
-								return false;
+								break;
 							case MLPAction.LEFT:
 								if (Current.Left == true && Previous.Left == false)
 								{
 									__result = true;
-									return false;
 								}
-								return false;
+								break;
 							case MLPAction.UP:
 								if (Current.Up == true && Previous.Up == false)
 								{
 									__result = true;
-									return false;
 								}
-								return false;
+								break;
 							case MLPAction.DOWN:
 								if (Current.Down == true && Previous.Down == false)
 								{
 									__result = true;
-									return false;
 								}
-								return false;
+								break;
 
 							case MLPAction.JUMP:
 							case MLPAction.SELECT:
 								if (Current.South == true && Previous.South == false)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 							case MLPAction.INTERACT:
@@ -500,7 +626,6 @@ namespace ElementsOfHarmony
 								if (Current.East == true && Previous.East == false)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 							case MLPAction.PAUSE:
@@ -508,7 +633,6 @@ namespace ElementsOfHarmony
 								if (Current.West == true && Previous.West == false)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 							case MLPAction.EQUIPMENT:
@@ -516,21 +640,24 @@ namespace ElementsOfHarmony
 								if (Current.North == true && Previous.North == false)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 
 							case MLPAction.ANY:
-								if (Current.LeftThresholdCrossed == true && Previous.LeftThresholdCrossed == false ||
-									Current.RightThresholdCrossed == true && Previous.RightThresholdCrossed == false)
+								if (Current.Right == true && Previous.Right == false ||
+									Current.Left == true && Previous.Left == false ||
+									Current.Up == true && Previous.Up == false ||
+									Current.Down == true && Previous.Down == false ||
+									Current.South == true && Previous.South == false ||
+									Current.East == true && Previous.East == false ||
+									Current.West == true && Previous.West == false ||
+									Current.North == true && Previous.North == false)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 						}
 					}
-					return true;
 				}
 			}
 
@@ -538,12 +665,12 @@ namespace ElementsOfHarmony
 			[HarmonyPatch("GetButtonUp")]
 			public static class GetButtonUpOverride
 			{
-				public static bool Prefix(ref bool __result, GamePadInput __instance, MLPAction mlpAction)
+				public static void Postfix(ref bool __result, GamePadInput __instance, MLPAction mlpAction)
 				{
 					EnsureFrameUpdate();
 					if (__instance is XBOXGamePadInput &&
-						(__instance.index == 1 ? CurrentPlayer1Status : __instance.index == 2 ? CurrentPlayer1Status : null) is ButtonStatus Current &&
-						(__instance.index == 1 ? PreviousPlayer1Status : __instance.index == 2 ? PreviousPlayer1Status : null) is ButtonStatus Previous)
+						(__instance.index == 0 ? CurrentPlayer1Status : __instance.index == 1 ? CurrentPlayer2Status : null) is ButtonStatus Current &&
+						(__instance.index == 0 ? PreviousPlayer1Status : __instance.index == 1 ? PreviousPlayer2Status : null) is ButtonStatus Previous)
 					{
 						switch (mlpAction)
 						{
@@ -551,37 +678,32 @@ namespace ElementsOfHarmony
 								if (Current.Right == false && Previous.Right == true)
 								{
 									__result = true;
-									return false;
 								}
-								return false;
+								break;
 							case MLPAction.LEFT:
 								if (Current.Left == false && Previous.Left == true)
 								{
 									__result = true;
-									return false;
 								}
-								return false;
+								break;
 							case MLPAction.UP:
 								if (Current.Up == false && Previous.Up == true)
 								{
 									__result = true;
-									return false;
 								}
-								return false;
+								break;
 							case MLPAction.DOWN:
 								if (Current.Down == false && Previous.Down == true)
 								{
 									__result = true;
-									return false;
 								}
-								return false;
+								break;
 
 							case MLPAction.JUMP:
 							case MLPAction.SELECT:
 								if (Current.South == false && Previous.South == true)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 							case MLPAction.INTERACT:
@@ -589,7 +711,6 @@ namespace ElementsOfHarmony
 								if (Current.East == false && Previous.East == true)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 							case MLPAction.PAUSE:
@@ -597,7 +718,6 @@ namespace ElementsOfHarmony
 								if (Current.West == false && Previous.West == true)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 							case MLPAction.EQUIPMENT:
@@ -605,21 +725,24 @@ namespace ElementsOfHarmony
 								if (Current.North == false && Previous.North == true)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 
 							case MLPAction.ANY:
-								if (Current.LeftThresholdCrossed == false && Previous.LeftThresholdCrossed == true ||
-									Current.RightThresholdCrossed == false && Previous.RightThresholdCrossed == true)
+								if (Current.Right == false && Previous.Right == true ||
+									Current.Left == false && Previous.Left == true ||
+									Current.Up == false && Previous.Up == true ||
+									Current.Down == false && Previous.Down == true ||
+									Current.South == false && Previous.South == true ||
+									Current.East == false && Previous.East == true ||
+									Current.West == false && Previous.West == true ||
+									Current.North == false && Previous.North == true)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 						}
 					}
-					return true;
 				}
 			}
 
@@ -627,10 +750,11 @@ namespace ElementsOfHarmony
 			[HarmonyPatch("GetButton")]
 			public static class GetButtonOverride
 			{
-				public static bool Prefix(ref bool __result, GamePadInput __instance, MLPAction mlpAction)
+				public static void Postfix(ref bool __result, GamePadInput __instance, MLPAction mlpAction)
 				{
 					EnsureFrameUpdate();
-					if (__instance is XBOXGamePadInput && (__instance.index == 1 ? CurrentPlayer1Status : __instance.index == 2 ? CurrentPlayer1Status : null) is ButtonStatus Player)
+					if (__instance is XBOXGamePadInput &&
+						(__instance.index == 0 ? CurrentPlayer1Status : __instance.index == 1 ? CurrentPlayer2Status : null) is ButtonStatus Player)
 					{
 						switch (mlpAction)
 						{
@@ -638,37 +762,32 @@ namespace ElementsOfHarmony
 								if (Player.Right == true)
 								{
 									__result = true;
-									return false;
 								}
-								return false;
+								break;
 							case MLPAction.LEFT:
 								if (Player.Left == true)
 								{
 									__result = true;
-									return false;
 								}
-								return false;
+								break;
 							case MLPAction.UP:
 								if (Player.Up == true)
 								{
 									__result = true;
-									return false;
 								}
-								return false;
+								break;
 							case MLPAction.DOWN:
 								if (Player.Down == true)
 								{
 									__result = true;
-									return false;
 								}
-								return false;
+								break;
 
 							case MLPAction.JUMP:
 							case MLPAction.SELECT:
 								if (Player.South == true)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 							case MLPAction.INTERACT:
@@ -676,7 +795,6 @@ namespace ElementsOfHarmony
 								if (Player.East == true)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 							case MLPAction.PAUSE:
@@ -684,7 +802,6 @@ namespace ElementsOfHarmony
 								if (Player.West == true)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 							case MLPAction.EQUIPMENT:
@@ -692,21 +809,24 @@ namespace ElementsOfHarmony
 								if (Player.North == true)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 
 							case MLPAction.ANY:
-								if (Player.LeftThresholdCrossed == true ||
-									Player.RightThresholdCrossed == true)
+								if (Player.Right == true ||
+									Player.Left == true ||
+									Player.Up == true ||
+									Player.Down == true ||
+									Player.South == true ||
+									Player.East == true ||
+									Player.West == true ||
+									Player.North == true)
 								{
 									__result = true;
-									return false;
 								}
 								break;
 						}
 					}
-					return true;
 				}
 			}
 		}
@@ -714,7 +834,5 @@ namespace ElementsOfHarmony
 		public static class AZHM
 		{
 		}
-
-		public static Vector2 ToVector2(this CameraSpacePoint P) => new Vector2(P.X, P.Y);
 	}
 }

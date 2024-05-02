@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElementsOfHarmony
 {
 	/// <summary>
 	/// you made me do this Unity, since you've banned native/managed mixed code,
-	/// I'm writing my own managed wrapper for C++ native IUnknown interface
+	/// I'm writing my own managed wrapper for the C++ native IUnknown interface
 	/// </summary>
 	public class Unknown : IDisposable
 	{
@@ -18,7 +16,17 @@ namespace ElementsOfHarmony
 		/// <summary>
 		/// get function address from VTable
 		/// </summary>
-		protected IntPtr this[uint Index] => Marshal.ReadIntPtr(Marshal.ReadIntPtr(pInstance), (int)(Index * IntPtr.Size));
+		protected IntPtr this[int Index] => Marshal.ReadIntPtr(Marshal.ReadIntPtr(pInstance), Index * IntPtr.Size);
+
+		public override bool Equals(object obj)
+		{
+			if (obj is Unknown other) return pInstance == other.pInstance;
+			return base.Equals(obj);
+		}
+		public override int GetHashCode()
+		{
+			return pInstance.GetHashCode();
+		}
 
 		protected Unknown(IntPtr pInstance)
 		{
@@ -28,7 +36,7 @@ namespace ElementsOfHarmony
 		/// <summary>
 		/// invoke function with given VTable index and delegate type
 		/// </summary>
-		protected object Invoke<T>(uint Index, params object[] args) where T : Delegate
+		protected object Invoke<T>(int Index, params object[] args) where T : Delegate
 		{
 			if (!VTable.TryGetValue(Index, out Delegate Function))
 			{
@@ -39,20 +47,17 @@ namespace ElementsOfHarmony
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public unsafe delegate int QueryInterfaceProc(IntPtr pInstance, Guid IID, IntPtr* PPV);
-		public const int QueryInterfaceProcIndex = 0;
-		public unsafe int QueryInterface(Guid IID, IntPtr* PPV) => (int)Invoke<QueryInterfaceProc>(QueryInterfaceProcIndex, IID, (IntPtr)PPV);
+		public unsafe int QueryInterface(Guid IID, IntPtr* PPV) => (int)Invoke<QueryInterfaceProc>(0, IID, (IntPtr)PPV);
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate uint AddRefProc(IntPtr pInstance);
-		public const int AddRefProcIndex = 1;
-		public uint AddRef() => (uint)Invoke<AddRefProc>(AddRefProcIndex);
+		public uint AddRef() => (uint)Invoke<AddRefProc>(1);
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate uint ReleaseProc(IntPtr pInstance);
-		public const int ReleaseProcIndex = 2;
-		public uint Release() => (uint)Invoke<ReleaseProc>(ReleaseProcIndex);
+		public uint Release() => (uint)Invoke<ReleaseProc>(2);
 
-		protected Dictionary<uint, Delegate> VTable = new Dictionary<uint, Delegate>();
+		protected Dictionary<int, Delegate> VTable = new Dictionary<int, Delegate>();
 
 		private bool disposedValue;
 
