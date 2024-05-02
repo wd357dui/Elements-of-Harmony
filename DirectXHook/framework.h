@@ -40,6 +40,7 @@ using Microsoft::WRL::ComPtr;
 #pragma comment(lib, "DXGI.lib")
 #pragma comment(lib, "D3D11.lib")
 #pragma comment(lib, "D2D1.lib")
+#pragma comment(lib, "D2D1.lib")
 #pragma comment(lib, "DWrite.lib")
 #pragma comment(lib, "User32.lib")
 #pragma comment(lib, "PSApi.lib")

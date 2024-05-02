@@ -76,6 +76,14 @@ namespace ElementsOfHarmony
 			}
 		}
 
+		public static class Loyalty
+		{
+			public static class KinectControl
+			{
+				public static bool Enabled = false;
+			}
+		}
+
 		public static void ReadOurSettings()
 		{
 			// this settings exist originally because the game can't save a language setting that it doesn't originally support
@@ -160,7 +168,10 @@ namespace ElementsOfHarmony
 					ReadSettingsForClass(Nested);
 				}
 			}
-			ReadSettingsForClass(typeof(DirectXHook));
+			foreach (var Nested in typeof(Settings).GetNestedTypes())
+			{
+				ReadSettingsForClass(Nested);
+			}
 
 			WriteOurSettings();
 		}
@@ -231,7 +242,10 @@ namespace ElementsOfHarmony
 					WriteSettingsForClass(Nested);
 				}
 			}
-			WriteSettingsForClass(typeof(DirectXHook));
+			foreach (var Nested in typeof(Settings).GetNestedTypes())
+			{
+				WriteSettingsForClass(Nested);
+			}
 
 			Config.SaveConfig();
 		}

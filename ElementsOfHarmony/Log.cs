@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text;
+using static BansheeGz.BGSpline.Curve.BGCc;
 
 namespace ElementsOfHarmony
 {
@@ -135,6 +136,7 @@ namespace ElementsOfHarmony
 					Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
 					Message($"Exception.StackTrace:\r\n{__instance.StackTrace}");
 					Message($"Exception.GetType(): {__instance.GetType()}");
+					Message($"Exception.HResult: 0x{__instance.HResult:X8}");
 					Message($"Exception.Message: {__instance.Message}");
 					Message("\r\n");
 				}
@@ -163,6 +165,7 @@ namespace ElementsOfHarmony
 				Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
 				Message($"Exception.StackTrace:\r\n{exception.StackTrace}");
 				Message($"Exception.GetType(): {exception.GetType()}");
+				Message($"Exception.HResult: 0x{exception.HResult:X8}");
 				Message($"Exception.Message: {exception.Message}");
 				Message("\r\n");
 			}

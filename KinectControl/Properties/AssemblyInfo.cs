@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 
-[assembly: AssemblyTitle("ElementsOfHarmony")]
+[assembly: AssemblyTitle("KinectControl")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ElementsOfHarmony")]
+[assembly: AssemblyProduct("KinectControl")]
 [assembly: AssemblyCopyright("Copyright © 2022-2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

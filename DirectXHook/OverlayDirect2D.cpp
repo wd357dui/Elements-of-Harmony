@@ -384,7 +384,7 @@ HRESULT __stdcall SetFontParams(_In_ Device* pInstance,
 			result = pInstance->DWriteTextFormat->SetFlowDirection(FlowDirection);
 			if (FAILED(result)) return result;
 		}
-		if (IncrementalTabStop != -1) {
+		if (!isnan(IncrementalTabStop)) {
 			result = pInstance->DWriteTextFormat->SetIncrementalTabStop(IncrementalTabStop);
 			if (FAILED(result)) return result;
 		}

@@ -44,7 +44,6 @@
     <Reference Include="System">
       <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\System.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="Unity.Addressables, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\Unity.Addressables.dll</HintPath>
@@ -81,10 +80,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.ParticleSystemModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.TextCoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.TextCoreModule.dll</HintPath>
@@ -109,15 +104,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.VideoModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.VideoModule.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DirectXHook.cs" />
     <Compile Include="ElementsOfHarmony.cs" />
     <Compile Include="EnvFile.cs" />
+    <Compile Include="NativeInterface.cs" />
     <Compile Include="Localization.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

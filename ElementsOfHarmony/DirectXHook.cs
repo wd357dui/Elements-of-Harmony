@@ -30,6 +30,8 @@ namespace ElementsOfHarmony
 				SynchornizationThread.Start();
 				SetRunning(true);
 
+				InitOverlay();
+
 				// apply all of our patch procedures using Harmony API
 				Harmony element = new Harmony($"{typeof(DirectXHook).FullName}");
 				int Num = 0;
@@ -370,7 +372,7 @@ namespace ElementsOfHarmony
 			SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
 		};
 
-		public static void OnPresenting()
+		private static void OnPresenting()
 		{
 			IntPtr pInstance;
 			unsafe
@@ -380,7 +382,7 @@ namespace ElementsOfHarmony
 			OverlayDraw?.Invoke(pInstance);
 			Marshal.ThrowExceptionForHR(SwapChainEndDraw(SwapChainPresentingEventArgs.IDXGISwapChain_This, 0, pInstance));
 		}
-		public static void OnPresenting1()
+		private static void OnPresenting1()
 		{
 			IntPtr pInstance;
 			unsafe
@@ -395,6 +397,8 @@ namespace ElementsOfHarmony
 		{
 			SetRunning(false);
 			Marshal.GetExceptionForHR(UninstallHook());
+
+			ReleaseOverlay();
 		}
 
 		/// <summary>
@@ -462,10 +466,10 @@ namespace ElementsOfHarmony
 		{
 			public ThirdPartyNonDetourHookDetectedException() : base($"A third-party non-detour DirectX hook detected!")
 			{
-				Log.MessageBox(IntPtr.Zero,
+				new Thread(() => Log.MessageBox(IntPtr.Zero,
 					$"{typeof(DirectXHook).FullName}: A third-party non-detour DirectX hook detected!" + "\r\n" +
 					"Keep in mind that if this other hook somehow causes stack overflow exception I won't be able to fix it!",
-					"I curse the name, the one behind it all", Log.MB_ICONWARNING | Log.MB_OK);
+					"I curse the name, the one behind it all", Log.MB_ICONWARNING | Log.MB_OK)).Start();
 			}
 		}
 
@@ -605,55 +609,63 @@ namespace ElementsOfHarmony
 			IntPtr pInstance);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int SetColor(this IntPtr pInstance, D2D1_COLOR_F Color);
-		
+		public extern static int SetColor(this IntPtr pInstance, D2D1_COLOR_F Color);
+
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int SetFont(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string FontFamily,
+		public extern static int SetOpacity(this IntPtr pInstance, float Opacity);
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		public extern static int SetFont(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string FontFamily,
 			DWRITE_FONT_WEIGHT FontWeight, DWRITE_FONT_STYLE FontStyle, DWRITE_FONT_STRETCH FontStretch,
 			float FontSize, [MarshalAs(UnmanagedType.LPWStr)] string FontLocale);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int SetFontParams(this IntPtr pInstance,
-			DWRITE_TEXT_ALIGNMENT TextAlignment, DWRITE_PARAGRAPH_ALIGNMENT ParagraphAlignment, DWRITE_WORD_WRAPPING WordWrapping,
-			DWRITE_READING_DIRECTION ReadingDirection, DWRITE_FLOW_DIRECTION FlowDirection, float IncrementalTabStop,
-			DWRITE_LINE_SPACING_METHOD LineSpacingMethod, float LineSpacing, float Baseline);
+		public extern static int SetFontParams(this IntPtr pInstance,
+			DWRITE_TEXT_ALIGNMENT TextAlignment = DWRITE_TEXT_ALIGNMENT.NULL,
+			DWRITE_PARAGRAPH_ALIGNMENT ParagraphAlignment = DWRITE_PARAGRAPH_ALIGNMENT.NULL,
+			DWRITE_WORD_WRAPPING WordWrapping = DWRITE_WORD_WRAPPING.NULL,
+			DWRITE_READING_DIRECTION ReadingDirection = DWRITE_READING_DIRECTION.NULL,
+			DWRITE_FLOW_DIRECTION FlowDirection = DWRITE_FLOW_DIRECTION.NULL,
+			float IncrementalTabStop = float.NaN,
+			DWRITE_LINE_SPACING_METHOD LineSpacingMethod = DWRITE_LINE_SPACING_METHOD.NULL,
+			float LineSpacing = float.NaN, float Baseline = float.NaN);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int SetGDICompatibleText(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string Str,
+		public extern static int SetGDICompatibleText(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string Str,
 			float LayoutWidth, float LayoutHeight, float PixelsPerDip);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void DrawEllipse(this IntPtr pInstance, D2D1_POINT_2F Point, float RadiusX, float RadiusY, float StrokeWidth);
+		public extern static void DrawEllipse(this IntPtr pInstance, D2D1_POINT_2F Point, float RadiusX, float RadiusY, float StrokeWidth);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void DrawLine(this IntPtr pInstance, D2D1_POINT_2F Src, D2D1_POINT_2F Dst, float StrokeWidth);
+		public extern static void DrawLine(this IntPtr pInstance, D2D1_POINT_2F Src, D2D1_POINT_2F Dst, float StrokeWidth);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void DrawRectangle(this IntPtr pInstance, D2D1_RECT_F Rect, float RoundedRadiusX, float RoundedRadiusY, float StrokeWidth);
+		public extern static void DrawRectangle(this IntPtr pInstance, D2D1_RECT_F Rect, float RoundedRadiusX, float RoundedRadiusY, float StrokeWidth);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void DrawPlainText(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string Str, D2D1_RECT_F Rect);
+		public extern static void DrawPlainText(this IntPtr pInstance, [MarshalAs(UnmanagedType.LPWStr)] string Str, D2D1_RECT_F Rect);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int DrawGDICompatibleText(this IntPtr pInstance, D2D1_POINT_2F Origin);
+		public extern static int DrawGDICompatibleText(this IntPtr pInstance, D2D1_POINT_2F Origin);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int DrawGDICompatibleTextMetrics(this IntPtr pInstance, uint Index, uint Length, float OriginX, float OriginY);
+		public extern static int DrawGDICompatibleTextMetrics(this IntPtr pInstance, uint Index, uint Length, float OriginX, float OriginY);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int DrawGDICompatibleTextCaret(this IntPtr pInstance, bool Trailing, float StrokeWidth);
+		public extern static int DrawGDICompatibleTextCaret(this IntPtr pInstance, bool Trailing, float StrokeWidth);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void FillEllipse(this IntPtr pInstance, D2D1_POINT_2F Point, float RadiusX, float RadiusY);
+		public extern static void FillEllipse(this IntPtr pInstance, D2D1_POINT_2F Point, float RadiusX, float RadiusY);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void FillRectangle(this IntPtr pInstance, D2D1_RECT_F Rect, float RoundedRadiusX, float RoundedRadiusY);
+		public extern static void FillRectangle(this IntPtr pInstance, D2D1_RECT_F Rect, float RoundedRadiusX, float RoundedRadiusY);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void SetTransform(this IntPtr pInstance, Matrix3x2F Matrix);
+		public extern static void SetTransform(this IntPtr pInstance, Matrix3x2F Matrix);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void SetDpi(this IntPtr pInstance, float DpiX, float DpiY);
+		public extern static void SetDpi(this IntPtr pInstance, float DpiX, float DpiY);
 
 		#endregion
 
@@ -1320,18 +1332,37 @@ namespace ElementsOfHarmony
 		public struct D2D1_COLOR_F
 		{
 			public float R, G, B, A;
+			public static implicit operator D2D1_COLOR_F(Color UnityColor) => new D2D1_COLOR_F
+			{
+				R = UnityColor.r,
+				G = UnityColor.g,
+				B = UnityColor.b,
+				A = UnityColor.a,
+			};
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
 		public struct D2D1_POINT_2F
 		{
 			public float X, Y;
+			public static implicit operator D2D1_POINT_2F(Vector2 V2) => new D2D1_POINT_2F
+			{
+				X = V2.x,
+				Y = V2.y,
+			};
 		}
 		
 		[StructLayout(LayoutKind.Sequential)]
 		public struct D2D1_RECT_F
 		{
 			public float Left, Top, Right, Bottom;
+			public static implicit operator D2D1_RECT_F(Rect UnityRect) => new D2D1_RECT_F
+			{
+				Left = UnityRect.xMin,
+				Top = UnityRect.yMin,
+				Right = UnityRect.xMax,
+				Bottom = UnityRect.yMax,
+			};
 		}
 		
 		[StructLayout(LayoutKind.Sequential)]
@@ -1432,7 +1463,9 @@ namespace ElementsOfHarmony
 			/// <summary>
 			/// Predefined font weight : Ultra-black (950).
 			/// </summary>
-			DWRITE_FONT_WEIGHT_ULTRA_BLACK = 950
+			DWRITE_FONT_WEIGHT_ULTRA_BLACK = 950,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1495,7 +1528,9 @@ namespace ElementsOfHarmony
 			/// <summary>
 			/// Predefined font stretch : Ultra-expanded (9).
 			/// </summary>
-			DWRITE_FONT_STRETCH_ULTRA_EXPANDED = 9
+			DWRITE_FONT_STRETCH_ULTRA_EXPANDED = 9,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1517,7 +1552,9 @@ namespace ElementsOfHarmony
 			/// <summary>
 			/// Font slope style : Italic.
 			/// </summary>
-			DWRITE_FONT_STYLE_ITALIC
+			DWRITE_FONT_STYLE_ITALIC,
+
+			NULL = -1,
 
 		};
 
@@ -1545,7 +1582,9 @@ namespace ElementsOfHarmony
 			/// <summary>
 			/// Align text to the leading side, and also justify text to fill the lines.
 			/// </summary>
-			DWRITE_TEXT_ALIGNMENT_JUSTIFIED
+			DWRITE_TEXT_ALIGNMENT_JUSTIFIED,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1567,7 +1606,9 @@ namespace ElementsOfHarmony
 			/// <summary>
 			/// The center of the paragraph is aligned to the center of the flow of the layout box.
 			/// </summary>
-			DWRITE_PARAGRAPH_ALIGNMENT_CENTER
+			DWRITE_PARAGRAPH_ALIGNMENT_CENTER,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1602,6 +1643,8 @@ namespace ElementsOfHarmony
 			/// Wrap between any valid characters clusters.
 			/// </summary>
 			DWRITE_WORD_WRAPPING_CHARACTER = 4,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1628,6 +1671,8 @@ namespace ElementsOfHarmony
 			/// Reading progresses from bottom to top.
 			/// </summary>
 			DWRITE_READING_DIRECTION_BOTTOM_TO_TOP = 3,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1654,6 +1699,8 @@ namespace ElementsOfHarmony
 			/// Text lines are placed from right to left.
 			/// </summary>
 			DWRITE_FLOW_DIRECTION_RIGHT_TO_LEFT = 3,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1675,7 +1722,9 @@ namespace ElementsOfHarmony
 			/// <summary>
 			/// Line spacing and baseline distances are proportional to the computed values based on the content, the size of the fonts and inline objects.
 			/// </summary>
-			DWRITE_LINE_SPACING_METHOD_PROPORTIONAL
+			DWRITE_LINE_SPACING_METHOD_PROPORTIONAL,
+
+			NULL = -1,
 		};
 
 		#endregion
