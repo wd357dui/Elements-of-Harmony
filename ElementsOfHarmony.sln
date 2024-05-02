@@ -890,6 +890,7 @@ Global
 		{15223734-4633-40AE-A116-50C15BE431E0}.Debug|x64.ActiveCfg = Debug|x64
 		{15223734-4633-40AE-A116-50C15BE431E0}.Debug|x64.Build.0 = Debug|x64
 		{15223734-4633-40AE-A116-50C15BE431E0}.Release|x64.ActiveCfg = Release|x64
+		{15223734-4633-40AE-A116-50C15BE431E0}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

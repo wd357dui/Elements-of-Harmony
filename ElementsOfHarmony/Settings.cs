@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -9,14 +10,14 @@ namespace ElementsOfHarmony
 	{
 		private static EnvFile Config;
 
-		public static bool Debug = false;
+		public static bool Debug = true;
 		public static bool DebugTCPEnabled = false;
 		public static string DebugTCPIP = "localhost";
 		public static int DebugTCPPort = 1024;
-		public static bool DebugLog = false;
+		public static bool DebugLog = true;
 		public static string DebugLogFile = "Elements of Harmony/Elements of Harmony.log";
 
-		private static string OurSelectedLanguageOverride_Internal = "";
+		private static string OurSelectedLanguageOverride_Internal = CultureInfo.CurrentCulture.Name;
 		private static string OurFallbackLanguage_Internal = "en-US";
 		public static string OurSelectedLanguageOverride
 		{
@@ -39,11 +40,11 @@ namespace ElementsOfHarmony
 			public static int? MSAA = null;
 			public static int? VSyncInterval = null;
 			public static int? TargetFrameRate = null;
-			public static bool? AllowHDR = null;
+			public static bool? AllowHDR = true;
 			public static class URP
 			{
 				public static bool FabricateNewGlobalVolumeProfile = true;
-				public static TonemappingMode? TonemappingMode = null;
+				public static TonemappingMode? TonemappingMode = UnityEngine.Rendering.Universal.TonemappingMode.ACES;
 				public static class ColorAdjustments
 				{
 					public static float? PostExposure = null;
