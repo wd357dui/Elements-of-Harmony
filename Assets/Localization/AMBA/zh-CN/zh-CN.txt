@@ -8,7 +8,7 @@ VanityItems/Body/CategoryName	身体
 VanityItems/Face/CategoryName	脸部
 VanityItems/Head/CategoryName	头部
 VanityItems/Neck/CategoryName	颈部
-BeachCove/INTRO/EV_01/BC_INTRO_EV_01_01_CS_ZP_01	欢迎来到W.I.N.G.S.——小马湾著名的飞行学院
+BeachCove/INTRO/EV_01/BC_INTRO_EV_01_01_CS_ZP_01	欢迎来到 W.I.N.G.S. ——小马湾著名的飞行学院
 BeachCove/INTRO/EV_01/BC_INTRO_EV_01_02_CVS_SN_01	有小马似乎很高兴
 BeachCove/INTRO/EV_01/BC_INTRO_EV_01_03_CVS_ZP_02	都是我妈妈的主意
 BeachCove/INTRO/EV_01/BC_INTRO_EV_01_04_CVS_ZP_03	我其实没有那么热情
@@ -826,13 +826,13 @@ VideoTutorials/VIDEOTUTORIAL_HC_HERDINGCTUT2	将兔子和螃蟹赶至对应的�
 VideoTutorials/VIDEOTUTORIAL_HC_SPECIALPTUT1	这是一个特别皮纳塔！\n找到它们来解锁新角色 并与朋友们一起玩
 VideoTutorials/VIDEOTUTORIAL_IZ_UNICYCLINGTUT1	当你碰到这样的桌子时 按B键进行独角回收！
 VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT1	女士们先生们
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT10	使用方向键和A键跟随节奏
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT10	使用方向键和 A 键跟随节奏
 VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT11	命中的越多 分数越高！
 VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT2	欢迎来到琪琪游行 小马湾节版本！
 VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT3	首先我们得穿上好看的衣服！
 VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT4	在菜单中选择最好看的服装
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT5	按A键穿上
-VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT6	按LB、RB或向边缘移动来查看更多配饰
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT5	按 A 键穿上
+VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT6	按 LB、RB 或向边缘移动来查看更多配饰
 VideoTutorials/VIDEOTUTORIAL_PP_FASHIONTUT7	当你准备好时 按这个按钮
 VideoTutorials/VIDEOTUTORIAL_PP_MAGICMTUT1	留意魔法镜子！\n按B键随时更换装扮！
 VideoTutorials/VIDEOTUTORIAL_SN_BUTTERTUT1	跟随蝴蝶找到你下一步目标
@@ -842,9 +842,9 @@ VideoTutorials/VIDEOTUTORIAL_SN_KICKTUT1	使用此按钮踢树\n别忘了收集�
 VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT1	可以用我的陆马魔法让植物快速长大 按B键使用
 VideoTutorials/VIDEOTUTORIAL_SN_MAGICPTUT2	利用它们跳至更高的地方
 VideoTutorials/VIDEOTUTORIAL_SN_MOVTUT1	使用左摇杆移动
-VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT3	按A键跳过陷阱
-VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT2	按Y键穿上轮滑鞋
-VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT3	如果想慢下来 按Y键将它们脱下
+VideoTutorials/VIDEOTUTORIAL_SP_FASTWINTTUT3	按 A 键跳过陷阱
+VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT2	按 Y 键穿上轮滑鞋
+VideoTutorials/VIDEOTUTORIAL_ZM_ROLLERTUT3	如果想慢下来 按 Y 键将它们脱下
 VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT4	用左摇杆左右移动躲开障碍物
 VideoTutorials/VIDEOTUTORIAL_ZP_DASHSKYTUT5	通过圆环可以加速
 VideoTutorialsTitle/VIDEOTUTORIAL_TITLE_BUTTERTUT	蝴蝶向导
