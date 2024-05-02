@@ -121,7 +121,7 @@ namespace Microsoft.Kinect
 								FrameArrived?.Invoke(this, EventArgs);
 							}
 						}
-						catch (COMException e)
+						catch (COMException)
 						{
 							// this happens occasionally for some frames for no reason...
 							// doesn't cause errors for later frames though

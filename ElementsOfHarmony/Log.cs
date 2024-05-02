@@ -173,19 +173,29 @@ namespace ElementsOfHarmony
 		#endregion
 
 		[DllImport("User32.dll", CharSet = CharSet.Unicode)]
-		internal extern static int MessageBox(IntPtr hWnd, string Text, string Caption, uint uType);
+		public extern static int MessageBox(IntPtr hWnd, string Text, string Caption, uint uType);
 
-		internal const uint MB_OK					= 0x00000000;
-		internal const uint MB_OKCANCEL				= 0x00000001;
-		internal const uint MB_ABORTRETRYIGNORE		= 0x00000002;
-		internal const uint MB_YESNOCANCEL			= 0x00000003;
-		internal const uint MB_YESNO				= 0x00000004;
-		internal const uint MB_RETRYCANCEL			= 0x00000005;
-		internal const uint MB_CANCELTRYCONTINUE	= 0x00000006;
+		public const uint MB_OK					= 0x00000000;
+		public const uint MB_OKCANCEL			= 0x00000001;
+		public const uint MB_ABORTRETRYIGNORE	= 0x00000002;
+		public const uint MB_YESNOCANCEL		= 0x00000003;
+		public const uint MB_YESNO				= 0x00000004;
+		public const uint MB_RETRYCANCEL		= 0x00000005;
+		public const uint MB_CANCELTRYCONTINUE	= 0x00000006;
 
-		internal const uint MB_ICONERROR		= 0x00000010;
-		internal const uint MB_ICONQUESTION		= 0x00000020;
-		internal const uint MB_ICONWARNING		= 0x00000030;
-		internal const uint MB_ICONINFORMATION	= 0x00000040;
+		public const uint MB_ICONERROR			= 0x00000010;
+		public const uint MB_ICONQUESTION		= 0x00000020;
+		public const uint MB_ICONWARNING		= 0x00000030;
+		public const uint MB_ICONINFORMATION	= 0x00000040;
+
+		public const uint IDOK			= 1;
+		public const uint IDCANCEL		= 2;
+		public const uint IDABORT		= 3;
+		public const uint IDRETRY		= 4;
+		public const uint IDIGNORE		= 5;
+		public const uint IDYES			= 6;
+		public const uint IDNO			= 7;
+		public const uint IDTRYAGAIN	= 10;
+		public const uint IDCONTINUE	= 11;
 	}
 }

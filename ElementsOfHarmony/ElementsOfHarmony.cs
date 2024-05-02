@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Security.Cryptography;
+using System.Threading;
 
 namespace ElementsOfHarmony
 {
@@ -64,14 +66,33 @@ namespace ElementsOfHarmony
 					// I remembered why I didn't end up using it and went for C++ instead back in 2022
 					// it was because Microsoft.Kinect.dll has native/managed mixed code in it
 					// and Unity have zero tolerance for mixed code...
+					Assembly KinectControl;
 					try
 					{
-						Assembly KinectControl = Assembly.Load("KinectControl");
+						KinectControl = Assembly.Load("KinectControl");
 						KinectControl.GetType("ElementsOfHarmony.KinectControl")
 							.GetMethod("Init", BindingFlags.Public | BindingFlags.Static)
 							.Invoke(null, Array.Empty<object>());
 					}
-					catch { }
+					catch (Exception e)
+					{
+						if (e.InnerException is DllNotFoundException dll &&
+							dll.Message.EndsWith("Kinect20.dll", StringComparison.InvariantCultureIgnoreCase))
+						{
+							new Thread(() =>
+							{
+								int result = Log.MessageBox(IntPtr.Zero,
+									"Unable to start `Elements of Harmony -> Loyalty -> Kinect Control` module, because Kinect20.dll was not found.\r\n" +
+									"Please install Kinect V2 Runtime (or SDK) before running this module.\r\n" +
+									"Would you like to go to the download page?",
+									"Unable to load Kinect V2 library", Log.MB_YESNO | Log.MB_ICONWARNING);
+								if (result == Log.IDYES)
+								{
+									System.Diagnostics.Process.Start("https://www.microsoft.com/download/details.aspx?id=44559");
+								}
+							}).Start();
+						}
+					}
 				}
 			}
 		}
