@@ -372,7 +372,7 @@ namespace ElementsOfHarmony
 			SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
 		};
 
-		public static void OnPresenting()
+		private static void OnPresenting()
 		{
 			IntPtr pInstance;
 			unsafe
@@ -382,7 +382,7 @@ namespace ElementsOfHarmony
 			OverlayDraw?.Invoke(pInstance);
 			Marshal.ThrowExceptionForHR(SwapChainEndDraw(SwapChainPresentingEventArgs.IDXGISwapChain_This, 0, pInstance));
 		}
-		public static void OnPresenting1()
+		private static void OnPresenting1()
 		{
 			IntPtr pInstance;
 			unsafe
@@ -1332,18 +1332,37 @@ namespace ElementsOfHarmony
 		public struct D2D1_COLOR_F
 		{
 			public float R, G, B, A;
+			public static implicit operator D2D1_COLOR_F(Color UnityColor) => new D2D1_COLOR_F
+			{
+				R = UnityColor.r,
+				G = UnityColor.g,
+				B = UnityColor.b,
+				A = UnityColor.a,
+			};
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
 		public struct D2D1_POINT_2F
 		{
 			public float X, Y;
+			public static implicit operator D2D1_POINT_2F(Vector2 V2) => new D2D1_POINT_2F
+			{
+				X = V2.x,
+				Y = V2.y,
+			};
 		}
 		
 		[StructLayout(LayoutKind.Sequential)]
 		public struct D2D1_RECT_F
 		{
 			public float Left, Top, Right, Bottom;
+			public static implicit operator D2D1_RECT_F(Rect UnityRect) => new D2D1_RECT_F
+			{
+				Left = UnityRect.xMin,
+				Top = UnityRect.yMin,
+				Right = UnityRect.xMax,
+				Bottom = UnityRect.yMax,
+			};
 		}
 		
 		[StructLayout(LayoutKind.Sequential)]
@@ -1444,7 +1463,9 @@ namespace ElementsOfHarmony
 			/// <summary>
 			/// Predefined font weight : Ultra-black (950).
 			/// </summary>
-			DWRITE_FONT_WEIGHT_ULTRA_BLACK = 950
+			DWRITE_FONT_WEIGHT_ULTRA_BLACK = 950,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1507,7 +1528,9 @@ namespace ElementsOfHarmony
 			/// <summary>
 			/// Predefined font stretch : Ultra-expanded (9).
 			/// </summary>
-			DWRITE_FONT_STRETCH_ULTRA_EXPANDED = 9
+			DWRITE_FONT_STRETCH_ULTRA_EXPANDED = 9,
+
+			NULL = -1,
 		};
 
 		/// <summary>
@@ -1529,7 +1552,9 @@ namespace ElementsOfHarmony
 			/// <summary>
 			/// Font slope style : Italic.
 			/// </summary>
-			DWRITE_FONT_STYLE_ITALIC
+			DWRITE_FONT_STYLE_ITALIC,
+
+			NULL = -1,
 
 		};
 

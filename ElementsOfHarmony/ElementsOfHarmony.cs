@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 
 namespace ElementsOfHarmony
 {
@@ -53,6 +54,25 @@ namespace ElementsOfHarmony
 				if (Settings.DirectXHook.Enabled)
 				{
 					DirectXHook.Init();
+				}
+
+				if (Settings.Loyalty.KinectControl.Enabled)
+				{
+					// 2024.4.30
+					// I was going to use Kinect NuGet Package (for C#.Net Framework 4.5),
+					// then after some failed tests,
+					// I remembered why I didn't use this one and went for C++ instead back in 2022
+					// it was because Microsoft.Kinect.dll has native/managed mixed code in it
+					// and Unity have zero tolerance for mixed code...
+					try
+					{
+						// so I'm implementing 
+						Assembly KinectControl = Assembly.Load("KinectControl");
+						KinectControl.GetType("ElementsOfHarmony.KinectControl")
+							.GetMethod("Init", BindingFlags.Public | BindingFlags.Static)
+							.Invoke(null, Array.Empty<object>());
+					}
+					catch { }
 				}
 			}
 		}

@@ -610,7 +610,7 @@ Mainstreet/Q6/EV_06/MS_Q6_EV_06_20_CVS_Primrose_10	听上去是个不错的理�
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_21_CVS_SN_11	他超爱南瓜口味的冰沙！
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_22_CVS_Primrose_11	你能帮我拿点吗？
 Mainstreet/Q6/EV_06/MS_Q6_EV_06_23_CVS_SN_12	可以！我来当你的冰沙操作员！
-Mainstreet/Q6/EV_06/MS_Q6_EV_06_24_CVS_SN_13	不过我的冰沙车还在店里！我该去哪里找冰沙呢？
+Mainstreet/Q6/EV_06/MS_Q6_EV_06_24_CVS_SN_13	不过我的冰沙车还在维修！我该去哪里找冰沙呢？
 Mainstreet/Q6/EV_07/MS_Q6_EV_07_01_CVS_SN_01	嘿 你好！我冰沙车里的冰箱坏了
 Mainstreet/Q6/EV_07/MS_Q6_EV_07_02_CVS_SN_02	你能帮我做点冰沙吗？我之后会还你的
 Mainstreet/Q6/EV_07/MS_Q6_EV_07_03_CVS_SmoothieShop_01	没问题 希悦 你需要什么？

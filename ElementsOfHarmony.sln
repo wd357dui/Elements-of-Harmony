@@ -871,6 +871,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "zh-CN", "zh-CN", "{EE1E8F6B
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXHook", "DirectXHook\DirectXHook.vcxproj", "{2394D283-4A25-401E-8B5E-91FE65032317}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectControl", "KinectControl\KinectControl.csproj", "{15223734-4633-40AE-A116-50C15BE431E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -885,6 +887,9 @@ Global
 		{2394D283-4A25-401E-8B5E-91FE65032317}.Debug|x64.Build.0 = Debug|x64
 		{2394D283-4A25-401E-8B5E-91FE65032317}.Release|x64.ActiveCfg = Release|x64
 		{2394D283-4A25-401E-8B5E-91FE65032317}.Release|x64.Build.0 = Release|x64
+		{15223734-4633-40AE-A116-50C15BE431E0}.Debug|x64.ActiveCfg = Debug|x64
+		{15223734-4633-40AE-A116-50C15BE431E0}.Debug|x64.Build.0 = Debug|x64
+		{15223734-4633-40AE-A116-50C15BE431E0}.Release|x64.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
