@@ -1,4 +1,4 @@
-﻿Menu/MLP_logo_file	RUS_MLP_logo.png
+﻿Menu/MLP_logo_file	ru/RUS_MLP_logo.png
 FONTS/DIMBO_REGULAR	Roboto-Black
 FONTS/NOTO_SANS	Roboto-Medium
 FONTS/ROBOTO_MEDIUM	Roboto-Regular

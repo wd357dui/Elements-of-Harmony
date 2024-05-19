@@ -86,5 +86,4 @@ namespace ElementsOfHarmony
 			GC.SuppressFinalize(this);
 		}
 	}
-
 }

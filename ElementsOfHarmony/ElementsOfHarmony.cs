@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using System.Security.Cryptography;
 using System.Threading;
 
 namespace ElementsOfHarmony
@@ -33,7 +32,8 @@ namespace ElementsOfHarmony
 				}
 				catch (Exception e)
 				{
-					UnityEngine.Debug.LogError($"UnityEngine.StackTraceUtility.ExtractStackTrace()\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+					UnityEngine.Debug.LogError(e.GetType());
+					UnityEngine.Debug.LogError(UnityEngine.StackTraceUtility.ExtractStackTrace());
 					UnityEngine.Debug.LogError($"e.StackTrace\r\n{e.StackTrace}");
 					UnityEngine.Debug.LogError($"e.Message {e.Message}");
 				}
@@ -41,10 +41,12 @@ namespace ElementsOfHarmony
 				try
 				{
 					Settings.ReadOurSettings();
+					Settings.WriteOurSettings();
 				}
 				catch (Exception e)
 				{
-					UnityEngine.Debug.LogError($"UnityEngine.StackTraceUtility.ExtractStackTrace()\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+					UnityEngine.Debug.LogError(e.GetType());
+					UnityEngine.Debug.LogError(UnityEngine.StackTraceUtility.ExtractStackTrace());
 					UnityEngine.Debug.LogError($"e.StackTrace\r\n{e.StackTrace}");
 					UnityEngine.Debug.LogError($"e.Message {e.Message}");
 				}
@@ -69,7 +71,7 @@ namespace ElementsOfHarmony
 					Assembly KinectControl;
 					try
 					{
-						KinectControl = Assembly.Load("KinectControl");
+						KinectControl = Assembly.LoadFrom($"{Assembly_Path}KinectControl.dll");
 						KinectControl.GetType("ElementsOfHarmony.KinectControl")
 							.GetMethod("Init", BindingFlags.Public | BindingFlags.Static)
 							.Invoke(null, Array.Empty<object>());
@@ -84,7 +86,7 @@ namespace ElementsOfHarmony
 								int result = Log.MessageBox(IntPtr.Zero,
 									"Unable to start `Elements of Harmony -> Loyalty -> Kinect Control` module, because Kinect20.dll was not found.\r\n" +
 									"Please install Kinect V2 Runtime (or SDK) before running this module.\r\n" +
-									"Would you like to go to the download page?",
+									"Would you like to go to the download page for Kinect V2 Runtime?",
 									"Unable to load Kinect V2 library", Log.MB_YESNO | Log.MB_ICONWARNING);
 								if (result == Log.IDYES)
 								{
@@ -97,7 +99,11 @@ namespace ElementsOfHarmony
 			}
 		}
 
-		public static bool IsAMBA => UnityEngine.Application.productName == "MLP";
-		public static bool IsAZHM => false; // wait for the game to come out
+		public static bool IsAMBA => UnityEngine.Application.companyName == "Melbot Studios" && UnityEngine.Application.productName == "MLP";
+		public static bool IsAZHM => UnityEngine.Application.companyName == "DrakharStudio" && UnityEngine.Application.productName == "MyLittlePonyZephyrHeights";
+
+		public static string Assembly_Path =
+			IsAMBA ? "MyLittlePonyZephyrHeights_Data/Managed/" :
+			IsAZHM ? "MyLittlePonyZephyrHeights_Data/Managed/" : "";
 	}
 }

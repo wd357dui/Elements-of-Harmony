@@ -1,5 +1,7 @@
 ﻿using HarmonyLib;
 using System;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using UnityEngine;
@@ -35,9 +37,57 @@ namespace ElementsOfHarmony
 				// apply all of our patch procedures using Harmony API
 				Harmony element = new Harmony($"{typeof(DirectXHook).FullName}");
 				int Num = 0;
+				if (ElementsOfHarmony.IsAMBA)
+				{
+					Assembly ElementsOfHarmony_AMBA =
+						AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(A => A.GetName().Name == "ElementsOfHarmony.AMBA") ??
+						Assembly.LoadFrom("MLP_Data/Managed/ElementsOfHarmony.AMBA.dll");
+					if (ElementsOfHarmony_AMBA.GetType("ElementsOfHarmony.AMBA.DirectXHook") is Type DirectXHook_AMBA)
+					{
+						if (DirectXHook_AMBA.GetMethod("Init") is MethodInfo InitMethod)
+						{
+							InitMethod.Invoke(null, Array.Empty<object>());
+						}
+						Num = 0;
+						foreach (var Patch in DirectXHook_AMBA.GetNestedTypes())
+						{
+							new PatchClassProcessor(element, Patch).Patch();
+							Num++;
+						}
+						if (Num > 0)
+						{
+							Log.Message($"Harmony patch for {DirectXHook_AMBA.FullName} successful - {Num} Patches");
+						}
+					}
+				}
+				if (ElementsOfHarmony.IsAZHM)
+				{
+					Assembly ElementsOfHarmony_AZHM =
+						AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(A => A.GetName().Name == "ElementsOfHarmony.AZHM") ??
+						Assembly.LoadFrom("MyLittlePonyZephyrHeights_Data/Managed/ElementsOfHarmony.AZHM.dll");
+					if (ElementsOfHarmony_AZHM.GetType("ElementsOfHarmony.AZHM.DirectXHook") is Type DirectXHook_AZHM)
+					{
+						if (DirectXHook_AZHM.GetMethod("Init") is MethodInfo InitMethod)
+						{
+							InitMethod.Invoke(null, Array.Empty<object>());
+						}
+						Num = 0;
+						foreach (var Patch in DirectXHook_AZHM.GetNestedTypes())
+						{
+							new PatchClassProcessor(element, Patch).Patch();
+							Num++;
+						}
+						if (Num > 0)
+						{
+							Log.Message($"Harmony patch for {DirectXHook_AZHM.FullName} successful - {Num} Patches");
+						}
+					}
+				}
+
+				Num = 0;
 				foreach (var Patch in typeof(RenderHooks).GetNestedTypes())
 				{
-					element.CreateClassProcessor(Patch).Patch();
+					new PatchClassProcessor(element, Patch).Patch();
 					Num++;
 				}
 				if (Num > 0)
@@ -180,13 +230,12 @@ namespace ElementsOfHarmony
 
 		public static class RenderHooks
 		{
-			[HarmonyPatch(typeof(Volume))]
-			[HarmonyPatch(methodName: "profileRef", methodType: MethodType.Getter)]
+			[HarmonyPatch(typeof(Volume), methodName: "profileRef", methodType: MethodType.Getter)]
 			public static class VolumnProfile_profileRef_getter
 			{
 				public static void Postfix(Volume __instance, VolumeProfile __result)
 				{
-					if (__instance.isGlobal)
+					if (__instance.IsGlobal())
 					{
 						if (UpdateVolumeFrameworkPatch.NewGlobalVolumeProfile != null &&
 							!ReferenceEquals(UpdateVolumeFrameworkPatch.NewGlobalVolumeProfile, __result))
@@ -213,12 +262,11 @@ namespace ElementsOfHarmony
 				}
 			}
 
-			[HarmonyPatch(typeof(UniversalRenderPipeline))]
-			[HarmonyPatch("UpdateVolumeFramework")]
+			[HarmonyPatch(typeof(UniversalRenderPipeline), methodName: "UpdateVolumeFramework")]
 			public static class UpdateVolumeFrameworkPatch
 			{
-				public static GameObject NewGlobalVolumeGameObject;
-				public static VolumeProfile NewGlobalVolumeProfile;
+				public static GameObject? NewGlobalVolumeGameObject;
+				public static VolumeProfile? NewGlobalVolumeProfile;
 				public static void Postfix()
 				{
 					if (URP.FabricateNewGlobalVolumeProfile &&
@@ -233,7 +281,7 @@ namespace ElementsOfHarmony
 
 						Volume NewGlobalVolume = NewGlobalVolumeGameObject.AddComponent<Volume>();
 						NewGlobalVolume.name = nameof(NewGlobalVolume);
-						NewGlobalVolume.isGlobal = true;
+						NewGlobalVolume.IsGlobal(true);
 						NewGlobalVolume.profile = NewGlobalVolumeProfile = ScriptableObject.CreateInstance<VolumeProfile>();
 						NewGlobalVolumeProfile.name = nameof(NewGlobalVolumeProfile);
 						Log.Message($"fabricated a new global volume profile - " +
@@ -327,7 +375,7 @@ namespace ElementsOfHarmony
 						}
 						Log.Message($"NewColorAdjustments.active={NewColorAdjustments.active}");
 
-						void OnActiveSceneChanged(Scene Old, Scene New)
+						static void OnActiveSceneChanged(Scene Old, Scene New)
 						{
 							SceneManager.MoveGameObjectToScene(NewGlobalVolumeGameObject, New);
 							UnityEngine.Object.DontDestroyOnLoad(NewGlobalVolumeGameObject);
@@ -366,9 +414,12 @@ namespace ElementsOfHarmony
 			}
 			if (VSyncInterval != null) QualitySettings.vSyncCount = VSyncInterval.Value;
 			if (TargetFrameRate != null) Application.targetFrameRate = TargetFrameRate.Value;
+
+			// Obsolete in AZHM's Unity version but is still usable
 			Screen.SetResolution(Width ?? Screen.width, Height ?? Screen.height,
 				Settings.DirectXHook.FullScreenMode ?? Screen.fullScreenMode,
 				RefreshRate ?? 0);
+
 			SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
 		};
 
@@ -448,17 +499,17 @@ namespace ElementsOfHarmony
 			}
 		}
 
-		public static event Action SwapChainShouldRelease;
-		public static event Action SwapChainCreating;
-		public static event Action SwapChainCreated;
-		public static event Action SwapChainForHwndCreating;
-		public static event Action SwapChainForHwndCreated;
-		public static event Action SwapChainPresenting;
-		public static event Action SwapChainPresented;
-		public static event Action SwapChain1Presenting;
-		public static event Action SwapChain1Presented;
+		public static event Action? SwapChainShouldRelease;
+		public static event Action? SwapChainCreating;
+		public static event Action? SwapChainCreated;
+		public static event Action? SwapChainForHwndCreating;
+		public static event Action? SwapChainForHwndCreated;
+		public static event Action? SwapChainPresenting;
+		public static event Action? SwapChainPresented;
+		public static event Action? SwapChain1Presenting;
+		public static event Action? SwapChain1Presented;
 
-		public static event Action<IntPtr> OverlayDraw;
+		public static event Action<IntPtr>? OverlayDraw;
 
 		public const byte OpCode_jmp = 0xE9;
 		public const uint Discord = 0xD15C03D;
@@ -776,12 +827,12 @@ namespace ElementsOfHarmony
 				public IntPtr _LocalFullscreenDesc;
 
 				[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006: (Naming rule violation)", Justification = "This is intentional")]
-				public IntPtr pFullscreenDesc
+				public readonly IntPtr pFullscreenDesc
 				{
 					get => Marshal.ReadIntPtr(_pFullscreenDesc);
 					set => Marshal.WriteIntPtr(_pFullscreenDesc, value);
 				}
-				public DXGI_SWAP_CHAIN_FULLSCREEN_DESC? OriginalFullscreenDesc
+				public readonly DXGI_SWAP_CHAIN_FULLSCREEN_DESC? OriginalFullscreenDesc
 				{
 					get
 					{
@@ -795,7 +846,7 @@ namespace ElementsOfHarmony
 						}
 					}
 				}
-				public DXGI_SWAP_CHAIN_FULLSCREEN_DESC LocalFullscreenDesc
+				public readonly DXGI_SWAP_CHAIN_FULLSCREEN_DESC LocalFullscreenDesc
 				{
 					get => Marshal.PtrToStructure<DXGI_SWAP_CHAIN_FULLSCREEN_DESC>(_LocalFullscreenDesc);
 					set => Marshal.StructureToPtr(value, _LocalFullscreenDesc, false);
@@ -1244,13 +1295,13 @@ namespace ElementsOfHarmony
 		{
 			public int Left, Top, Right, Bottom;
 			public int Width
-			{
-				get => Right - Left;
+			{ 
+				readonly get => Right - Left;
 				set => Right = Left + value;
 			}
 			public int Height
 			{
-				get => Bottom - Top;
+				readonly get => Bottom - Top;
 				set => Bottom = Top + value;
 			}
 		}
@@ -1268,7 +1319,7 @@ namespace ElementsOfHarmony
 			public IntPtr pDirtyRects;
 			public IntPtr pScrollRect;
 			public IntPtr pScrollOffset;
-			public NativeArrayAccess<RECT>? DirtyRects
+			public readonly NativeArrayAccess<RECT>? DirtyRects
 			{
 				get
 				{
@@ -1284,7 +1335,7 @@ namespace ElementsOfHarmony
 			}
 			public RECT? ScrollRect
 			{
-				get
+				readonly get
 				{
 					if (pScrollRect != IntPtr.Zero)
 					{
@@ -1304,7 +1355,7 @@ namespace ElementsOfHarmony
 			}
 			public POINT? ScrollOffset
 			{
-				get
+				readonly get
 				{
 					if (pScrollRect != IntPtr.Zero)
 					{

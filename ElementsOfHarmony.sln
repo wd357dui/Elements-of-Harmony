@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElementsOfHarmony", "ElementsOfHarmony\ElementsOfHarmony.csproj", "{91F38739-5BF2-4BD9-95B0-57D5B2809717}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{05946EF0-6CF5-4B9A-A6EE-326163C31039}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localization", "{D427F97A-4561-4A35-8950-3E84A11524A8}"
@@ -871,7 +869,39 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "zh-CN", "zh-CN", "{EE1E8F6B
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXHook", "DirectXHook\DirectXHook.vcxproj", "{2394D283-4A25-401E-8B5E-91FE65032317}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectControl", "KinectControl\KinectControl.csproj", "{15223734-4633-40AE-A116-50C15BE431E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElementsOfHarmony", "ElementsOfHarmony\ElementsOfHarmony.csproj", "{279E7FA1-39AE-46E1-AF14-394FAC5F1853}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElementsOfHarmony.AMBA", "ElementsOfHarmony.AMBA\ElementsOfHarmony.AMBA.csproj", "{C7FDBFF2-0991-4933-841F-A6D2D720FE97}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElementsOfHarmony.MelonLoaderReference", "ElementsOfHarmony.MelonLoaderReference\ElementsOfHarmony.MelonLoaderReference.csproj", "{885B376D-B474-48FF-9998-C663F2543A6E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElementsOfHarmony.KinectControl", "ElementsOfHarmony.KinectControl\ElementsOfHarmony.KinectControl.csproj", "{D1716C72-DB3E-4AC1-98AE-FF516DD0FC35}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElementsOfHarmony.KinectControl.AMBA", "ElementsOfHarmony.KinectControl.AMBA\ElementsOfHarmony.KinectControl.AMBA.csproj", "{A70A4BB1-A162-4539-9A04-B04133E08056}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElementsOfHarmony.AZHM", "ElementsOfHarmony.AZHM\ElementsOfHarmony.AZHM.csproj", "{079BB346-777D-4E16-892C-B5620250D701}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElementsOfHarmony.KinectControl.AZHM", "ElementsOfHarmony.KinectControl.AZHM\ElementsOfHarmony.KinectControl.AZHM.csproj", "{D7F07F62-0309-4E25-80FD-F85A85F829F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "File Copy Script", "File Copy Script", "{0485FC13-6E30-4A74-AC33-4E84F7A81A6C}"
+	ProjectSection(SolutionItems) = preProject
+		File Copy Script\MelonLoader.ps1 = File Copy Script\MelonLoader.ps1
+		File Copy Script\Standalone.ps1 = File Copy Script\Standalone.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assembly Load Patch", "Assembly Load Patch", "{FC9288EB-C9DD-4029-A486-D6CE4ABFD439}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AMBA", "AMBA", "{8F641D79-AA5C-41EF-B507-D756EE99F088}"
+	ProjectSection(SolutionItems) = preProject
+		Assembly Load Patch\AMBA\RuntimeInitializeOnLoads.json = Assembly Load Patch\AMBA\RuntimeInitializeOnLoads.json
+		Assembly Load Patch\AMBA\ScriptingAssemblies.json = Assembly Load Patch\AMBA\ScriptingAssemblies.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AZHM", "AZHM", "{0DD9EF20-753A-4DD4-A512-3E72DD7B2347}"
+	ProjectSection(SolutionItems) = preProject
+		Assembly Load Patch\AZHM\RuntimeInitializeOnLoads.json = Assembly Load Patch\AZHM\RuntimeInitializeOnLoads.json
+		Assembly Load Patch\AZHM\ScriptingAssemblies.json = Assembly Load Patch\AZHM\ScriptingAssemblies.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -879,18 +909,38 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Debug|x64.ActiveCfg = Debug|x64
-		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Debug|x64.Build.0 = Debug|x64
-		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Release|x64.ActiveCfg = Release|x64
-		{91F38739-5BF2-4BD9-95B0-57D5B2809717}.Release|x64.Build.0 = Release|x64
 		{2394D283-4A25-401E-8B5E-91FE65032317}.Debug|x64.ActiveCfg = Debug|x64
 		{2394D283-4A25-401E-8B5E-91FE65032317}.Debug|x64.Build.0 = Debug|x64
 		{2394D283-4A25-401E-8B5E-91FE65032317}.Release|x64.ActiveCfg = Release|x64
 		{2394D283-4A25-401E-8B5E-91FE65032317}.Release|x64.Build.0 = Release|x64
-		{15223734-4633-40AE-A116-50C15BE431E0}.Debug|x64.ActiveCfg = Debug|x64
-		{15223734-4633-40AE-A116-50C15BE431E0}.Debug|x64.Build.0 = Debug|x64
-		{15223734-4633-40AE-A116-50C15BE431E0}.Release|x64.ActiveCfg = Release|x64
-		{15223734-4633-40AE-A116-50C15BE431E0}.Release|x64.Build.0 = Release|x64
+		{279E7FA1-39AE-46E1-AF14-394FAC5F1853}.Debug|x64.ActiveCfg = Debug|x64
+		{279E7FA1-39AE-46E1-AF14-394FAC5F1853}.Debug|x64.Build.0 = Debug|x64
+		{279E7FA1-39AE-46E1-AF14-394FAC5F1853}.Release|x64.ActiveCfg = Release|x64
+		{279E7FA1-39AE-46E1-AF14-394FAC5F1853}.Release|x64.Build.0 = Release|x64
+		{C7FDBFF2-0991-4933-841F-A6D2D720FE97}.Debug|x64.ActiveCfg = Debug|x64
+		{C7FDBFF2-0991-4933-841F-A6D2D720FE97}.Debug|x64.Build.0 = Debug|x64
+		{C7FDBFF2-0991-4933-841F-A6D2D720FE97}.Release|x64.ActiveCfg = Release|x64
+		{C7FDBFF2-0991-4933-841F-A6D2D720FE97}.Release|x64.Build.0 = Release|x64
+		{885B376D-B474-48FF-9998-C663F2543A6E}.Debug|x64.ActiveCfg = Debug|x64
+		{885B376D-B474-48FF-9998-C663F2543A6E}.Debug|x64.Build.0 = Debug|x64
+		{885B376D-B474-48FF-9998-C663F2543A6E}.Release|x64.ActiveCfg = Release|x64
+		{885B376D-B474-48FF-9998-C663F2543A6E}.Release|x64.Build.0 = Release|x64
+		{D1716C72-DB3E-4AC1-98AE-FF516DD0FC35}.Debug|x64.ActiveCfg = Debug|x64
+		{D1716C72-DB3E-4AC1-98AE-FF516DD0FC35}.Debug|x64.Build.0 = Debug|x64
+		{D1716C72-DB3E-4AC1-98AE-FF516DD0FC35}.Release|x64.ActiveCfg = Release|x64
+		{D1716C72-DB3E-4AC1-98AE-FF516DD0FC35}.Release|x64.Build.0 = Release|x64
+		{A70A4BB1-A162-4539-9A04-B04133E08056}.Debug|x64.ActiveCfg = Debug|x64
+		{A70A4BB1-A162-4539-9A04-B04133E08056}.Debug|x64.Build.0 = Debug|x64
+		{A70A4BB1-A162-4539-9A04-B04133E08056}.Release|x64.ActiveCfg = Release|x64
+		{A70A4BB1-A162-4539-9A04-B04133E08056}.Release|x64.Build.0 = Release|x64
+		{079BB346-777D-4E16-892C-B5620250D701}.Debug|x64.ActiveCfg = Debug|x64
+		{079BB346-777D-4E16-892C-B5620250D701}.Debug|x64.Build.0 = Debug|x64
+		{079BB346-777D-4E16-892C-B5620250D701}.Release|x64.ActiveCfg = Release|x64
+		{079BB346-777D-4E16-892C-B5620250D701}.Release|x64.Build.0 = Release|x64
+		{D7F07F62-0309-4E25-80FD-F85A85F829F6}.Debug|x64.ActiveCfg = Debug|x64
+		{D7F07F62-0309-4E25-80FD-F85A85F829F6}.Debug|x64.Build.0 = Debug|x64
+		{D7F07F62-0309-4E25-80FD-F85A85F829F6}.Release|x64.ActiveCfg = Release|x64
+		{D7F07F62-0309-4E25-80FD-F85A85F829F6}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -903,6 +953,8 @@ Global
 		{5A546965-0A11-4D7C-9F0C-801AA6FC6FB7} = {91849B45-F677-46DA-8AC8-5F3DA32C3C05}
 		{595768C5-9C2E-438F-8DD6-D79623807F65} = {D427F97A-4561-4A35-8950-3E84A11524A8}
 		{EE1E8F6B-5B46-4A5B-9E79-C09851FE9DBE} = {595768C5-9C2E-438F-8DD6-D79623807F65}
+		{8F641D79-AA5C-41EF-B507-D756EE99F088} = {FC9288EB-C9DD-4029-A486-D6CE4ABFD439}
+		{0DD9EF20-753A-4DD4-A512-3E72DD7B2347} = {FC9288EB-C9DD-4029-A486-D6CE4ABFD439}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22A4A59C-B668-4B2B-93D8-06A5D6B0FF85}

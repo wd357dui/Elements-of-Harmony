@@ -1,0 +1,292 @@
+{
+    "root": [
+        {
+            "assemblyName": "Assembly-CSharp",
+            "nameSpace": "DrakharStudio.Engine",
+            "className": "Coroutiner",
+            "methodName": "RunOnStart",
+            "loadTypes": 4,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Assembly-CSharp",
+            "nameSpace": "Doozy.Engine",
+            "className": "Coroutiner",
+            "methodName": "RunOnStart",
+            "loadTypes": 4,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Assembly-CSharp",
+            "nameSpace": "Doozy.Engine",
+            "className": "GameEventManager",
+            "methodName": "RunOnStart",
+            "loadTypes": 4,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Assembly-CSharp",
+            "nameSpace": "Doozy.Engine.UI",
+            "className": "UIPopupManager",
+            "methodName": "RunOnStart",
+            "loadTypes": 4,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Assembly-CSharp",
+            "nameSpace": "Doozy.Engine.UI.Input",
+            "className": "BackButton",
+            "methodName": "RunOnStart",
+            "loadTypes": 4,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Assembly-CSharp",
+            "nameSpace": "Doozy.Engine.Touchy",
+            "className": "TouchDetector",
+            "methodName": "RunOnStart",
+            "loadTypes": 4,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Assembly-CSharp",
+            "nameSpace": "Doozy.Engine.Themes",
+            "className": "ThemeManager",
+            "methodName": "RunOnStart",
+            "loadTypes": 4,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Assembly-CSharp",
+            "nameSpace": "Doozy.Engine.Soundy",
+            "className": "SoundyManager",
+            "methodName": "RunOnStart",
+            "loadTypes": 4,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Assembly-CSharp",
+            "nameSpace": "Doozy.Engine.SceneManagement",
+            "className": "SceneDirector",
+            "methodName": "RunOnStart",
+            "loadTypes": 4,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Assembly-CSharp",
+            "nameSpace": "Doozy.Engine.Orientation",
+            "className": "OrientationDetector",
+            "methodName": "RunOnStart",
+            "loadTypes": 4,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Cinemachine",
+            "nameSpace": "Cinemachine",
+            "className": "CinemachineStoryboard",
+            "methodName": "InitializeModule",
+            "loadTypes": 0,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Cinemachine",
+            "nameSpace": "Cinemachine",
+            "className": "CinemachineCore",
+            "methodName": "InitializeModule",
+            "loadTypes": 0,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Cinemachine",
+            "nameSpace": "Cinemachine",
+            "className": "UpdateTracker",
+            "methodName": "InitializeModule",
+            "loadTypes": 0,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Cinemachine",
+            "nameSpace": "Cinemachine",
+            "className": "CinemachineImpulseManager",
+            "methodName": "InitializeModule",
+            "loadTypes": 0,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Cinemachine",
+            "nameSpace": "Cinemachine.PostFX",
+            "className": "CinemachineVolumeSettings",
+            "methodName": "InitializeModule",
+            "loadTypes": 0,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Coffee.SoftMaskForUGUI",
+            "nameSpace": "Coffee.UISoftMask",
+            "className": "GraphicConnector",
+            "methodName": "Init",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Coffee.UIParticle",
+            "nameSpace": "Coffee.UIExtensions",
+            "className": "UIParticleUpdater",
+            "methodName": "InitializeOnLoad",
+            "loadTypes": 0,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "com.saladgamer.volumetriclightbeam",
+            "nameSpace": "VLB",
+            "className": "Config",
+            "methodName": "OnStartup",
+            "loadTypes": 0,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "com.saladgamer.volumetriclightbeam",
+            "nameSpace": "VLB",
+            "className": "Noise3D",
+            "methodName": "OnStartUp",
+            "loadTypes": 0,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "I2Localization",
+            "nameSpace": "I2.Loc",
+            "className": "LocalizeTarget_TextMeshPro_Label",
+            "methodName": "AutoRegister",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "I2Localization",
+            "nameSpace": "I2.Loc",
+            "className": "LocalizeTarget_TextMeshPro_UGUI",
+            "methodName": "AutoRegister",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "I2Localization",
+            "nameSpace": "I2.Loc",
+            "className": "LocalizeTarget_UnityStandard_AudioSource",
+            "methodName": "AutoRegister",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "I2Localization",
+            "nameSpace": "I2.Loc",
+            "className": "LocalizeTarget_UnityStandard_Child",
+            "methodName": "AutoRegister",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "I2Localization",
+            "nameSpace": "I2.Loc",
+            "className": "LocalizeTarget_UnityStandard_GUIText",
+            "methodName": "AutoRegister",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "I2Localization",
+            "nameSpace": "I2.Loc",
+            "className": "LocalizeTarget_UnityStandard_MeshRenderer",
+            "methodName": "AutoRegister",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "I2Localization",
+            "nameSpace": "I2.Loc",
+            "className": "LocalizeTarget_UnityStandard_Prefab",
+            "methodName": "AutoRegister",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "I2Localization",
+            "nameSpace": "I2.Loc",
+            "className": "LocalizeTarget_UnityStandard_SpriteRenderer",
+            "methodName": "AutoRegister",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "I2Localization",
+            "nameSpace": "I2.Loc",
+            "className": "LocalizeTarget_UnityStandard_TextMesh",
+            "methodName": "AutoRegister",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "I2Localization",
+            "nameSpace": "I2.Loc",
+            "className": "LocalizeTarget_UnityUI_Image",
+            "methodName": "AutoRegister",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "I2Localization",
+            "nameSpace": "I2.Loc",
+            "className": "LocalizeTarget_UnityUI_RawImage",
+            "methodName": "AutoRegister",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "I2Localization",
+            "nameSpace": "I2.Loc",
+            "className": "LocalizeTarget_UnityUI_Text",
+            "methodName": "AutoRegister",
+            "loadTypes": 1,
+            "isUnityClass": false
+        },
+        {
+            "assemblyName": "Unity.MemoryProfiler",
+            "nameSpace": "Unity.MemoryProfiler",
+            "className": "MetadataInjector",
+            "methodName": "PlayerInitMetadata",
+            "loadTypes": 3,
+            "isUnityClass": true
+        },
+        {
+            "assemblyName": "Unity.RenderPipelines.Core.Runtime",
+            "nameSpace": "UnityEngine.Experimental.Rendering",
+            "className": "XRSystem",
+            "methodName": "XRSystemInit",
+            "loadTypes": 3,
+            "isUnityClass": true
+        },
+        {
+            "assemblyName": "Unity.RenderPipelines.Core.Runtime",
+            "nameSpace": "UnityEngine.Rendering",
+            "className": "DebugUpdater",
+            "methodName": "RuntimeInit",
+            "loadTypes": 0,
+            "isUnityClass": true
+        },
+        {
+            "assemblyName": "Unity.RenderPipelines.Universal.Runtime",
+            "nameSpace": "VolumetricFogAndMist2",
+            "className": "VolumetricFog",
+            "methodName": "Init",
+            "loadTypes": 4,
+            "isUnityClass": true
+        },
+        {
+            "assemblyName": "ElementsOfHarmony.dll",
+            "nameSpace": "ElementsOfHarmony",
+            "className": "ElementsOfHarmony",
+            "methodName": "Exist",
+            "loadTypes": 2,
+            "isUnityClass": false
+        }
+    ]
+}

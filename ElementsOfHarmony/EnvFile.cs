@@ -9,8 +9,8 @@ namespace ElementsOfHarmony
 	{
 		private class KeyValuePair
 		{
-			public string Name;
-			public string Value;
+			public string? Name;
+			public string? Value;
 		}
 
 		private readonly List<KeyValuePair> keyValuePairs = new List<KeyValuePair>();
@@ -25,7 +25,7 @@ namespace ElementsOfHarmony
 				string[] lines = File.ReadAllLines(Path);
 				foreach (string line in lines)
 				{
-					string[] parts = line.Split('=');
+					string[] parts = line.Split(new char[] { '=' });
 					if (parts.Length >= 2)
 					{
 						string name = parts[0].Trim();
@@ -43,7 +43,7 @@ namespace ElementsOfHarmony
 			}
 		}
 
-		public string ReadString(string name, string defaultValue = null)
+		public string? ReadString(string name, string? defaultValue = null)
 		{
 			var keyValuePair = keyValuePairs.FirstOrDefault(x => x.Name == name);
 			if (keyValuePair != null)

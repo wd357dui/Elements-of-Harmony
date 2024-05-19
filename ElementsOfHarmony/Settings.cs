@@ -8,7 +8,7 @@ namespace ElementsOfHarmony
 {
 	public static class Settings
 	{
-		private static EnvFile Config;
+		private static EnvFile? Config;
 
 		public static bool Debug = true;
 		public static bool DebugTCPEnabled = false;
@@ -56,7 +56,7 @@ namespace ElementsOfHarmony
 					}
 					public static class ColorFilter
 					{
-						public static string Color = null;
+						public static string? Color = null;
 						public static bool? HDR = null;
 						public static bool? ShowAlpha = null;
 						public static bool? ShowEyeDropper = null;
@@ -81,7 +81,7 @@ namespace ElementsOfHarmony
 		{
 			public static class KinectControl
 			{
-				public static bool Enabled = true;
+				public static bool Enabled = false;
 			}
 		}
 
@@ -96,17 +96,17 @@ namespace ElementsOfHarmony
 			// nowadays I use this to store all kinds of settings
 
 			Config = new EnvFile("Elements of Harmony/Settings.txt"); // thanks Ponywka for writing `EnvFile` by the way
-			OurSelectedLanguageOverride_Internal = Config.ReadString("OurSelectedLanguageOverride", OurSelectedLanguageOverride_Internal);
-			OurFallbackLanguage_Internal = Config.ReadString("OurFallbackLanguage", OurFallbackLanguage_Internal);
+			OurSelectedLanguageOverride_Internal = Config.ReadString("OurSelectedLanguageOverride", OurSelectedLanguageOverride_Internal)!;
+			OurFallbackLanguage_Internal = Config.ReadString("OurFallbackLanguage", OurFallbackLanguage_Internal)!;
 
 			Debug = Config.ReadBoolean("Debug", Debug);
 
 			DebugTCPEnabled = Config.ReadBoolean("Debug.TCP.Enabled", DebugTCPEnabled);
-			DebugTCPIP = Config.ReadString("Debug.TCP.IP", DebugTCPIP);
+			DebugTCPIP = Config.ReadString("Debug.TCP.IP", DebugTCPIP)!;
 			DebugTCPPort = Config.ReadInteger("Debug.TCP.Port", DebugTCPPort);
 
 			DebugLog = Config.ReadBoolean("Debug.Log.Enabled", DebugLog);
-			DebugLogFile = Config.ReadString("Debug.Log.File", DebugLogFile);
+			DebugLogFile = Config.ReadString("Debug.Log.File", DebugLogFile)!;
 
 			void ReadSettingsForClass(Type ClassType)
 			{
@@ -123,37 +123,37 @@ namespace ElementsOfHarmony
 					{
 						if (Field.FieldType == typeof(bool?))
 						{
-							Field.SetValue(null, Config.ReadBooleanOptional($"{ClassName}.{Field.Name}"));
+							Field.SetValue(null, Config!.ReadBooleanOptional($"{ClassName}.{Field.Name}"));
 						}
 						else if (Field.FieldType == typeof(int?))
 						{
-							Field.SetValue(null, Config.ReadIntegerOptional($"{ClassName}.{Field.Name}"));
+							Field.SetValue(null, Config!.ReadIntegerOptional($"{ClassName}.{Field.Name}"));
 						}
 						else if (Field.FieldType == typeof(float?))
 						{
-							Field.SetValue(null, Config.ReadFloatOptional($"{ClassName}.{Field.Name}"));
+							Field.SetValue(null, Config!.ReadFloatOptional($"{ClassName}.{Field.Name}"));
 						}
 						else if (Field.FieldType == typeof(string))
 						{
-							Field.SetValue(null, Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null) as string));
+							Field.SetValue(null, Config!.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null) as string));
 						}
 						else if (Field.FieldType == typeof(bool))
 						{
-							Field.SetValue(null, Config.ReadBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null)));
+							Field.SetValue(null, Config!.ReadBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null)));
 						}
 						else if (Field.FieldType == typeof(int))
 						{
-							Field.SetValue(null, Config.ReadInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null)));
+							Field.SetValue(null, Config!.ReadInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null)));
 						}
 						else if (Field.FieldType == typeof(float))
 						{
-							Field.SetValue(null, Config.ReadFloat($"{ClassName}.{Field.Name}", (int)Field.GetValue(null)));
+							Field.SetValue(null, Config!.ReadFloat($"{ClassName}.{Field.Name}", (float)Field.GetValue(null)));
 						}
 						else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
 						{
 							Type EnumType = Field.FieldType.IsEnum ? Field.FieldType : Nullable.GetUnderlyingType(Field.FieldType);
 							string[] EnumNames = Enum.GetNames(EnumType);
-							string Read = Config.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
+							string? Read = Config!.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
 							if (Read != null &&
 								EnumNames.FirstOrDefault(N => N.Equals(Read, StringComparison.InvariantCultureIgnoreCase))
 								is string MatchedEnumName)
@@ -178,19 +178,19 @@ namespace ElementsOfHarmony
 		}
 		public static void WriteOurSettings()
 		{
-			Config.WriteString("OurSelectedLanguageOverride", OurSelectedLanguageOverride);
-			Config.WriteString("OurFallbackLanguage", OurFallbackLanguage);
+			Config!.WriteString("OurSelectedLanguageOverride", OurSelectedLanguageOverride);
+			Config!.WriteString("OurFallbackLanguage", OurFallbackLanguage);
 
-			Config.WriteBoolean("Debug", Debug);
+			Config!.WriteBoolean("Debug", Debug);
 
-			Config.WriteBoolean("Debug.TCP.Enabled", DebugTCPEnabled);
-			Config.WriteString("Debug.TCP.IP", DebugTCPIP);
-			Config.WriteInteger("Debug.TCP.Port", DebugTCPPort);
+			Config!.WriteBoolean("Debug.TCP.Enabled", DebugTCPEnabled);
+			Config!.WriteString("Debug.TCP.IP", DebugTCPIP);
+			Config!.WriteInteger("Debug.TCP.Port", DebugTCPPort);
 
-			Config.WriteBoolean("Debug.Log.Enabled", DebugLog);
-			Config.WriteString("Debug.Log.File", DebugLogFile);
+			Config!.WriteBoolean("Debug.Log.Enabled", DebugLog);
+			Config!.WriteString("Debug.Log.File", DebugLogFile);
 
-			void WriteSettingsForClass(Type ClassType)
+			static void WriteSettingsForClass(Type ClassType)
 			{
 				string ClassName = ClassType.Name;
 				Type RootClass = ClassType;
@@ -205,35 +205,35 @@ namespace ElementsOfHarmony
 					{
 						if (Field.FieldType == typeof(bool?))
 						{
-							Config.WriteBooleanOptional($"{ClassName}.{Field.Name}", (bool?)Field.GetValue(null));
+							Config!.WriteBooleanOptional($"{ClassName}.{Field.Name}", (bool?)Field.GetValue(null));
 						}
 						else if (Field.FieldType == typeof(int?))
 						{
-							Config.WriteIntegerOptional($"{ClassName}.{Field.Name}", (int?)Field.GetValue(null));
+							Config!.WriteIntegerOptional($"{ClassName}.{Field.Name}", (int?)Field.GetValue(null));
 						}
 						else if (Field.FieldType == typeof(float?))
 						{
-							Config.WriteFloatOptional($"{ClassName}.{Field.Name}", (int?)Field.GetValue(null));
+							Config!.WriteFloatOptional($"{ClassName}.{Field.Name}", (float?)Field.GetValue(null));
 						}
 						else if (Field.FieldType == typeof(string))
 						{
-							Config.WriteString($"{ClassName}.{Field.Name}", (string)Field.GetValue(null));
+							Config!.WriteString($"{ClassName}.{Field.Name}", (string)Field.GetValue(null));
 						}
 						else if (Field.FieldType == typeof(bool))
 						{
-							Config.WriteBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null));
+							Config!.WriteBoolean($"{ClassName}.{Field.Name}", (bool)Field.GetValue(null));
 						}
 						else if (Field.FieldType == typeof(int))
 						{
-							Config.WriteInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null));
+							Config!.WriteInteger($"{ClassName}.{Field.Name}", (int)Field.GetValue(null));
 						}
 						else if (Field.FieldType == typeof(float))
 						{
-							Config.WriteFloat($"{ClassName}.{Field.Name}", (int)Field.GetValue(null));
+							Config!.WriteFloat($"{ClassName}.{Field.Name}", (float)Field.GetValue(null));
 						}
 						else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
 						{
-							Config.WriteString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
+							Config!.WriteString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString() ?? "");
 						}
 					}
 					catch { }

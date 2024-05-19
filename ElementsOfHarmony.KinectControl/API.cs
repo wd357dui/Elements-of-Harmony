@@ -116,10 +116,8 @@ namespace Microsoft.Kinect
 							{
 								Marshal.ThrowExceptionForHR(GetFrameArrivedEventData((IntPtr)Waitable, &pEventArgs));
 							}
-							using (BodyFrameArrivedEventArgs EventArgs = new BodyFrameArrivedEventArgs(pEventArgs))
-							{
-								FrameArrived?.Invoke(this, EventArgs);
-							}
+							using BodyFrameArrivedEventArgs EventArgs = new BodyFrameArrivedEventArgs(pEventArgs);
+							FrameArrived?.Invoke(this, EventArgs);
 						}
 						catch (COMException)
 						{
@@ -171,7 +169,7 @@ namespace Microsoft.Kinect
 		public unsafe delegate int GetFrameArrivedEventDataProc(IntPtr pInstance, IntPtr waitableHandle, IntPtr* eventData);
 		public unsafe int GetFrameArrivedEventData(IntPtr waitableHandle, IntPtr* eventData) => (int)Invoke<GetFrameArrivedEventDataProc>(5, waitableHandle, (IntPtr)eventData);
 
-		public event EventHandler<BodyFrameArrivedEventArgs> FrameArrived;
+		public event EventHandler<BodyFrameArrivedEventArgs>? FrameArrived;
 	}
 
 	public class BodyFrameArrivedEventArgs : Unknown

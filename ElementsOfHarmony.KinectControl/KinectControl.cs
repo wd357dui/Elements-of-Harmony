@@ -1,17 +1,19 @@
 ﻿using HarmonyLib;
 using Microsoft.Kinect;
 using System;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using static ElementsOfHarmony.DirectXHook;
 
-namespace ElementsOfHarmony
+namespace ElementsOfHarmony.KinectControl
 {
 	public static class KinectControl
 	{
-		private static KinectSensor sensor;
-		private static BodyFrameSource source;
-		private static BodyFrameReader reader;
+		private static KinectSensor? sensor;
+		private static BodyFrameSource? source;
+		private static BodyFrameReader? reader;
 		public static void Init()
 		{
 			sensor = KinectSensor.GetDefault();
@@ -23,28 +25,36 @@ namespace ElementsOfHarmony
 			Harmony element = new Harmony($"{typeof(KinectControl).FullName}");
 			if (ElementsOfHarmony.IsAMBA)
 			{
+				Assembly KinectControl_AMBA =
+					AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(A => A.GetName().Name == "ElementsOfHarmony.KinectControl.AMBA") ??
+					Assembly.LoadFrom("MLP_Data/Managed/ElementsOfHarmony.KinectControl.AMBA.dll");
+				Type AMBA = KinectControl_AMBA.GetType("ElementsOfHarmony.KinectControl.AMBA.KinectControl");
 				int Num = 0;
-				foreach (var Patch in typeof(AMBA).GetNestedTypes())
+				foreach (var Patch in AMBA.GetNestedTypes())
 				{
-					element.CreateClassProcessor(Patch).Patch();
+					new PatchClassProcessor(element, Patch).Patch();
 					Num++;
 				}
 				if (Num > 0)
 				{
-					Log.Message($"Harmony patch for {typeof(AMBA).FullName} successful - {Num} Patches");
+					Log.Message($"Harmony patch for {AMBA.FullName} successful - {Num} Patches");
 				}
 			}
 			if (ElementsOfHarmony.IsAZHM)
 			{
+				Assembly KinectControl_AZHM =
+					AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(A => A.GetName().Name == "ElementsOfHarmony.KinectControl.AZHM") ??
+					Assembly.LoadFrom("MyLittlePonyZephyrHeights_Data/Managed/ElementsOfHarmony.KinectControl.AZHM.dll");
+				Type AZHM = KinectControl_AZHM.GetType("ElementsOfHarmony.KinectControl.AZHM.KinectControl");
 				int Num = 0;
-				foreach (var Patch in typeof(AZHM).GetNestedTypes())
+				foreach (var Patch in AZHM.GetNestedTypes())
 				{
-					element.CreateClassProcessor(Patch).Patch();
+					new PatchClassProcessor(element, Patch).Patch();
 					Num++;
 				}
 				if (Num > 0)
 				{
-					Log.Message($"Harmony patch for {typeof(AZHM).FullName} successful - {Num} Patches");
+					Log.Message($"Harmony patch for {AZHM.FullName} successful - {Num} Patches");
 				}
 			}
 
@@ -65,8 +75,9 @@ namespace ElementsOfHarmony
 			reader?.Dispose();
 		}
 
-		private static Body[] Bodies;
-		private static PlayerStatus Player1, Player2;
+		private static Body[]? Bodies;
+
+		public static PlayerStatus? Player1, Player2;
 		private static readonly Color Player1Color = new Color(0.92f, 0.0f, 0.57f, 1.0f);
 		private static readonly Color Player2Color = new Color(0.19f, 0.66f, 0.92f, 1.0f);
 		private const float Highlight = 0.9f;
@@ -77,70 +88,66 @@ namespace ElementsOfHarmony
 
 		private static void Reader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
 		{
-			using (BodyFrameReference reference = e.FrameReference)
+			using BodyFrameReference reference = e.FrameReference;
+			using BodyFrame frame = reference.AcquireFrame();
+			if (frame == null) return;
+			if (Bodies == null || Bodies.Length != source!.BodyCount)
 			{
-				using (BodyFrame frame = reference.AcquireFrame())
+				Bodies = new Body[source!.BodyCount];
+				Player1 = Player2 = null;
+			}
+			frame.GetAndRefreshBodyData(Bodies);
+
+			// invalidate player status if lost track
+			if (Player1?.BodyIndex is int PreviousIndex1 && !Bodies[PreviousIndex1].IsTracked)
+			{
+				Player1 = null;
+			}
+			if (Player2?.BodyIndex is int PreviousIndex2 && !Bodies[PreviousIndex2].IsTracked)
+			{
+				Player2 = null;
+			}
+
+			// select new tracked body
+			if (Player1 == null)
+			{
+				for (int n = 0; n < Bodies.Length; n++)
 				{
-					if (frame == null) return;
-					if (Bodies == null || Bodies.Length != source.BodyCount)
+					if (Bodies[n].IsTracked && n != Player2?.BodyIndex)
 					{
-						Bodies = new Body[source.BodyCount];
-						Player1 = Player2 = null;
-					}
-					frame.GetAndRefreshBodyData(Bodies);
-
-					// invalidate player status if lost track
-					if (Player1?.BodyIndex is int PreviousIndex1 && !Bodies[PreviousIndex1].IsTracked)
-					{
-						Player1 = null;
-					}
-					if (Player2?.BodyIndex is int PreviousIndex2 && !Bodies[PreviousIndex2].IsTracked)
-					{
-						Player2 = null;
-					}
-
-					// select new tracked body
-					if (Player1 == null)
-					{
-						for (int n = 0; n < Bodies.Length; n++)
-						{
-							if (Bodies[n].IsTracked && n != Player2?.BodyIndex)
-							{
-								Player1 = new PlayerStatus(n);
-								break;
-							}
-						}
-					}
-					if (Player2 == null)
-					{
-						for (int n = 0; n < Bodies.Length; n++)
-						{
-							if (Bodies[n].IsTracked && n != Player1?.BodyIndex)
-							{
-								Player2 = new PlayerStatus(n);
-								break;
-							}
-						}
-					}
-
-					if (Player1?.BodyIndex is int Index1) Player1.UpdateHandStatus(Bodies[Index1]);
-					if (Player2?.BodyIndex is int Index2) Player2.UpdateHandStatus(Bodies[Index2]);
-
-					for (int n = 0; n < Bodies.Length; n++)
-					{
-						Bodies[n]?.Dispose();
+						Player1 = new PlayerStatus(n);
+						break;
 					}
 				}
+			}
+			if (Player2 == null)
+			{
+				for (int n = 0; n < Bodies.Length; n++)
+				{
+					if (Bodies[n].IsTracked && n != Player1?.BodyIndex)
+					{
+						Player2 = new PlayerStatus(n);
+						break;
+					}
+				}
+			}
+
+			if (Player1?.BodyIndex is int Index1) Player1.UpdateHandStatus(Bodies[Index1]);
+			if (Player2?.BodyIndex is int Index2) Player2.UpdateHandStatus(Bodies[Index2]);
+
+			for (int n = 0; n < Bodies.Length; n++)
+			{
+				Bodies[n]?.Dispose();
 			}
 		}
 		private static void DirectXHook_OverlayDraw(IntPtr Device)
 		{
-			void DrawPlayerControls(PlayerStatus Player, Color PlayerColor)
+			void DrawPlayerControls(PlayerStatus? Player, Color PlayerColor)
 			{
 				if (Player == null) return;
 				lock (Player)
 				{
-					Action DelayAction = null;
+					Action? DelayAction = null;
 
 					float Scale = (Screen.currentResolution.width / 1920.0f + Screen.currentResolution.height / 1080.0f) / 2;
 					Scale *= Screen.dpi / 96.0f;
@@ -459,377 +466,51 @@ namespace ElementsOfHarmony
 			/// dpad left
 			/// </summary>
 			public bool? Left => LeftThresholdCrossed == null ? (bool?)null :
-				LeftThresholdCrossed == true && LeftStick.Value.x < 0.0f && Math.Abs(LeftStick.Value.x) > Math.Abs(LeftStick.Value.y);
+				LeftThresholdCrossed == true && LeftStick!.Value.x < 0.0f && Math.Abs(LeftStick.Value.x) > Math.Abs(LeftStick.Value.y);
 
 			/// <summary>
 			/// dpad up
 			/// </summary>
 			public bool? Up => LeftThresholdCrossed == null ? (bool?)null :
-				LeftThresholdCrossed == true && LeftStick.Value.y > 0.0f && Math.Abs(LeftStick.Value.x) < Math.Abs(LeftStick.Value.y);
+				LeftThresholdCrossed == true && LeftStick!.Value.y > 0.0f && Math.Abs(LeftStick.Value.x) < Math.Abs(LeftStick.Value.y);
 
 			/// <summary>
 			/// dpad right
 			/// </summary>
 			public bool? Right => LeftThresholdCrossed == null ? (bool?)null :
-				LeftThresholdCrossed == true && LeftStick.Value.x > 0.0f && Math.Abs(LeftStick.Value.x) > Math.Abs(LeftStick.Value.y);
+				LeftThresholdCrossed == true && LeftStick!.Value.x > 0.0f && Math.Abs(LeftStick.Value.x) > Math.Abs(LeftStick.Value.y);
 
 			/// <summary>
 			/// dpad down
 			/// </summary>
 			public bool? Down => LeftThresholdCrossed == null ? (bool?)null :
-				LeftThresholdCrossed == true && LeftStick.Value.y < 0.0f && Math.Abs(LeftStick.Value.x) < Math.Abs(LeftStick.Value.y);
+				LeftThresholdCrossed == true && LeftStick!.Value.y < 0.0f && Math.Abs(LeftStick.Value.x) < Math.Abs(LeftStick.Value.y);
 
 			/// <summary>
 			/// xbox A button
 			/// </summary>
 			public bool? South => RightThresholdCrossed == null ? (bool?)null :
-				RightThresholdCrossed == true && RightStick.Value.y < 0.0f && Math.Abs(RightStick.Value.x) < Math.Abs(RightStick.Value.y);
+				RightThresholdCrossed == true && RightStick!.Value.y < 0.0f && Math.Abs(RightStick.Value.x) < Math.Abs(RightStick.Value.y);
 
 			/// <summary>
 			/// xbox B button
 			/// </summary>
 			public bool? East => RightThresholdCrossed == null ? (bool?)null :
-				RightThresholdCrossed == true && RightStick.Value.x > 0.0f && Math.Abs(RightStick.Value.x) > Math.Abs(RightStick.Value.y);
+				RightThresholdCrossed == true && RightStick!.Value.x > 0.0f && Math.Abs(RightStick.Value.x) > Math.Abs(RightStick.Value.y);
 
 			/// <summary>
 			/// xbox X button (but we're using this as menu button, because the game didn't use the X button and we need a menu button)
 			/// </summary>
 			public bool? West => RightThresholdCrossed == null ? (bool?)null :
-				RightThresholdCrossed == true && RightStick.Value.x < 0.0f && Math.Abs(RightStick.Value.x) > Math.Abs(RightStick.Value.y);
+				RightThresholdCrossed == true && RightStick!.Value.x < 0.0f && Math.Abs(RightStick.Value.x) > Math.Abs(RightStick.Value.y);
 
 			/// <summary>
 			/// xbox Y button
 			/// </summary>
 			public bool? North => RightThresholdCrossed == null ? (bool?)null :
-				RightThresholdCrossed == true && RightStick.Value.y > 0.0f && Math.Abs(RightStick.Value.x) < Math.Abs(RightStick.Value.y);
+				RightThresholdCrossed == true && RightStick!.Value.y > 0.0f && Math.Abs(RightStick.Value.x) < Math.Abs(RightStick.Value.y);
 		}
 
 		public static Vector2 XY(this Vector3 V3) => new Vector2(V3.x, V3.y);
-
-		public static class AMBA
-		{
-			public struct ButtonStatus
-			{
-				public bool? Left, Up, Right, Down,
-					South, East, West, North;
-			}
-			public static ButtonStatus? PreviousPlayer1Status = null, PreviousPlayer2Status = null,
-				CurrentPlayer1Status = null, CurrentPlayer2Status = null;
-			public static int PreviousFrame = -1;
-
-			public static void EnsureFrameUpdate()
-			{
-				if (PreviousFrame != Time.frameCount)
-				{
-					PreviousPlayer1Status = CurrentPlayer1Status;
-					PreviousPlayer2Status = CurrentPlayer2Status;
-
-					ButtonStatus? GetStatus(PlayerStatus Player)
-					{
-						if (Player == null) return null;
-						lock (Player)
-						{
-							return new ButtonStatus()
-							{
-								Left = Player.Left,
-								Up = Player.Up,
-								Right = Player.Right,
-								Down = Player.Down,
-								South = Player.South,
-								East = Player.East,
-								West = Player.West,
-								North = Player.North,
-							};
-						}
-					}
-
-					CurrentPlayer1Status = GetStatus(Player1);
-					CurrentPlayer2Status = GetStatus(Player2);
-
-					PreviousFrame = Time.frameCount;
-				}
-			}
-
-			[HarmonyPatch(typeof(GamePadInput))]
-			[HarmonyPatch("GetAxis")]
-			public static class GetAxisOverride
-			{
-				public static void Postfix(GamePadInput __instance, ref Vector3 __result)
-				{
-					EnsureFrameUpdate();
-					if (__instance is XBOXGamePadInput &&
-						(__instance.index == 0 ? Player1 : __instance.index == 1 ? Player2 : null) is PlayerStatus Player)
-					{
-						lock (Player)
-						{
-							if (Player?.LeftStick is Vector2 Axis)
-							{
-								Axis *= 2.5f; // adjust sensitivity
-								__result.x = Axis.x;
-								__result.z = Axis.y;
-							}
-						}
-					}
-				}
-			}
-
-			[HarmonyPatch(typeof(GamePadInput))]
-			[HarmonyPatch("GetButtonDown")]
-			public static class GetButtonDownOverride
-			{
-				public static void Postfix(ref bool __result, GamePadInput __instance, MLPAction mlpAction)
-				{
-					EnsureFrameUpdate();
-					if (__instance is XBOXGamePadInput &&
-						(__instance.index == 0 ? CurrentPlayer1Status : __instance.index == 1 ? CurrentPlayer2Status : null) is ButtonStatus Current &&
-						(__instance.index == 0 ? PreviousPlayer1Status : __instance.index == 1 ? PreviousPlayer2Status : null) is ButtonStatus Previous)
-					{
-						switch (mlpAction)
-						{
-							case MLPAction.RIGHT:
-								if (Current.Right == true && Previous.Right == false)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.LEFT:
-								if (Current.Left == true && Previous.Left == false)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.UP:
-								if (Current.Up == true && Previous.Up == false)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.DOWN:
-								if (Current.Down == true && Previous.Down == false)
-								{
-									__result = true;
-								}
-								break;
-
-							case MLPAction.JUMP:
-							case MLPAction.SELECT:
-								if (Current.South == true && Previous.South == false)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.INTERACT:
-							case MLPAction.BACK:
-								if (Current.East == true && Previous.East == false)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.PAUSE:
-							case MLPAction.CHANGE_ACCOUNT:
-								if (Current.West == true && Previous.West == false)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.EQUIPMENT:
-							case MLPAction.DELETE_ITEM:
-								if (Current.North == true && Previous.North == false)
-								{
-									__result = true;
-								}
-								break;
-
-							case MLPAction.ANY:
-								if (Current.Right == true && Previous.Right == false ||
-									Current.Left == true && Previous.Left == false ||
-									Current.Up == true && Previous.Up == false ||
-									Current.Down == true && Previous.Down == false ||
-									Current.South == true && Previous.South == false ||
-									Current.East == true && Previous.East == false ||
-									Current.West == true && Previous.West == false ||
-									Current.North == true && Previous.North == false)
-								{
-									__result = true;
-								}
-								break;
-						}
-					}
-				}
-			}
-
-			[HarmonyPatch(typeof(GamePadInput))]
-			[HarmonyPatch("GetButtonUp")]
-			public static class GetButtonUpOverride
-			{
-				public static void Postfix(ref bool __result, GamePadInput __instance, MLPAction mlpAction)
-				{
-					EnsureFrameUpdate();
-					if (__instance is XBOXGamePadInput &&
-						(__instance.index == 0 ? CurrentPlayer1Status : __instance.index == 1 ? CurrentPlayer2Status : null) is ButtonStatus Current &&
-						(__instance.index == 0 ? PreviousPlayer1Status : __instance.index == 1 ? PreviousPlayer2Status : null) is ButtonStatus Previous)
-					{
-						switch (mlpAction)
-						{
-							case MLPAction.RIGHT:
-								if (Current.Right == false && Previous.Right == true)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.LEFT:
-								if (Current.Left == false && Previous.Left == true)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.UP:
-								if (Current.Up == false && Previous.Up == true)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.DOWN:
-								if (Current.Down == false && Previous.Down == true)
-								{
-									__result = true;
-								}
-								break;
-
-							case MLPAction.JUMP:
-							case MLPAction.SELECT:
-								if (Current.South == false && Previous.South == true)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.INTERACT:
-							case MLPAction.BACK:
-								if (Current.East == false && Previous.East == true)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.PAUSE:
-							case MLPAction.CHANGE_ACCOUNT:
-								if (Current.West == false && Previous.West == true)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.EQUIPMENT:
-							case MLPAction.DELETE_ITEM:
-								if (Current.North == false && Previous.North == true)
-								{
-									__result = true;
-								}
-								break;
-
-							case MLPAction.ANY:
-								if (Current.Right == false && Previous.Right == true ||
-									Current.Left == false && Previous.Left == true ||
-									Current.Up == false && Previous.Up == true ||
-									Current.Down == false && Previous.Down == true ||
-									Current.South == false && Previous.South == true ||
-									Current.East == false && Previous.East == true ||
-									Current.West == false && Previous.West == true ||
-									Current.North == false && Previous.North == true)
-								{
-									__result = true;
-								}
-								break;
-						}
-					}
-				}
-			}
-
-			[HarmonyPatch(typeof(GamePadInput))]
-			[HarmonyPatch("GetButton")]
-			public static class GetButtonOverride
-			{
-				public static void Postfix(ref bool __result, GamePadInput __instance, MLPAction mlpAction)
-				{
-					EnsureFrameUpdate();
-					if (__instance is XBOXGamePadInput &&
-						(__instance.index == 0 ? CurrentPlayer1Status : __instance.index == 1 ? CurrentPlayer2Status : null) is ButtonStatus Player)
-					{
-						switch (mlpAction)
-						{
-							case MLPAction.RIGHT:
-								if (Player.Right == true)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.LEFT:
-								if (Player.Left == true)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.UP:
-								if (Player.Up == true)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.DOWN:
-								if (Player.Down == true)
-								{
-									__result = true;
-								}
-								break;
-
-							case MLPAction.JUMP:
-							case MLPAction.SELECT:
-								if (Player.South == true)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.INTERACT:
-							case MLPAction.BACK:
-								if (Player.East == true)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.PAUSE:
-							case MLPAction.CHANGE_ACCOUNT:
-								if (Player.West == true)
-								{
-									__result = true;
-								}
-								break;
-							case MLPAction.EQUIPMENT:
-							case MLPAction.DELETE_ITEM:
-								if (Player.North == true)
-								{
-									__result = true;
-								}
-								break;
-
-							case MLPAction.ANY:
-								if (Player.Right == true ||
-									Player.Left == true ||
-									Player.Up == true ||
-									Player.Down == true ||
-									Player.South == true ||
-									Player.East == true ||
-									Player.West == true ||
-									Player.North == true)
-								{
-									__result = true;
-								}
-								break;
-						}
-					}
-				}
-			}
-		}
-
-		public static class AZHM
-		{
-		}
 	}
 }

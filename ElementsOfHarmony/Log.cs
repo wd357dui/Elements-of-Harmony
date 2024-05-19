@@ -14,9 +14,9 @@ namespace ElementsOfHarmony
 	public static class Log
 	{
 		private static readonly object MessageMutex = new object();
-		private static StreamWriter LogFile;
-		private static TcpClient Client;
-		private static NetworkStream Stream;
+		private static StreamWriter? LogFile;
+		private static TcpClient? Client;
+		private static NetworkStream? Stream;
 
 		public static void InitDebug()
 		{
@@ -43,24 +43,56 @@ namespace ElementsOfHarmony
 					}
 					catch (Exception e)
 					{
-						Message(e.StackTrace + "\n" + e.Message);
+					repeat:
+						Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
+						if (e.InnerException != null)
+						{
+							e = e.InnerException;
+							goto repeat;
+						}
 					}
 				}
 
 				// attach our error handlers
-				UnityEngine.Application.logMessageReceived += LogCallback;
-				AppDomain.CurrentDomain.UnhandledException += ExceptionHandler;
-
-				Harmony element = new Harmony($"{typeof(Log).FullName}");
-				int Num = 0;
-				foreach (var Patch in typeof(Log).GetNestedTypes())
+				try
 				{
-					element.CreateClassProcessor(Patch).Patch();
-					Num++;
+					UnityEngine.Application.logMessageReceived += LogCallback;
+					AppDomain.CurrentDomain.UnhandledException += ExceptionHandler;
 				}
-				if (Num > 0)
+				catch (Exception e)
 				{
-					Message($"Harmony patch for {typeof(Log).FullName} successful - {Num} Patches");
+				repeat:
+					Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
+					if (e.InnerException != null)
+					{
+						e = e.InnerException;
+						goto repeat;
+					}
+				}
+
+				try
+				{
+					Harmony element = new Harmony($"{typeof(Log).FullName}");
+					int Num = 0;
+					foreach (var Patch in typeof(Log).GetNestedTypes())
+					{
+						new PatchClassProcessor(element, Patch).Patch();
+						Num++;
+					}
+					if (Num > 0)
+					{
+						Message($"Harmony patch for {typeof(Log).FullName} successful - {Num} Patches");
+					}
+				}
+				catch (Exception e)
+				{
+				repeat:
+					Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
+					if (e.InnerException != null)
+					{
+						e = e.InnerException;
+						goto repeat;
+					}
 				}
 			}
 		}
@@ -130,6 +162,7 @@ namespace ElementsOfHarmony
 			}
 			public static void Postfix(Exception __instance)
 			{
+				repeat:
 				if (!UnityEngine.StackTraceUtility.ExtractStackTrace().Contains($"{nameof(ElementsOfHarmony)}.{nameof(Log)}.{nameof(Message)}")) // prevent infinite loop
 				{
 					Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
@@ -139,11 +172,23 @@ namespace ElementsOfHarmony
 					Message($"Exception.Message: {__instance.Message}");
 					Message("\r\n");
 				}
+				if (__instance is FileLoadException fl)
+				{
+					Message($"FileLoadException.FileName: {fl.FileName}");
+				}
+				if (__instance is FileNotFoundException f)
+				{
+					Message($"FileNotFoundException.FileName: {f.FileName}");
+				}
+				if (__instance.InnerException != null)
+				{
+					__instance = __instance.InnerException;
+					goto repeat;
+				}
 			}
 		}
 
-		[HarmonyPatch(typeof(UnityEngine.Debug))]
-		[HarmonyPatch(nameof(UnityEngine.Debug.LogError), typeof(object))]
+		[HarmonyPatch(typeof(UnityEngine.Debug), nameof(UnityEngine.Debug.LogError), typeof(object))]
 		public static class LogError
 		{
 			public static void Postfix(object message)
@@ -155,8 +200,7 @@ namespace ElementsOfHarmony
 			}
 		}
 
-		[HarmonyPatch(typeof(UnityEngine.Debug))]
-		[HarmonyPatch(nameof(UnityEngine.Debug.LogException), typeof(Exception))]
+		[HarmonyPatch(typeof(UnityEngine.Debug), nameof(UnityEngine.Debug.LogException), typeof(Exception))]
 		public static class LogException
 		{
 			public static void Postfix(Exception exception)
