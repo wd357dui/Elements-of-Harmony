@@ -5,7 +5,7 @@
 	version: "0.3.0",
 	author: "wd357dui")]
 [assembly: MelonGame("Melbot Studios", "MLP")]
-[assembly: MelonGame("Drakhar Studio", "MyLittlePonyZephyrHeights")]
+[assembly: MelonGame("DrakharStudio", "MyLittlePonyZephyrHeights")]
 [assembly: MelonPlatform(MelonPlatformAttribute.CompatiblePlatforms.WINDOWS_X64)]
 [assembly: MelonOptionalDependencies(
 	"ElementsOfHarmony.AMBA",
