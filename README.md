@@ -40,6 +40,12 @@ That motivated me to remaster this project to use it to mod both games and imple
 - [x] **(for AMBA)** Remove the green filter in the swamp area (in Town Park where the herding crabs minigame is) and in the herding crabs minigame
 - [ ] **(for AMBA, can be used for both games)** Implement custom font?... I spent 4 days trying out different ideas, but after finally understanding the situation, I've concluded that this is not possible until I implement the `Generosity` module mentioned in the [Additional Overall Optional goals](#additional-overall-optional-goals) section
 
+> [!NOTE]
+> First update following AZHM's release, it's a shame that I'm 2 days late due to classes (whose idea was it to put classes on Saturday?)
+
+- [x] **(for both games)** added MelonLoader support, you can now apply this mod using [MelonLoader](https://github.com/LavaGang/MelonLoader), which is non-destructive mod manager (non-destructive as in doesn't modify game files at all)
+- [x] **(for AZHM)** fixed a bug where the Chinese language cannot be displayed due to the base game's incorrect language mappings
+
 ## Goals
 
 - [x] Magic - Hook the DirectX API to acquire the game's swap chain, so that we can render our graphics on top of the original game using Direct2D - *already implemented in 2022, will improve in the future*
@@ -57,7 +63,7 @@ That motivated me to remaster this project to use it to mod both games and imple
 
 ------
 
-## ~~Applying the mod to the game~~
+## ~~Applying the mod to the game~~ (obsolete)
 
 1. build the DLL (remember to restore NuGet package first) (or just download from [release tag](https://github.com/wd357dui/Elements-of-Harmony/releases))
 2. put `ElementsOfHarmony.dll` and `0Harmony.dll` and `0Harmony.xml` into `(game folder)\MLP_Data\Managed`
@@ -78,11 +84,11 @@ and corresponding value `16` into `"types"`
 ## Adding our custom translations
 *to add a language that the game didn't originally support, follow the following steps*
 1. create a folder named `Elements of Harmony` in the game folder (where MLP.exe is)
-2. to add text translations, in the `Elements of Harmony` folder, create a sub folder named `Translations` and put translation files inside
+2. to add text translations, in the `Elements of Harmony` folder, create ~~a sub folder named `Translations` and put translation files inside~~ (since version 0.3.0, this location is changed to `Elements of Harmony/Assets/Localization/[YourLanguageISOCode]/[YourLanguageISOCode].txt`)
 3. the translation file name should be `(language ISO code).txt` (case sensitive), its content should be tab-separated values (TSV), where first column is the **term** (case sensitive) and second column is the translated text (use \n for line break during text); other columns will be ignored
 4. please also add your language code as **term** and your language name as translated text so that your language name can show up in the game menu correctly
-5. to add localized audio files, in the `Elements of Harmony` folder, create a sub folder named `AudioClip` and put the audio files inside (you can create sub folders in `AudioClip` as well, the mod will recursively search for all audio files in all sub folders)
-6. the name of the audio files should match the **translated terms** (case sensitive);
+5. to add localized audio files, in the `Elements of Harmony` folder, ~~create a sub folder named `AudioClip` and put the audio files inside (you can create sub folders in `AudioClip` as well, the mod will recursively search for all audio files in all sub folders)~~ (since version 0.3.0, this location is changed to `Elements of Harmony/Assets/Localization/[YourLanguageISOCode]/AudioClip/`)
+6. the name of the audio files should match the **translated terms** (case sensitive); in nerds' language, it's a two-stage-mapping method.
 look for the field `OurSupportedAudioFormats` in [ElementsOfHarmony.cs](ElementsOfHarmony/ElementsOfHarmony.cs) for a list of supported audio formats; 
     >example for audio clip:<br>
     >term `Audio_BeachCove/INTRO/EV_01/BC_INTRO_EV_01_01_CS_ZP_01`<br>
