@@ -84,10 +84,10 @@ and corresponding value `16` into `"types"`
 ## Adding our custom translations
 *to add a language that the game didn't originally support, follow the following steps*
 1. create a folder named `Elements of Harmony` in the game folder (where MLP.exe is)
-2. to add text translations, in the `Elements of Harmony` folder, create ~~a sub folder named `Translations` and put translation files inside~~ (since version 0.3.0, this location is changed to `Elements of Harmony/Assets/Localization/[YourLanguageISOCode]/[YourLanguageISOCode].txt`)
+2. to add text translations, in the `Elements of Harmony` folder, create ~~a sub folder named `Translations` and put translation files inside~~ (since version 0.3.0, this location is changed to `Elements of Harmony/Assets/Localization/[GameTitleInitials]/[YourLanguageISOCode]/[YourLanguageISOCode].txt`)
 3. the translation file name should be `(language ISO code).txt` (case sensitive), its content should be tab-separated values (TSV), where first column is the **term** (case sensitive) and second column is the translated text (use \n for line break during text); other columns will be ignored
 4. please also add your language code as **term** and your language name as translated text so that your language name can show up in the game menu correctly
-5. to add localized audio files, in the `Elements of Harmony` folder, ~~create a sub folder named `AudioClip` and put the audio files inside (you can create sub folders in `AudioClip` as well, the mod will recursively search for all audio files in all sub folders)~~ (since version 0.3.0, this location is changed to `Elements of Harmony/Assets/Localization/[YourLanguageISOCode]/AudioClip/`)
+5. to add localized audio files, in the `Elements of Harmony` folder, ~~create a sub folder named `AudioClip` and put the audio files inside (you can create sub folders in `AudioClip` as well, the mod will recursively search for all audio files in all sub folders)~~ (since version 0.3.0, this location is changed to `Elements of Harmony/Assets/Localization/[GameTitleInitials]/[YourLanguageISOCode]/AudioClip/`)
 6. the name of the audio files should match the **translated terms** (case sensitive); in nerds' language, it's a two-stage-mapping method.
 look for the field `OurSupportedAudioFormats` in [ElementsOfHarmony.cs](ElementsOfHarmony/ElementsOfHarmony.cs) for a list of supported audio formats; 
     >example for audio clip:<br>
