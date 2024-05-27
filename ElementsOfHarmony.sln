@@ -883,25 +883,30 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElementsOfHarmony.AZHM", "E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElementsOfHarmony.KinectControl.AZHM", "ElementsOfHarmony.KinectControl.AZHM\ElementsOfHarmony.KinectControl.AZHM.csproj", "{D7F07F62-0309-4E25-80FD-F85A85F829F6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "File Copy Script", "File Copy Script", "{0485FC13-6E30-4A74-AC33-4E84F7A81A6C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{0485FC13-6E30-4A74-AC33-4E84F7A81A6C}"
 	ProjectSection(SolutionItems) = preProject
-		File Copy Script\MelonLoader.ps1 = File Copy Script\MelonLoader.ps1
-		File Copy Script\Standalone.ps1 = File Copy Script\Standalone.ps1
+		Build\All.bat = Build\All.bat
+		Build\BepInEx.bat = Build\BepInEx.bat
+		Build\MelonLoader.bat = Build\MelonLoader.bat
+		Build\Standalone.bat = Build\Standalone.bat
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assembly Load Patch", "Assembly Load Patch", "{FC9288EB-C9DD-4029-A486-D6CE4ABFD439}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patch", "Patch", "{FC9288EB-C9DD-4029-A486-D6CE4ABFD439}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AMBA", "AMBA", "{8F641D79-AA5C-41EF-B507-D756EE99F088}"
 	ProjectSection(SolutionItems) = preProject
-		Assembly Load Patch\AMBA\RuntimeInitializeOnLoads.json = Assembly Load Patch\AMBA\RuntimeInitializeOnLoads.json
-		Assembly Load Patch\AMBA\ScriptingAssemblies.json = Assembly Load Patch\AMBA\ScriptingAssemblies.json
+		Patch\AMBA\RuntimeInitializeOnLoads.json = Patch\AMBA\RuntimeInitializeOnLoads.json
+		Patch\AMBA\ScriptingAssemblies.json = Patch\AMBA\ScriptingAssemblies.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AZHM", "AZHM", "{0DD9EF20-753A-4DD4-A512-3E72DD7B2347}"
 	ProjectSection(SolutionItems) = preProject
-		Assembly Load Patch\AZHM\RuntimeInitializeOnLoads.json = Assembly Load Patch\AZHM\RuntimeInitializeOnLoads.json
-		Assembly Load Patch\AZHM\ScriptingAssemblies.json = Assembly Load Patch\AZHM\ScriptingAssemblies.json
+		Patch\AZHM\globalgamemanagers.assets = Patch\AZHM\globalgamemanagers.assets
+		Patch\AZHM\RuntimeInitializeOnLoads.json = Patch\AZHM\RuntimeInitializeOnLoads.json
+		Patch\AZHM\ScriptingAssemblies.json = Patch\AZHM\ScriptingAssemblies.json
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElementsOfHarmony.BepInExReference", "ElementsOfHarmony.BepInExReference\ElementsOfHarmony.BepInExReference.csproj", "{359A90D1-6901-4174-ADB6-5BEC71BA6529}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -941,6 +946,9 @@ Global
 		{D7F07F62-0309-4E25-80FD-F85A85F829F6}.Debug|x64.Build.0 = Debug|x64
 		{D7F07F62-0309-4E25-80FD-F85A85F829F6}.Release|x64.ActiveCfg = Release|x64
 		{D7F07F62-0309-4E25-80FD-F85A85F829F6}.Release|x64.Build.0 = Release|x64
+		{359A90D1-6901-4174-ADB6-5BEC71BA6529}.Debug|x64.ActiveCfg = Debug|x64
+		{359A90D1-6901-4174-ADB6-5BEC71BA6529}.Release|x64.ActiveCfg = Release|x64
+		{359A90D1-6901-4174-ADB6-5BEC71BA6529}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

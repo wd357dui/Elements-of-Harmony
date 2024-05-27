@@ -5,10 +5,9 @@ using Melbot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -19,15 +18,19 @@ namespace ElementsOfHarmony.AMBA
 {
 	public static class Localization
 	{
+		// if we have a language override, use our override settings, otherwise we follow the game settings
+		public static string TargetLanguage => !string.IsNullOrEmpty(Settings.OurSelectedLanguageOverride) ?
+			Settings.OurSelectedLanguageOverride : LocalizationManager.CurrentLanguageCode;
+
+		public static string TargetAudioLanguage => !string.IsNullOrEmpty(Settings.OurSelectedAudioLanguageOverride) ?
+			Settings.OurSelectedAudioLanguageOverride : TargetLanguage;
+
 		public static void Exist()
 		{
 			// empty the field that is partially responsible for removing the Russian language
 			string[] excludedLanguages = Traverse.Create<I2LManager>().Field<string[]>("excludedLanguages").Value;
 			excludedLanguages[Array.IndexOf(excludedLanguages, "ru")] = "";
 		}
-
-		// if we have a language override, use our override settings, otherwise we follow the game settings
-		public static string TargetLanguage => string.IsNullOrEmpty(Settings.OurSelectedLanguageOverride) ? LocalizationManager.CurrentLanguageCode : Settings.OurSelectedLanguageOverride;
 
 		[HarmonyPatch(typeof(SupportedLanguages), methodName: "GetSupportedLanguages")] // the game use this method to fetch a list of all supported languages
 		public static class GetSupportedLanguagesPatch
@@ -81,8 +84,6 @@ namespace ElementsOfHarmony.AMBA
 			public static bool Prefix(LanguageSelector __instance)
 			{
 				List<SupportedLanguageParams> supportedLanguageParams = NonPersistentSingleton<BaseSystem>.Get().i2LManager.supportedLanguages.GetSupportedLanguages();
-				SupportedLanguageParams supportedLanguageParams2 = supportedLanguageParams.Find((SupportedLanguageParams x) => x.code == LocalizationManager.CurrentLanguageCode);
-				string TargetLanguage = string.IsNullOrEmpty(Settings.OurSelectedLanguageOverride) ? LocalizationManager.CurrentLanguageCode : Settings.OurSelectedLanguageOverride;
 				int index = supportedLanguageParams.FindIndex((SupportedLanguageParams x) => x.code == TargetLanguage);
 				Traverse.Create(__instance).Field<int>("index").Value = index;
 				AccessTools.Method(typeof(LanguageSelector), "ShowLangname").Invoke(__instance, new object[] { TargetLanguage });
@@ -101,7 +102,8 @@ namespace ElementsOfHarmony.AMBA
 			}
 		}
 
-		[HarmonyPatch(typeof(LanguageSelector), "ShowLangname")] // the game calls this method to make language names appear/disapper in the menu when player moves the selection
+		[HarmonyPatch(typeof(LanguageSelector), "ShowLangname")] // the game calls this method to make language names appear/disapper
+																 // in the menuwhen player moves the language selection
 		public static class ShowLangnamePatch
 		{
 			public static void Prefix(LanguageSelector __instance)
@@ -157,105 +159,96 @@ namespace ElementsOfHarmony.AMBA
 		[HarmonyPatch(typeof(LanguageSelector), "OnSelected")] // the game calls this method when player selects a language
 		public static class OnSelectedPatch
 		{
-			public static void Prefix(LanguageSelector __instance)
+			public static void Prefix(LanguageSelector __instance, out int __state)
 			{
-				int index = Traverse.Create(__instance).Field<int>("index").Value;
+				var index = Traverse.Create(__instance).Field<int>("index");
 				List<SupportedLanguageParams> OurSupportedLanguages = NonPersistentSingleton<BaseSystem>.Get().i2LManager.supportedLanguages.GetSupportedLanguages();
-				string SelectedLangCode = OurSupportedLanguages[index].code;
-				bool wasOverride = !string.IsNullOrEmpty(Settings.OurSelectedLanguageOverride);
+				string SelectedLangCode = OurSupportedLanguages[index.Value].code;
 				if (!OriginalSupportedLanguageList.Contains(SelectedLangCode))
 				{
 					// if the language is not originally supported we will follow our override settings
 					Settings.OurSelectedLanguageOverride = SelectedLangCode;
+					__state = index.Value;
+					index.Value = 0;
 					Log.Message("language override: " + SelectedLangCode);
-					LocalizationManager.CurrentLanguageCode = Settings.OurFallbackLanguage;
 				}
 				else
 				{
 					// but if the language is already originally supported then we will just follow the game settings
 					Settings.OurSelectedLanguageOverride = "";
+					__state = index.Value;
 					Log.Message("language selected: " + SelectedLangCode);
 				}
-				if (wasOverride &&
-					SelectedLangCode == LocalizationManager.CurrentLanguageCode)
-				{
-					// when player is switching back from our "override" language to a fallback language
-					// the game won't start changing because the game thinks it's already in that language
-					// so in order to fix this, we switch to a different language before the game checks the language settings
-					foreach (string langCode in OriginalSupportedLanguageList!)
-					{
-						if (langCode != LocalizationManager.CurrentLanguageCode)
-						{
-							LocalizationManager.CurrentLanguageCode = langCode;
-							break;
-						}
-					}
-				}
+				LocalizationManager.CurrentLanguageCode = OriginalSupportedLanguageList
+						.First(L => L != OurSupportedLanguages[index.Value].code);
+			}
+			public static void Postfix(LanguageSelector __instance, int __state)
+			{
+				Traverse.Create(__instance).Field<int>("index").Value = __state;
 			}
 		}
 
 		[HarmonyPatch(typeof(LocalizationManager), "GetTranslation")] // the game use this method to fetch text translations, or to map a "term" to a translated audio clip
 		public static class GetTranslationPatch
 		{
-			public static bool Prefix(string Term, ref string __result, out string __state)
+			public static bool Prefix(string Term, ref string? __result)
 			{
-				__state = LocalizationManager.CurrentLanguageCode; // save the current game language setting for Postfix function to recover to
-				if (OriginalSupportedLanguageList is null)
+				if (OriginalSupportedLanguageList == null)
 				{
 					// save a list of the game's original supported langauges if we haven't already
 					SupportedLanguageParams[] OriginalSupportedLanguageParams = NonPersistentSingleton<BaseSystem>.Get().i2LManager.supportedLanguages.supportedLanguages;
 					OriginalSupportedLanguageList = new string[OriginalSupportedLanguageParams.Length];
-					bool isValid = false;
 					for (int i = 0; i < OriginalSupportedLanguageParams.Length; i++)
 					{
 						OriginalSupportedLanguageList[i] = OriginalSupportedLanguageParams[i].code;
-						if (Settings.OurFallbackLanguage == OriginalSupportedLanguageParams[i].code)
-						{
-							isValid = true;
-						}
 						Log.Message($"Originally supported language: {OriginalSupportedLanguageParams[i].code}");
-					}
-					if (!isValid)
-					{
-						// looks like our previous fallback language isn't valid, choose the first selected language instead
-						Settings.OurFallbackLanguage = OriginalSupportedLanguageParams.FirstOrDefault()?.code ?? "en-US";
-					}
-				}
-				if (!string.IsNullOrEmpty(Term))
-				{
-					if (OurTranslations.ContainsKey(TargetLanguage))
-					{
-						// search for the term in our translation list
-						if (OurTranslations[TargetLanguage].TryGetValue(Term, out __result))
-						{
-							Log.Message($"Translation Matched! lang={TargetLanguage} term={Term} result={__result}");
-							return false;
-						}
-					}
-					if (TermFallback.TryGetValue(Term, out string FallbackTerm))
-					{
-						// search for the term in our translation list again
-						if (OurTranslations[TargetLanguage].TryGetValue(FallbackTerm, out __result))
-						{
-							Log.Message($"fallback term translation matched! lang={TargetLanguage} term={Term} FallbackTerm={FallbackTerm} result={__result}");
-							return false;
-						}
 					}
 				}
 
-				if (!string.IsNullOrEmpty(Settings.OurSelectedLanguageOverride))
+				if (!string.IsNullOrEmpty(Term))
 				{
-					// if we are overriding the language but failed to match the specified term in our translation list,
-					// we will let the game fetch translation in fallback language
-					LocalizationManager.CurrentLanguageCode = Settings.OurFallbackLanguage;
-					Log.Message($"Override translation not matched, fallback to {Settings.OurFallbackLanguage}, term={Term}");
+					static bool Search(string TargetTerm, out string? __result)
+					{
+						__result = null;
+						// search for the term in our translation list
+						if (OurTranslations.TryGetValue(TargetLanguage, out SortedDictionary<string, string> Translations) &&
+							Translations.TryGetValue(TargetTerm, out __result))
+						{
+							Log.Message($"Translation Matched! lang={TargetLanguage} term={TargetTerm} result={__result}");
+							return true;
+						}
+						return false;
+					}
+
+					if (Search(Term, out __result))
+					{
+						return false;
+					}
+					if (TermFallback.TryGetValue(Term, out string FallbackTerm) && Search(FallbackTerm, out __result))
+					{
+						Log.Message($"fallback term translation matched! lang={TargetLanguage} term={Term} FallbackTerm={FallbackTerm} result={__result}");
+						return false;
+					}
+					// let the game search for the translation
+					if (LocalizationManager.TryGetTranslation(Term, out __result, overrideLanguage: TargetLanguage))
+					{
+						Log.Message($"game original translation matched, lang={TargetLanguage} term={Term} result={__result}");
+						return false;
+					}
 				}
 				return true;
 			}
-			public static void Postfix(string Term, ref string __result, ref string __state)
+			public static void Postfix(string Term, ref string __result)
 			{
-				LocalizationManager.CurrentLanguageCode = __state; // set the game language setting to what it was before
 				Log.Message($"Translation result: lang={LocalizationManager.CurrentLanguageCode} term={Term} result={__result}");
+				if (Term.StartsWith("Audio") && !string.IsNullOrEmpty(__result) &&
+					!string.IsNullOrEmpty(Settings.OurSelectedAudioLanguageOverride))
+				{
+					__result = __result
+						.Replace($"_{TargetLanguage}", $"_{TargetAudioLanguage}")
+						.Replace("_en-US", $"_{TargetAudioLanguage}");
+					Log.Message($"Applying audio language override, result={__result}");
+				}
 			}
 		}
 
@@ -265,6 +258,11 @@ namespace ElementsOfHarmony.AMBA
 			// `mainTranslation` is the term string for the requested audio clip
 			public static bool Prefix(LocalizeTarget_UnityStandard_AudioSource __instance, Localize cmp, string mainTranslation)
 			{
+				if (string.IsNullOrEmpty(mainTranslation))
+				{
+					return true;
+				}
+
 				// code copied from the original method
 				bool num = (__instance.mTarget.isPlaying || __instance.mTarget.loop) && Application.isPlaying;
 				AudioClip clip = __instance.mTarget.clip;
@@ -274,43 +272,44 @@ namespace ElementsOfHarmony.AMBA
 
 				#region my replacement code
 
-				if (string.IsNullOrEmpty(mainTranslation))
-				{
-					return true;
-				}
 				if (!AudioClipsLoaded)
 				{
 					// if our audio clips haven't finished loading, we wait until they do
 					AudioClipsLoadedEvent.Wait();
 				}
-				bool AudioMatched;
-				if (AudioMatched = OurAudioClips.TryGetValue(mainTranslation, out AudioClip audioClip))
+
+				AudioClip? audioClip = null;
+				if (OurAudioClips.TryGetValue(TargetAudioLanguage, out SortedDictionary<string, AudioClip> clips) &&
+					clips.TryGetValue(mainTranslation, out audioClip))
 				{
 					Log.Message($"Audio: term matched - {mainTranslation}");
 				}
-				if (!AudioMatched)
+
+				if (audioClip == null)
 				{
 					// if we failed to match the specified audio clip, we look for it in the original game assets
 					audioClip = cmp.FindTranslatedObject<AudioClip>(mainTranslation);
-					if (AudioMatched = audioClip != null)
+					if (audioClip != null)
 					{
 						Log.Message($"Audio: term matched in game's original assets - {mainTranslation}");
 					}
 				}
-				if (!AudioMatched)
+				if (audioClip == null)
 				{
 					// if we still didn't match an audio clip,
 					// we change the language code in the "term" to English and try again (aka. language fallback)
 					string fallback = mainTranslation.Replace(LocalizationManager.CurrentLanguageCode, "en-US");
 					if (!string.IsNullOrEmpty(Settings.OurSelectedLanguageOverride))
 					{
-						fallback = fallback.Replace(Settings.OurSelectedLanguageOverride, "en-US");
+						fallback = fallback.Replace($"_{TargetAudioLanguage}", "_en-US");
 					}
 					audioClip = cmp.FindTranslatedObject<AudioClip>(fallback);
-					AudioMatched = audioClip != null;
-					Log.Message($"Audio: term matched for English fallback - {fallback}");
+					if (audioClip != null)
+					{
+						Log.Message($"Audio: term matched for English fallback - {fallback}");
+					}
 				}
-				if (!AudioMatched)
+				if (audioClip == null)
 				{
 					Log.Message($"Audio: term not matched!! - {mainTranslation}");
 					// and if all of the above didn't work, we'll let the game handle it
@@ -461,6 +460,18 @@ namespace ElementsOfHarmony.AMBA
 				NonPersistentSingleton<BaseSystem>.Get().i2LManager.LoadI2L(text,
 					() => AccessTools.Method(typeof(PreMenu), "OnLoaded").Invoke(__instance, Array.Empty<object>()));
 				LocalizationManager.CurrentLanguage = NonPersistentSingleton<BaseSystem>.Get().i2LManager.GetSystemLanguage(text);
+
+				// additional code
+				string SystemLanguageCode = CultureInfo.CurrentCulture.Name;
+				if (string.IsNullOrEmpty(Settings.OurSelectedLanguageOverride) &&
+					OurSupportedLanguageList?.Any(L => L == SystemLanguageCode) == true)
+				{
+					if (!OriginalSupportedLanguageList.Contains(SystemLanguageCode))
+					{
+						Settings.OurSelectedLanguageOverride = SystemLanguageCode;
+					}
+				}
+
 				return false;
 			}
 		}
@@ -1328,6 +1339,7 @@ namespace ElementsOfHarmony.AMBA
 			}
 		}
 
+		/*
 		[HarmonyPatch(typeof(LocalizeTarget_UnityUI_Text), "DoLocalize")] // the game use this function to set font and text for UnityEngine.UI.Text
 		public static class LocalizeTarget_UnityUI_Text_DoLocalizePatch
 		{
@@ -1447,6 +1459,7 @@ namespace ElementsOfHarmony.AMBA
 				return null;
 			}
 		}
+		*/
 
 		[HarmonyPatch(typeof(Volume), methodName: "profileRef", methodType: MethodType.Getter)]
 		public static class VolumnProfile_profileRef_getter

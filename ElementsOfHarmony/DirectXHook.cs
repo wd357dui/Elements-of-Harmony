@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -41,7 +42,7 @@ namespace ElementsOfHarmony
 				{
 					Assembly ElementsOfHarmony_AMBA =
 						AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(A => A.GetName().Name == "ElementsOfHarmony.AMBA") ??
-						Assembly.LoadFrom("MLP_Data/Managed/ElementsOfHarmony.AMBA.dll");
+						Assembly.LoadFile(Path.Combine(ElementsOfHarmony.AssemblyDirectory, "ElementsOfHarmony.AMBA.dll"));
 					if (ElementsOfHarmony_AMBA.GetType("ElementsOfHarmony.AMBA.DirectXHook") is Type DirectXHook_AMBA)
 					{
 						if (DirectXHook_AMBA.GetMethod("Init") is MethodInfo InitMethod)
@@ -64,7 +65,7 @@ namespace ElementsOfHarmony
 				{
 					Assembly ElementsOfHarmony_AZHM =
 						AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(A => A.GetName().Name == "ElementsOfHarmony.AZHM") ??
-						Assembly.LoadFrom("MyLittlePonyZephyrHeights_Data/Managed/ElementsOfHarmony.AZHM.dll");
+						Assembly.LoadFile(Path.Combine(ElementsOfHarmony.AssemblyDirectory, "ElementsOfHarmony.AZHM.dll"));
 					if (ElementsOfHarmony_AZHM.GetType("ElementsOfHarmony.AZHM.DirectXHook") is Type DirectXHook_AZHM)
 					{
 						if (DirectXHook_AZHM.GetMethod("Init") is MethodInfo InitMethod)
@@ -375,7 +376,7 @@ namespace ElementsOfHarmony
 						}
 						Log.Message($"NewColorAdjustments.active={NewColorAdjustments.active}");
 
-						static void OnActiveSceneChanged(Scene Old, Scene New)
+						void OnActiveSceneChanged(Scene Old, Scene New)
 						{
 							SceneManager.MoveGameObjectToScene(NewGlobalVolumeGameObject, New);
 							UnityEngine.Object.DontDestroyOnLoad(NewGlobalVolumeGameObject);
@@ -827,12 +828,12 @@ namespace ElementsOfHarmony
 				public IntPtr _LocalFullscreenDesc;
 
 				[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006: (Naming rule violation)", Justification = "This is intentional")]
-				public readonly IntPtr pFullscreenDesc
+				public IntPtr pFullscreenDesc
 				{
 					get => Marshal.ReadIntPtr(_pFullscreenDesc);
 					set => Marshal.WriteIntPtr(_pFullscreenDesc, value);
 				}
-				public readonly DXGI_SWAP_CHAIN_FULLSCREEN_DESC? OriginalFullscreenDesc
+				public DXGI_SWAP_CHAIN_FULLSCREEN_DESC? OriginalFullscreenDesc
 				{
 					get
 					{
@@ -846,7 +847,7 @@ namespace ElementsOfHarmony
 						}
 					}
 				}
-				public readonly DXGI_SWAP_CHAIN_FULLSCREEN_DESC LocalFullscreenDesc
+				public DXGI_SWAP_CHAIN_FULLSCREEN_DESC LocalFullscreenDesc
 				{
 					get => Marshal.PtrToStructure<DXGI_SWAP_CHAIN_FULLSCREEN_DESC>(_LocalFullscreenDesc);
 					set => Marshal.StructureToPtr(value, _LocalFullscreenDesc, false);
@@ -1296,12 +1297,12 @@ namespace ElementsOfHarmony
 			public int Left, Top, Right, Bottom;
 			public int Width
 			{ 
-				readonly get => Right - Left;
+				get => Right - Left;
 				set => Right = Left + value;
 			}
 			public int Height
 			{
-				readonly get => Bottom - Top;
+				get => Bottom - Top;
 				set => Bottom = Top + value;
 			}
 		}
@@ -1319,7 +1320,7 @@ namespace ElementsOfHarmony
 			public IntPtr pDirtyRects;
 			public IntPtr pScrollRect;
 			public IntPtr pScrollOffset;
-			public readonly NativeArrayAccess<RECT>? DirtyRects
+			public NativeArrayAccess<RECT>? DirtyRects
 			{
 				get
 				{
@@ -1335,7 +1336,7 @@ namespace ElementsOfHarmony
 			}
 			public RECT? ScrollRect
 			{
-				readonly get
+				get
 				{
 					if (pScrollRect != IntPtr.Zero)
 					{
@@ -1355,7 +1356,7 @@ namespace ElementsOfHarmony
 			}
 			public POINT? ScrollOffset
 			{
-				readonly get
+				get
 				{
 					if (pScrollRect != IntPtr.Zero)
 					{

@@ -1,18 +1,15 @@
 ﻿using MelonLoader;
+using System.Reflection;
+using System;
+using System.IO;
 
 [assembly: MelonInfo(typeof(ElementsOfHarmony.MelonLoaderReference.ElementsOfHarmony),
 	name: "Elements of Harmony",
-	version: "0.3.0",
+	version: "0.3.1",
 	author: "wd357dui")]
 [assembly: MelonGame("Melbot Studios", "MLP")]
 [assembly: MelonGame("DrakharStudio", "MyLittlePonyZephyrHeights")]
 [assembly: MelonPlatform(MelonPlatformAttribute.CompatiblePlatforms.WINDOWS_X64)]
-[assembly: MelonOptionalDependencies(
-	"ElementsOfHarmony.AMBA",
-	"ElementsOfHarmony.AZHM",
-	"ElementsOfHarmony.KinectControl",
-	"ElementsOfHarmony.KinectControl.AMBA",
-	"ElementsOfHarmony.KinectControl.AZHM")]
 
 namespace ElementsOfHarmony.MelonLoaderReference
 {
@@ -20,7 +17,11 @@ namespace ElementsOfHarmony.MelonLoaderReference
     {
 		public override void OnLateInitializeMelon()
 		{
-			global::ElementsOfHarmony.ElementsOfHarmony.Exist();
+			Assembly Program = Assembly.LoadFile(
+				Path.Combine(Environment.CurrentDirectory, "Elements of Harmony/Managed/ElementsOfHarmony.dll"));
+			Program.GetType("ElementsOfHarmony.ElementsOfHarmony")
+				.GetMethod("Exist")
+				.Invoke(null, Array.Empty<object>());
 		}
 	}
 }

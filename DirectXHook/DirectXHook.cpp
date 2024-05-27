@@ -938,7 +938,7 @@ begin:
 			LastError = GetLastError();
 			return -1;
 		}
-		SrcAddr += sizeof(BYTE) + sizeof(int) + Offset;
+		SrcAddr += sizeof(BYTE) + sizeof(int) + Offset; // relative address
 		goto begin;
 	}
 	if (Instruction == OpCode_jmpFF) {
@@ -954,6 +954,7 @@ begin:
 		}
 		if (TwentyFive != 25) { // I don't know what 25 means here though, I don't really know assembly code
 			LastError = E_UNEXPECTED;
+			return -1;
 		}
 
 		if (!VirtualProtect(reinterpret_cast<void*>(NewAddr + 2), 1, PAGE_EXECUTE_READWRITE, &OldProtect)) {
@@ -967,6 +968,7 @@ begin:
 		}
 		if (Zero != 0) { // I don't know what 0 means exactly
 			LastError = E_UNEXPECTED;
+			return -1;
 		}
 		
 		if (!VirtualProtect(reinterpret_cast<void*>(NewAddr + 2 + sizeof(int)), 1, PAGE_EXECUTE_READWRITE, &OldProtect)) {

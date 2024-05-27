@@ -71,7 +71,7 @@ namespace ElementsOfHarmony
 					Assembly KinectControl;
 					try
 					{
-						KinectControl = Assembly.LoadFrom($"{Assembly_Path}KinectControl.dll");
+						KinectControl = Assembly.LoadFile($"{AssemblyDirectory}ElementsOfHarmony.KinectControl.dll");
 						KinectControl.GetType("ElementsOfHarmony.KinectControl")
 							.GetMethod("Init", BindingFlags.Public | BindingFlags.Static)
 							.Invoke(null, Array.Empty<object>());
@@ -102,8 +102,6 @@ namespace ElementsOfHarmony
 		public static bool IsAMBA => UnityEngine.Application.companyName == "Melbot Studios" && UnityEngine.Application.productName == "MLP";
 		public static bool IsAZHM => UnityEngine.Application.companyName == "DrakharStudio" && UnityEngine.Application.productName == "MyLittlePonyZephyrHeights";
 
-		public static string Assembly_Path =
-			IsAMBA ? "MyLittlePonyZephyrHeights_Data/Managed/" :
-			IsAZHM ? "MyLittlePonyZephyrHeights_Data/Managed/" : "";
+		public static string AssemblyDirectory => Path.Combine(Directory.GetCurrentDirectory(), "Elements of Harmony/Managed/");
 	}
 }

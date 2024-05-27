@@ -7,10 +7,11 @@
 		<Platforms>x64</Platforms>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<BaseOutputPath>$(SolutionDir)</BaseOutputPath>
+		<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
 
 		<AssemblyTitle>ElementsOfHarmony.AZHM</AssemblyTitle>
-		<AssemblyVersion>0.3.0</AssemblyVersion>
-		<FileVersion>0.3.0</FileVersion>
+		<AssemblyVersion>0.3.1</AssemblyVersion>
+		<FileVersion>0.3.1</FileVersion>
 		<Company>wd357dui</Company>
 	</PropertyGroup>
 
@@ -20,24 +21,49 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Lib.Harmony" Version="2.3.3" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\ElementsOfHarmony\ElementsOfHarmony.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<Reference Include="0Harmony">
+			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MelonLoader\net35\0Harmony.dll</HintPath>
+			<SpecificVersion>False</SpecificVersion>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="mscorlib">
+			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\mscorlib.dll</HintPath>
+			<SpecificVersion>False</SpecificVersion>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="netstandard">
+			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\netstandard.dll</HintPath>
+			<SpecificVersion>False</SpecificVersion>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="System">
+			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\System.dll</HintPath>
+			<SpecificVersion>False</SpecificVersion>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="System.Core">
+			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\System.Core.dll</HintPath>
+			<SpecificVersion>False</SpecificVersion>
+			<Private>False</Private>
+		</Reference>
 		<Reference Include="Assembly-CSharp">
 			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\Assembly-CSharp.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
 		</Reference>
 		<Reference Include="DrakharStudio.Engine.DataTypes">
-		  <HintPath>..\..\..\..\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\DrakharStudio.Engine.DataTypes.dll</HintPath>
+		  <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\DrakharStudio.Engine.DataTypes.dll</HintPath>
+			<SpecificVersion>False</SpecificVersion>
+			<Private>False</Private>
 		</Reference>
 		<Reference Include="I2Localization">
-		  <HintPath>..\..\..\..\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\I2Localization.dll</HintPath>
+		  <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\I2Localization.dll</HintPath>
+			<SpecificVersion>False</SpecificVersion>
+			<Private>False</Private>
 		</Reference>
 		<Reference Include="Unity.Addressables">
 			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\Unity.Addressables.dll</HintPath>
@@ -51,6 +77,11 @@
 		</Reference>
 		<Reference Include="Unity.RenderPipelines.Universal.Runtime">
 			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+			<SpecificVersion>False</SpecificVersion>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Unity.ResourceManager">
+		  <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\Unity.ResourceManager.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
 		</Reference>

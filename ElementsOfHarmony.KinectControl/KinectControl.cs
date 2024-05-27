@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using Microsoft.Kinect;
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -27,7 +28,7 @@ namespace ElementsOfHarmony.KinectControl
 			{
 				Assembly KinectControl_AMBA =
 					AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(A => A.GetName().Name == "ElementsOfHarmony.KinectControl.AMBA") ??
-					Assembly.LoadFrom("MLP_Data/Managed/ElementsOfHarmony.KinectControl.AMBA.dll");
+					Assembly.LoadFile(Path.Combine(ElementsOfHarmony.AssemblyDirectory, "ElementsOfHarmony.KinectControl.AMBA.dll"));
 				Type AMBA = KinectControl_AMBA.GetType("ElementsOfHarmony.KinectControl.AMBA.KinectControl");
 				int Num = 0;
 				foreach (var Patch in AMBA.GetNestedTypes())
@@ -44,7 +45,7 @@ namespace ElementsOfHarmony.KinectControl
 			{
 				Assembly KinectControl_AZHM =
 					AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(A => A.GetName().Name == "ElementsOfHarmony.KinectControl.AZHM") ??
-					Assembly.LoadFrom("MyLittlePonyZephyrHeights_Data/Managed/ElementsOfHarmony.KinectControl.AZHM.dll");
+					Assembly.LoadFile(Path.Combine(ElementsOfHarmony.AssemblyDirectory, "ElementsOfHarmony.KinectControl.AZHM.dll"));
 				Type AZHM = KinectControl_AZHM.GetType("ElementsOfHarmony.KinectControl.AZHM.KinectControl");
 				int Num = 0;
 				foreach (var Patch in AZHM.GetNestedTypes())

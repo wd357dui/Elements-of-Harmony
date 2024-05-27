@@ -15,7 +15,8 @@ namespace ElementsOfHarmony
 	{
 		public static readonly object AudioClipMutex = new object();
 
-		public static readonly SortedDictionary<string, AudioClip> OurAudioClips = new SortedDictionary<string, AudioClip>();
+		public static readonly SortedDictionary<string, SortedDictionary<string, AudioClip>> OurAudioClips =
+			new SortedDictionary<string, SortedDictionary<string, AudioClip>>();
 		public static readonly HashSet<UnityWebRequestAsyncOperation> AudioClipLoadingOperations = new HashSet<UnityWebRequestAsyncOperation>();
 		public static readonly ManualResetEventSlim AudioClipsLoadedEvent = new ManualResetEventSlim(false);
 		public static volatile bool AudioClipsLoaded = false;
@@ -45,6 +46,8 @@ namespace ElementsOfHarmony
 				int numAudioClips = 0;
 				void LoadAudioClips(string directory)
 				{
+					string lang = Path.GetFileName(directory.TrimEnd('/', '\\'));
+					OurAudioClips[lang] = new SortedDictionary<string, AudioClip>();
 					IEnumerable<string> files = Directory.EnumerateFiles(directory);
 					foreach (string f in files)
 					{
@@ -59,30 +62,21 @@ namespace ElementsOfHarmony
 							}
 						}
 					}
-				}
-				void LoadAudioClipsRecursive(string directory)
-				{
-					IEnumerable<string> directories = Directory.EnumerateDirectories(directory, "*", SearchOption.AllDirectories).
-						Append(Path.GetFullPath(directory));
-					foreach (string currentDirectory in directories)
+					void AudioClipLoadComplete(AsyncOperation op)
 					{
-						LoadAudioClips(currentDirectory);
-					}
-				}
-				void AudioClipLoadComplete(AsyncOperation op)
-				{
-					UnityWebRequestAsyncOperation req = (UnityWebRequestAsyncOperation)op;
-					AudioClip clip = DownloadHandlerAudioClip.GetContent(req.webRequest);
-					string term = Path.GetFileNameWithoutExtension(new Uri(req.webRequest.url).LocalPath);
-					lock (AudioClipMutex)
-					{
-						OurAudioClips[term] = clip;
-						Log.Message("Audio clip loaded: " + term);
-						AudioClipLoadingOperations.Remove(req);
-						if (AudioClipLoadingOperations.Count == 0)
+						UnityWebRequestAsyncOperation req = (UnityWebRequestAsyncOperation)op;
+						AudioClip clip = DownloadHandlerAudioClip.GetContent(req.webRequest);
+						string term = Path.GetFileNameWithoutExtension(new Uri(req.webRequest.url).LocalPath);
+						lock (AudioClipMutex)
 						{
-							AudioClipsLoaded = true;
-							AudioClipsLoadedEvent.Set();
+							OurAudioClips[lang][term] = clip;
+							Log.Message($"Audio clip loaded: lang={lang}, term={term}");
+							AudioClipLoadingOperations.Remove(req);
+							if (AudioClipLoadingOperations.Count == 0)
+							{
+								AudioClipsLoaded = true;
+								AudioClipsLoadedEvent.Set();
+							}
 						}
 					}
 				}
@@ -94,7 +88,7 @@ namespace ElementsOfHarmony
 						.Where(D => Directory.Exists(D));
 					foreach (var lang in langs)
 					{
-						LoadAudioClipsRecursive(lang);
+						LoadAudioClips(lang);
 					}
 					Log.Message($"{numAudioClips} audio clips queued for loading");
 				}
@@ -105,7 +99,7 @@ namespace ElementsOfHarmony
 						.Where(D => Directory.Exists(D));
 					foreach (var lang in langs)
 					{
-						LoadAudioClipsRecursive(lang);
+						LoadAudioClips(lang);
 					}
 					Log.Message($"{numAudioClips} audio clips queued for loading");
 				}
@@ -134,9 +128,7 @@ namespace ElementsOfHarmony
 					// file name of the txt should be the ISO language code
 					// the content should be tab-separated values (TSV)
 					// see readme file for content specifications
-					string langCode = f.Remove(f.LastIndexOf("."));
-					langCode = langCode.Replace("\\", "/");
-					langCode = langCode[(langCode.LastIndexOf("/") + 1)..];
+					string langCode = Path.GetFileNameWithoutExtension(f);
 					SortedDictionary<string, string> Translations = new SortedDictionary<string, string>();
 					OurTranslations.Add(langCode, Translations);
 					using (StreamReader reader = new StreamReader(f))
@@ -236,7 +228,7 @@ namespace ElementsOfHarmony
 				{
 					Assembly ElementsOfHarmony_AMBA =
 						AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(A => A.GetName().Name == "ElementsOfHarmony.AMBA") ??
-						Assembly.LoadFrom("MLP_Data/Managed/ElementsOfHarmony.AMBA.dll");
+						Assembly.LoadFile(Path.Combine(ElementsOfHarmony.AssemblyDirectory, "ElementsOfHarmony.AMBA.dll"));
 					if (ElementsOfHarmony_AMBA.GetType("ElementsOfHarmony.AMBA.Localization") is Type Localization_AMBA)
 					{
 						if (Localization_AMBA.GetMethod("Exist") is MethodInfo ExistMethod)
@@ -259,7 +251,7 @@ namespace ElementsOfHarmony
 				{
 					Assembly ElementsOfHarmony_AZHM =
 						AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(A => A.GetName().Name == "ElementsOfHarmony.AZHM") ??
-						Assembly.LoadFrom("MyLittlePonyZephyrHeights_Data/Managed/ElementsOfHarmony.AZHM.dll");
+						Assembly.LoadFile(Path.Combine(ElementsOfHarmony.AssemblyDirectory, "ElementsOfHarmony.AZHM.dll"));
 					if (ElementsOfHarmony_AZHM.GetType("ElementsOfHarmony.AZHM.Localization") is Type Localization_AZHM)
 					{
 						if (Localization_AZHM.GetMethod("Exist") is MethodInfo ExistMethod)

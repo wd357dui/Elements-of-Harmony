@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -17,17 +16,17 @@ namespace ElementsOfHarmony
 		public static bool DebugLog = true;
 		public static string DebugLogFile = "Elements of Harmony/Elements of Harmony.log";
 
-		private static string OurSelectedLanguageOverride_Internal = CultureInfo.CurrentCulture.Name;
-		private static string OurFallbackLanguage_Internal = "en-US";
+		private static string OurSelectedLanguageOverride_Internal = "";
+		private static string OurSelectedAudioLanguageOverride_Internal = "";
 		public static string OurSelectedLanguageOverride
 		{
 			get { return OurSelectedLanguageOverride_Internal; }
 			set { OurSelectedLanguageOverride_Internal = value; try { WriteOurSettings(); } catch (Exception) { } }
 		}
-		public static string OurFallbackLanguage
+		public static string OurSelectedAudioLanguageOverride
 		{
-			get { return OurFallbackLanguage_Internal; }
-			set { OurFallbackLanguage_Internal = value; try { WriteOurSettings(); } catch (Exception) { } }
+			get { return OurSelectedAudioLanguageOverride_Internal; }
+			set { OurSelectedAudioLanguageOverride_Internal = value; try { WriteOurSettings(); } catch (Exception) { } }
 		}
 
 		public static class DirectXHook
@@ -96,17 +95,17 @@ namespace ElementsOfHarmony
 			// nowadays I use this to store all kinds of settings
 
 			Config = new EnvFile("Elements of Harmony/Settings.txt"); // thanks Ponywka for writing `EnvFile` by the way
-			OurSelectedLanguageOverride_Internal = Config.ReadString("OurSelectedLanguageOverride", OurSelectedLanguageOverride_Internal)!;
-			OurFallbackLanguage_Internal = Config.ReadString("OurFallbackLanguage", OurFallbackLanguage_Internal)!;
+			OurSelectedLanguageOverride_Internal = Config!.ReadString("OurSelectedLanguageOverride", OurSelectedLanguageOverride_Internal)!;
+			OurSelectedAudioLanguageOverride_Internal = Config!.ReadString("OurSelectedAudioLanguageOverride", OurSelectedAudioLanguageOverride_Internal)!;
 
-			Debug = Config.ReadBoolean("Debug", Debug);
+			Debug = Config!.ReadBoolean("Debug", Debug);
 
-			DebugTCPEnabled = Config.ReadBoolean("Debug.TCP.Enabled", DebugTCPEnabled);
-			DebugTCPIP = Config.ReadString("Debug.TCP.IP", DebugTCPIP)!;
-			DebugTCPPort = Config.ReadInteger("Debug.TCP.Port", DebugTCPPort);
+			DebugTCPEnabled = Config!.ReadBoolean("Debug.TCP.Enabled", DebugTCPEnabled);
+			DebugTCPIP = Config!.ReadString("Debug.TCP.IP", DebugTCPIP)!;
+			DebugTCPPort = Config!.ReadInteger("Debug.TCP.Port", DebugTCPPort)!;
 
-			DebugLog = Config.ReadBoolean("Debug.Log.Enabled", DebugLog);
-			DebugLogFile = Config.ReadString("Debug.Log.File", DebugLogFile)!;
+			DebugLog = Config!.ReadBoolean("Debug.Log.Enabled", DebugLog);
+			DebugLogFile = Config!.ReadString("Debug.Log.File", DebugLogFile)!;
 
 			void ReadSettingsForClass(Type ClassType)
 			{
@@ -173,13 +172,11 @@ namespace ElementsOfHarmony
 			{
 				ReadSettingsForClass(Nested);
 			}
-
-			WriteOurSettings();
 		}
 		public static void WriteOurSettings()
 		{
 			Config!.WriteString("OurSelectedLanguageOverride", OurSelectedLanguageOverride);
-			Config!.WriteString("OurFallbackLanguage", OurFallbackLanguage);
+			Config!.WriteString("OurSelectedAudioLanguageOverride", OurSelectedAudioLanguageOverride);
 
 			Config!.WriteBoolean("Debug", Debug);
 
@@ -248,7 +245,7 @@ namespace ElementsOfHarmony
 				WriteSettingsForClass(Nested);
 			}
 
-			Config.SaveConfig();
+			Config!.SaveConfig();
 		}
 	}
 }
