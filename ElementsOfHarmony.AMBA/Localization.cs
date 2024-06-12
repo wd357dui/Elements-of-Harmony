@@ -521,7 +521,7 @@ namespace ElementsOfHarmony.AMBA
 						AdditionalActionPre = () =>
 						{
 							__instance.StartCoroutine((IEnumerator)
-								AccessTools.Method(typeof(MinigameBase), "InitializeTutorialAndGame")
+								AccessTools.Method(ActualGame.GetType(), "InitializeTutorialAndGame")
 								.Invoke(ActualGame, Array.Empty<object>()));
 						};
 						if (ActualGame is DashThroughTheSkyMiniGame &&
@@ -548,7 +548,7 @@ namespace ElementsOfHarmony.AMBA
 					}
 				}
 				else if (currentPhase.Value is TutorialPhase &&
-					nextPhase is CountDownPhase &&
+					nextPhase is CountDownPhase countDown &&
 					nextNextPhase is GameplayPhase gameplay)
 				{
 					MinigameBase ActualGame = Traverse.Create(gameplay).Field<MinigameBase>("minigameBase").Value;
@@ -563,6 +563,12 @@ namespace ElementsOfHarmony.AMBA
 						Log.Message("countdown is about to begin, load level for HerdingCrabsMinigame in advance");
 						// so that it would not change in a sudden after "3, 2, 1, go"
 						HerdingCrabsMinigamePatch.StartGameFirstHalf(crabs);
+					}
+					else if (ActualGame is FashionShowMinigame dance)
+					{
+						dance.StartGame();
+						dance.audioSource.Stop(); // crappy solution but it just works
+						dance.introSource.Play(); // crappy solution but it just works
 					}
 					else if (ActualGame is Runner1MiniGame runner)
 					{
@@ -601,26 +607,19 @@ namespace ElementsOfHarmony.AMBA
 		{
 			public static void Postfix(SequenceNode __instance)
 			{
-				int DisableCameraNodeIndex = __instance.nodes.FindIndex(N => N is EnableGameObjectNode);
-				int GoCountDownIndex = __instance.nodes.FindIndex(N => N is GoCountDownNode);
-				if (GoCountDownIndex >= 0 && DisableCameraNodeIndex >= 0 &&
-					GoCountDownIndex > DisableCameraNodeIndex)
+				if (__instance.nodes.Any(N => N is GoCountDownNode))
 				{
-					int RedundantTimerIndex;
-					do
-					{
-						TimerNode? RedundantTimer = null;
-						RedundantTimerIndex = __instance.nodes.FindIndex(DisableCameraNodeIndex,
-							N => (RedundantTimer = (TimerNode)N) != null &&
+				repeat:
+					TimerNode? RedundantTimer = null;
+					int RedundantTimerIndex = __instance.nodes.FindIndex(N => (RedundantTimer = N as TimerNode) != null &&
 							RedundantTimer.total > 0.0f && RedundantTimer.total < 3.0f);
-						if (RedundantTimerIndex >= 0 && RedundantTimer != null)
-						{
-							Log.Message($"Removing redundant timer for countdown phase, " +
-								$"name={RedundantTimer.name} time={RedundantTimer.total}");
-							__instance.nodes.RemoveAt(RedundantTimerIndex);
-						}
+					if (RedundantTimerIndex >= 0 && RedundantTimer != null)
+					{
+						Log.Message($"Removing redundant timer for countdown phase, " +
+							$"name={RedundantTimer.name} time={RedundantTimer.total}");
+						__instance.nodes.RemoveAt(RedundantTimerIndex);
+						goto repeat;
 					}
-					while (RedundantTimerIndex >= 0);
 				}
 			}
 		}
@@ -786,7 +785,7 @@ namespace ElementsOfHarmony.AMBA
 				}
 				gui.SetGameMode(__instance.Mode, copp: true, list);
 				gui.PauseTimer();
-				Traverse.Create(__instance).Field<List<HerdingCrabsMinigame.BonusLimit>>("crabsBonusLimits").Value = 
+				Traverse.Create(__instance).Field<List<HerdingCrabsMinigame.BonusLimit>>("crabsBonusLimits").Value =
 					crabsBonusLimits.OrderByDescending((HerdingCrabsMinigame.BonusLimit t) => t.numberOfAnimals).ToList();
 				Traverse.Create(__instance).Field<List<HerdingCrabsMinigame.BonusLimit>>("bunniesBonusLimits").Value =
 					bunniesBonusLimits.OrderByDescending((HerdingCrabsMinigame.BonusLimit t) => t.numberOfAnimals).ToList();
@@ -907,14 +906,17 @@ namespace ElementsOfHarmony.AMBA
 					return null;
 				}
 
-				Log.Message("applying fix for dancing game");
+				Log.Message("applying evaluation text fix for dancing game");
 
 				// set evaluation text active
 				__instance.fashionShowCombo.smsPivote.gameObject.SetActive(true);
 
 				// adjust emoji position
 				GameObject emojis = Find(__instance.gameObject, "emojis")!;
-				emojis.GetComponent<RectTransform>().position += new Vector3(0, 1.0f, 0);
+				RectTransform rectTransform = emojis.GetComponent<RectTransform>();
+				var position = rectTransform.position;
+				position.y = 1.0f;
+				rectTransform.position = position;
 			}
 		}
 
@@ -924,6 +926,14 @@ namespace ElementsOfHarmony.AMBA
 			public static void Prefix(FashionShowCombo fashionShowCombo)
 			{
 				fashionShowCombo.sms.Rebind();
+			}
+			public static void Postfix(FashionShowCombo fashionShowCombo)
+			{
+				// original position is (-4.2f, -2.8f, 19.0f) for singleplayer
+				// change it so that it doesn't block other stuff and doesn't get blocked
+				var position = fashionShowCombo.smsPivote.position;
+				position.y = -1.7f;
+				fashionShowCombo.smsPivote.position = position;
 			}
 		}
 

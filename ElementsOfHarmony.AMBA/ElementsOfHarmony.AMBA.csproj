@@ -10,13 +10,18 @@
 		<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
 
 		<AssemblyTitle>ElementsOfHarmony.AMBA</AssemblyTitle>
-		<AssemblyVersion>0.3.1</AssemblyVersion>
-		<FileVersion>0.3.1</FileVersion>
+		<AssemblyVersion>0.3.2</AssemblyVersion>
+		<FileVersion>0.3.2</FileVersion>
 		<Company>wd357dui</Company>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Dance.cs" />
     <Compile Include="Localization.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="2.3.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,11 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="0Harmony">
-			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MelonLoader\net35\0Harmony.dll</HintPath>
-			<SpecificVersion>False</SpecificVersion>
-			<Private>False</Private>
-    </Reference>
 		<Reference Include="mscorlib">
 			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\mscorlib.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>

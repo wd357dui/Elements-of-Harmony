@@ -885,7 +885,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElementsOfHarmony.KinectCon
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{0485FC13-6E30-4A74-AC33-4E84F7A81A6C}"
 	ProjectSection(SolutionItems) = preProject
-		Build\All.bat = Build\All.bat
+		Build\All_Debug.bat = Build\All_Debug.bat
+		Build\All_Release.bat = Build\All_Release.bat
 		Build\BepInEx.bat = Build\BepInEx.bat
 		Build\MelonLoader.bat = Build\MelonLoader.bat
 		Build\Standalone.bat = Build\Standalone.bat
@@ -907,6 +908,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AZHM", "AZHM", "{0DD9EF20-7
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElementsOfHarmony.BepInExReference", "ElementsOfHarmony.BepInExReference\ElementsOfHarmony.BepInExReference.csproj", "{359A90D1-6901-4174-ADB6-5BEC71BA6529}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Minigame", "Minigame", "{864F4658-9E8C-43BB-8772-3560F96CD8A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dance", "Dance", "{82035D7B-203D-4B87-8913-41D14AB31335}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\Minigame\Dance\Starbound.lrc = Assets\Minigame\Dance\Starbound.lrc
+		Assets\Minigame\Dance\Starbound.ogg = Assets\Minigame\Dance\Starbound.ogg
+		Assets\Minigame\Dance\Starbound.txt = Assets\Minigame\Dance\Starbound.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElememsOfHarmony.Standalone", "ElememsOfHarmony.Standalone\ElememsOfHarmony.Standalone.csproj", "{5C40B0A0-7DED-4500-8277-51AAE159685E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Font", "Font", "{3AEEBFFB-D58C-408E-949B-936CDEA0BFE2}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\Font\Dimbo Regular.ttf = Assets\Font\Dimbo Regular.ttf
+		Assets\Font\MLP-FindYourSparkle.otf = Assets\Font\MLP-FindYourSparkle.otf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -947,8 +965,13 @@ Global
 		{D7F07F62-0309-4E25-80FD-F85A85F829F6}.Release|x64.ActiveCfg = Release|x64
 		{D7F07F62-0309-4E25-80FD-F85A85F829F6}.Release|x64.Build.0 = Release|x64
 		{359A90D1-6901-4174-ADB6-5BEC71BA6529}.Debug|x64.ActiveCfg = Debug|x64
+		{359A90D1-6901-4174-ADB6-5BEC71BA6529}.Debug|x64.Build.0 = Debug|x64
 		{359A90D1-6901-4174-ADB6-5BEC71BA6529}.Release|x64.ActiveCfg = Release|x64
 		{359A90D1-6901-4174-ADB6-5BEC71BA6529}.Release|x64.Build.0 = Release|x64
+		{5C40B0A0-7DED-4500-8277-51AAE159685E}.Debug|x64.ActiveCfg = Debug|x64
+		{5C40B0A0-7DED-4500-8277-51AAE159685E}.Debug|x64.Build.0 = Debug|x64
+		{5C40B0A0-7DED-4500-8277-51AAE159685E}.Release|x64.ActiveCfg = Release|x64
+		{5C40B0A0-7DED-4500-8277-51AAE159685E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -963,6 +986,9 @@ Global
 		{EE1E8F6B-5B46-4A5B-9E79-C09851FE9DBE} = {595768C5-9C2E-438F-8DD6-D79623807F65}
 		{8F641D79-AA5C-41EF-B507-D756EE99F088} = {FC9288EB-C9DD-4029-A486-D6CE4ABFD439}
 		{0DD9EF20-753A-4DD4-A512-3E72DD7B2347} = {FC9288EB-C9DD-4029-A486-D6CE4ABFD439}
+		{864F4658-9E8C-43BB-8772-3560F96CD8A9} = {05946EF0-6CF5-4B9A-A6EE-326163C31039}
+		{82035D7B-203D-4B87-8913-41D14AB31335} = {864F4658-9E8C-43BB-8772-3560F96CD8A9}
+		{3AEEBFFB-D58C-408E-949B-936CDEA0BFE2} = {05946EF0-6CF5-4B9A-A6EE-326163C31039}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22A4A59C-B668-4B2B-93D8-06A5D6B0FF85}

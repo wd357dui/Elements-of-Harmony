@@ -28,9 +28,11 @@ namespace ElementsOfHarmony
 			return pInstance.GetHashCode();
 		}
 
-		protected Unknown(IntPtr pInstance)
+		protected List<Delegate?> VTable = new List<Delegate?>();
+		protected Unknown(IntPtr pInstance, int MethodCount = 3)
 		{
 			this.pInstance = pInstance;
+			VTable.AddRange(Enumerable.Repeat<Delegate?>(null, MethodCount));
 		}
 
 		/// <summary>
@@ -38,11 +40,12 @@ namespace ElementsOfHarmony
 		/// </summary>
 		protected object Invoke<T>(int Index, params object[] args) where T : Delegate
 		{
-			if (!VTable.TryGetValue(Index, out Delegate Function))
+			if (VTable.Count <= Index)
 			{
-				VTable.Add(Index, Function = Marshal.GetDelegateForFunctionPointer<T>(this[Index]));
+				VTable.AddRange(Enumerable.Repeat<Delegate?>(null, Index - VTable.Count + 1));
 			}
-			return Function.DynamicInvoke(args.Prepend(pInstance).ToArray());
+			Delegate Method = VTable[Index] ??= Marshal.GetDelegateForFunctionPointer<T>(this[Index]);
+			return Method.DynamicInvoke(args.Prepend(pInstance).ToArray());
 		}
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
@@ -56,8 +59,6 @@ namespace ElementsOfHarmony
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate uint ReleaseProc(IntPtr pInstance);
 		public uint Release() => (uint)Invoke<ReleaseProc>(2);
-
-		protected Dictionary<int, Delegate> VTable = new Dictionary<int, Delegate>();
 
 		private bool disposedValue;
 

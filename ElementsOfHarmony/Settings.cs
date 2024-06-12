@@ -84,7 +84,16 @@ namespace ElementsOfHarmony
 			}
 		}
 
-		public static void ReadOurSettings()
+		public static class Dance
+		{
+			public static bool Enabled = true;
+			public static class Customization
+			{
+				public static bool Enabled = true;
+			}
+		}
+
+        public static void ReadOurSettings()
 		{
 			// this settings exist originally because the game can't save a language setting that it doesn't originally support
 			// into the game save

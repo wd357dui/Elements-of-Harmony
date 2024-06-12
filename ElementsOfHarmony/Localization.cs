@@ -112,7 +112,7 @@ namespace ElementsOfHarmony
 			catch (Exception e)
 			{
 			repeat:
-				Log.Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
+				Log.Message($"{typeof(Localization).FullName} - {e.GetType()}\n{e.StackTrace}\n{e.Message}");
 				if (e.InnerException != null)
 				{
 					e = e.InnerException;
@@ -198,20 +198,28 @@ namespace ElementsOfHarmony
 			try
 			{
 				// load fallback fonts into TMP's fallback fonts
-				foreach (string fallback in Font.GetPathsToOSFonts())
+				if (Directory.Exists("Elements of Harmony/Assets/Font"))
 				{
-					try
+					var Fonts = Directory.EnumerateFiles("Elements of Harmony/Assets/Font")
+						.Where(F => F.EndsWith(".ttf", StringComparison.InvariantCultureIgnoreCase) ||
+									F.EndsWith(".otf", StringComparison.InvariantCultureIgnoreCase));
+					foreach (var Font in Fonts)
 					{
 						TMP_Settings.fallbackFontAssets.Add(TMP_FontAsset.CreateFontAsset(
-							new Font(fallback)));
+							new Font(Font)));
 					}
-					catch { }
+				}
+				TMP_Settings.fallbackFontAssets.Add(TMP_FontAsset.CreateFontAsset(new Font()));
+				foreach (string fallback in Font.GetPathsToOSFonts())
+				{
+					TMP_Settings.fallbackFontAssets.Add(TMP_FontAsset.CreateFontAsset(
+						new Font(fallback)));
 				}
 			}
 			catch (Exception e)
 			{
 			repeat:
-				Log.Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
+				Log.Message($"{typeof(Localization).FullName} - {e.GetType()}\n{e.StackTrace}\n{e.Message}");
 				if (e.InnerException != null)
 				{
 					e = e.InnerException;
@@ -274,7 +282,7 @@ namespace ElementsOfHarmony
 			catch (Exception e)
 			{
 			repeat:
-				Log.Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
+				Log.Message($"{typeof(Localization).FullName} - {e.GetType()}\n{e.StackTrace}\n{e.Message}");
 				if (e.InnerException != null)
 				{
 					e = e.InnerException;

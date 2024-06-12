@@ -376,7 +376,7 @@ namespace ElementsOfHarmony
 						}
 						Log.Message($"NewColorAdjustments.active={NewColorAdjustments.active}");
 
-						void OnActiveSceneChanged(Scene Old, Scene New)
+						static void OnActiveSceneChanged(Scene Old, Scene New)
 						{
 							SceneManager.MoveGameObjectToScene(NewGlobalVolumeGameObject, New);
 							UnityEngine.Object.DontDestroyOnLoad(NewGlobalVolumeGameObject);
@@ -828,12 +828,12 @@ namespace ElementsOfHarmony
 				public IntPtr _LocalFullscreenDesc;
 
 				[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006: (Naming rule violation)", Justification = "This is intentional")]
-				public IntPtr pFullscreenDesc
+				public readonly IntPtr pFullscreenDesc
 				{
 					get => Marshal.ReadIntPtr(_pFullscreenDesc);
 					set => Marshal.WriteIntPtr(_pFullscreenDesc, value);
 				}
-				public DXGI_SWAP_CHAIN_FULLSCREEN_DESC? OriginalFullscreenDesc
+				public readonly DXGI_SWAP_CHAIN_FULLSCREEN_DESC? OriginalFullscreenDesc
 				{
 					get
 					{
@@ -847,7 +847,7 @@ namespace ElementsOfHarmony
 						}
 					}
 				}
-				public DXGI_SWAP_CHAIN_FULLSCREEN_DESC LocalFullscreenDesc
+				public readonly DXGI_SWAP_CHAIN_FULLSCREEN_DESC LocalFullscreenDesc
 				{
 					get => Marshal.PtrToStructure<DXGI_SWAP_CHAIN_FULLSCREEN_DESC>(_LocalFullscreenDesc);
 					set => Marshal.StructureToPtr(value, _LocalFullscreenDesc, false);
@@ -1296,13 +1296,13 @@ namespace ElementsOfHarmony
 		{
 			public int Left, Top, Right, Bottom;
 			public int Width
-			{ 
-				get => Right - Left;
+			{
+				readonly get => Right - Left;
 				set => Right = Left + value;
 			}
 			public int Height
 			{
-				get => Bottom - Top;
+				readonly get => Bottom - Top;
 				set => Bottom = Top + value;
 			}
 		}
@@ -1320,7 +1320,7 @@ namespace ElementsOfHarmony
 			public IntPtr pDirtyRects;
 			public IntPtr pScrollRect;
 			public IntPtr pScrollOffset;
-			public NativeArrayAccess<RECT>? DirtyRects
+			public readonly NativeArrayAccess<RECT>? DirtyRects
 			{
 				get
 				{
@@ -1336,7 +1336,7 @@ namespace ElementsOfHarmony
 			}
 			public RECT? ScrollRect
 			{
-				get
+				readonly get
 				{
 					if (pScrollRect != IntPtr.Zero)
 					{
@@ -1356,7 +1356,7 @@ namespace ElementsOfHarmony
 			}
 			public POINT? ScrollOffset
 			{
-				get
+				readonly get
 				{
 					if (pScrollRect != IntPtr.Zero)
 					{

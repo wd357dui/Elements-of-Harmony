@@ -3,6 +3,13 @@ REM Remove the directory if it exists
 IF EXIST "..\publish\Standalone" (
     rmdir /S /Q "..\publish\Standalone"
 )
+IF NOT DEFINED BuildType (
+    set /p BuildType="Please specify build type (Release/Debug): "
+)
+IF "%BuildType%"=="" (
+    echo No build type entered. Defaulting to Release.
+    set BuildType=Release
+)
 
 REM Create directories
 mkdir "..\publish"
@@ -24,15 +31,20 @@ copy "..\Patch\AZHM\globalgamemanagers.assets" "..\publish\Standalone\MyLittlePo
 copy "..\Patch\AZHM\RuntimeInitializeOnLoads.json" "..\publish\Standalone\MyLittlePonyZephyrHeights_Data\RuntimeInitializeOnLoads.json"
 copy "..\Patch\AZHM\ScriptingAssemblies.json" "..\publish\Standalone\MyLittlePonyZephyrHeights_Data\ScriptingAssemblies.json"
 
-copy "..\x64\Release\DirectXHook.dll" "..\publish\Standalone\DirectXHook.dll"
+copy "..\x64\%BuildType%\DirectXHook.dll" "..\publish\Standalone\DirectXHook.dll"
 
-copy "..\x64\Release\netstandard2.1\0Harmony.dll" "..\publish\Standalone\Elements of Harmony\0Harmony.dll"
+copy "..\x64\%BuildType%\0Harmony.dll" "..\publish\Standalone\MLP_Data\Managed\0Harmony.dll"
+copy "..\x64\%BuildType%\netstandard2.1\ElementsOfHarmony.dll" "..\publish\Standalone\MLP_Data\Managed\ElementsOfHarmony.dll"
 
-copy "..\x64\Release\netstandard2.1\ElementsOfHarmony.dll" "..\publish\Standalone\MLP_Data\Managed\ElementsOfHarmony.dll"
-copy "..\x64\Release\netstandard2.1\ElementsOfHarmony.dll" "..\publish\Standalone\MyLittlePonyZephyrHeights_Data\Managed\ElementsOfHarmony.dll"
+copy "..\x64\%BuildType%\0Harmony.dll" "..\publish\Standalone\MyLittlePonyZephyrHeights_Data\Managed\0Harmony.dll"
+copy "..\x64\%BuildType%\netstandard2.1\ElementsOfHarmony.dll" "..\publish\Standalone\MyLittlePonyZephyrHeights_Data\Managed\ElementsOfHarmony.dll"
 
-copy "..\x64\Release\netstandard2.1\ElementsOfHarmony.AMBA.dll" "..\publish\Standalone\Elements of Harmony\Managed\ElementsOfHarmony.AMBA.dll"
-copy "..\x64\Release\netstandard2.1\ElementsOfHarmony.AZHM.dll" "..\publish\Standalone\Elements of Harmony\Managed\ElementsOfHarmony.AZHM.dll"
-copy "..\x64\Release\netstandard2.1\ElementsOfHarmony.KinectControl.dll" "..\publish\Standalone\Elements of Harmony\Managed\ElementsOfHarmony.KinectControl.dll"
-copy "..\x64\Release\netstandard2.1\ElementsOfHarmony.KinectControl.AMBA.dll" "..\publish\Standalone\Elements of Harmony\Managed\ElementsOfHarmony.KinectControl.AMBA.dll"
-copy "..\x64\Release\netstandard2.1\ElementsOfHarmony.KinectControl.AZHM.dll" "..\publish\Standalone\Elements of Harmony\Managed\ElementsOfHarmony.KinectControl.AZHM.dll"
+copy "..\x64\%BuildType%\netstandard2.1\ElementsOfHarmony.AMBA.dll" "..\publish\Standalone\Elements of Harmony\Managed\ElementsOfHarmony.AMBA.dll"
+copy "..\x64\%BuildType%\netstandard2.1\ElementsOfHarmony.AZHM.dll" "..\publish\Standalone\Elements of Harmony\Managed\ElementsOfHarmony.AZHM.dll"
+copy "..\x64\%BuildType%\netstandard2.1\ElementsOfHarmony.KinectControl.dll" "..\publish\Standalone\Elements of Harmony\Managed\ElementsOfHarmony.KinectControl.dll"
+copy "..\x64\%BuildType%\netstandard2.1\ElementsOfHarmony.KinectControl.AMBA.dll" "..\publish\Standalone\Elements of Harmony\Managed\ElementsOfHarmony.KinectControl.AMBA.dll"
+copy "..\x64\%BuildType%\netstandard2.1\ElementsOfHarmony.KinectControl.AZHM.dll" "..\publish\Standalone\Elements of Harmony\Managed\ElementsOfHarmony.KinectControl.AZHM.dll"
+
+IF NOT DEFINED Pausing (
+    pause
+)

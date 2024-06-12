@@ -96,6 +96,11 @@ namespace ElementsOfHarmony
 						}
 					}
 				}
+
+				if (Settings.Dance.Enabled)
+				{
+					Dance.Init();
+				}
 			}
 		}
 
