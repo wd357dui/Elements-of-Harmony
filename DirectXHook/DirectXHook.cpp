@@ -2,50 +2,42 @@
 
 using namespace std;
 
+void ForceBreakpoint();
+
+struct Arguments;
+typedef void(__stdcall* CallbackProc)(Arguments* Args);
+typedef void(__stdcall* LogCallbackProc)(LPCWSTR Message);
+CallbackProc HookCallback = nullptr;
+LogCallbackProc LogCallback = nullptr;
+
+atomic_bool Running = false;
+
 extern "C" {
 	__declspec(dllexport) HRESULT __stdcall InstallHook();
 	__declspec(dllexport) HRESULT __stdcall UninstallHook();
-	__declspec(dllexport) HRESULT __stdcall SetRunning(bool Running);
+	__declspec(dllexport) void __stdcall SetRunning(bool Running);
 
-	__declspec(dllexport) int __stdcall BeginProcessCompletionEvent();
-	__declspec(dllexport) HRESULT __stdcall EndProcessCompletionEvent();
+	__declspec(dllexport) void __stdcall SetCallbacks(CallbackProc HookCallback, LogCallbackProc LogCallback);
 
-	__declspec(dllexport) UINT __stdcall GetCurrentBufferIndex();
+	__declspec(dllexport) intptr_t __stdcall Get_Present_MemoryOriginal_Proc();
+	__declspec(dllexport) intptr_t __stdcall Get_Present1_MemoryOriginal_Proc();
+	__declspec(dllexport) BYTE* __stdcall Get_Present_MemoryOriginal_Bytes();
+	__declspec(dllexport) BYTE* __stdcall Get_Present1_MemoryOriginal_Bytes();
+	__declspec(dllexport) bool __stdcall Get_Present_DetourHookDetected();
+	__declspec(dllexport) bool __stdcall Get_Present1_DetourHookDetected();
 
-	__declspec(dllexport) intptr_t __stdcall Get_DXGI_DLL_Address();
+	__declspec(dllexport) intptr_t __stdcall Get_D3D11_DLL_BaseAddress();
+	__declspec(dllexport) intptr_t __stdcall Get_DXGI_DLL_BaseAddress();
+	__declspec(dllexport) intptr_t __stdcall Get_GameOverlayRenderer64_DLL_BaseAddress();
+	__declspec(dllexport) DWORD __stdcall Get_D3D11_DLL_ImageSize();
 	__declspec(dllexport) DWORD __stdcall Get_DXGI_DLL_ImageSize();
-	__declspec(dllexport) intptr_t __stdcall Get_IDXGISwapChain_Present_Original();
-	__declspec(dllexport) intptr_t __stdcall Get_IDXGISwapChain1_Present1_Original();
-	__declspec(dllexport) intptr_t __stdcall Get_IDXGIFactory_CreateSwapChain_Original();
-	__declspec(dllexport) intptr_t __stdcall Get_IDXGIFactory2_CreateSwapChainForHwnd_Original();
-
-	__declspec(dllexport) void** __stdcall Get_LocalVariablesArray();
-
-	__declspec(dllexport) bool __stdcall Get_Present_PreviousDetourHookDetected();
-	__declspec(dllexport) bool __stdcall Get_Present1_PreviousDetourHookDetected();
-	__declspec(dllexport) intptr_t __stdcall Get_GameOverlayRenderer64_DLL_Address();
 	__declspec(dllexport) DWORD __stdcall Get_GameOverlayRenderer64_DLL_ImageSize();
-	__declspec(dllexport) bool __stdcall Get_Present_HasOriginalFirstFiveBytesOfInstruction();
-	__declspec(dllexport) bool __stdcall Get_Present1_HasOriginalFirstFiveBytesOfInstruction();
-	__declspec(dllexport) bool __stdcall Get_Present_HasLoadedFirstFiveBytesOfInstruction();
-	__declspec(dllexport) bool __stdcall Get_Present1_HasLoadedFirstFiveBytesOfInstruction();
-	__declspec(dllexport) void __stdcall Refresh_Present_LoadedFirstFiveBytesOfInstruction();
-	__declspec(dllexport) void __stdcall Refresh_Present1_LoadedFirstFiveBytesOfInstruction();
-	__declspec(dllexport) intptr_t __stdcall Get_Present_OriginalFirstFiveBytesOfInstruction();
-	__declspec(dllexport) intptr_t __stdcall Get_Present1_OriginalFirstFiveBytesOfInstruction();
-	__declspec(dllexport) intptr_t __stdcall Get_Present_LoadedFirstFiveBytesOfInstruction();
-	__declspec(dllexport) intptr_t __stdcall Get_Present1_LoadedFirstFiveBytesOfInstruction();
 
 	/// <returns>1 for true, 0 for false, -1 for error</returns>
-	__declspec(dllexport) int __stdcall JmpEndsUpInRange(intptr_t SrcAddr, intptr_t RangeStart, DWORD Size);
-	__declspec(dllexport) BYTE __stdcall JmpEndsUpInRange_LastInstruction();
-	__declspec(dllexport) intptr_t __stdcall JmpEndsUpInRange_LastAddress();
-	__declspec(dllexport) DWORD __stdcall JmpEndsUpInRange_LastError();
+	__declspec(dllexport) bool __stdcall JmpEndsUpInRange(intptr_t SrcAddr, intptr_t RangeStart, DWORD Size);
 }
 
-typedef HRESULT(STDMETHODCALLTYPE* IDXGISwapChain_Present_Proc)(IDXGISwapChain* This, UINT SyncInterval, UINT Flags);
-typedef HRESULT(STDMETHODCALLTYPE* IDXGISwapChain1_Present1_Proc)(IDXGISwapChain1* This, UINT SyncInterval, UINT Flags,
-	_In_ const DXGI_PRESENT_PARAMETERS* pPresentParameters);
+typedef HRESULT(STDMETHODCALLTYPE* IUnknown_Release_Proc)(IUnknown* This);
 typedef HRESULT(STDMETHODCALLTYPE* IDXGIFactory_CreateSwapChain_Proc)(IDXGIFactory* This,
 	_In_  IUnknown* pDevice,
 	_In_::DXGI_SWAP_CHAIN_DESC* pDesc,
@@ -57,251 +49,660 @@ typedef HRESULT(STDMETHODCALLTYPE* IDXGIFactory2_CreateSwapChainForHwnd_Proc)(ID
 	_In_opt_  const ::DXGI_SWAP_CHAIN_FULLSCREEN_DESC* pFullscreenDesc,
 	_In_opt_  IDXGIOutput* pRestrictToOutput,
 	_COM_Outptr_  IDXGISwapChain1** ppSwapChain);
-IDXGISwapChain_Present_Proc IDXGISwapChain_Present_Original = nullptr;
-IDXGISwapChain1_Present1_Proc IDXGISwapChain1_Present1_Original = nullptr;
-IDXGIFactory_CreateSwapChain_Proc IDXGIFactory_CreateSwapChain_Original = nullptr;
-IDXGIFactory2_CreateSwapChainForHwnd_Proc IDXGIFactory2_CreateSwapChainForHwnd_Original = nullptr;
+typedef HRESULT(STDMETHODCALLTYPE* IDXGISwapChain_Present_Proc)(IDXGISwapChain* This, UINT SyncInterval, UINT Flags);
+typedef HRESULT(STDMETHODCALLTYPE* IDXGISwapChain1_Present1_Proc)(IDXGISwapChain1* This, UINT SyncInterval, UINT Flags,
+	_In_ const DXGI_PRESENT_PARAMETERS* pPresentParameters);
+typedef void (STDMETHODCALLTYPE* ID3D11DeviceContext_OMSetRenderTargets_Proc)(
+	_In_range_(0, D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT)  UINT NumViews,
+	_In_reads_opt_(NumViews)  ID3D11RenderTargetView* const* ppRenderTargetViews,
+	_In_opt_  ID3D11DepthStencilView* pDepthStencilView);
+typedef void (STDMETHODCALLTYPE* ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_Proc)(
+	_In_  UINT NumRTVs,
+	_In_reads_opt_(NumRTVs)  ID3D11RenderTargetView* const* ppRenderTargetViews,
+	_In_opt_  ID3D11DepthStencilView* pDepthStencilView,
+	_In_range_(0, D3D11_1_UAV_SLOT_COUNT - 1)  UINT UAVStartSlot,
+	_In_  UINT NumUAVs,
+	_In_reads_opt_(NumUAVs)  ID3D11UnorderedAccessView* const* ppUnorderedAccessViews,
+	_In_reads_opt_(NumUAVs)  const UINT* pUAVInitialCounts);
 
 intptr_t FactoryVTableAddress = 0;
 intptr_t Factory2VTableAddress = 0;
 intptr_t SwapChainVTableAddress = 0;
 intptr_t SwapChain1VTableAddress = 0;
+intptr_t DeviceContextVTableAddress = 0;
+constexpr size_t IUnknown_Release_VTableIndex = 2;
 constexpr size_t IDXGIFactory_CreateSwapChain_VTableIndex = 10;
 constexpr size_t IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex = 15;
 constexpr size_t IDXGISwapChain_Present_VTableIndex = 8;
 constexpr size_t IDXGISwapChain1_Present1_VTableIndex = 22;
-constexpr size_t IUnknown_Release_VTableIndex = 2;
+constexpr size_t ID3D11DeviceContext_OMSetRenderTargets_VTableIndex = 33;
+constexpr size_t ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_VTableIndex = 34;
 
-HMODULE		DXGI_DLL = NULL;
-intptr_t	DXGI_DLL_BaseAddress = 0;
-DWORD		DXGI_DLL_ImageSize = 0;
-HMODULE		GameOverlayRenderer64_DLL = NULL;
-intptr_t	GameOverlayRenderer64_DLL_BaseAddress = 0;
-DWORD		GameOverlayRenderer64_DLL_ImageSize = 0;
-constexpr size_t InstructionCompareByteCount = 32;
-constexpr HRESULT Discord = 0xD15C03D;
-BYTE Present_OriginalFirstFiveBytesOfInstruction[5]{ 0 };
-BYTE Present1_OriginalFirstFiveBytesOfInstruction[5]{ 0 };
-BYTE Present_LoadedFirstFiveBytesOfInstruction[5]{ 0 };
-BYTE Present1_LoadedFirstFiveBytesOfInstruction[5]{ 0 };
-bool Present_HasOriginalFirstFiveBytesOfInstruction = false;
-bool Present1_HasOriginalFirstFiveBytesOfInstruction = false;
-bool Present_HasLoadedFirstFiveBytesOfInstruction = false;
-bool Present1_HasLoadedFirstFiveBytesOfInstruction = false;
-bool Present_PreviousDetourHookDetected = false;
-bool Present1_PreviousDetourHookDetected = false;
-HRESULT DetectPreviousDetourHook();
+constexpr size_t InstructionCompareByteCount = 0x20;
 
-HRESULT IDXGISwapChain_Present_PatchFix();
-HRESULT IDXGISwapChain_Present_UnPatchFix();
-HRESULT IDXGISwapChain1_Present1_PatchFix();
-HRESULT IDXGISwapChain1_Present1_UnPatchFix();
+struct DllInfo
+{
+	HMODULE		hModule = NULL;
+	intptr_t	BaseAddress = 0;
+	DWORD		ImageSize = 0;
 
-atomic<bool> Running = false;
-HANDLE OnCompletionEvent = NULL;
-HANDLE AckCompletionEvent = NULL;
-HANDLE StopEvent = NULL;
-int CompletionID = 0;
-void* PtrList[8]{ 0 };
+	HRESULT Load(LPCWSTR DllName)
+	{
+		if (hModule == NULL) {
+			hModule = GetModuleHandleW(DllName);
+			if (hModule == NULL) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		}
+		MODULEINFO Info{};
+		if (!GetModuleInformation(GetCurrentProcess(), hModule, &Info, sizeof(MODULEINFO))) {
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		}
+		BaseAddress = reinterpret_cast<intptr_t>(Info.lpBaseOfDll);
+		ImageSize = Info.SizeOfImage;
+		return S_OK;
+	}
+} DXGI_DLL, D3D11_DLL, GameOverlayRenderer64_DLL;
 
-HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, UINT SyncInterval, UINT Flags);
-HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* This, UINT SyncInterval, UINT Flags, _In_ const DXGI_PRESENT_PARAMETERS* pPresentParameters);
+struct FirstFiveBytes
+{
+	// the first 5 bytes of this function in memory before our hook is installed,
+	// this can be already replaced by other hooks,
+	// for example, the steam overlay hook
+	BYTE MemoryOriginalBytes[5]{ 0 };
+	bool HasMemoryOriginalBytes = false;
+
+	// the true original first 5 bytes of this function
+	// determined by reading the original DLL file as binary file
+	BYTE TrueOriginalBytes[5]{ 0 };
+	bool HasTrueOriginalBytes = false;
+
+	/// <summary>
+	/// compare the original function in memory with byte code from the original file; 
+	/// for a specified number of byte codes, excluding the first 5 bytes (which can hold a jmp instruction): 
+	/// we match the byte code with the original file;
+	/// If a match exists then we believe that we have found the original function's byte code;
+	/// so next step we compare the first 5 bytes;
+	/// if the first 5 bytes didn't match, then there must have been a detour hook installed prior to this point.
+	/// if the first 5 bytes did match however, there were no detour hooks.
+	/// </summary>
+	/// <returns>if no byte code ever matched, returns STATUS_ENTRYPOINT_NOT_FOUND (didn't find the original function)</returns>
+	HRESULT Init(intptr_t Proc, LPCWSTR DllPath)
+	{
+		CopyMemory(MemoryOriginalBytes, reinterpret_cast<void*>(Proc), 5);
+		HasMemoryOriginalBytes = true;
+
+		HANDLE DLL_File = CreateFileW(DllPath, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_READONLY, NULL);
+		if (DLL_File == INVALID_HANDLE_VALUE) {
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		}
+
+		size_t CurrentPos = 0x80; // skip the "This program cannot be run in DOS mode" header that every dll have
+		LARGE_INTEGER Large;
+		if (!GetFileSizeEx(DLL_File, &Large)) {
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		}
+
+		size_t FileSize = Large.QuadPart;
+		while (((CurrentPos + InstructionCompareByteCount) < FileSize) && !HasTrueOriginalBytes) {
+			Large.QuadPart = CurrentPos;
+			if (!SetFilePointerEx(DLL_File, Large, nullptr, FILE_BEGIN)) {
+				return E_FAIL;
+			}
+			BYTE Buffer[InstructionCompareByteCount]{ 0 };
+			if (!ReadFile(DLL_File, Buffer, InstructionCompareByteCount, nullptr, nullptr)) {
+				return E_FAIL;
+			}
+			if (RtlEqualMemory(reinterpret_cast<BYTE*>(Proc) + 5, Buffer + 5, InstructionCompareByteCount - 5)) {
+				CopyMemory(TrueOriginalBytes, Buffer, 5);
+				HasTrueOriginalBytes = true;
+			}
+			CurrentPos += 0x10; // it seems that the beginning position of every function are aligned to 0x10
+		}
+		if (!HasTrueOriginalBytes) {
+			return STATUS_ENTRYPOINT_NOT_FOUND;
+		}
+		if (!CloseHandle(DLL_File)) {
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		}
+		return S_OK;
+	}
+
+	bool DetectDetourHook() const
+	{
+		return HasMemoryOriginalBytes && HasTrueOriginalBytes && !RtlEqualMemory(MemoryOriginalBytes, TrueOriginalBytes, 5 * sizeof(BYTE));
+	}
+	__declspec(property(get = DetectDetourHook)) bool DetourHookDetected;
+} PresentBytes, Present1Bytes;
+
+struct HookPatch
+{
+	using Delegate = intptr_t;
+
+	Delegate* Pointer = nullptr;
+	Delegate MemoryOriginalProc = 0;
+	Delegate Override = 0;
+
+	void Init(Delegate* Pointer, Delegate Override)
+	{
+		this->Pointer = Pointer;
+		MemoryOriginalProc = *Pointer;
+		this->Override = Override;
+	}
+	inline bool getInitialized() const
+	{
+		return Pointer != nullptr;
+	}
+	__declspec(property(get = getInitialized)) bool Initialized;
+	HRESULT Patch()
+	{
+		HRESULT result = 0;
+		DWORD OldProtect = 0;
+		if (!VirtualProtect(Pointer, sizeof(Delegate), PAGE_EXECUTE_READWRITE, &OldProtect)) {
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		}
+		*Pointer = Override;
+		if (!VirtualProtect(Pointer, sizeof(Delegate), OldProtect, &OldProtect)) {
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		}
+		if (FAILED(result)) return result;
+		return result;
+	}
+	HRESULT UnPatch()
+	{
+		HRESULT result = 0;
+		DWORD OldProtect = 0;
+		if (!VirtualProtect(Pointer, sizeof(Delegate), PAGE_EXECUTE_READWRITE, &OldProtect)) {
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		}
+		if (FAILED(result)) return result;
+		*Pointer = MemoryOriginalProc;
+		if (!VirtualProtect(Pointer, sizeof(Delegate), OldProtect, &OldProtect)) {
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		}
+		return result;
+	}
+	HRESULT RestoreMemoryOriginal(FirstFiveBytes& Bytes) const
+	{
+		HRESULT result = 0;
+		DWORD OldProtect = 0;
+		if (Bytes.HasMemoryOriginalBytes) {
+			if (!VirtualProtect(reinterpret_cast<void*>(MemoryOriginalProc), 5, PAGE_EXECUTE_READWRITE, &OldProtect)) {
+				return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+			}
+			CopyMemory(reinterpret_cast<void*>(MemoryOriginalProc), Bytes.MemoryOriginalBytes, 5);
+			if (!VirtualProtect(reinterpret_cast<void*>(MemoryOriginalProc), 5, OldProtect, &OldProtect)) {
+				return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+			}
+		}
+		else return E_PENDING;
+		return result;
+	}
+	HRESULT RestoreTrueOriginal(FirstFiveBytes& Bytes) const
+	{
+		HRESULT result = 0;
+		DWORD OldProtect = 0;
+		if (Bytes.HasTrueOriginalBytes) {
+			if (!VirtualProtect(reinterpret_cast<void*>(MemoryOriginalProc), 5, PAGE_EXECUTE_READWRITE, &OldProtect)) {
+				return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+			}
+			CopyMemory(reinterpret_cast<void*>(MemoryOriginalProc), Bytes.TrueOriginalBytes, 5);
+			if (!VirtualProtect(reinterpret_cast<void*>(MemoryOriginalProc), 5, OldProtect, &OldProtect)) {
+				return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+			}
+		}
+		else return E_PENDING;
+		return result;
+	}
+} Release, CreateSwapChain, CreateSwapChainForHwnd, Present, Present1, OMSetRenderTargets, OMSetRenderTargetsAndUnorderedAccessViews;
+
+struct Arguments
+{
+	static_assert(sizeof(void*) == sizeof(int64_t), "target platform (pointer size) must be the same (64-bit) between here and DirectXHook.cs");
+
+	GUID IID; // uuid of the interface
+	void* PPV; // pointer of the interface
+	size_t VTableIndex; // vtable index of the function
+	BOOL Post = FALSE; // determines whether if this is called after the original function is called
+	HRESULT Result = S_OK; // if Post is TRUE, the HRESULT return value of the function
+	void* Args[11]{ nullptr };	// function arguments, array size is in favor of 128 byte struct alignment
+								// alignment is not necessary (at least not for now), it's just satisfying.
+
+	template <typename StructType>
+	struct OptionalStruct
+	{
+		BOOL Exist = FALSE;
+		StructType Struct{};
+		OptionalStruct(const StructType* Ptr) {
+			if (Ptr == nullptr) Exist = FALSE;
+			else {
+				Struct = *Ptr;
+				Exist = TRUE;
+			}
+		}
+		StructType* Ptr() {
+			if (Exist) return &Struct;
+			else return nullptr;
+		}
+	};
+
+	inline static Arguments PreRelease(IUnknown* This)
+	{
+		Arguments Result;
+		Result.IID = __uuidof(IUnknown);
+		Result.PPV = This;
+		Result.VTableIndex = IUnknown_Release_VTableIndex;
+		return Result;
+	}
+	inline static void PostRelease(Arguments& Previous, HRESULT result)
+	{
+		Previous.Post = TRUE;
+		Previous.Result = result;
+	}
+
+	inline static Arguments PreCreateSwapChain(IDXGIFactory* This,
+		IUnknown*& pDevice, DXGI_SWAP_CHAIN_DESC& pDesc)
+	{
+		Arguments Result;
+		Result.IID = __uuidof(IDXGIFactory);
+		Result.PPV = This;
+		Result.VTableIndex = IDXGISwapChain_Present_VTableIndex;
+		Result.Args[0] = &pDevice;
+		Result.Args[1] = &pDesc;
+		return Result;
+	}
+	inline static void PostCreateSwapChain(Arguments& Previous, IDXGISwapChain** ppSwapChain, HRESULT result)
+	{
+		Previous.Args[2] = ppSwapChain;
+		Previous.Post = TRUE;
+		Previous.Result = result;
+	}
+
+	inline static Arguments PreCreateSwapChainForHwnd(IDXGIFactory2* This,
+		IUnknown*& pDevice, HWND& hWnd, DXGI_SWAP_CHAIN_DESC1& Desc, OptionalStruct<DXGI_SWAP_CHAIN_FULLSCREEN_DESC>& FullscreenDesc,
+		IDXGIOutput*& pRestrictToOutput)
+	{
+		Arguments Result;
+		Result.IID = __uuidof(IDXGIFactory);
+		Result.PPV = This;
+		Result.VTableIndex = IDXGISwapChain_Present_VTableIndex;
+		Result.Args[0] = &pDevice;
+		Result.Args[1] = &hWnd;
+		Result.Args[2] = &Desc;
+		Result.Args[3] = &FullscreenDesc;
+		Result.Args[4] = &pRestrictToOutput;
+		return Result;
+	}
+	inline static void PostCreateSwapChainForHwnd(Arguments& Previous, IDXGISwapChain1** ppSwapChain, HRESULT result)
+	{
+		Previous.Args[5] = ppSwapChain;
+		Previous.Post = TRUE;
+		Previous.Result = result;
+	}
+
+	inline static Arguments PrePresent(IDXGISwapChain* This, UINT& SyncInterval, UINT& Flags)
+	{
+		Arguments Result;
+		Result.IID = __uuidof(IDXGISwapChain);
+		Result.PPV = This;
+		Result.VTableIndex = IDXGISwapChain_Present_VTableIndex;
+		Result.Args[0] = &SyncInterval;
+		Result.Args[1] = &Flags;
+		return Result;
+	}
+	inline static void PostPresent(Arguments& Previous, HRESULT result)
+	{
+		Previous.Post = TRUE;
+		Previous.Result = result;
+	}
+
+	inline static Arguments PrePresent1(IDXGISwapChain1* This, UINT& SyncInterval, UINT& Flags, DXGI_PRESENT_PARAMETERS& PresentParameters)
+	{
+		Arguments Result;
+		Result.IID = __uuidof(IDXGISwapChain1);
+		Result.PPV = This;
+		Result.VTableIndex = IDXGISwapChain1_Present1_VTableIndex;
+		Result.Args[0] = &SyncInterval;
+		Result.Args[1] = &Flags;
+		Result.Args[2] = &PresentParameters;
+		return Result;
+	}
+	inline static void PostPresent1(Arguments& Previous, HRESULT result)
+	{
+		Previous.Post = TRUE;
+		Previous.Result = result;
+	}
+
+	inline static Arguments PreOMSetRenderTargets(ID3D11DeviceContext* This,
+		UINT& NumViews, ID3D11RenderTargetView**& ppRenderTargetViews, ID3D11DepthStencilView*& pDepthStencilView)
+	{
+		Arguments Result;
+		Result.IID = __uuidof(ID3D11DeviceContext);
+		Result.PPV = This;
+		Result.VTableIndex = ID3D11DeviceContext_OMSetRenderTargets_VTableIndex;
+		Result.Args[0] = &NumViews;
+		Result.Args[1] = &ppRenderTargetViews;
+		Result.Args[2] = &pDepthStencilView;
+		return Result;
+	}
+	inline static void PostOMSetRenderTargets(Arguments& Previous, HRESULT result)
+	{
+		Previous.Post = TRUE;
+		Previous.Result = result;
+	}
+
+	inline static Arguments PreOMSetRenderTargetsAndUnorderedAccessViews(ID3D11DeviceContext* This,
+		UINT& NumRTVs, ID3D11RenderTargetView**& ppRenderTargetViews, ID3D11DepthStencilView*& pDepthStencilView,
+		UINT& UAVStartSlot,
+		UINT& NumUAVs, ID3D11UnorderedAccessView**& ppUnorderedAccessViews,
+		UINT*& pUAVInitialCounts)
+	{
+		Arguments Result;
+		Result.IID = __uuidof(ID3D11DeviceContext);
+		Result.PPV = This;
+		Result.VTableIndex = ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_VTableIndex;
+		Result.Args[0] = &NumRTVs;
+		Result.Args[1] = &ppRenderTargetViews;
+		Result.Args[2] = &pDepthStencilView;
+		Result.Args[3] = &UAVStartSlot;
+		Result.Args[4] = &NumUAVs;
+		Result.Args[5] = &ppUnorderedAccessViews;
+		Result.Args[6] = &pUAVInitialCounts;
+		return Result;
+	}
+	inline static void PostOMSetRenderTargetsAndUnorderedAccessViews(Arguments& Previous, HRESULT result)
+	{
+		Previous.Post = TRUE;
+		Previous.Result = result;
+	}
+};
+
+HRESULT STDMETHODCALLTYPE IUnknown_Release_Override(IUnknown* This);
 HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* This,
 	_In_  IUnknown* pDevice,
 	_In_::DXGI_SWAP_CHAIN_DESC* pDesc,
-	_COM_Outptr_  IDXGISwapChain** ppSwapChain);
+	IDXGISwapChain** ppSwapChain);
 HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFactory2* This,
 	_In_  IUnknown* pDevice,
 	_In_  HWND hWnd,
 	_In_  const ::DXGI_SWAP_CHAIN_DESC1* pDesc,
 	_In_opt_  const ::DXGI_SWAP_CHAIN_FULLSCREEN_DESC* pFullscreenDesc,
 	_In_opt_  IDXGIOutput* pRestrictToOutput,
-	_COM_Outptr_  IDXGISwapChain1** ppSwapChain);
+	IDXGISwapChain1** ppSwapChain);
+HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, UINT SyncInterval, UINT Flags);
+HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* This, UINT SyncInterval, UINT Flags, _In_ const DXGI_PRESENT_PARAMETERS* pPresentParameters);
+void STDMETHODCALLTYPE ID3D11DeviceContext_OMSetRenderTargets_Override(ID3D11DeviceContext* This,
+	_In_range_(0, D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT)  UINT NumViews,
+	_In_reads_opt_(NumViews)  ID3D11RenderTargetView* const* ppRenderTargetViews,
+	_In_opt_  ID3D11DepthStencilView* pDepthStencilView);
+void STDMETHODCALLTYPE ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_Override(ID3D11DeviceContext* This,
+	_In_  UINT NumRTVs,
+	_In_reads_opt_(NumRTVs)  ID3D11RenderTargetView* const* ppRenderTargetViews,
+	_In_opt_  ID3D11DepthStencilView* pDepthStencilView,
+	_In_range_(0, D3D11_1_UAV_SLOT_COUNT - 1)  UINT UAVStartSlot,
+	_In_  UINT NumUAVs,
+	_In_reads_opt_(NumUAVs)  ID3D11UnorderedAccessView* const* ppUnorderedAccessViews,
+	_In_reads_opt_(NumUAVs)  const UINT* pUAVInitialCounts);
 
-constexpr WCHAR ClassName[] = L"MAGIC";
-constexpr WCHAR WindowName[] = L"Magic";
-HINSTANCE Module = NULL;
-HWND hWndForTest = NULL;
-HANDLE WindowThread = NULL;
-HANDLE WindowCreated = NULL;
-DWORD CreateHwndForTest(LPVOID Arg);
-LRESULT DummyWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
+HRESULT DummyCreateDirectXInstances(
+	ID3D11Device** Device, ID3D11DeviceContext** Context,
+	IDXGIFactory** Factory, IDXGIFactory2** Factory2,
+	IDXGISwapChain** SwapChain, IDXGISwapChain1** SwapChain1);
+HRESULT DummyRelease();
 
-/// <summary>
-/// compare the loaded original Present function with byte code from the original file; 
-/// for a specified number of byte codes, excluding the first five bytes (which can hold a jmp instruction): 
-/// we match the byte code with the original file;
-/// If a match exists then we believe that we have found the original function's byte code;
-/// so next step we compare the first five bytes;
-/// if the first five bytes didn't match, then it must be a detour hook.
-/// if the first five bytes did match however, there were no detour hooks.
-/// </summary>
-/// <returns>if no byte code ever matched, returns STATUS_ENTRYPOINT_NOT_FOUND (didn't find the original function)</returns>
-HRESULT DetectPreviousDetourHook()
+HRESULT __stdcall InstallHook()
 {
-	BYTE CurrentPresentInstructions[InstructionCompareByteCount];
-	CopyMemory(CurrentPresentInstructions, IDXGISwapChain_Present_Original, InstructionCompareByteCount);
-	CopyMemory(Present_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction));
-	Present_HasLoadedFirstFiveBytesOfInstruction = true;
+	HRESULT result = 0;
 
-	BYTE CurrentPresent1Instructions[InstructionCompareByteCount];
-	CopyMemory(CurrentPresent1Instructions, IDXGISwapChain1_Present1_Original, InstructionCompareByteCount);
-	CopyMemory(Present1_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction));
-	Present1_HasLoadedFirstFiveBytesOfInstruction = true;
+	result = DXGI_DLL.Load(L"DXGI.dll");
+	if (FAILED(result)) return result;
 
-	wstring RealDllPath = L"C:/Windows/System32/DXGI.dll";
-	HANDLE DLL_File = CreateFileW(RealDllPath.c_str(), GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_READONLY, NULL);
-	if (DLL_File == INVALID_HANDLE_VALUE) {
-		return E_FAIL;
+	result = D3D11_DLL.Load(L"D3D11.dll");
+	if (FAILED(result)) return result;
+
+	result = GameOverlayRenderer64_DLL.Load(L"GameOverlayRenderer64.dll");
+	if (FAILED(result)) return result;
+
+	ComPtr<ID3D11Device> Device;
+	ComPtr<ID3D11DeviceContext> Context;
+
+	ComPtr<IDXGIFactory> Factory;
+	ComPtr<IDXGIFactory2> Factory2;
+
+	ComPtr<IDXGISwapChain> SwapChain;
+	ComPtr<IDXGISwapChain1> SwapChain1;
+
+	result = DummyCreateDirectXInstances(&Device, &Context, &Factory, &Factory2, &SwapChain, &SwapChain1);
+	if (FAILED(result)) return result;
+
+	// saving original function pointers
+	intptr_t* VTable = nullptr;
+
+	VTable = reinterpret_cast<intptr_t*>(SwapChainVTableAddress = *reinterpret_cast<intptr_t*>(SwapChain.Get()));
+	Present.Init(&VTable[IDXGISwapChain_Present_VTableIndex], reinterpret_cast<intptr_t>(IDXGISwapChain_Present_Override));
+	result = PresentBytes.Init(VTable[IDXGISwapChain_Present_VTableIndex], L"C:/Windows/System32/DXGI.dll");
+	if (FAILED(result)) return result;
+
+	VTable = reinterpret_cast<intptr_t*>(SwapChain1VTableAddress = *reinterpret_cast<intptr_t*>(SwapChain1.Get()));
+	Present1.Init(&VTable[IDXGISwapChain1_Present1_VTableIndex], reinterpret_cast<intptr_t>(IDXGISwapChain1_Present1_Override));
+	result = Present1Bytes.Init(VTable[IDXGISwapChain1_Present1_VTableIndex], L"C:/Windows/System32/DXGI.dll");
+	if (FAILED(result)) return result;
+
+	if (Factory2 != nullptr) {
+		VTable = reinterpret_cast<intptr_t*>(Factory2VTableAddress = *reinterpret_cast<intptr_t*>(Factory2.Get()));
+		CreateSwapChainForHwnd.Init(&VTable[IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex], reinterpret_cast<intptr_t>(IDXGIFactory2_CreateSwapChainForHwnd_Override));
 	}
 
-	size_t CurrentPos = 0x80; // skip the "This program cannot be run in DOS mode" header that every dll have
-	LARGE_INTEGER Large;
-	if (!GetFileSizeEx(DLL_File, &Large)) {
-		return E_FAIL;
+	VTable = reinterpret_cast<intptr_t*>(FactoryVTableAddress = *reinterpret_cast<intptr_t*>(Factory.Get()));
+	CreateSwapChain.Init(&VTable[IDXGIFactory_CreateSwapChain_VTableIndex], reinterpret_cast<intptr_t>(IDXGIFactory_CreateSwapChain_Override));
+
+	VTable = reinterpret_cast<intptr_t*>(DeviceContextVTableAddress = *reinterpret_cast<intptr_t*>(Context.Get()));
+	OMSetRenderTargets.Init(&VTable[ID3D11DeviceContext_OMSetRenderTargets_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_OMSetRenderTargets_Override));
+	OMSetRenderTargetsAndUnorderedAccessViews.Init(&VTable[ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_Override));
+
+	// changing function pointers
+	result = Present.Patch();
+	if (FAILED(result)) return result;
+	
+	result = Present1.Patch();
+	if (FAILED(result)) return result;
+
+	if (CreateSwapChainForHwnd.Initialized) {
+		result = CreateSwapChainForHwnd.Patch();
+		if (FAILED(result)) return result;
 	}
 
-	bool PresentFound = false;
-	bool Present1Found = false;
-	size_t FileSize = Large.QuadPart;
-	while (((CurrentPos + InstructionCompareByteCount) < FileSize) && (!PresentFound || !Present1Found)) {
-		Large.QuadPart = CurrentPos;
-		if (!SetFilePointerEx(DLL_File, Large, nullptr, FILE_BEGIN)) {
-			return E_FAIL;
-		}
-		BYTE OriginalInstructions[InstructionCompareByteCount]{ 0 };
-		if (!ReadFile(DLL_File, OriginalInstructions, InstructionCompareByteCount, nullptr, nullptr)) {
-			return E_FAIL;
-		}
-		if (RtlEqualMemory(CurrentPresentInstructions + 5, OriginalInstructions + 5, InstructionCompareByteCount - 5)) {
-			Present_PreviousDetourHookDetected = RtlCompareMemory(CurrentPresentInstructions, OriginalInstructions, 5) != 5;
-			CopyMemory(Present_OriginalFirstFiveBytesOfInstruction, OriginalInstructions, 5);
-			Present_HasOriginalFirstFiveBytesOfInstruction = true;
-			PresentFound = true;
-		}
-		if (RtlEqualMemory(CurrentPresent1Instructions + 5, OriginalInstructions + 5, InstructionCompareByteCount - 5)) {
-			Present1_PreviousDetourHookDetected = RtlCompareMemory(CurrentPresent1Instructions, OriginalInstructions, 5) != 5;
-			CopyMemory(Present1_OriginalFirstFiveBytesOfInstruction, OriginalInstructions, 5);
-			Present1_HasOriginalFirstFiveBytesOfInstruction = true;
-			Present1Found = true;
-		}
-		CurrentPos += 0x10; // it seems that the beginning position of every function are aligned to 0x10
-	}
-	if (!PresentFound) {
-		return STATUS_ENTRYPOINT_NOT_FOUND;
+	result = CreateSwapChain.Patch();
+	if (FAILED(result)) return result;
+	
+	result = OMSetRenderTargets.Patch();
+	if (FAILED(result)) return result;
+	
+	result = OMSetRenderTargetsAndUnorderedAccessViews.Patch();
+	if (FAILED(result)) return result;
+
+	SwapChain.Reset();
+	Context.Reset();
+	Device.Reset();
+	Factory.Reset();
+
+	return result;
+}
+
+HRESULT __stdcall UninstallHook()
+{
+	HRESULT result = 0;
+
+	result = Present.UnPatch();
+	if (FAILED(result)) return result;
+
+	result = Present1.UnPatch();
+	if (FAILED(result)) return result;
+
+	if (CreateSwapChainForHwnd.Initialized) {
+		result = CreateSwapChainForHwnd.UnPatch();
+		if (FAILED(result)) return result;
 	}
 
-	if (!CloseHandle(DLL_File)) {
-		return E_FAIL;
-	}
+	result = CreateSwapChain.UnPatch();
+	if (FAILED(result)) return result;
+
+	result = OMSetRenderTargets.UnPatch();
+	if (FAILED(result)) return result;
+
+	result = OMSetRenderTargetsAndUnorderedAccessViews.UnPatch();
+	if (FAILED(result)) return result;
 
 	return S_OK;
 }
 
-HRESULT IDXGISwapChain_Present_PatchFix()
+void __stdcall SetRunning(bool Running)
 {
-	DWORD OldProtect;
-	if (!VirtualProtect(IDXGISwapChain_Present_Original, sizeof(Present_OriginalFirstFiveBytesOfInstruction), PAGE_EXECUTE_READWRITE, &OldProtect)) return E_FAIL;
-	if (!Present_HasLoadedFirstFiveBytesOfInstruction) {
-		CopyMemory(Present_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction));
-		Present_HasLoadedFirstFiveBytesOfInstruction = true;
+	::Running = Running;
+}
+
+void __stdcall SetCallbacks(CallbackProc HookCallback, LogCallbackProc LogCallback)
+{
+	::HookCallback = HookCallback;
+	::LogCallback = LogCallback;
+}
+
+intptr_t __stdcall Get_Present_MemoryOriginal_Proc()
+{
+	return Present.MemoryOriginalProc;
+}
+
+intptr_t __stdcall Get_Present1_MemoryOriginal_Proc()
+{
+	return Present1.MemoryOriginalProc;
+}
+
+BYTE* __stdcall Get_Present_MemoryOriginal_Bytes()
+{
+	return PresentBytes.MemoryOriginalBytes;
+}
+
+BYTE* __stdcall Get_Present1_MemoryOriginal_Bytes()
+{
+	return Present1Bytes.MemoryOriginalBytes;
+}
+
+bool __stdcall Get_Present_DetourHookDetected()
+{
+	return PresentBytes.DetourHookDetected;
+}
+
+bool __stdcall Get_Present1_DetourHookDetected()
+{
+	return Present1Bytes.DetourHookDetected;
+}
+
+HRESULT STDMETHODCALLTYPE IUnknown_Release_Override(IUnknown* This)
+{
+	if (Running && HookCallback != nullptr) {
+
+		Arguments Args = Arguments::PreRelease(This);
+		HookCallback(&Args);
+
+		HRESULT result = reinterpret_cast<IUnknown_Release_Proc>(Release.MemoryOriginalProc)(This);
+
+		Arguments::PostRelease(Args, result);
+		HookCallback(&Args);
+
+		return result;
 	}
-	CopyMemory(IDXGISwapChain_Present_Original, Present_OriginalFirstFiveBytesOfInstruction, sizeof(Present_OriginalFirstFiveBytesOfInstruction));
-	if (!VirtualProtect(IDXGISwapChain_Present_Original, sizeof(Present_OriginalFirstFiveBytesOfInstruction), OldProtect, &OldProtect)) return E_FAIL;
-	return S_OK;
+	else return reinterpret_cast<IUnknown_Release_Proc>(Release.MemoryOriginalProc)(This);
 }
 
-HRESULT IDXGISwapChain_Present_UnPatchFix()
+HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* This,
+	_In_  IUnknown* pDevice,
+	_In_::DXGI_SWAP_CHAIN_DESC* pDesc,
+	IDXGISwapChain** ppSwapChain)
 {
-	if (!Present_HasLoadedFirstFiveBytesOfInstruction) return E_NOT_VALID_STATE;
-	DWORD OldProtect;
-	if (!VirtualProtect(IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction), PAGE_EXECUTE_READWRITE, &OldProtect)) return E_FAIL;
-	CopyMemory(IDXGISwapChain_Present_Original, Present_LoadedFirstFiveBytesOfInstruction, sizeof(Present_LoadedFirstFiveBytesOfInstruction));
-	if (!VirtualProtect(IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction), OldProtect, &OldProtect)) return E_FAIL;
-	return S_OK;
-}
+	if (Running && HookCallback != nullptr) {
 
-HRESULT IDXGISwapChain1_Present1_PatchFix()
-{
-	DWORD OldProtect;
-	if (!VirtualProtect(IDXGISwapChain1_Present1_Original, sizeof(Present_OriginalFirstFiveBytesOfInstruction), PAGE_EXECUTE_READWRITE, &OldProtect)) return E_FAIL;
-	if (!Present1_HasLoadedFirstFiveBytesOfInstruction) {
-		CopyMemory(Present1_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction));
-		Present1_HasLoadedFirstFiveBytesOfInstruction = true;
+		Arguments Args = Arguments::PreCreateSwapChain(This, pDevice, *pDesc);
+		HookCallback(&Args);
+
+		HRESULT result = reinterpret_cast<IDXGIFactory_CreateSwapChain_Proc>(CreateSwapChain.MemoryOriginalProc)(This, pDevice, pDesc, ppSwapChain);
+
+		Arguments::PostCreateSwapChain(Args, ppSwapChain, result);
+		HookCallback(&Args);
+
+		return result;
 	}
-	CopyMemory(IDXGISwapChain1_Present1_Original, Present1_OriginalFirstFiveBytesOfInstruction, sizeof(Present_OriginalFirstFiveBytesOfInstruction));
-	if (!VirtualProtect(IDXGISwapChain1_Present1_Original, sizeof(Present1_OriginalFirstFiveBytesOfInstruction), OldProtect, &OldProtect)) return E_FAIL;
-	return S_OK;
+	else return reinterpret_cast<IDXGIFactory_CreateSwapChain_Proc>(CreateSwapChain.MemoryOriginalProc)(This, pDevice, pDesc, ppSwapChain);
 }
 
-HRESULT IDXGISwapChain1_Present1_UnPatchFix()
+HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFactory2* This,
+	_In_  IUnknown* pDevice,
+	_In_  HWND hWnd,
+	_In_  const ::DXGI_SWAP_CHAIN_DESC1* pDesc,
+	_In_opt_  const ::DXGI_SWAP_CHAIN_FULLSCREEN_DESC* pFullscreenDesc,
+	_In_opt_  IDXGIOutput* pRestrictToOutput,
+	IDXGISwapChain1** ppSwapChain)
 {
-	if (!Present1_HasLoadedFirstFiveBytesOfInstruction) return E_NOT_VALID_STATE;
-	DWORD OldProtect;
-	if (!VirtualProtect(IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction), PAGE_EXECUTE_READWRITE, &OldProtect)) return E_FAIL;
-	CopyMemory(IDXGISwapChain1_Present1_Original, Present1_LoadedFirstFiveBytesOfInstruction, sizeof(Present1_LoadedFirstFiveBytesOfInstruction));
-	if (!VirtualProtect(IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction), OldProtect, &OldProtect)) return E_FAIL;
-	return S_OK;
+	if (Running && HookCallback != nullptr) {
+
+		DXGI_SWAP_CHAIN_DESC1 Desc = *pDesc;
+		Arguments::OptionalStruct<DXGI_SWAP_CHAIN_FULLSCREEN_DESC> FullscreenDesc = pFullscreenDesc;
+
+		pDesc = &Desc;
+
+		Arguments Args = Arguments::PreCreateSwapChainForHwnd(This,
+			pDevice, hWnd, Desc, FullscreenDesc, pRestrictToOutput);
+		HookCallback(&Args);
+
+		HRESULT result = reinterpret_cast<IDXGIFactory2_CreateSwapChainForHwnd_Proc>(CreateSwapChainForHwnd.MemoryOriginalProc)(This,
+			pDevice, hWnd, pDesc, FullscreenDesc.Ptr(), pRestrictToOutput, ppSwapChain);
+
+		Arguments::PostCreateSwapChainForHwnd(Args, ppSwapChain, result);
+		HookCallback(&Args);
+
+		return result;
+	}
+	else return reinterpret_cast<IDXGIFactory2_CreateSwapChainForHwnd_Proc>(CreateSwapChainForHwnd.MemoryOriginalProc)(This,
+		pDevice, hWnd, pDesc, pFullscreenDesc, pRestrictToOutput, ppSwapChain);
 }
 
-std::map<HWND, ComPtr<IDXGISwapChain>> Window_SwapChain_Map;
-
-IDXGISwapChain* PreviousSwapChain;
 std::map<IDXGISwapChain*, int> IDXGISwapChain_Present_StackCount;
 HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, UINT SyncInterval, UINT Flags)
 {
 	if (IDXGISwapChain_Present_StackCount.find(This) == IDXGISwapChain_Present_StackCount.end()) {
 		IDXGISwapChain_Present_StackCount[This] = 0;
 	}
+
+	HRESULT result = 0, result2 = 0;
 	bool StackOverflowFixNeeded = ++IDXGISwapChain_Present_StackCount[This] >= 2;
-	if (Running && !StackOverflowFixNeeded) {
-		HRESULT result = 0;
-		DXGI_SWAP_CHAIN_DESC Desc{};
-		result = This->GetDesc(&Desc);
-		if (FAILED(result)) throw exception(("SwapChain GetDesc failed " + std::to_string(result)).c_str());
-		result = This->QueryInterface(IID_PPV_ARGS(&Window_SwapChain_Map[Desc.OutputWindow]));
-		if (FAILED(result)) throw exception(("SwapChain QueryInterface failed " + std::to_string(result)).c_str());
-		ZeroMemory(PtrList, sizeof(PtrList));
-		PtrList[0] = &This;
-		PtrList[1] = &SyncInterval;
-		PtrList[2] = &Flags;
-		PreviousSwapChain = This;
-		CompletionID = -static_cast<int>(IDXGISwapChain_Present_VTableIndex);
-		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
-		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
-			throw exception("synchronization error");
-		}
-	}
-	HRESULT result = 0;
+
 	if (StackOverflowFixNeeded) {
-		if (Present_HasOriginalFirstFiveBytesOfInstruction) {
-			// I have a fix for this stack overflow which is known caused by steam overlay hook (GameOverlayRenderer64.dll)
-			HRESULT PatchResult = 0;
-			PatchResult = IDXGISwapChain_Present_PatchFix();
-			if (FAILED(PatchResult)) throw exception(("failed to patch stackoverflow fix - " + std::to_string(PatchResult)).c_str());
-			result = IDXGISwapChain_Present_Original(This, ++SyncInterval, Flags);
-			PatchResult = IDXGISwapChain_Present_UnPatchFix();
-			if (FAILED(PatchResult)) throw exception(("failed to patch stackoverflow fix - " + std::to_string(PatchResult)).c_str());
-		}
-		else {
-			// I don't have a fix for this stack overflow (we're doomed! celestia help us all)
-			result = IDXGISwapChain_Present_Original(This, ++SyncInterval, Flags);
+		result2 = Present.RestoreTrueOriginal(PresentBytes);
+		if (FAILED(result2)) {
+			LogCallback((L"IDXGISwapChain_Present_Override -> Present.RestoreTrueOriginal -> error code: " + to_wstring(result2)).c_str());
+			ForceBreakpoint();
 		}
 	}
-	else {
-		result = IDXGISwapChain_Present_Original(This, ++SyncInterval, Flags);
+
+	Arguments Args{};
+	if (Running && HookCallback != nullptr) {
+		Args = Arguments::PrePresent(This, SyncInterval, Flags);
+		HookCallback(&Args);
 	}
+
+	result = reinterpret_cast<IDXGISwapChain_Present_Proc>(Present.MemoryOriginalProc)(This, SyncInterval, Flags);
+
+	if (Running && HookCallback != nullptr) {
+		Arguments::PostPresent(Args, result);
+		HookCallback(&Args);
+	}
+
+	if (StackOverflowFixNeeded) {
+		result2 = Present.RestoreMemoryOriginal(PresentBytes);
+		if (FAILED(result2)) {
+			LogCallback((L"IDXGISwapChain_Present_Override -> Present.RestoreMemoryOriginal -> error code: " + to_wstring(result2)).c_str());
+			ForceBreakpoint();
+		}
+	}
+
 	--IDXGISwapChain_Present_StackCount[This];
-	if (FAILED(result)) return result;
-	if (Running && !StackOverflowFixNeeded) {
-		CompletionID = IDXGISwapChain_Present_VTableIndex;
-		if (!SetEvent(OnCompletionEvent)) throw exception("synchronization error");
-		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
-			throw exception("synchronization error");
-		}
-	}
 	return result;
 }
 
@@ -311,605 +712,183 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* Thi
 	if (IDXGISwapChain1_Present1_StackCount.find(This) == IDXGISwapChain1_Present1_StackCount.end()) {
 		IDXGISwapChain1_Present1_StackCount[This] = 0;
 	}
+
+	HRESULT result = 0, result2 = 0;
 	bool StackOverflowFixNeeded = ++IDXGISwapChain1_Present1_StackCount[This] >= 2;
-	if (Running && !StackOverflowFixNeeded) {
-		HRESULT result = 0;
-		DXGI_SWAP_CHAIN_DESC Desc{};
-		result = This->GetDesc(&Desc);
-		if (FAILED(result)) throw exception(("SwapChain1 GetDesc failed " + std::to_string(result)).c_str());
-		result = This->QueryInterface(IID_PPV_ARGS(&Window_SwapChain_Map[Desc.OutputWindow]));
-		if (FAILED(result)) throw exception(("SwapChain1 QueryInterface failed " + std::to_string(result)).c_str());
-		ZeroMemory(PtrList, sizeof(PtrList));
-		PtrList[0] = &This;
-		PtrList[1] = &SyncInterval;
-		PtrList[2] = &Flags;
-		PtrList[3] = &pPresentParameters;
-		CompletionID = -static_cast<int>(IDXGISwapChain1_Present1_VTableIndex);
-		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
-		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
-		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
-			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
-		}
-	}
-	HRESULT result = 0;
+
 	if (StackOverflowFixNeeded) {
-		if (Present1_HasOriginalFirstFiveBytesOfInstruction) {
-			// I have a fix for this stack overflow which is known caused by steam overlay hook (GameOverlayRenderer64.dll)
-			HRESULT PatchResult = 0;
-			PatchResult = IDXGISwapChain1_Present1_PatchFix();
-			if (FAILED(PatchResult)) throw exception(("failed to patch stackoverflow fix - " + std::to_string(PatchResult)).c_str());
-			result = IDXGISwapChain1_Present1_Original(This, ++SyncInterval, Flags, pPresentParameters);
-			PatchResult = IDXGISwapChain1_Present1_UnPatchFix();
-			if (FAILED(PatchResult)) throw exception(("failed to patch stackoverflow fix - " + std::to_string(PatchResult)).c_str());
-		}
-		else {
-			// I don't have a fix for this stack overflow (we're doomed! celestia help us all)
-			result = IDXGISwapChain1_Present1_Original(This, ++SyncInterval, Flags, pPresentParameters);
+		result2 = Present1.RestoreTrueOriginal(Present1Bytes);
+		if (FAILED(result2)) {
+			LogCallback((L"IDXGISwapChain1_Present1_Override -> Present1.RestoreTrueOriginal -> error code: " + to_wstring(result2)).c_str());
+			ForceBreakpoint();
 		}
 	}
-	else {
-		result = IDXGISwapChain1_Present1_Original(This, ++SyncInterval, Flags, pPresentParameters);
+
+	Arguments Args{};
+	DXGI_PRESENT_PARAMETERS PresentParameters = *pPresentParameters;
+	vector<RECT> DirtyRects;
+	RECT ScrollRect{};
+	POINT ScrollOffset{};
+
+	if (PresentParameters.pDirtyRects != nullptr) {
+		DirtyRects.resize(PresentParameters.DirtyRectsCount);
+		CopyMemory(DirtyRects.data(), PresentParameters.pDirtyRects, sizeof(RECT) * PresentParameters.DirtyRectsCount);
+		PresentParameters.pDirtyRects = DirtyRects.data();
 	}
+	if (PresentParameters.pScrollRect != nullptr) {
+		ScrollRect = *PresentParameters.pScrollRect;
+		PresentParameters.pScrollRect = &ScrollRect;
+	}
+	if (PresentParameters.pScrollOffset != nullptr) {
+		ScrollOffset = *PresentParameters.pScrollOffset;
+		PresentParameters.pScrollOffset = &ScrollOffset;
+	}
+
+	Args = Arguments::PrePresent1(This, SyncInterval, Flags, PresentParameters);
+	if (Running && HookCallback != nullptr) {
+		HookCallback(&Args);
+	}
+
+	result = reinterpret_cast<IDXGISwapChain1_Present1_Proc>(Present1.MemoryOriginalProc)(This, SyncInterval, Flags, &PresentParameters);
+
+	if (Running && HookCallback != nullptr) {
+		Arguments::PostPresent1(Args, result);
+		HookCallback(&Args);
+	}
+
+	if (StackOverflowFixNeeded) {
+		result2 = Present1.RestoreMemoryOriginal(Present1Bytes);
+		if (FAILED(result2)) {
+			LogCallback((L"IDXGISwapChain1_Present1_Override -> Present1.RestoreMemoryOriginal -> error code: " + to_wstring(result2)).c_str());
+			ForceBreakpoint();
+		}
+	}
+
 	--IDXGISwapChain1_Present1_StackCount[This];
-	if (FAILED(result)) return result;
-	if (Running && !StackOverflowFixNeeded) {
-		CompletionID = IDXGISwapChain1_Present1_VTableIndex;
-		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
-		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
-		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
-			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
-		}
-	}
 	return result;
 }
 
-HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* This,
-	_In_  IUnknown* pDevice,
-	_In_::DXGI_SWAP_CHAIN_DESC* pDesc,
-	_COM_Outptr_  IDXGISwapChain** ppSwapChain)
+void STDMETHODCALLTYPE ID3D11DeviceContext_OMSetRenderTargets_Override(ID3D11DeviceContext* This,
+	_In_range_(0, D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT)  UINT NumViews,
+	_In_reads_opt_(NumViews)  ID3D11RenderTargetView* const* ppRenderTargetViews,
+	_In_opt_  ID3D11DepthStencilView* pDepthStencilView)
 {
-	DXGI_SWAP_CHAIN_DESC Desc = *pDesc;
-	pDesc = &Desc;
-	if (Window_SwapChain_Map.find(Desc.OutputWindow) != Window_SwapChain_Map.end()) {
-		CompletionID = IUnknown_Release_VTableIndex;
-		ZeroMemory(PtrList, sizeof(PtrList));
-		PtrList[0] = Window_SwapChain_Map[Desc.OutputWindow].Get();
-		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
-		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
-		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
-			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
+	if (Running && HookCallback != nullptr) {
+
+		ID3D11RenderTargetView** ArrayRTV = nullptr;
+		vector<ID3D11RenderTargetView*> RenderTargetViews;
+		if (ppRenderTargetViews != nullptr) {
+			RenderTargetViews.resize(NumViews);
+			CopyMemory(RenderTargetViews.data(), ppRenderTargetViews, sizeof(ID3D11RenderTargetView*) * NumViews);
+			ArrayRTV = RenderTargetViews.data();
 		}
-		Window_SwapChain_Map.erase(Desc.OutputWindow);
-	}
-	if (Running) {
-		ZeroMemory(PtrList, sizeof(PtrList));
-		PtrList[0] = &This;
-		PtrList[1] = &pDevice;
-		PtrList[2] = &pDesc;
-		PtrList[3] = &ppSwapChain;
-		CompletionID = -static_cast<int>(IDXGIFactory_CreateSwapChain_VTableIndex);
-		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
-		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
-		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
-			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
-		}
-	}
-	HRESULT result = IDXGIFactory_CreateSwapChain_Original(This, pDevice, pDesc, ppSwapChain);
-	if (FAILED(result)) return result;
-	if (Running) {
-		CompletionID = IDXGIFactory_CreateSwapChain_VTableIndex;
-		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
-		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
-		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
-			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
-		}
-	}
-	return result;
-}
+		
+		Arguments Args = Arguments::PreOMSetRenderTargets(This,
+			NumViews,
+			ArrayRTV, pDepthStencilView);
+		HookCallback(&Args);
 
-HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFactory2* This,
-	_In_  IUnknown* pDevice,
-	_In_  HWND hWnd,
-	_In_  const ::DXGI_SWAP_CHAIN_DESC1* pDesc,
-	_In_opt_  const ::DXGI_SWAP_CHAIN_FULLSCREEN_DESC* pFullscreenDesc,
-	_In_opt_  IDXGIOutput* pRestrictToOutput,
-	_COM_Outptr_  IDXGISwapChain1** ppSwapChain)
-{
-	DXGI_SWAP_CHAIN_DESC1 Desc = *pDesc;
-	DXGI_SWAP_CHAIN_FULLSCREEN_DESC FullscreenDesc = pFullscreenDesc != nullptr ? *pFullscreenDesc : DXGI_SWAP_CHAIN_FULLSCREEN_DESC{};
-	pDesc = &Desc;
-	if (Window_SwapChain_Map.find(hWnd) != Window_SwapChain_Map.end()) {
-		CompletionID = IUnknown_Release_VTableIndex;
-		ZeroMemory(PtrList, sizeof(PtrList));
-		PtrList[0] = Window_SwapChain_Map[hWnd].Get();
-		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
-		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
-		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
-			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
-		}
-		Window_SwapChain_Map.erase(hWnd);
-	}
-	if (Running) {
-		ZeroMemory(PtrList, sizeof(PtrList));
-		intptr_t FullscreenDescOptionalPointers[3]{
-			reinterpret_cast<intptr_t>(&pFullscreenDesc), // pointer to local pointer
-			reinterpret_cast<intptr_t>(pFullscreenDesc), // pointer to original struct or nullptr
-			reinterpret_cast<intptr_t>(&FullscreenDesc), // pointer to local struct
-		};
-		PtrList[0] = &This;
-		PtrList[1] = &pDevice;
-		PtrList[2] = &hWnd;
-		PtrList[3] = &pDesc;
-		PtrList[4] = FullscreenDescOptionalPointers;
-		PtrList[5] = &pRestrictToOutput;
-		PtrList[6] = &ppSwapChain;
-		CompletionID = -static_cast<int>(IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex);
-		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
-		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
-		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
-			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
-		}
-	}
-	HRESULT result = IDXGIFactory2_CreateSwapChainForHwnd_Original(This, pDevice, hWnd, pDesc, pFullscreenDesc, pRestrictToOutput, ppSwapChain);
-	if (FAILED(result)) return result;
-	if (Running) {
-		CompletionID = IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex;
-		if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - SetEvent - " + std::to_string(GetLastError())).c_str());
-		HANDLE WaitHandles[2]{ AckCompletionEvent, StopEvent };
-		DWORD WaitResult = WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE);
-		if (WaitResult != WAIT_OBJECT_0 && WaitResult != WAIT_OBJECT_0 + 1) {
-			if (!SetEvent(OnCompletionEvent)) throw exception(("synchronization error - WaitForMultipleObjects - " + std::to_string(GetLastError())).c_str());
-		}
-	}
-	return result;
-}
+		reinterpret_cast<ID3D11DeviceContext_OMSetRenderTargets_Proc>(OMSetRenderTargets.MemoryOriginalProc)(NumViews,
+			ArrayRTV, pDepthStencilView);
 
-DWORD CreateHwndForTest(LPVOID Arg)
-{
-	WNDCLASSEXW wcexw{};
-	wcexw.cbSize = sizeof(WNDCLASSEXW);
-	wcexw.style = CS_HREDRAW | CS_VREDRAW;
-	wcexw.lpfnWndProc = DummyWndProc;
-	wcexw.hInstance = Module = GetModuleHandleW(NULL);
-	wcexw.hIcon = NULL;
-	wcexw.hIconSm = NULL;
-	wcexw.hCursor = LoadCursorW(nullptr, IDC_ARROW);
-	wcexw.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	wcexw.lpszClassName = ClassName;
-
-	ATOM Class = RegisterClassExW(&wcexw);
-	if (Class == NULL) return E_FAIL;
-
-	hWndForTest = CreateWindowW(ClassName, WindowName, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0,
-		NULL, NULL, Module, nullptr);
-	if (hWndForTest == NULL) return E_FAIL;
-
-	SetEvent(WindowCreated);
-
-	MSG msg;
-	while (GetMessageW(&msg, NULL, 0, 0))
-	{
-		TranslateMessage(&msg);
-		DispatchMessageW(&msg);
-	}
-
-	if (!UnregisterClassW(ClassName, Module)) {
-		return E_FAIL;
-	}
-	return S_OK;
-}
-
-LRESULT DummyWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
-{
-	switch (Msg)
-	{
-	case WM_CLOSE:
-		DestroyWindow(hWnd);
-		return 0;
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		return 0;
-	}
-	return DefWindowProcW(hWnd, Msg, wParam, lParam);
-}
-
-HRESULT __stdcall InstallHook()
-{
-	HRESULT result = 0;
-
-	ComPtr<IDXGIFactory> Factory;
-	ComPtr<IDXGIFactory2> Factory2;
-	ComPtr<IDXGISwapChain> SwapChain;
-	ComPtr<IDXGISwapChain1> SwapChain1;
-
-	if (DXGI_DLL == NULL) {
-		DXGI_DLL = GetModuleHandleW(L"DXGI.dll");
-		if (DXGI_DLL == NULL) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	}
-	MODULEINFO Info{};
-	if (!GetModuleInformation(GetCurrentProcess(), DXGI_DLL, &Info, sizeof(MODULEINFO))) {
-		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	}
-	DXGI_DLL_BaseAddress = reinterpret_cast<intptr_t>(Info.lpBaseOfDll);
-	DXGI_DLL_ImageSize = Info.SizeOfImage;
-	
-	if (GameOverlayRenderer64_DLL == NULL) {
-		GameOverlayRenderer64_DLL = GetModuleHandleW(L"GameOverlayRenderer64.dll");
-	}
-	if (GameOverlayRenderer64_DLL != NULL) {
-		MODULEINFO Info{};
-		if (!GetModuleInformation(GetCurrentProcess(), GameOverlayRenderer64_DLL, &Info, sizeof(MODULEINFO))) {
-			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-		}
-		GameOverlayRenderer64_DLL_BaseAddress = reinterpret_cast<intptr_t>(Info.lpBaseOfDll);
-		GameOverlayRenderer64_DLL_ImageSize = Info.SizeOfImage;
-	}
-
-	if (Factory == nullptr) {
-		result = CreateDXGIFactory(IID_PPV_ARGS(&Factory2));
-		if (FAILED(result))
-		{
-			result = CreateDXGIFactory(IID_PPV_ARGS(&Factory));
-			if (FAILED(result)) return result;
-		}
-		result = Factory2.As(&Factory);
-		if (FAILED(result)) return result;
-	}
-
-	ComPtr<ID3D11Device> Device;
-	D3D_FEATURE_LEVEL FeatureLevels[]{
-		D3D_FEATURE_LEVEL_11_1,
-		D3D_FEATURE_LEVEL_11_0,
-		D3D_FEATURE_LEVEL_10_1,
-		D3D_FEATURE_LEVEL_10_0,
-	};
-	result = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, NULL, 0,
-		FeatureLevels, ARRAYSIZE(FeatureLevels),
-		D3D11_SDK_VERSION, &Device, nullptr, nullptr);
-	if (FAILED(result)) return result;
-
-	WindowCreated = CreateEventW(nullptr, TRUE, FALSE, nullptr);
-	if (WindowCreated == NULL) {
-		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	}
-	WindowThread = CreateThread(nullptr, 0, CreateHwndForTest, nullptr, 0, nullptr);
-	if (WindowThread == NULL) {
-		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	}
-
-	HANDLE WaitHandles[2]{ WindowCreated, WindowThread };
-	if (WaitForMultipleObjects(2, WaitHandles, FALSE, INFINITE) != WAIT_OBJECT_0) {
-		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	}
-
-	DWORD OldProtect;
-	intptr_t* VTable;
-
-	if (Factory2 != nullptr) {
-		::DXGI_SWAP_CHAIN_DESC1 SwapChainDesc{};
-		SwapChainDesc.Width = 640;
-		SwapChainDesc.Height = 360;
-		SwapChainDesc.Format = ::DXGI_FORMAT_R8G8B8A8_UNORM;
-		SwapChainDesc.SampleDesc.Count = 1;
-		SwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-		SwapChainDesc.BufferCount = 2;
-		SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-		SwapChainDesc.Flags = 0;
-		result = Factory2->CreateSwapChainForHwnd(Device.Get(), hWndForTest, &SwapChainDesc, nullptr, nullptr, &SwapChain1);
-		if (FAILED(result)) return result;
-
-		result = SwapChain1.As(&SwapChain);
-		if (FAILED(result)) return result;
+		Arguments::PostOMSetRenderTargets(Args, S_OK);
+		HookCallback(&Args);
 	}
 	else {
-		::DXGI_SWAP_CHAIN_DESC SwapChainDesc{};
-		SwapChainDesc.BufferDesc.Width = 640;
-		SwapChainDesc.BufferDesc.Height = 320;
-		SwapChainDesc.BufferDesc.Format = ::DXGI_FORMAT_R8G8B8A8_UNORM;
-		SwapChainDesc.SampleDesc.Count = 1;
-		SwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-		SwapChainDesc.BufferCount = 2;
-		SwapChainDesc.OutputWindow = hWndForTest;
-		SwapChainDesc.Windowed = TRUE;
-		SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-		SwapChainDesc.Flags = 0;
-		result = Factory->CreateSwapChain(Device.Get(), &SwapChainDesc, &SwapChain);
-		if (FAILED(result)) return result;
+		reinterpret_cast<ID3D11DeviceContext_OMSetRenderTargets_Proc>(OMSetRenderTargets.MemoryOriginalProc)(NumViews,
+			ppRenderTargetViews, pDepthStencilView);
 	}
-
-	// saving original function pointers
-	if (SwapChain1 != nullptr) {
-		SwapChain1VTableAddress = *reinterpret_cast<intptr_t*>(SwapChain1.Get());
-		VTable = reinterpret_cast<intptr_t*>(SwapChain1VTableAddress);
-		IDXGISwapChain1_Present1_Original = reinterpret_cast<IDXGISwapChain1_Present1_Proc>(VTable[IDXGISwapChain1_Present1_VTableIndex]);
-	}
-
-	SwapChainVTableAddress = *reinterpret_cast<intptr_t*>(SwapChain.Get());
-	VTable = reinterpret_cast<intptr_t*>(SwapChainVTableAddress);
-	IDXGISwapChain_Present_Original = reinterpret_cast<IDXGISwapChain_Present_Proc>(VTable[IDXGISwapChain_Present_VTableIndex]);
-
-	if (Factory2 != nullptr) {
-		Factory2VTableAddress = *reinterpret_cast<intptr_t*>(Factory2.Get());
-		VTable = reinterpret_cast<intptr_t*>(Factory2VTableAddress);
-		IDXGIFactory2_CreateSwapChainForHwnd_Original = reinterpret_cast<IDXGIFactory2_CreateSwapChainForHwnd_Proc>(VTable[IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex]);
-	}
-
-	FactoryVTableAddress = *reinterpret_cast<intptr_t*>(Factory.Get());
-	VTable = reinterpret_cast<intptr_t*>(FactoryVTableAddress);
-	IDXGIFactory_CreateSwapChain_Original = reinterpret_cast<IDXGIFactory_CreateSwapChain_Proc>(VTable[IDXGIFactory_CreateSwapChain_VTableIndex]);
-
-	bool Discord = false;
-	result = DetectPreviousDetourHook();
-	if (result == STATUS_ENTRYPOINT_NOT_FOUND) Discord = true;
-	else if (result == E_FAIL) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	else if (FAILED(result)) return result;
-
-	// changing function pointers
-	if (SwapChain1VTableAddress != 0) {
-		VTable = reinterpret_cast<intptr_t*>(SwapChain1VTableAddress);
-
-		if (!VirtualProtect(VTable + IDXGISwapChain1_Present1_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-		VTable[IDXGISwapChain1_Present1_VTableIndex] = reinterpret_cast<intptr_t>(IDXGISwapChain1_Present1_Override);
-		if (!VirtualProtect(VTable + IDXGISwapChain1_Present1_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	}
-
-	VTable = reinterpret_cast<intptr_t*>(SwapChainVTableAddress);
-
-	if (!VirtualProtect(VTable + IDXGISwapChain_Present_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	VTable[IDXGISwapChain_Present_VTableIndex] = reinterpret_cast<intptr_t>(IDXGISwapChain_Present_Override);
-	if (!VirtualProtect(VTable + IDXGISwapChain_Present_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-
-	if (Factory2VTableAddress != 0) {
-		VTable = reinterpret_cast<intptr_t*>(Factory2VTableAddress);
-
-		if (!VirtualProtect(VTable + IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-		VTable[IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex] = reinterpret_cast<intptr_t>(IDXGIFactory2_CreateSwapChainForHwnd_Override);
-		if (!VirtualProtect(VTable + IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	}
-
-	VTable = reinterpret_cast<intptr_t*>(FactoryVTableAddress);
-
-	if (!VirtualProtect(VTable + IDXGIFactory_CreateSwapChain_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	VTable[IDXGIFactory_CreateSwapChain_VTableIndex] = reinterpret_cast<intptr_t>(IDXGIFactory_CreateSwapChain_Override);
-	if (!VirtualProtect(VTable + IDXGIFactory_CreateSwapChain_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	
-	SwapChain.Reset();
-	Device.Reset();
-
-	if (!PostMessageW(hWndForTest, WM_CLOSE, 0, 0)) {
-		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	}
-	if (WaitForSingleObject(WindowThread, INFINITE) != WAIT_OBJECT_0) {
-		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	}
-
-	CloseHandle(WindowCreated);
-	CloseHandle(WindowThread);
-
-	OnCompletionEvent = CreateEventW(nullptr, FALSE, FALSE, nullptr);
-	AckCompletionEvent = CreateEventW(nullptr, FALSE, FALSE, nullptr);
-	StopEvent = CreateEventW(nullptr, TRUE, FALSE, nullptr);
-
-	return Discord ? ::Discord : result;
 }
 
-HRESULT __stdcall UninstallHook()
+void STDMETHODCALLTYPE ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_Override(ID3D11DeviceContext* This,
+	_In_  UINT NumRTVs,
+	_In_reads_opt_(NumRTVs)  ID3D11RenderTargetView* const* ppRenderTargetViews,
+	_In_opt_  ID3D11DepthStencilView* pDepthStencilView,
+	_In_range_(0, D3D11_1_UAV_SLOT_COUNT - 1)  UINT UAVStartSlot,
+	_In_  UINT NumUAVs,
+	_In_reads_opt_(NumUAVs)  ID3D11UnorderedAccessView* const* ppUnorderedAccessViews,
+	_In_reads_opt_(NumUAVs)  const UINT* pUAVInitialCounts)
 {
-	intptr_t* VTable = nullptr;
-	DWORD OldProtect = 0;
+	if (Running && HookCallback != nullptr) {
 
-	if (Factory2VTableAddress != 0) {
-		VTable = reinterpret_cast<intptr_t*>(Factory2VTableAddress);
-
-		if (IDXGIFactory2_CreateSwapChainForHwnd_Original != nullptr) {
-			if (!VirtualProtect(VTable + IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-			VTable[IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex] = reinterpret_cast<intptr_t>(IDXGIFactory2_CreateSwapChainForHwnd_Original);
-			if (!VirtualProtect(VTable + IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		ID3D11RenderTargetView** ArrayRTV = nullptr;
+		vector<ID3D11RenderTargetView*> RenderTargetViews;
+		if (ppRenderTargetViews != nullptr) {
+			RenderTargetViews.resize(NumRTVs);
+			CopyMemory(RenderTargetViews.data(), ppRenderTargetViews, sizeof(ID3D11RenderTargetView*) * NumRTVs);
+			ArrayRTV = RenderTargetViews.data();
 		}
-	}
-	if (FactoryVTableAddress != 0) {
-		VTable = reinterpret_cast<intptr_t*>(FactoryVTableAddress);
-
-		if (IDXGIFactory_CreateSwapChain_Original != nullptr) {
-			if (!VirtualProtect(VTable + IDXGIFactory_CreateSwapChain_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-			VTable[IDXGIFactory_CreateSwapChain_VTableIndex] = reinterpret_cast<intptr_t>(IDXGIFactory_CreateSwapChain_Original);
-			if (!VirtualProtect(VTable + IDXGIFactory_CreateSwapChain_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		
+		ID3D11UnorderedAccessView** ArrayUAV = nullptr;
+		vector<ID3D11UnorderedAccessView*> UnorderedAccessViews;
+		if (ppUnorderedAccessViews != nullptr) {
+			UnorderedAccessViews.resize(NumUAVs);
+			CopyMemory(UnorderedAccessViews.data(), ppUnorderedAccessViews, sizeof(ID3D11RenderTargetView*) * NumUAVs);
+			ArrayUAV = UnorderedAccessViews.data();
 		}
-	}
 
-	if (SwapChain1VTableAddress != 0) {
-		VTable = reinterpret_cast<intptr_t*>(SwapChain1VTableAddress);
-
-		if (IDXGISwapChain1_Present1_Original != nullptr) {
-			if (!VirtualProtect(VTable + IDXGISwapChain1_Present1_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-			VTable[IDXGISwapChain1_Present1_VTableIndex] = reinterpret_cast<intptr_t>(IDXGISwapChain1_Present1_Original);
-			if (!VirtualProtect(VTable + IDXGISwapChain1_Present1_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		UINT* ArrayUAVInitialCounts = nullptr;
+		vector<UINT> UAVInitialCounts;
+		if (pUAVInitialCounts != nullptr) {
+			UAVInitialCounts.resize(NumUAVs);
+			CopyMemory(UAVInitialCounts.data(), pUAVInitialCounts, sizeof(UINT) * NumUAVs);
+			ArrayUAVInitialCounts = UAVInitialCounts.data();
 		}
-	}
-	if (SwapChainVTableAddress != 0) {
-		VTable = reinterpret_cast<intptr_t*>(SwapChainVTableAddress);
 
-		if (IDXGISwapChain_Present_Original != nullptr) {
-			if (!VirtualProtect(VTable + IDXGISwapChain_Present_VTableIndex, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-			VTable[IDXGISwapChain_Present_VTableIndex] = reinterpret_cast<intptr_t>(IDXGISwapChain_Present_Original);
-			if (!VirtualProtect(VTable + IDXGISwapChain_Present_VTableIndex, sizeof(intptr_t), OldProtect, &OldProtect)) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-		}
-	}
+		Arguments Args = Arguments::PreOMSetRenderTargetsAndUnorderedAccessViews(This,
+			NumRTVs,
+			ArrayRTV, pDepthStencilView,
+			UAVStartSlot, NumUAVs,
+			ArrayUAV, ArrayUAVInitialCounts);
+		HookCallback(&Args);
 
-	CloseHandle(OnCompletionEvent);
-	CloseHandle(AckCompletionEvent);
-	CloseHandle(StopEvent);
+		reinterpret_cast<ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_Proc>(OMSetRenderTargetsAndUnorderedAccessViews.MemoryOriginalProc)(NumRTVs,
+			ArrayRTV, pDepthStencilView,
+			UAVStartSlot, NumUAVs, ArrayUAV, ArrayUAVInitialCounts);
 
-	return S_OK;
-}
-
-HRESULT __stdcall SetRunning(bool Running)
-{
-	::Running = Running;
-	if (!Running) {
-		if (!SetEvent(StopEvent)) {
-			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-		}
+		Arguments::PostOMSetRenderTargetsAndUnorderedAccessViews(Args, S_OK);
+		HookCallback(&Args);
 	}
 	else {
-		if (!ResetEvent(StopEvent)) {
-			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-		}
+		reinterpret_cast<ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_Proc>(OMSetRenderTargetsAndUnorderedAccessViews.MemoryOriginalProc)(NumRTVs,
+			ppRenderTargetViews, pDepthStencilView,
+			UAVStartSlot, NumUAVs, ppUnorderedAccessViews, pUAVInitialCounts);
 	}
-	return S_OK;
 }
 
-int __stdcall BeginProcessCompletionEvent()
+
+
+intptr_t __stdcall Get_D3D11_DLL_BaseAddress()
 {
-	HANDLE Handles[2]{ OnCompletionEvent, StopEvent };
-	if (WaitForMultipleObjects(2, Handles, FALSE, INFINITE) != WAIT_OBJECT_0) {
-		return INT_MAX;
-	}
-	else return static_cast<int>(CompletionID);
+	return D3D11_DLL.BaseAddress;
 }
 
-HRESULT __stdcall EndProcessCompletionEvent()
+intptr_t __stdcall Get_DXGI_DLL_BaseAddress()
 {
-	CompletionID = INT_MAX;
-	if (!SetEvent(AckCompletionEvent)) {
-		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-	}
-	return S_OK;
+	return DXGI_DLL.BaseAddress;
 }
 
-UINT __stdcall GetCurrentBufferIndex()
+intptr_t __stdcall Get_GameOverlayRenderer64_DLL_BaseAddress()
 {
-	DXGI_SWAP_CHAIN_DESC1 Desc1{};
-	ComPtr<IDXGISwapChain3> SwapChain3;
-	PreviousSwapChain->QueryInterface<IDXGISwapChain3>(&SwapChain3);
-	if (SwapChain3 != nullptr && SUCCEEDED(SwapChain3->GetDesc1(&Desc1))) {
-		switch (Desc1.SwapEffect)
-		{
-		case DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_FLIP_DISCARD:
-		case DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL:
-			return SwapChain3->GetCurrentBackBufferIndex();
-		}
-	}
-	return 0;
+	return GameOverlayRenderer64_DLL.BaseAddress;
 }
 
-intptr_t __stdcall Get_DXGI_DLL_Address()
+DWORD __stdcall Get_D3D11_DLL_ImageSize()
 {
-	return DXGI_DLL_BaseAddress;
+	return D3D11_DLL.ImageSize;
 }
 
 DWORD __stdcall Get_DXGI_DLL_ImageSize()
 {
-	return DXGI_DLL_ImageSize;
-}
-
-intptr_t __stdcall Get_IDXGISwapChain_Present_Original()
-{
-	return reinterpret_cast<intptr_t>(IDXGISwapChain_Present_Original);
-}
-
-intptr_t __stdcall Get_IDXGISwapChain1_Present1_Original()
-{
-	return reinterpret_cast<intptr_t>(IDXGISwapChain1_Present1_Original);
-}
-
-intptr_t __stdcall Get_IDXGIFactory_CreateSwapChain_Original()
-{
-	return reinterpret_cast<intptr_t>(IDXGIFactory_CreateSwapChain_Original);
-}
-
-intptr_t __stdcall Get_IDXGIFactory2_CreateSwapChainForHwnd_Original()
-{
-	return reinterpret_cast<intptr_t>(IDXGIFactory2_CreateSwapChainForHwnd_Original);
-}
-
-void** __stdcall Get_LocalVariablesArray()
-{
-	return PtrList;
-}
-
-bool __stdcall Get_Present_PreviousDetourHookDetected()
-{
-	return Present_PreviousDetourHookDetected;
-}
-
-bool __stdcall Get_Present1_PreviousDetourHookDetected()
-{
-	return Present1_PreviousDetourHookDetected;
-}
-
-intptr_t __stdcall Get_GameOverlayRenderer64_DLL_Address()
-{
-	return GameOverlayRenderer64_DLL_BaseAddress;
+	return DXGI_DLL.ImageSize;
 }
 
 DWORD __stdcall Get_GameOverlayRenderer64_DLL_ImageSize()
 {
-	return GameOverlayRenderer64_DLL_ImageSize;
+	return GameOverlayRenderer64_DLL.ImageSize;
 }
 
-bool __stdcall Get_Present_HasOriginalFirstFiveBytesOfInstruction()
-{
-	return Present_HasOriginalFirstFiveBytesOfInstruction;
-}
-
-bool __stdcall Get_Present1_HasOriginalFirstFiveBytesOfInstruction()
-{
-	return Present1_HasOriginalFirstFiveBytesOfInstruction;
-}
-
-bool __stdcall Get_Present_HasLoadedFirstFiveBytesOfInstruction()
-{
-	return Present_HasLoadedFirstFiveBytesOfInstruction;
-}
-
-bool __stdcall Get_Present1_HasLoadedFirstFiveBytesOfInstruction()
-{
-	return Present1_HasLoadedFirstFiveBytesOfInstruction;
-}
-
-void __stdcall Refresh_Present_LoadedFirstFiveBytesOfInstruction()
-{
-	CopyMemory(Present_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain_Present_Original, sizeof(Present_LoadedFirstFiveBytesOfInstruction));
-}
-
-void __stdcall Refresh_Present1_LoadedFirstFiveBytesOfInstruction()
-{
-	CopyMemory(Present1_LoadedFirstFiveBytesOfInstruction, IDXGISwapChain1_Present1_Original, sizeof(Present1_LoadedFirstFiveBytesOfInstruction));
-}
-
-intptr_t __stdcall Get_Present_OriginalFirstFiveBytesOfInstruction()
-{
-	return reinterpret_cast<intptr_t>(Present_OriginalFirstFiveBytesOfInstruction);
-}
-
-intptr_t __stdcall Get_Present1_OriginalFirstFiveBytesOfInstruction()
-{
-	return reinterpret_cast<intptr_t>(Present1_OriginalFirstFiveBytesOfInstruction);
-}
-
-intptr_t __stdcall Get_Present_LoadedFirstFiveBytesOfInstruction()
-{
-	return reinterpret_cast<intptr_t>(Present_LoadedFirstFiveBytesOfInstruction);
-}
-
-intptr_t __stdcall Get_Present1_LoadedFirstFiveBytesOfInstruction()
-{
-	return reinterpret_cast<intptr_t>(Present1_LoadedFirstFiveBytesOfInstruction);
-}
-
-BYTE LastInstruction = 0;
-intptr_t LastAddress = 0;
-DWORD LastError = 0;
-int __stdcall JmpEndsUpInRange(intptr_t SrcAddr, intptr_t RangeStart, DWORD Size)
+bool __stdcall JmpEndsUpInRange(intptr_t SrcAddr, intptr_t RangeStart, DWORD Size)
 {
 	BYTE* nextAddress = reinterpret_cast<BYTE*>(SrcAddr);
 
@@ -962,24 +941,184 @@ int __stdcall JmpEndsUpInRange(intptr_t SrcAddr, intptr_t RangeStart, DWORD Size
 		}
 	}
 
-	LastAddress = reinterpret_cast<intptr_t>(nextAddress);
-	if (LastAddress >= RangeStart && LastAddress < (RangeStart + Size)) {
+	if (reinterpret_cast<intptr_t>(nextAddress) >= RangeStart && reinterpret_cast<intptr_t>(nextAddress) < (RangeStart + Size)) {
 		return 1;
 	}
 	return 0;
 }
 
-BYTE __stdcall JmpEndsUpInRange_LastInstruction()
+
+
+constexpr WCHAR ClassName[] = L"MAGIC";
+constexpr WCHAR WindowName[] = L"Magic";
+HINSTANCE Module = NULL;
+HWND hWndForTest = NULL;
+HANDLE WindowThread = NULL;
+HANDLE WindowCreated = NULL;
+
+LRESULT static DummyWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
-	return LastInstruction;
+	switch (Msg)
+	{
+	case WM_CLOSE:
+		DestroyWindow(hWnd);
+		return 0;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		return 0;
+	}
+	return DefWindowProcW(hWnd, Msg, wParam, lParam);
 }
 
-intptr_t __stdcall JmpEndsUpInRange_LastAddress()
+DWORD static DummyCreateHwnd(LPVOID Arg)
 {
-	return LastAddress;
+	WNDCLASSEXW wcexw{};
+	wcexw.cbSize = sizeof(WNDCLASSEXW);
+	wcexw.style = CS_HREDRAW | CS_VREDRAW;
+	wcexw.lpfnWndProc = DummyWndProc;
+	wcexw.hInstance = Module = GetModuleHandleW(NULL);
+	wcexw.hIcon = NULL;
+	wcexw.hIconSm = NULL;
+	wcexw.hCursor = LoadCursorW(nullptr, IDC_ARROW);
+	wcexw.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+	wcexw.lpszClassName = ClassName;
+
+	ATOM Class = RegisterClassExW(&wcexw);
+	if (Class == NULL) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+
+	hWndForTest = CreateWindowW(ClassName, WindowName, WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0,
+		NULL, NULL, Module, nullptr);
+	if (hWndForTest == NULL) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+
+	SetEvent(WindowCreated);
+
+	MSG msg;
+	while (GetMessageW(&msg, NULL, 0, 0))
+	{
+		TranslateMessage(&msg);
+		DispatchMessageW(&msg);
+	}
+
+	if (!UnregisterClassW(ClassName, Module)) {
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+	}
+	return S_OK;
 }
 
-DWORD __stdcall JmpEndsUpInRange_LastError()
+HRESULT DummyCreateDirectXInstances(
+	ID3D11Device** Device, ID3D11DeviceContext** Context,
+	IDXGIFactory** Factory, IDXGIFactory2** Factory2,
+	IDXGISwapChain** SwapChain, IDXGISwapChain1** SwapChain1)
 {
-	return LastError;
+	HRESULT result = 0;
+
+	if (*Factory == nullptr) {
+		result = CreateDXGIFactory2(0, IID_PPV_ARGS(Factory2));
+		if (FAILED(result))
+		{
+			result = CreateDXGIFactory(IID_PPV_ARGS(Factory));
+			if (FAILED(result)) return result;
+		}
+		else {
+			result = (*Factory2)->QueryInterface(Factory);
+			if (FAILED(result)) return result;
+		}
+	}
+
+	D3D_FEATURE_LEVEL FeatureLevels[]{
+		D3D_FEATURE_LEVEL_11_1,
+		D3D_FEATURE_LEVEL_11_0,
+		D3D_FEATURE_LEVEL_10_1,
+		D3D_FEATURE_LEVEL_10_0,
+	};
+	result = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, NULL, 0,
+		FeatureLevels, ARRAYSIZE(FeatureLevels),
+		D3D11_SDK_VERSION, Device, nullptr, Context);
+	if (FAILED(result)) return result;
+
+	WindowCreated = CreateEventW(nullptr, TRUE, FALSE, nullptr);
+	if (WindowCreated == NULL) {
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+	}
+	WindowThread = CreateThread(nullptr, 0, DummyCreateHwnd, nullptr, 0, nullptr);
+	if (WindowThread == NULL) {
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+	}
+
+	HANDLE Wait[2]{ WindowCreated, WindowThread };
+	DWORD WaitResult = WaitForMultipleObjects(2, Wait, FALSE, INFINITE);
+	if (WaitResult == (WAIT_OBJECT_0 + 1)) {
+		if (!GetExitCodeThread(WindowThread, &WaitResult)) {
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		}
+		else {
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, WaitResult);
+		}
+	}
+	else if (WaitResult != WAIT_OBJECT_0) {
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+	}
+
+	// create swap chain
+	if (*Factory2 != nullptr) {
+		::DXGI_SWAP_CHAIN_DESC1 SwapChainDesc{};
+		SwapChainDesc.Width = 640;
+		SwapChainDesc.Height = 360;
+		SwapChainDesc.Format = ::DXGI_FORMAT_R8G8B8A8_UNORM;
+		SwapChainDesc.SampleDesc.Count = 1;
+		SwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		SwapChainDesc.BufferCount = 2;
+		SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+		SwapChainDesc.Flags = 0;
+
+		result = (*Factory2)->CreateSwapChainForHwnd(*Device, hWndForTest, &SwapChainDesc, nullptr, nullptr, SwapChain1);
+		if (FAILED(result)) return result;
+
+		result = (*SwapChain1)->QueryInterface(SwapChain);
+		if (FAILED(result)) return result;
+	}
+	else {
+		::DXGI_SWAP_CHAIN_DESC SwapChainDesc{};
+		SwapChainDesc.BufferDesc.Width = 640;
+		SwapChainDesc.BufferDesc.Height = 320;
+		SwapChainDesc.BufferDesc.Format = ::DXGI_FORMAT_R8G8B8A8_UNORM;
+		SwapChainDesc.SampleDesc.Count = 1;
+		SwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		SwapChainDesc.BufferCount = 2;
+		SwapChainDesc.OutputWindow = hWndForTest;
+		SwapChainDesc.Windowed = TRUE;
+		SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+		SwapChainDesc.Flags = 0;
+		result = (*Factory)->CreateSwapChain(*Device, &SwapChainDesc, SwapChain);
+		if (FAILED(result)) return result;
+	}
+
+	return result;
+}
+
+HRESULT DummyRelease()
+{
+	if (!PostMessageW(hWndForTest, WM_CLOSE, 0, 0)) {
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+	}
+	if (WaitForSingleObject(WindowThread, INFINITE) != WAIT_OBJECT_0) {
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+	}
+
+	CloseHandle(WindowCreated);
+	CloseHandle(WindowThread);
+
+	return S_OK;
+}
+
+
+
+void ForceBreakpoint()
+{
+	int* n = nullptr;
+#pragma warning (push)
+#pragma warning (disable : 6011)
+	*n = 1;
+#pragma warning (pop)
 }

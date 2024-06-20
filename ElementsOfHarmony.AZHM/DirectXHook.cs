@@ -4,7 +4,7 @@
 	{
 		public static void Init()
 		{
-			// put adjustment codes here in the future
+			//global::ElementsOfHarmony.DirectXHook;
 		}
 	}
 }

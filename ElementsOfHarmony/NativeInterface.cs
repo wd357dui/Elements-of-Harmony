@@ -29,7 +29,7 @@ namespace ElementsOfHarmony
 		}
 
 		protected List<Delegate?> VTable = new List<Delegate?>();
-		protected Unknown(IntPtr pInstance, int MethodCount = 3)
+		public Unknown(IntPtr pInstance, int MethodCount = 3)
 		{
 			this.pInstance = pInstance;
 			VTable.AddRange(Enumerable.Repeat<Delegate?>(null, MethodCount));
@@ -78,7 +78,7 @@ namespace ElementsOfHarmony
 
 		~Unknown()
 		{
-			Dispose(disposing: false);
+			Dispose(disposing: true);
 		}
 
 		public void Dispose()

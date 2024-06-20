@@ -40,6 +40,7 @@ namespace ElementsOfHarmony.KinectControl
 				{
 					Log.Message($"Harmony patch for {AMBA.FullName} successful - {Num} Patches");
 				}
+				OverlayDraw += OnOverlayDraw;
 			}
 			if (ElementsOfHarmony.IsAZHM)
 			{
@@ -60,11 +61,6 @@ namespace ElementsOfHarmony.KinectControl
 			}
 
 			reader.FrameArrived += Reader_FrameArrived;
-
-			if (ElementsOfHarmony.IsAMBA)
-			{
-				OverlayDraw += DirectXHook_OverlayDraw;
-			}
 
 			Application.quitting += Application_quitting;
 		}
@@ -141,8 +137,9 @@ namespace ElementsOfHarmony.KinectControl
 				Bodies[n]?.Dispose();
 			}
 		}
-		private static void DirectXHook_OverlayDraw(IntPtr Device)
+		private static void OnOverlayDraw(object sender, EventArgs _)
 		{
+			IntPtr Device = (IntPtr)sender;
 			void DrawPlayerControls(PlayerStatus? Player, Color PlayerColor)
 			{
 				if (Player == null) return;

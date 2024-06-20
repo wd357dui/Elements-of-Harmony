@@ -50,13 +50,11 @@ extern "C" {
 	__declspec(dllexport) void __stdcall SetDpi(_In_ Device* pInstance, float DpiX, float DpiY);
 }
 
-HRESULT CreateRenderTargetFromSurface(IDXGISurface* Surface);
-
 struct Device
 {
 	ComPtr<ID2D1Device> Device2D;
 	ComPtr<ID2D1DeviceContext> Context2D;
-	HRESULT Init(IDXGIDevice* DeviceDXGI);
+	HRESULT EnsureResources(IDXGIDevice* DeviceDXGI);
 
 	ComPtr<ID2D1SolidColorBrush> SolidColorBrush;
 	ComPtr<IDWriteTextFormat> DWriteTextFormat;
@@ -66,7 +64,7 @@ struct Device
 struct RenderTarget
 {
 	ComPtr<ID2D1Bitmap1> Target;
-	HRESULT Init(Device& Device, IDXGISurface* Surface);
+	HRESULT EnsureResources(Device& Device, IDXGISurface* Surface);
 };
 
 ComPtr<IDWriteFactory> DWriteFactory;
@@ -75,7 +73,7 @@ map<ComPtr<IDXGIDevice>, set<ComPtr<IDXGISurface>>>	DeviceSurfaces;
 map<ComPtr<IDXGISurface>, RenderTarget>				RenderTargets;
 map<ComPtr<IDXGISurface>, ComPtr<ID2D1CommandList>>	CommandLists;
 
-HRESULT CreateRenderTargetFromSurface(IDXGISurface* Surface)
+HRESULT static EnsureResourcesForSurface(IDXGISurface* Surface)
 {
 	HRESULT result = 0;
 	ComPtr<IDXGIDevice> DeviceDXGI;
@@ -92,9 +90,9 @@ HRESULT CreateRenderTargetFromSurface(IDXGISurface* Surface)
 	DeviceSurfaces[DeviceDXGI].insert(SurfaceDXGI);
 
 	Device& Device = DeviceResources[DeviceDXGI];
-	result = Device.Init(DeviceDXGI.Get());
+	result = Device.EnsureResources(DeviceDXGI.Get());
 	if (FAILED(result)) return result;
-	result = RenderTargets[SurfaceDXGI].Init(Device, SurfaceDXGI.Get());
+	result = RenderTargets[SurfaceDXGI].EnsureResources(Device, SurfaceDXGI.Get());
 	if (FAILED(result)) return result;
 	return result;
 }
@@ -117,7 +115,7 @@ void __stdcall ReleaseOverlay()
 	CoUninitialize();
 }
 
-HRESULT Device::Init(IDXGIDevice* DeviceDXGI)
+HRESULT Device::EnsureResources(IDXGIDevice* DeviceDXGI)
 {
 	HRESULT result = 0;
 	if (Device2D != nullptr && Context2D != nullptr) return S_OK;
@@ -139,7 +137,7 @@ HRESULT Device::Init(IDXGIDevice* DeviceDXGI)
 	return result;
 }
 
-HRESULT RenderTarget::Init(Device& Device, IDXGISurface* Surface)
+HRESULT RenderTarget::EnsureResources(Device& Device, IDXGISurface* Surface)
 {
 	HRESULT result = 0;
 	if (Target != nullptr) return S_OK;
@@ -152,11 +150,8 @@ HRESULT RenderTarget::Init(Device& Device, IDXGISurface* Surface)
 HRESULT __stdcall SwapChainBeginDraw(_In_ IDXGISwapChain* SwapChain, UINT Index, _Out_ Device** ppInstance)
 {
 	HRESULT result = 0;
-	ComPtr<IDXGIDevice> DeviceDXGI;
 	ComPtr<IDXGISurface> SurfaceDXGI;
 
-	result = SwapChain->GetDevice(IID_PPV_ARGS(&DeviceDXGI));
-	if (FAILED(result)) return result;
 	result = SwapChain->GetBuffer(Index, IID_PPV_ARGS(&SurfaceDXGI));
 	if (FAILED(result)) { // doesn't implement IDXGISurface, might be a stereo buffer
 		ComPtr<IDXGIResource1> ResourceDXGI;
@@ -183,7 +178,7 @@ HRESULT __stdcall SurfaceBeginDraw(_In_ IDXGISurface* Surface, _Out_ Device** pp
 
 	result = Surface->GetDevice(IID_PPV_ARGS(&DeviceDXGI));
 	if (FAILED(result)) return result;
-	result = CreateRenderTargetFromSurface(Surface);
+	result = EnsureResourcesForSurface(Surface);
 	if (FAILED(result)) return result;
 
 	*ppInstance = &DeviceResources[DeviceDXGI];
@@ -211,9 +206,9 @@ HRESULT __stdcall StereoSurfaceBeginDraw(_In_ IDXGISurface* SurfaceLeft, _In_ ID
 
 	result = SurfaceLeft->GetDevice(IID_PPV_ARGS(&DeviceDXGI));
 	if (FAILED(result)) return result;
-	result = CreateRenderTargetFromSurface(SurfaceLeft);
+	result = EnsureResourcesForSurface(SurfaceLeft);
 	if (FAILED(result)) return result;
-	result = CreateRenderTargetFromSurface(SurfaceRight);
+	result = EnsureResourcesForSurface(SurfaceRight);
 	if (FAILED(result)) return result;
 
 	*ppInstance = &DeviceResources[DeviceDXGI];

@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -15,25 +14,29 @@ namespace ElementsOfHarmony
 {
 	public static class DirectXHook
 	{
-		private static readonly Thread SynchornizationThread = new Thread(Sync);
 		public static void Init()
 		{
 			try
 			{
+				unsafe
+				{
+					SetCallbacks(HookCallback, Log.Message);
+				}
+
 				int HResult = InstallHook();
 				Log.Message($"InstallHook() returns {HResult:X}");
-				if (HResult == Discord)
-				{
-					_ = new ThirdPartyNonDetourHookDetectedException();
-				}
-				else
-				{
-					Marshal.ThrowExceptionForHR(HResult);
-				}
-				SynchornizationThread.Start();
-				SetRunning(true);
+				Marshal.ThrowExceptionForHR(HResult);
 
-				InitOverlay();
+				HResult = InitOverlay();
+				Log.Message($"InitOverlay() returns {HResult:X}");
+				Marshal.ThrowExceptionForHR(HResult);
+
+				Application.quitting += Application_quitting;
+				SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+				PrePresent += OnPrePresent;
+				PrePresent1 += OnPrePresent1;
+
+				SetRunning(true);
 
 				// apply all of our patch procedures using Harmony API
 				Harmony element = new Harmony($"{typeof(DirectXHook).FullName}");
@@ -96,135 +99,59 @@ namespace ElementsOfHarmony
 					Log.Message($"Harmony patch for {typeof(RenderHooks).FullName} successful - {Num} Patches");
 				}
 
-				Application.quitting += Application_quitting;
-				SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-
-				SwapChainPresenting += OnPresenting;
-				SwapChain1Presenting += OnPresenting1;
-
 				Log.Message("DirectX hook complete");
 			}
-			catch (Exception) { }
+			catch (Exception e)
+			{
+			repeat:
+				Log.Message($"{typeof(DirectXHook).FullName} - {e.GetType()}\n{e.StackTrace}\n{e.Message}");
+				if (e.InnerException != null)
+				{
+					e = e.InnerException;
+					goto repeat;
+				}
+			}
 			finally
 			{
-				IntPtr DllAddress = Get_DXGI_DLL_Address();
-				uint DllImageSize = Get_DXGI_DLL_ImageSize();
-				Log.Message($"Address space for DXGI.dll {DllAddress.ToInt64():X} - {DllAddress.ToInt64() + DllImageSize:X}");
-				Log.Message($"Get_IDXGISwapChain_Present_Original() {Get_IDXGISwapChain_Present_Original().ToInt64():X}");
-				Log.Message($"Get_IDXGISwapChain1_Present1_Original() {Get_IDXGISwapChain1_Present1_Original().ToInt64():X}");
-				Log.Message($"Get_IDXGIFactory_CreateSwapChain_Original() {Get_IDXGIFactory_CreateSwapChain_Original().ToInt64():X}");
-				Log.Message($"Get_IDXGIFactory2_CreateSwapChainForHwnd_Original() {Get_IDXGIFactory2_CreateSwapChainForHwnd_Original().ToInt64():X}");
-				Log.Message($"Get_Present_PreviousDetourHookDetected() {Get_Present_PreviousDetourHookDetected()}");
-				Log.Message($"Get_Present1_PreviousDetourHookDetected() {Get_Present1_PreviousDetourHookDetected()}");
-				Log.Message($"Get_Present_HasLoadedFirstFiveBytesOfInstruction() {Get_Present_HasLoadedFirstFiveBytesOfInstruction()}");
-				Log.Message($"Get_Present_HasOriginalFirstFiveBytesOfInstruction() {Get_Present_HasOriginalFirstFiveBytesOfInstruction()}");
-				Log.Message($"Get_Present1_HasLoadedFirstFiveBytesOfInstruction() {Get_Present1_HasLoadedFirstFiveBytesOfInstruction()}");
-				Log.Message($"Get_Present1_HasOriginalFirstFiveBytesOfInstruction() {Get_Present1_HasOriginalFirstFiveBytesOfInstruction()}");
+				IntPtr DXGI_DLL = Get_DXGI_DLL_BaseAddress();
+				IntPtr GameOverlayRenderer64_DLL = Get_GameOverlayRenderer64_DLL_BaseAddress();
+				uint GameOverlayRenderer64_DLL_ImageSize = Get_GameOverlayRenderer64_DLL_ImageSize();
 
-				DllAddress = Get_GameOverlayRenderer64_DLL_Address();
-				DllImageSize = Get_GameOverlayRenderer64_DLL_ImageSize();
-				bool HasGameOverlayRenderer64 = DllAddress != IntPtr.Zero;
-				if (HasGameOverlayRenderer64)
+				if (DXGI_DLL != IntPtr.Zero && GameOverlayRenderer64_DLL != IntPtr.Zero)
 				{
-					Log.Message($"Address space for GameOverlayRenderer64.dll {DllAddress.ToInt64():X} - {DllAddress.ToInt64() + DllImageSize:X}");
-				}
+					IntPtr PresentProc = Get_Present_MemoryOriginal_Proc();
+					IntPtr Present1Proc = Get_Present1_MemoryOriginal_Proc();
+					var PresentBytes = new NativeArrayAccess<byte>(Get_Present_MemoryOriginal_Bytes(), 5);
+					var Present1Bytes = new NativeArrayAccess<byte>(Get_Present1_MemoryOriginal_Bytes(), 5);
 
-				if (Get_Present_HasLoadedFirstFiveBytesOfInstruction())
-				{
-					Refresh_Present_LoadedFirstFiveBytesOfInstruction();
-					IntPtr Present_Loaded = Get_Present_LoadedFirstFiveBytesOfInstruction();
-					byte[] Present_Loaded_Bytes = new byte[5];
-					Marshal.Copy(Present_Loaded, Present_Loaded_Bytes, 0, 5);
-					int? Addr = null;
-					Log.Message($"Get_Present_LoadedFirstFiveBytesOfInstruction() " +
-						$"{Present_Loaded_Bytes[0]:X2} " +
-						$"{Present_Loaded_Bytes[1]:X2} " +
-						$"{Present_Loaded_Bytes[2]:X2} " +
-						$"{Present_Loaded_Bytes[3]:X2} " +
-						$"{Present_Loaded_Bytes[4]:X2} " +
-						((Present_Loaded_Bytes[0] == OpCode_jmp) ? $"(jmp {Addr = BitConverter.ToInt32(Present_Loaded_Bytes, 1):X})" : ""));
-					if (Addr.HasValue && DllAddress != IntPtr.Zero)
+					if (PresentProc != IntPtr.Zero && Get_Present_DetourHookDetected())
 					{
-						int result = JmpEndsUpInRange(Get_IDXGISwapChain_Present_Original(), DllAddress, DllImageSize);
-						Log.Message($"JmpEndsUpInRange(Get_IDXGISwapChain_Present_Original(), DllAddress, DllImageSize) = {result} (1=true,0=false,-1=error)");
-						if (result == 1)
+						Log.Message($"detour hook detected on IDXGISwapChain::Present - " +
+							$"{PresentBytes[0]:X2} {PresentBytes[1]:X2} {PresentBytes[2]:X2} {PresentBytes[3]:X2} {PresentBytes[4]:X2}");
+
+						if (JmpEndsUpInRange(PresentProc, GameOverlayRenderer64_DLL, GameOverlayRenderer64_DLL_ImageSize))
 						{
 							Log.Message($"jmp ends up in GameOverlayRenderer64.dll, which means this is a steam overlay hook");
 						}
-						else if (result == 0)
+						else
 						{
-							Log.Message($"jmp did not end up in GameOverlayRenderer64.dll");
-							Log.Message($"JmpEndsUpInRange_LastInstruction() = {JmpEndsUpInRange_LastInstruction():X}");
-							Log.Message($"JmpEndsUpInRange_LastAddress() = {JmpEndsUpInRange_LastAddress().ToInt64():X}");
-						}
-						else if (result == -1)
-						{
-							Log.Message($"JmpEndsUpInRange_LastError() = {JmpEndsUpInRange_LastError()}");
-							_ = Marshal.GetExceptionForHR((int)JmpEndsUpInRange_LastError());
+							Log.Message($"jmp did not end up in GameOverlayRenderer64.dll, this is (probably) not a steam overlay hook");
 						}
 					}
-				}
-
-				if (Get_Present_HasOriginalFirstFiveBytesOfInstruction())
-				{
-					IntPtr Present_Original = Get_Present_OriginalFirstFiveBytesOfInstruction();
-					byte[] Present_Original_Bytes = new byte[5];
-					Marshal.Copy(Present_Original, Present_Original_Bytes, 0, 5);
-					Log.Message($"Get_Present_OriginalFirstFiveBytesOfInstruction() " +
-						$"{Present_Original_Bytes[0]:X2} " +
-						$"{Present_Original_Bytes[1]:X2} " +
-						$"{Present_Original_Bytes[2]:X2} " +
-						$"{Present_Original_Bytes[3]:X2} " +
-						$"{Present_Original_Bytes[4]:X2} ");
-				}
-
-				if (Get_Present1_HasLoadedFirstFiveBytesOfInstruction())
-				{
-					Refresh_Present1_LoadedFirstFiveBytesOfInstruction();
-					IntPtr Present1_Loaded = Get_Present1_LoadedFirstFiveBytesOfInstruction();
-					byte[] Present1_Loaded_Bytes = new byte[5];
-					Marshal.Copy(Present1_Loaded, Present1_Loaded_Bytes, 0, 5);
-					int? Addr = null;
-					Log.Message($"Get_Present1_LoadedFirstFiveBytesOfInstruction() " +
-						$"{Present1_Loaded_Bytes[0]:X2} " +
-						$"{Present1_Loaded_Bytes[1]:X2} " +
-						$"{Present1_Loaded_Bytes[2]:X2} " +
-						$"{Present1_Loaded_Bytes[3]:X2} " +
-						$"{Present1_Loaded_Bytes[4]:X2} " +
-						((Present1_Loaded_Bytes[0] == OpCode_jmp) ? $"(jmp {Addr = BitConverter.ToInt32(Present1_Loaded_Bytes, 1):X})" : ""));
-					if (Addr.HasValue && DllAddress != IntPtr.Zero)
+					if (Present1Proc != IntPtr.Zero && Get_Present1_DetourHookDetected())
 					{
-						int result = JmpEndsUpInRange(Get_IDXGISwapChain1_Present1_Original(), DllAddress, DllImageSize);
-						Log.Message($"JmpEndsUpInRange(Get_IDXGISwapChain1_Present1_Original(), DllAddress, DllImageSize) = {result} (1=true,0=false,-1=error)");
-						if (result == 1)
+						Log.Message($"detour hook detected on IDXGISwapChain1::Present1 - " +
+							$"{Present1Bytes[0]:X2} {Present1Bytes[1]:X2} {Present1Bytes[2]:X2} {Present1Bytes[3]:X2} {Present1Bytes[4]:X2}");
+
+						if (JmpEndsUpInRange(Present1Proc, GameOverlayRenderer64_DLL, GameOverlayRenderer64_DLL_ImageSize))
 						{
 							Log.Message($"jmp ends up in GameOverlayRenderer64.dll, which means this is a steam overlay hook");
 						}
-						else if (result == 0)
+						else
 						{
-							Log.Message($"jmp did not end up in GameOverlayRenderer64.dll");
-							Log.Message($"JmpEndsUpInRange_LastInstruction() = {JmpEndsUpInRange_LastInstruction():X}");
-							Log.Message($"JmpEndsUpInRange_LastAddress() = {JmpEndsUpInRange_LastAddress().ToInt64():X}");
-						}
-						else if (result == -1)
-						{
-							Log.Message($"JmpEndsUpInRange_LastError() = {JmpEndsUpInRange_LastError()}");
-							_ = Marshal.GetExceptionForHR((int)JmpEndsUpInRange_LastError());
+							Log.Message($"jmp did not end up in GameOverlayRenderer64.dll, this is (probably) not a steam overlay hook");
 						}
 					}
-				}
-
-				if (Get_Present1_HasOriginalFirstFiveBytesOfInstruction())
-				{
-					IntPtr Present1_Original = Get_Present1_OriginalFirstFiveBytesOfInstruction();
-					byte[] Present1_Original_Bytes = new byte[5];
-					Marshal.Copy(Present1_Original, Present1_Original_Bytes, 0, 5);
-					Log.Message($"Get_Present1_OriginalFirstFiveBytesOfInstruction() " +
-						$"{Present1_Original_Bytes[0]:X2} " +
-						$"{Present1_Original_Bytes[1]:X2} " +
-						$"{Present1_Original_Bytes[2]:X2} " +
-						$"{Present1_Original_Bytes[3]:X2} " +
-						$"{Present1_Original_Bytes[4]:X2} ");
 				}
 			}
 		}
@@ -396,6 +323,42 @@ namespace ElementsOfHarmony
 			}
 		}
 
+		private unsafe static void HookCallback(IntPtr Ptr)
+		{
+			Arguments Args = Marshal.PtrToStructure<Arguments>(Ptr);
+			switch (Args.VTableIndex)
+			{
+				case IUnknown_Release_VTableIndex when Args.IID == IUnknown_IID:
+					if (Args.Post) PostRelease?.Invoke(Args.PPV, EventArgs.Empty);
+					else PreRelease?.Invoke(Args.PPV, EventArgs.Empty);
+					break;
+				case IDXGIFactory_CreateSwapChain_VTableIndex when Args.IID == IDXGIFactory_IID:
+					if (Args.Post) PostCreateSwapChain?.Invoke(Args.PPV, new CreateSwapChainEventArgs() { Args = Args });
+					else PreCreateSwapChain?.Invoke(Args.PPV, new CreateSwapChainEventArgs() { Args = Args });
+					break;
+				case IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex when Args.IID == IDXGIFactory2_IID:
+					if (Args.Post) PostCreateSwapChainForHwnd?.Invoke(Args.PPV, new CreateSwapChainForHwndEventArgs() { Args = Args });
+					else PreCreateSwapChainForHwnd?.Invoke(Args.PPV, new CreateSwapChainForHwndEventArgs() { Args = Args });
+					break;
+				case IDXGISwapChain_Present_VTableIndex when Args.IID == IDXGISwapChain_IID:
+					if (Args.Post) PostPresent?.Invoke(Args.PPV, new PresentEventArgs() { Args = Args });
+					else PrePresent?.Invoke(Args.PPV, new PresentEventArgs() { Args = Args });
+					break;
+				case IDXGISwapChain1_Present1_VTableIndex when Args.IID == IDXGISwapChain1_IID:
+					if (Args.Post) PostPresent1?.Invoke(Args.PPV, new Present1EventArgs() { Args = Args });
+					else PrePresent1?.Invoke(Args.PPV, new Present1EventArgs() { Args = Args });
+					break;
+				case ID3D11DeviceContext_OMSetRenderTargets_VTableIndex when Args.IID == ID3D11DeviceContext_IID:
+					if (Args.Post) PostOMSetRenderTargets?.Invoke(Args.PPV, new OMSetRenderTargetsEventArgs() { Args = Args });
+					else PreOMSetRenderTargets?.Invoke(Args.PPV, new OMSetRenderTargetsEventArgs() { Args = Args });
+					break;
+				case ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_VTableIndex when Args.IID == ID3D11DeviceContext_IID:
+					if (Args.Post) PostOMSetRenderTargetsAndUnorderedAccessViews?.Invoke(Args.PPV, new OMSetRenderTargetsAndUnorderedAccessViewsEventArgs() { Args = Args });
+					else PreOMSetRenderTargetsAndUnorderedAccessViews?.Invoke(Args.PPV, new OMSetRenderTargetsAndUnorderedAccessViewsEventArgs() { Args = Args });
+					break;
+			}
+		}
+
 		private static readonly UnityEngine.Events.UnityAction<Scene, LoadSceneMode> SceneManager_sceneLoaded = (Scene arg0, LoadSceneMode arg1) =>
 		{
 			if (AllowHDR != null)
@@ -424,27 +387,6 @@ namespace ElementsOfHarmony
 			SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
 		};
 
-		private static void OnPresenting()
-		{
-			IntPtr pInstance;
-			unsafe
-			{
-				Marshal.ThrowExceptionForHR(SwapChainBeginDraw(SwapChainPresentingEventArgs.IDXGISwapChain_This, 0, &pInstance));
-			}
-			OverlayDraw?.Invoke(pInstance);
-			Marshal.ThrowExceptionForHR(SwapChainEndDraw(SwapChainPresentingEventArgs.IDXGISwapChain_This, 0, pInstance));
-		}
-		private static void OnPresenting1()
-		{
-			IntPtr pInstance;
-			unsafe
-			{
-				Marshal.ThrowExceptionForHR(SwapChainBeginDraw(SwapChain1PresentingEventArgs.IDXGISwapChain_This, 0, &pInstance));
-			}
-			OverlayDraw?.Invoke(pInstance);
-			Marshal.ThrowExceptionForHR(SwapChainEndDraw(SwapChain1PresentingEventArgs.IDXGISwapChain_This, 0, pInstance));
-		}
-
 		private static void Application_quitting()
 		{
 			SetRunning(false);
@@ -453,79 +395,59 @@ namespace ElementsOfHarmony
 			ReleaseOverlay();
 		}
 
-		/// <summary>
-		/// synchronize with C++ hook
-		/// </summary>
-		private static void Sync()
+		private static void OnPrePresent(object sender, PresentEventArgs _)
 		{
-			while (true)
+			IntPtr pInstance;
+			unsafe
 			{
-				int ID = BeginProcessCompletionEvent();
-				switch (ID)
-				{
-					case 2: // a new swap chain is being created on the same hWnd,
-							// so the old one should be released
-							// meaning anyone else who is still referencing this IDXGISwapChain
-							// should revoke their reference
-						SwapChainShouldRelease?.Invoke();
-						break;
-					case -10: // CreateSwapChain
-						SwapChainCreating?.Invoke();
-						break;
-					case 10: // CreateSwapChain
-						SwapChainCreated?.Invoke();
-						break;
-					case -15: // CreateSwapChainForHwnd
-						SwapChainForHwndCreating?.Invoke();
-						break;
-					case 15: // CreateSwapChainForHwnd
-						SwapChainForHwndCreated?.Invoke();
-						break;
-					case -8: // Present
-						SwapChainPresenting?.Invoke();
-						break;
-					case 8: // Present
-						SwapChainPresented?.Invoke();
-						break;
-					case -22: // Present1
-						SwapChain1Presenting?.Invoke();
-						break;
-					case 22: // Present1
-						SwapChain1Presented?.Invoke();
-						break;
-					case int.MaxValue:
-						return;
-				}
-				Marshal.ThrowExceptionForHR(EndProcessCompletionEvent());
+				Marshal.ThrowExceptionForHR(SwapChainBeginDraw((IntPtr)sender, 0, &pInstance));
 			}
+			OverlayDraw?.Invoke(pInstance, EventArgs.Empty);
+			Marshal.ThrowExceptionForHR(SwapChainEndDraw((IntPtr)sender, 0, pInstance));
+		}
+		private static void OnPrePresent1(object sender, Present1EventArgs _)
+		{
+			IntPtr pInstance;
+			unsafe
+			{
+				Marshal.ThrowExceptionForHR(SwapChainBeginDraw((IntPtr)sender, 0, &pInstance));
+			}
+			OverlayDraw?.Invoke(pInstance, EventArgs.Empty);
+			Marshal.ThrowExceptionForHR(SwapChainEndDraw((IntPtr)sender, 0, pInstance));
 		}
 
-		public static event Action? SwapChainShouldRelease;
-		public static event Action? SwapChainCreating;
-		public static event Action? SwapChainCreated;
-		public static event Action? SwapChainForHwndCreating;
-		public static event Action? SwapChainForHwndCreated;
-		public static event Action? SwapChainPresenting;
-		public static event Action? SwapChainPresented;
-		public static event Action? SwapChain1Presenting;
-		public static event Action? SwapChain1Presented;
 
-		public static event Action<IntPtr>? OverlayDraw;
 
-		public const byte OpCode_jmp = 0xE9;
-		public const uint Discord = 0xD15C03D;
-		public class ThirdPartyNonDetourHookDetectedException : Exception
-		{
-			public ThirdPartyNonDetourHookDetectedException() : base($"A third-party non-detour DirectX hook detected!")
-			{
-				new Thread(() => Log.MessageBox(IntPtr.Zero,
-					$"{typeof(DirectXHook).FullName}: A third-party non-detour DirectX hook detected!" + "\r\n" +
-					"Keep in mind that if this other hook somehow causes stack overflow exception I won't be able to fix it!",
-					"I curse the name, the one behind it all", Log.MB_ICONWARNING | Log.MB_OK)).Start();
-			}
-		}
+		public const ulong IUnknown_Release_VTableIndex = 2;
+		public const ulong IDXGIFactory_CreateSwapChain_VTableIndex = 10;
+		public const ulong IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex = 15;
+		public const ulong IDXGISwapChain_Present_VTableIndex = 8;
+		public const ulong IDXGISwapChain1_Present1_VTableIndex = 22;
+		public const ulong ID3D11DeviceContext_OMSetRenderTargets_VTableIndex = 33;
+		public const ulong ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_VTableIndex = 34;
+		public static readonly Guid IUnknown_IID = new Guid("00000000-0000-0000-C000-000000000046");
+		public static readonly Guid IDXGIFactory_IID = new Guid("7b7166ec-21c7-44ae-b21a-c9ae321ae369");
+		public static readonly Guid IDXGIFactory2_IID = new Guid("50c83a1c-e072-4c48-87b0-3630fa36a6d0");
+		public static readonly Guid IDXGISwapChain_IID = new Guid("310d36a0-d2e7-4c0a-aa04-6a9d23b8886a");
+		public static readonly Guid IDXGISwapChain1_IID = new Guid("790a45f7-0d42-4876-983a-0a55cfe6f4aa");
+		public static readonly Guid ID3D11DeviceContext_IID = new Guid("c0bfa96c-e089-44fb-8eaf-26f8796190da");
+		public static event EventHandler? PreRelease, PostRelease;
+		public static event EventHandler<CreateSwapChainEventArgs>? PreCreateSwapChain, PostCreateSwapChain;
+		public static event EventHandler<CreateSwapChainForHwndEventArgs>? PreCreateSwapChainForHwnd, PostCreateSwapChainForHwnd;
+		public static event EventHandler<PresentEventArgs>? PrePresent, PostPresent;
+		public static event EventHandler<Present1EventArgs>? PrePresent1, PostPresent1;
+		public static event EventHandler<OMSetRenderTargetsEventArgs>? PreOMSetRenderTargets, PostOMSetRenderTargets;
+		public static event EventHandler<OMSetRenderTargetsAndUnorderedAccessViewsEventArgs>? PreOMSetRenderTargetsAndUnorderedAccessViews, PostOMSetRenderTargetsAndUnorderedAccessViews;
 
-		#region DirectXHook.dll
+		public static event EventHandler? OverlayDraw;
+
+
+
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		public unsafe delegate void CallbackProc(IntPtr Args);
+
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		public delegate void LogCallbackProc([MarshalAs(UnmanagedType.LPWStr)] string Message);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		internal extern static int InstallHook();
@@ -534,99 +456,299 @@ namespace ElementsOfHarmony
 		internal extern static int UninstallHook();
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int SetRunning(bool Running);
+		internal extern static void SetRunning(bool Running);
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int BeginProcessCompletionEvent();
+		internal extern static void SetCallbacks(
+			[MarshalAs(UnmanagedType.FunctionPtr)] CallbackProc HookCallback,
+			[MarshalAs(UnmanagedType.FunctionPtr)] LogCallbackProc LogCallback);
+
+
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int EndProcessCompletionEvent();
-		
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static uint GetCurrentBufferIndex();
-
-		#region functions for getting global variables in DirectXHook.dll
+		internal extern static IntPtr Get_Present_MemoryOriginal_Proc();
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static IntPtr Get_DXGI_DLL_Address();
+		internal extern static IntPtr Get_Present1_MemoryOriginal_Proc();
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		internal extern static IntPtr Get_Present_MemoryOriginal_Bytes();
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		internal extern static IntPtr Get_Present1_MemoryOriginal_Bytes();
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		internal extern static bool Get_Present_DetourHookDetected();
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		internal extern static bool Get_Present1_DetourHookDetected();
+
+
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		internal extern static IntPtr Get_D3D11_DLL_BaseAddress();
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		internal extern static IntPtr Get_DXGI_DLL_BaseAddress();
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		internal extern static IntPtr Get_GameOverlayRenderer64_DLL_BaseAddress();
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		internal extern static uint Get_D3D11_DLL_ImageSize();
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		internal extern static uint Get_DXGI_DLL_ImageSize();
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static IntPtr Get_IDXGISwapChain_Present_Original();
-
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static IntPtr Get_IDXGISwapChain1_Present1_Original();
-
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static IntPtr Get_IDXGIFactory_CreateSwapChain_Original();
-
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static IntPtr Get_IDXGIFactory2_CreateSwapChainForHwnd_Original();
-
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static IntPtr Get_LocalVariablesArray();
-
-		#region for dealing with other hooks
-
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static bool Get_Present_PreviousDetourHookDetected();
-
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static bool Get_Present1_PreviousDetourHookDetected();
-
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static IntPtr Get_GameOverlayRenderer64_DLL_Address();
-
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		internal extern static uint Get_GameOverlayRenderer64_DLL_ImageSize();
 
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static bool Get_Present_HasOriginalFirstFiveBytesOfInstruction();
+
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static bool Get_Present1_HasOriginalFirstFiveBytesOfInstruction();
+		internal extern static bool JmpEndsUpInRange(IntPtr SrcAddr, IntPtr RangeStart, uint Size);
 
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static bool Get_Present_HasLoadedFirstFiveBytesOfInstruction();
 
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static bool Get_Present1_HasLoadedFirstFiveBytesOfInstruction();
 
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void Refresh_Present_LoadedFirstFiveBytesOfInstruction();
+		[StructLayout(LayoutKind.Sequential)]
+		public unsafe struct Arguments
+		{
+			public Guid IID;
+			public IntPtr PPV;
+			public ulong VTableIndex;
+			[MarshalAs(UnmanagedType.Bool)]
+			public bool Post;
+			public int Result;
+			public fixed long Args[11]; // cannot use IntPtr here, but we only target 64-bit so `long` is alright
 
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static void Refresh_Present1_LoadedFirstFiveBytesOfInstruction();
+			[StructLayout(LayoutKind.Sequential)]
+			public struct OptionalStruct<T> where T : struct
+			{
+				[MarshalAs(UnmanagedType.Bool)]
+				public bool Exist;
+				public T Value;
+			}
 
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static IntPtr Get_Present_OriginalFirstFiveBytesOfInstruction();
+			public readonly IntPtr this[int index] => new IntPtr(Args[index]);
+			public readonly T Get<T>(int index) where T : struct
+			{
+				return Marshal.PtrToStructure<T>(this[index]);
+			}
+			public readonly void Set<T>(int index, T value) where T : struct
+			{
+				Marshal.StructureToPtr(value, this[index], false);
+			}
+		}
 
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static IntPtr Get_Present1_OriginalFirstFiveBytesOfInstruction();
+		public class NativeArrayAccess<T>
+			where T : struct
+		{
+			public NativeArrayAccess(IntPtr Address, int ElementCount)
+			{
+				this.Address = Address;
+				this.ElementCount = ElementCount;
+			}
+			protected readonly IntPtr Address;
+			protected readonly int ElementCount;
+			public T this[int index]
+			{
+				get
+				{
+					if (Address == IntPtr.Zero) throw new NullReferenceException();
+					else if (index < 0 || index >= ElementCount) throw new IndexOutOfRangeException();
+					else return Marshal.PtrToStructure<T>(IntPtr.Add(Address, index * Marshal.SizeOf<T>()));
+				}
+				set
+				{
+					if (Address == IntPtr.Zero) throw new NullReferenceException();
+					else if (index < 0 || index >= ElementCount) throw new IndexOutOfRangeException();
+					else Marshal.StructureToPtr(value, IntPtr.Add(Address, index * Marshal.SizeOf<T>()), false);
+				}
+			}
+			public IntPtr FixedAddress => Address;
+			public int Length => ElementCount;
+		}
+		public class AllocatedArrayAccess<T> : NativeArrayAccess<T>, IDisposable
+			where T : struct
+		{
+			public AllocatedArrayAccess(int ElementCount) :
+				base(Marshal.AllocHGlobal(Marshal.SizeOf<T>() * ElementCount), ElementCount)
+			{ }
 
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static IntPtr Get_Present_LoadedFirstFiveBytesOfInstruction();
+			private bool disposedValue;
+			protected virtual void Dispose(bool disposing)
+			{
+				if (!disposedValue)
+				{
+					if (disposing)
+					{
+						Marshal.FreeHGlobal(Address);
+					}
+					disposedValue = true;
+				}
+			}
+			~AllocatedArrayAccess()
+			{
+				Dispose(disposing: true);
+			}
+			public void Dispose()
+			{
+				Dispose(disposing: true);
+				GC.SuppressFinalize(this);
+			}
+		}
 
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static IntPtr Get_Present1_LoadedFirstFiveBytesOfInstruction();
-
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int JmpEndsUpInRange(IntPtr SrcAddr, IntPtr RangeStart, uint Size);
-
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static byte JmpEndsUpInRange_LastInstruction();
-
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static IntPtr JmpEndsUpInRange_LastAddress();
-
-		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static uint JmpEndsUpInRange_LastError();
-
-		#endregion
-
-		#endregion
+		public class HookCallbackEventArgs : EventArgs
+		{
+			public Arguments Args;
+		}
+#pragma warning disable IDE1006
+		public class CreateSwapChainEventArgs : HookCallbackEventArgs
+		{
+			public IntPtr pDevice
+			{
+				get => Args.Get<IntPtr>(0);
+				set => Args.Set(0, value);
+			}
+			public DXGI_SWAP_CHAIN_DESC Desc
+			{
+				get => Args.Get<DXGI_SWAP_CHAIN_DESC>(1);
+				set => Args.Set(1, value);
+			}
+			public IntPtr ppSwapChain
+			{
+				get => Args.Get<IntPtr>(2);
+				set => Args.Set(2, value);
+			}
+		}
+		public class CreateSwapChainForHwndEventArgs : HookCallbackEventArgs
+		{
+			public IntPtr pDevice
+			{
+				get => Args.Get<IntPtr>(0);
+				set => Args.Set(0, value);
+			}
+			public IntPtr hWnd
+			{
+				get => Args.Get<IntPtr>(1);
+				set => Args.Set(1, value);
+			}
+			public DXGI_SWAP_CHAIN_DESC1 Desc
+			{
+				get => Args.Get<DXGI_SWAP_CHAIN_DESC1>(2);
+				set => Args.Set(2, value);
+			}
+			public DXGI_SWAP_CHAIN_FULLSCREEN_DESC? FullscreenDesc
+			{
+				get
+				{
+					var FullscreenDesc = Args.Get<Arguments.OptionalStruct<DXGI_SWAP_CHAIN_FULLSCREEN_DESC>>(3);
+					return FullscreenDesc.Exist ? FullscreenDesc.Value : (DXGI_SWAP_CHAIN_FULLSCREEN_DESC?)null;
+				}
+				set
+				{
+					var FullscreenDesc = Args.Get<Arguments.OptionalStruct<DXGI_SWAP_CHAIN_FULLSCREEN_DESC>>(3);
+					if (value.HasValue)
+					{
+						FullscreenDesc.Exist = true;
+						FullscreenDesc.Value = value.Value;
+					}
+					else
+					{
+						FullscreenDesc.Exist = false;
+					}
+					Args.Set(3, FullscreenDesc);
+				}
+			}
+		}
+		public class PresentEventArgs : HookCallbackEventArgs
+		{
+			public uint SyncInterval
+			{
+				get => Args.Get<uint>(0);
+				set => Args.Set(0, value);
+			}
+			public uint Flags
+			{
+				get => Args.Get<uint>(1);
+				set => Args.Set(1, value);
+			}
+		}
+		public class Present1EventArgs : HookCallbackEventArgs
+		{
+			public uint SyncInterval
+			{
+				get => Args.Get<uint>(0);
+				set => Args.Set(0, value);
+			}
+			public uint Flags
+			{
+				get => Args.Get<uint>(1);
+				set => Args.Set(1, value);
+			}
+			public DXGI_PRESENT_PARAMETERS PresentParameters
+			{
+				get => Args.Get<DXGI_PRESENT_PARAMETERS>(2);
+				set => Args.Set(2, value);
+			}
+		}
+		public class OMSetRenderTargetsEventArgs : HookCallbackEventArgs
+		{
+			public uint NumViews
+			{
+				get => Args.Get<uint>(0);
+				set => Args.Set(0, value);
+			}
+			public NativeArrayAccess<IntPtr> RenderTargetViews
+			{
+				get => new NativeArrayAccess<IntPtr>(Args.Get<IntPtr>(1), (int)NumViews);
+				set => Args.Set(1, value.FixedAddress);
+			}
+			public IntPtr DepthStencilView
+			{
+				get => Args.Get<IntPtr>(2);
+				set => Args.Set(2, value);
+			}
+		}
+		public class OMSetRenderTargetsAndUnorderedAccessViewsEventArgs : HookCallbackEventArgs
+		{
+			public uint NumViews
+			{
+				get => Args.Get<uint>(0);
+				set => Args.Set(0, value);
+			}
+			public NativeArrayAccess<IntPtr> RenderTargetViews
+			{
+				get => new NativeArrayAccess<IntPtr>(Args.Get<IntPtr>(1), (int)NumViews);
+				set => Args.Set(1, value.FixedAddress);
+			}
+			public IntPtr DepthStencilView
+			{
+				get => Args.Get<IntPtr>(2);
+				set => Args.Set(2, value);
+			}
+			public uint UAVStartSlot
+			{
+				get => Args.Get<uint>(3);
+				set => Args.Set(3, value);
+			}
+			public uint NumUAVs
+			{
+				get => Args.Get<uint>(4);
+				set => Args.Set(4, value);
+			}
+			public NativeArrayAccess<IntPtr> UnorderedAccessViews
+			{
+				get => new NativeArrayAccess<IntPtr>(Args.Get<IntPtr>(5), (int)NumViews);
+				set => Args.Set(5, value.FixedAddress);
+			}
+			public NativeArrayAccess<uint> UAVInitialCounts
+			{
+				get => new NativeArrayAccess<uint>(Args.Get<IntPtr>(6), (int)NumViews);
+				set => Args.Set(6, value.FixedAddress);
+			}
+		}
+#pragma warning restore IDE1006
 
 		#region Overlay
 
@@ -720,311 +842,6 @@ namespace ElementsOfHarmony
 		public extern static void SetDpi(this IntPtr pInstance, float DpiX, float DpiY);
 
 		#endregion
-
-		#endregion
-
-		#region Event Args
-		public static class SwapChainShouldReleaseEventArgs
-		{
-			public static IntPtr IDXGISwapChain_SwapChain
-			{
-				get => Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size);
-			}
-		}
-
-		public static class SwapChainCreatingEventArgs
-		{
-			public static IntPtr IDXGIFactory_This
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
-				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size), value);
-			}
-			public static IntPtr IUnknown_pDevice
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
-				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size), value);
-			}
-			public static IntPtr DXGI_SWAP_CHAIN_DESC_pDesc
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
-				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size), value);
-			}
-			public static DXGI_SWAP_CHAIN_DESC Desc
-			{
-				get => Marshal.PtrToStructure<DXGI_SWAP_CHAIN_DESC>(DXGI_SWAP_CHAIN_DESC_pDesc);
-				set => Marshal.StructureToPtr(value, DXGI_SWAP_CHAIN_DESC_pDesc, false);
-			}
-		}
-
-		public static class SwapChainCreatedEventArgs
-		{
-			public static IntPtr IDXGIFactory_This
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
-			}
-			public static IntPtr IUnknown_pDevice
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
-			}
-			public static IntPtr DXGI_SWAP_CHAIN_DESC_pDesc
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
-			}
-			public static IntPtr IDXGISwapChain_ppSwapChain
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 3 * IntPtr.Size));
-			}
-			public static DXGI_SWAP_CHAIN_DESC Desc
-			{
-				get => Marshal.PtrToStructure<DXGI_SWAP_CHAIN_DESC>(DXGI_SWAP_CHAIN_DESC_pDesc);
-			}
-			public static IntPtr IDXGISwapChain_ppSwapChain_Deref
-			{
-				get => Marshal.ReadIntPtr(IDXGISwapChain_ppSwapChain);
-				set => Marshal.WriteIntPtr(IDXGISwapChain_ppSwapChain, value);
-			}
-		}
-
-		public static class SwapChainForHwndCreatingEventArgs
-		{
-			public static IntPtr IDXGIFactory2_This
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
-				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size), value);
-			}
-			public static IntPtr IUnknown_pDevice
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
-				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size), value);
-			}
-			public static IntPtr HWND_hWnd
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
-				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size), value);
-			}
-			public static IntPtr DXGI_SWAP_CHAIN_DESC1_pDesc
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 3 * IntPtr.Size));
-				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 3 * IntPtr.Size), value);
-			}
-			public static FullscreenDescOptionalPointers DXGI_SWAP_CHAIN_FULLSCREEN_DESC_pFullscreenDesc
-			{
-				get => Marshal.PtrToStructure<FullscreenDescOptionalPointers>(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 4 * IntPtr.Size));
-			}
-			public static IntPtr IDXGIOutput_pRestrictToOutput
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 5 * IntPtr.Size));
-				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 5 * IntPtr.Size), value);
-			}
-			public static DXGI_SWAP_CHAIN_DESC1 Desc
-			{
-				get => Marshal.PtrToStructure<DXGI_SWAP_CHAIN_DESC1>(DXGI_SWAP_CHAIN_DESC1_pDesc);
-				set => Marshal.StructureToPtr(value, DXGI_SWAP_CHAIN_DESC1_pDesc, false);
-			}
-			public struct FullscreenDescOptionalPointers
-			{
-				public IntPtr _pFullscreenDesc;
-				public IntPtr _OriginalFullscreenDesc;
-				public IntPtr _LocalFullscreenDesc;
-
-				[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006: (Naming rule violation)", Justification = "This is intentional")]
-				public readonly IntPtr pFullscreenDesc
-				{
-					get => Marshal.ReadIntPtr(_pFullscreenDesc);
-					set => Marshal.WriteIntPtr(_pFullscreenDesc, value);
-				}
-				public readonly DXGI_SWAP_CHAIN_FULLSCREEN_DESC? OriginalFullscreenDesc
-				{
-					get
-					{
-						if (_OriginalFullscreenDesc != IntPtr.Zero)
-						{
-							return Marshal.PtrToStructure<DXGI_SWAP_CHAIN_FULLSCREEN_DESC>(_OriginalFullscreenDesc);
-						}
-						else
-						{
-							return null;
-						}
-					}
-				}
-				public readonly DXGI_SWAP_CHAIN_FULLSCREEN_DESC LocalFullscreenDesc
-				{
-					get => Marshal.PtrToStructure<DXGI_SWAP_CHAIN_FULLSCREEN_DESC>(_LocalFullscreenDesc);
-					set => Marshal.StructureToPtr(value, _LocalFullscreenDesc, false);
-				}
-			}
-		}
-
-		public static class SwapChainForHwndCreatedEventArgs
-		{
-			public static IntPtr IDXGIFactory2_This
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
-			}
-			public static IntPtr IUnknown_pDevice
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
-			}
-			public static IntPtr HWND_hWnd
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
-			}
-			public static IntPtr DXGI_SWAP_CHAIN_DESC1_pDesc
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 3 * IntPtr.Size));
-			}
-			public static IntPtr DXGI_SWAP_CHAIN_FULLSCREEN_DESC_pFullscreenDesc
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 4 * IntPtr.Size));
-			}
-			public static IntPtr IDXGIOutput_pRestrictToOutput
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 5 * IntPtr.Size));
-			}
-			public static IntPtr IDXGISwapChain1_ppSwapChain
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 6 * IntPtr.Size));
-			}
-			public static IntPtr IDXGISwapChain1_ppSwapChain_Deref
-			{
-				get => Marshal.ReadIntPtr(IDXGISwapChain1_ppSwapChain);
-				set => Marshal.WriteIntPtr(IDXGISwapChain1_ppSwapChain, value);
-			}
-		}
-
-		public static class SwapChainPresentingEventArgs
-		{
-			public static IntPtr IDXGISwapChain_This
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
-				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size), value);
-			}
-			public static uint SyncInterval
-			{
-				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
-				set => Marshal.WriteInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size), (int)value);
-			}
-			public static uint Flags
-			{
-				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
-				set => Marshal.WriteInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size), (int)value);
-			}
-		}
-
-		public static class SwapChainPresentedEventArgs
-		{
-			public static IntPtr IDXGISwapChain_This
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
-			}
-			public static uint SyncInterval
-			{
-				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
-			}
-			public static uint Flags
-			{
-				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
-			}
-		}
-
-		public static class SwapChain1PresentingEventArgs
-		{
-			public static IntPtr IDXGISwapChain_This
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
-				set => Marshal.WriteIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size), value);
-			}
-			public static uint SyncInterval
-			{
-				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
-				set => Marshal.WriteInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size), (int)value);
-			}
-			public static uint Flags
-			{
-				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
-				set => Marshal.WriteInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size), (int)value);
-			}
-			public static IntPtr DXGI_PRESENT_PARAMETERS_pPresentParameters
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 3 * IntPtr.Size));
-			}
-			public static DXGI_PRESENT_PARAMETERS? PresentParameters
-			{
-				get
-				{
-					if (DXGI_PRESENT_PARAMETERS_pPresentParameters != IntPtr.Zero)
-					{
-						return Marshal.PtrToStructure<DXGI_PRESENT_PARAMETERS>(DXGI_PRESENT_PARAMETERS_pPresentParameters);
-					}
-					else
-					{
-						return null;
-					}
-				}
-				set
-				{
-					if (value == null)
-					{
-						Marshal.WriteIntPtr(DXGI_PRESENT_PARAMETERS_pPresentParameters, IntPtr.Zero);
-					}
-					else throw new NotImplementedException(); // not yet
-				}
-			}
-		}
-
-		public static class SwapChain1PresentedEventArgs
-		{
-			public static IntPtr IDXGISwapChain_This
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 0 * IntPtr.Size));
-			}
-			public static uint SyncInterval
-			{
-				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 1 * IntPtr.Size));
-			}
-			public static uint Flags
-			{
-				get => (uint)Marshal.ReadInt32(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 2 * IntPtr.Size));
-			}
-			public static IntPtr DXGI_PRESENT_PARAMETERS_pPresentParameters
-			{
-				get => Marshal.ReadIntPtr(Marshal.ReadIntPtr(Get_LocalVariablesArray(), 3 * IntPtr.Size));
-			}
-			public static DXGI_PRESENT_PARAMETERS? PresentParameters
-			{
-				get => Marshal.PtrToStructure<DXGI_PRESENT_PARAMETERS>(DXGI_PRESENT_PARAMETERS_pPresentParameters);
-			}
-		}
-
-		#endregion
-
-		public readonly struct NativeArrayAccess<T>
-			where T : struct
-		{
-			public NativeArrayAccess(IntPtr Address, int ElementCount)
-			{
-				this.Address = Address;
-				this.ElementCount = ElementCount;
-			}
-			private readonly IntPtr Address;
-			private readonly int ElementCount;
-			public T this[int index]
-			{
-				get
-				{
-					if (Address == IntPtr.Zero) throw new NullReferenceException();
-					else if (index < 0 || index >= ElementCount) throw new IndexOutOfRangeException();
-					else return Marshal.PtrToStructure<T>(IntPtr.Add(Address, index * Marshal.SizeOf<T>()));
-				}
-				set
-				{
-					if (Address == IntPtr.Zero) throw new NullReferenceException();
-					else if (index < 0 || index >= ElementCount) throw new IndexOutOfRangeException();
-					else Marshal.StructureToPtr(value, IntPtr.Add(Address, index * Marshal.SizeOf<T>()), false);
-				}
-			}
-			public int Length => ElementCount;
-		}
 
 		#region DXGI
 		public enum DXGI_FORMAT : uint
@@ -1320,9 +1137,9 @@ namespace ElementsOfHarmony
 			public IntPtr pDirtyRects;
 			public IntPtr pScrollRect;
 			public IntPtr pScrollOffset;
-			public readonly NativeArrayAccess<RECT>? DirtyRects
+			public NativeArrayAccess<RECT>? DirtyRects
 			{
-				get
+				readonly get
 				{
 					if (pDirtyRects != IntPtr.Zero)
 					{
@@ -1331,6 +1148,19 @@ namespace ElementsOfHarmony
 					else
 					{
 						return null;
+					}
+				}
+				set
+				{
+					if (value == null)
+					{
+						DirtyRectsCount = 0;
+						pDirtyRects = IntPtr.Zero;
+					}
+					else
+					{
+						DirtyRectsCount = (uint)value.Length;
+						pDirtyRects = value.FixedAddress;
 					}
 				}
 			}
