@@ -10,10 +10,15 @@ However, since anything is possible with [Harmony API](https://github.com/pardei
 
 One of those featured is already proven back in 2022 - **Loyalty**: the Motion Control module.
 
-# New Goal 2024
-A new MLP game from the same publisher (not the same developer, but they *are from* España, like the previous one) is confirmed, it's called **A Zephyr Heights Mystery**.
+## Goals
 
-That motivated me to remaster this project to use it to mod both games and implement all those [features](#goals) I dreamed of back in 2022
+- [x] Magic - Hook the DirectX API to acquire the game's swap chain, so that we can render our graphics on top of the original game using Direct2D - *already implemented in 2022, will improve in the future*
+- [x] Loyalty - Kinect motion control - *already implemented in 2022, will refactor in the future*
+- [ ] Generosity - Enable the game to load custom models - *[AssetBundle.LoadAsset](https://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html) seems like a promising lead*
+- [ ] Laughter - Add online multiplayer functionality, you should be able to see other players as any pony they choose, there will be text chat and voice chat, and you should be able to compete with other players in a minigame - *should I use P2P or dedicated server?*
+- [x] Battle of the Bands - Add the ability to add custom songs to the music minigame - *implemented in June 12 2024 in [Dance.cs](https://github.com/wd357dui/Elements-of-Harmony/blob/4b30960b6de5e19e246f9e79612390e1625ff82f/ElementsOfHarmony/Dance.cs)*
+- [ ] Friendship Games - Add new minigames - *my current idea is to create new projects in Unity, make the gameplay there, build it, and then abuse [AssetBundle.LoadAsset](https://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html) and [Assembly.Load](https://learn.microsoft.com/dotnet/api/system.reflection.assembly.load) to load that onto this game*
+- [ ] Loyalty (Extended) - implement VR support
 
 ## Bug fixes & improvements for the base game + small additional features
 
@@ -26,7 +31,7 @@ That motivated me to remaster this project to use it to mod both games and imple
 - [ ] With all these gradually increasing amounts of settings, I feel like I need to bring the property editor module from my DirectX game engine project (not on GitHub) into this mod, to support real-time adjustments of settings. However, I need to consider whether to use a separate window (already implemented) or re-render controls with Direct2D in-game (not implemented yet), the latter will take time, and may not make it before the game comes out. *(If anyone asks why I don't just use [ImGUI](https://github.com/ocornut/imgui) or something, it's because I don't like using any third-party libraries)*
 
 > [!NOTE]
-> It's been some time since I updated this list, I couldn't keep track and post the code links anymore, so from now on I'm just going to post only the descriptions. (April, 16)
+> It's been some time since I updated this list, I couldn't keep track and post the code links anymore, so from now on I'm just going to post only the descriptions. (April 16 2024)
 
 - [x] **(for both games)** `DirectXHook` - fixes compatibility with the Steam overlay hook by temporarily un-patching Steam's hook when [Present](https://learn.microsoft.com/en-us/windows/win32/api/dxgi/nf-dxgi-idxgiswapchain-present) is being called more than one time for a single frame (being called more than one time but has returned 0 times)
 - [x] **(for both games)** Implement display settings in `Settings.txt`, resolution, fullscreen, refresh rate, anti-aliasing, v-sync, target framerate
@@ -38,23 +43,16 @@ That motivated me to remaster this project to use it to mod both games and imple
 - [x] **(for AMBA)** In the **Sprout's Roller Blading Chase** minigame, shorten the distance between Sprout and the player as the game progresses while in singleplayer mode
 - [x] **(for AMBA)** In the **Sprout's Roller Blading Chase** minigame, play some of the unused audio clips in story mode ("story mode" means entering the minigame through the story instead of from the main menu)
 - [x] **(for AMBA)** Remove the green filter in the swamp area (in Town Park where the herding crabs minigame is) and in the herding crabs minigame
-- [ ] **(for AMBA, can be used for both games)** Implement custom font?... I spent 4 days trying out different ideas, but after finally understanding the situation, I've concluded that this is not possible until I implement the `Generosity` module mentioned in the [Additional Overall Optional goals](#additional-overall-optional-goals) section
+- [ ] **(for AMBA, can be used for both games)** Implement custom font?... I spent 4 days trying out different ideas, but after finally understanding the situation, I've concluded that this is not possible until I implement the `Generosity` module
 
 > [!NOTE]
-> First update following AZHM's release, it's a shame that I'm 2 days late due to classes (whose idea was it to put classes on Saturday?)
+> First update following AZHM's release, it's a shame that I'm 2 days late due to classes (whose idea was it to put classes on Saturday?) May 19 2024
 
-- [x] **(for both games)** added MelonLoader support, you can now apply this mod using [MelonLoader](https://github.com/LavaGang/MelonLoader), which is non-destructive mod manager (non-destructive as in doesn't modify game files at all)
-- [x] **(for AZHM)** fixed a bug where the Chinese language cannot be displayed due to the base game's incorrect language mappings
-
-## Goals
-
-- [x] Magic - Hook the DirectX API to acquire the game's swap chain, so that we can render our graphics on top of the original game using Direct2D - *already implemented in 2022, will improve in the future*
-- [x] Loyalty - Kinect motion control - *already implemented in 2022, will refactor in the future*
-- [ ] Generosity - Enable the game to load custom models - *[AssetBundle.LoadAsset](https://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html) seems like a promising lead*
-- [ ] Laughter - Add online multiplayer functionality, you should be able to see other players as any pony they choose, there will be text chat and voice chat, and you should be able to compete with other players in a minigame - *should I use P2P or dedicated server?*
-- [ ] Battle of the Bands - Add the ability to add custom songs to the music minigame - *I think it's possible, and fun*
-- [ ] Friendship Games - Add new minigames - *my current idea is to create new projects in Unity, make the gameplay there, build it, and then abuse [AssetBundle.LoadAsset](https://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html) and [Assembly.Load](https://learn.microsoft.com/dotnet/api/system.reflection.assembly.load) to load that onto this game*
-- [ ] Loyalty (Extended) - implement VR support
+- [x] **(for both games)** added MelonLoader support, you can now apply this mod using [MelonLoader](https://github.com/LavaGang/MelonLoader). in [MelonLoaderReference](https://github.com/wd357dui/Elements-of-Harmony/blob/f45d8e19e6b18232251bb7cec12259814fe0df92/ElementsOfHarmony.MelonLoaderReference/ElementsOfHarmony.cs)
+- [x] **(for AZHM)** fixed a bug where the Chinese language cannot be displayed due to the base game's incorrect language mappings in [Localization.cs](https://github.com/wd357dui/Elements-of-Harmony/blob/f45d8e19e6b18232251bb7cec12259814fe0df92/ElementsOfHarmony.AZHM/Localization.cs#L54-L73)
+- [x] **(for both games)** added BepInEx support in [BepInExReference](https://github.com/wd357dui/Elements-of-Harmony/blob/51dcd45d01d2aea6960f581f1256f44dd1179bfb/ElementsOfHarmony.BepInExReference/ElementsOfHarmony.cs)
+- [x] **(for AZHM)** The URP shaders in AZHM were stripped, I tried to bring them back and succeeded by patching [globalgamemanagers.assets](https://github.com/wd357dui/Elements-of-Harmony/blob/e7a6b9d0b757e52d9b29a6d5f4586d71da9b4eeb/Patch/AZHM/globalgamemanagers.assets) after fixing AssetRipper/AssetRipper#1365
+- [x] **(for AMBA)** fix combo bar's stutter issue in the dancing game minigame by depending on `Time.time` instead of `AudioSource.time` for checking time progression. My reason and supporting evidence for [Fixing](https://github.com/wd357dui/Elements-of-Harmony/blob/e7a6b9d0b757e52d9b29a6d5f4586d71da9b4eeb/ElementsOfHarmony.AMBA/Dance.cs#L457-L464) the issue in this way are: 1.[Timeline AudioTrack stuttering and artifacts](https://forum.unity.com/threads/timeline-audiotrack-stuttering-and-artifacts.488543/); 2.[Audiosource.time innaccurate in Android?](https://forum.unity.com/threads/audiosource-time-innaccurate-in-android.471872/)
 
 ------
 
