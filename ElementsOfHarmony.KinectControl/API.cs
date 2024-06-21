@@ -11,7 +11,10 @@ namespace Microsoft.Kinect
 {
 	public class KinectSensor : Unknown
 	{
-		internal KinectSensor(IntPtr pInstance) : base(pInstance) { }
+		public static readonly Guid IKinectSensor_IID = new Guid("3C6EBA94-0DE1-4360-B6D4-653A10794C8B");
+		public override Guid IID => IKinectSensor_IID;
+
+		internal KinectSensor(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef) { }
 
 		[DllImport("Kinect20.dll", CallingConvention = CallingConvention.Winapi)]
 		public unsafe static extern int GetDefaultKinectSensor(IntPtr* defaultKinectSensor);
@@ -23,7 +26,7 @@ namespace Microsoft.Kinect
 			{
 				Marshal.ThrowExceptionForHR(GetDefaultKinectSensor(&ptr));
 			}
-			return new KinectSensor(ptr);
+			return new KinectSensor(ptr, true);
 		}
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
@@ -44,14 +47,17 @@ namespace Microsoft.Kinect
 				{
 					Marshal.ThrowExceptionForHR(get_BodyFrameSource(&ptr));
 				}
-				return new BodyFrameSource(ptr);
+				return new BodyFrameSource(ptr, true);
 			}
 		}
 	}
 
 	public class BodyFrameSource : Unknown
 	{
-		internal BodyFrameSource(IntPtr pInstance) : base(pInstance) { }
+		public static readonly Guid IBodyFrameSource_IID = new Guid("BB94A78A-458C-4608-AC69-34FEAD1E3BAE");
+		public override Guid IID => IBodyFrameSource_IID;
+
+		internal BodyFrameSource(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef) { }
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public unsafe delegate int GetBodyCountProc(IntPtr pInstance, IntPtr bodyCount);
@@ -81,16 +87,18 @@ namespace Microsoft.Kinect
 			{
 				Marshal.ThrowExceptionForHR(OpenReader(&ptr));
 			}
-			return new BodyFrameReader(ptr);
+			return new BodyFrameReader(ptr, true);
 		}
 	}
 	
 	public class BodyFrameReader : Unknown
 	{
+		public static readonly Guid IBodyFrameReader_IID = new Guid("45532DF5-A63C-418F-A39F-C567936BC051");
+		public override Guid IID => IBodyFrameReader_IID;
+
 		private readonly ManualResetEvent StopEvent;
 		private readonly Thread WaitThread;
-
-		internal BodyFrameReader(IntPtr pInstance) : base(pInstance)
+		internal BodyFrameReader(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef)
 		{
 			StopEvent = new ManualResetEvent(false);
 			IntPtr WaitableHandle;
@@ -116,7 +124,7 @@ namespace Microsoft.Kinect
 							{
 								Marshal.ThrowExceptionForHR(GetFrameArrivedEventData((IntPtr)Waitable, &pEventArgs));
 							}
-							using BodyFrameArrivedEventArgs EventArgs = new BodyFrameArrivedEventArgs(pEventArgs);
+							using BodyFrameArrivedEventArgs EventArgs = new BodyFrameArrivedEventArgs(pEventArgs, true);
 							FrameArrived?.Invoke(this, EventArgs);
 						}
 						catch (COMException)
@@ -174,7 +182,10 @@ namespace Microsoft.Kinect
 
 	public class BodyFrameArrivedEventArgs : Unknown
 	{
-		internal BodyFrameArrivedEventArgs(IntPtr pInstance) : base(pInstance) { }
+		public static readonly Guid IBodyFrameArrivedEventArgs_IID = new Guid("BF5CCA0E-00C1-4D48-837F-AB921E6AEE01");
+		public override Guid IID => IBodyFrameArrivedEventArgs_IID;
+
+		internal BodyFrameArrivedEventArgs(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef) { }
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public unsafe delegate int GetFrameReferenceProc(IntPtr pInstance, IntPtr* bodyFrameReference);
@@ -189,14 +200,17 @@ namespace Microsoft.Kinect
 				{
 					Marshal.ThrowExceptionForHR(GetFrameReference(&ptr));
 				}
-				return new BodyFrameReference(ptr);
+				return new BodyFrameReference(ptr, true);
 			}
 		}
 	}
 
 	public class BodyFrameReference : Unknown
 	{
-		internal BodyFrameReference(IntPtr pInstance) : base(pInstance) { }
+		public static readonly Guid IBodyFrameReference_IID = new Guid("C3A1733C-5F84-443B-9659-2F2BE250C97D");
+		public override Guid IID => IBodyFrameReference_IID;
+
+		internal BodyFrameReference(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef) { }
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public unsafe delegate int AcquireFrameProc(IntPtr pInstance, IntPtr* bodyFrame);
@@ -209,13 +223,16 @@ namespace Microsoft.Kinect
 			{
 				Marshal.ThrowExceptionForHR(AcquireFrame(&ptr));
 			}
-			return new BodyFrame(ptr);
+			return new BodyFrame(ptr, true);
 		}
 	}
 
 	public class BodyFrame : Unknown
 	{
-		internal BodyFrame(IntPtr pInstance) : base(pInstance) { }
+		public static readonly Guid IBodyFrame_IID = new Guid("52884F1F-94D7-4B57-BF87-9226950980D5");
+		public override Guid IID => IBodyFrame_IID;
+
+		internal BodyFrame(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef) { }
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate int GetAndRefreshBodyDataProc(IntPtr pInstance, uint capacity, IntPtr[] bodies);
@@ -227,14 +244,17 @@ namespace Microsoft.Kinect
 			Marshal.ThrowExceptionForHR(GetAndRefreshBodyData((uint)pointers.Length, pointers));
 			for (int n = 0; n < pointers.Length; n++)
 			{
-				bodies[n] = new Body(pointers[n]);
+				bodies[n] = new Body(pointers[n], true);
 			}
 		}
 	}
 
 	public class Body : Unknown
 	{
-		internal Body(IntPtr pInstance) : base(pInstance) { }
+		public static readonly Guid IBody_IID = new Guid("46AEF731-98B0-4D18-827B-933758678F4A");
+		public override Guid IID => IBody_IID;
+
+		internal Body(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef) { }
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate int GetJointsProc(IntPtr pInstance, uint capacity, Joint[] joints);

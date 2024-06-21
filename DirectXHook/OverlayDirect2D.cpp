@@ -238,11 +238,7 @@ HRESULT __stdcall StereoSurfaceBeginDraw(_In_ IDXGISurface* SurfaceLeft, _In_ ID
 HRESULT __stdcall SwapChainEndDraw(_In_ IDXGISwapChain* SwapChain, UINT Index, _In_ Device* pInstance)
 {
 	HRESULT result = 0;
-	ComPtr<IDXGIDevice> DeviceDXGI;
 	ComPtr<IDXGISurface> SurfaceDXGI;
-
-	result = SwapChain->GetDevice(IID_PPV_ARGS(&DeviceDXGI));
-	if (FAILED(result)) return result;
 	result = SwapChain->GetBuffer(Index, IID_PPV_ARGS(&SurfaceDXGI));
 	if (FAILED(result)) { // doesn't implement IDXGISurface, might be a stereo buffer
 		ComPtr<IDXGIResource1> ResourceDXGI;
@@ -258,7 +254,6 @@ HRESULT __stdcall SwapChainEndDraw(_In_ IDXGISwapChain* SwapChain, UINT Index, _
 			return StereoSurfaceEndDraw(Left.Get(), Right.Get(), pInstance);
 		}
 	}
-
 	return SurfaceEndDraw(SurfaceDXGI.Get(), pInstance);
 }
 

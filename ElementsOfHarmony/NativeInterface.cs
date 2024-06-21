@@ -13,11 +13,6 @@ namespace ElementsOfHarmony
 	{
 		protected IntPtr pInstance;
 
-		/// <summary>
-		/// get function address from VTable
-		/// </summary>
-		protected IntPtr this[int Index] => Marshal.ReadIntPtr(Marshal.ReadIntPtr(pInstance), Index * IntPtr.Size);
-
 		public override bool Equals(object obj)
 		{
 			if (obj is Unknown other) return pInstance == other.pInstance;
@@ -28,17 +23,81 @@ namespace ElementsOfHarmony
 			return pInstance.GetHashCode();
 		}
 
-		protected List<Delegate?> VTable = new List<Delegate?>();
-		public Unknown(IntPtr pInstance, int MethodCount = 3)
+		public IntPtr Instance => pInstance;
+
+		public static readonly Guid IUnknown_IID = new Guid("00000000-0000-0000-C000-000000000046");
+		public virtual Guid IID => IUnknown_IID;
+
+		public Unknown()
+		{
+			pInstance = IntPtr.Zero;
+		}
+		public Unknown(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false, int MethodCount = 3)
 		{
 			this.pInstance = pInstance;
 			VTable.AddRange(Enumerable.Repeat<Delegate?>(null, MethodCount));
+			if (!OwnsInstance_DoNotAddRef)
+			{
+				AddRef();
+			}
+		}
+
+		/// <summary>
+		/// get function address from VTable
+		/// </summary>
+		protected IntPtr this[int Index] => Marshal.ReadIntPtr(Marshal.ReadIntPtr(pInstance), Index * IntPtr.Size);
+
+		protected List<Delegate?> VTable = new List<Delegate?>();
+
+		public int As<T>(out T? PPV, Guid? IID = null) where T : Unknown, new()
+		{
+			PPV = new T();
+			IID ??= PPV.IID;
+			IntPtr Ptr;
+			int result;
+			unsafe
+			{
+				result = QueryInterface(IID.Value, &Ptr);
+			}
+			if (result == 0)
+			{
+				PPV.pInstance = Ptr;
+			}
+			else
+			{
+				PPV.Dispose();
+				PPV = null;
+			}
+			return result;
+		}
+		public T? As<T>(Guid? IID = null) where T : Unknown, new()
+		{
+			As(out T? PPV, IID);
+			return PPV;
+		}
+		public bool Is(Guid? IID = null)
+		{
+			if (IID != null)
+			{
+				using Unknown? Temp = As<Unknown>(IID);
+				return Temp != null;
+			}
+			return false;
+		}
+
+		public static uint GetRefCount(IntPtr IUnknown)
+		{
+			using Unknown Temp = new Unknown(IUnknown, true);
+			Temp.AddRef();
+			uint RefCount = Temp.Release();
+			Temp.pInstance = IntPtr.Zero;
+			return RefCount;
 		}
 
 		/// <summary>
 		/// invoke function with given VTable index and delegate type
 		/// </summary>
-		protected object Invoke<T>(int Index, params object[] args) where T : Delegate
+		public object Invoke<T>(int Index, params object[] args) where T : Delegate
 		{
 			if (VTable.Count <= Index)
 			{
@@ -60,6 +119,8 @@ namespace ElementsOfHarmony
 		public delegate uint ReleaseProc(IntPtr pInstance);
 		public uint Release() => (uint)Invoke<ReleaseProc>(2);
 
+
+
 		private bool disposedValue;
 
 		protected virtual void Dispose(bool disposing)
@@ -68,10 +129,11 @@ namespace ElementsOfHarmony
 			{
 				if (disposing)
 				{
-					// dispose instance
-					Release();
+					if (pInstance != IntPtr.Zero)
+					{
+						Release();
+					}
 				}
-
 				disposedValue = true;
 			}
 		}

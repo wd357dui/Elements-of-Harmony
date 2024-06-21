@@ -37,7 +37,6 @@ extern "C" {
 	__declspec(dllexport) bool __stdcall JmpEndsUpInRange(intptr_t SrcAddr, intptr_t RangeStart, DWORD Size);
 }
 
-typedef HRESULT(STDMETHODCALLTYPE* IUnknown_Release_Proc)(IUnknown* This);
 typedef HRESULT(STDMETHODCALLTYPE* IDXGIFactory_CreateSwapChain_Proc)(IDXGIFactory* This,
 	_In_  IUnknown* pDevice,
 	_In_::DXGI_SWAP_CHAIN_DESC* pDesc,
@@ -69,8 +68,8 @@ intptr_t FactoryVTableAddress = 0;
 intptr_t Factory2VTableAddress = 0;
 intptr_t SwapChainVTableAddress = 0;
 intptr_t SwapChain1VTableAddress = 0;
+intptr_t DeviceVTableAddress = 0;
 intptr_t DeviceContextVTableAddress = 0;
-constexpr size_t IUnknown_Release_VTableIndex = 2;
 constexpr size_t IDXGIFactory_CreateSwapChain_VTableIndex = 10;
 constexpr size_t IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex = 15;
 constexpr size_t IDXGISwapChain_Present_VTableIndex = 8;
@@ -252,7 +251,7 @@ struct HookPatch
 		else return E_PENDING;
 		return result;
 	}
-} Release, CreateSwapChain, CreateSwapChainForHwnd, Present, Present1, OMSetRenderTargets, OMSetRenderTargetsAndUnorderedAccessViews;
+} CreateSwapChain, CreateSwapChainForHwnd, Present, Present1, OMSetRenderTargets, OMSetRenderTargetsAndUnorderedAccessViews;
 
 struct Arguments
 {
@@ -283,20 +282,6 @@ struct Arguments
 			else return nullptr;
 		}
 	};
-
-	inline static Arguments PreRelease(IUnknown* This)
-	{
-		Arguments Result;
-		Result.IID = __uuidof(IUnknown);
-		Result.PPV = This;
-		Result.VTableIndex = IUnknown_Release_VTableIndex;
-		return Result;
-	}
-	inline static void PostRelease(Arguments& Previous, HRESULT result)
-	{
-		Previous.Post = TRUE;
-		Previous.Result = result;
-	}
 
 	inline static Arguments PreCreateSwapChain(IDXGIFactory* This,
 		IUnknown*& pDevice, DXGI_SWAP_CHAIN_DESC& pDesc)
@@ -415,7 +400,6 @@ struct Arguments
 	}
 };
 
-HRESULT STDMETHODCALLTYPE IUnknown_Release_Override(IUnknown* This);
 HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* This,
 	_In_  IUnknown* pDevice,
 	_In_::DXGI_SWAP_CHAIN_DESC* pDesc,
@@ -593,23 +577,6 @@ bool __stdcall Get_Present_DetourHookDetected()
 bool __stdcall Get_Present1_DetourHookDetected()
 {
 	return Present1Bytes.DetourHookDetected;
-}
-
-HRESULT STDMETHODCALLTYPE IUnknown_Release_Override(IUnknown* This)
-{
-	if (Running && HookCallback != nullptr) {
-
-		Arguments Args = Arguments::PreRelease(This);
-		HookCallback(&Args);
-
-		HRESULT result = reinterpret_cast<IUnknown_Release_Proc>(Release.MemoryOriginalProc)(This);
-
-		Arguments::PostRelease(Args, result);
-		HookCallback(&Args);
-
-		return result;
-	}
-	else return reinterpret_cast<IUnknown_Release_Proc>(Release.MemoryOriginalProc)(This);
 }
 
 HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* This,

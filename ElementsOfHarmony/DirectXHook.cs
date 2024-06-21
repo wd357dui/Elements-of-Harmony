@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -328,10 +329,6 @@ namespace ElementsOfHarmony
 			Arguments Args = Marshal.PtrToStructure<Arguments>(Ptr);
 			switch (Args.VTableIndex)
 			{
-				case IUnknown_Release_VTableIndex when Args.IID == IUnknown_IID:
-					if (Args.Post) PostRelease?.Invoke(Args.PPV, EventArgs.Empty);
-					else PreRelease?.Invoke(Args.PPV, EventArgs.Empty);
-					break;
 				case IDXGIFactory_CreateSwapChain_VTableIndex when Args.IID == IDXGIFactory_IID:
 					if (Args.Post) PostCreateSwapChain?.Invoke(Args.PPV, new CreateSwapChainEventArgs() { Args = Args });
 					else PreCreateSwapChain?.Invoke(Args.PPV, new CreateSwapChainEventArgs() { Args = Args });
@@ -397,28 +394,25 @@ namespace ElementsOfHarmony
 
 		private static void OnPrePresent(object sender, PresentEventArgs _)
 		{
-			IntPtr pInstance;
-			unsafe
-			{
-				Marshal.ThrowExceptionForHR(SwapChainBeginDraw((IntPtr)sender, 0, &pInstance));
-			}
-			OverlayDraw?.Invoke(pInstance, EventArgs.Empty);
-			Marshal.ThrowExceptionForHR(SwapChainEndDraw((IntPtr)sender, 0, pInstance));
+			InvokeOverlay((IntPtr)sender);
 		}
 		private static void OnPrePresent1(object sender, Present1EventArgs _)
 		{
-			IntPtr pInstance;
+			InvokeOverlay((IntPtr)sender);
+		}
+		private static void InvokeOverlay(IntPtr pSwapChain)
+		{
+			IntPtr DeviceInstance;
 			unsafe
 			{
-				Marshal.ThrowExceptionForHR(SwapChainBeginDraw((IntPtr)sender, 0, &pInstance));
+				Marshal.ThrowExceptionForHR(SwapChainBeginDraw(pSwapChain, 0, &DeviceInstance));
 			}
-			OverlayDraw?.Invoke(pInstance, EventArgs.Empty);
-			Marshal.ThrowExceptionForHR(SwapChainEndDraw((IntPtr)sender, 0, pInstance));
+			OverlayDraw?.Invoke(pSwapChain, EventArgs.Empty);
+			Marshal.ThrowExceptionForHR(SwapChainEndDraw(pSwapChain, 0, DeviceInstance));
 		}
 
 
 
-		public const ulong IUnknown_Release_VTableIndex = 2;
 		public const ulong IDXGIFactory_CreateSwapChain_VTableIndex = 10;
 		public const ulong IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex = 15;
 		public const ulong IDXGISwapChain_Present_VTableIndex = 8;
@@ -431,7 +425,6 @@ namespace ElementsOfHarmony
 		public static readonly Guid IDXGISwapChain_IID = new Guid("310d36a0-d2e7-4c0a-aa04-6a9d23b8886a");
 		public static readonly Guid IDXGISwapChain1_IID = new Guid("790a45f7-0d42-4876-983a-0a55cfe6f4aa");
 		public static readonly Guid ID3D11DeviceContext_IID = new Guid("c0bfa96c-e089-44fb-8eaf-26f8796190da");
-		public static event EventHandler? PreRelease, PostRelease;
 		public static event EventHandler<CreateSwapChainEventArgs>? PreCreateSwapChain, PostCreateSwapChain;
 		public static event EventHandler<CreateSwapChainForHwndEventArgs>? PreCreateSwapChainForHwnd, PostCreateSwapChainForHwnd;
 		public static event EventHandler<PresentEventArgs>? PrePresent, PostPresent;
@@ -439,6 +432,10 @@ namespace ElementsOfHarmony
 		public static event EventHandler<OMSetRenderTargetsEventArgs>? PreOMSetRenderTargets, PostOMSetRenderTargets;
 		public static event EventHandler<OMSetRenderTargetsAndUnorderedAccessViewsEventArgs>? PreOMSetRenderTargetsAndUnorderedAccessViews, PostOMSetRenderTargetsAndUnorderedAccessViews;
 
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		public unsafe delegate int IDXGIDeviceSubObject_GetDevice_Proc(IntPtr pInstance, Guid IID, IntPtr* PPV);
+
+		public static readonly Dictionary<IntPtr, int> D3D11DeviceRefCountThreashold = new Dictionary<IntPtr, int>();
 		public static event EventHandler? OverlayDraw;
 
 
@@ -603,6 +600,7 @@ namespace ElementsOfHarmony
 			public Arguments Args;
 		}
 #pragma warning disable IDE1006
+
 		public class CreateSwapChainEventArgs : HookCallbackEventArgs
 		{
 			public IntPtr pDevice
@@ -781,7 +779,7 @@ namespace ElementsOfHarmony
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		internal extern static int StereoSurfaceEndDraw(IntPtr SurfaceLeft, IntPtr SurfaceRight,
 			IntPtr pInstance);
-
+		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		public extern static int SetColor(this IntPtr pInstance, D2D1_COLOR_F Color);
 
