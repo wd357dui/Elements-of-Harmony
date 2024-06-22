@@ -72,14 +72,13 @@ namespace ElementsOfHarmony
 					try
 					{
 						KinectControl = Assembly.LoadFile($"{AssemblyDirectory}ElementsOfHarmony.KinectControl.dll");
-						KinectControl.GetType("ElementsOfHarmony.KinectControl")
+						KinectControl.GetType("ElementsOfHarmony.KinectControl.KinectControl")
 							.GetMethod("Init", BindingFlags.Public | BindingFlags.Static)
 							.Invoke(null, Array.Empty<object>());
 					}
-					catch (Exception e)
+					catch (Exception e) when (e.InnerException is DllNotFoundException dll)
 					{
-						if (e.InnerException is DllNotFoundException dll &&
-							dll.Message.EndsWith("Kinect20.dll", StringComparison.InvariantCultureIgnoreCase))
+						if (dll.Message.EndsWith("Kinect20.dll", StringComparison.InvariantCultureIgnoreCase))
 						{
 							new Thread(() =>
 							{
@@ -93,6 +92,16 @@ namespace ElementsOfHarmony
 									System.Diagnostics.Process.Start("https://www.microsoft.com/download/details.aspx?id=44559");
 								}
 							}).Start();
+						}
+					}
+					catch (Exception e)
+					{
+					repeat:
+						Log.Message($"{MethodBase.GetCurrentMethod()} -> Settings.Loyalty.KinectControl - {e.GetType()}\n{e.StackTrace}\n{e.Message}");
+						if (e.InnerException != null)
+						{
+							e = e.InnerException;
+							goto repeat;
 						}
 					}
 				}

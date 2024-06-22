@@ -40,7 +40,6 @@ namespace ElementsOfHarmony.KinectControl
 				{
 					Log.Message($"Harmony patch for {AMBA.FullName} successful - {Num} Patches");
 				}
-				OverlayDraw += OnOverlayDraw;
 			}
 			if (ElementsOfHarmony.IsAZHM)
 			{
@@ -61,6 +60,8 @@ namespace ElementsOfHarmony.KinectControl
 			}
 
 			reader.FrameArrived += Reader_FrameArrived;
+
+			OverlayDraw += OnOverlayDraw;
 
 			Application.quitting += Application_quitting;
 		}
@@ -148,7 +149,6 @@ namespace ElementsOfHarmony.KinectControl
 					Action? DelayAction = null;
 
 					float Scale = (Screen.currentResolution.width / 1920.0f + Screen.currentResolution.height / 1080.0f) / 2;
-					Scale *= Screen.dpi / 96.0f;
 
 					Marshal.ThrowExceptionForHR(Device.SetFont("Segoe UI",
 						DWRITE_FONT_WEIGHT.DWRITE_FONT_WEIGHT_NORMAL,
@@ -179,10 +179,31 @@ namespace ElementsOfHarmony.KinectControl
 						// left stick's arrows
 						Marshal.ThrowExceptionForHR(Device.SetColor(Color.white));
 						Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
-						Device.DrawPlainText("◀", new D2D1_RECT_F() { Left = LeftCenter.x - Scale * 200.0f, Top = LeftCenter.y, Right = LeftCenter.x, Bottom = LeftCenter.y });
-						Device.DrawPlainText("▲", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y - Scale * 200.0f, Right = LeftCenter.x, Bottom = LeftCenter.y });
-						Device.DrawPlainText("▶", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y, Right = LeftCenter.x + Scale * 200.0f, Bottom = LeftCenter.y });
-						Device.DrawPlainText("▼", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y, Right = LeftCenter.x, Bottom = LeftCenter.y + Scale * 200.0f });
+						Device.DrawPlainText("◀", new D2D1_RECT_F() { Left = LeftCenter.x - (Scale * 200.0f), Top = LeftCenter.y, Right = LeftCenter.x, Bottom = LeftCenter.y });
+						Device.DrawPlainText("▲", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y - (Scale * 200.0f), Right = LeftCenter.x, Bottom = LeftCenter.y });
+						Device.DrawPlainText("▶", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y, Right = LeftCenter.x + (Scale * 200.0f), Bottom = LeftCenter.y });
+						Device.DrawPlainText("▼", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y, Right = LeftCenter.x, Bottom = LeftCenter.y + (Scale * 200.0f) });
+					}
+
+					// used for drawing a letter on a button
+					void DrawOutlinedText(string Text, D2D1_RECT_F Rect, float PX = 1.0f, float PY = 1.0f, float NX = -1.0f, float NY = -1.0f)
+					{
+						PX = Scale * PX;
+						PY = Scale * PY;
+						NX = Scale * NX;
+						NY = Scale * NY;
+						Marshal.ThrowExceptionForHR(Device.SetOpacity(1.0f));
+						Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + NX, Top = Rect.Top + NY, Right = Rect.Right + NX, Bottom = Rect.Bottom + NY });
+						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + NX, Top = Rect.Top + 0, Right = Rect.Right + NX, Bottom = Rect.Bottom + 0 });
+						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + NX, Top = Rect.Top + PY, Right = Rect.Right + NX, Bottom = Rect.Bottom + PY });
+						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + 0, Top = Rect.Top + PY, Right = Rect.Right + 0, Bottom = Rect.Bottom + PY });
+						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + 0, Top = Rect.Top + NY, Right = Rect.Right + 0, Bottom = Rect.Bottom + NY });
+						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + PX, Top = Rect.Top + NY, Right = Rect.Right + PX, Bottom = Rect.Bottom + NY });
+						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + PX, Top = Rect.Top + 0, Right = Rect.Right + PX, Bottom = Rect.Bottom + 0 });
+						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + PX, Top = Rect.Top + PY, Right = Rect.Right + PX, Bottom = Rect.Bottom + PY });
+						Marshal.ThrowExceptionForHR(Device.SetColor(Color.white));
+						Device.DrawPlainText(Text, Rect);
 					}
 
 					bool RightShouldHighlight = false;
@@ -198,88 +219,154 @@ namespace ElementsOfHarmony.KinectControl
 						RightCenter.y = 1.0f - RightCenter.y;
 						RightCenter *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
 
-						// right stick's circle
-						Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray));
-						Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
-						Device.FillEllipse(RightCenter, Scale * 150.0f, Scale * 150.0f);
-
-						DelayAction += () =>
+						if (Player.RightLasso)
 						{
+							// slightly larger right stick's circle
+							Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray));
+							Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
+							Device.FillEllipse(RightCenter, Scale * 180.0f, Scale * 180.0f);
 
-							void DrawOutlinedText(string Text, D2D1_RECT_F Rect, float PX = 1.0f, float PY = 1.0f, float NX = -1.0f, float NY = -1.0f)
+							DelayAction = () =>
 							{
-								PX = Scale * PX;
-								PY = Scale * PY;
-								NX = Scale * NX;
-								NY = Scale * NY;
-								Marshal.ThrowExceptionForHR(Device.SetOpacity(1.0f));
+								// LB button
 								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
-								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + NX, Top = Rect.Top + NY, Right = Rect.Right + NX, Bottom = Rect.Bottom + NY });
-								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + NX, Top = Rect.Top + 0, Right = Rect.Right + NX, Bottom = Rect.Bottom + 0 });
-								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + NX, Top = Rect.Top + PY, Right = Rect.Right + NX, Bottom = Rect.Bottom + PY });
-								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + 0, Top = Rect.Top + PY, Right = Rect.Right + 0, Bottom = Rect.Bottom + PY });
-								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + 0, Top = Rect.Top + NY, Right = Rect.Right + 0, Bottom = Rect.Bottom + NY });
-								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + PX, Top = Rect.Top + NY, Right = Rect.Right + PX, Bottom = Rect.Bottom + NY });
-								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + PX, Top = Rect.Top + 0, Right = Rect.Right + PX, Bottom = Rect.Bottom + 0 });
-								Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + PX, Top = Rect.Top + PY, Right = Rect.Right + PX, Bottom = Rect.Bottom + PY });
-								Marshal.ThrowExceptionForHR(Device.SetColor(Color.white));
-								Device.DrawPlainText(Text, Rect);
-							}
+								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.NorthWest == true ? Highlight : NestedTransparent));
+								Vector2 NorthWestButtonCenterPoint = RightCenter + new Vector2(Scale * -80.0f, Scale * -80.0f);
+								D2D1_RECT_F NorthWestButtonRectangle = new D2D1_RECT_F
+								{
+									Left = NorthWestButtonCenterPoint.x - Scale * 60.0f,
+									Top = NorthWestButtonCenterPoint.y - Scale * 30.0f,
+									Right = NorthWestButtonCenterPoint.x + Scale * 60.0f,
+									Bottom = NorthWestButtonCenterPoint.y + Scale * 30.0f,
+								};
+								Device.FillRectangle(NorthWestButtonRectangle, Scale * 8.0f, Scale * 8.0f);
+								NorthWestButtonRectangle.Top -= Scale * 10.0f; // move a little bit more to the top
+								DrawOutlinedText("LB", NorthWestButtonRectangle);
 
-							// A button
-							Marshal.ThrowExceptionForHR(Device.SetColor(Color.green));
-							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.South == true ? Highlight : NestedTransparent));
-							Device.FillEllipse(RightCenter + new Vector2(0.0f, Scale * 100.0f), Scale * 50.0f, Scale * 50.0f);
-							DrawOutlinedText("A", new D2D1_RECT_F()
-							{
-								Left = RightCenter.x,
-								Top = RightCenter.y - Scale * 10.0f,
-								Right = RightCenter.x,
-								Bottom = RightCenter.y + Scale * 200.0f
-							});
+								// RB button
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.NorthEast == true ? Highlight : NestedTransparent));
+								Vector2 NorthEastButtonCenterPoint = RightCenter + new Vector2(Scale * 80.0f, Scale * -80.0f);
+								D2D1_RECT_F NorthEastButtonRectangle = new D2D1_RECT_F
+								{
+									Left = NorthEastButtonCenterPoint.x - Scale * 60.0f,
+									Top = NorthEastButtonCenterPoint.y - Scale * 30.0f,
+									Right = NorthEastButtonCenterPoint.x + Scale * 60.0f,
+									Bottom = NorthEastButtonCenterPoint.y + Scale * 30.0f,
+								};
+								Device.FillRectangle(NorthEastButtonRectangle, Scale * 8.0f, Scale * 8.0f);
+								NorthEastButtonRectangle.Top -= Scale * 10.0f; // move a little bit more to the top
+								DrawOutlinedText("RB", NorthEastButtonRectangle);
 
-							// B button
-							Marshal.ThrowExceptionForHR(Device.SetColor(Color.red));
-							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.East == true ? Highlight : NestedTransparent));
-							Device.FillEllipse(RightCenter + new Vector2(Scale * 100.0f, 0.0f), Scale * 50.0f, Scale * 50.0f);
-							DrawOutlinedText("B", new D2D1_RECT_F()
-							{
-								Left = RightCenter.x,
-								Top = RightCenter.y - Scale * 10.0f,
-								Right = RightCenter.x + Scale * 200.0f,
-								Bottom = RightCenter.y
-							}, PY: 2.0f); // outline of "B" need an additional Y offset to look right
+								// View button
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.SouthWest == true ? Highlight : NestedTransparent));
+								Device.FillEllipse(RightCenter + new Vector2(Scale * -80.0f, Scale * 80.0f), Scale * 60.0f, Scale * 60.0f);
+								DrawOutlinedText("🗗", new D2D1_RECT_F()
+								{
+									Left = RightCenter.x - (Scale * 160.0f),
+									Top = RightCenter.y + (Scale * 160.0f) - (Scale * 20.0f), // move a little bit more to the top
+									Right = RightCenter.x,
+									Bottom = RightCenter.y
+								});
 
-							// Y button
-							Marshal.ThrowExceptionForHR(Device.SetColor(Color.yellow));
-							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.North == true ? Highlight : NestedTransparent));
-							Device.FillEllipse(RightCenter + new Vector2(0.0f, Scale * -100.0f), Scale * 50.0f, Scale * 50.0f);
-							DrawOutlinedText("Y", new D2D1_RECT_F()
-							{
-								Left = RightCenter.x,
-								Top = RightCenter.y - Scale * 200.0f - Scale * 10.0f,
-								Right = RightCenter.x,
-								Bottom = RightCenter.y
-							});
+								// Menu button
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.SouthEast == true ? Highlight : NestedTransparent));
+								Device.FillEllipse(RightCenter + new Vector2(Scale * 80.0f, Scale * 80.0f), Scale * 60.0f, Scale * 60.0f);
+								DrawOutlinedText("≡", new D2D1_RECT_F()
+								{
+									Left = RightCenter.x + (Scale * 160.0f),
+									Top = RightCenter.y + (Scale * 160.0f) - (Scale * 20.0f), // move a little bit more to the top
+									Right = RightCenter.x,
+									Bottom = RightCenter.y
+								});
+							};
+						}
+						else
+						{
+							// right stick's circle
+							Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray));
+							Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
+							Device.FillEllipse(RightCenter, Scale * 150.0f, Scale * 150.0f);
 
-							// Menu button
-							Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
-							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.West == true ? Highlight : NestedTransparent));
-							Device.FillEllipse(RightCenter + new Vector2(Scale * -100.0f, 0.0f), Scale * 50.0f, Scale * 50.0f);
-							DrawOutlinedText("≡", new D2D1_RECT_F()
+							DelayAction = () =>
 							{
-								Left = RightCenter.x - Scale * 200.0f,
-								Top = RightCenter.y - Scale * 20.0f, // this symbol needs to be moved a little bit more to the up
-								Right = RightCenter.x,
-								Bottom = RightCenter.y
-							});
-						};
+								// I just found that there are characters in unicode for 🅐🅑🅧🅨,
+								// but I'm not going to use them because it's not worth the headache of
+								// aligning positions and sizes all over again,
+								// not to mention the struggle of adding outline to a character
+
+								// A button
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.green));
+								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.South == true ? Highlight : NestedTransparent));
+								Device.FillEllipse(RightCenter + new Vector2(0.0f, Scale * 100.0f), Scale * 50.0f, Scale * 50.0f);
+								DrawOutlinedText("A", new D2D1_RECT_F()
+								{
+									Left = RightCenter.x,
+									Top = RightCenter.y - (Scale * 10.0f),
+									Right = RightCenter.x,
+									Bottom = RightCenter.y + (Scale * 200.0f)
+								});
+
+								// B button
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.red));
+								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.East == true ? Highlight : NestedTransparent));
+								Device.FillEllipse(RightCenter + new Vector2(Scale * 100.0f, 0.0f), Scale * 50.0f, Scale * 50.0f);
+								DrawOutlinedText("B", new D2D1_RECT_F()
+								{
+									Left = RightCenter.x,
+									Top = RightCenter.y - (Scale * 10.0f),
+									Right = RightCenter.x + (Scale * 200.0f),
+									Bottom = RightCenter.y
+								}, PY: 2.0f); // outline of "B" need an additional Y offset to look right
+
+								/* since X button is being used in AZHM, I've decided to not use the west button as menu button anymore
+								// Menu button
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.West == true ? Highlight : NestedTransparent));
+								Device.FillEllipse(RightCenter + new Vector2(Scale * -100.0f, 0.0f), Scale * 50.0f, Scale * 50.0f);
+								DrawOutlinedText("≡", new D2D1_RECT_F()
+								{
+									Left = RightCenter.x - Scale * 200.0f,
+									Top = RightCenter.y - Scale * 20.0f, // this symbol needs to be moved a little bit more to the up
+									Right = RightCenter.x,
+									Bottom = RightCenter.y
+								});
+								*/
+
+								// X button
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.blue));
+								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.West == true ? Highlight : NestedTransparent));
+								Device.FillEllipse(RightCenter + new Vector2(Scale * -100.0f, 0.0f), Scale * 50.0f, Scale * 50.0f);
+								DrawOutlinedText("X", new D2D1_RECT_F()
+								{
+									Left = RightCenter.x - (Scale * 200.0f),
+									Top = RightCenter.y - (Scale * 10.0f),
+									Right = RightCenter.x,
+									Bottom = RightCenter.y
+								});
+
+								// Y button
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.yellow));
+								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.North == true ? Highlight : NestedTransparent));
+								Device.FillEllipse(RightCenter + new Vector2(0.0f, Scale * -100.0f), Scale * 50.0f, Scale * 50.0f);
+								DrawOutlinedText("Y", new D2D1_RECT_F()
+								{
+									Left = RightCenter.x,
+									Top = RightCenter.y - (Scale * 200.0f) - (Scale * 10.0f),
+									Right = RightCenter.x,
+									Bottom = RightCenter.y
+								});
+							};
+						}
 					}
 
+					// left pointer
 					if (Player.LeftPos is Vector2 Left &&
 						Player.LeftShoulderPos is Vector2 LeftShoulder)
 					{
-						// convert to screen space
+						// convert to pixel coordinates
 						Left += new Vector2(1.0f, 1.0f);
 						Left *= new Vector2(0.5f, 0.5f);
 						Left.y = 1.0f - Left.y;
@@ -289,16 +376,19 @@ namespace ElementsOfHarmony.KinectControl
 						LeftShoulder.y = 1.0f - LeftShoulder.y;
 						LeftShoulder *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
 
-						// draw a line from left shoulder to left hand, and draw a circle on the left hand
+						// draw a line from left shoulder to left hand,
+						// and then draw a circle on the left hand
 						Marshal.ThrowExceptionForHR(Device.SetColor(PlayerColor));
 						Marshal.ThrowExceptionForHR(Device.SetOpacity(LeftShouldHighlight ? Highlight : Player.LeftPosCloserToHead ? Transparent : FadedTransparent));
 						Device.DrawLine(LeftShoulder, Left, Scale * 10.0f);
 						Device.FillEllipse(Left, Scale * 40.0f, Scale * 40.0f);
 					}
+
+					// right pointer
 					if (Player.RightPos is Vector2 Right &&
 						Player.RightShoulderPos is Vector2 RightShoulder)
 					{
-						// convert to screen space
+						// convert to pixel coordinates
 						Right += new Vector2(1.0f, 1.0f);
 						Right *= new Vector2(0.5f, 0.5f);
 						Right.y = 1.0f - Right.y;
@@ -308,11 +398,88 @@ namespace ElementsOfHarmony.KinectControl
 						RightShoulder.y = 1.0f - RightShoulder.y;
 						RightShoulder *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
 
-						// draw a line from right shoulder to right hand, and draw a circle on the right hand
+						// draw a line from right shoulder to right hand,
+						// and then draw a circle on the right hand
 						Marshal.ThrowExceptionForHR(Device.SetColor(PlayerColor));
 						Marshal.ThrowExceptionForHR(Device.SetOpacity(RightShouldHighlight ? Highlight : Player.RightPosCloserToHead ? Transparent : FadedTransparent));
 						Device.DrawLine(RightShoulder, Right, Scale * 10.0f);
 						Device.FillEllipse(Right, Scale * 40.0f, Scale * 40.0f);
+
+						/* it's good practice while it lasted, but I've decided to use add another layer of buttons
+						 * instead of just one button
+						 * 
+						if (Player.RightLassoProgress is decimal Progress)
+						{
+							// draw a menu button and a circle outline
+							Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+							Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.RightLassoValidated ? Highlight : NestedTransparent));
+							Device.FillEllipse(Right, Scale * 50.0f, Scale * 50.0f);
+							DrawOutlinedText("≡", new D2D1_RECT_F()
+							{
+								Left = Right.x,
+								Top = Right.y - Scale * 20.0f, // this symbol needs to be moved a little bit more to the up
+								Right = Right.x,
+								Bottom = Right.y
+							});
+
+							// draw a circle outline as progress bar
+							Marshal.ThrowExceptionForHR(Device.BeginDrawBezier(Right + (Scale * new Vector2(0.0f, -50.0f))));
+
+							float Sector = 0.0f;
+							if (Progress > 0.25m)
+							{
+								Device.AddBezier(
+									Right + (Scale * new Vector2(0.0f, -50.0f)),
+									Right + (Scale * new Vector2(50.0f, -50.0f)),
+									Right + (Scale * new Vector2(50.0f, 0.0f)));
+								Sector = 90.0f;
+							}
+							if (Progress > 0.5m)
+							{
+								Device.AddBezier(
+									Right + (Scale * new Vector2(50.0f, 0.0f)),
+									Right + (Scale * new Vector2(50.0f, 50.0f)),
+									Right + (Scale * new Vector2(0.0f, 50.0f)));
+								Sector = 180.0f;
+							}
+							if (Progress > 0.75m)
+							{
+								Device.AddBezier(
+									Right + (Scale * new Vector2(0.0f, 50.0f)),
+									Right + (Scale * new Vector2(-50.0f, 50.0f)),
+									Right + (Scale * new Vector2(-50.0f, 0.0f)));
+								Sector = 270.0f;
+							}
+
+							decimal Degrees = (Progress == 1.0m ? 1.0m : (Progress % 0.25m / 0.25m)) * 90.0m;
+							Matrix4x4 ReferenceRotation = Matrix4x4.Rotate(Quaternion.Euler(0.0f, 0.0f, (float)(Degrees / 2m)));
+							Matrix4x4 EndRotation = Matrix4x4.Rotate(Quaternion.Euler(0.0f, 0.0f, (float)Degrees));
+
+							Vector3 Start = new Vector3(0.0f, -1.0f, 0.0f);
+							Vector3 Reference = ReferenceRotation.MultiplyPoint(Start);
+							Vector3 End = EndRotation.MultiplyPoint(Start);
+
+							float K = Reference.y / Reference.x;
+							Reference.x = -1.0f / K;
+							Reference.y = -1.0f;
+
+							Matrix4x4 SectorRotation = Matrix4x4.Rotate(Quaternion.Euler(0.0f, 0.0f, Sector));
+							D2D1_POINT_2F StartPoint = Right + SectorRotation.MultiplyPoint(Start).XY() * Scale * 50.0f;
+							D2D1_POINT_2F ReferencePoint = Right + SectorRotation.MultiplyPoint(Reference).XY() * Scale * 50.0f;
+							D2D1_POINT_2F EndPoint = Right + SectorRotation.MultiplyPoint(End).XY() * Scale * 50.0f;
+
+							Device.AddBezier(StartPoint, ReferencePoint, EndPoint);
+
+							Marshal.ThrowExceptionForHR(Device.SetColor(PlayerColor));
+							Marshal.ThrowExceptionForHR(Device.SetOpacity(Highlight));
+							Marshal.ThrowExceptionForHR(Device.EndDrawBezier(EndPoint, Scale * 8.0f));
+						}
+						else
+						{
+							// draw a circle on the right hand
+							Device.FillEllipse(Right, Scale * 40.0f, Scale * 40.0f);
+						}
+						*/
 					}
 
 					DelayAction?.Invoke();
@@ -341,23 +508,34 @@ namespace ElementsOfHarmony.KinectControl
 			private bool PreviousLeftHolding = false, PreviousRightHolding = false; // check if hand was holding in the previous frame
 			private Hand LeftStatus = Hand.NotHolding, RightStatus = Hand.NotHolding; // converted to current frame holding status
 
-			public bool? LeftStartPosCloserToHead = null, RightStartPosCloserToHead = null; // hand start holding pos is closer to head
-			public Vector2? LeftStartPos = null, RightStartPos = null; // hand start holding pos
+			private bool PreviousRightLasso = false; // check if right hand was lasso in the previous frame
 
-			public bool LeftPosCloserToHead = false, RightPosCloserToHead = false; // hand current pos is closer to head
-			public Vector2 LeftPos = Vector2.negativeInfinity, RightPos = Vector2.negativeInfinity; // hand current pos
-			public Vector2 LeftShoulderPos = Vector2.negativeInfinity, RightShoulderPos = Vector2.negativeInfinity; // shoulder current pos
+			internal bool? LeftStartPosCloserToHead = null, RightStartPosCloserToHead = null; // hand start holding pos is closer to head
+			internal Vector2? LeftStartPos = null, RightStartPos = null; // hand start holding pos
+
+			internal bool RightLasso = false;
+
+			internal bool LeftPosCloserToHead = false, RightPosCloserToHead = false; // hand current pos is closer to head
+			internal Vector2? LeftPos = null, RightPos = null; // hand current pos
+			internal Vector2? LeftShoulderPos = null, RightShoulderPos = null; // shoulder current pos
+
+			/*
+			internal double? RightLassoStartTime = null; // time when right hand entered lasso state
+			internal bool RightLassoValidated = false; // right hand had a valid lasso frame after long press threshold passed
+			*/
+
 			public void UpdateHandStatus(Body Body)
 			{
 				lock (this)
 				{
-					Hand HandStatus(HandState BodyHandState, ref bool PreviousStatus)
+					// determine hand state change in current frame
+					Hand HandStatus(HandState BodyHandState, ref bool PreviousStateHolding)
 					{
-						if (PreviousStatus)
+						if (PreviousStateHolding)
 						{
 							if (BodyHandState == HandState.Open)
 							{
-								PreviousStatus = false;
+								PreviousStateHolding = false;
 								return Hand.ExitHolding;
 							}
 							else
@@ -369,7 +547,7 @@ namespace ElementsOfHarmony.KinectControl
 						{
 							if (BodyHandState == HandState.Closed)
 							{
-								PreviousStatus = true;
+								PreviousStateHolding = true;
 								return Hand.EnterHolding;
 							}
 							else
@@ -383,10 +561,12 @@ namespace ElementsOfHarmony.KinectControl
 
 					var Joints = Body.Joints;
 
+					// determine whether if the hand is closer to the head than the torso
 					bool CloserToHead(Vector2 Pos) =>
 						(Pos - Joints[JointType.Head].Position.XY()).sqrMagnitude <
 						(Pos - Joints[JointType.SpineBase].Position.XY()).sqrMagnitude;
 
+					// set or reset hand start pos when hand state is being changed
 					void UpdateHandStartPos(Hand Status, ref Vector2? StartPos, ref bool? StartPosCloserToHead, Vector2 HandPos)
 					{
 						switch (Status)
@@ -411,9 +591,22 @@ namespace ElementsOfHarmony.KinectControl
 					RightPosCloserToHead = CloserToHead(Joints[JointType.HandRight].Position.XY());
 					LeftShoulderPos = Joints[JointType.ShoulderLeft].Position.XY();
 					RightShoulderPos = Joints[JointType.ShoulderRight].Position.XY();
+
+					if (RightStatus == Hand.Holding && Body.HandRightState == HandState.Lasso && PreviousRightLasso)
+					{
+						RightLasso = true;
+					}
+					else if (RightStatus != Hand.Holding)
+					{
+						RightLasso = false;
+					}
+					PreviousRightLasso = Body.HandRightState == HandState.Lasso;
 				}
 			}
 
+			/// <summary>
+			/// convert coordinate from infrared (depth) sensor space to screen space
+			/// </summary>
 			private Vector2 AdjustStick(Vector2 V2)
 			{
 				V2.x *= 5.0f / 6.0f; // aspect ratio of depth sensor is 6:5, convert to 1:1
@@ -430,9 +623,9 @@ namespace ElementsOfHarmony.KinectControl
 				{
 					lock (this)
 					{
-						if (LeftStartPos != null && LeftStartPosCloserToHead == true)
+						if (LeftStartPos != null && LeftStartPosCloserToHead == true && LeftPos != null)
 						{
-							return AdjustStick(LeftPos - LeftStartPos.Value);
+							return AdjustStick(LeftPos.Value - LeftStartPos.Value);
 						}
 						return null;
 					}
@@ -448,14 +641,35 @@ namespace ElementsOfHarmony.KinectControl
 				{
 					lock (this)
 					{
-						if (RightStartPos != null && RightStartPosCloserToHead == true)
+						if (RightStartPos != null && RightStartPosCloserToHead == true && RightPos != null)
 						{
-							return AdjustStick(RightPos - RightStartPos.Value);
+							return AdjustStick(RightPos.Value - RightStartPos.Value);
 						}
 						return null;
 					}
 				}
 			}
+
+			/*
+			/// <summary>
+			/// progress of the right hand's lasso state
+			/// </summary>
+			public decimal? RightLassoProgress
+			{
+				get
+				{
+					lock (this)
+					{
+						if (RightLassoStartTime != null)
+						{
+							decimal Elapsed = (decimal)(Time.realtimeSinceStartupAsDouble - RightLassoStartTime.Value);
+							return Elapsed > 1.0m ? 1.0m : Elapsed;
+						}
+						else return null;
+					}
+				}
+			}
+			*/
 
 			public bool? LeftThresholdCrossed => LeftStick is Vector2 S ? S.sqrMagnitude >= Threshold : (bool?)null;
 			public bool? RightThresholdCrossed => RightStick is Vector2 S ? S.sqrMagnitude >= Threshold : (bool?)null;
@@ -488,25 +702,65 @@ namespace ElementsOfHarmony.KinectControl
 			/// xbox A button
 			/// </summary>
 			public bool? South => RightThresholdCrossed == null ? (bool?)null :
-				RightThresholdCrossed == true && RightStick!.Value.y < 0.0f && Math.Abs(RightStick.Value.x) < Math.Abs(RightStick.Value.y);
+				RightThresholdCrossed == true && !RightLasso &&
+				RightStick!.Value.y < 0.0f && Math.Abs(RightStick.Value.x) < Math.Abs(RightStick.Value.y);
 
 			/// <summary>
 			/// xbox B button
 			/// </summary>
 			public bool? East => RightThresholdCrossed == null ? (bool?)null :
-				RightThresholdCrossed == true && RightStick!.Value.x > 0.0f && Math.Abs(RightStick.Value.x) > Math.Abs(RightStick.Value.y);
+				RightThresholdCrossed == true && !RightLasso &&
+				RightStick!.Value.x > 0.0f && Math.Abs(RightStick.Value.x) > Math.Abs(RightStick.Value.y);
 
 			/// <summary>
-			/// xbox X button (but we're using this as menu button, because the game didn't use the X button and we need a menu button)
+			/// xbox X button
 			/// </summary>
 			public bool? West => RightThresholdCrossed == null ? (bool?)null :
-				RightThresholdCrossed == true && RightStick!.Value.x < 0.0f && Math.Abs(RightStick.Value.x) > Math.Abs(RightStick.Value.y);
+				RightThresholdCrossed == true && !RightLasso &&
+				RightStick!.Value.x < 0.0f && Math.Abs(RightStick.Value.x) > Math.Abs(RightStick.Value.y);
 
 			/// <summary>
 			/// xbox Y button
 			/// </summary>
 			public bool? North => RightThresholdCrossed == null ? (bool?)null :
-				RightThresholdCrossed == true && RightStick!.Value.y > 0.0f && Math.Abs(RightStick.Value.x) < Math.Abs(RightStick.Value.y);
+				RightThresholdCrossed == true && !RightLasso &&
+				RightStick!.Value.y > 0.0f && Math.Abs(RightStick.Value.x) < Math.Abs(RightStick.Value.y);
+
+			/*
+			/// <summary>
+			/// xbox right stick button (which will use as menu button)
+			/// </summary>
+			public bool RightStickButton => RightLassoStartTime != null && RightLassoValidated;
+			*/
+
+			/// <summary>
+			/// xbox View button
+			/// </summary>
+			public bool? SouthWest => RightThresholdCrossed == null ? (bool?)null :
+				RightThresholdCrossed == true && RightLasso &&
+				RightStick!.Value.x < 0.0f && RightStick!.Value.y < 0.0f;
+
+			/// <summary>
+			/// xbox Menu button
+			/// </summary>
+			public bool? SouthEast => RightThresholdCrossed == null ? (bool?)null :
+				RightThresholdCrossed == true && RightLasso &&
+				RightStick!.Value.x > 0.0f && RightStick!.Value.y < 0.0f;
+
+			/// <summary>
+			/// xbox LB button
+			/// </summary>
+			public bool? NorthWest => RightThresholdCrossed == null ? (bool?)null :
+				RightThresholdCrossed == true && RightLasso &&
+				RightStick!.Value.x < 0.0f && RightStick!.Value.y > 0.0f;
+
+			/// <summary>
+			/// xbox RB button
+			/// </summary>
+			public bool? NorthEast => RightThresholdCrossed == null ? (bool?)null :
+				RightThresholdCrossed == true && RightLasso &&
+				RightStick!.Value.x > 0.0f && RightStick!.Value.y > 0.0f;
+
 		}
 
 		public static Vector2 XY(this Vector3 V3) => new Vector2(V3.x, V3.y);

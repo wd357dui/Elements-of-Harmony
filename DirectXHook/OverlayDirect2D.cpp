@@ -3,6 +3,8 @@
 using namespace std;
 using namespace D2D1;
 
+extern void ForceBreakpoint();
+
 struct Device;
 
 extern "C" {
@@ -35,14 +37,17 @@ extern "C" {
 	__declspec(dllexport) HRESULT __stdcall SetGDICompatibleText(_In_ Device* pInstance, LPCWSTR Str,
 		float LayoutWidth, float LayoutHeight, float PixelsPerDip);
 
+#undef DrawText // this is not DrawTextA or DrawTextW in GDI
 	__declspec(dllexport) void __stdcall DrawEllipse(_In_ Device* pInstance, D2D1_POINT_2F Point, float RadiusX, float RadiusY, float StrokeWidth);
 	__declspec(dllexport) void __stdcall DrawLine(_In_ Device* pInstance, D2D1_POINT_2F Src, D2D1_POINT_2F Dst, float StrokeWidth);
 	__declspec(dllexport) void __stdcall DrawRectangle(_In_ Device* pInstance, D2D1_RECT_F Rect, float RoundedRadiusX, float RoundedRadiusY, float StrokeWidth);
-#undef DrawText // this is not DrawTextA or DrawTextW in GDI
 	__declspec(dllexport) void __stdcall DrawPlainText(_In_ Device* pInstance, LPCWSTR Str, D2D1_RECT_F Rect);
 	__declspec(dllexport) HRESULT __stdcall DrawGDICompatibleText(_In_ Device* pInstance, D2D1_POINT_2F Origin);
 	__declspec(dllexport) HRESULT __stdcall DrawGDICompatibleTextMetrics(_In_ Device* pInstance, UINT Index, UINT Length, float OriginX, float OriginY);
 	__declspec(dllexport) HRESULT __stdcall DrawGDICompatibleTextCaret(_In_ Device* pInstance, bool Trailing, float StrokeWidth);
+	__declspec(dllexport) HRESULT __stdcall BeginDrawBezier(_In_ Device* pInstance, D2D1_POINT_2F StartPoint);
+	__declspec(dllexport) void __stdcall AddBezier(_In_ Device* pInstance, D2D1_POINT_2F Start, D2D1_POINT_2F Reference, D2D1_POINT_2F End);
+	__declspec(dllexport) HRESULT __stdcall EndDrawBezier(_In_ Device* pInstance, D2D1_POINT_2F EndPoint, float StrokeWidth);
 	__declspec(dllexport) void __stdcall FillEllipse(_In_ Device* pInstance, D2D1_POINT_2F Point, float RadiusX, float RadiusY);
 	__declspec(dllexport) void __stdcall FillRectangle(_In_ Device* pInstance, D2D1_RECT_F Rect, float RoundedRadiusX, float RoundedRadiusY);
 
@@ -52,22 +57,26 @@ extern "C" {
 
 struct Device
 {
-	ComPtr<ID2D1Device> Device2D;
-	ComPtr<ID2D1DeviceContext> Context2D;
+	ComPtr<ID2D1Device> Device2D = nullptr;
+	ComPtr<ID2D1DeviceContext> Context2D = nullptr;
+	ComPtr<ID2D1Factory> Factory = nullptr;
 	HRESULT EnsureResources(IDXGIDevice* DeviceDXGI);
 
-	ComPtr<ID2D1SolidColorBrush> SolidColorBrush;
-	ComPtr<IDWriteTextFormat> DWriteTextFormat;
-	ComPtr<IDWriteTextLayout> DWriteLayoutGDICompatible;
+	ComPtr<ID2D1SolidColorBrush> SolidColorBrush = nullptr;
+	ComPtr<IDWriteTextFormat> DWriteTextFormat = nullptr;
+	ComPtr<IDWriteTextLayout> DWriteLayoutGDICompatible = nullptr;
 	vector<DWRITE_HIT_TEST_METRICS> DWriteTextMetrics;
+
+	ComPtr<ID2D1PathGeometry> PathGeometryForBezierCircle = nullptr;
+	ComPtr<ID2D1GeometrySink> SinkForBezierCircle = nullptr;
 };
 struct RenderTarget
 {
-	ComPtr<ID2D1Bitmap1> Target;
+	ComPtr<ID2D1Bitmap1> Target = nullptr;
 	HRESULT EnsureResources(Device& Device, IDXGISurface* Surface);
 };
 
-ComPtr<IDWriteFactory> DWriteFactory;
+ComPtr<IDWriteFactory> DWriteFactory = nullptr;
 map<ComPtr<IDXGIDevice>, Device>					DeviceResources;
 map<ComPtr<IDXGIDevice>, set<ComPtr<IDXGISurface>>>	DeviceSurfaces;
 map<ComPtr<IDXGISurface>, RenderTarget>				RenderTargets;
@@ -105,6 +114,13 @@ HRESULT __stdcall InitOverlay()
 	if (FAILED(result)) return result;
 	result = DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(IDWriteFactory), &DWriteFactory);
 	if (FAILED(result)) return result;
+	D2D1_FACTORY_OPTIONS Options = {
+#ifdef _DEBUG
+		.debugLevel = D2D1_DEBUG_LEVEL_ERROR
+#else
+		.debugLevel = D2D1_DEBUG_LEVEL_NONE
+#endif
+	};
 
 	return result;
 }
@@ -118,7 +134,7 @@ void __stdcall ReleaseOverlay()
 HRESULT Device::EnsureResources(IDXGIDevice* DeviceDXGI)
 {
 	HRESULT result = 0;
-	if (Device2D != nullptr && Context2D != nullptr) return S_OK;
+	if (Device2D != nullptr && Context2D != nullptr && Factory != nullptr) return S_OK;
 
 	result = D2D1CreateDevice(DeviceDXGI, D2D1_CREATION_PROPERTIES{
 		.threadingMode = D2D1_THREADING_MODE_SINGLE_THREADED, // D2D1_THREADING_MODE_MULTI_THREADED,
@@ -133,6 +149,7 @@ HRESULT Device::EnsureResources(IDXGIDevice* DeviceDXGI)
 //	result = Device2D->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_ENABLE_MULTITHREADED_OPTIMIZATIONS, &Context2D);
 	result = Device2D->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_NONE, &Context2D);
 	if (FAILED(result)) return result;
+	Context2D->GetFactory(&Factory);
 
 	return result;
 }
@@ -495,6 +512,41 @@ HRESULT __stdcall DrawGDICompatibleTextCaret(_In_ Device* pInstance, bool Traili
 			StrokeWidth);
 	}
 	return S_OK;
+}
+
+HRESULT __stdcall BeginDrawBezier(_In_ Device* pInstance, D2D1_POINT_2F StartPoint)
+{
+	HRESULT result = 0;
+
+	pInstance->Factory->CreatePathGeometry(&pInstance->PathGeometryForBezierCircle);
+	if (FAILED(result)) return result;
+	result = pInstance->PathGeometryForBezierCircle->Open(&pInstance->SinkForBezierCircle);
+	if (FAILED(result)) return result;
+
+	pInstance->SinkForBezierCircle->BeginFigure(StartPoint, D2D1_FIGURE_BEGIN_HOLLOW);
+
+	return result;
+}
+
+void __stdcall AddBezier(_In_ Device* pInstance, D2D1_POINT_2F Start, D2D1_POINT_2F Reference, D2D1_POINT_2F End)
+{
+	D2D1_BEZIER_SEGMENT Segment = {
+		.point1 = Start,
+		.point2 = Reference,
+		.point3 = End,
+	};
+	pInstance->SinkForBezierCircle->AddBezier(&Segment);
+}
+
+HRESULT __stdcall EndDrawBezier(_In_ Device* pInstance, D2D1_POINT_2F EndPoint, float StrokeWidth)
+{
+	pInstance->SinkForBezierCircle->EndFigure(D2D1_FIGURE_END_OPEN);
+
+	HRESULT result = pInstance->SinkForBezierCircle->Close();
+	if (FAILED(result)) return result;
+
+	pInstance->Context2D->DrawGeometry(pInstance->PathGeometryForBezierCircle.Get(), pInstance->SolidColorBrush.Get(), StrokeWidth);
+	return result;
 }
 
 void __stdcall FillEllipse(_In_ Device* pInstance, D2D1_POINT_2F Point, float RadiusX, float RadiusY)

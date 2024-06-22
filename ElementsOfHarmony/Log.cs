@@ -130,7 +130,7 @@ namespace ElementsOfHarmony
 			{
 				case UnityEngine.LogType.Error:
 				case UnityEngine.LogType.Exception:
-					Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+					Message(UnityEngine.StackTraceUtility.ExtractStackTrace());
 					Message($"condition: {condition}");
 					Message($"stackTrace:\r\n{stackTrace}");
 					Message("\r\n");
@@ -139,7 +139,7 @@ namespace ElementsOfHarmony
 		}
 		public static void ExceptionHandler(object sender, UnhandledExceptionEventArgs args)
 		{
-			Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+			Message(UnityEngine.StackTraceUtility.ExtractStackTrace());
 			Message($"sender.GetType(): {sender.GetType()}");
 			Message($"sender: {sender}");
 			Message($"args: {args}");
@@ -165,7 +165,7 @@ namespace ElementsOfHarmony
 				repeat:
 				if (!UnityEngine.StackTraceUtility.ExtractStackTrace().Contains($"{nameof(ElementsOfHarmony)}.{nameof(Log)}.{nameof(Message)}")) // prevent infinite loop
 				{
-					Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+					Message(UnityEngine.StackTraceUtility.ExtractStackTrace());
 					Message($"Exception.StackTrace:\r\n{__instance.StackTrace}");
 					Message($"Exception.GetType(): {__instance.GetType()}");
 					Message($"Exception.HResult: 0x{__instance.HResult:X8}");
@@ -193,7 +193,7 @@ namespace ElementsOfHarmony
 		{
 			public static void Postfix(object message)
 			{
-				Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+				Message(UnityEngine.StackTraceUtility.ExtractStackTrace());
 				Message($"Message.GetType(): {message.GetType()}");
 				Message($"Message: {message}");
 				Message("\r\n");
@@ -205,11 +205,27 @@ namespace ElementsOfHarmony
 		{
 			public static void Postfix(Exception exception)
 			{
-				Message($"UnityEngine.StackTraceUtility.ExtractStackTrace():\r\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+				Message(UnityEngine.StackTraceUtility.ExtractStackTrace());
 				Message($"Exception.StackTrace:\r\n{exception.StackTrace}");
 				Message($"Exception.GetType(): {exception.GetType()}");
 				Message($"Exception.HResult: 0x{exception.HResult:X8}");
 				Message($"Exception.Message: {exception.Message}");
+				Message("\r\n");
+			}
+		}
+
+		[HarmonyPatch(typeof(Marshal), nameof(Marshal.GetExceptionForHR), typeof(int), typeof(IntPtr))]
+		public static class LogMarshalHRException
+		{
+			public static void Postfix(int errorCode, Exception? __result)
+			{
+				if (__result == null) return;
+				Message(UnityEngine.StackTraceUtility.ExtractStackTrace());
+				Message($"errorCode: 0x{(uint)errorCode:X8}");
+				Message($"__result.StackTrace:\r\n{__result.StackTrace}");
+				Message($"__result.GetType(): {__result.GetType()}");
+				Message($"__result.HResult: 0x{__result.HResult:X8}");
+				Message($"__result.Message: {__result.Message}");
 				Message("\r\n");
 			}
 		}

@@ -407,7 +407,7 @@ namespace ElementsOfHarmony
 			{
 				Marshal.ThrowExceptionForHR(SwapChainBeginDraw(pSwapChain, 0, &DeviceInstance));
 			}
-			OverlayDraw?.Invoke(pSwapChain, EventArgs.Empty);
+			OverlayDraw?.Invoke(DeviceInstance, EventArgs.Empty);
 			Marshal.ThrowExceptionForHR(SwapChainEndDraw(pSwapChain, 0, DeviceInstance));
 		}
 
@@ -516,7 +516,7 @@ namespace ElementsOfHarmony
 			[MarshalAs(UnmanagedType.Bool)]
 			public bool Post;
 			public int Result;
-			public fixed long Args[11]; // cannot use IntPtr here, but we only target 64-bit so `long` is alright
+			public fixed long Args[11]; // cannot use IntPtr here, but we only target 64-bit so, the `long` type is alright
 
 			[StructLayout(LayoutKind.Sequential)]
 			public struct OptionalStruct<T> where T : struct
@@ -826,6 +826,15 @@ namespace ElementsOfHarmony
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		public extern static int DrawGDICompatibleTextCaret(this IntPtr pInstance, bool Trailing, float StrokeWidth);
+		
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		public extern static int BeginDrawBezier(this IntPtr pInstance, D2D1_POINT_2F StartPoint);
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		public extern static void AddBezier(this IntPtr pInstance, D2D1_POINT_2F Start, D2D1_POINT_2F Reference, D2D1_POINT_2F End);
+
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		public extern static int EndDrawBezier(this IntPtr pInstance, D2D1_POINT_2F EndPoint, float StrokeWidth);
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		public extern static void FillEllipse(this IntPtr pInstance, D2D1_POINT_2F Point, float RadiusX, float RadiusY);

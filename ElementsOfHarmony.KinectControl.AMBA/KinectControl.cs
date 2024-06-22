@@ -9,7 +9,7 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 		public struct ButtonStatus
 		{
 			public bool? Left, Up, Right, Down,
-				South, East, West, North;
+				South, East, West, North, Menu;
 		}
 		public static ButtonStatus? PreviousPlayer1Status = null, PreviousPlayer2Status = null,
 			CurrentPlayer1Status = null, CurrentPlayer2Status = null;
@@ -37,6 +37,7 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 							East = Player.East,
 							West = Player.West,
 							North = Player.North,
+							Menu = Player.SouthEast,
 						};
 					}
 				}
@@ -47,6 +48,8 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 				PreviousFrame = Time.frameCount;
 			}
 		}
+
+		#region Regular Controls
 
 		[HarmonyPatch(typeof(GamePadInput), "GetAxis")]
 		public static class GetAxisOverride
@@ -127,6 +130,10 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 							{
 								__result = true;
 							}
+							if (Current.Menu == true && Previous.Menu == false)
+							{
+								__result = true;
+							}
 							break;
 						case MLPAction.EQUIPMENT:
 						case MLPAction.DELETE_ITEM:
@@ -144,7 +151,8 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 								Current.South == true && Previous.South == false ||
 								Current.East == true && Previous.East == false ||
 								Current.West == true && Previous.West == false ||
-								Current.North == true && Previous.North == false)
+								Current.North == true && Previous.North == false ||
+								Current.Menu == true && Previous.Menu == false)
 							{
 								__result = true;
 							}
@@ -211,6 +219,10 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 							{
 								__result = true;
 							}
+							if (Current.Menu == false && Previous.Menu == true)
+							{
+								__result = true;
+							}
 							break;
 						case MLPAction.EQUIPMENT:
 						case MLPAction.DELETE_ITEM:
@@ -228,7 +240,8 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 								Current.South == false && Previous.South == true ||
 								Current.East == false && Previous.East == true ||
 								Current.West == false && Previous.West == true ||
-								Current.North == false && Previous.North == true)
+								Current.North == false && Previous.North == true ||
+								Current.Menu == false && Previous.Menu == true)
 							{
 								__result = true;
 							}
@@ -294,6 +307,10 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 							{
 								__result = true;
 							}
+							if (Player.Menu == true)
+							{
+								__result = true;
+							}
 							break;
 						case MLPAction.EQUIPMENT:
 						case MLPAction.DELETE_ITEM:
@@ -311,7 +328,8 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 								Player.South == true ||
 								Player.East == true ||
 								Player.West == true ||
-								Player.North == true)
+								Player.North == true ||
+								Player.Menu == true)
 							{
 								__result = true;
 							}
@@ -320,5 +338,7 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 				}
 			}
 		}
+
+		#endregion
 	}
 }
