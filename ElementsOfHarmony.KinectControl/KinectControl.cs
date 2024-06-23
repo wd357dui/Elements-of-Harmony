@@ -130,8 +130,8 @@ namespace ElementsOfHarmony.KinectControl
 				}
 			}
 
-			if (Player1?.BodyIndex is int Index1) Player1.UpdateHandStatus(Bodies[Index1]);
-			if (Player2?.BodyIndex is int Index2) Player2.UpdateHandStatus(Bodies[Index2]);
+			if (Player1?.BodyIndex is int Index1) Player1.UpdateStatus(Bodies[Index1], frame.FloorClipPlane);
+			if (Player2?.BodyIndex is int Index2) Player2.UpdateStatus(Bodies[Index2], frame.FloorClipPlane);
 
 			for (int n = 0; n < Bodies.Length; n++)
 			{
@@ -405,8 +405,8 @@ namespace ElementsOfHarmony.KinectControl
 						Device.DrawLine(RightShoulder, Right, Scale * 10.0f);
 						Device.FillEllipse(Right, Scale * 40.0f, Scale * 40.0f);
 
-						/* it's good practice while it lasted, but I've decided to use add another layer of buttons
-						 * instead of just one button
+						/* it's good practice while it lasted, but I've decided to add an new layer of buttons
+						 * instead of adding only one long-press-enabled button
 						 * 
 						if (Player.RightLassoProgress is decimal Progress)
 						{
@@ -519,12 +519,17 @@ namespace ElementsOfHarmony.KinectControl
 			internal Vector2? LeftPos = null, RightPos = null; // hand current pos
 			internal Vector2? LeftShoulderPos = null, RightShoulderPos = null; // shoulder current pos
 
+			public float LeftAnkleGroundDistance { get; private set; } = 0.0f;
+			public float RightAnkleGroundDistance { get; private set; } = 0.0f;
+
+			public float HeadTiltAngle { get; private set; } = 0.0f;
+
 			/*
 			internal double? RightLassoStartTime = null; // time when right hand entered lasso state
 			internal bool RightLassoValidated = false; // right hand had a valid lasso frame after long press threshold passed
 			*/
 
-			public void UpdateHandStatus(Body Body)
+			public void UpdateStatus(Body Body, Vector4 FloorClipPlane)
 			{
 				lock (this)
 				{
@@ -601,6 +606,18 @@ namespace ElementsOfHarmony.KinectControl
 						RightLasso = false;
 					}
 					PreviousRightLasso = Body.HandRightState == HandState.Lasso;
+
+					// determine distance between ankle and ground
+					Plane FloorPlane = new Plane(FloorClipPlane, FloorClipPlane.w);
+					Vector3 AnkleLeft = Joints[JointType.AnkleLeft].Position;
+					Vector3 AnkleRight = Joints[JointType.AnkleRight].Position;
+					Vector3 AnkleLeftAnchor = FloorPlane.ClosestPointOnPlane(AnkleLeft);
+					Vector3 AnkleRightAnchor = FloorPlane.ClosestPointOnPlane(AnkleRight);
+					LeftAnkleGroundDistance = (AnkleLeft - AnkleLeftAnchor).magnitude;
+					RightAnkleGroundDistance = (AnkleRight - AnkleRightAnchor).magnitude;
+
+					// determine head to neck tilting angle relative to the up direction
+					HeadTiltAngle = Vector2.SignedAngle((Joints[JointType.Head].Position.XY() - Joints[JointType.Neck].Position.XY()).normalized, Vector2.up);
 				}
 			}
 
@@ -728,24 +745,10 @@ namespace ElementsOfHarmony.KinectControl
 
 			/*
 			/// <summary>
-			/// xbox right stick button (which will use as menu button)
+			/// xbox right stick button
 			/// </summary>
 			public bool RightStickButton => RightLassoStartTime != null && RightLassoValidated;
 			*/
-
-			/// <summary>
-			/// xbox View button
-			/// </summary>
-			public bool? SouthWest => RightThresholdCrossed == null ? (bool?)null :
-				RightThresholdCrossed == true && RightLasso &&
-				RightStick!.Value.x < 0.0f && RightStick!.Value.y < 0.0f;
-
-			/// <summary>
-			/// xbox Menu button
-			/// </summary>
-			public bool? SouthEast => RightThresholdCrossed == null ? (bool?)null :
-				RightThresholdCrossed == true && RightLasso &&
-				RightStick!.Value.x > 0.0f && RightStick!.Value.y < 0.0f;
 
 			/// <summary>
 			/// xbox LB button
@@ -761,6 +764,19 @@ namespace ElementsOfHarmony.KinectControl
 				RightThresholdCrossed == true && RightLasso &&
 				RightStick!.Value.x > 0.0f && RightStick!.Value.y > 0.0f;
 
+			/// <summary>
+			/// xbox View button
+			/// </summary>
+			public bool? SouthWest => RightThresholdCrossed == null ? (bool?)null :
+				RightThresholdCrossed == true && RightLasso &&
+				RightStick!.Value.x < 0.0f && RightStick!.Value.y < 0.0f;
+
+			/// <summary>
+			/// xbox Menu button
+			/// </summary>
+			public bool? SouthEast => RightThresholdCrossed == null ? (bool?)null :
+				RightThresholdCrossed == true && RightLasso &&
+				RightStick!.Value.x > 0.0f && RightStick!.Value.y < 0.0f;
 		}
 
 		public static Vector2 XY(this Vector3 V3) => new Vector2(V3.x, V3.y);

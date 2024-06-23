@@ -53,6 +53,11 @@
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
     </Reference>
+		<Reference Include="UnityEngine.AnimationModule">
+			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
+			<SpecificVersion>False</SpecificVersion>
+			<Private>False</Private>
+		</Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>
