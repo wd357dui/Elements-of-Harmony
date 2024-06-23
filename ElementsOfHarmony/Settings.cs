@@ -81,6 +81,8 @@ namespace ElementsOfHarmony
 			public static class KinectControl
 			{
 				public static bool Enabled = false;
+				public static float AnkleJumpThreshold = 0.2f;
+				public static float HeadTiltMaxAngle = 30.0f;
 			}
 		}
 

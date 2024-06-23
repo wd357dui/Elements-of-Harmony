@@ -112,7 +112,7 @@ namespace Microsoft.Kinect
 				{
 					(IntPtr)Waitable, StopEvent.SafeWaitHandle.DangerousGetHandle(),
 				};
-				loop:
+			loop:
 				uint result = WaitForMultipleObjects(2, Handles, false, unchecked((uint)Timeout.Infinite));
 				switch (result)
 				{
@@ -127,11 +127,10 @@ namespace Microsoft.Kinect
 							using BodyFrameArrivedEventArgs EventArgs = new BodyFrameArrivedEventArgs(pEventArgs, true);
 							FrameArrived?.Invoke(this, EventArgs);
 						}
-						catch (COMException)
+						catch
 						{
-							// this happens occasionally for some frames for no reason...
-							// doesn't cause errors for later frames though
-							// so we can just ignore this faulty frame and move on
+							// it fails randomly sometimes, we can only wait and try again later
+							Thread.Sleep(2);
 						}
 						goto loop;
 					case 1:
@@ -238,6 +237,11 @@ namespace Microsoft.Kinect
 		public delegate int GetAndRefreshBodyDataProc(IntPtr pInstance, uint capacity, IntPtr[] bodies);
 		public int GetAndRefreshBodyData(uint capacity, IntPtr[] bodies) => (int)Invoke<GetAndRefreshBodyDataProc>(3, capacity, bodies);
 
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		public unsafe delegate int get_FloorClipPlaneProc(IntPtr pInstance, Vector4* floorClipPlane);
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006: Naming Convention", Justification = "is original")]
+		public unsafe int get_FloorClipPlane(Vector4* floorClipPlane) => (int)Invoke<get_FloorClipPlaneProc>(4, (IntPtr)floorClipPlane);
+
 		public void GetAndRefreshBodyData(IList<Body> bodies)
 		{
 			IntPtr[] pointers = new IntPtr[bodies.Count];
@@ -245,6 +249,19 @@ namespace Microsoft.Kinect
 			for (int n = 0; n < pointers.Length; n++)
 			{
 				bodies[n] = new Body(pointers[n], true);
+			}
+		}
+
+		public Vector4 FloorClipPlane
+		{
+			get
+			{
+				Vector4 Plane;
+				unsafe
+				{
+					Marshal.ThrowExceptionForHR(get_FloorClipPlane(&Plane));
+				}
+				return Plane;
 			}
 		}
 	}
