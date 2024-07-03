@@ -34,8 +34,8 @@ namespace ElementsOfHarmony.AZHM
 			{ "es-ES", "es" }, // Spanish (Spain)
 
 			{ "es-419", "las" }, // Spanish (Latin America)
-			{ "es-US", // yeah but "US"? what are the developers doing?
-				"las" }, // Spanish (Latin America)c
+			{ "es-US", // yeah but "US"? what are the developers thinking?
+				"las" }, // Spanish (Latin America)
 
 			{ "de", "de" }, // German
 
@@ -74,7 +74,7 @@ namespace ElementsOfHarmony.AZHM
 
 				/* already fixed in base game
 				 * https://steamcommunity.com/app/2235440/discussions/0/6761670113856426365/
-				 * though they only added zh-cn and zh-tw
+				 * although they only fixed zh-cn and zh-tw
 				
 				_languagePerSystemCode["zh-cn"] = "Chinese (Simplified)";
 				_languagePerSystemCode["zh-sg"] = "Chinese (Simplified)";

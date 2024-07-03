@@ -31,6 +31,9 @@ copy "..\Patch\AZHM\globalgamemanagers.assets" "..\publish\Standalone\MyLittlePo
 copy "..\Patch\AZHM\RuntimeInitializeOnLoads.json" "..\publish\Standalone\MyLittlePonyZephyrHeights_Data\RuntimeInitializeOnLoads.json"
 copy "..\Patch\AZHM\ScriptingAssemblies.json" "..\publish\Standalone\MyLittlePonyZephyrHeights_Data\ScriptingAssemblies.json"
 
+IF "%BuildType%"=="Debug" (
+copy "..\x64\%BuildType%\D3D11.dll" "..\publish\Standalone\D3D11.dll"
+)
 copy "..\x64\%BuildType%\DirectXHook.dll" "..\publish\Standalone\DirectXHook.dll"
 
 copy "..\x64\%BuildType%\0Harmony.dll" "..\publish\Standalone\MLP_Data\Managed\0Harmony.dll"

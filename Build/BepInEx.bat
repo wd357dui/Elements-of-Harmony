@@ -25,6 +25,9 @@ xcopy /E /I "..\Assets" "..\publish\BepInEx\Elements of Harmony\Assets"
 
 copy "..\Patch\AZHM\globalgamemanagers.assets" "..\publish\BepInEx\MyLittlePonyZephyrHeights_Data\globalgamemanagers.assets"
 
+IF "%BuildType%"=="Debug" (
+copy "..\x64\%BuildType%\D3D11.dll" "..\publish\BepInEx\D3D11.dll"
+)
 copy "..\x64\%BuildType%\DirectXHook.dll" "..\publish\BepInEx\DirectXHook.dll"
 
 copy "..\x64\%BuildType%\netstandard2.1\ElementsOfHarmony.BepInExReference.dll" "..\publish\BepInEx\BepInEx\plugins\ElementsOfHarmony.BepInExReference.dll"

@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using static ElementsOfHarmony.DirectXHook;
+using static ElementsOfHarmony.NativeInterface.D2D1;
 
 namespace ElementsOfHarmony.KinectControl
 {
@@ -21,6 +22,11 @@ namespace ElementsOfHarmony.KinectControl
 			source = sensor.BodyFrameSource;
 			reader = source.OpenReader();
 			Marshal.ThrowExceptionForHR(sensor.Open());
+
+			reader.FrameArrived += Reader_FrameArrived;
+			OverlayDraw += OnOverlayDraw;
+
+			Application.quitting += Application_quitting;
 
 			// apply all of our patch procedures using Harmony API
 			Harmony element = new Harmony($"{typeof(KinectControl).FullName}");
@@ -58,12 +64,6 @@ namespace ElementsOfHarmony.KinectControl
 					Log.Message($"Harmony patch for {AZHM.FullName} successful - {Num} Patches");
 				}
 			}
-
-			reader.FrameArrived += Reader_FrameArrived;
-
-			OverlayDraw += OnOverlayDraw;
-
-			Application.quitting += Application_quitting;
 		}
 
 		private static void Application_quitting()
@@ -148,7 +148,12 @@ namespace ElementsOfHarmony.KinectControl
 				{
 					Action? DelayAction = null;
 
-					float Scale = (Screen.currentResolution.width / 1920.0f + Screen.currentResolution.height / 1080.0f) / 2;
+					float Scale = (Screen.width / 1920.0f + Screen.height / 1080.0f) / 2;
+					Color ColorScale = IsHDR ? new Color(
+						12.5f * Settings.DirectXHook.Magic.HDR.DynamicRangeFactor,
+						12.5f * Settings.DirectXHook.Magic.HDR.DynamicRangeFactor,
+						12.5f * Settings.DirectXHook.Magic.HDR.DynamicRangeFactor)
+						: Color.white;
 
 					Marshal.ThrowExceptionForHR(Device.SetFont("Segoe UI",
 						DWRITE_FONT_WEIGHT.DWRITE_FONT_WEIGHT_NORMAL,
@@ -165,19 +170,19 @@ namespace ElementsOfHarmony.KinectControl
 						// left starting pos is legal
 						LeftShouldHighlight = true;
 
-						// convert to screen space
+						// convert to screen coordinate space
 						LeftCenter += new Vector2(1.0f, 1.0f);
 						LeftCenter *= new Vector2(0.5f, 0.5f);
 						LeftCenter.y = 1.0f - LeftCenter.y;
-						LeftCenter *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+						LeftCenter *= new Vector2(Screen.width, Screen.height);
 
 						// left stick's circle
-						Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray));
+						Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray * ColorScale));
 						Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
 						Device.FillEllipse(LeftCenter, Scale * 150.0f, Scale * 150.0f);
 
 						// left stick's arrows
-						Marshal.ThrowExceptionForHR(Device.SetColor(Color.white));
+						Marshal.ThrowExceptionForHR(Device.SetColor(Color.white * ColorScale));
 						Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
 						Device.DrawPlainText("◀", new D2D1_RECT_F() { Left = LeftCenter.x - (Scale * 200.0f), Top = LeftCenter.y, Right = LeftCenter.x, Bottom = LeftCenter.y });
 						Device.DrawPlainText("▲", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y - (Scale * 200.0f), Right = LeftCenter.x, Bottom = LeftCenter.y });
@@ -185,15 +190,22 @@ namespace ElementsOfHarmony.KinectControl
 						Device.DrawPlainText("▼", new D2D1_RECT_F() { Left = LeftCenter.x, Top = LeftCenter.y, Right = LeftCenter.x, Bottom = LeftCenter.y + (Scale * 200.0f) });
 					}
 
-					// used for drawing a letter on a button
-					void DrawOutlinedText(string Text, D2D1_RECT_F Rect, float PX = 1.0f, float PY = 1.0f, float NX = -1.0f, float NY = -1.0f)
+					/// <summary>
+					/// used for drawing characters (with fake outlines) on a button
+					/// PX: positive X
+					/// PY: positive Y
+					/// NX: negative X
+					/// NY: negative Y
+					/// </summary>
+					void DrawOutlinedText(string Text, D2D1_RECT_F Rect, float PX = 1.5f, float PY = 1.5f, float NX = -1.5f, float NY = -1.5f)
 					{
 						PX = Scale * PX;
 						PY = Scale * PY;
 						NX = Scale * NX;
 						NY = Scale * NY;
+						// implement fake outlines by drawing the same text in black multiple times off center in 8 different directions
 						Marshal.ThrowExceptionForHR(Device.SetOpacity(1.0f));
-						Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+						Marshal.ThrowExceptionForHR(Device.SetColor(Color.black * ColorScale));
 						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + NX, Top = Rect.Top + NY, Right = Rect.Right + NX, Bottom = Rect.Bottom + NY });
 						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + NX, Top = Rect.Top + 0, Right = Rect.Right + NX, Bottom = Rect.Bottom + 0 });
 						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + NX, Top = Rect.Top + PY, Right = Rect.Right + NX, Bottom = Rect.Bottom + PY });
@@ -202,7 +214,8 @@ namespace ElementsOfHarmony.KinectControl
 						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + PX, Top = Rect.Top + NY, Right = Rect.Right + PX, Bottom = Rect.Bottom + NY });
 						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + PX, Top = Rect.Top + 0, Right = Rect.Right + PX, Bottom = Rect.Bottom + 0 });
 						Device.DrawPlainText(Text, new D2D1_RECT_F() { Left = Rect.Left + PX, Top = Rect.Top + PY, Right = Rect.Right + PX, Bottom = Rect.Bottom + PY });
-						Marshal.ThrowExceptionForHR(Device.SetColor(Color.white));
+						// draw the actual text
+						Marshal.ThrowExceptionForHR(Device.SetColor(Color.white * ColorScale));
 						Device.DrawPlainText(Text, Rect);
 					}
 
@@ -213,23 +226,23 @@ namespace ElementsOfHarmony.KinectControl
 						// right starting pos is legal
 						RightShouldHighlight = true;
 
-						// convert to screen space
+						// convert to screen coordinate space
 						RightCenter += new Vector2(1.0f, 1.0f);
 						RightCenter *= new Vector2(0.5f, 0.5f);
 						RightCenter.y = 1.0f - RightCenter.y;
-						RightCenter *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+						RightCenter *= new Vector2(Screen.width, Screen.height);
 
 						if (Player.RightLasso)
 						{
 							// slightly larger right stick's circle
-							Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray));
+							Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray * ColorScale));
 							Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
 							Device.FillEllipse(RightCenter, Scale * 180.0f, Scale * 180.0f);
 
 							DelayAction = () =>
 							{
 								// LB button
-								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black * ColorScale));
 								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.NorthWest == true ? Highlight : NestedTransparent));
 								Vector2 NorthWestButtonCenterPoint = RightCenter + new Vector2(Scale * -80.0f, Scale * -80.0f);
 								D2D1_RECT_F NorthWestButtonRectangle = new D2D1_RECT_F
@@ -244,7 +257,7 @@ namespace ElementsOfHarmony.KinectControl
 								DrawOutlinedText("LB", NorthWestButtonRectangle);
 
 								// RB button
-								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black * ColorScale));
 								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.NorthEast == true ? Highlight : NestedTransparent));
 								Vector2 NorthEastButtonCenterPoint = RightCenter + new Vector2(Scale * 80.0f, Scale * -80.0f);
 								D2D1_RECT_F NorthEastButtonRectangle = new D2D1_RECT_F
@@ -259,19 +272,25 @@ namespace ElementsOfHarmony.KinectControl
 								DrawOutlinedText("RB", NorthEastButtonRectangle);
 
 								// View button
-								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black * ColorScale));
 								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.SouthWest == true ? Highlight : NestedTransparent));
 								Device.FillEllipse(RightCenter + new Vector2(Scale * -80.0f, Scale * 80.0f), Scale * 50.0f, Scale * 50.0f);
-								DrawOutlinedText("🗗", new D2D1_RECT_F()
+								D2D1_RECT_F ViewButtonRect = new D2D1_RECT_F()
 								{
 									Left = RightCenter.x - (Scale * 160.0f),
 									Top = RightCenter.y + (Scale * 160.0f) - (Scale * 20.0f), // move a little bit more to the top
 									Right = RightCenter.x,
 									Bottom = RightCenter.y
-								});
+								};
+								Vector2 ViewButtonCenter = new Vector2(
+									(ViewButtonRect.Left + ViewButtonRect.Right) / 2f,
+									(ViewButtonRect.Top + ViewButtonRect.Bottom) / 2f);
+								Device.SetTransformScale(ViewButtonCenter, -1.0f, 1.0f); // mirror this character to make it face the same way as the xbox view button
+								DrawOutlinedText("🗗", ViewButtonRect);
+								Device.SetTransformIdentity();
 
 								// Menu button
-								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black));
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.black * ColorScale));
 								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.SouthEast == true ? Highlight : NestedTransparent));
 								Device.FillEllipse(RightCenter + new Vector2(Scale * 80.0f, Scale * 80.0f), Scale * 50.0f, Scale * 50.0f);
 								DrawOutlinedText("≡", new D2D1_RECT_F()
@@ -286,7 +305,7 @@ namespace ElementsOfHarmony.KinectControl
 						else
 						{
 							// right stick's circle
-							Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray));
+							Marshal.ThrowExceptionForHR(Device.SetColor(Color.gray * ColorScale));
 							Marshal.ThrowExceptionForHR(Device.SetOpacity(Transparent));
 							Device.FillEllipse(RightCenter, Scale * 150.0f, Scale * 150.0f);
 
@@ -295,10 +314,10 @@ namespace ElementsOfHarmony.KinectControl
 								// I just found that there are characters in unicode for 🅐🅑🅧🅨,
 								// but I'm not going to use them because it's not worth the headache of
 								// aligning positions and sizes all over again,
-								// not to mention the struggle of adding outline to a character
+								// not to mention the struggle of adding outlines
 
 								// A button
-								Marshal.ThrowExceptionForHR(Device.SetColor(Color.green));
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.green * ColorScale));
 								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.South == true ? Highlight : NestedTransparent));
 								Device.FillEllipse(RightCenter + new Vector2(0.0f, Scale * 100.0f), Scale * 50.0f, Scale * 50.0f);
 								DrawOutlinedText("A", new D2D1_RECT_F()
@@ -310,7 +329,7 @@ namespace ElementsOfHarmony.KinectControl
 								});
 
 								// B button
-								Marshal.ThrowExceptionForHR(Device.SetColor(Color.red));
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.red * ColorScale));
 								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.East == true ? Highlight : NestedTransparent));
 								Device.FillEllipse(RightCenter + new Vector2(Scale * 100.0f, 0.0f), Scale * 50.0f, Scale * 50.0f);
 								DrawOutlinedText("B", new D2D1_RECT_F()
@@ -319,7 +338,7 @@ namespace ElementsOfHarmony.KinectControl
 									Top = RightCenter.y - (Scale * 10.0f),
 									Right = RightCenter.x + (Scale * 200.0f),
 									Bottom = RightCenter.y
-								}, PY: 2.0f); // outline of "B" need an additional Y offset to look right
+								}); // outline of "B" need an additional Y offset to look right
 
 								/* since X button is being used in AZHM, I've decided to not use the west button as menu button anymore
 								// Menu button
@@ -336,7 +355,7 @@ namespace ElementsOfHarmony.KinectControl
 								*/
 
 								// X button
-								Marshal.ThrowExceptionForHR(Device.SetColor(Color.blue));
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.blue * ColorScale));
 								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.West == true ? Highlight : NestedTransparent));
 								Device.FillEllipse(RightCenter + new Vector2(Scale * -100.0f, 0.0f), Scale * 50.0f, Scale * 50.0f);
 								DrawOutlinedText("X", new D2D1_RECT_F()
@@ -348,7 +367,7 @@ namespace ElementsOfHarmony.KinectControl
 								});
 
 								// Y button
-								Marshal.ThrowExceptionForHR(Device.SetColor(Color.yellow));
+								Marshal.ThrowExceptionForHR(Device.SetColor(Color.yellow * ColorScale));
 								Marshal.ThrowExceptionForHR(Device.SetOpacity(Player.North == true ? Highlight : NestedTransparent));
 								Device.FillEllipse(RightCenter + new Vector2(0.0f, Scale * -100.0f), Scale * 50.0f, Scale * 50.0f);
 								DrawOutlinedText("Y", new D2D1_RECT_F()
@@ -370,15 +389,15 @@ namespace ElementsOfHarmony.KinectControl
 						Left += new Vector2(1.0f, 1.0f);
 						Left *= new Vector2(0.5f, 0.5f);
 						Left.y = 1.0f - Left.y;
-						Left *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+						Left *= new Vector2(Screen.width, Screen.height);
 						LeftShoulder += new Vector2(1.0f, 1.0f);
 						LeftShoulder *= new Vector2(0.5f, 0.5f);
 						LeftShoulder.y = 1.0f - LeftShoulder.y;
-						LeftShoulder *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+						LeftShoulder *= new Vector2(Screen.width, Screen.height);
 
 						// draw a line from left shoulder to left hand,
 						// and then draw a circle on the left hand
-						Marshal.ThrowExceptionForHR(Device.SetColor(PlayerColor));
+						Marshal.ThrowExceptionForHR(Device.SetColor(PlayerColor * ColorScale));
 						Marshal.ThrowExceptionForHR(Device.SetOpacity(LeftShouldHighlight ? Highlight : Player.LeftPosCloserToHead ? Transparent : FadedTransparent));
 						Device.DrawLine(LeftShoulder, Left, Scale * 10.0f);
 						Device.FillEllipse(Left, Scale * 40.0f, Scale * 40.0f);
@@ -392,15 +411,15 @@ namespace ElementsOfHarmony.KinectControl
 						Right += new Vector2(1.0f, 1.0f);
 						Right *= new Vector2(0.5f, 0.5f);
 						Right.y = 1.0f - Right.y;
-						Right *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+						Right *= new Vector2(Screen.width, Screen.height);
 						RightShoulder += new Vector2(1.0f, 1.0f);
 						RightShoulder *= new Vector2(0.5f, 0.5f);
 						RightShoulder.y = 1.0f - RightShoulder.y;
-						RightShoulder *= new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+						RightShoulder *= new Vector2(Screen.width, Screen.height);
 
 						// draw a line from right shoulder to right hand,
 						// and then draw a circle on the right hand
-						Marshal.ThrowExceptionForHR(Device.SetColor(PlayerColor));
+						Marshal.ThrowExceptionForHR(Device.SetColor(PlayerColor * ColorScale));
 						Marshal.ThrowExceptionForHR(Device.SetOpacity(RightShouldHighlight ? Highlight : Player.RightPosCloserToHead ? Transparent : FadedTransparent));
 						Device.DrawLine(RightShoulder, Right, Scale * 10.0f);
 						Device.FillEllipse(Right, Scale * 40.0f, Scale * 40.0f);
@@ -627,7 +646,7 @@ namespace ElementsOfHarmony.KinectControl
 			private Vector2 AdjustStick(Vector2 V2)
 			{
 				V2.x *= 5.0f / 6.0f; // aspect ratio of depth sensor is 6:5, convert to 1:1
-				V2.x *= (float)Screen.currentResolution.width / Screen.currentResolution.height; // and then convert to screen ratio
+				V2.x *= (float)Screen.width / Screen.height; // and then convert to screen ratio
 				return V2;
 			}
 

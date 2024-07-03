@@ -301,7 +301,7 @@ namespace ElementsOfHarmony
 						{
 							Log.Message($"Song loaded: {SongFile}");
 							Log.Message($"Description: {CurrentSong.Description}");
-							Log.Message($"Punches: {CurrentSong.Punches.Count}");
+							Log.Message($"Number of Punches: {CurrentSong.Punches.Count}");
 							AudioClipLoadingOperations.Remove(req);
 							if (AudioClipLoadingOperations.Count == 0)
 							{
@@ -333,7 +333,8 @@ namespace ElementsOfHarmony
 									catch (Exception e)
 									{
 									repeat:
-										Log.Message($"{typeof(Dance).FullName} - {e.GetType()}\n{e.StackTrace}\n{e.Message}");
+										Log.Message(StackTraceUtility.ExtractStackTrace());
+										Log.Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
 										if (e.InnerException != null)
 										{
 											e = e.InnerException;
@@ -404,7 +405,8 @@ namespace ElementsOfHarmony
 			catch (Exception e)
 			{
 			repeat:
-				Log.Message($"{typeof(Dance).FullName} - {e.GetType()}\n{e.StackTrace}\n{e.Message}");
+				Log.Message(StackTraceUtility.ExtractStackTrace());
+				Log.Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
 				if (e.InnerException != null)
 				{
 					e = e.InnerException;
@@ -429,7 +431,7 @@ namespace ElementsOfHarmony
 			}
 		}
 
-		public static int CurrentSongIndex = 0;
+		public static int CurrentSongIndex = -1;
 		public static List<Song>? Playlist;
 
 		public static void SelectSong()

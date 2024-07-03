@@ -20,13 +20,16 @@
   <ItemGroup>
     <Compile Include="Animator.cs" />
     <Compile Include="Compatibility.cs" />
+    <Compile Include="NativeInterface\D2D1.cs" />
+    <Compile Include="NativeInterface\D3D11.cs" />
     <Compile Include="Dance.cs" />
     <Compile Include="DirectXHook.cs" />
+    <Compile Include="NativeInterface\DXGI.cs" />
     <Compile Include="ElementsOfHarmony.cs" />
     <Compile Include="EnvFile.cs" />
     <Compile Include="Localization.cs" />
     <Compile Include="Log.cs" />
-    <Compile Include="NativeInterface.cs" />
+    <Compile Include="NativeInterface\NativeInterface.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
 	

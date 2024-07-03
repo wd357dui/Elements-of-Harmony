@@ -926,6 +926,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Font", "Font", "{3AEEBFFB-D
 		Assets\Font\MLP-FindYourSparkle.otf = Assets\Font\MLP-FindYourSparkle.otf
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D3D11", "D3D11\D3D11.vcxproj", "{0F2F9135-CB5F-478C-8A25-2610AF528E02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shader", "Shader", "{955CC1B5-C625-4F66-A345-F88B56F985F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PixelShader", "PixelShader", "{01F5BA4E-2D05-49F3-A823-57C53F0E2E41}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\Shader\PixelShader\BlitCopyHDRTonemap_Replacement.hlsl = Assets\Shader\PixelShader\BlitCopyHDRTonemap_Replacement.hlsl
+		Assets\Shader\PixelShader\CopyTextureToSwapChainHDR.hlsl = Assets\Shader\PixelShader\CopyTextureToSwapChainHDR.hlsl
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VertexShader", "VertexShader", "{37D9FE88-467A-4967-8DC4-8A19210F57BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -972,6 +984,9 @@ Global
 		{5C40B0A0-7DED-4500-8277-51AAE159685E}.Debug|x64.Build.0 = Debug|x64
 		{5C40B0A0-7DED-4500-8277-51AAE159685E}.Release|x64.ActiveCfg = Release|x64
 		{5C40B0A0-7DED-4500-8277-51AAE159685E}.Release|x64.Build.0 = Release|x64
+		{0F2F9135-CB5F-478C-8A25-2610AF528E02}.Debug|x64.ActiveCfg = Debug|x64
+		{0F2F9135-CB5F-478C-8A25-2610AF528E02}.Debug|x64.Build.0 = Debug|x64
+		{0F2F9135-CB5F-478C-8A25-2610AF528E02}.Release|x64.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -989,6 +1004,9 @@ Global
 		{864F4658-9E8C-43BB-8772-3560F96CD8A9} = {05946EF0-6CF5-4B9A-A6EE-326163C31039}
 		{82035D7B-203D-4B87-8913-41D14AB31335} = {864F4658-9E8C-43BB-8772-3560F96CD8A9}
 		{3AEEBFFB-D58C-408E-949B-936CDEA0BFE2} = {05946EF0-6CF5-4B9A-A6EE-326163C31039}
+		{955CC1B5-C625-4F66-A345-F88B56F985F3} = {05946EF0-6CF5-4B9A-A6EE-326163C31039}
+		{01F5BA4E-2D05-49F3-A823-57C53F0E2E41} = {955CC1B5-C625-4F66-A345-F88B56F985F3}
+		{37D9FE88-467A-4967-8DC4-8A19210F57BC} = {955CC1B5-C625-4F66-A345-F88B56F985F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22A4A59C-B668-4B2B-93D8-06A5D6B0FF85}

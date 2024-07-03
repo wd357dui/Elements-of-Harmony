@@ -14,9 +14,6 @@ namespace ElementsOfHarmony
 		/// <summary>
 		/// bool UnityEngine.Rendering.Volume.isGlobal
 		/// </summary>
-		/// <param name="volume"></param>
-		/// <returns></returns>
-		/// <exception cref="MissingFieldException"></exception>
 		public static bool IsGlobal(this Volume volume, bool? setValue = null)
 		{
 			if (IsGlobalField != null) goto field_found;

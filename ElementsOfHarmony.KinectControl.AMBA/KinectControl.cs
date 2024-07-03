@@ -67,7 +67,7 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 					{
 						if (Player?.LeftStick is Vector2 Axis)
 						{
-							Axis *= 2.5f; // adjust sensitivity
+							Axis *= Settings.Loyalty.KinectControl.StickSensitivity;
 							__result.x = Axis.x;
 							__result.z = Axis.y;
 						}

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using UnityEngine;
 
 namespace ElementsOfHarmony
 {
@@ -12,7 +13,7 @@ namespace ElementsOfHarmony
 		private static readonly object ExistenceMutex = new object();
 		private static volatile bool Existed = false;
 
-		[UnityEngine.RuntimeInitializeOnLoadMethod(loadType: UnityEngine.RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+		[RuntimeInitializeOnLoadMethod(loadType: RuntimeInitializeLoadType.AfterAssembliesLoaded)]
 		public static void Exist() // this is our "main" function
 		{
 			lock (ExistenceMutex)
@@ -32,10 +33,10 @@ namespace ElementsOfHarmony
 				}
 				catch (Exception e)
 				{
-					UnityEngine.Debug.LogError(e.GetType());
-					UnityEngine.Debug.LogError(UnityEngine.StackTraceUtility.ExtractStackTrace());
-					UnityEngine.Debug.LogError($"e.StackTrace\r\n{e.StackTrace}");
-					UnityEngine.Debug.LogError($"e.Message {e.Message}");
+					Debug.LogError(e.GetType());
+					Debug.LogError(StackTraceUtility.ExtractStackTrace());
+					Debug.LogError($"e.StackTrace\r\n{e.StackTrace}");
+					Debug.LogError($"e.Message {e.Message}");
 				}
 
 				try
@@ -45,19 +46,20 @@ namespace ElementsOfHarmony
 				}
 				catch (Exception e)
 				{
-					UnityEngine.Debug.LogError(e.GetType());
-					UnityEngine.Debug.LogError(UnityEngine.StackTraceUtility.ExtractStackTrace());
-					UnityEngine.Debug.LogError($"e.StackTrace\r\n{e.StackTrace}");
-					UnityEngine.Debug.LogError($"e.Message {e.Message}");
+					Debug.LogError(e.GetType());
+					Debug.LogError(StackTraceUtility.ExtractStackTrace());
+					Debug.LogError($"e.StackTrace\r\n{e.StackTrace}");
+					Debug.LogError($"e.Message {e.Message}");
 				}
 
 				Log.InitDebug();
 
 				Localization.Init();
 
+				Action? DelayInit = null;
 				if (Settings.DirectXHook.Enabled)
 				{
-					DirectXHook.Init();
+					DirectXHook.Init(out DelayInit);
 				}
 
 				if (Settings.Loyalty.KinectControl.Enabled)
@@ -97,7 +99,8 @@ namespace ElementsOfHarmony
 					catch (Exception e)
 					{
 					repeat:
-						Log.Message($"{MethodBase.GetCurrentMethod()} -> Settings.Loyalty.KinectControl - {e.GetType()}\n{e.StackTrace}\n{e.Message}");
+						Log.Message(StackTraceUtility.ExtractStackTrace());
+						Log.Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
 						if (e.InnerException != null)
 						{
 							e = e.InnerException;
@@ -110,11 +113,13 @@ namespace ElementsOfHarmony
 				{
 					Dance.Init();
 				}
+
+				DelayInit?.Invoke();
 			}
 		}
 
-		public static bool IsAMBA => UnityEngine.Application.companyName == "Melbot Studios" && UnityEngine.Application.productName == "MLP";
-		public static bool IsAZHM => UnityEngine.Application.companyName == "DrakharStudio" && UnityEngine.Application.productName == "MyLittlePonyZephyrHeights";
+		public static bool IsAMBA => Application.companyName == "Melbot Studios" && Application.productName == "MLP";
+		public static bool IsAZHM => Application.companyName == "DrakharStudio" && Application.productName == "MyLittlePonyZephyrHeights";
 
 		public static string AssemblyDirectory => Path.Combine(Directory.GetCurrentDirectory(), "Elements of Harmony/Managed/");
 	}

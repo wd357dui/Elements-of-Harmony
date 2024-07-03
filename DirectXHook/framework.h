@@ -22,6 +22,7 @@
 #include <D2D1_2.h>
 #include <D2D1_3.h>
 #include <DWrite.h>
+#include <D3DCompiler.h>
 #pragma pop_macro("DrawText")
 
 #include <wrl.h>
@@ -34,6 +35,7 @@ using Microsoft::WRL::ComPtr;
 #include <map>
 #include <optional>
 #include <set>
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -42,5 +44,6 @@ using Microsoft::WRL::ComPtr;
 #pragma comment(lib, "D2D1.lib")
 #pragma comment(lib, "D2D1.lib")
 #pragma comment(lib, "DWrite.lib")
+#pragma comment(lib, "D3DCompiler.lib")
 #pragma comment(lib, "User32.lib")
 #pragma comment(lib, "PSApi.lib")

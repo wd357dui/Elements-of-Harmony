@@ -3,9 +3,11 @@
 using namespace std;
 using namespace D2D1;
 
-extern void ForceBreakpoint();
+extern void __stdcall ForceBreakpoint();
 
 struct Device;
+typedef void(__stdcall* LogCallbackProc)(LPCWSTR Message);
+extern LogCallbackProc LogCallback;
 
 extern "C" {
 	__declspec(dllexport) HRESULT __stdcall InitOverlay();
@@ -24,6 +26,8 @@ extern "C" {
 		_In_ Device* pInstance);
 	__declspec(dllexport) HRESULT __stdcall StereoSurfaceEndDraw(_In_ IDXGISurface* SurfaceLeft, _In_ IDXGISurface* SurfaceRight,
 		_In_ Device* pInstance);
+
+	__declspec(dllexport) HRESULT __stdcall ReleaseSwapChainResources(_In_ IDXGISwapChain* SwapChain);
 
 	__declspec(dllexport) HRESULT __stdcall SetColor(_In_ Device* pInstance, D2D1_COLOR_F Color);
 	__declspec(dllexport) HRESULT __stdcall SetOpacity(_In_ Device* pInstance, float Opacity);
@@ -52,6 +56,8 @@ extern "C" {
 	__declspec(dllexport) void __stdcall FillRectangle(_In_ Device* pInstance, D2D1_RECT_F Rect, float RoundedRadiusX, float RoundedRadiusY);
 
 	__declspec(dllexport) void __stdcall SetTransform(_In_ Device* pInstance, Matrix3x2F Matrix);
+	__declspec(dllexport) void __stdcall SetTransformIdentity(_In_ Device* pInstance);
+	__declspec(dllexport) void __stdcall SetTransformScale(_In_ Device* pInstance, D2D1_POINT_2F CenterPoint, float ScaleX, float ScaleY);
 	__declspec(dllexport) void __stdcall SetDpi(_In_ Device* pInstance, float DpiX, float DpiY);
 }
 
@@ -76,7 +82,7 @@ struct RenderTarget
 	HRESULT EnsureResources(Device& Device, IDXGISurface* Surface);
 };
 
-ComPtr<IDWriteFactory> DWriteFactory = nullptr;
+ComPtr<IDWriteFactory> DWriteFactory;
 map<ComPtr<IDXGIDevice>, Device>					DeviceResources;
 map<ComPtr<IDXGIDevice>, set<ComPtr<IDXGISurface>>>	DeviceSurfaces;
 map<ComPtr<IDXGISurface>, RenderTarget>				RenderTargets;
@@ -136,6 +142,12 @@ HRESULT Device::EnsureResources(IDXGIDevice* DeviceDXGI)
 	HRESULT result = 0;
 	if (Device2D != nullptr && Context2D != nullptr && Factory != nullptr) return S_OK;
 
+	ComPtr<ID3D11Device> Device;
+	ComPtr<ID3D11DeviceContext> Context;
+	result = DeviceDXGI->QueryInterface(IID_PPV_ARGS(&Device));
+	if (FAILED(result)) return result;
+	Device->GetImmediateContext(&Context);
+
 	result = D2D1CreateDevice(DeviceDXGI, D2D1_CREATION_PROPERTIES{
 		.threadingMode = D2D1_THREADING_MODE_SINGLE_THREADED, // D2D1_THREADING_MODE_MULTI_THREADED,
 #ifdef _DEBUG
@@ -167,8 +179,17 @@ HRESULT RenderTarget::EnsureResources(Device& Device, IDXGISurface* Surface)
 HRESULT __stdcall SwapChainBeginDraw(_In_ IDXGISwapChain* SwapChain, UINT Index, _Out_ Device** ppInstance)
 {
 	HRESULT result = 0;
-	ComPtr<IDXGISurface> SurfaceDXGI;
 
+	DXGI_SWAP_CHAIN_DESC Desc{};
+	result = SwapChain->GetDesc(&Desc);
+	if (FAILED(result)) return result;
+
+	if (Desc.BufferDesc.Format == DXGI_FORMAT_R10G10B10A2_UNORM) {
+		// 10 bit HDR format is not compatible with Direct2D
+		return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NULL, 0x10BF);
+	}
+
+	ComPtr<IDXGISurface> SurfaceDXGI;
 	result = SwapChain->GetBuffer(Index, IID_PPV_ARGS(&SurfaceDXGI));
 	if (FAILED(result)) { // doesn't implement IDXGISurface, might be a stereo buffer
 		ComPtr<IDXGIResource1> ResourceDXGI;
@@ -331,6 +352,24 @@ HRESULT __stdcall StereoSurfaceEndDraw(_In_ IDXGISurface* SurfaceLeft, _In_ IDXG
 	if (FAILED(result)) return result;
 	Multithread->Leave();
 	*/
+
+	return result;
+}
+
+HRESULT __stdcall ReleaseSwapChainResources(_In_ IDXGISwapChain* SwapChain)
+{
+	HRESULT result = 0;
+
+	ComPtr<IDXGIDevice> DXGIDevice;
+	result = SwapChain->GetDevice(IID_PPV_ARGS(&DXGIDevice));
+	if (FAILED(result)) return result;
+
+	DeviceResources.erase(DXGIDevice);
+	for (auto& Surface : DeviceSurfaces[DXGIDevice]) {
+		RenderTargets.erase(Surface);
+		CommandLists.erase(Surface);
+	}
+	DeviceSurfaces.erase(DXGIDevice);
 
 	return result;
 }
@@ -571,6 +610,16 @@ void __stdcall FillRectangle(_In_ Device* pInstance, D2D1_RECT_F Rect, float Rou
 void __stdcall SetTransform(_In_ Device* pInstance, Matrix3x2F Matrix)
 {
 	pInstance->Context2D->SetTransform(Matrix);
+}
+
+void __stdcall SetTransformIdentity(_In_ Device* pInstance)
+{
+	pInstance->Context2D->SetTransform(IdentityMatrix());
+}
+
+void __stdcall SetTransformScale(_In_ Device* pInstance, D2D1_POINT_2F CenterPoint, float ScaleX, float ScaleY)
+{
+	pInstance->Context2D->SetTransform(D2D1::Matrix3x2F::Scale({ScaleX, ScaleY}, CenterPoint));
 }
 
 void __stdcall SetDpi(_In_ Device* pInstance, float DpiX, float DpiY)

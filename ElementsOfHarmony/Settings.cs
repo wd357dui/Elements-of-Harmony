@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using static ElementsOfHarmony.NativeInterface.DXGI;
 
 namespace ElementsOfHarmony
 {
@@ -32,6 +33,7 @@ namespace ElementsOfHarmony
 		public static class DirectXHook
 		{
 			public static bool Enabled = true;
+
 			public static int? Width = null;
 			public static int? Height = null;
 			public static FullScreenMode? FullScreenMode = null;
@@ -39,7 +41,26 @@ namespace ElementsOfHarmony
 			public static int? MSAA = null;
 			public static int? VSyncInterval = null;
 			public static int? TargetFrameRate = null;
-			public static bool? AllowHDR = true;
+			public static bool? AllowHDR = null;
+			public static bool? AllowDynamicResolution = null;
+
+			public static DXGI_FORMAT? ForceSwapChainFormat = null;
+
+			public static class Magic
+			{
+				public static class Overlay
+				{
+					public static bool Enabled = true;
+					public static bool SolveCompatibilityWithHDR = true;
+				}
+				public static class HDR
+				{
+					public static bool Forced = false;
+					public static bool TakeOverOutputFormat = true;
+					public static float DynamicRangeFactor = 1.0f;
+				}
+			}
+
 			public static class URP
 			{
 				public static bool FabricateNewGlobalVolumeProfile = true;
@@ -81,6 +102,8 @@ namespace ElementsOfHarmony
 			public static class KinectControl
 			{
 				public static bool Enabled = false;
+				public static bool ShowOverlay = true;
+				public static float StickSensitivity = 2.5f;
 				public static float AnkleJumpThreshold = 0.2f;
 				public static float HeadTiltMaxAngle = 30.0f;
 			}
@@ -163,16 +186,34 @@ namespace ElementsOfHarmony
 						{
 							Type EnumType = Field.FieldType.IsEnum ? Field.FieldType : Nullable.GetUnderlyingType(Field.FieldType);
 							string[] EnumNames = Enum.GetNames(EnumType);
-							string? Read = Config!.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString());
-							if (Read != null &&
-								EnumNames.FirstOrDefault(N => N.Equals(Read, StringComparison.InvariantCultureIgnoreCase))
-								is string MatchedEnumName)
+							object FinalEnumValue = Field.GetValue(null);
+							if (Config!.ReadString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString()) is string Read)
 							{
-								Field.SetValue(null, Enum.Parse(EnumType, MatchedEnumName));
+								string[] Flags = Read.Split('|');
+								foreach (string Flag in Flags)
+								{
+									if ((from string EnumName in EnumNames
+										where EnumName.Equals(Flag.Trim(), StringComparison.InvariantCultureIgnoreCase)
+										select Enum.Parse(EnumType, EnumName)).FirstOrDefault() is object Value)
+									{
+										FinalEnumValue = (int)(FinalEnumValue ?? 0) | (int)Value;
+									}
+								}
 							}
+							Field.SetValue(null, FinalEnumValue);
 						}
 					}
-					catch { }
+					catch (Exception e)
+					{
+					repeat:
+						Log.Message(StackTraceUtility.ExtractStackTrace());
+						Log.Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
+						if (e.InnerException != null)
+						{
+							e = e.InnerException;
+							goto repeat;
+						}
+					}
 				}
 				foreach (var Nested in ClassType.GetNestedTypes())
 				{

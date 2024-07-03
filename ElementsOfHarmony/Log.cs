@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text;
+using UnityEngine;
 
 namespace ElementsOfHarmony
 {
@@ -44,6 +45,7 @@ namespace ElementsOfHarmony
 					catch (Exception e)
 					{
 					repeat:
+						Message(StackTraceUtility.ExtractStackTrace());
 						Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
 						if (e.InnerException != null)
 						{
@@ -56,12 +58,13 @@ namespace ElementsOfHarmony
 				// attach our error handlers
 				try
 				{
-					UnityEngine.Application.logMessageReceived += LogCallback;
+					Application.logMessageReceived += LogCallback;
 					AppDomain.CurrentDomain.UnhandledException += ExceptionHandler;
 				}
 				catch (Exception e)
 				{
 				repeat:
+					Message(StackTraceUtility.ExtractStackTrace());
 					Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
 					if (e.InnerException != null)
 					{
@@ -87,6 +90,7 @@ namespace ElementsOfHarmony
 				catch (Exception e)
 				{
 				repeat:
+					Message(StackTraceUtility.ExtractStackTrace());
 					Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
 					if (e.InnerException != null)
 					{
@@ -128,9 +132,9 @@ namespace ElementsOfHarmony
 		{
 			switch (type)
 			{
-				case UnityEngine.LogType.Error:
-				case UnityEngine.LogType.Exception:
-					Message(UnityEngine.StackTraceUtility.ExtractStackTrace());
+				case LogType.Error:
+				case LogType.Exception:
+					Message(StackTraceUtility.ExtractStackTrace());
 					Message($"condition: {condition}");
 					Message($"stackTrace:\r\n{stackTrace}");
 					Message("\r\n");
@@ -139,7 +143,7 @@ namespace ElementsOfHarmony
 		}
 		public static void ExceptionHandler(object sender, UnhandledExceptionEventArgs args)
 		{
-			Message(UnityEngine.StackTraceUtility.ExtractStackTrace());
+			Message(StackTraceUtility.ExtractStackTrace());
 			Message($"sender.GetType(): {sender.GetType()}");
 			Message($"sender: {sender}");
 			Message($"args: {args}");
@@ -162,50 +166,50 @@ namespace ElementsOfHarmony
 			}
 			public static void Postfix(Exception __instance)
 			{
-				repeat:
-				if (!UnityEngine.StackTraceUtility.ExtractStackTrace().Contains($"{nameof(ElementsOfHarmony)}.{nameof(Log)}.{nameof(Message)}")) // prevent infinite loop
+			repeat:
+				if (!StackTraceUtility.ExtractStackTrace().Contains($"{nameof(ElementsOfHarmony)}.{nameof(Log)}.{nameof(Message)}")) // prevent infinite loop
 				{
-					Message(UnityEngine.StackTraceUtility.ExtractStackTrace());
+					Message(StackTraceUtility.ExtractStackTrace());
 					Message($"Exception.StackTrace:\r\n{__instance.StackTrace}");
 					Message($"Exception.GetType(): {__instance.GetType()}");
 					Message($"Exception.HResult: 0x{__instance.HResult:X8}");
 					Message($"Exception.Message: {__instance.Message}");
 					Message("\r\n");
-				}
-				if (__instance is FileLoadException fl)
-				{
-					Message($"FileLoadException.FileName: {fl.FileName}");
-				}
-				if (__instance is FileNotFoundException f)
-				{
-					Message($"FileNotFoundException.FileName: {f.FileName}");
-				}
-				if (__instance.InnerException != null)
-				{
-					__instance = __instance.InnerException;
-					goto repeat;
+					if (__instance is FileLoadException fl)
+					{
+						Message($"FileLoadException.FileName: {fl.FileName}");
+					}
+					if (__instance is FileNotFoundException f)
+					{
+						Message($"FileNotFoundException.FileName: {f.FileName}");
+					}
+					if (__instance.InnerException != null)
+					{
+						__instance = __instance.InnerException;
+						goto repeat;
+					}
 				}
 			}
 		}
 
-		[HarmonyPatch(typeof(UnityEngine.Debug), nameof(UnityEngine.Debug.LogError), typeof(object))]
+		[HarmonyPatch(typeof(Debug), nameof(Debug.LogError), typeof(object))]
 		public static class LogError
 		{
 			public static void Postfix(object message)
 			{
-				Message(UnityEngine.StackTraceUtility.ExtractStackTrace());
+				Message(StackTraceUtility.ExtractStackTrace());
 				Message($"Message.GetType(): {message.GetType()}");
 				Message($"Message: {message}");
 				Message("\r\n");
 			}
 		}
 
-		[HarmonyPatch(typeof(UnityEngine.Debug), nameof(UnityEngine.Debug.LogException), typeof(Exception))]
+		[HarmonyPatch(typeof(Debug), nameof(Debug.LogException), typeof(Exception))]
 		public static class LogException
 		{
 			public static void Postfix(Exception exception)
 			{
-				Message(UnityEngine.StackTraceUtility.ExtractStackTrace());
+				Message(StackTraceUtility.ExtractStackTrace());
 				Message($"Exception.StackTrace:\r\n{exception.StackTrace}");
 				Message($"Exception.GetType(): {exception.GetType()}");
 				Message($"Exception.HResult: 0x{exception.HResult:X8}");
@@ -220,7 +224,7 @@ namespace ElementsOfHarmony
 			public static void Postfix(int errorCode, Exception? __result)
 			{
 				if (__result == null) return;
-				Message(UnityEngine.StackTraceUtility.ExtractStackTrace());
+				Message(StackTraceUtility.ExtractStackTrace());
 				Message($"errorCode: 0x{(uint)errorCode:X8}");
 				Message($"__result.StackTrace:\r\n{__result.StackTrace}");
 				Message($"__result.GetType(): {__result.GetType()}");
@@ -235,27 +239,27 @@ namespace ElementsOfHarmony
 		[DllImport("User32.dll", CharSet = CharSet.Unicode)]
 		public extern static int MessageBox(IntPtr hWnd, string Text, string Caption, uint uType);
 
-		public const uint MB_OK					= 0x00000000;
-		public const uint MB_OKCANCEL			= 0x00000001;
-		public const uint MB_ABORTRETRYIGNORE	= 0x00000002;
-		public const uint MB_YESNOCANCEL		= 0x00000003;
-		public const uint MB_YESNO				= 0x00000004;
-		public const uint MB_RETRYCANCEL		= 0x00000005;
-		public const uint MB_CANCELTRYCONTINUE	= 0x00000006;
+		public const uint MB_OK = 0x00000000;
+		public const uint MB_OKCANCEL = 0x00000001;
+		public const uint MB_ABORTRETRYIGNORE = 0x00000002;
+		public const uint MB_YESNOCANCEL = 0x00000003;
+		public const uint MB_YESNO = 0x00000004;
+		public const uint MB_RETRYCANCEL = 0x00000005;
+		public const uint MB_CANCELTRYCONTINUE = 0x00000006;
 
-		public const uint MB_ICONERROR			= 0x00000010;
-		public const uint MB_ICONQUESTION		= 0x00000020;
-		public const uint MB_ICONWARNING		= 0x00000030;
-		public const uint MB_ICONINFORMATION	= 0x00000040;
+		public const uint MB_ICONERROR = 0x00000010;
+		public const uint MB_ICONQUESTION = 0x00000020;
+		public const uint MB_ICONWARNING = 0x00000030;
+		public const uint MB_ICONINFORMATION = 0x00000040;
 
-		public const uint IDOK			= 1;
-		public const uint IDCANCEL		= 2;
-		public const uint IDABORT		= 3;
-		public const uint IDRETRY		= 4;
-		public const uint IDIGNORE		= 5;
-		public const uint IDYES			= 6;
-		public const uint IDNO			= 7;
-		public const uint IDTRYAGAIN	= 10;
-		public const uint IDCONTINUE	= 11;
+		public const uint IDOK = 1;
+		public const uint IDCANCEL = 2;
+		public const uint IDABORT = 3;
+		public const uint IDRETRY = 4;
+		public const uint IDIGNORE = 5;
+		public const uint IDYES = 6;
+		public const uint IDNO = 7;
+		public const uint IDTRYAGAIN = 10;
+		public const uint IDCONTINUE = 11;
 	}
 }

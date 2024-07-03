@@ -1,4 +1,4 @@
-﻿using ElementsOfHarmony;
+﻿using ElementsOfHarmony.NativeInterface;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,12 +9,12 @@ using UnityEngine;
 
 namespace Microsoft.Kinect
 {
-	public class KinectSensor : Unknown
+    public class KinectSensor : Unknown
 	{
 		public static readonly Guid IKinectSensor_IID = new Guid("3C6EBA94-0DE1-4360-B6D4-653A10794C8B");
 		public override Guid IID => IKinectSensor_IID;
 
-		internal KinectSensor(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef) { }
+		internal KinectSensor(IntPtr pInstance, bool NotOwningInstance_ShouldAddRef = true) : base(pInstance, NotOwningInstance_ShouldAddRef) { }
 
 		[DllImport("Kinect20.dll", CallingConvention = CallingConvention.Winapi)]
 		public unsafe static extern int GetDefaultKinectSensor(IntPtr* defaultKinectSensor);
@@ -26,7 +26,7 @@ namespace Microsoft.Kinect
 			{
 				Marshal.ThrowExceptionForHR(GetDefaultKinectSensor(&ptr));
 			}
-			return new KinectSensor(ptr, true);
+			return new KinectSensor(ptr, false);
 		}
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
@@ -47,7 +47,7 @@ namespace Microsoft.Kinect
 				{
 					Marshal.ThrowExceptionForHR(get_BodyFrameSource(&ptr));
 				}
-				return new BodyFrameSource(ptr, true);
+				return new BodyFrameSource(ptr, false);
 			}
 		}
 	}
@@ -57,7 +57,7 @@ namespace Microsoft.Kinect
 		public static readonly Guid IBodyFrameSource_IID = new Guid("BB94A78A-458C-4608-AC69-34FEAD1E3BAE");
 		public override Guid IID => IBodyFrameSource_IID;
 
-		internal BodyFrameSource(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef) { }
+		internal BodyFrameSource(IntPtr pInstance, bool NotOwningInstance_ShouldAddRef = true) : base(pInstance, NotOwningInstance_ShouldAddRef) { }
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public unsafe delegate int GetBodyCountProc(IntPtr pInstance, IntPtr bodyCount);
@@ -87,7 +87,7 @@ namespace Microsoft.Kinect
 			{
 				Marshal.ThrowExceptionForHR(OpenReader(&ptr));
 			}
-			return new BodyFrameReader(ptr, true);
+			return new BodyFrameReader(ptr, false);
 		}
 	}
 	
@@ -98,7 +98,7 @@ namespace Microsoft.Kinect
 
 		private readonly ManualResetEvent StopEvent;
 		private readonly Thread WaitThread;
-		internal BodyFrameReader(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef)
+		internal BodyFrameReader(IntPtr pInstance, bool NotOwningInstance_ShouldAddRef = true) : base(pInstance, NotOwningInstance_ShouldAddRef)
 		{
 			StopEvent = new ManualResetEvent(false);
 			IntPtr WaitableHandle;
@@ -124,7 +124,7 @@ namespace Microsoft.Kinect
 							{
 								Marshal.ThrowExceptionForHR(GetFrameArrivedEventData((IntPtr)Waitable, &pEventArgs));
 							}
-							using BodyFrameArrivedEventArgs EventArgs = new BodyFrameArrivedEventArgs(pEventArgs, true);
+							using BodyFrameArrivedEventArgs EventArgs = new BodyFrameArrivedEventArgs(pEventArgs, false);
 							FrameArrived?.Invoke(this, EventArgs);
 						}
 						catch
@@ -184,7 +184,7 @@ namespace Microsoft.Kinect
 		public static readonly Guid IBodyFrameArrivedEventArgs_IID = new Guid("BF5CCA0E-00C1-4D48-837F-AB921E6AEE01");
 		public override Guid IID => IBodyFrameArrivedEventArgs_IID;
 
-		internal BodyFrameArrivedEventArgs(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef) { }
+		internal BodyFrameArrivedEventArgs(IntPtr pInstance, bool NotOwningInstance_ShouldAddRef = true) : base(pInstance, NotOwningInstance_ShouldAddRef) { }
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public unsafe delegate int GetFrameReferenceProc(IntPtr pInstance, IntPtr* bodyFrameReference);
@@ -199,7 +199,7 @@ namespace Microsoft.Kinect
 				{
 					Marshal.ThrowExceptionForHR(GetFrameReference(&ptr));
 				}
-				return new BodyFrameReference(ptr, true);
+				return new BodyFrameReference(ptr, false);
 			}
 		}
 	}
@@ -209,7 +209,7 @@ namespace Microsoft.Kinect
 		public static readonly Guid IBodyFrameReference_IID = new Guid("C3A1733C-5F84-443B-9659-2F2BE250C97D");
 		public override Guid IID => IBodyFrameReference_IID;
 
-		internal BodyFrameReference(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef) { }
+		internal BodyFrameReference(IntPtr pInstance, bool NotOwningInstance_ShouldAddRef = true) : base(pInstance, NotOwningInstance_ShouldAddRef) { }
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public unsafe delegate int AcquireFrameProc(IntPtr pInstance, IntPtr* bodyFrame);
@@ -222,7 +222,7 @@ namespace Microsoft.Kinect
 			{
 				Marshal.ThrowExceptionForHR(AcquireFrame(&ptr));
 			}
-			return new BodyFrame(ptr, true);
+			return new BodyFrame(ptr, false);
 		}
 	}
 
@@ -231,7 +231,7 @@ namespace Microsoft.Kinect
 		public static readonly Guid IBodyFrame_IID = new Guid("52884F1F-94D7-4B57-BF87-9226950980D5");
 		public override Guid IID => IBodyFrame_IID;
 
-		internal BodyFrame(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef) { }
+		internal BodyFrame(IntPtr pInstance, bool NotOwningInstance_ShouldAddRef = true) : base(pInstance, NotOwningInstance_ShouldAddRef) { }
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate int GetAndRefreshBodyDataProc(IntPtr pInstance, uint capacity, IntPtr[] bodies);
@@ -248,7 +248,7 @@ namespace Microsoft.Kinect
 			Marshal.ThrowExceptionForHR(GetAndRefreshBodyData((uint)pointers.Length, pointers));
 			for (int n = 0; n < pointers.Length; n++)
 			{
-				bodies[n] = new Body(pointers[n], true);
+				bodies[n] = new Body(pointers[n], false);
 			}
 		}
 
@@ -271,7 +271,7 @@ namespace Microsoft.Kinect
 		public static readonly Guid IBody_IID = new Guid("46AEF731-98B0-4D18-827B-933758678F4A");
 		public override Guid IID => IBody_IID;
 
-		internal Body(IntPtr pInstance, bool OwnsInstance_DoNotAddRef = false) : base(pInstance, OwnsInstance_DoNotAddRef) { }
+		internal Body(IntPtr pInstance, bool NotOwningInstance_ShouldAddRef = true) : base(pInstance, NotOwningInstance_ShouldAddRef) { }
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate int GetJointsProc(IntPtr pInstance, uint capacity, Joint[] joints);

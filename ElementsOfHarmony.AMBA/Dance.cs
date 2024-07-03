@@ -518,10 +518,11 @@ namespace ElementsOfHarmony.AMBA
 						RectTransform[] backgroundImages = signal.buttonFashion.backgroundImages;
 						foreach (RectTransform rectTransform in backgroundImages)
 						{
-							/* although this is used to shink the large combo bar, it didn't shink it fast enough,
-							 * this is causing the large combo bar to gradually "grow" in size compared with other combo bars
+							/* although this code is used to shink the large combo bar, it didn't shink it fast enough,
+							 * and is causing the large combo bar to gradually "grow" in size compared with other combo bars
 							 * and it can block up subsequent combos if any of which is close enough;
-							 * also deltaTime is not reliable
+							 * 
+							 * also deltaTime is not reliable either
 							 * 
 							float num7 = 236f;
 							float num8 = rectTransform.sizeDelta.x - 100f * signal.velocity.magnitude * Time.deltaTime;

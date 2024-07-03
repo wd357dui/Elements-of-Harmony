@@ -112,7 +112,8 @@ namespace ElementsOfHarmony
 			catch (Exception e)
 			{
 			repeat:
-				Log.Message($"{typeof(Localization).FullName} - {e.GetType()}\n{e.StackTrace}\n{e.Message}");
+				Log.Message(StackTraceUtility.ExtractStackTrace());
+				Log.Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
 				if (e.InnerException != null)
 				{
 					e = e.InnerException;
@@ -187,7 +188,8 @@ namespace ElementsOfHarmony
 			catch (Exception e)
 			{
 			repeat:
-				Log.Message($"{typeof(Localization).FullName} - {e.GetType()}\n{e.StackTrace}\n{e.Message}");
+				Log.Message(StackTraceUtility.ExtractStackTrace());
+				Log.Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
 				if (e.InnerException != null)
 				{
 					e = e.InnerException;
@@ -219,7 +221,8 @@ namespace ElementsOfHarmony
 			catch (Exception e)
 			{
 			repeat:
-				Log.Message($"{typeof(Localization).FullName} - {e.GetType()}\n{e.StackTrace}\n{e.Message}");
+				Log.Message(StackTraceUtility.ExtractStackTrace());
+				Log.Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
 				if (e.InnerException != null)
 				{
 					e = e.InnerException;
@@ -282,7 +285,8 @@ namespace ElementsOfHarmony
 			catch (Exception e)
 			{
 			repeat:
-				Log.Message($"{typeof(Localization).FullName} - {e.GetType()}\n{e.StackTrace}\n{e.Message}");
+				Log.Message(StackTraceUtility.ExtractStackTrace());
+				Log.Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
 				if (e.InnerException != null)
 				{
 					e = e.InnerException;

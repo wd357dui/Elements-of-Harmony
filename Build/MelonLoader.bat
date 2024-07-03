@@ -24,6 +24,9 @@ xcopy /E /I "..\Assets" "..\publish\MelonLoader\Elements of Harmony\Assets"
 
 copy "..\Patch\AZHM\globalgamemanagers.assets" "..\publish\MelonLoader\MyLittlePonyZephyrHeights_Data\globalgamemanagers.assets"
 
+IF "%BuildType%"=="Debug" (
+copy "..\x64\%BuildType%\D3D11.dll" "..\publish\MelonLoader\D3D11.dll"
+)
 copy "..\x64\%BuildType%\DirectXHook.dll" "..\publish\MelonLoader\DirectXHook.dll"
 
 copy "..\x64\%BuildType%\netstandard2.1\ElementsOfHarmony.MelonLoaderReference.dll" "..\publish\MelonLoader\Mods\ElementsOfHarmony.MelonLoaderReference.dll"
