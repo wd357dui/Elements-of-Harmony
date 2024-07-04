@@ -16,13 +16,13 @@ namespace ElementsOfHarmony.NativeInterface
 		public const int IDXGISwapChain1_Present1_VTableIndex = 22;
 		public const int IDXGISwapChain3_SetColorSpace1_VTableIndex = 38;
 		public const int IDXGISwapChain4_SetHDRMetaData_VTableIndex = 40;
-		public static readonly Guid IUnknown_IID = new Guid("00000000-0000-0000-C000-000000000046");
-		public static readonly Guid IDXGIFactory_IID = new Guid("7b7166ec-21c7-44ae-b21a-c9ae321ae369");
-		public static readonly Guid IDXGIFactory2_IID = new Guid("50c83a1c-e072-4c48-87b0-3630fa36a6d0");
-		public static readonly Guid IDXGISwapChain_IID = new Guid("310d36a0-d2e7-4c0a-aa04-6a9d23b8886a");
-		public static readonly Guid IDXGISwapChain1_IID = new Guid("790a45f7-0d42-4876-983a-0a55cfe6f4aa");
-		public static readonly Guid IDXGISwapChain3_IID = new Guid("94D99BDB-F1F8-4AB0-B236-7DA0170EDAB1");
-		public static readonly Guid IDXGISwapChain4_IID = new Guid("3D585D5A-BD4A-489E-B1F4-3DBCB6452FFB");
+		public static readonly Guid IID_IUnknown = new Guid("00000000-0000-0000-C000-000000000046");
+		public static readonly Guid IID_IDXGIFactory = new Guid("7b7166ec-21c7-44ae-b21a-c9ae321ae369");
+		public static readonly Guid IID_IDXGIFactory2 = new Guid("50c83a1c-e072-4c48-87b0-3630fa36a6d0");
+		public static readonly Guid IID_IDXGISwapChain = new Guid("310d36a0-d2e7-4c0a-aa04-6a9d23b8886a");
+		public static readonly Guid IID_IDXGISwapChain1 = new Guid("790a45f7-0d42-4876-983a-0a55cfe6f4aa");
+		public static readonly Guid IID_IDXGISwapChain3 = new Guid("94D99BDB-F1F8-4AB0-B236-7DA0170EDAB1");
+		public static readonly Guid IID_IDXGISwapChain4 = new Guid("3D585D5A-BD4A-489E-B1F4-3DBCB6452FFB");
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public unsafe delegate int IDXGISwapChain_GetBuffer_Proc(IntPtr pInstance, uint Buffer, Guid riid, IntPtr* ppSurface);

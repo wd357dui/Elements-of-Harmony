@@ -3,11 +3,7 @@
 using namespace std;
 using namespace D2D1;
 
-extern void __stdcall ForceBreakpoint();
-
 struct Device;
-typedef void(__stdcall* LogCallbackProc)(LPCWSTR Message);
-extern LogCallbackProc LogCallback;
 
 extern "C" {
 	__declspec(dllexport) HRESULT __stdcall InitOverlay();

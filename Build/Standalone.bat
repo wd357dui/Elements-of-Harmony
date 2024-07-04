@@ -35,6 +35,7 @@ IF "%BuildType%"=="Debug" (
 copy "..\x64\%BuildType%\D3D11.dll" "..\publish\Standalone\D3D11.dll"
 )
 copy "..\x64\%BuildType%\DirectXHook.dll" "..\publish\Standalone\DirectXHook.dll"
+copy "..\x64\%BuildType%\ElementsOfHarmony.Native.dll" "..\publish\BepInEx\ElementsOfHarmony.Native.dll"
 
 copy "..\x64\%BuildType%\0Harmony.dll" "..\publish\Standalone\MLP_Data\Managed\0Harmony.dll"
 copy "..\x64\%BuildType%\netstandard2.1\ElementsOfHarmony.dll" "..\publish\Standalone\MLP_Data\Managed\ElementsOfHarmony.dll"

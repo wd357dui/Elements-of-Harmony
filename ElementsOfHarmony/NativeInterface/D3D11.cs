@@ -24,9 +24,9 @@ namespace ElementsOfHarmony.NativeInterface
 		public const int ID3D11DeviceContext_DrawInstancedIndirect_VTableIndex = 40;
 		public const int ID3D11DeviceContext_OMGetRenderTargets_VTableIndex = 89;
         public const int ID3D11Texture2D_GetDesc_VTableIndex = 10;
-		public static readonly Guid ID3D11Device_IID = new Guid("db6f6ddb-ac77-4e88-8253-819df9bbf140");
-		public static readonly Guid ID3D11DeviceContext_IID = new Guid("c0bfa96c-e089-44fb-8eaf-26f8796190da");
-		public static readonly Guid ID3D11Texture2D_IID = new Guid("6F15AAF2-D208-4E89-9AB4-489535D34F9C");
+		public static readonly Guid IID_ID3D11Device = new Guid("db6f6ddb-ac77-4e88-8253-819df9bbf140");
+		public static readonly Guid IID_ID3D11DeviceContext = new Guid("c0bfa96c-e089-44fb-8eaf-26f8796190da");
+		public static readonly Guid IID_ID3D11Texture2D = new Guid("6F15AAF2-D208-4E89-9AB4-489535D34F9C");
 
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public unsafe delegate void ID3D11Device_GetImmediateContext_Proc(IntPtr pInstance, IntPtr* DeviceContext);

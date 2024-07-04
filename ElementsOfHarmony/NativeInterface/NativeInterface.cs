@@ -25,8 +25,8 @@ namespace ElementsOfHarmony.NativeInterface
 
         public IntPtr Instance => pInstance;
 
-        public static readonly Guid IUnknown_IID = new Guid("00000000-0000-0000-C000-000000000046");
-        public virtual Guid IID => IUnknown_IID;
+        public static readonly Guid IID_IUnknown = new Guid("00000000-0000-0000-C000-000000000046");
+        public virtual Guid IID => IID_IUnknown;
 
         public Unknown()
         {

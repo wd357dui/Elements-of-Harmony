@@ -56,10 +56,9 @@ namespace ElementsOfHarmony
 
 				Localization.Init();
 
-				Action? DelayInit = null;
 				if (Settings.DirectXHook.Enabled)
 				{
-					DirectXHook.Init(out DelayInit);
+					DirectXHook.Init();
 				}
 
 				if (Settings.Loyalty.KinectControl.Enabled)
@@ -113,8 +112,6 @@ namespace ElementsOfHarmony
 				{
 					Dance.Init();
 				}
-
-				DelayInit?.Invoke();
 			}
 		}
 
