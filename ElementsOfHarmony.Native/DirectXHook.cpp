@@ -107,6 +107,8 @@ HRESULT static EnsurePixelShader(ID3D11Device* Device, LPCWSTR WName, LPCSTR Nam
 }
 
 ComPtr<ID3D11PixelShader> BlitCopyHDRTonemap_Replacement;
+std::set<ID3D11PixelShader*> Is_BlitCopyHDRTonemap;
+std::set<ID3D11PixelShader*> IsNot_BlitCopyHDRTonemap;
 static void DirectXHook_PrePSSetShader_Hook(Arguments* Args)
 {
 	if (::WithinOverlayPass) return;
@@ -120,19 +122,23 @@ static void DirectXHook_PrePSSetShader_Hook(Arguments* Args)
 	ID3D11PixelShader*& pPixelShader = *reinterpret_cast<ID3D11PixelShader**>(Args->Args[0]);
 
 	if (pPixelShader == nullptr) return;
+	if (IsNot_BlitCopyHDRTonemap.contains(pPixelShader)) return;
 
 	ComPtr<ID3D11Device> Device;
 	pDeviceContext->GetDevice(&Device);
 
-	LPCSTR DebugName;
-	result = GetName(pPixelShader, &DebugName);
-	if (FAILED(result) && result != DXGI_ERROR_NOT_FOUND) {
-		LogCallback((L"get debug name from ID3D11PixelShader failed, return value " + to_wstring(result)).c_str());
-		ForceBreakpoint();
+	LPCSTR DebugName = nullptr;
+	bool Is = Is_BlitCopyHDRTonemap.contains(pPixelShader);
+	if (!Is) {
+		result = GetName(pPixelShader, &DebugName);
+		if (FAILED(result) && result != DXGI_ERROR_NOT_FOUND) {
+			LogCallback((L"get debug name from ID3D11PixelShader failed, return value " + to_wstring(result)).c_str());
+			ForceBreakpoint();
+		}
 	}
 
-	if (strcmp(DebugName, "Hidden/BlitCopyHDRTonemap") == 0) {
-
+	if (Is || (DebugName != nullptr && strcmp(DebugName, "Hidden/BlitCopyHDRTonemap") == 0)) {
+		Is_BlitCopyHDRTonemap.insert(pPixelShader);
 		EnsurePixelShader(Device.Get(), L"BlitCopyHDRTonemap_Replacement", "BlitCopyHDRTonemap_Replacement",
 			BlitCopyHDRTonemap_Replacement);
 
@@ -140,6 +146,7 @@ static void DirectXHook_PrePSSetShader_Hook(Arguments* Args)
 			pPixelShader = BlitCopyHDRTonemap_Replacement.Get();
 		}
 	}
+	else IsNot_BlitCopyHDRTonemap.insert(pPixelShader);
 }
 
 HRESULT static EnsureConstantBuffer(_In_ ID3D11Device* Device, _In_ ID3D11DeviceContext* DeviceContext,
@@ -157,10 +164,17 @@ HRESULT static EnsureConstantBuffer(_In_ ID3D11Device* Device, _In_ ID3D11Device
 			.StructureByteStride = sizeof(float),
 		};
 
-		result = Device->CreateBuffer(&Desc, nullptr, &ConstantBuffer);
+		D3D11_SUBRESOURCE_DATA Data = {
+			.pSysMem = Values,
+			.SysMemPitch = 0,
+			.SysMemSlicePitch = 0,
+		};
+
+		result = Device->CreateBuffer(&Desc, &Data, &ConstantBuffer);
 		if (FAILED(result)) return result;
 	}
 
+	/*
 	D3D11_MAPPED_SUBRESOURCE Mapped{};
 	result = DeviceContext->Map(ConstantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &Mapped);
 	if (FAILED(result)) return result;
@@ -168,6 +182,7 @@ HRESULT static EnsureConstantBuffer(_In_ ID3D11Device* Device, _In_ ID3D11Device
 	CopyMemory(Mapped.pData, Values, 4 * sizeof(float));
 
 	DeviceContext->Unmap(ConstantBuffer.Get(), 0);
+	*/
 
 	return result;
 }

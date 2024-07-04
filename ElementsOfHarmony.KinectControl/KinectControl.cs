@@ -24,7 +24,10 @@ namespace ElementsOfHarmony.KinectControl
 			Marshal.ThrowExceptionForHR(sensor.Open());
 
 			reader.FrameArrived += Reader_FrameArrived;
-			OverlayDraw += OnOverlayDraw;
+			if (Settings.Loyalty.KinectControl.ShowOverlay)
+			{
+				OverlayDraw += OnOverlayDraw;
+			}
 
 			Application.quitting += Application_quitting;
 
