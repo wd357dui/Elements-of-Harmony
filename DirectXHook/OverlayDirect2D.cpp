@@ -31,9 +31,15 @@ extern "C" {
 		DWRITE_FONT_WEIGHT FontWeight, DWRITE_FONT_STYLE FontStyle, DWRITE_FONT_STRETCH FontStretch,
 		float FontSize, LPCWSTR FontLocale);
 	__declspec(dllexport) HRESULT __stdcall SetFontParams(_In_ Device* pInstance,
-		DWRITE_TEXT_ALIGNMENT TextAlignment, DWRITE_PARAGRAPH_ALIGNMENT ParagraphAlignment, DWRITE_WORD_WRAPPING WordWrapping, 
-		DWRITE_READING_DIRECTION ReadingDirection, DWRITE_FLOW_DIRECTION FlowDirection, FLOAT IncrementalTabStop,
-		DWRITE_LINE_SPACING_METHOD LineSpacingMethod, FLOAT LineSpacing, FLOAT Baseline);
+		DWRITE_TEXT_ALIGNMENT TextAlignment = (DWRITE_TEXT_ALIGNMENT)-1,
+		DWRITE_PARAGRAPH_ALIGNMENT ParagraphAlignment = (DWRITE_PARAGRAPH_ALIGNMENT)-1,
+		DWRITE_WORD_WRAPPING WordWrapping = (DWRITE_WORD_WRAPPING)-1,
+		DWRITE_READING_DIRECTION ReadingDirection = (DWRITE_READING_DIRECTION)-1,
+		DWRITE_FLOW_DIRECTION FlowDirection = (DWRITE_FLOW_DIRECTION)-1,
+		FLOAT IncrementalTabStop = NAN,
+		DWRITE_LINE_SPACING_METHOD LineSpacingMethod = (DWRITE_LINE_SPACING_METHOD)-1,
+		FLOAT LineSpacing = NAN,
+		FLOAT Baseline = NAN);
 	__declspec(dllexport) HRESULT __stdcall SetGDICompatibleText(_In_ Device* pInstance, LPCWSTR Str,
 		float LayoutWidth, float LayoutHeight, float PixelsPerDip);
 
@@ -55,6 +61,8 @@ extern "C" {
 	__declspec(dllexport) void __stdcall SetTransformIdentity(_In_ Device* pInstance);
 	__declspec(dllexport) void __stdcall SetTransformScale(_In_ Device* pInstance, D2D1_POINT_2F CenterPoint, float ScaleX, float ScaleY);
 	__declspec(dllexport) void __stdcall SetDpi(_In_ Device* pInstance, float DpiX, float DpiY);
+
+	__declspec(dllexport) void __stdcall PrintFrameTime(_In_ Device* pInstance, bool IsHDR);
 }
 
 struct Device
@@ -621,4 +629,29 @@ void __stdcall SetTransformScale(_In_ Device* pInstance, D2D1_POINT_2F CenterPoi
 void __stdcall SetDpi(_In_ Device* pInstance, float DpiX, float DpiY)
 {
 	pInstance->Context2D->SetDpi(DpiX, DpiY);
+}
+
+double PreviousTimestamp = 0.0;
+void __stdcall PrintFrameTime(_In_ Device* pInstance, bool IsHDR)
+{
+	LARGE_INTEGER Large{};
+	QueryPerformanceCounter(&Large);
+	double Counter = static_cast<double>(Large.QuadPart);
+	QueryPerformanceFrequency(&Large);
+	double Frequency = static_cast<double>(Large.QuadPart);
+	double Timestamp = Counter / Frequency;
+	double Elapsed = Timestamp - PreviousTimestamp;
+	PreviousTimestamp = Timestamp;
+	wstring Str = to_wstring(Elapsed);
+	D2D1_RECT_F Rect{ 0.0f, 0.0f, 800.0f, 600.0f };
+	D2D1_COLOR_F Color{ IsHDR ? 12.5f : 1.0f, 0.0f, IsHDR ? 12.5f : 1.0f, 1.0f };
+	SetFont(pInstance, L"Segoe UI",
+		DWRITE_FONT_WEIGHT_NORMAL,
+		DWRITE_FONT_STYLE_NORMAL,
+		DWRITE_FONT_STRETCH_NORMAL,
+		48.0f * 0.75f, L"en-US");
+	SetFontParams(pInstance, DWRITE_TEXT_ALIGNMENT_LEADING, DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
+	SetColor(pInstance, Color);
+	SetOpacity(pInstance, 1.0f);
+	pInstance->Context2D->DrawText(Str.c_str(), static_cast<UINT32>(Str.size()), pInstance->DWriteTextFormat.Get(), Rect, pInstance->SolidColorBrush.Get());
 }

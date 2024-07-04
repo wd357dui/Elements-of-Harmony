@@ -3,15 +3,15 @@
 
 using namespace std;
 
-void __stdcall ForceBreakpoint();
-
 CallbackProc HookCallback1 = nullptr;
 CallbackProc HookCallback2 = nullptr;
-LogCallbackProc LogCallback = nullptr;
 
 atomic_bool Running = false;
 
 extern "C" {
+	__declspec(dllexport) void __stdcall ForceBreakpoint();
+	__declspec(dllexport) LogCallbackProc LogCallback = nullptr;
+
 	__declspec(dllexport) HRESULT __stdcall InstallHook();
 	__declspec(dllexport) HRESULT __stdcall UninstallHook();
 	__declspec(dllexport) void __stdcall SetRunning(bool Running);
@@ -54,10 +54,14 @@ extern "C" {
 	/// </summary>
 	__declspec(dllexport) HRESULT __stdcall GetName(_In_ IUnknown* D3D11_Interface, _Out_ LPCSTR* ppCharArray);
 
+	__declspec(dllexport) HRESULT __stdcall CompileVertexShader(_In_ ID3D11Device* Device, _In_ LPCWSTR FileName, _In_ LPCSTR EntryPoint,
+		_In_opt_ LPCSTR DebugName, _Out_ ID3D11VertexShader** VertexShader);
 	__declspec(dllexport) HRESULT __stdcall CompilePixelShader(_In_ ID3D11Device* Device, _In_ LPCWSTR FileName, _In_ LPCSTR EntryPoint,
 		_In_opt_ LPCSTR DebugName, _Out_ ID3D11PixelShader** PixelShader);
+	/*
 	__declspec(dllexport) HRESULT __stdcall EnsureConstantBuffer(_In_ ID3D11Device* Device, _In_ ID3D11DeviceContext* DeviceContext,
-		_Inout_ ID3D11Buffer** ConstantBuffer, _In_reads_(4 * sizeof(float)) float* Values);
+		_Inout_ ID3D11Buffer** ConstantBuffer, _In_reads_(4) float* Values);
+	*/
 }
 
 HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* This,
@@ -2096,6 +2100,24 @@ static void LogErrorMessageFromBlob(wstring Prefix, ID3DBlob* Blob)
 	LogCallback(Convert(string(Message, CharCount)).c_str());
 }
 
+HRESULT __stdcall CompileVertexShader(_In_ ID3D11Device* Device, _In_ LPCWSTR FileName, _In_ LPCSTR EntryPoint,
+	_In_opt_ LPCSTR DebugName, _Out_ ID3D11VertexShader** VertexShader)
+{
+	ComPtr<ID3DBlob> Code, Error;
+	HRESULT result = D3DCompileFromFile(FileName, nullptr, nullptr, EntryPoint, "vs_5_0", 0, 0, &Code, &Error);
+	if (FAILED(result) && Error != nullptr) {
+		LogErrorMessageFromBlob(L"compile vertex shader " + wstring(FileName) + L" failed: ", Error.Get());
+		return result;
+	}
+	result = Device->CreateVertexShader(Code->GetBufferPointer(), Code->GetBufferSize(), nullptr, VertexShader);
+	if (FAILED(result)) return result;
+	if (DebugName != nullptr) {
+		result = (*VertexShader)->SetPrivateData(WKPDID_D3DDebugObjectName, static_cast<UINT>(strlen(DebugName)), DebugName);
+		if (FAILED(result)) return result;
+	}
+	return result;
+}
+
 HRESULT __stdcall CompilePixelShader(_In_ ID3D11Device* Device, _In_ LPCWSTR FileName, _In_ LPCSTR EntryPoint,
 	_In_opt_ LPCSTR DebugName, _Out_ ID3D11PixelShader** PixelShader)
 {
@@ -2114,8 +2136,9 @@ HRESULT __stdcall CompilePixelShader(_In_ ID3D11Device* Device, _In_ LPCWSTR Fil
 	return result;
 }
 
+/*
 HRESULT __stdcall EnsureConstantBuffer(_In_ ID3D11Device* Device, _In_ ID3D11DeviceContext* DeviceContext,
-	_Inout_ ID3D11Buffer** ConstantBuffer, _In_reads_(4 * sizeof(float)) float* Values)
+	_Inout_ ID3D11Buffer** ConstantBuffer, _In_reads_(4) float* Values)
 {
 	HRESULT result = 0;
 
@@ -2143,7 +2166,7 @@ HRESULT __stdcall EnsureConstantBuffer(_In_ ID3D11Device* Device, _In_ ID3D11Dev
 
 	return result;
 }
-
+*/
 
 
 constexpr WCHAR ClassName[] = L"MAGIC";

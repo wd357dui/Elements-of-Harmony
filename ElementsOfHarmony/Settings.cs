@@ -52,6 +52,7 @@ namespace ElementsOfHarmony
 				{
 					public static bool Enabled = true;
 					public static bool SolveCompatibilityWithHDR = true;
+					public static bool ShowFrameTime = false;
 				}
 				public static class HDR
 				{

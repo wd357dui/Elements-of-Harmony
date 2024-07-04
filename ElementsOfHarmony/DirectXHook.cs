@@ -14,6 +14,7 @@ using static ElementsOfHarmony.NativeInterface.D2D1;
 using static ElementsOfHarmony.NativeInterface.D3D11;
 using static ElementsOfHarmony.NativeInterface.DXGI;
 using static ElementsOfHarmony.Settings.DirectXHook;
+using static ElementsOfHarmony.Settings.DirectXHook.Magic;
 
 namespace ElementsOfHarmony
 {
@@ -69,11 +70,27 @@ namespace ElementsOfHarmony
 					}
 				}
 
-				SetLogCallback(Log.Message);
-
 				Application.quitting += Application_quitting;
 
+				SetLogCallback(Log.Message);
+
 				SetHookCallback1(HookCallback);
+
+				SetCallbacks(
+					VertexShader: (Name) => {
+						if (VertexShaderFiles.TryGetValue(Name, out string File))
+						{
+							return File;
+						}
+						return null;
+					},
+					PixelShader: (Name) => {
+						if (PixelShaderFiles.TryGetValue(Name, out string File))
+						{
+							return File;
+						}
+						return null;
+					});
 
 				// overlay hooks
 				PrePresent += OnPrePresent;
@@ -89,7 +106,7 @@ namespace ElementsOfHarmony
 
 				PreSetHDRMetaData += DirectXHook_PreSetHDRMetaData_Hook;
 
-				// HDR shader hooks
+				/* HDR shader hooks moved to ElementsOfHarmony.Native in favor of performance
 				PostPresent += DirectXHook_PostPresent_Hook;
 				PostPresent1 += DirectXHook_PostPresent1_Hook;
 				PostCreateRenderTargetView += DirectXHook_PostCreateRenderTargetView_Hook;
@@ -101,6 +118,7 @@ namespace ElementsOfHarmony
 				PreDrawIndexedInstancedIndirect += DirectXHook_PreDrawIndexedInstancedIndirect_Hook;
 				PreDrawInstanced += DirectXHook_PreDrawInstanced_Hook;
 				PreDrawInstancedIndirect += DirectXHook_PreDrawInstancedIndirect_Hook;
+				*/
 
 				PreAnyEvent += ApplyRenderSettings;
 
@@ -175,7 +193,7 @@ namespace ElementsOfHarmony
 				Log.Message($"InitOverlay() returns {HResult:X}");
 				Marshal.ThrowExceptionForHR(HResult);
 				
-				HResult = InitNativeCallbacks();
+				HResult = InitNativeCallbacks(HDR.TakeOverOutputFormat, HDR.DynamicRangeFactor);
 				Log.Message($"InitNativeCallbacks() returns {HResult:X}");
 				Marshal.ThrowExceptionForHR(HResult);
 
@@ -439,9 +457,26 @@ namespace ElementsOfHarmony
 			ReleaseOverlay();
 		}
 
-		#region Overlay and HDR color space hooks
+		#region Overlay and HDR color space hook
 
-		public static bool IsHDR { get; private set; } = false;
+		private static volatile bool _IsHDR = false;
+		private static volatile bool _WithinOverlayPass = false;
+		public static bool IsHDR
+		{ 
+			get => _IsHDR;
+			set
+			{
+				SetIsHDR(_IsHDR = value);
+			}
+		}
+		public static bool WithinOverlayPass
+		{
+			get =>_WithinOverlayPass;
+			set
+			{
+				SetWithinOverlayPass(_WithinOverlayPass = value);
+			}
+		}
 		private static void SetColorSpace(IntPtr pSwapChain, DXGI_FORMAT Format)
 		{
 			using Unknown SwapChain = new Unknown(pSwapChain);
@@ -457,7 +492,7 @@ namespace ElementsOfHarmony
 			Marshal.ThrowExceptionForHR(DetermineOutputHDR(SwapChain, out DXGI_FORMAT Format, out bool HDR));
 			IsHDR = HDR;
 			SetColorSpace(SwapChain, Format);
-			if (Magic.Overlay.Enabled)
+			if (Overlay.Enabled)
 			{
 				InvokeOverlay(SwapChain);
 			}
@@ -468,12 +503,11 @@ namespace ElementsOfHarmony
 			Marshal.ThrowExceptionForHR(DetermineOutputHDR(SwapChain, out DXGI_FORMAT Format, out bool HDR));
 			IsHDR = HDR;
 			SetColorSpace(SwapChain, Format);
-			if (Magic.Overlay.Enabled)
+			if (Overlay.Enabled)
 			{
 				InvokeOverlay(SwapChain);
 			}
 		}
-		private static volatile bool WithinOverlayPass = false;
 		private static void InvokeOverlay(IntPtr pSwapChain)
 		{
 			int HResult;
@@ -484,7 +518,7 @@ namespace ElementsOfHarmony
 			}
 			if (HResult == unchecked((int)0x800010BF)) // 10 bit HDR format is not compatible with Direct2D
 			{
-				if (Magic.Overlay.SolveCompatibilityWithHDR)
+				if (Overlay.SolveCompatibilityWithHDR)
 				{
 					Screen.SetResolution(Width ?? Screen.width, Height ?? Screen.height, Settings.DirectXHook.FullScreenMode ?? Screen.fullScreenMode);
 					Log.Message($"10 bit HDR format is not compatible with Direct2D, attempting to change to 16 bit format");
@@ -495,6 +529,10 @@ namespace ElementsOfHarmony
 			Marshal.ThrowExceptionForHR(HResult);
 			WithinOverlayPass = true;
 			OverlayDraw?.Invoke(DeviceInstance, EventArgs.Empty);
+			if (Overlay.ShowFrameTime)
+			{
+				PrintFrameTime(DeviceInstance, IsHDR);
+			}
 			Marshal.ThrowExceptionForHR(SwapChainEndDraw(pSwapChain, 0, DeviceInstance));
 			WithinOverlayPass = false;
 		}
@@ -505,12 +543,12 @@ namespace ElementsOfHarmony
 
 		private static void ChangeFormat(ref DXGI_FORMAT Format)
 		{
-			if (Format == DXGI_FORMAT.DXGI_FORMAT_R10G10B10A2_UNORM && (Magic.Overlay.SolveCompatibilityWithHDR || Magic.HDR.TakeOverOutputFormat))
+			if (Format == DXGI_FORMAT.DXGI_FORMAT_R10G10B10A2_UNORM && (Overlay.SolveCompatibilityWithHDR || HDR.TakeOverOutputFormat))
 			{
 				Format = DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_FLOAT;
 				Log.Message($"swap chain is resizing, changing HDR format DXGI_FORMAT_R10G10B10A2_UNORM to DXGI_FORMAT_R16G16B16A16_FLOAT");
 			}
-			else if (Magic.HDR.Forced && Format != DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_FLOAT)
+			else if (HDR.Forced && Format != DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_FLOAT)
 			{
 				Format = DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_FLOAT;
 				Log.Message($"swap chain is resizing, forcing HDR format DXGI_FORMAT_R16G16B16A16_FLOAT");
@@ -601,7 +639,7 @@ namespace ElementsOfHarmony
 
 		private static void DirectXHook_PreSetHDRMetaData_Hook(object sender, SetHDRMetaDataEventArgs e)
 		{
-			if (Magic.HDR.TakeOverOutputFormat)
+			if (HDR.TakeOverOutputFormat)
 			{
 				// this function seems to have no impact on the display,
 				// but still better disable it in case it cause problem some day
@@ -609,7 +647,7 @@ namespace ElementsOfHarmony
 			}
 		}
 
-		#region HDR shader hooks
+		/* HDR shader hooks moved to ElementsOfHarmony.Native in favor of performance
 
 		// create the pixel shader if not created already
 		private static bool EnsurePixelShader(IntPtr Device, ref Unknown? Instance, string Name)
@@ -672,7 +710,7 @@ namespace ElementsOfHarmony
 		private static void DirectXHook_PrePSSetShader_Hook(object sender, PSSetShaderEventArgs e)
 		{
 			if (WithinOverlayPass) return; // don't change any state set by Direct2D
-			if (!Magic.HDR.TakeOverOutputFormat) return;
+			if (!HDR.TakeOverOutputFormat) return;
 			if (e.PixelShader.GetName() == "Hidden/BlitCopyHDRTonemap")
 			{
 				Unknown DeviceContext = new Unknown((IntPtr)sender);
@@ -695,7 +733,7 @@ namespace ElementsOfHarmony
 		private static void OnDrawCall(IntPtr pDeviceContext)
 		{
 			if (WithinOverlayPass) return; // don't change any state set by Direct2D
-			if (!Magic.HDR.TakeOverOutputFormat) return;
+			if (!HDR.TakeOverOutputFormat) return;
 			if (!IsHDR) return;
 
 			using Unknown DeviceContext = new Unknown(pDeviceContext);
@@ -725,7 +763,7 @@ namespace ElementsOfHarmony
 				DeviceContext.Invoke<ID3D11DeviceContext_PSSetShader_Proc>(ID3D11DeviceContext_PSSetShader_VTableIndex, CopyTextureToSwapChainHDR!.Instance, IntPtr.Zero, 0u);
 
 				// create (if not created already) and upload constant buffer
-				// to deliver the Magic.HDR.DynamicRangeFactor parameter to the shader
+				// to deliver the HDR.DynamicRangeFactor parameter to the shader
 				IntPtr ConstantBufferPtr = IntPtr.Zero;
 				if (CopyTextureToSwapChainHDR_ConstantBuffer != null)
 				{
@@ -736,7 +774,7 @@ namespace ElementsOfHarmony
 				{
 					var values = stackalloc float[4]
 					{
-						Magic.HDR.DynamicRangeFactor, // multiplicator for color values, default is 1
+						HDR.DynamicRangeFactor, // multiplicator for color values, default is 1
 						0.0f, 0.0f, 0.0f // obligatory padding, values are unused
 					};
 					IntPtr* ppConstantBuffer = &ConstantBufferPtr;
@@ -783,8 +821,7 @@ namespace ElementsOfHarmony
 		{
 			OnDrawCall((IntPtr)sender);
 		}
-
-		#endregion
+		*/
 
 
 
@@ -1484,9 +1521,6 @@ namespace ElementsOfHarmony
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate void LogCallbackProc([MarshalAs(UnmanagedType.LPWStr)] string Message);
 
-		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-		public delegate bool IsCallbackUsed([MarshalAs(UnmanagedType.LPWStr)] string MethodName);
-
 
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
@@ -1606,22 +1640,31 @@ namespace ElementsOfHarmony
 		}
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		public extern unsafe static int CompileVertexShader(IntPtr Device,
+			[MarshalAs(UnmanagedType.LPWStr)] string FileName,
+			[MarshalAs(UnmanagedType.LPStr)] string EntryPoint,
+			[MarshalAs(UnmanagedType.LPStr)] string? DebugName,
+			IntPtr* VertexShader);
+		
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		public extern unsafe static int CompilePixelShader(IntPtr Device,
 			[MarshalAs(UnmanagedType.LPWStr)] string FileName,
 			[MarshalAs(UnmanagedType.LPStr)] string EntryPoint,
 			[MarshalAs(UnmanagedType.LPStr)] string? DebugName,
 			IntPtr* PixelShader);
 
+		/*
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		public extern unsafe static int EnsureConstantBuffer(IntPtr Device, IntPtr DeviceContext,
 			IntPtr* ConstantBuffer, float* Values);
+		*/
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		internal extern static bool JmpEndsUpInRange(IntPtr SrcAddr, IntPtr RangeStart, uint Size);
 
 		#endregion
 
-		#region Overlay.cpp
+		#region OverlayDirect2D.cpp
 
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		internal extern static int InitOverlay();
@@ -1729,13 +1772,40 @@ namespace ElementsOfHarmony
 		
 		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
 		public extern static void SetDpi(this IntPtr pInstance, float DpiX, float DpiY);
+		
+		[DllImport("DirectXHook.dll", CallingConvention = CallingConvention.StdCall)]
+		public extern static void PrintFrameTime(this IntPtr pInstance, bool IsHDR);
 
 		#endregion
 
 		#region ElementsOfHarmony.Native
 
 		[DllImport("ElementsOfHarmony.Native.dll", CallingConvention = CallingConvention.StdCall)]
-		internal extern static int InitNativeCallbacks();
+		internal extern static int InitNativeCallbacks(
+			bool HDRTakeOverOutputFormat,
+			float HDRDynamicRangeFactor);
+
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		internal delegate bool BoolVariableCallback();
+		
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		internal delegate float FloatVariableCallback();
+		
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		[return: MarshalAs(UnmanagedType.LPWStr)]
+		internal delegate string? StringVariableCallback([MarshalAs(UnmanagedType.LPWStr)] string Name);
+
+		[DllImport("ElementsOfHarmony.Native.dll", CallingConvention = CallingConvention.StdCall)]
+		internal extern static void SetCallbacks(
+			[MarshalAs(UnmanagedType.FunctionPtr)] StringVariableCallback VertexShader,
+			[MarshalAs(UnmanagedType.FunctionPtr)] StringVariableCallback PixelShader);
+
+		[DllImport("ElementsOfHarmony.Native.dll", CallingConvention = CallingConvention.StdCall)]
+		internal extern static void SetIsHDR(bool IsHDR);
+
+		[DllImport("ElementsOfHarmony.Native.dll", CallingConvention = CallingConvention.StdCall)]
+		internal extern static void SetWithinOverlayPass(bool WithinOverlayPass);
 
 		#endregion
 	}
