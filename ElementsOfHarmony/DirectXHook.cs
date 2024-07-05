@@ -124,6 +124,8 @@ namespace ElementsOfHarmony
 
 				SetRunning(true);
 
+				bool DoNotInstallHook = false;
+
 				// apply all of our patch procedures using Harmony API
 				Harmony element = new Harmony($"{typeof(DirectXHook).FullName}");
 				int Num = 0;
@@ -159,7 +161,12 @@ namespace ElementsOfHarmony
 					{
 						if (DirectXHook_AZHM.GetMethod("Init") is MethodInfo InitMethod)
 						{
-							InitMethod.Invoke(null, Array.Empty<object>());
+							object[] Args = new object[1];
+							InitMethod.Invoke(null, Args);
+							if (Args[0] is bool DoNot)
+							{
+								DoNotInstallHook = DoNot;
+							}
 						}
 						Num = 0;
 						foreach (var Patch in DirectXHook_AZHM.GetNestedTypes())
@@ -185,60 +192,68 @@ namespace ElementsOfHarmony
 					Log.Message($"Harmony patch for {typeof(RenderHooks).FullName} successful - {Num} Patches");
 				}
 
-				int HResult = InstallHook();
-				Log.Message($"InstallHook() returns {HResult:X}");
-				Marshal.ThrowExceptionForHR(HResult);
-
-				HResult = InitOverlay();
-				Log.Message($"InitOverlay() returns {HResult:X}");
-				Marshal.ThrowExceptionForHR(HResult);
-				
-				HResult = InitNativeCallbacks(HDR.TakeOverOutputFormat, HDR.DynamicRangeFactor);
-				Log.Message($"InitNativeCallbacks() returns {HResult:X}");
-				Marshal.ThrowExceptionForHR(HResult);
-
-				IntPtr DXGI_DLL = Get_DXGI_DLL_BaseAddress();
-				IntPtr GameOverlayRenderer64_DLL = Get_GameOverlayRenderer64_DLL_BaseAddress();
-				uint GameOverlayRenderer64_DLL_ImageSize = Get_GameOverlayRenderer64_DLL_ImageSize();
-
-				if (DXGI_DLL != IntPtr.Zero && GameOverlayRenderer64_DLL != IntPtr.Zero)
+				if (!DoNotInstallHook)
 				{
-					IntPtr PresentProc = Get_Present_MemoryOriginal_Proc();
-					IntPtr Present1Proc = Get_Present1_MemoryOriginal_Proc();
-					var PresentBytes = new NativeArrayAccess<byte>(Get_Present_MemoryOriginal_Bytes(), 5);
-					var Present1Bytes = new NativeArrayAccess<byte>(Get_Present1_MemoryOriginal_Bytes(), 5);
+					int HResult = InstallHook();
+					Log.Message($"InstallHook() returns {HResult:X}");
+					Marshal.ThrowExceptionForHR(HResult);
 
-					if (PresentProc != IntPtr.Zero && Get_Present_DetourHookDetected())
+					HResult = InitOverlay();
+					Log.Message($"InitOverlay() returns {HResult:X}");
+					Marshal.ThrowExceptionForHR(HResult);
+
+					HResult = InitNativeCallbacks(HDR.TakeOverOutputFormat, HDR.DynamicRangeFactor);
+					Log.Message($"InitNativeCallbacks() returns {HResult:X}");
+					Marshal.ThrowExceptionForHR(HResult);
+
+					IntPtr DXGI_DLL = Get_DXGI_DLL_BaseAddress();
+					IntPtr GameOverlayRenderer64_DLL = Get_GameOverlayRenderer64_DLL_BaseAddress();
+					uint GameOverlayRenderer64_DLL_ImageSize = Get_GameOverlayRenderer64_DLL_ImageSize();
+
+					if (DXGI_DLL != IntPtr.Zero)
 					{
-						Log.Message($"detour hook detected on IDXGISwapChain::Present - " +
-							$"{PresentBytes[0]:X2} {PresentBytes[1]:X2} {PresentBytes[2]:X2} {PresentBytes[3]:X2} {PresentBytes[4]:X2}");
+						IntPtr PresentProc = Get_Present_MemoryOriginal_Proc();
+						IntPtr Present1Proc = Get_Present1_MemoryOriginal_Proc();
+						var PresentBytes = new NativeArrayAccess<byte>(Get_Present_MemoryOriginal_Bytes(), 5);
+						var Present1Bytes = new NativeArrayAccess<byte>(Get_Present1_MemoryOriginal_Bytes(), 5);
 
-						if (JmpEndsUpInRange(PresentProc, GameOverlayRenderer64_DLL, GameOverlayRenderer64_DLL_ImageSize))
+						if (PresentProc != IntPtr.Zero && Get_Present_DetourHookDetected())
 						{
-							Log.Message($"jmp ends up in GameOverlayRenderer64.dll, which means this is a steam overlay hook");
-						}
-						else
-						{
-							Log.Message($"jmp did not end up in GameOverlayRenderer64.dll, this is (probably) not a steam overlay hook");
-						}
-					}
-					if (Present1Proc != IntPtr.Zero && Get_Present1_DetourHookDetected())
-					{
-						Log.Message($"detour hook detected on IDXGISwapChain1::Present1 - " +
-							$"{Present1Bytes[0]:X2} {Present1Bytes[1]:X2} {Present1Bytes[2]:X2} {Present1Bytes[3]:X2} {Present1Bytes[4]:X2}");
+							Log.Message($"detour hook detected on IDXGISwapChain::Present - " +
+								$"{PresentBytes[0]:X2} {PresentBytes[1]:X2} {PresentBytes[2]:X2} {PresentBytes[3]:X2} {PresentBytes[4]:X2}");
 
-						if (JmpEndsUpInRange(Present1Proc, GameOverlayRenderer64_DLL, GameOverlayRenderer64_DLL_ImageSize))
-						{
-							Log.Message($"jmp ends up in GameOverlayRenderer64.dll, which means this is a steam overlay hook");
+							if (GameOverlayRenderer64_DLL != IntPtr.Zero &&
+								JmpEndsUpInRange(PresentProc, GameOverlayRenderer64_DLL, GameOverlayRenderer64_DLL_ImageSize))
+							{
+								Log.Message($"jmp ends up in GameOverlayRenderer64.dll, which means this is a steam overlay hook");
+							}
+							else
+							{
+								Log.Message($"jmp did not end up in GameOverlayRenderer64.dll, this is (probably) not a steam overlay hook");
+							}
 						}
-						else
+						else Log.Message($"detour hook not detected on IDXGISwapChain::Present");
+
+						if (Present1Proc != IntPtr.Zero && Get_Present1_DetourHookDetected())
 						{
-							Log.Message($"jmp did not end up in GameOverlayRenderer64.dll, this is (probably) not a steam overlay hook");
+							Log.Message($"detour hook detected on IDXGISwapChain1::Present1 - " +
+								$"{Present1Bytes[0]:X2} {Present1Bytes[1]:X2} {Present1Bytes[2]:X2} {Present1Bytes[3]:X2} {Present1Bytes[4]:X2}");
+
+							if (GameOverlayRenderer64_DLL != IntPtr.Zero &&
+								JmpEndsUpInRange(Present1Proc, GameOverlayRenderer64_DLL, GameOverlayRenderer64_DLL_ImageSize))
+							{
+								Log.Message($"jmp ends up in GameOverlayRenderer64.dll, which means this is a steam overlay hook");
+							}
+							else
+							{
+								Log.Message($"jmp did not end up in GameOverlayRenderer64.dll, this is (probably) not a steam overlay hook");
+							}
 						}
+						else Log.Message($"detour hook not detected on IDXGISwapChain1::Present1");
 					}
+
+					Log.Message("DirectX hook complete");
 				}
-
-				Log.Message("DirectX hook complete");
 			}
 			catch (Exception e)
 			{
@@ -422,6 +437,8 @@ namespace ElementsOfHarmony
 
 		private static readonly EventHandler<HookCallbackEventArgs> ApplyRenderSettings = (object sender, HookCallbackEventArgs e) =>
 		{
+			Log.Message("applying render settings");
+
 			if (VSyncInterval != null) QualitySettings.vSyncCount = VSyncInterval.Value;
 			if (TargetFrameRate != null) Application.targetFrameRate = TargetFrameRate.Value;
 
@@ -546,12 +563,12 @@ namespace ElementsOfHarmony
 			if (Format == DXGI_FORMAT.DXGI_FORMAT_R10G10B10A2_UNORM && (Overlay.SolveCompatibilityWithHDR || HDR.TakeOverOutputFormat))
 			{
 				Format = DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_FLOAT;
-				Log.Message($"swap chain is resizing, changing HDR format DXGI_FORMAT_R10G10B10A2_UNORM to DXGI_FORMAT_R16G16B16A16_FLOAT");
+				Log.Message($"changing HDR format DXGI_FORMAT_R10G10B10A2_UNORM to DXGI_FORMAT_R16G16B16A16_FLOAT");
 			}
 			else if (HDR.Forced && Format != DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_FLOAT)
 			{
 				Format = DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_FLOAT;
-				Log.Message($"swap chain is resizing, forcing HDR format DXGI_FORMAT_R16G16B16A16_FLOAT");
+				Log.Message($"changing HDR format DXGI_FORMAT_R10G10B10A2_UNORM to DXGI_FORMAT_R16G16B16A16_FLOAT");
 			}
 			if (ForceSwapChainFormat is DXGI_FORMAT ForceFormat)
 			{
@@ -562,12 +579,14 @@ namespace ElementsOfHarmony
 		private static void DirectXHook_PreCreateSwapChain_Format_Hook(object sender, CreateSwapChainEventArgs e)
 		{
 			var Desc = e.Desc;
+			Log.Message($"swap chain is re-creating");
 			ChangeFormat(ref Desc.BufferDesc.Format);
 			e.Desc = Desc;
 		}
 		private static void DirectXHook_PreCreateSwapChainForHwnd_Format_Hook(object sender, CreateSwapChainForHwndEventArgs e)
 		{
 			var Desc = e.Desc;
+			Log.Message($"swap chain is re-creating");
 			ChangeFormat(ref Desc.Format);
 			e.Desc = Desc;
 		}
@@ -575,6 +594,7 @@ namespace ElementsOfHarmony
 		{
 			Marshal.ThrowExceptionForHR(ReleaseSwapChainResources((IntPtr)sender));
 			DXGI_FORMAT Format = e.NewFormat;
+			Log.Message($"swap chain is resizing");
 			ChangeFormat(ref Format);
 			e.NewFormat = Format;
 		}
@@ -582,6 +602,7 @@ namespace ElementsOfHarmony
 		{
 			Marshal.ThrowExceptionForHR(ReleaseSwapChainResources((IntPtr)sender));
 			var Desc = e.NewTargetParameters;
+			Log.Message($"swap chain is resizing");
 			ChangeFormat(ref Desc.Format);
 			e.NewTargetParameters = Desc;
 		}

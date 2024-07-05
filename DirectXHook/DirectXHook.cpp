@@ -378,6 +378,33 @@ struct DetourHook
 		CopyMemory(reinterpret_cast<void*>(MemoryOriginalProc), MemoryOriginalBytes, 14);
 		return S_OK;
 	}
+	
+	/// <summary>
+	/// used for fixing stack overflow error caused by Steam overlay's detour hook
+	/// </summary>
+	HRESULT RestoreMemoryOriginal(FirstFiveBytes& Bytes) const
+	{
+		HRESULT result = 0;
+		DWORD OldProtect = 0;
+		if (Bytes.HasMemoryOriginalBytes) {
+			CopyMemory(reinterpret_cast<void*>(MemoryOriginalProc), Bytes.MemoryOriginalBytes, 5);
+			return S_OK;
+		}
+		else return E_PENDING;
+	}
+	/// <summary>
+	/// used for fixing stack overflow error caused by Steam overlay's detour hook
+	/// </summary>
+	HRESULT RestoreTrueOriginal(FirstFiveBytes& Bytes) const
+	{
+		HRESULT result = 0;
+		DWORD OldProtect = 0;
+		if (Bytes.HasTrueOriginalBytes) {
+			CopyMemory(reinterpret_cast<void*>(MemoryOriginalProc), Bytes.TrueOriginalBytes, 5);
+			return S_OK;
+		}
+		else return E_PENDING;
+	}
 
 	template <typename ProcType, typename ...ArgTypes>
 		requires ReturnsHResult<ProcType, ArgTypes...>

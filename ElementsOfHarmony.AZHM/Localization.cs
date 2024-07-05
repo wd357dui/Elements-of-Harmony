@@ -152,10 +152,6 @@ namespace ElementsOfHarmony.AZHM
 			public static void Postfix(string Term, ref string __result)
 			{
 				Log.Message($"Translation result: lang={LocalizationManager.CurrentLanguageCode} term={Term} result={__result}");
-				if (__result?.Contains("{[") == true)
-				{
-					Log.Message(StackTraceUtility.ExtractStackTrace());
-				}
 			}
 		}
 
