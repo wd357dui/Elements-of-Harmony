@@ -13,6 +13,8 @@ namespace ElementsOfHarmony.KinectControl
 {
 	public static class KinectControl
 	{
+		public static event Action? AfterFrameArrived;
+
 		private static KinectSensor? sensor;
 		private static BodyFrameSource? source;
 		private static BodyFrameReader? reader;
@@ -38,16 +40,22 @@ namespace ElementsOfHarmony.KinectControl
 				Assembly KinectControl_AMBA =
 					AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(A => A.GetName().Name == "ElementsOfHarmony.KinectControl.AMBA") ??
 					Assembly.LoadFile(Path.Combine(ElementsOfHarmony.AssemblyDirectory, "ElementsOfHarmony.KinectControl.AMBA.dll"));
-				Type AMBA = KinectControl_AMBA.GetType("ElementsOfHarmony.KinectControl.AMBA.KinectControl");
-				int Num = 0;
-				foreach (var Patch in AMBA.GetNestedTypes())
+				if (KinectControl_AMBA.GetType("ElementsOfHarmony.KinectControl.AMBA.KinectControl") is Type AMBA)
 				{
-					new PatchClassProcessor(element, Patch).Patch();
-					Num++;
-				}
-				if (Num > 0)
-				{
-					Log.Message($"Harmony patch for {AMBA.FullName} successful - {Num} Patches");
+					if (AMBA.GetMethod("Init") is MethodInfo InitMethod)
+					{
+						InitMethod.Invoke(null, Array.Empty<object>());
+					}
+					int Num = 0;
+					foreach (var Patch in AMBA.GetNestedTypes())
+					{
+						new PatchClassProcessor(element, Patch).Patch();
+						Num++;
+					}
+					if (Num > 0)
+					{
+						Log.Message($"Harmony patch for {AMBA.FullName} successful - {Num} Patches");
+					}
 				}
 			}
 			if (ElementsOfHarmony.IsAZHM)
@@ -55,16 +63,22 @@ namespace ElementsOfHarmony.KinectControl
 				Assembly KinectControl_AZHM =
 					AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(A => A.GetName().Name == "ElementsOfHarmony.KinectControl.AZHM") ??
 					Assembly.LoadFile(Path.Combine(ElementsOfHarmony.AssemblyDirectory, "ElementsOfHarmony.KinectControl.AZHM.dll"));
-				Type AZHM = KinectControl_AZHM.GetType("ElementsOfHarmony.KinectControl.AZHM.KinectControl");
-				int Num = 0;
-				foreach (var Patch in AZHM.GetNestedTypes())
+				if (KinectControl_AZHM.GetType("ElementsOfHarmony.KinectControl.AZHM.KinectControl") is Type AZHM)
 				{
-					new PatchClassProcessor(element, Patch).Patch();
-					Num++;
-				}
-				if (Num > 0)
-				{
-					Log.Message($"Harmony patch for {AZHM.FullName} successful - {Num} Patches");
+					if (AZHM.GetMethod("Init") is MethodInfo InitMethod)
+					{
+						InitMethod.Invoke(null, Array.Empty<object>());
+					}
+					int Num = 0;
+					foreach (var Patch in AZHM.GetNestedTypes())
+					{
+						new PatchClassProcessor(element, Patch).Patch();
+						Num++;
+					}
+					if (Num > 0)
+					{
+						Log.Message($"Harmony patch for {AZHM.FullName} successful - {Num} Patches");
+					}
 				}
 			}
 		}
@@ -140,6 +154,7 @@ namespace ElementsOfHarmony.KinectControl
 			{
 				Bodies[n]?.Dispose();
 			}
+			AfterFrameArrived?.Invoke();
 		}
 		private static void OnOverlayDraw(object sender, EventArgs _)
 		{

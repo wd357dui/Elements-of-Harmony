@@ -12,7 +12,7 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 		public struct ButtonStatus
 		{
 			public bool? Left, Up, Right, Down,
-				South, East, West, North, Menu;
+				A, B, X, Y, Menu;
 		}
 		public static ButtonStatus? PreviousPlayer1Status = null, PreviousPlayer2Status = null,
 			CurrentPlayer1Status = null, CurrentPlayer2Status = null;
@@ -36,10 +36,10 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 							Up = Player.Up,
 							Right = Player.Right,
 							Down = Player.Down,
-							South = Player.South,
-							East = Player.East,
-							West = Player.West,
-							North = Player.North,
+							A = Player.South,
+							B = Player.East,
+							X = Player.West,
+							Y = Player.North,
 							Menu = Player.SouthEast,
 						};
 					}
@@ -115,21 +115,21 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 
 						case MLPAction.JUMP:
 						case MLPAction.SELECT:
-							if (Current.South == true && Previous.South == false)
+							if (Current.A == true && Previous.A == false)
 							{
 								__result = true;
 							}
 							break;
 						case MLPAction.INTERACT:
 						case MLPAction.BACK:
-							if (Current.East == true && Previous.East == false)
+							if (Current.B == true && Previous.B == false)
 							{
 								__result = true;
 							}
 							break;
 						case MLPAction.PAUSE:
 						case MLPAction.CHANGE_ACCOUNT:
-							if (Current.West == true && Previous.West == false)
+							if (Current.X == true && Previous.X == false)
 							{
 								__result = true;
 							}
@@ -140,7 +140,7 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 							break;
 						case MLPAction.EQUIPMENT:
 						case MLPAction.DELETE_ITEM:
-							if (Current.North == true && Previous.North == false)
+							if (Current.Y == true && Previous.Y == false)
 							{
 								__result = true;
 							}
@@ -151,10 +151,10 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 								Current.Left == true && Previous.Left == false ||
 								Current.Up == true && Previous.Up == false ||
 								Current.Down == true && Previous.Down == false ||
-								Current.South == true && Previous.South == false ||
-								Current.East == true && Previous.East == false ||
-								Current.West == true && Previous.West == false ||
-								Current.North == true && Previous.North == false ||
+								Current.A == true && Previous.A == false ||
+								Current.B == true && Previous.B == false ||
+								Current.X == true && Previous.X == false ||
+								Current.Y == true && Previous.Y == false ||
 								Current.Menu == true && Previous.Menu == false)
 							{
 								__result = true;
@@ -204,21 +204,21 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 
 						case MLPAction.JUMP:
 						case MLPAction.SELECT:
-							if (Current.South == false && Previous.South == true)
+							if (Current.A == false && Previous.A == true)
 							{
 								__result = true;
 							}
 							break;
 						case MLPAction.INTERACT:
 						case MLPAction.BACK:
-							if (Current.East == false && Previous.East == true)
+							if (Current.B == false && Previous.B == true)
 							{
 								__result = true;
 							}
 							break;
 						case MLPAction.PAUSE:
 						case MLPAction.CHANGE_ACCOUNT:
-							if (Current.West == false && Previous.West == true)
+							if (Current.X == false && Previous.X == true)
 							{
 								__result = true;
 							}
@@ -229,7 +229,7 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 							break;
 						case MLPAction.EQUIPMENT:
 						case MLPAction.DELETE_ITEM:
-							if (Current.North == false && Previous.North == true)
+							if (Current.Y == false && Previous.Y == true)
 							{
 								__result = true;
 							}
@@ -240,10 +240,10 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 								Current.Left == false && Previous.Left == true ||
 								Current.Up == false && Previous.Up == true ||
 								Current.Down == false && Previous.Down == true ||
-								Current.South == false && Previous.South == true ||
-								Current.East == false && Previous.East == true ||
-								Current.West == false && Previous.West == true ||
-								Current.North == false && Previous.North == true ||
+								Current.A == false && Previous.A == true ||
+								Current.B == false && Previous.B == true ||
+								Current.X == false && Previous.X == true ||
+								Current.Y == false && Previous.Y == true ||
 								Current.Menu == false && Previous.Menu == true)
 							{
 								__result = true;
@@ -292,21 +292,21 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 
 						case MLPAction.JUMP:
 						case MLPAction.SELECT:
-							if (Player.South == true)
+							if (Player.A == true)
 							{
 								__result = true;
 							}
 							break;
 						case MLPAction.INTERACT:
 						case MLPAction.BACK:
-							if (Player.East == true)
+							if (Player.B == true)
 							{
 								__result = true;
 							}
 							break;
 						case MLPAction.PAUSE:
 						case MLPAction.CHANGE_ACCOUNT:
-							if (Player.West == true)
+							if (Player.X == true)
 							{
 								__result = true;
 							}
@@ -317,7 +317,7 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 							break;
 						case MLPAction.EQUIPMENT:
 						case MLPAction.DELETE_ITEM:
-							if (Player.North == true)
+							if (Player.Y == true)
 							{
 								__result = true;
 							}
@@ -328,10 +328,10 @@ namespace ElementsOfHarmony.KinectControl.AMBA
 								Player.Left == true ||
 								Player.Up == true ||
 								Player.Down == true ||
-								Player.South == true ||
-								Player.East == true ||
-								Player.West == true ||
-								Player.North == true ||
+								Player.A == true ||
+								Player.B == true ||
+								Player.X == true ||
+								Player.Y == true ||
 								Player.Menu == true)
 							{
 								__result = true;
