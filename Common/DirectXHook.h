@@ -29,8 +29,6 @@ constexpr size_t ID3D11DeviceContext_OMGetRenderTargets_VTableIndex = 89;
 constexpr size_t IDXGISwapChain3_SetColorSpace1_VTableIndex = 38;
 constexpr size_t IDXGISwapChain4_SetHDRMetaData_VTableIndex = 40;
 
-constexpr size_t InstructionCompareByteCount = 0x20;
-
 typedef HRESULT(STDMETHODCALLTYPE* IDXGIFactory_CreateSwapChain_Proc)(IDXGIFactory* This,
 	_In_  IUnknown* pDevice,
 	_In_::DXGI_SWAP_CHAIN_DESC* pDesc,

@@ -916,6 +916,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dance", "Dance", "{82035D7B
 		Assets\Minigame\Dance\Starbound.lrc = Assets\Minigame\Dance\Starbound.lrc
 		Assets\Minigame\Dance\Starbound.ogg = Assets\Minigame\Dance\Starbound.ogg
 		Assets\Minigame\Dance\Starbound.txt = Assets\Minigame\Dance\Starbound.txt
+		Assets\Minigame\Dance\SuperIzzyball.ogg = Assets\Minigame\Dance\SuperIzzyball.ogg
+		Assets\Minigame\Dance\SuperIzzyball.txt = Assets\Minigame\Dance\SuperIzzyball.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElememsOfHarmony.Standalone", "ElememsOfHarmony.Standalone\ElememsOfHarmony.Standalone.csproj", "{5C40B0A0-7DED-4500-8277-51AAE159685E}"

@@ -32,23 +32,6 @@ extern "C" {
 
 	__declspec(dllexport) HRESULT __stdcall DetermineOutputHDR(_In_ IDXGISwapChain* SwapChain, _Out_ DXGI_FORMAT* Format, _Out_ bool* IsHDR);
 
-	__declspec(dllexport) intptr_t __stdcall Get_Present_MemoryOriginal_Proc();
-	__declspec(dllexport) intptr_t __stdcall Get_Present1_MemoryOriginal_Proc();
-	__declspec(dllexport) BYTE* __stdcall Get_Present_MemoryOriginal_Bytes();
-	__declspec(dllexport) BYTE* __stdcall Get_Present1_MemoryOriginal_Bytes();
-	__declspec(dllexport) bool __stdcall Get_Present_DetourHookDetected();
-	__declspec(dllexport) bool __stdcall Get_Present1_DetourHookDetected();
-
-	__declspec(dllexport) intptr_t __stdcall Get_D3D11_DLL_BaseAddress();
-	__declspec(dllexport) intptr_t __stdcall Get_DXGI_DLL_BaseAddress();
-	__declspec(dllexport) intptr_t __stdcall Get_GameOverlayRenderer64_DLL_BaseAddress();
-	__declspec(dllexport) DWORD __stdcall Get_D3D11_DLL_ImageSize();
-	__declspec(dllexport) DWORD __stdcall Get_DXGI_DLL_ImageSize();
-	__declspec(dllexport) DWORD __stdcall Get_GameOverlayRenderer64_DLL_ImageSize();
-
-	/// <returns>1 for true, 0 for false, -1 for error</returns>
-	__declspec(dllexport) bool __stdcall JmpEndsUpInRange(intptr_t SrcAddr, intptr_t RangeStart, DWORD Size);
-
 	/// <summary>
 	/// get debug name in a ID3D11Device or ID3D11DeviceChild object
 	/// </summary>
@@ -58,10 +41,6 @@ extern "C" {
 		_In_opt_ LPCSTR DebugName, _Out_ ID3D11VertexShader** VertexShader);
 	__declspec(dllexport) HRESULT __stdcall CompilePixelShader(_In_ ID3D11Device* Device, _In_ LPCWSTR FileName, _In_ LPCSTR EntryPoint,
 		_In_opt_ LPCSTR DebugName, _Out_ ID3D11PixelShader** PixelShader);
-	/*
-	__declspec(dllexport) HRESULT __stdcall EnsureConstantBuffer(_In_ ID3D11Device* Device, _In_ ID3D11DeviceContext* DeviceContext,
-		_Inout_ ID3D11Buffer** ConstantBuffer, _In_reads_(4) float* Values);
-	*/
 }
 
 HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* This,
@@ -147,54 +126,57 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain4_SetHDRMetaData_Override(IDXGISwapChain
 
 intptr_t* VTableDeviceContext = nullptr;
 
-struct DllInfo
-{
-	HMODULE		hModule = NULL;
-	intptr_t	BaseAddress = 0;
-	DWORD		ImageSize = 0;
+template <typename ProcType, typename ...ArgTypes>
+concept ReturnsHResult = requires(ProcType proc, ArgTypes ...args) {
+	{ proc(args...) } -> std::same_as<HRESULT>;
+};
 
-	HRESULT Load(LPCWSTR DllName)
-	{
-		if (hModule == NULL) {
-			hModule = GetModuleHandleW(DllName);
-			if (hModule == NULL) return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-		}
-		MODULEINFO Info{};
-		if (!GetModuleInformation(GetCurrentProcess(), hModule, &Info, sizeof(MODULEINFO))) {
-			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-		}
-		BaseAddress = reinterpret_cast<intptr_t>(Info.lpBaseOfDll);
-		ImageSize = Info.SizeOfImage;
-		return S_OK;
-	}
-} DXGI_DLL, D3D11_DLL, GameOverlayRenderer64_DLL;
+template <typename ProcType, typename ...ArgTypes>
+concept ReturnsVoid = requires(ProcType proc, ArgTypes ...args) {
+	{ proc(args...) } -> std::same_as<void>;
+};
 
-struct FirstFiveBytes
+struct HookBase
 {
-	// the first 5 bytes of this function in memory before our hook is installed,
+	static constexpr size_t InstructionCompareByteCount = 0x20;
+	static constexpr size_t InstructionJumpByteCount = 5;
+	static constexpr size_t InstructionJumpByteCount64 = 14;
+
+	// the first bytes of this function in memory before our hook is installed,
 	// this byte code can be already replaced by other hooks,
 	// for example, the steam overlay hook
-	BYTE MemoryOriginalBytes[5]{ 0 };
+	BYTE MemoryOriginalBytes[InstructionJumpByteCount]{ 0 };
+	BYTE MemoryOriginalBytes64[InstructionJumpByteCount64]{ 0 };
 	bool HasMemoryOriginalBytes = false;
 
-	// the true original first 5 bytes of this function
+	// the true original first bytes of this function
 	// determined by reading the original DLL file as binary file
-	BYTE TrueOriginalBytes[5]{ 0 };
+	BYTE TrueOriginalBytes[InstructionJumpByteCount]{ 0 };
+	BYTE TrueOriginalBytes64[InstructionJumpByteCount64]{ 0 };
 	bool HasTrueOriginalBytes = false;
+
+	intptr_t OriginalProc = 0;
+	intptr_t OverrideProc = 0;
 
 	/// <summary>
 	/// compare the original function in memory with byte code from the original file; 
-	/// for a specified number of byte codes, excluding the first 5 bytes (which can hold a jmp instruction): 
+	/// for a specified number of byte codes, excluding the first bytes (which can hold a jmp instruction): 
 	/// we match the byte code with the original file;
 	/// If a match exists then we believe that we have found the original function's byte code;
-	/// so next step we compare the first 5 bytes;
-	/// if the first 5 bytes didn't match, then there must have been a detour hook installed prior to this point.
-	/// if the first 5 bytes did match however, there were no detour hooks.
+	/// so next step we compare the first bytes;
+	/// if the first bytes didn't match, then there must have been a detour hook installed prior to this point.
+	/// if the first bytes did match however, there were no detour hooks.
 	/// </summary>
 	/// <returns>if no byte code ever matched, returns STATUS_ENTRYPOINT_NOT_FOUND (didn't find the original function)</returns>
-	HRESULT Init(intptr_t Proc, LPCWSTR DllPath)
+	HRESULT PrepareBytes(LPCWSTR DllPath)
 	{
-		CopyMemory(MemoryOriginalBytes, reinterpret_cast<void*>(Proc), 5);
+		DWORD OldProtect;
+		if (!VirtualProtect(reinterpret_cast<void*>(OriginalProc), InstructionJumpByteCount64, PAGE_EXECUTE_READWRITE, &OldProtect)) {
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		}
+
+		CopyMemory(MemoryOriginalBytes, reinterpret_cast<void*>(OriginalProc), InstructionJumpByteCount);
+		CopyMemory(MemoryOriginalBytes64, reinterpret_cast<void*>(OriginalProc), InstructionJumpByteCount64);
 		HasMemoryOriginalBytes = true;
 
 		HANDLE DLL_File = CreateFileW(DllPath, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_READONLY, NULL);
@@ -218,8 +200,9 @@ struct FirstFiveBytes
 			if (!ReadFile(DLL_File, Buffer, InstructionCompareByteCount, nullptr, nullptr)) {
 				return E_FAIL;
 			}
-			if (RtlEqualMemory(reinterpret_cast<BYTE*>(Proc) + 5, Buffer + 5, InstructionCompareByteCount - 5)) {
-				CopyMemory(TrueOriginalBytes, Buffer, 5);
+			if (RtlEqualMemory(reinterpret_cast<BYTE*>(OriginalProc) + InstructionJumpByteCount, Buffer + InstructionJumpByteCount, InstructionCompareByteCount - InstructionJumpByteCount)) {
+				CopyMemory(TrueOriginalBytes, Buffer, InstructionJumpByteCount);
+				CopyMemory(TrueOriginalBytes64, Buffer, InstructionJumpByteCount64);
 				HasTrueOriginalBytes = true;
 			}
 			CurrentPos += 0x10; // it seems that the beginning position of every function are aligned to 0x10
@@ -232,216 +215,240 @@ struct FirstFiveBytes
 		}
 		return S_OK;
 	}
-
-	bool DetectDetourHook() const
-	{
-		return HasMemoryOriginalBytes && HasTrueOriginalBytes && !RtlEqualMemory(MemoryOriginalBytes, TrueOriginalBytes, 5);
-	}
-	__declspec(property(get = DetectDetourHook)) bool DetourHookDetected;
-} PresentBytes, Present1Bytes;
-
-template <typename ProcType, typename ...ArgTypes>
-concept ReturnsHResult = requires(ProcType proc, ArgTypes ...args) {
-	{ proc(args...) } -> std::same_as<HRESULT>;
-};
-
-struct VTableHook
-{
-	using Delegate = intptr_t;
-
-	Delegate* PointerInVTable = nullptr;
-	Delegate MemoryOriginalProc = 0;
-	Delegate Override = 0;
-
-	HRESULT Init(Delegate* PointerInVTable, Delegate Override)
-	{
-		this->PointerInVTable = PointerInVTable;
-		MemoryOriginalProc = *PointerInVTable;
-		this->Override = Override;
-		DWORD OldProtect = 0;
-		if (!VirtualProtect(PointerInVTable, sizeof(Delegate), PAGE_EXECUTE_READWRITE, &OldProtect)) {
-			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-		}
-		if (!VirtualProtect(reinterpret_cast<void*>(MemoryOriginalProc), 5, PAGE_EXECUTE_READWRITE, &OldProtect)) {
-			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-		}
-		return S_OK;
-	}
-	inline bool getInitialized() const
-	{
-		return PointerInVTable != nullptr && MemoryOriginalProc != 0 && Override != 0;
-	}
-	__declspec(property(get = getInitialized)) bool Initialized;
-
-	HRESULT Patch()
-	{
-		DWORD OldProtect = 0;
-		*PointerInVTable = Override;
-		return S_OK;
-	}
-	HRESULT UnPatch()
-	{
-		DWORD OldProtect = 0;
-		*PointerInVTable = MemoryOriginalProc;
-		return S_OK;
-	}
-	/// <summary>
-	/// used for fixing stack overflow error caused by Steam overlay's detour hook
-	/// </summary>
-	HRESULT RestoreMemoryOriginal(FirstFiveBytes& Bytes) const
+	HRESULT Init(LPCWSTR DllPath)
 	{
 		HRESULT result = 0;
-		DWORD OldProtect = 0;
-		if (Bytes.HasMemoryOriginalBytes) {
-			CopyMemory(reinterpret_cast<void*>(MemoryOriginalProc), Bytes.MemoryOriginalBytes, 5);
-			return S_OK;
-		}
-		else return E_PENDING;
-	}
-	/// <summary>
-	/// used for fixing stack overflow error caused by Steam overlay's detour hook
-	/// </summary>
-	HRESULT RestoreTrueOriginal(FirstFiveBytes& Bytes) const
-	{
-		HRESULT result = 0;
-		DWORD OldProtect = 0;
-		if (Bytes.HasTrueOriginalBytes) {
-			CopyMemory(reinterpret_cast<void*>(MemoryOriginalProc), Bytes.TrueOriginalBytes, 5);
-			return S_OK;
-		}
-		else return E_PENDING;
-	}
-
-	template <typename ProcType, typename ...ArgTypes>
-		requires ReturnsHResult<ProcType, ArgTypes...>
-	HRESULT InvokeHResult(ArgTypes ...Args)
-	{
-		return reinterpret_cast<ProcType>(MemoryOriginalProc)(Args...);
-	}
-
-	template <typename ProcType, typename ...ArgTypes>
-	void Invoke(ArgTypes ...Args)
-	{
-		reinterpret_cast<ProcType>(MemoryOriginalProc)(Args...);
-	}
-
-} CreateSwapChain, CreateSwapChainForHwnd,
-//ResizeBuffers,
-ResizeTarget,
-Present, Present1,
-CreateShaderResourceView, CreateRenderTargetView, CreatePixelShader,
-//PSSetShader, DrawIndexed, Draw, PSSetConstantBuffers, DrawIndexedInstanced, DrawInstanced, OMSetRenderTargets, OMSetRenderTargetsAndUnorderedAccessViews, DrawAuto, DrawIndexedInstancedIndirect, DrawInstancedIndirect,
-SetColorSpace1, SetHDRMetaData;
-
-struct DetourHook
-{
-	using Delegate = intptr_t;
-
-	Delegate MemoryOriginalProc = 0;
-	Delegate Override = 0;
-
-	BYTE MemoryOriginalBytes[14]{ 0 };
-	bool HasMemoryOriginalBytes = false;
-
-	HRESULT Init(Delegate* PointerInVTable, Delegate Override)
-	{
-		MemoryOriginalProc = *PointerInVTable;
-		this->Override = Override;
-
-		DWORD OldProtect = 0;
-		if (!VirtualProtect(reinterpret_cast<void*>(MemoryOriginalProc), sizeof(Delegate), PAGE_EXECUTE_READWRITE, &OldProtect)) {
-			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
-		}
-		CopyMemory(MemoryOriginalBytes, reinterpret_cast<void*>(MemoryOriginalProc), 14);
-		HasMemoryOriginalBytes = true;
-		return S_OK;
-	}
-	inline bool getInitialized() const
-	{
-		return MemoryOriginalProc != 0 && Override != 0 && HasMemoryOriginalBytes;
-	}
-	__declspec(property(get = getInitialized)) bool Initialized;
-
-	HRESULT Patch() const
-	{
-		BYTE DetourJump64[14]{
-			0xFF, 0x25,
-			0x00, 0x00, 0x00, 0x00,
-			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		};
-		*reinterpret_cast<intptr_t*>(DetourJump64 + 6) = Override;
-		CopyMemory(reinterpret_cast<void*>(MemoryOriginalProc), DetourJump64, 14);
-		return S_OK;
-	}
-	HRESULT UnPatch() const
-	{
-		CopyMemory(reinterpret_cast<void*>(MemoryOriginalProc), MemoryOriginalBytes, 14);
-		return S_OK;
-	}
-	
-	/// <summary>
-	/// used for fixing stack overflow error caused by Steam overlay's detour hook
-	/// </summary>
-	HRESULT RestoreMemoryOriginal(FirstFiveBytes& Bytes) const
-	{
-		HRESULT result = 0;
-		DWORD OldProtect = 0;
-		if (Bytes.HasMemoryOriginalBytes) {
-			CopyMemory(reinterpret_cast<void*>(MemoryOriginalProc), Bytes.MemoryOriginalBytes, 5);
-			return S_OK;
-		}
-		else return E_PENDING;
-	}
-	/// <summary>
-	/// used for fixing stack overflow error caused by Steam overlay's detour hook
-	/// </summary>
-	HRESULT RestoreTrueOriginal(FirstFiveBytes& Bytes) const
-	{
-		HRESULT result = 0;
-		DWORD OldProtect = 0;
-		if (Bytes.HasTrueOriginalBytes) {
-			CopyMemory(reinterpret_cast<void*>(MemoryOriginalProc), Bytes.TrueOriginalBytes, 5);
-			return S_OK;
-		}
-		else return E_PENDING;
-	}
-
-	template <typename ProcType, typename ...ArgTypes>
-		requires ReturnsHResult<ProcType, ArgTypes...>
-	HRESULT InvokeHResult(ArgTypes ...Args)
-	{
-		HRESULT result2 = UnPatch();
-		if (FAILED(result2)) {
-			LogCallback((L"DetourHook::UnPatch failed, return value " + to_wstring(result2)).c_str());
-			ForceBreakpoint();
-		}
-		HRESULT result = reinterpret_cast<ProcType>(MemoryOriginalProc)(Args...);
-		result2 = Patch();
-		if (FAILED(result2)) {
-			LogCallback((L"DetourHook::UnPatch failed, return value " + to_wstring(result2)).c_str());
-			ForceBreakpoint();
+		result = PrepareBytes(DllPath);
+		if (result == STATUS_ENTRYPOINT_NOT_FOUND)
+		{
+			HMODULE DLL;
+			if (!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+				reinterpret_cast<LPCWSTR>(OriginalProc), &DLL)) {
+				return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+			}
+			vector<WCHAR> Chars;
+			Chars.assign(256, L'\0');
+		try_again:
+			DWORD Size = GetModuleFileNameW(DLL, Chars.data(), static_cast<DWORD>(Chars.size()));
+			while (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
+				Chars.assign(Chars.size() + 128, L'\0');
+				goto try_again;
+			}
+			if (Size == Chars.size()) Chars.push_back(L'\0');
+			result = PrepareBytes(Chars.data());
 		}
 		return result;
 	}
 
-	template <typename ProcType, typename ...ArgTypes>
-	void Invoke(ArgTypes ...Args)
+	bool DetectDetourHook() const
 	{
-		HRESULT result2 = UnPatch();
-		if (FAILED(result2)) {
-			LogCallback((L"DetourHook::UnPatch failed, return value " + to_wstring(result2)).c_str());
-			ForceBreakpoint();
+		return HasMemoryOriginalBytes && HasTrueOriginalBytes && !RtlEqualMemory(MemoryOriginalBytes, TrueOriginalBytes, InstructionJumpByteCount);
+	}
+	__declspec(property(get = DetectDetourHook)) bool DetourHookDetected;
+	
+	bool IsBaseInitialized() const
+	{
+		return HasMemoryOriginalBytes && HasTrueOriginalBytes && OriginalProc != 0 && OverrideProc != 0;
+	}
+	__declspec(property(get = IsBaseInitialized)) bool BaseInitialized;
+
+	HRESULT RestoreMemoryOriginal() const
+	{
+		HRESULT result = 0;
+		DWORD OldProtect = 0;
+		if (HasMemoryOriginalBytes && OriginalProc != 0) {
+			CopyMemory(reinterpret_cast<void*>(OriginalProc), MemoryOriginalBytes, InstructionJumpByteCount);
+			return S_OK;
 		}
-		reinterpret_cast<ProcType>(MemoryOriginalProc)(Args...);
-		result2 = Patch();
-		if (FAILED(result2)) {
-			LogCallback((L"DetourHook::UnPatch failed, return value " + to_wstring(result2)).c_str());
-			ForceBreakpoint();
+		else return E_PENDING;
+	}
+	HRESULT RestoreMemoryOriginal64() const
+	{
+		HRESULT result = 0;
+		DWORD OldProtect = 0;
+		if (HasMemoryOriginalBytes && OriginalProc != 0) {
+			CopyMemory(reinterpret_cast<void*>(OriginalProc), MemoryOriginalBytes64, InstructionJumpByteCount64);
+			return S_OK;
 		}
+		else return E_PENDING;
+	}
+	HRESULT RestoreTrueOriginal() const
+	{
+		HRESULT result = 0;
+		DWORD OldProtect = 0;
+		if (HasTrueOriginalBytes && OriginalProc != 0) {
+			CopyMemory(reinterpret_cast<void*>(OriginalProc), TrueOriginalBytes, InstructionJumpByteCount);
+			return S_OK;
+		}
+		else return E_PENDING;
+	}
+	HRESULT RestoreTrueOriginal64() const
+	{
+		HRESULT result = 0;
+		DWORD OldProtect = 0;
+		if (HasTrueOriginalBytes && OriginalProc != 0) {
+			CopyMemory(reinterpret_cast<void*>(OriginalProc), TrueOriginalBytes64, InstructionJumpByteCount64);
+			return S_OK;
+		}
+		else return E_PENDING;
+	}
+	HRESULT PatchJump64() const
+	{
+		if (OriginalProc != 0 && OverrideProc != 0) {
+			BYTE Bytes[InstructionJumpByteCount64]{
+				0xFF, 0x25,
+				0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+			};
+			*reinterpret_cast<intptr_t*>(Bytes + 6) = OverrideProc;
+			CopyMemory(reinterpret_cast<void*>(OriginalProc), Bytes, InstructionJumpByteCount64);
+			return S_OK;
+		}
+		else return E_PENDING;
+	}
+};
+
+struct VTableHook : HookBase
+{
+	using HookBase::DetectDetourHook;
+
+	intptr_t* PointerInVTable = nullptr;
+
+	HRESULT Init(intptr_t* PointerInVTable, intptr_t OverrideProc, LPCWSTR DllPath)
+	{
+		this->PointerInVTable = PointerInVTable;
+		this->OriginalProc = *PointerInVTable;
+		this->OverrideProc = OverrideProc;
+		DWORD OldProtect;
+		if (!VirtualProtect(PointerInVTable, sizeof(intptr_t), PAGE_EXECUTE_READWRITE, &OldProtect)) {
+			return MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, GetLastError());
+		}
+		return HookBase::Init(DllPath);
 	}
 
-} ResizeBuffers,
-PSSetShader, DrawIndexed, Draw, PSSetConstantBuffers, DrawIndexedInstanced, DrawInstanced, OMSetRenderTargets, OMSetRenderTargetsAndUnorderedAccessViews, DrawAuto, DrawIndexedInstancedIndirect, DrawInstancedIndirect;
+	HRESULT Patch()
+	{
+		*PointerInVTable = OverrideProc;
+		return S_OK;
+	}
+	HRESULT UnPatch()
+	{
+		*PointerInVTable = OriginalProc;
+		return S_OK;
+	}
+	using HookBase::RestoreMemoryOriginal64;
+	using HookBase::RestoreTrueOriginal64;
+
+	inline bool IsInitialized() const
+	{
+		return HookBase::BaseInitialized && PointerInVTable != nullptr;
+	}
+	__declspec(property(get = IsInitialized)) bool Initialized;
+
+	template <typename ProcType, typename ...ArgTypes>
+	inline auto InvokeMemoryOrginal(ArgTypes ...Args)
+	{
+		using ReturnType = std::invoke_result_t<ProcType, ArgTypes...>;
+		if constexpr (std::is_same_v<ReturnType, void>) {
+			reinterpret_cast<ProcType>(OriginalProc)(Args...);
+		}
+		else return reinterpret_cast<ProcType>(OriginalProc)(Args...);
+	}
+	template <typename ProcType, typename ...ArgTypes>
+	inline auto InvokeTrueOrginal(ArgTypes ...Args)
+	{
+		using ReturnType = std::invoke_result_t<ProcType, ArgTypes...>;
+		if constexpr (std::is_same_v<ReturnType, void>) {
+			RestoreTrueOriginal();
+			reinterpret_cast<ProcType>(OriginalProc)(Args...);
+			RestoreMemoryOriginal();
+		}
+		else {
+			RestoreTrueOriginal();
+			ReturnType result = reinterpret_cast<ProcType>(OriginalProc)(Args...);
+			RestoreMemoryOriginal();
+			return result;
+		}
+	}
+}
+// IDXGIFactory
+CreateSwapChain, CreateSwapChainForHwnd,
+// ID3D11Device
+CreateShaderResourceView, CreateRenderTargetView, CreatePixelShader;
+
+struct DetourHook : HookBase
+{
+	using HookBase::DetectDetourHook;
+
+	HRESULT Init(intptr_t* PointerInVTable, intptr_t OverrideProc, LPCWSTR DllPath)
+	{
+		this->OriginalProc = *PointerInVTable;
+		this->OverrideProc = OverrideProc;
+		return HookBase::Init(DllPath);
+	}
+
+	HRESULT Patch()
+	{
+		return HookBase::PatchJump64();
+	}
+	HRESULT UnPatch()
+	{
+		return HookBase::RestoreMemoryOriginal64();
+	}
+	using HookBase::RestoreMemoryOriginal64;
+	using HookBase::RestoreTrueOriginal64;
+
+	inline bool IsInitialized() const
+	{
+		return HookBase::BaseInitialized;
+	}
+	__declspec(property(get = IsInitialized)) bool Initialized;
+
+	template <typename ProcType, typename ...ArgTypes>
+	inline auto InvokeMemoryOrginal(ArgTypes ...Args)
+	{
+		using ReturnType = std::invoke_result_t<ProcType, ArgTypes...>;
+		if constexpr (std::is_same_v<ReturnType, void>) {
+			UnPatch();
+			reinterpret_cast<ProcType>(OriginalProc)(Args...);
+			Patch();
+		}
+		else {
+			UnPatch();
+			ReturnType result = reinterpret_cast<ProcType>(OriginalProc)(Args...);
+			Patch();
+			return result;
+		}
+	}
+	template <typename ProcType, typename ...ArgTypes>
+	inline auto InvokeTrueOrginal(ArgTypes ...Args)
+	{
+		using ReturnType = std::invoke_result_t<ProcType, ArgTypes...>;
+		if constexpr (std::is_same_v<ReturnType, void>) {
+			RestoreTrueOriginal64();
+			reinterpret_cast<ProcType>(OriginalProc)(Args...);
+			RestoreMemoryOriginal64();
+		}
+		else {
+			RestoreTrueOriginal64();
+			ReturnType result = reinterpret_cast<ProcType>(OriginalProc)(Args...);
+			RestoreMemoryOriginal64();
+			return result;
+		}
+	}
+}
+// IDXGISwapChain
+ResizeBuffers, ResizeTarget,
+Present, Present1,
+// ID3D11DeviceContext
+PSSetShader,
+DrawIndexed, Draw,
+PSSetConstantBuffers,
+DrawIndexedInstanced, DrawInstanced,
+OMSetRenderTargets, OMSetRenderTargetsAndUnorderedAccessViews,
+DrawAuto, DrawIndexedInstancedIndirect, DrawInstancedIndirect,
+// IDXGISwapChain3
+SetColorSpace1, SetHDRMetaData;
 
 static inline wstring Convert(string MultiByte)
 {
@@ -572,17 +579,10 @@ HRESULT __stdcall InstallHook()
 {
 	HRESULT result = 0;
 
-	result = DXGI_DLL.Load(L"DXGI.dll");
-	if (FAILED(result)) return result;
-
-	result = D3D11_DLL.Load(L"D3D11.dll");
-	if (FAILED(result)) return result;
-
-	result = GameOverlayRenderer64_DLL.Load(L"GameOverlayRenderer64.dll");
-	if (FAILED(result)) {
-		LogCallback(L"GameOverlayRenderer64.dll (the Steam overlay hook) is not loaded");
+	if (GetModuleHandleW(L"GameOverlayRenderer64.dll") != NULL) {
+		LogCallback(L"GameOverlayRenderer64.dll (the Steam overlay hook) is loaded");
 	}
-	else LogCallback(L"GameOverlayRenderer64.dll (the Steam overlay hook) is loaded");
+	else LogCallback(L"GameOverlayRenderer64.dll (the Steam overlay hook) is not loaded");
 
 	ComPtr<ID3D11Device> Device;
 	ComPtr<ID3D11DeviceContext> DeviceContext;
@@ -600,18 +600,18 @@ HRESULT __stdcall InstallHook()
 		&SwapChain, &SwapChain1, &SwapChain3, &SwapChain4);
 	if (FAILED(result)) return result;
 
+	result = InstallHookForFactory(Factory.Get(), Factory2.Get());
+	if (FAILED(result)) return result;
+
+	result = InstallHookForSwapChain(SwapChain.Get(), SwapChain1.Get(), SwapChain3.Get(), SwapChain4.Get());
+	if (FAILED(result)) return result;
+
 	result = InstallHookForDevice(Device.Get());
 	if (FAILED(result)) return result;
 	
 	result = InstallHookForDeviceContext(DeviceContext.Get());
 	if (FAILED(result)) return result;
 	
-	result = InstallHookForFactory(Factory.Get(), Factory2.Get());
-	if (FAILED(result)) return result;
-	
-	result = InstallHookForSwapChain(SwapChain.Get(), SwapChain1.Get(), SwapChain3.Get(), SwapChain4.Get());
-	if (FAILED(result)) return result;
-
 	return result;
 }
 
@@ -654,8 +654,8 @@ __declspec(dllexport) void __stdcall SetLogCallback(LogCallbackProc LogCallback)
 	::LogCallback = LogCallback;
 }
 
-#define InitHook(Name, PointerInVTable, Override) \
-result = Name.Init(PointerInVTable, Override); \
+#define InitHook(Name, PointerInVTable, Override, DllPath) \
+result = Name.Init(PointerInVTable, Override, DllPath); \
 if (FAILED(result)) return result;
 
 HRESULT __stdcall InstallHookForDevice(_In_ ID3D11Device* Device)
@@ -665,9 +665,18 @@ HRESULT __stdcall InstallHookForDevice(_In_ ID3D11Device* Device)
 	int NumHooks = 0;
 
 	VTable = reinterpret_cast<intptr_t*>(*reinterpret_cast<intptr_t*>(Device));
-	InitHook(CreateShaderResourceView, &VTable[ID3D11Device_CreateShaderResourceView_VTableIndex], reinterpret_cast<intptr_t>(ID3D11Device_CreateShaderResourceView_Override));
-	InitHook(CreateRenderTargetView, &VTable[ID3D11Device_CreateRenderTargetView_VTableIndex], reinterpret_cast<intptr_t>(ID3D11Device_CreateRenderTargetView_Override));
-	InitHook(CreatePixelShader, &VTable[ID3D11Device_CreatePixelShader_VTableIndex], reinterpret_cast<intptr_t>(ID3D11Device_CreatePixelShader_Override));
+	InitHook(CreateShaderResourceView,
+		&VTable[ID3D11Device_CreateShaderResourceView_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11Device_CreateShaderResourceView_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
+	InitHook(CreateRenderTargetView,
+		&VTable[ID3D11Device_CreateRenderTargetView_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11Device_CreateRenderTargetView_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
+	InitHook(CreatePixelShader,
+		&VTable[ID3D11Device_CreatePixelShader_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11Device_CreatePixelShader_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
 
 	if (CreateShaderResourceView.Initialized) {
 		result = CreateShaderResourceView.Patch();
@@ -699,17 +708,50 @@ HRESULT __stdcall InstallHookForDeviceContext(_In_ ID3D11DeviceContext* DeviceCo
 	int NumHooks = 0;
 
 	VTable = VTableDeviceContext = reinterpret_cast<intptr_t*>(*reinterpret_cast<intptr_t*>(DeviceContext));
-	InitHook(PSSetShader, &VTable[ID3D11DeviceContext_PSSetShader_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_PSSetShader_Override));
-	InitHook(DrawIndexed, &VTable[ID3D11DeviceContext_DrawIndexed_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_DrawIndexed_Override));
-	InitHook(Draw, &VTable[ID3D11DeviceContext_Draw_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_Draw_Override));
-	InitHook(PSSetConstantBuffers, &VTable[ID3D11DeviceContext_PSSetConstantBuffers_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_PSSetConstantBuffers_Override));
-	InitHook(DrawIndexedInstanced, &VTable[ID3D11DeviceContext_DrawIndexedInstanced_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_DrawIndexedInstanced_Override));
-	InitHook(DrawInstanced, &VTable[ID3D11DeviceContext_DrawInstanced_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_DrawInstanced_Override));
-	InitHook(OMSetRenderTargets, &VTable[ID3D11DeviceContext_OMSetRenderTargets_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_OMSetRenderTargets_Override));
-	InitHook(OMSetRenderTargetsAndUnorderedAccessViews, &VTable[ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_Override));
-	InitHook(DrawAuto, &VTable[ID3D11DeviceContext_DrawAuto_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_DrawAuto_Override));
-	InitHook(DrawIndexedInstancedIndirect, &VTable[ID3D11DeviceContext_DrawIndexedInstancedIndirect_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_DrawIndexedInstancedIndirect_Override));
-	InitHook(DrawInstancedIndirect, &VTable[ID3D11DeviceContext_DrawInstancedIndirect_VTableIndex], reinterpret_cast<intptr_t>(ID3D11DeviceContext_DrawInstancedIndirect_Override));
+	InitHook(PSSetShader,
+		&VTable[ID3D11DeviceContext_PSSetShader_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11DeviceContext_PSSetShader_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
+	InitHook(DrawIndexed,
+		&VTable[ID3D11DeviceContext_DrawIndexed_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11DeviceContext_DrawIndexed_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
+	InitHook(Draw,
+		&VTable[ID3D11DeviceContext_Draw_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11DeviceContext_Draw_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
+	InitHook(PSSetConstantBuffers,
+		&VTable[ID3D11DeviceContext_PSSetConstantBuffers_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11DeviceContext_PSSetConstantBuffers_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
+	InitHook(DrawIndexedInstanced,
+		&VTable[ID3D11DeviceContext_DrawIndexedInstanced_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11DeviceContext_DrawIndexedInstanced_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
+	InitHook(DrawInstanced,
+		&VTable[ID3D11DeviceContext_DrawInstanced_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11DeviceContext_DrawInstanced_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
+	InitHook(OMSetRenderTargets,
+		&VTable[ID3D11DeviceContext_OMSetRenderTargets_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11DeviceContext_OMSetRenderTargets_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
+	InitHook(OMSetRenderTargetsAndUnorderedAccessViews,
+		&VTable[ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
+	InitHook(DrawAuto,
+		&VTable[ID3D11DeviceContext_DrawAuto_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11DeviceContext_DrawAuto_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
+	InitHook(DrawIndexedInstancedIndirect,
+		&VTable[ID3D11DeviceContext_DrawIndexedInstancedIndirect_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11DeviceContext_DrawIndexedInstancedIndirect_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
+	InitHook(DrawInstancedIndirect,
+		&VTable[ID3D11DeviceContext_DrawInstancedIndirect_VTableIndex],
+		reinterpret_cast<intptr_t>(ID3D11DeviceContext_DrawInstancedIndirect_Override),
+		L"C:\\Windows\\System32\\D3D11.dll");
 
 	if (PSSetShader.Initialized) {
 		result = PSSetShader.Patch();
@@ -789,7 +831,10 @@ HRESULT __stdcall InstallHookForFactory(_In_ IDXGIFactory* Factory, _In_opt_ IDX
 	int NumHooks = 0;
 
 	VTable = reinterpret_cast<intptr_t*>(*reinterpret_cast<intptr_t*>(Factory));
-	InitHook(CreateSwapChain, &VTable[IDXGIFactory_CreateSwapChain_VTableIndex], reinterpret_cast<intptr_t>(IDXGIFactory_CreateSwapChain_Override));
+	InitHook(CreateSwapChain,
+		&VTable[IDXGIFactory_CreateSwapChain_VTableIndex],
+		reinterpret_cast<intptr_t>(IDXGIFactory_CreateSwapChain_Override),
+		L"C:\\Windows\\System32\\DXGI.dll");
 
 	if (CreateSwapChain.Initialized) {
 		result = CreateSwapChain.Patch();
@@ -799,7 +844,10 @@ HRESULT __stdcall InstallHookForFactory(_In_ IDXGIFactory* Factory, _In_opt_ IDX
 
 	if (Factory2 != nullptr) {
 		VTable = reinterpret_cast<intptr_t*>(*reinterpret_cast<intptr_t*>(Factory2));
-		InitHook(CreateSwapChainForHwnd, &VTable[IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex], reinterpret_cast<intptr_t>(IDXGIFactory2_CreateSwapChainForHwnd_Override));
+		InitHook(CreateSwapChainForHwnd,
+			&VTable[IDXGIFactory2_CreateSwapChainForHwnd_VTableIndex],
+			reinterpret_cast<intptr_t>(IDXGIFactory2_CreateSwapChainForHwnd_Override),
+			L"C:\\Windows\\System32\\DXGI.dll");
 
 		result = CreateSwapChainForHwnd.Patch();
 		if (FAILED(result)) return result;
@@ -818,16 +866,18 @@ HRESULT __stdcall InstallHookForSwapChain(_In_ IDXGISwapChain* SwapChain, _In_op
 	int NumHooks = 0;
 
 	VTable = reinterpret_cast<intptr_t*>(*reinterpret_cast<intptr_t*>(SwapChain));
-	InitHook(Present, &VTable[IDXGISwapChain_Present_VTableIndex], reinterpret_cast<intptr_t>(IDXGISwapChain_Present_Override));
-	result = PresentBytes.Init(VTable[IDXGISwapChain_Present_VTableIndex], L"C:/Windows/System32/DXGI.dll");
-	if (result == STATUS_ENTRYPOINT_NOT_FOUND) {
-		LogCallback(L"failed to find true original byte code for IDXGISwapChain::Present, won't be able to fix stack overflow error if steam overlay hook is present");
-	}
-	else if (FAILED(result)) return result;
-	else result = S_OK;
-
-	InitHook(ResizeBuffers, &VTable[IDXGISwapChain_ResizeBuffers_VTableIndex], reinterpret_cast<intptr_t>(IDXGISwapChain_ResizeBuffers_Override));
-	InitHook(ResizeTarget, &VTable[IDXGISwapChain_ResizeTarget_VTableIndex], reinterpret_cast<intptr_t>(IDXGISwapChain_ResizeTarget_Override));
+	InitHook(Present,
+		&VTable[IDXGISwapChain_Present_VTableIndex],
+		reinterpret_cast<intptr_t>(IDXGISwapChain_Present_Override),
+		L"C:\\Windows\\System32\\DXGI.dll");
+	InitHook(ResizeBuffers,
+		&VTable[IDXGISwapChain_ResizeBuffers_VTableIndex],
+		reinterpret_cast<intptr_t>(IDXGISwapChain_ResizeBuffers_Override),
+		L"C:\\Windows\\System32\\DXGI.dll");
+	InitHook(ResizeTarget,
+		&VTable[IDXGISwapChain_ResizeTarget_VTableIndex],
+		reinterpret_cast<intptr_t>(IDXGISwapChain_ResizeTarget_Override),
+		L"C:\\Windows\\System32\\DXGI.dll");
 
 	if (Present.Initialized) {
 		result = Present.Patch();
@@ -849,13 +899,10 @@ HRESULT __stdcall InstallHookForSwapChain(_In_ IDXGISwapChain* SwapChain, _In_op
 
 	if (SwapChain1 != nullptr) {
 		VTable = reinterpret_cast<intptr_t*>(*reinterpret_cast<intptr_t*>(SwapChain1));
-		InitHook(Present1, &VTable[IDXGISwapChain1_Present1_VTableIndex], reinterpret_cast<intptr_t>(IDXGISwapChain1_Present1_Override));
-		result = Present1Bytes.Init(VTable[IDXGISwapChain1_Present1_VTableIndex], L"C:/Windows/System32/DXGI.dll");
-		if (result == STATUS_ENTRYPOINT_NOT_FOUND) {
-			LogCallback(L"failed to find true original byte code for IDXGISwapChain1::Present1, won't be able to fix stack overflow error if steam overlay hook is present");
-		}
-		else if (FAILED(result)) return result;
-		else result = S_OK;
+		InitHook(Present1,
+			&VTable[IDXGISwapChain1_Present1_VTableIndex],
+			reinterpret_cast<intptr_t>(IDXGISwapChain1_Present1_Override),
+			L"C:\\Windows\\System32\\DXGI.dll");
 
 		if (Present1.Initialized) {
 			result = Present1.Patch();
@@ -866,7 +913,10 @@ HRESULT __stdcall InstallHookForSwapChain(_In_ IDXGISwapChain* SwapChain, _In_op
 
 	if (SwapChain3 != nullptr) {
 		VTable = reinterpret_cast<intptr_t*>(*reinterpret_cast<intptr_t*>(SwapChain3));
-		InitHook(SetColorSpace1, &VTable[IDXGISwapChain3_SetColorSpace1_VTableIndex], reinterpret_cast<intptr_t>(IDXGISwapChain3_SetColorSpace1_Override));
+		InitHook(SetColorSpace1,
+			&VTable[IDXGISwapChain3_SetColorSpace1_VTableIndex],
+			reinterpret_cast<intptr_t>(IDXGISwapChain3_SetColorSpace1_Override),
+			L"C:\\Windows\\System32\\DXGI.dll");
 
 		if (SetColorSpace1.Initialized) {
 			result = SetColorSpace1.Patch();
@@ -877,7 +927,10 @@ HRESULT __stdcall InstallHookForSwapChain(_In_ IDXGISwapChain* SwapChain, _In_op
 
 	if (SwapChain4 != nullptr) {
 		VTable = reinterpret_cast<intptr_t*>(*reinterpret_cast<intptr_t*>(SwapChain4));
-		InitHook(SetHDRMetaData, &VTable[IDXGISwapChain4_SetHDRMetaData_VTableIndex], reinterpret_cast<intptr_t>(IDXGISwapChain4_SetHDRMetaData_Override));
+		InitHook(SetHDRMetaData,
+			&VTable[IDXGISwapChain4_SetHDRMetaData_VTableIndex],
+			reinterpret_cast<intptr_t>(IDXGISwapChain4_SetHDRMetaData_Override),
+			L"C:\\Windows\\System32\\DXGI.dll");
 
 		if (SetHDRMetaData.Initialized) {
 			result = SetHDRMetaData.Patch();
@@ -1273,49 +1326,19 @@ HRESULT __stdcall DetermineOutputHDR(_In_ IDXGISwapChain* SwapChain, _Out_ DXGI_
 	return S_OK;
 }
 
-intptr_t __stdcall Get_Present_MemoryOriginal_Proc()
-{
-	return Present.MemoryOriginalProc;
-}
-
-intptr_t __stdcall Get_Present1_MemoryOriginal_Proc()
-{
-	return Present1.MemoryOriginalProc;
-}
-
-BYTE* __stdcall Get_Present_MemoryOriginal_Bytes()
-{
-	return PresentBytes.MemoryOriginalBytes;
-}
-
-BYTE* __stdcall Get_Present1_MemoryOriginal_Bytes()
-{
-	return Present1Bytes.MemoryOriginalBytes;
-}
-
-bool __stdcall Get_Present_DetourHookDetected()
-{
-	return PresentBytes.DetourHookDetected;
-}
-
-bool __stdcall Get_Present1_DetourHookDetected()
-{
-	return Present1Bytes.DetourHookDetected;
-}
-
 HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* This,
 	_In_  IUnknown* pDevice,
 	_In_::DXGI_SWAP_CHAIN_DESC* pDesc,
 	IDXGISwapChain** ppSwapChain)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		Arguments Args = Arguments::PreCreateSwapChain(This, pDevice, *pDesc);
 		HookCallback(&Args);
 
 		if (Args.Stop) return Args.Result;
 
-		HRESULT result = CreateSwapChain.InvokeHResult<IDXGIFactory_CreateSwapChain_Proc>(This,
+		HRESULT result = CreateSwapChain.InvokeMemoryOrginal<IDXGIFactory_CreateSwapChain_Proc>(This,
 			pDevice, pDesc, ppSwapChain);
 
 		Arguments::PostCreateSwapChain(Args, ppSwapChain, result);
@@ -1326,7 +1349,7 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory_CreateSwapChain_Override(IDXGIFactory* Th
 		}
 		return result;
 	}
-	else return CreateSwapChain.InvokeHResult<IDXGIFactory_CreateSwapChain_Proc>(This, pDevice, pDesc, ppSwapChain);
+	else return CreateSwapChain.InvokeMemoryOrginal<IDXGIFactory_CreateSwapChain_Proc>(This, pDevice, pDesc, ppSwapChain);
 }
 
 HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFactory2* This,
@@ -1337,7 +1360,7 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFac
 	_In_opt_  IDXGIOutput* pRestrictToOutput,
 	IDXGISwapChain1** ppSwapChain)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		DXGI_SWAP_CHAIN_DESC1 Desc = *pDesc;
 		Arguments::OptionalStruct<DXGI_SWAP_CHAIN_FULLSCREEN_DESC> FullscreenDesc = pFullscreenDesc;
@@ -1350,7 +1373,7 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFac
 
 		if (Args.Stop) return Args.Result;
 
-		HRESULT result = CreateSwapChainForHwnd.InvokeHResult<IDXGIFactory2_CreateSwapChainForHwnd_Proc>(This,
+		HRESULT result = CreateSwapChainForHwnd.InvokeMemoryOrginal<IDXGIFactory2_CreateSwapChainForHwnd_Proc>(This,
 			pDevice, hWnd, pDesc, FullscreenDesc.Ptr(), pRestrictToOutput, ppSwapChain);
 
 		Arguments::PostCreateSwapChainForHwnd(Args, ppSwapChain, result);
@@ -1361,7 +1384,7 @@ HRESULT STDMETHODCALLTYPE IDXGIFactory2_CreateSwapChainForHwnd_Override(IDXGIFac
 		}
 		return result;
 	}
-	else return CreateSwapChainForHwnd.InvokeHResult<IDXGIFactory2_CreateSwapChainForHwnd_Proc>(This,
+	else return CreateSwapChainForHwnd.InvokeMemoryOrginal<IDXGIFactory2_CreateSwapChainForHwnd_Proc>(This,
 		pDevice, hWnd, pDesc, pFullscreenDesc, pRestrictToOutput, ppSwapChain);
 }
 
@@ -1375,22 +1398,10 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, 
 	bool StackOverflowFixNeeded = ++StackCount >= 2;
 
 	if (StackOverflowFixNeeded) {
-		result2 = Present.RestoreTrueOriginal(PresentBytes);
-		if (FAILED(result2)) {
-			LogCallback((L"IDXGISwapChain_Present_Override -> Present.RestoreTrueOriginal -> error code: " + to_wstring(result2)).c_str());
-			ForceBreakpoint();
-		}
-
-		result = Present.InvokeHResult<IDXGISwapChain_Present_Proc>(This, SyncInterval, Flags);
-
-		result2 = Present.RestoreMemoryOriginal(PresentBytes);
-		if (FAILED(result2)) {
-			LogCallback((L"IDXGISwapChain_Present_Override -> Present.RestoreMemoryOriginal -> error code: " + to_wstring(result2)).c_str());
-			ForceBreakpoint();
-		}
+		result = Present.InvokeTrueOrginal<IDXGISwapChain_Present_Proc>(This, SyncInterval, Flags);
 	}
 	else {
-		if (Running && HookCallback != nullptr) {
+		if (Running) {
 
 			Arguments Args{};
 			Args = Arguments::PrePresent(This, SyncInterval, Flags);
@@ -1402,12 +1413,12 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, 
 				goto skip;
 			}
 
-			result = Present.InvokeHResult<IDXGISwapChain_Present_Proc>(This, SyncInterval, Flags);
+			result = Present.InvokeMemoryOrginal<IDXGISwapChain_Present_Proc>(This, SyncInterval, Flags);
 
 			Arguments::PostPresent(Args, result);
 			HookCallback(&Args);
 		}
-		else result = Present.InvokeHResult<IDXGISwapChain_Present_Proc>(This, SyncInterval, Flags);
+		else result = Present.InvokeMemoryOrginal<IDXGISwapChain_Present_Proc>(This, SyncInterval, Flags);
 	}
 
 	skip:
@@ -1418,7 +1429,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_Present_Override(IDXGISwapChain* This, 
 
 HRESULT STDMETHODCALLTYPE IDXGISwapChain_ResizeBuffers_Override(IDXGISwapChain* This, UINT BufferCount, UINT Width, UINT Height, DXGI_FORMAT NewFormat, UINT SwapChainFlags)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		Arguments Args = Arguments::PreResizeBuffers(This,
 			BufferCount, Width, Height, NewFormat, SwapChainFlags);
@@ -1426,7 +1437,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_ResizeBuffers_Override(IDXGISwapChain* 
 
 		if (Args.Stop) return Args.Result;
 
-		HRESULT result = ResizeBuffers.InvokeHResult<IDXGISwapChain_ResizeBuffers_Proc>(This,
+		HRESULT result = ResizeBuffers.InvokeMemoryOrginal<IDXGISwapChain_ResizeBuffers_Proc>(This,
 				BufferCount, Width, Height, NewFormat, SwapChainFlags);
 
 		Arguments::PostResizeBuffers(Args, result);
@@ -1437,13 +1448,13 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_ResizeBuffers_Override(IDXGISwapChain* 
 		}
 		return result;
 	}
-	else return ResizeBuffers.InvokeHResult<IDXGISwapChain_ResizeBuffers_Proc>(This,
+	else return ResizeBuffers.InvokeMemoryOrginal<IDXGISwapChain_ResizeBuffers_Proc>(This,
 		BufferCount, Width, Height, NewFormat, SwapChainFlags);
 }
 
 HRESULT STDMETHODCALLTYPE IDXGISwapChain_ResizeTarget_Override(IDXGISwapChain* This, _In_ const DXGI_MODE_DESC* pNewTargetParameters)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 		DXGI_MODE_DESC NewTargetParameters = *pNewTargetParameters;
 
 		Arguments Args = Arguments::PreResizeTarget(This, NewTargetParameters);
@@ -1451,7 +1462,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_ResizeTarget_Override(IDXGISwapChain* T
 
 		if (Args.Stop) return Args.Result;
 
-		HRESULT result = ResizeTarget.InvokeHResult<IDXGISwapChain_ResizeTarget_Proc>(This,
+		HRESULT result = ResizeTarget.InvokeMemoryOrginal<IDXGISwapChain_ResizeTarget_Proc>(This,
 			&NewTargetParameters);
 
 		Arguments::PostResizeTarget(Args, result);
@@ -1462,7 +1473,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain_ResizeTarget_Override(IDXGISwapChain* T
 		}
 		return result;
 	}
-	else return ResizeTarget.InvokeHResult<IDXGISwapChain_ResizeTarget_Proc>(This, pNewTargetParameters);
+	else return ResizeTarget.InvokeMemoryOrginal<IDXGISwapChain_ResizeTarget_Proc>(This, pNewTargetParameters);
 }
 
 std::map<IDXGISwapChain1*, UINT> IDXGISwapChain1_Present1_StackCount;
@@ -1475,22 +1486,10 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* Thi
 	bool StackOverflowFixNeeded = ++StackCount >= 2;
 
 	if (StackOverflowFixNeeded) {
-		result2 = Present1.RestoreTrueOriginal(Present1Bytes);
-		if (FAILED(result2)) {
-			LogCallback((L"IDXGISwapChain1_Present1_Override -> Present1.RestoreTrueOriginal -> error code: " + to_wstring(result2)).c_str());
-			ForceBreakpoint();
-		}
-
-		result = Present1.InvokeHResult<IDXGISwapChain1_Present1_Proc>(This, SyncInterval, Flags, pPresentParameters);
-
-		result2 = Present1.RestoreMemoryOriginal(Present1Bytes);
-		if (FAILED(result2)) {
-			LogCallback((L"IDXGISwapChain1_Present1_Override -> Present1.RestoreMemoryOriginal -> error code: " + to_wstring(result2)).c_str());
-			ForceBreakpoint();
-		}
+		result = Present1.InvokeTrueOrginal<IDXGISwapChain1_Present1_Proc>(This, SyncInterval, Flags, pPresentParameters);
 	}
 	else {
-		if (Running && HookCallback != nullptr) {
+		if (Running) {
 
 			Arguments Args{};
 			DXGI_PRESENT_PARAMETERS PresentParameters = *pPresentParameters;
@@ -1520,12 +1519,12 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain1_Present1_Override(IDXGISwapChain1* Thi
 				goto skip;
 			}
 
-			result = Present1.InvokeHResult<IDXGISwapChain1_Present1_Proc>(This, SyncInterval, Flags, &PresentParameters);
+			result = Present1.InvokeMemoryOrginal<IDXGISwapChain1_Present1_Proc>(This, SyncInterval, Flags, &PresentParameters);
 
 			Arguments::PostPresent1(Args, result);
 			HookCallback(&Args);
 		}
-		else result = Present1.InvokeHResult<IDXGISwapChain1_Present1_Proc>(This, SyncInterval, Flags, pPresentParameters);
+		else result = Present1.InvokeMemoryOrginal<IDXGISwapChain1_Present1_Proc>(This, SyncInterval, Flags, pPresentParameters);
 	}
 	
 	skip:
@@ -1539,7 +1538,7 @@ HRESULT STDMETHODCALLTYPE ID3D11Device_CreateShaderResourceView_Override(ID3D11D
 	_In_opt_  const D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc,
 	ID3D11ShaderResourceView** ppSRView)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 		Arguments::OptionalStruct<D3D11_SHADER_RESOURCE_VIEW_DESC> Desc = pDesc;
 
 		Arguments Args = Arguments::PreCreateShaderResourceView(This,
@@ -1548,7 +1547,7 @@ HRESULT STDMETHODCALLTYPE ID3D11Device_CreateShaderResourceView_Override(ID3D11D
 
 		if (Args.Stop) return Args.Result;
 
-		HRESULT result = CreateShaderResourceView.InvokeHResult<ID3D11Device_CreateShaderResourceView_Proc>(This,
+		HRESULT result = CreateShaderResourceView.InvokeMemoryOrginal<ID3D11Device_CreateShaderResourceView_Proc>(This,
 			pResource, Desc.Ptr(), ppSRView);
 
 		Arguments::PostCreateShaderResourceView(Args, ppSRView, result);
@@ -1559,7 +1558,7 @@ HRESULT STDMETHODCALLTYPE ID3D11Device_CreateShaderResourceView_Override(ID3D11D
 		}
 		return result;
 	}
-	else return CreateShaderResourceView.InvokeHResult<ID3D11Device_CreateShaderResourceView_Proc>(This,
+	else return CreateShaderResourceView.InvokeMemoryOrginal<ID3D11Device_CreateShaderResourceView_Proc>(This,
 		pResource, pDesc, ppSRView);
 }
 
@@ -1568,7 +1567,7 @@ HRESULT STDMETHODCALLTYPE ID3D11Device_CreateRenderTargetView_Override(ID3D11Dev
 	_In_opt_  const D3D11_RENDER_TARGET_VIEW_DESC* pDesc,
 	ID3D11RenderTargetView** ppRTView)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 		Arguments::OptionalStruct<D3D11_RENDER_TARGET_VIEW_DESC> Desc = pDesc;
 
 		Arguments Args = Arguments::PreCreateRenderTargetView(This,
@@ -1577,7 +1576,7 @@ HRESULT STDMETHODCALLTYPE ID3D11Device_CreateRenderTargetView_Override(ID3D11Dev
 
 		if (Args.Stop) return Args.Result;
 
-		HRESULT result = CreateRenderTargetView.InvokeHResult<ID3D11Device_CreateRenderTargetView_Proc>(This,
+		HRESULT result = CreateRenderTargetView.InvokeMemoryOrginal<ID3D11Device_CreateRenderTargetView_Proc>(This,
 			pResource, Desc.Ptr(), ppRTView);
 
 		Arguments::PostCreateRenderTargetView(Args, ppRTView, result);
@@ -1588,7 +1587,7 @@ HRESULT STDMETHODCALLTYPE ID3D11Device_CreateRenderTargetView_Override(ID3D11Dev
 		}
 		return result;
 	}
-	else return CreateRenderTargetView.InvokeHResult<ID3D11Device_CreateRenderTargetView_Proc>(This,
+	else return CreateRenderTargetView.InvokeMemoryOrginal<ID3D11Device_CreateRenderTargetView_Proc>(This,
 		pResource, pDesc, ppRTView);
 }
 
@@ -1597,14 +1596,14 @@ HRESULT STDMETHODCALLTYPE ID3D11Device_CreatePixelShader_Override(ID3D11Device* 
 	_In_opt_  ID3D11ClassLinkage* pClassLinkage,
 	ID3D11PixelShader** ppPixelShader)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 		Arguments Args = Arguments::PreCreatePixelShader(This,
 			pShaderBytecode, BytecodeLength, pClassLinkage);
 		HookCallback(&Args);
 
 		if (Args.Stop) return Args.Result;
 
-		HRESULT result = CreatePixelShader.InvokeHResult<ID3D11Device_CreatePixelShader_Proc>(This,
+		HRESULT result = CreatePixelShader.InvokeMemoryOrginal<ID3D11Device_CreatePixelShader_Proc>(This,
 			pShaderBytecode, BytecodeLength, pClassLinkage, ppPixelShader);
 
 		Arguments::PostCreatePixelShader(Args, ppPixelShader, result);
@@ -1615,7 +1614,7 @@ HRESULT STDMETHODCALLTYPE ID3D11Device_CreatePixelShader_Override(ID3D11Device* 
 		}
 		return result;
 	}
-	else return CreatePixelShader.InvokeHResult<ID3D11Device_CreatePixelShader_Proc>(This,
+	else return CreatePixelShader.InvokeMemoryOrginal<ID3D11Device_CreatePixelShader_Proc>(This,
 		pShaderBytecode, BytecodeLength, pClassLinkage, ppPixelShader);
 }
 
@@ -1624,7 +1623,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_PSSetShader_Override(ID3D11DeviceCont
 	_In_reads_opt_(NumClassInstances) ID3D11ClassInstance* const* ppClassInstances,
 	UINT NumClassInstances)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		ID3D11ClassInstance** ArrayClassInstances = nullptr;
 		vector<ID3D11ClassInstance*> ClassInstances;
@@ -1640,14 +1639,14 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_PSSetShader_Override(ID3D11DeviceCont
 
 		if (Args.Stop) return;
 
-		PSSetShader.Invoke<ID3D11DeviceContext_PSSetShader_Proc>(This,
+		PSSetShader.InvokeMemoryOrginal<ID3D11DeviceContext_PSSetShader_Proc>(This,
 			pPixelShader, ArrayClassInstances, NumClassInstances);
 
 		Arguments::PostPSSetShader(Args, S_OK);
 		HookCallback(&Args);
 	}
 	else {
-		PSSetShader.Invoke<ID3D11DeviceContext_PSSetShader_Proc>(This,
+		PSSetShader.InvokeMemoryOrginal<ID3D11DeviceContext_PSSetShader_Proc>(This,
 			pPixelShader, ppClassInstances, NumClassInstances);
 	}
 }
@@ -1657,7 +1656,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_DrawIndexed_Override(ID3D11DeviceCont
 	_In_  UINT StartIndexLocation,
 	_In_  INT BaseVertexLocation)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		Arguments Args = Arguments::PreDrawIndexed(This,
 			IndexCount, StartIndexLocation, BaseVertexLocation);
@@ -1665,14 +1664,14 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_DrawIndexed_Override(ID3D11DeviceCont
 
 		if (Args.Stop) return;
 
-		DrawIndexed.Invoke<ID3D11DeviceContext_DrawIndexed_Proc>(This,
+		DrawIndexed.InvokeMemoryOrginal<ID3D11DeviceContext_DrawIndexed_Proc>(This,
 			IndexCount, StartIndexLocation, BaseVertexLocation);
 
 		Arguments::PostDrawIndexed(Args, S_OK);
 		HookCallback(&Args);
 	}
 	else {
-		DrawIndexed.Invoke<ID3D11DeviceContext_DrawIndexed_Proc>(This,
+		DrawIndexed.InvokeMemoryOrginal<ID3D11DeviceContext_DrawIndexed_Proc>(This,
 			IndexCount, StartIndexLocation, BaseVertexLocation);
 	}
 }
@@ -1681,7 +1680,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_Draw_Override(ID3D11DeviceContext* Th
 	_In_  UINT VertexCount,
 	_In_  UINT StartVertexLocation)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		Arguments Args = Arguments::PreDraw(This,
 			VertexCount, StartVertexLocation);
@@ -1689,14 +1688,14 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_Draw_Override(ID3D11DeviceContext* Th
 
 		if (Args.Stop) return;
 
-		Draw.Invoke<ID3D11DeviceContext_Draw_Proc>(This,
+		Draw.InvokeMemoryOrginal<ID3D11DeviceContext_Draw_Proc>(This,
 			VertexCount, StartVertexLocation);
 
 		Arguments::PostDraw(Args, S_OK);
 		HookCallback(&Args);
 	}
 	else {
-		Draw.Invoke<ID3D11DeviceContext_Draw_Proc>(This,
+		Draw.InvokeMemoryOrginal<ID3D11DeviceContext_Draw_Proc>(This,
 			VertexCount, StartVertexLocation);
 	}
 }
@@ -1706,7 +1705,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_PSSetConstantBuffers_Override(ID3D11D
 	_In_range_(0, D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT - StartSlot)  UINT NumBuffers,
 	_In_reads_opt_(NumBuffers)  ID3D11Buffer* const* ppConstantBuffers)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 		ID3D11Buffer** ArrayConstantBuffers = nullptr;
 		std::vector<ID3D11Buffer*> ConstantBuffers;
 		if (ppConstantBuffers != nullptr) {
@@ -1718,13 +1717,13 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_PSSetConstantBuffers_Override(ID3D11D
 		Arguments Args = Arguments::PrePSSetConstantBuffers(This, StartSlot, NumBuffers, ArrayConstantBuffers);
 		HookCallback(&Args);
 
-		PSSetConstantBuffers.Invoke<ID3D11DeviceContext_PSSetConstantBuffers_Proc>(This, StartSlot, NumBuffers, ArrayConstantBuffers);
+		PSSetConstantBuffers.InvokeMemoryOrginal<ID3D11DeviceContext_PSSetConstantBuffers_Proc>(This, StartSlot, NumBuffers, ArrayConstantBuffers);
 
 		Arguments::PostPSSetConstantBuffers(Args, S_OK);
 		HookCallback(&Args);
 	}
 	else {
-		PSSetConstantBuffers.Invoke<ID3D11DeviceContext_PSSetConstantBuffers_Proc>(This, StartSlot, NumBuffers, ppConstantBuffers);
+		PSSetConstantBuffers.InvokeMemoryOrginal<ID3D11DeviceContext_PSSetConstantBuffers_Proc>(This, StartSlot, NumBuffers, ppConstantBuffers);
 	}
 }
 
@@ -1735,7 +1734,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_DrawIndexedInstanced_Override(ID3D11D
 	_In_  INT BaseVertexLocation,
 	_In_  UINT StartInstanceLocation)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		Arguments Args = Arguments::PreDrawIndexedInstanced(This,
 			IndexCountPerInstance, InstanceCount, StartIndexLocation, BaseVertexLocation, StartInstanceLocation);
@@ -1743,14 +1742,14 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_DrawIndexedInstanced_Override(ID3D11D
 
 		if (Args.Stop) return;
 
-		DrawIndexedInstanced.Invoke<ID3D11DeviceContext_DrawIndexedInstanced_Proc>(This,
+		DrawIndexedInstanced.InvokeMemoryOrginal<ID3D11DeviceContext_DrawIndexedInstanced_Proc>(This,
 			IndexCountPerInstance, InstanceCount, StartIndexLocation, BaseVertexLocation, StartInstanceLocation);
 
 		Arguments::PostDrawIndexedInstanced(Args, S_OK);
 		HookCallback(&Args);
 	}
 	else {
-		DrawIndexedInstanced.Invoke<ID3D11DeviceContext_DrawIndexedInstanced_Proc>(This,
+		DrawIndexedInstanced.InvokeMemoryOrginal<ID3D11DeviceContext_DrawIndexedInstanced_Proc>(This,
 			IndexCountPerInstance, InstanceCount, StartIndexLocation, BaseVertexLocation, StartInstanceLocation);
 	}
 }
@@ -1761,7 +1760,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_DrawInstanced_Override(ID3D11DeviceCo
 	_In_  UINT StartVertexLocation,
 	_In_  UINT StartInstanceLocation)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		Arguments Args = Arguments::PreDrawInstanced(This,
 			VertexCountPerInstance, InstanceCount, StartVertexLocation, StartInstanceLocation);
@@ -1769,14 +1768,14 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_DrawInstanced_Override(ID3D11DeviceCo
 
 		if (Args.Stop) return;
 
-		DrawInstanced.Invoke<ID3D11DeviceContext_DrawInstanced_Proc>(This,
+		DrawInstanced.InvokeMemoryOrginal<ID3D11DeviceContext_DrawInstanced_Proc>(This,
 			VertexCountPerInstance, InstanceCount, StartVertexLocation, StartInstanceLocation);
 
 		Arguments::PostDrawInstanced(Args, S_OK);
 		HookCallback(&Args);
 	}
 	else {
-		DrawInstanced.Invoke<ID3D11DeviceContext_DrawInstanced_Proc>(This,
+		DrawInstanced.InvokeMemoryOrginal<ID3D11DeviceContext_DrawInstanced_Proc>(This,
 			VertexCountPerInstance, InstanceCount, StartVertexLocation, StartInstanceLocation);
 	}
 }
@@ -1786,7 +1785,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_OMSetRenderTargets_Override(ID3D11Dev
 	_In_reads_opt_(NumViews)  ID3D11RenderTargetView* const* ppRenderTargetViews,
 	_In_opt_  ID3D11DepthStencilView* pDepthStencilView)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		ID3D11RenderTargetView** ArrayRTV = nullptr;
 		vector<ID3D11RenderTargetView*> RenderTargetViews;
@@ -1803,14 +1802,14 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_OMSetRenderTargets_Override(ID3D11Dev
 
 		if (Args.Stop) return;
 
-		OMSetRenderTargets.Invoke<ID3D11DeviceContext_OMSetRenderTargets_Proc>(This,
+		OMSetRenderTargets.InvokeMemoryOrginal<ID3D11DeviceContext_OMSetRenderTargets_Proc>(This,
 			NumViews, ArrayRTV, pDepthStencilView);
 
 		Arguments::PostOMSetRenderTargets(Args, S_OK);
 		HookCallback(&Args);
 	}
 	else {
-		OMSetRenderTargets.Invoke<ID3D11DeviceContext_OMSetRenderTargets_Proc>(This,
+		OMSetRenderTargets.InvokeMemoryOrginal<ID3D11DeviceContext_OMSetRenderTargets_Proc>(This,
 			NumViews, ppRenderTargetViews, pDepthStencilView);
 	}
 }
@@ -1824,7 +1823,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessV
 	_In_reads_opt_(NumUAVs)  ID3D11UnorderedAccessView* const* ppUnorderedAccessViews,
 	_In_reads_opt_(NumUAVs)  const UINT* pUAVInitialCounts)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		ID3D11RenderTargetView** ArrayRTV = nullptr;
 		vector<ID3D11RenderTargetView*> RenderTargetViews;
@@ -1859,7 +1858,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessV
 
 		if (Args.Stop) return;
 
-		OMSetRenderTargetsAndUnorderedAccessViews.Invoke<ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_Proc>(This,
+		OMSetRenderTargetsAndUnorderedAccessViews.InvokeMemoryOrginal<ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_Proc>(This,
 			NumRTVs, ArrayRTV, pDepthStencilView,
 			UAVStartSlot, NumUAVs, ArrayUAV, ArrayUAVInitialCounts);
 
@@ -1867,7 +1866,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessV
 		HookCallback(&Args);
 	}
 	else {
-		OMSetRenderTargetsAndUnorderedAccessViews.Invoke<ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_Proc>(This,
+		OMSetRenderTargetsAndUnorderedAccessViews.InvokeMemoryOrginal<ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessViews_Proc>(This,
 			NumRTVs, ppRenderTargetViews, pDepthStencilView,
 			UAVStartSlot, NumUAVs, ppUnorderedAccessViews, pUAVInitialCounts);
 	}
@@ -1875,20 +1874,20 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_OMSetRenderTargetsAndUnorderedAccessV
 
 void STDMETHODCALLTYPE ID3D11DeviceContext_DrawAuto_Override(ID3D11DeviceContext* This)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		Arguments Args = Arguments::PreDrawAuto(This);
 		HookCallback(&Args);
 
 		if (Args.Stop) return;
 
-		reinterpret_cast<ID3D11DeviceContext_DrawAuto_Proc>(DrawAuto.MemoryOriginalProc)(This);
+		DrawAuto.InvokeMemoryOrginal<ID3D11DeviceContext_DrawAuto_Proc>(This);
 
 		Arguments::PostDrawAuto(Args, S_OK);
 		HookCallback(&Args);
 	}
 	else {
-		reinterpret_cast<ID3D11DeviceContext_DrawAuto_Proc>(DrawAuto.MemoryOriginalProc)(This);
+		DrawAuto.InvokeMemoryOrginal<ID3D11DeviceContext_DrawAuto_Proc>(This);
 	}
 }
 
@@ -1896,7 +1895,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_DrawIndexedInstancedIndirect_Override
 	_In_  ID3D11Buffer* pBufferForArgs,
 	_In_  UINT AlignedByteOffsetForArgs)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		Arguments Args = Arguments::PreDrawIndexedInstancedIndirect(This,
 			pBufferForArgs, AlignedByteOffsetForArgs);
@@ -1904,14 +1903,14 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_DrawIndexedInstancedIndirect_Override
 
 		if (Args.Stop) return;
 
-		DrawIndexedInstancedIndirect.Invoke<ID3D11DeviceContext_DrawIndexedInstancedIndirect_Proc>(This,
+		DrawIndexedInstancedIndirect.InvokeMemoryOrginal<ID3D11DeviceContext_DrawIndexedInstancedIndirect_Proc>(This,
 			pBufferForArgs, AlignedByteOffsetForArgs);
 
 		Arguments::PostDrawIndexedInstancedIndirect(Args, S_OK);
 		HookCallback(&Args);
 	}
 	else {
-		DrawIndexedInstancedIndirect.Invoke<ID3D11DeviceContext_DrawIndexedInstancedIndirect_Proc>(This,
+		DrawIndexedInstancedIndirect.InvokeMemoryOrginal<ID3D11DeviceContext_DrawIndexedInstancedIndirect_Proc>(This,
 			pBufferForArgs, AlignedByteOffsetForArgs);
 	}
 }
@@ -1920,7 +1919,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_DrawInstancedIndirect_Override(ID3D11
 	_In_  ID3D11Buffer* pBufferForArgs,
 	_In_  UINT AlignedByteOffsetForArgs)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		Arguments Args = Arguments::PreDrawInstancedIndirect(This,
 			pBufferForArgs, AlignedByteOffsetForArgs);
@@ -1928,14 +1927,14 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_DrawInstancedIndirect_Override(ID3D11
 
 		if (Args.Stop) return;
 
-		DrawInstancedIndirect.Invoke<ID3D11DeviceContext_DrawInstancedIndirect_Proc>(This,
+		DrawInstancedIndirect.InvokeMemoryOrginal<ID3D11DeviceContext_DrawInstancedIndirect_Proc>(This,
 			pBufferForArgs, AlignedByteOffsetForArgs);
 
 		Arguments::PostDrawInstancedIndirect(Args, S_OK);
 		HookCallback(&Args);
 	}
 	else {
-		DrawInstancedIndirect.Invoke<ID3D11DeviceContext_DrawInstancedIndirect_Proc>(This,
+		DrawInstancedIndirect.InvokeMemoryOrginal<ID3D11DeviceContext_DrawInstancedIndirect_Proc>(This,
 			pBufferForArgs, AlignedByteOffsetForArgs);
 	}
 }
@@ -1943,7 +1942,7 @@ void STDMETHODCALLTYPE ID3D11DeviceContext_DrawInstancedIndirect_Override(ID3D11
 HRESULT STDMETHODCALLTYPE IDXGISwapChain3_SetColorSpace1_Override(IDXGISwapChain3* This,
 	_In_  DXGI_COLOR_SPACE_TYPE ColorSpace)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		Arguments Args = Arguments::PreSetColorSpace1(This,
 			ColorSpace);
@@ -1951,7 +1950,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain3_SetColorSpace1_Override(IDXGISwapChain
 
 		if (Args.Stop) return Args.Result;
 
-		HRESULT result = SetColorSpace1.InvokeHResult<IDXGISwapChain3_SetColorSpace1_Proc>(This,
+		HRESULT result = SetColorSpace1.InvokeMemoryOrginal<IDXGISwapChain3_SetColorSpace1_Proc>(This,
 			ColorSpace);
 
 		Arguments::PostSetColorSpace1(Args, result);
@@ -1963,7 +1962,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain3_SetColorSpace1_Override(IDXGISwapChain
 		return result;
 	}
 	else {
-		return SetColorSpace1.InvokeHResult<IDXGISwapChain3_SetColorSpace1_Proc>(This,
+		return SetColorSpace1.InvokeMemoryOrginal<IDXGISwapChain3_SetColorSpace1_Proc>(This,
 			ColorSpace);
 	}
 }
@@ -1973,7 +1972,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain4_SetHDRMetaData_Override(IDXGISwapChain
 	_In_  UINT Size,
 	_In_reads_opt_(Size)  void* pMetaData)
 {
-	if (Running && HookCallback != nullptr) {
+	if (Running) {
 
 		Arguments::OptionalStruct<DXGI_HDR_METADATA_HDR10> MetaData10 = reinterpret_cast<DXGI_HDR_METADATA_HDR10*>(pMetaData);
 		Arguments::OptionalStruct<DXGI_HDR_METADATA_HDR10PLUS> MetaData10Plus = reinterpret_cast<DXGI_HDR_METADATA_HDR10PLUS*>(pMetaData);
@@ -1984,7 +1983,7 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain4_SetHDRMetaData_Override(IDXGISwapChain
 
 		if (Args.Stop) return Args.Result;
 
-		HRESULT result = SetHDRMetaData.InvokeHResult<IDXGISwapChain4_SetHDRMetaData_Proc>(This,
+		HRESULT result = SetHDRMetaData.InvokeMemoryOrginal<IDXGISwapChain4_SetHDRMetaData_Proc>(This,
 			Type, Size,
 			Type == DXGI_HDR_METADATA_TYPE_HDR10 ? reinterpret_cast<void*>(MetaData10.Ptr()) :
 			Type == DXGI_HDR_METADATA_TYPE_HDR10PLUS ? reinterpret_cast<void*>(MetaData10Plus.Ptr()) : nullptr);
@@ -1996,105 +1995,12 @@ HRESULT STDMETHODCALLTYPE IDXGISwapChain4_SetHDRMetaData_Override(IDXGISwapChain
 		return result;
 	}
 	else {
-		return SetHDRMetaData.InvokeHResult<IDXGISwapChain4_SetHDRMetaData_Proc>(This,
+		return SetHDRMetaData.InvokeMemoryOrginal<IDXGISwapChain4_SetHDRMetaData_Proc>(This,
 			Type, Size, pMetaData);
 	}
 }
 
 
-
-intptr_t __stdcall Get_D3D11_DLL_BaseAddress()
-{
-	return D3D11_DLL.BaseAddress;
-}
-
-intptr_t __stdcall Get_DXGI_DLL_BaseAddress()
-{
-	return DXGI_DLL.BaseAddress;
-}
-
-intptr_t __stdcall Get_GameOverlayRenderer64_DLL_BaseAddress()
-{
-	return GameOverlayRenderer64_DLL.BaseAddress;
-}
-
-DWORD __stdcall Get_D3D11_DLL_ImageSize()
-{
-	return D3D11_DLL.ImageSize;
-}
-
-DWORD __stdcall Get_DXGI_DLL_ImageSize()
-{
-	return DXGI_DLL.ImageSize;
-}
-
-DWORD __stdcall Get_GameOverlayRenderer64_DLL_ImageSize()
-{
-	return GameOverlayRenderer64_DLL.ImageSize;
-}
-
-bool __stdcall JmpEndsUpInRange(intptr_t SrcAddr, intptr_t RangeStart, DWORD Size)
-{
-#if defined(_M_ARM)
-#error this function will not work on ARM because it assumes x86 instruction machine codes
-#endif
-
-	BYTE* nextAddress = reinterpret_cast<BYTE*>(SrcAddr);
-
-	// generated by ChatGPT because my old code (which is based on guess work) eventually failed
-	// Follow jumps until a non-jump instruction is found
-	while (true) {
-		BYTE opcode = *nextAddress;
-
-		if (opcode == 0xEB) { // Short jump (relative)
-			int8_t offset = *(int8_t*)(nextAddress + 1);
-			nextAddress = nextAddress + 2 + offset;
-		}
-		else if (opcode == 0xE9) { // Near jump (relative)
-			int32_t offset = *(int32_t*)(nextAddress + 1);
-			nextAddress = nextAddress + 5 + offset;
-		}
-		else if (opcode == 0xE8) { // Call (relative)
-			int32_t offset = *(int32_t*)(nextAddress + 1);
-			nextAddress = nextAddress + 5 + offset;
-		}
-		else if (opcode == 0xFF) { // Indirect jump (complex, multiple forms)
-			BYTE modrm = *(nextAddress + 1);
-			if ((modrm & 0xC0) == 0x00) { // [reg] or [disp32]
-				if ((modrm & 0x07) == 0x05) { // [disp32]
-					int32_t disp32 = *(int32_t*)(nextAddress + 2);
-					nextAddress = *(BYTE**)(nextAddress + 6 + disp32);
-				}
-				else {
-					BYTE reg = modrm & 0x07;
-					nextAddress = *(BYTE**)(nextAddress + 2); // [reg]
-				}
-			}
-			else if ((modrm & 0xC0) == 0x40) { // [reg + disp8]
-				BYTE reg = modrm & 0x07;
-				int8_t disp8 = *(int8_t*)(nextAddress + 2);
-				nextAddress = *(BYTE**)(nextAddress + 3 + disp8);
-			}
-			else if ((modrm & 0xC0) == 0x80) { // [reg + disp32]
-				BYTE reg = modrm & 0x07;
-				int32_t disp32 = *(int32_t*)(nextAddress + 2);
-				nextAddress = *(BYTE**)(nextAddress + 6 + disp32);
-			}
-			else {
-				// Unsupported addressing mode
-				break;
-			}
-		}
-		else {
-			break;
-		}
-	}
-
-	if (reinterpret_cast<intptr_t>(nextAddress) >= RangeStart && reinterpret_cast<intptr_t>(nextAddress) < (RangeStart + Size)) {
-		return true;
-	}
-	return false;
-}
 
 char CharArray[1024] = "\0";
 constexpr GUID WKPDID_D3DDebugObjectName{ 0x429b8c22, 0x9188, 0x4b0c, 0x87, 0x42, 0xac, 0xb0, 0xbf, 0x85, 0xc2, 0x00 };
@@ -2162,38 +2068,6 @@ HRESULT __stdcall CompilePixelShader(_In_ ID3D11Device* Device, _In_ LPCWSTR Fil
 	}
 	return result;
 }
-
-/*
-HRESULT __stdcall EnsureConstantBuffer(_In_ ID3D11Device* Device, _In_ ID3D11DeviceContext* DeviceContext,
-	_Inout_ ID3D11Buffer** ConstantBuffer, _In_reads_(4) float* Values)
-{
-	HRESULT result = 0;
-
-	if (*ConstantBuffer == nullptr) {
-		D3D11_BUFFER_DESC Desc = {
-			.ByteWidth = 4 * sizeof(float),
-			.Usage = D3D11_USAGE_DYNAMIC,
-			.BindFlags = D3D11_BIND_CONSTANT_BUFFER,
-			.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE,
-			.MiscFlags = 0,
-			.StructureByteStride = sizeof(float),
-		};
-
-		result = Device->CreateBuffer(&Desc, nullptr, ConstantBuffer);
-		if (FAILED(result)) return result;
-	}
-
-	D3D11_MAPPED_SUBRESOURCE Mapped{};
-	result = DeviceContext->Map(*ConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &Mapped);
-	if (FAILED(result)) return result;
-	
-	CopyMemory(Mapped.pData, Values, 4 * sizeof(float));
-
-	DeviceContext->Unmap(*ConstantBuffer, 0);
-
-	return result;
-}
-*/
 
 
 constexpr WCHAR ClassName[] = L"MAGIC";

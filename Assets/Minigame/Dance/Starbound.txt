@@ -6,10 +6,10 @@ Trey Husk, Nexgen & Koa
 128
 
 [BeginAt]
-00:00.875
+00:01.875
 
 [EndAt]
-03:02.578
+03:01.875
 
 [Speed]
 4,6

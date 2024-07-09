@@ -150,22 +150,22 @@ static void DirectXHook_PrePSSetShader_Hook(Arguments* Args)
 }
 
 HRESULT static EnsureConstantBuffer(_In_ ID3D11Device* Device, _In_ ID3D11DeviceContext* DeviceContext,
-	ComPtr<ID3D11Buffer>& ConstantBuffer, _In_reads_(4) float* Values)
+	ComPtr<ID3D11Buffer>& ConstantBuffer, _In_reads_(4) float* InitialValues)
 {
 	HRESULT result = 0;
 
 	if (ConstantBuffer == nullptr) {
 		D3D11_BUFFER_DESC Desc = {
 			.ByteWidth = 4 * sizeof(float),
-			.Usage = D3D11_USAGE_DYNAMIC,
+			.Usage = D3D11_USAGE_DEFAULT,
 			.BindFlags = D3D11_BIND_CONSTANT_BUFFER,
-			.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE,
+			.CPUAccessFlags = 0,
 			.MiscFlags = 0,
 			.StructureByteStride = sizeof(float),
 		};
 
 		D3D11_SUBRESOURCE_DATA Data = {
-			.pSysMem = Values,
+			.pSysMem = InitialValues,
 			.SysMemPitch = 0,
 			.SysMemSlicePitch = 0,
 		};
@@ -173,16 +173,6 @@ HRESULT static EnsureConstantBuffer(_In_ ID3D11Device* Device, _In_ ID3D11Device
 		result = Device->CreateBuffer(&Desc, &Data, &ConstantBuffer);
 		if (FAILED(result)) return result;
 	}
-
-	/*
-	D3D11_MAPPED_SUBRESOURCE Mapped{};
-	result = DeviceContext->Map(ConstantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &Mapped);
-	if (FAILED(result)) return result;
-
-	CopyMemory(Mapped.pData, Values, 4 * sizeof(float));
-
-	DeviceContext->Unmap(ConstantBuffer.Get(), 0);
-	*/
 
 	return result;
 }
@@ -216,7 +206,7 @@ static void OnDrawCall(ID3D11DeviceContext* pDeviceContext)
 
 			pDeviceContext->PSSetShader(CopyTextureToSwapChainHDR.Get(), nullptr, 0);
 
-			float Values[4] {
+			static float Values[4] {
 				HDRDynamicRangeFactor = ::HDRDynamicRangeFactor,
 				0.0f, 0.0f, 0.0f,
 			};

@@ -208,7 +208,7 @@ namespace ElementsOfHarmony
 					foreach (var Font in Fonts)
 					{
 						TMP_Settings.fallbackFontAssets.Add(TMP_FontAsset.CreateFontAsset(
-							new Font(Font)));
+							new Font(Path.GetFullPath(Font))));
 					}
 				}
 				TMP_Settings.fallbackFontAssets.Add(TMP_FontAsset.CreateFontAsset(new Font()));

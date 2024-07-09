@@ -285,7 +285,7 @@ namespace ElementsOfHarmony.AMBA
 			{
 				if (PreviousInstance != null)
 				{
-					StartTime = Time.time + 3f - (GetBeginAt() ?? 0f);
+					StartTime = Time.time + 4f - (GetBeginAt() ?? 0f);
 					Paused = false;
 					Started = true;
 				}
@@ -371,7 +371,7 @@ namespace ElementsOfHarmony.AMBA
 				}
 				if (PreviousInstance?.introSource.isPlaying == true)
 				{
-					float GradualDecrease = Mathf.Clamp01(Mathf.Pow(-time / 3f, 2f)) * 0.5f;
+					float GradualDecrease = Mathf.Clamp01(Mathf.Pow(-time / 4f, 2f)) * 0.5f;
 					PreviousInstance.introSource.volume = GradualDecrease;
 					if (time >= 0f)
 					{
@@ -530,18 +530,22 @@ namespace ElementsOfHarmony.AMBA
 							flag = num7 >= num8;
 							 */
 
+							float speed = (signalLauncher.lifetimeIndex == 0 ?
+								(float?)(SelectedSong?.Speed) : (float?)(SelectedSong?.SpeedMultiplayerSplitScreen)
+								) ?? __instance.signal.maxSpeed;
+
 							// so, a better shinking method is needed
 							float maxSize = (0 < signalLauncher.lifetimeIndex) ? 850f : 1000f;
 							float shinkFactor = (0 < signalLauncher.lifetimeIndex) ? 60f : 120f;
 							if (GetPunchEndTime(__instance.hitTime) is float punchEndTime)
 							{
 								float punchDuration = punchEndTime - __instance.hitTime;
-								maxSize = shinkFactor * __instance.signal.maxSpeed * punchDuration + 236f;
+								maxSize = shinkFactor * speed * punchDuration + 236f;
 							}
 
 							float timeElapsedSinceHit = time - __instance.hitTime;
 							float minimunSize = 236f;
-							float calculatedSize = maxSize - shinkFactor * __instance.signal.maxSpeed * timeElapsedSinceHit;
+							float calculatedSize = maxSize - shinkFactor * speed * timeElapsedSinceHit;
 							rectTransform.sizeDelta = new Vector2(Mathf.Max(minimunSize, calculatedSize), rectTransform.sizeDelta.y);
 							flag = minimunSize >= calculatedSize;
 						}

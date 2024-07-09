@@ -7,9 +7,10 @@ namespace ElementsOfHarmony.AZHM
 {
 	public class DirectXHook
 	{
-		public static void Init(out bool DoNotInstallHook)
+		public static void Init()
 		{
-			// my initial (and final) diagnosis on compatibility with Steam overlay concludes that
+			// 2024-7-5
+			// my initial diagnosis on compatibility with Steam overlay concludes that
 			// the crash occurs because Steam has detour hooked MY IDXGISwapChain::Present callback
 			// instead of the original one, switching to detour hook does NOT fix this issue;
 			// I've disabled ResolutionManager yet it's still doing that
@@ -17,6 +18,7 @@ namespace ElementsOfHarmony.AZHM
 			// I've already done so much to work around its Present and ResizeBuffers hooks
 			// I can't possibly go and teach it how to do the most basic stuff
 			// like AVOIDING DUPLICATE INITIALIZATION!!!
+			/*
 			if (DoNotInstallHook = GetModuleHandle("GameOverlayRenderer64.dll") != IntPtr.Zero)
 			{
 				Log.MessageBox(IntPtr.Zero,
@@ -32,6 +34,13 @@ namespace ElementsOfHarmony.AZHM
 					$"to prevent it from launching from Steam",
 					"Steam overlay hook not compatible", Log.MB_OK | Log.MB_ICONWARNING);
 			}
+			*/
+
+			// 2024-7-8
+			// well what do you know...
+			// the same code that used to work on AMBA suddenly stopped working!
+			// my sanity is completely broken...
+			// I thought ResizeBuffers was the problem and I thought I fixed that...
 		}
 
 		[HarmonyPatch(typeof(ResolutionManager), methodName: "Update")]
@@ -43,7 +52,7 @@ namespace ElementsOfHarmony.AZHM
 			}
 		}
 
-		[DllImport("Kernel32.dll", CharSet = CharSet.Unicode)]
-		internal extern static IntPtr GetModuleHandle([MarshalAs(UnmanagedType.LPWStr)] string lpModuleName);
+		//[DllImport("Kernel32.dll", CharSet = CharSet.Unicode)]
+		//internal extern static IntPtr GetModuleHandle([MarshalAs(UnmanagedType.LPWStr)] string lpModuleName);
 	}
 }

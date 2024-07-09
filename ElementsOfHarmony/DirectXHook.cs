@@ -77,14 +77,16 @@ namespace ElementsOfHarmony
 				SetHookCallback1(HookCallback);
 
 				SetCallbacks(
-					VertexShader: (Name) => {
+					VertexShader: (Name) =>
+					{
 						if (VertexShaderFiles.TryGetValue(Name, out string File))
 						{
 							return File;
 						}
 						return null;
 					},
-					PixelShader: (Name) => {
+					PixelShader: (Name) =>
+					{
 						if (PixelShaderFiles.TryGetValue(Name, out string File))
 						{
 							return File;
@@ -124,8 +126,6 @@ namespace ElementsOfHarmony
 
 				SetRunning(true);
 
-				bool DoNotInstallHook = false;
-
 				// apply all of our patch procedures using Harmony API
 				Harmony element = new Harmony($"{typeof(DirectXHook).FullName}");
 				int Num = 0;
@@ -161,12 +161,7 @@ namespace ElementsOfHarmony
 					{
 						if (DirectXHook_AZHM.GetMethod("Init") is MethodInfo InitMethod)
 						{
-							object[] Args = new object[1];
-							InitMethod.Invoke(null, Args);
-							if (Args[0] is bool DoNot)
-							{
-								DoNotInstallHook = DoNot;
-							}
+							InitMethod.Invoke(null, Array.Empty<object>());
 						}
 						Num = 0;
 						foreach (var Patch in DirectXHook_AZHM.GetNestedTypes())
@@ -192,68 +187,20 @@ namespace ElementsOfHarmony
 					Log.Message($"Harmony patch for {typeof(RenderHooks).FullName} successful - {Num} Patches");
 				}
 
-				if (!DoNotInstallHook)
-				{
-					int HResult = InstallHook();
-					Log.Message($"InstallHook() returns {HResult:X}");
-					Marshal.ThrowExceptionForHR(HResult);
 
-					HResult = InitOverlay();
-					Log.Message($"InitOverlay() returns {HResult:X}");
-					Marshal.ThrowExceptionForHR(HResult);
+				int HResult = InstallHook();
+				Log.Message($"InstallHook() returns {HResult:X}");
+				Marshal.ThrowExceptionForHR(HResult);
 
-					HResult = InitNativeCallbacks(HDR.TakeOverOutputFormat, HDR.DynamicRangeFactor);
-					Log.Message($"InitNativeCallbacks() returns {HResult:X}");
-					Marshal.ThrowExceptionForHR(HResult);
+				HResult = InitOverlay();
+				Log.Message($"InitOverlay() returns {HResult:X}");
+				Marshal.ThrowExceptionForHR(HResult);
 
-					IntPtr DXGI_DLL = Get_DXGI_DLL_BaseAddress();
-					IntPtr GameOverlayRenderer64_DLL = Get_GameOverlayRenderer64_DLL_BaseAddress();
-					uint GameOverlayRenderer64_DLL_ImageSize = Get_GameOverlayRenderer64_DLL_ImageSize();
+				HResult = InitNativeCallbacks(HDR.TakeOverOutputFormat, HDR.DynamicRangeFactor);
+				Log.Message($"InitNativeCallbacks() returns {HResult:X}");
+				Marshal.ThrowExceptionForHR(HResult);
 
-					if (DXGI_DLL != IntPtr.Zero)
-					{
-						IntPtr PresentProc = Get_Present_MemoryOriginal_Proc();
-						IntPtr Present1Proc = Get_Present1_MemoryOriginal_Proc();
-						var PresentBytes = new NativeArrayAccess<byte>(Get_Present_MemoryOriginal_Bytes(), 5);
-						var Present1Bytes = new NativeArrayAccess<byte>(Get_Present1_MemoryOriginal_Bytes(), 5);
-
-						if (PresentProc != IntPtr.Zero && Get_Present_DetourHookDetected())
-						{
-							Log.Message($"detour hook detected on IDXGISwapChain::Present - " +
-								$"{PresentBytes[0]:X2} {PresentBytes[1]:X2} {PresentBytes[2]:X2} {PresentBytes[3]:X2} {PresentBytes[4]:X2}");
-
-							if (GameOverlayRenderer64_DLL != IntPtr.Zero &&
-								JmpEndsUpInRange(PresentProc, GameOverlayRenderer64_DLL, GameOverlayRenderer64_DLL_ImageSize))
-							{
-								Log.Message($"jmp ends up in GameOverlayRenderer64.dll, which means this is a steam overlay hook");
-							}
-							else
-							{
-								Log.Message($"jmp did not end up in GameOverlayRenderer64.dll, this is (probably) not a steam overlay hook");
-							}
-						}
-						else Log.Message($"detour hook not detected on IDXGISwapChain::Present");
-
-						if (Present1Proc != IntPtr.Zero && Get_Present1_DetourHookDetected())
-						{
-							Log.Message($"detour hook detected on IDXGISwapChain1::Present1 - " +
-								$"{Present1Bytes[0]:X2} {Present1Bytes[1]:X2} {Present1Bytes[2]:X2} {Present1Bytes[3]:X2} {Present1Bytes[4]:X2}");
-
-							if (GameOverlayRenderer64_DLL != IntPtr.Zero &&
-								JmpEndsUpInRange(Present1Proc, GameOverlayRenderer64_DLL, GameOverlayRenderer64_DLL_ImageSize))
-							{
-								Log.Message($"jmp ends up in GameOverlayRenderer64.dll, which means this is a steam overlay hook");
-							}
-							else
-							{
-								Log.Message($"jmp did not end up in GameOverlayRenderer64.dll, this is (probably) not a steam overlay hook");
-							}
-						}
-						else Log.Message($"detour hook not detected on IDXGISwapChain1::Present1");
-					}
-
-					Log.Message("DirectX hook complete");
-				}
+				Log.Message("DirectX hook complete");
 			}
 			catch (Exception e)
 			{
