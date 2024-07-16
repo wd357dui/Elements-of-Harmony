@@ -53,6 +53,7 @@ One of those featured is already proven back in 2022 - **Loyalty**: the Motion C
 - [x] **(for both games)** added BepInEx support in [BepInExReference](https://github.com/wd357dui/Elements-of-Harmony/blob/51dcd45d01d2aea6960f581f1256f44dd1179bfb/ElementsOfHarmony.BepInExReference/ElementsOfHarmony.cs)
 - [x] **(for AZHM)** The URP shaders in AZHM were stripped, I tried to bring them back and succeeded by patching [globalgamemanagers.assets](https://github.com/wd357dui/Elements-of-Harmony/blob/e7a6b9d0b757e52d9b29a6d5f4586d71da9b4eeb/Patch/AZHM/globalgamemanagers.assets) after fixing AssetRipper/AssetRipper#1365
 - [x] **(for AMBA)** fix combo bar's stutter issue in the dancing game minigame by depending on `Time.time` instead of `AudioSource.time` for checking time progression. My reason and supporting evidence for [Fixing](https://github.com/wd357dui/Elements-of-Harmony/blob/e7a6b9d0b757e52d9b29a6d5f4586d71da9b4eeb/ElementsOfHarmony.AMBA/Dance.cs#L457-L464) the issue in this way are: 1.[Timeline AudioTrack stuttering and artifacts](https://forum.unity.com/threads/timeline-audiotrack-stuttering-and-artifacts.488543/); 2.[Audiosource.time innaccurate in Android?](https://forum.unity.com/threads/audiosource-time-innaccurate-in-android.471872/)
+- [x] **(for AZHM)** fix stutter every 1 second by stopping it from re-setting the same resolution every 1 second in [DirectXHook.cs](https://github.com/wd357dui/Elements-of-Harmony/blob/70806c98696f6af7b82c3a90f382d25f50a00c66/ElementsOfHarmony.AZHM/DirectXHook.cs#L37-L44)
 
 ------
 
