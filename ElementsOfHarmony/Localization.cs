@@ -56,7 +56,9 @@ namespace ElementsOfHarmony
 							if (f.EndsWith(format.Item1, StringComparison.InvariantCultureIgnoreCase))
 							{
 								UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip("file:///" + f, format.Item2);
-								req.SendWebRequest().completed += AudioClipLoadComplete;
+								var Operation = req.SendWebRequest();
+								AudioClipLoadingOperations.Add(Operation);
+								Operation.completed += AudioClipLoadComplete;
 								numAudioClips++;
 								break;
 							}

@@ -270,7 +270,9 @@ namespace ElementsOfHarmony
 					CurrentSong.HighScore = CalculateScore(HighScore, HighScoreIsPercent, 70); // default is 70%
 
 					UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip("file:///" + SongFile, Format);
-					req.SendWebRequest().completed += LoadComplete;
+					var Operation = req.SendWebRequest();
+					AudioClipLoadingOperations.Add(Operation);
+					Operation.completed += LoadComplete;
 
 					Songs.Add(Path.GetFileNameWithoutExtension(SongFile), CurrentSong);
 
