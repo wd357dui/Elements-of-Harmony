@@ -15,7 +15,7 @@ Trey Husk, Nexgen & Koa
 4,6
 
 [Score]
-30%,50%,70%
+50%,70%,90%
 
 [PunchOffset]
 00:00.000
