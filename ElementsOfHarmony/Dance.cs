@@ -265,9 +265,9 @@ namespace ElementsOfHarmony
 							return maxScore * 0.01m * DefaultPercent;
 						}
 					}
-					CurrentSong.LowScore = CalculateScore(LowScore, LowScoreIsPercent, 30); // default is 30%
-					CurrentSong.MediumScore = CalculateScore(MediumScore, MediumScoreIsPercent, 50); // default is 50%
-					CurrentSong.HighScore = CalculateScore(HighScore, HighScoreIsPercent, 70); // default is 70%
+					CurrentSong.LowScore = CalculateScore(LowScore, LowScoreIsPercent, 50); // default is 50%
+					CurrentSong.MediumScore = CalculateScore(MediumScore, MediumScoreIsPercent, 70); // default is 70%
+					CurrentSong.HighScore = CalculateScore(HighScore, HighScoreIsPercent, 90); // default is 90%
 
 					UnityWebRequest req = UnityWebRequestMultimedia.GetAudioClip("file:///" + SongFile, Format);
 					var Operation = req.SendWebRequest();

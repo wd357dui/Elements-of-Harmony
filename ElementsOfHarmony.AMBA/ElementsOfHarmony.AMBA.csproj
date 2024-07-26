@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Compile Include="Dance.cs" />
+    <Compile Include="DirectXHook.cs" />
     <Compile Include="Localization.cs" />
   </ItemGroup>
 
@@ -89,11 +90,9 @@
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
 		</Reference>
-		<Reference Include="UnityEngine.ImageConversionModule">
-			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
-			<SpecificVersion>False</SpecificVersion>
-			<Private>False</Private>
-		</Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\..\..\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
 		<Reference Include="UnityEngine.TextCoreModule">
 			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.TextCoreModule.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>

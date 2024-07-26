@@ -42,7 +42,7 @@ namespace ElementsOfHarmony
 				try
 				{
 					Settings.ReadOurSettings();
-					Settings.WriteOurSettings();
+					Application.quitting += Settings.WriteOurSettings;
 				}
 				catch (Exception e)
 				{

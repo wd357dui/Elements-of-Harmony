@@ -21,13 +21,13 @@ namespace ElementsOfHarmony
 		private static string OurSelectedAudioLanguageOverride_Internal = "";
 		public static string OurSelectedLanguageOverride
 		{
-			get { return OurSelectedLanguageOverride_Internal; }
-			set { OurSelectedLanguageOverride_Internal = value; try { WriteOurSettings(); } catch (Exception) { } }
+			get => OurSelectedLanguageOverride_Internal;
+			set => OurSelectedLanguageOverride_Internal = value;
 		}
 		public static string OurSelectedAudioLanguageOverride
 		{
-			get { return OurSelectedAudioLanguageOverride_Internal; }
-			set { OurSelectedAudioLanguageOverride_Internal = value; try { WriteOurSettings(); } catch (Exception) { } }
+			get => OurSelectedAudioLanguageOverride_Internal;
+			set => OurSelectedAudioLanguageOverride_Internal = value;
 		}
 
 		public static class DirectXHook
@@ -65,34 +65,193 @@ namespace ElementsOfHarmony
 			public static class URP
 			{
 				public static bool FabricateNewGlobalVolumeProfile = true;
-				public static TonemappingMode? TonemappingMode = UnityEngine.Rendering.Universal.TonemappingMode.ACES;
+				public static float? NewGlobalVolumeProfilePriority = null;
+				public static float? NewGlobalVolumeProfileBlendDistance = null;
+				public static float? NewGlobalVolumeProfileWeight = null;
+				public static class Tonemapping
+				{
+					public static bool? Active = null;
+					public static class Mode
+					{
+						public static bool? Override = null;
+						public static TonemappingMode? Value = null;
+					}
+				}
 				public static class ColorAdjustments
 				{
-					public static float? PostExposure = null;
+					public static bool? Active = null;
+					public static class PostExposure
+					{
+						public static bool? Override = null;
+						public static float? Value = null;
+					}
 					public static class Contrast
 					{
+						public static bool? Override = null;
 						public static float? Value = null;
 						public static float? Min = null;
 						public static float? Max = null;
 					}
 					public static class ColorFilter
 					{
-						public static string? Color = null;
+						public static bool? Override = null;
+						public static string? Value = null;
 						public static bool? HDR = null;
 						public static bool? ShowAlpha = null;
 						public static bool? ShowEyeDropper = null;
 					}
 					public static class HueShift
 					{
+						public static bool? Override = null;
 						public static float? Value = null;
 						public static float? Min = null;
 						public static float? Max = null;
 					}
 					public static class Saturation
 					{
+						public static bool? Override = null;
 						public static float? Value = null;
 						public static float? Min = null;
 						public static float? Max = null;
+					}
+				}
+				public static class Bloom
+				{
+					public static bool? Active = null;
+					public static class Threshold
+					{
+						public static bool? Override = null;
+						public static float? Value = null;
+						public static float? Min = null;
+					}
+					public static class Intensity
+					{
+						public static bool? Override = null;
+						public static float? Value = null;
+						public static float? Min = null;
+					}
+					public static class Scatter
+					{
+						public static bool? Override = null;
+						public static float? Value = null;
+						public static float? Min = null;
+						public static float? Max = null;
+					}
+					public static class Clamp
+					{
+						public static bool? Override = null;
+						public static float? Value = null;
+						public static float? Min = null;
+					}
+					public static class Tint
+					{
+						public static bool? Override = null;
+						public static string? Value = null;
+						public static bool? HDR = null;
+						public static bool? ShowAlpha = null;
+						public static bool? ShowEyeDropper = null;
+					}
+					public static class HighQualityFiltering
+					{
+						public static bool? Override = null;
+						public static bool? Value = null;
+					}
+					public static class SkipIterations
+					{
+						public static bool? Override = null;
+						public static int? Value = null;
+						public static int? Min = null;
+						public static int? Max = null;
+					}
+					public static class DirtTexture
+					{
+						public static bool? Override = null;
+						public static string? Value = null;
+					}
+					public static class DirtIntensity
+					{
+						public static bool? Override = null;
+						public static float? Value = null;
+						public static float? Min = null;
+					}
+				}
+				public static class Vignette
+				{
+					public static bool? Active = null;
+					public static class Color
+					{
+						public static bool? Override = null;
+						public static string? Value = null;
+						public static bool? HDR = null;
+						public static bool? ShowAlpha = null;
+						public static bool? ShowEyeDropper = null;
+					}
+					public static class Center
+					{
+						public static bool? Override = null;
+						public static string? Value = null;
+					}
+					public static class Intensity
+					{
+						public static bool? Override = null;
+						public static float? Value = null;
+						public static float? Min = null;
+						public static float? Max = null;
+					}
+					public static class Smoothness
+					{
+						public static bool? Override = null;
+						public static float? Value = null;
+						public static float? Min = null;
+						public static float? Max = null;
+					}
+					public static class Rounded
+					{
+						public static bool? Override = null;
+						public static bool? Value = null;
+					}
+				}
+				public static class ShadowsMidtonesHighlights
+				{
+					public static bool? Active = null;
+					public static class Shadows
+					{
+						public static bool? Override = null;
+						public static string? Value = null;
+					}
+					public static class Midtones
+					{
+						public static bool? Override = null;
+						public static string? Value = null;
+					}
+					public static class Highlights
+					{
+						public static bool? Override = null;
+						public static string? Value = null;
+					}
+					public static class ShadowsStart
+					{
+						public static bool? Override = null;
+						public static float? Value = null;
+						public static float? Min = null;
+					}
+					public static class ShadowsEnd
+					{
+						public static bool? Override = null;
+						public static float? Value = null;
+						public static float? Min = null;
+					}
+					public static class HighlightsStart
+					{
+						public static bool? Override = null;
+						public static float? Value = null;
+						public static float? Min = null;
+					}
+					public static class HighlightsEnd
+					{
+						public static bool? Override = null;
+						public static float? Value = null;
+						public static float? Min = null;
 					}
 				}
 			}
@@ -195,20 +354,32 @@ namespace ElementsOfHarmony
 								{
 									if ((from string EnumName in EnumNames
 										where EnumName.Equals(Flag.Trim(), StringComparison.InvariantCultureIgnoreCase)
-										select Enum.Parse(EnumType, EnumName)).FirstOrDefault() is object Value)
+										select Enum.Parse(EnumType, EnumName, ignoreCase: true)).FirstOrDefault() is object Value)
 									{
 										FinalEnumValue = (int)(FinalEnumValue ?? 0) | (int)Value;
 									}
 								}
 							}
-							Field.SetValue(null, FinalEnumValue);
+							if (FinalEnumValue is int NumValue)
+							{
+								var ResultValue = Enum.ToObject(EnumType, NumValue);
+								Field.SetValue(null, ResultValue);
+							}
+							else if (FinalEnumValue != null)
+							{
+								Field.SetValue(null, FinalEnumValue);
+							}
+							else
+							{
+								Field.SetValue(null, null);
+							}
 						}
 					}
 					catch (Exception e)
 					{
 					repeat:
-						Log.Message(StackTraceUtility.ExtractStackTrace());
-						Log.Message($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
+						UnityEngine.Debug.LogError(StackTraceUtility.ExtractStackTrace());
+						UnityEngine.Debug.LogError($"{e.GetType()}\n{e.StackTrace}\n{e.Message}");
 						if (e.InnerException != null)
 						{
 							e = e.InnerException;
@@ -281,7 +452,11 @@ namespace ElementsOfHarmony
 						{
 							Config!.WriteFloat($"{ClassName}.{Field.Name}", (float)Field.GetValue(null));
 						}
-						else if (Field.FieldType.IsEnum || Nullable.GetUnderlyingType(Field.FieldType)?.IsEnum == true)
+						else if (Field.FieldType.IsEnum)
+						{
+							Config!.WriteString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString() ?? "");
+						}
+						else if (Nullable.GetUnderlyingType(Field.FieldType) is Type EnumType && EnumType.IsEnum)
 						{
 							Config!.WriteString($"{ClassName}.{Field.Name}", Field.GetValue(null)?.ToString() ?? "");
 						}

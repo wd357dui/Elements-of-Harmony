@@ -58,6 +58,9 @@
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
 		</Reference>
+		<Reference Include="ToonyColorsPro.Runtime">
+		  <HintPath>..\..\..\..\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\ToonyColorsPro.Runtime.dll</HintPath>
+		</Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>
@@ -82,6 +85,9 @@
       <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\..\..\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
       <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>

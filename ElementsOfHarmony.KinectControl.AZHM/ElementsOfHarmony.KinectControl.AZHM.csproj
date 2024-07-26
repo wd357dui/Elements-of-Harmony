@@ -29,7 +29,7 @@
 
 	<ItemGroup>
 		<Reference Include="mscorlib">
-			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\mscorlib.dll</HintPath>
+			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\mscorlib.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
 		</Reference>
@@ -39,7 +39,9 @@
 			<Private>False</Private>
 		</Reference>
 		<Reference Include="Rewired_Core">
-		  <HintPath>..\..\..\..\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\Rewired_Core.dll</HintPath>
+		  <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\Rewired_Core.dll</HintPath>
+			<SpecificVersion>False</SpecificVersion>
+			<Private>False</Private>
 		</Reference>
 		<Reference Include="System">
 			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\MyLittlePonyZephyrHeights_Data\Managed\System.dll</HintPath>

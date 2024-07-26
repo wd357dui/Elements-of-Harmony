@@ -1,16 +1,12 @@
-﻿using DrakharStudio.Engine;
-using HarmonyLib;
-using UnityEngine.Rendering.Universal;
+﻿using UnityEngine.Rendering.Universal;
 
-namespace ElementsOfHarmony.AZHM
+namespace ElementsOfHarmony.AMBA
 {
 	public class DirectXHook
 	{
 		public static void Init()
 		{
-			Log.Message("filling in default UberPost parameters (Tonemapping, ColorAdjustments, Bloom, Vignette), " +
-				"these defaults are from AMBA, so it should make AZHM look more like AMBA " +
-				"(also turning off ShadowsMidtonesHighlights)");
+			Log.Message("filling in default UberPost parameters (Tonemapping, ColorAdjustments, Bloom, Vignette)");
 
 			Settings.DirectXHook.URP.Tonemapping.Active ??= true;
 			Settings.DirectXHook.URP.Tonemapping.Mode.Value ??= TonemappingMode.ACES;
@@ -55,17 +51,6 @@ namespace ElementsOfHarmony.AZHM
 			Settings.DirectXHook.URP.Vignette.Smoothness.Override ??= true;
 			Settings.DirectXHook.URP.Vignette.Rounded.Value ??= false;
 			Settings.DirectXHook.URP.Vignette.Rounded.Override ??= false;
-
-			Settings.DirectXHook.URP.ShadowsMidtonesHighlights.Active ??= true;
-		}
-
-		[HarmonyPatch(typeof(ResolutionManager), methodName: "Update")]
-		public static class TurnOffResolutionChangeEverySecond
-		{
-			public static bool Prefix()
-			{
-				return false;
-			}
 		}
 	}
 }

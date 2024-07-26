@@ -247,7 +247,7 @@ namespace ElementsOfHarmony
 			string output = "";
 			foreach (KeyValuePair keyValuePair in keyValuePairs)
 			{
-				output += keyValuePair.Name + "=" + keyValuePair.Value + "\n";
+				output += keyValuePair.Name + "=" + keyValuePair.Value + "\r\n";
 			}
 			try
 			{

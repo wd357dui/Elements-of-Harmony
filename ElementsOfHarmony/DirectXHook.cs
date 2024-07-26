@@ -187,6 +187,7 @@ namespace ElementsOfHarmony
 					Log.Message($"Harmony patch for {typeof(RenderHooks).FullName} successful - {Num} Patches");
 				}
 
+				//SceneManager.sceneLoaded += SceneManager_sceneLoaded;
 
 				int HResult = InstallHook();
 				Log.Message($"InstallHook() returns {HResult:X}");
@@ -215,6 +216,115 @@ namespace ElementsOfHarmony
 			}
 		}
 
+		/* 2024-7-21 this was used to determine shader difference on the model between AMBA and AZHM...
+		 * to my surprise, shader variant, property values, and textures are all identical
+		 * I'll have to look elsewhere to find what changed in AZHM that made it look worse
+		 * 
+		private static void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+		{
+			if (GameObject.Find("Player_Gameplay_Sunny") is GameObject Player_Gameplay_Sunny)
+			{
+				Log.Message("Player_Gameplay_Sunny");
+				Log.Message($"{Player_Gameplay_Sunny}");
+
+				GameObject sunny_lod0 = Player_Gameplay_Sunny.transform
+					.Find("Visual").Find("Pony_Sunny").Find("Visual").Find("Sunny_VISUAL").Find("Sunny").Find("sunny_lod0").gameObject;
+				Log.Message("sunny_lod0");
+				Log.Message($"{sunny_lod0}");
+
+				SkinnedMeshRenderer mesh = sunny_lod0.GetComponent<SkinnedMeshRenderer>();
+				Log.Message("mesh");
+				Log.Message($"{mesh}");
+
+				Material SunnyBodyMt = mesh.material;
+				Log.Message("SunnyBodyMt");
+				Log.Message($"{SunnyBodyMt}");
+
+				Shader ToonyShader = SunnyBodyMt.shader;
+				Log.Message("ToonyShader");
+				Log.Message($"{ToonyShader}");
+
+				new Thread(() =>
+				{
+					Thread.Sleep(1000);
+					for (int n = 0; n < ToonyShader.GetPropertyCount(); n++)
+					{
+						var N = ToonyShader.GetPropertyName(n);
+						var T = ToonyShader.GetPropertyType(n);
+						object V = "";
+						switch (T)
+						{
+							case ShaderPropertyType.Color:
+								V = SunnyBodyMt.GetColor(N);
+								break;
+							case ShaderPropertyType.Vector:
+								V = SunnyBodyMt.GetVector(N);
+								break;
+							case ShaderPropertyType.Float:
+							case ShaderPropertyType.Range:
+								V = SunnyBodyMt.GetFloat(N);
+								break;
+							case ShaderPropertyType.Texture:
+								V = SunnyBodyMt.GetTexture(N);
+								break;
+						}
+						Log.Message($"Name={N}, Type={T}, Value={V}");
+					}
+				}).Start();
+			}
+			if (GameObject.Find("SunnyCharacter") is GameObject SunnyCharacter)
+			{
+				Log.Message("SunnyCharacter");
+				Log.Message($"{SunnyCharacter}");
+
+				GameObject sunny_lod0 = SunnyCharacter.transform
+					.Find("Model").Find("Sunny").Find("Sunny").Find("sunny_lod0").gameObject;
+				Log.Message("sunny_lod0");
+				Log.Message($"{sunny_lod0}");
+
+				SkinnedMeshRenderer mesh = sunny_lod0.GetComponent<SkinnedMeshRenderer>();
+				Log.Message("mesh");
+				Log.Message($"{mesh}");
+
+				Material SunnyBodyMt = mesh.material;
+				Log.Message("SunnyBodyMt");
+				Log.Message($"{SunnyBodyMt}");
+
+				Shader ToonyShader = SunnyBodyMt.shader;
+				Log.Message("ToonyShader");
+				Log.Message($"{ToonyShader}");
+
+				new Thread(() =>
+				{
+					Thread.Sleep(1000);
+					for (int n = 0; n < ToonyShader.GetPropertyCount(); n++)
+					{
+						var N = ToonyShader.GetPropertyName(n);
+						var T = ToonyShader.GetPropertyType(n);
+						object V = "";
+						switch (T)
+						{
+							case ShaderPropertyType.Color:
+								V = SunnyBodyMt.GetColor(N);
+								break;
+							case ShaderPropertyType.Vector:
+								V = SunnyBodyMt.GetVector(N);
+								break;
+							case ShaderPropertyType.Float:
+							case ShaderPropertyType.Range:
+								V = SunnyBodyMt.GetFloat(N);
+								break;
+							case ShaderPropertyType.Texture:
+								V = SunnyBodyMt.GetTexture(N);
+								break;
+						}
+						Log.Message($"Name={N}, Type={T}, Value={V}");
+					}
+				}).Start();
+			}
+		}
+		*/
+
 		public static class RenderHooks
 		{
 			[HarmonyPatch(typeof(Volume), methodName: "profileRef", methodType: MethodType.Getter)]
@@ -227,6 +337,7 @@ namespace ElementsOfHarmony
 						if (UpdateVolumeFrameworkPatch.NewGlobalVolumeProfile != null &&
 							!ReferenceEquals(UpdateVolumeFrameworkPatch.NewGlobalVolumeProfile, __result))
 						{
+							HashSet<VolumeComponent>? Conflicted = null;
 							// there can only be one princess in equestria I mean... one global volume component of the same type active in an application
 							foreach (var OurComponent in UpdateVolumeFrameworkPatch.NewGlobalVolumeProfile.components)
 							{
@@ -235,13 +346,76 @@ namespace ElementsOfHarmony
 									!ReferenceEquals(ConflictedComponent, OurComponent) &&
 									ConflictedComponent.active)
 								{
-									ConflictedComponent.active = false;
-									Log.Message($"Conflicting volume component detected, " +
-										$"OurComponent.name={OurComponent.name}, " +
-										$"ConflictedComponent.name={ConflictedComponent.name}, " +
-										$"ConflictedComponent.parameters.Count={ConflictedComponent.parameters.Count}, " +
-										$"ConflictedComponent.parameters={{{string.Join(", ", ConflictedComponent.parameters)}}}, " +
+									Log.Message($"Conflicting volume component detected, \r\n" +
+										$"OurComponent.name={OurComponent.name}, \r\n" +
+										$"OurComponent.parameters.Count={OurComponent.parameters.Count}, \r\n" +
+										$"OurComponent.parameters={{\r\n" +
+										$"{string.Join(", \r\n", OurComponent.parameters)}}}, \r\n" +
+										$"ConflictedComponent.name={ConflictedComponent.name}, \r\n" +
+										$"ConflictedComponent.parameters.Count={ConflictedComponent.parameters.Count}, \r\n" +
+										$"ConflictedComponent.parameters={{\r\n" +
+										$"{string.Join(", \r\n", ConflictedComponent.parameters)}}}, \r\n" +
 										$"setting it to inactive");
+									Conflicted ??= new HashSet<VolumeComponent>();
+									Conflicted.Add(ConflictedComponent);
+								}
+							}
+							if (Conflicted != null)
+							{
+								Log.Message($"conflicted volume name {__instance.name}");
+								Log.Message($"conflicted volume priority {__instance.priority}");
+								Log.Message($"conflicted volume blendDistance {__instance.blendDistance}");
+								Log.Message($"conflicted volume weight {__instance.weight}");
+								Log.Message($"listing all components of the conflicting volume component");
+								foreach (var Component in __result.components)
+								{
+									Log.Message($"Component.name={Component.name}");
+									Log.Message($"Component.active={Component.active}");
+									Log.Message($"Component.parameters.Count={Component.parameters.Count}");
+									Type ComponentType = Component.GetType();
+									IEnumerable<FieldInfo> Fields = from Field in ComponentType.GetFields()
+																	where Field.FieldType.IsSubclassOf(typeof(VolumeParameter))
+																	select Field;
+									foreach (var Field in Fields)
+									{
+										if (Field.GetValue(Component) is VolumeParameter Param)
+										{
+											if (Param is VolumeParameter<float> Float)
+											{
+												Log.Message($"parameter={Field.Name} value={Float.value} override={Param.overrideState}");
+											}
+											else if (Param is VolumeParameter<Color> C)
+											{
+												Log.Message($"parameter={Field.Name} value={C.value.r} {C.value.g} {C.value.b} {C.value.a} override={Param.overrideState}");
+											}
+											else if (Param is VolumeParameter<bool> B)
+											{
+												Log.Message($"parameter={Field.Name} value={B.value} override={Param.overrideState}");
+											}
+											else if (Param is VolumeParameter<Vector2> V2)
+											{
+												Log.Message($"parameter={Field.Name} value={V2.value.x} {V2.value.y} override={Param.overrideState}");
+											}
+											else if (Param is VolumeParameter<Vector3> V3)
+											{
+												Log.Message($"parameter={Field.Name} value={V3.value.x} {V3.value.y} {V3.value.z} override={Param.overrideState}");
+											}
+											else if (Param is VolumeParameter<Vector4> V4)
+											{
+												Log.Message($"parameter={Field.Name} value={V4.value.x} {V4.value.y} {V4.value.z} {V4.value.w} override={Param.overrideState}");
+											}
+											else
+											{
+												Log.Message($"parameter={Field.Name} value={Param} override={Param.overrideState}");
+											}
+										}
+									}
+									Log.Message($"");
+								}
+								foreach (var Component in Conflicted)
+								{
+									Component.active = false;
+									__result.Remove(Component.GetType());
 								}
 							}
 						}
@@ -261,106 +435,151 @@ namespace ElementsOfHarmony
 					{
 						Log.Message($"fabricating a new global tonemapping profile");
 
-						NewGlobalVolumeGameObject = new GameObject(nameof(NewGlobalVolumeGameObject))
-						{
-							layer = 0
-						};
+						NewGlobalVolumeGameObject = new GameObject(nameof(NewGlobalVolumeGameObject));
+						NewGlobalVolumeGameObject.SetActive(true);
 
 						Volume NewGlobalVolume = NewGlobalVolumeGameObject.AddComponent<Volume>();
 						NewGlobalVolume.name = nameof(NewGlobalVolume);
+						NewGlobalVolume.enabled = true;
 						NewGlobalVolume.IsGlobal(true);
-						NewGlobalVolume.profile = NewGlobalVolumeProfile = ScriptableObject.CreateInstance<VolumeProfile>();
+						NewGlobalVolume.priority = URP.NewGlobalVolumeProfilePriority ?? NewGlobalVolume.priority;
+						NewGlobalVolume.blendDistance = URP.NewGlobalVolumeProfileBlendDistance ?? NewGlobalVolume.blendDistance;
+						NewGlobalVolume.weight = URP.NewGlobalVolumeProfileWeight ?? NewGlobalVolume.weight;
+
+						NewGlobalVolumeProfile = NewGlobalVolume.profile;
 						NewGlobalVolumeProfile.name = nameof(NewGlobalVolumeProfile);
 						Log.Message($"fabricated a new global volume profile - " +
 							$"GameObject={NewGlobalVolumeGameObject.name}, " +
 							$"Volume={NewGlobalVolume.name}, " +
 							$"VolumeProfile={NewGlobalVolumeProfile.name}");
 
-						Tonemapping NewTonemapping = NewGlobalVolumeProfile.Add<Tonemapping>(false);
-						NewTonemapping.active = false;
-						NewTonemapping.name = nameof(NewTonemapping);
-						if (URP.TonemappingMode is TonemappingMode mode)
+						void Fill(VolumeComponent Component, Type Settings)
 						{
-							NewTonemapping.mode.value = mode;
-							NewTonemapping.mode.overrideState = true;
-							NewTonemapping.active = true;
+							IEnumerable<FieldInfo> Parameters = from Field in Component.GetType().GetFields()
+																where Field.FieldType.IsSubclassOf(typeof(VolumeParameter))
+																select Field;
+							Type[] SettingsTypes = Settings.GetNestedTypes();
+							foreach (var Parameter in Parameters)
+							{
+								if (Parameter.GetValue(Component) is VolumeParameter Param &&
+									SettingsTypes.FirstOrDefault(S => S.Name.Equals(Parameter.Name, StringComparison.InvariantCultureIgnoreCase))
+									is Type SettingsType)
+								{
+									FieldInfo[] ParameterValues = Param.GetType().GetFields();
+									FieldInfo[] SettingsValues = SettingsType.GetRuntimeFields().ToArray();
+									var Values = from PV in ParameterValues
+												 join SV in SettingsValues
+												 on PV.Name.ToLower() equals SV.Name.ToLower()
+												 select (PV, SV);
+									static void SetValue(Type ParameterType, Action<object> SetValue, object SV)
+									{
+										if (SV.GetType() == ParameterType)
+										{
+											SetValue(SV);
+										}
+										else if (ParameterType.IsValueType &&
+											SV is string Str &&
+											Str.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries) is string[] Parts &&
+											Parts.All(P => decimal.TryParse(P, out _)) &&
+											Parts.Select(P => decimal.Parse(P)).ToArray() is decimal[] Values)
+										{
+											if (ParameterType == typeof(Color))
+											{
+												Color Result = Values.Length >= 4 ?
+													new Color((float)Values[0], (float)Values[1], (float)Values[2], (float)Values[3]) :
+													new Color((float)Values[0], (float)Values[1], (float)Values[2]);
+												SetValue(Result);
+											}
+											else if (ParameterType == typeof(Vector2))
+											{
+												SetValue(new Vector2((float)Values[0], (float)Values[1]));
+											}
+											else if (ParameterType == typeof(Vector3))
+											{
+												SetValue(new Vector3((float)Values[0], (float)Values[1], (float)Values[2]));
+											}
+											else if (ParameterType == typeof(Vector4))
+											{
+												SetValue(new Vector4((float)Values[0], (float)Values[1], (float)Values[2], (float)Values[3]));
+											}
+											else if (ParameterType == typeof(Vector2Int))
+											{
+												SetValue(new Vector2Int((int)Values[0], (int)Values[1]));
+											}
+											else if (ParameterType == typeof(Vector3Int))
+											{
+												SetValue(new Vector3Int((int)Values[0], (int)Values[1], (int)Values[2]));
+											}
+										}
+										else if (ParameterType == typeof(Texture) &&
+											SV is string Path &&
+											File.Exists(Path) &&
+											new Texture2D(2, 2) is Texture2D T &&
+											T.LoadImage(File.ReadAllBytes(Path)))
+										{
+											SetValue(T);
+										}
+									}
+									foreach (var (ParameterValue, SettingsValue) in Values)
+									{
+										if (SettingsValue.GetValue(null) is object SV)
+										{
+											SetValue(ParameterValue.FieldType, V => ParameterValue.SetValue(Param, V), SV);
+										}
+									}
+									PropertyInfo value = Param.GetType().GetProperty("value");
+									if (SettingsType.GetRuntimeField("Value")?.GetValue(null) is object Value)
+									{
+										SetValue(value.PropertyType, V => value.SetValue(Param, V), Value);
+									}
+									PropertyInfo overrideState = Param.GetType().GetProperty("overrideState");
+									if (SettingsType.GetRuntimeField("Override")?.GetValue(null) is object Override)
+									{
+										SetValue(overrideState.PropertyType, V => overrideState.SetValue(Param, V), Override);
+									}
+								}
+							}
 						}
-						Log.Message($"fabricated a new tonemapping component - " +
-							$"Tonemapping={NewTonemapping.name}, " +
-							$"active={NewTonemapping.active}, " +
-							$"value={NewTonemapping.mode.value}");
 
-						ColorAdjustments NewColorAdjustments = NewGlobalVolumeProfile.Add<ColorAdjustments>(false);
-						NewColorAdjustments.active = false;
-						NewColorAdjustments.name = nameof(NewColorAdjustments);
-						Log.Message($"fabricated a new color adjustments component - " +
-							$"ColorAdjustments={NewColorAdjustments.name}");
-						if (URP.ColorAdjustments.PostExposure is float postExposure)
+						if (URP.Tonemapping.Active == true)
 						{
-							NewColorAdjustments.postExposure.value = postExposure;
-							NewColorAdjustments.postExposure.overrideState = true;
-							NewColorAdjustments.active = true;
-							Log.Message($"postExposure={NewColorAdjustments.postExposure.value}");
+							VolumeComponent NewTonemapping = NewGlobalVolumeProfile.NewTonemapping();
+							NewTonemapping.name = nameof(NewTonemapping);
+							NewTonemapping.active = true;
+							Fill(NewTonemapping, typeof(URP.Tonemapping));
 						}
-						if (URP.ColorAdjustments.Contrast.Value is float contrast)
+
+						if (URP.ColorAdjustments.Active == true)
 						{
-							NewColorAdjustments.contrast.value = contrast;
-							NewColorAdjustments.contrast.min = URP.ColorAdjustments.Contrast.Min ?? NewColorAdjustments.contrast.min;
-							NewColorAdjustments.contrast.max = URP.ColorAdjustments.Contrast.Max ?? NewColorAdjustments.contrast.max;
-							NewColorAdjustments.contrast.overrideState = true;
+							ColorAdjustments NewColorAdjustments = NewGlobalVolumeProfile.Add<ColorAdjustments>(overrides: false);
+							NewColorAdjustments.name = nameof(NewColorAdjustments);
 							NewColorAdjustments.active = true;
-							Log.Message($"contrast={NewColorAdjustments.contrast.value}, " +
-								$"min={NewColorAdjustments.contrast.min}, " +
-								$"max={NewColorAdjustments.contrast.max}");
+							Fill(NewColorAdjustments, typeof(URP.ColorAdjustments));
 						}
-						if (URP.ColorAdjustments.ColorFilter.Color is string color &&
-							color.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries) is string[] RGBA &&
-							RGBA.Length >= 3 && RGBA.Length <= 4 &&
-							float.TryParse(RGBA[0].Trim(), out float R) &&
-							float.TryParse(RGBA[1].Trim(), out float G) &&
-							float.TryParse(RGBA[2].Trim(), out float B))
+
+						if (URP.Bloom.Active == true)
 						{
-							if (RGBA.Length == 4 && float.TryParse(RGBA[3].Trim(), out float A))
-							{
-								NewColorAdjustments.colorFilter.value = new Color(R, G, B, A);
-							}
-							else
-							{
-								NewColorAdjustments.colorFilter.value = new Color(R, G, B);
-							}
-							NewColorAdjustments.colorFilter.hdr = URP.ColorAdjustments.ColorFilter.HDR ?? NewColorAdjustments.colorFilter.hdr;
-							NewColorAdjustments.colorFilter.showAlpha = URP.ColorAdjustments.ColorFilter.ShowAlpha ?? NewColorAdjustments.colorFilter.showAlpha;
-							NewColorAdjustments.colorFilter.showEyeDropper = URP.ColorAdjustments.ColorFilter.ShowEyeDropper ?? NewColorAdjustments.colorFilter.showEyeDropper;
-							NewColorAdjustments.colorFilter.overrideState = true;
-							NewColorAdjustments.active = true;
-							Log.Message($"colorFilter={NewColorAdjustments.colorFilter.value}, " +
-								$"hdr={NewColorAdjustments.colorFilter.hdr}, " +
-								$"showAlpha={NewColorAdjustments.colorFilter.showAlpha}, " +
-								$"showEyeDropper={NewColorAdjustments.colorFilter.showEyeDropper}");
+							VolumeComponent NewBloom = NewGlobalVolumeProfile.NewBloom();
+							NewBloom.name = nameof(NewBloom);
+							NewBloom.active = true;
+							Fill(NewBloom, typeof(URP.Bloom));
 						}
-						if (URP.ColorAdjustments.HueShift.Value is float hueShift)
+
+						if (URP.Vignette.Active == true)
 						{
-							NewColorAdjustments.hueShift.value = hueShift;
-							NewColorAdjustments.hueShift.min = URP.ColorAdjustments.Contrast.Min ?? NewColorAdjustments.hueShift.min;
-							NewColorAdjustments.hueShift.max = URP.ColorAdjustments.Contrast.Max ?? NewColorAdjustments.hueShift.max;
-							NewColorAdjustments.hueShift.overrideState = true;
-							NewColorAdjustments.active = true;
-							Log.Message($"hueShift={NewColorAdjustments.hueShift.value}, " +
-								$"min={NewColorAdjustments.hueShift.min}, " +
-								$"max={NewColorAdjustments.hueShift.max}");
+							Vignette NewVignette = NewGlobalVolumeProfile.Add<Vignette>(overrides: false);
+							NewVignette.name = nameof(NewVignette);
+							NewVignette.active = true;
+							Fill(NewVignette, typeof(URP.Vignette));
 						}
-						if (URP.ColorAdjustments.Saturation.Value is float saturation)
+
+						if (URP.ShadowsMidtonesHighlights.Active == true)
 						{
-							NewColorAdjustments.saturation.value = saturation;
-							NewColorAdjustments.saturation.min = URP.ColorAdjustments.Saturation.Min ?? NewColorAdjustments.saturation.min;
-							NewColorAdjustments.saturation.max = URP.ColorAdjustments.Saturation.Max ?? NewColorAdjustments.saturation.max;
-							NewColorAdjustments.saturation.overrideState = true;
-							NewColorAdjustments.active = true;
-							Log.Message($"saturation={NewColorAdjustments.saturation.value}, " +
-								$"min={NewColorAdjustments.saturation.min}, " +
-								$"max={NewColorAdjustments.saturation.max}");
+							ShadowsMidtonesHighlights NewShadowsMidtonesHighlights = NewGlobalVolumeProfile.Add<ShadowsMidtonesHighlights>(overrides: false);
+							NewShadowsMidtonesHighlights.name = nameof(NewShadowsMidtonesHighlights);
+							NewShadowsMidtonesHighlights.active = true;
+							Fill(NewShadowsMidtonesHighlights, typeof(URP.ShadowsMidtonesHighlights));
 						}
-						Log.Message($"NewColorAdjustments.active={NewColorAdjustments.active}");
 
 						static void OnActiveSceneChanged(Scene Old, Scene New)
 						{
