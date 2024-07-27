@@ -412,6 +412,23 @@ namespace ElementsOfHarmony
 									}
 									Log.Message($"");
 								}
+
+								Log.Message($"listing RenderSettings");
+								foreach (var Property in typeof(RenderSettings).GetProperties(BindingFlags.Public | BindingFlags.Static))
+								{
+									if (Property.PropertyType.IsValueType)
+									{
+										Log.Message($"{Property.Name}={Property.GetValue(null)}");
+									}
+									else if (Property.PropertyType.IsClass && Property.GetValue(null) is object Class)
+									{
+										foreach (var Property2 in Class.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public))
+										{
+											Log.Message($"{Property.Name}.{Property2.Name}={Property2.GetValue(Class)}");
+										}
+									}
+								}
+
 								foreach (var Component in Conflicted)
 								{
 									Component.active = false;
@@ -466,7 +483,7 @@ namespace ElementsOfHarmony
 									is Type SettingsType)
 								{
 									FieldInfo[] ParameterValues = Param.GetType().GetFields();
-									FieldInfo[] SettingsValues = SettingsType.GetRuntimeFields().ToArray();
+									FieldInfo[] SettingsValues = SettingsType.GetFields().ToArray();
 									var Values = from PV in ParameterValues
 												 join SV in SettingsValues
 												 on PV.Name.ToLower() equals SV.Name.ToLower()
@@ -528,12 +545,12 @@ namespace ElementsOfHarmony
 										}
 									}
 									PropertyInfo value = Param.GetType().GetProperty("value");
-									if (SettingsType.GetRuntimeField("Value")?.GetValue(null) is object Value)
+									if (SettingsType.GetField("Value")?.GetValue(null) is object Value)
 									{
 										SetValue(value.PropertyType, V => value.SetValue(Param, V), Value);
 									}
 									PropertyInfo overrideState = Param.GetType().GetProperty("overrideState");
-									if (SettingsType.GetRuntimeField("Override")?.GetValue(null) is object Override)
+									if (SettingsType.GetField("Override")?.GetValue(null) is object Override)
 									{
 										SetValue(overrideState.PropertyType, V => overrideState.SetValue(Param, V), Override);
 									}

@@ -5,7 +5,7 @@ using System.IO;
 
 [assembly: MelonInfo(typeof(ElementsOfHarmony.MelonLoaderReference.ElementsOfHarmony),
 	name: "Elements of Harmony",
-	version: "0.3.2",
+	version: "0.3.3.0",
 	author: "wd357dui")]
 [assembly: MelonGame("Melbot Studios", "MLP")]
 [assembly: MelonGame("DrakharStudio", "MyLittlePonyZephyrHeights")]

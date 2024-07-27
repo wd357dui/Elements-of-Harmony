@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace ElementsOfHarmony.BepInExReference
 {
-	[BepInPlugin(GUID: "wd357dui.ElementsOfHarmony", Name: "Elements of Harmony", Version: "0.3.2")]
+	[BepInPlugin(GUID: "wd357dui.ElementsOfHarmony", Name: "Elements of Harmony", Version: "0.3.3.0")]
 	public class ElementsOfHarmony : BaseUnityPlugin
 	{
 		public void Awake()

@@ -3,15 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
-		<PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <Platforms>x64</Platforms>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<BaseOutputPath>$(SolutionDir)</BaseOutputPath>
 		<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
 
-		<AssemblyTitle>ElementsOfHarmony.BepInExReference</AssemblyTitle>
-		<AssemblyVersion>0.3.3.0</AssemblyVersion>
-		<FileVersion>0.3.3.0</FileVersion>
+		<AssemblyTitle>ElementsOfHarmony.MelonLoaderReference</AssemblyTitle>
+		<AssemblyVersion>0.3.3.0.0</AssemblyVersion>
+		<FileVersion>0.3.3.0.0</FileVersion>
 		<Company>wd357dui</Company>
   </PropertyGroup>
 
@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="BepInEx">
-			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\BepInEx\core\BepInEx.dll</HintPath>
+    <Reference Include="MelonLoader">
+      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MelonLoader\net35\MelonLoader.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
     </Reference>
@@ -45,16 +45,7 @@
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
 		</Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.dll</HintPath>
-			<SpecificVersion>False</SpecificVersion>
-			<Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-			<SpecificVersion>False</SpecificVersion>
-			<Private>False</Private>
-    </Reference>
   </ItemGroup>
 
 </Project>
+

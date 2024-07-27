@@ -4,6 +4,9 @@
     <Filter Include="PCH">
       <UniqueIdentifier>{081de4b8-3ee1-44a2-8056-c753a0f88534}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RES">
+      <UniqueIdentifier>{5782f69e-13e0-431d-99c0-d9fdf2fc7e2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -12,11 +15,19 @@
     <ClInclude Include="framework.h">
       <Filter>PCH</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>RES</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
       <Filter>PCH</Filter>
     </ClCompile>
     <ClCompile Include="DirectXHook.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>RES</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

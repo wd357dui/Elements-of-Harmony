@@ -3,28 +3,32 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
-		<PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <Platforms>x64</Platforms>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<BaseOutputPath>$(SolutionDir)</BaseOutputPath>
 		<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
 
-		<AssemblyTitle>ElementsOfHarmony.BepInExReference</AssemblyTitle>
-		<AssemblyVersion>0.3.3.0</AssemblyVersion>
-		<FileVersion>0.3.3.0</FileVersion>
+		<AssemblyTitle>ElementsOfHarmony.KinectControl</AssemblyTitle>
+		<AssemblyVersion>0.3.3.0.0</AssemblyVersion>
+		<FileVersion>0.3.3.0.0</FileVersion>
 		<Company>wd357dui</Company>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="ElementsOfHarmony.cs" />
+    <Compile Include="API.cs" />
+    <Compile Include="KinectControl.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="BepInEx">
-			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony 2\BepInEx\core\BepInEx.dll</HintPath>
-			<SpecificVersion>False</SpecificVersion>
-			<Private>False</Private>
-    </Reference>
+    <PackageReference Include="Lib.Harmony" Version="2.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ElementsOfHarmony\ElementsOfHarmony.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
 		<Reference Include="mscorlib">
 			<HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\mscorlib.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>
@@ -45,16 +49,17 @@
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
 		</Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.dll</HintPath>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\Assembly-CSharp.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
-    </Reference>
+		</Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>D:\SteamLibrary\steamapps\common\My Little Pony\MLP_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
-    </Reference>
+		</Reference>
   </ItemGroup>
 
 </Project>
+

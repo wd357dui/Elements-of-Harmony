@@ -11,8 +11,8 @@
 
 		<AssemblyTitle>ElementsOfHarmony</AssemblyTitle>
 		<AssemblyDescription>A mod for MLP G5 games</AssemblyDescription>
-		<AssemblyVersion>0.3.2</AssemblyVersion>
-		<FileVersion>0.3.2</FileVersion>
+		<AssemblyVersion>0.3.3.0</AssemblyVersion>
+		<FileVersion>0.3.3.0</FileVersion>
 		<Company>wd357dui</Company>
 		<Product>Elements of Harmony</Product>
 	</PropertyGroup>

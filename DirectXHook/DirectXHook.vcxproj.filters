@@ -4,6 +4,9 @@
     <Filter Include="PCH">
       <UniqueIdentifier>{79090446-83e5-4f61-8c67-2780a1d2452a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RES">
+      <UniqueIdentifier>{47fc57f7-d314-400f-b638-5838e1336903}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -15,6 +18,9 @@
     <ClInclude Include="framework.h">
       <Filter>PCH</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>RES</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -22,5 +28,10 @@
     </ClCompile>
     <ClCompile Include="DirectXHook.cpp" />
     <ClCompile Include="OverlayDirect2D.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>RES</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
