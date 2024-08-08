@@ -17,6 +17,8 @@ One of those featured is already proven back in 2022 - **Loyalty**: the Motion C
 - [ ] Generosity - Enable the game to load custom models - *[AssetBundle.LoadAsset](https://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html) seems like a promising lead*
 - [ ] Laughter - Add online multiplayer functionality, you should be able to see other players as any pony they choose, there will be text chat and voice chat, and you should be able to compete with other players in a minigame - *should I use P2P or dedicated server?*
 - [x] Battle of the Bands - Add the ability to add custom songs to the music minigame - *implemented in June 12 2024 in [Dance.cs](https://github.com/wd357dui/Elements-of-Harmony/blob/4b30960b6de5e19e246f9e79612390e1625ff82f/ElementsOfHarmony/Dance.cs)*
+> [!NOTE]
+> check out the tutorial on how you can add custom songs in [CustomizeSongsTutorial.md](CustomizeSongsTutorial.md)
 - [ ] Friendship Games - Add new minigames - *my current idea is to create new projects in Unity, make the gameplay there, build it, and then abuse [AssetBundle.LoadAsset](https://docs.unity3d.com/ScriptReference/AssetBundle.LoadAsset.html) and [Assembly.Load](https://learn.microsoft.com/dotnet/api/system.reflection.assembly.load) to load that onto this game*
 - [ ] Loyalty (Extended) - implement VR support
 
