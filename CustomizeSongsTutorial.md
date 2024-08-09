@@ -95,7 +95,7 @@ If neither `[BPM]` nor `[Beats]` are defined, the combo bar might not score duri
 ## 3. Design Workflow
 Feel free to design a workflow for designing maps yourself, here is my workflow for reference.
 
-First, generate all beat time points for the song based on BPM and import them as markers into Adobe Audition.
+First, generate all beat timestamps for the song based on BPM and import them as markers into Adobe Audition.
 Here's the code I use to generate the CSV file for import:
 
 ``` csharp
@@ -133,13 +133,13 @@ while (current < length)
 }
 ```
 
-In this way, in Adobe Audition, you can jump between beat time points by pressing <kbd>Alt</kbd> + <kbd>←</kbd> / <kbd>→</kbd> keys.
+In this way, in Adobe Audition, you can jump between beat timestamps by pressing <kbd>Alt</kbd> + <kbd>←</kbd> / <kbd>→</kbd> keys.
 
 Press the <kbd>M</kbd> key at each beat you want to add a punch to, marking it as a punch timestamp.
 
 In this way, each punch timestamp will be at a beat timestamp, making the points neatly aligned.
 
-Finally, export all your marked punch time points, here is my code for extracting punch timestamps from the exported CSV file:
+Finally, export all your marked punch timestamps, here is my code for extracting punch timestamps from the exported CSV file:
 
 ``` csharp
 using StreamReader reader = new("D:/markers.csv");
